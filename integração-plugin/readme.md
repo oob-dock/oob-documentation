@@ -8,6 +8,7 @@ Esta documentação tem como objetivo guiar o desenvolvimento de plugins para se
 
 - [Introdução](#introdução)
 - [Exemplo de Plugins e Extensão da Imagem Docker](#exemplo-de-plugins-e-extensão-da-imagem-docker)
+- [Consumindo o objeto de consentimento](#consumindo-o-objeto-de-consentimento)
 - [Injetando Variáveis de Ambiente](#injetando-variáveis-de-ambiente)
 - [Componentes Suportados](#componentes-suportados)
 - [Data Formats Suportados](#data-formats-suportados)
@@ -389,6 +390,64 @@ Onde:
 - A linha 2 copia todos os arquivos contidos no diretório `/mocks` do plugin para o diretório `/plugin/mocks` da imagem;
 - A linha 4 cria uma variárel chamada `routes` e atribui uma lista de arquivos de rota separados por vírgulas (aqui foram colocados os arquivos um a um no intuito de desmonstrar a opções. Porém, poderíamos ter utilizado um padrão da mesma forma do exemplo de proxy simples);
 - A linha 5 atribui a variável criada na linha 4 à variável de ambiente `camel.main.routes-include-pattern`. Essa variável de ambiente é responsável por informar ao Camel onde os arquivos de rotas devem ser procurados.
+
+&nbsp;
+
+## Consumindo o objeto de consentimento
+
+Suponha que temos a imagem oob-phase3-native-with-mocks, que já realiza a chamada do serviço para obter o consentimento por meio do id informado no header com a chave “X-Consent-ID”:
+
+![Consentimento - Lista de imagens](./images/consent_docker_images.png)
+
+&nbsp;
+
+### Exemplo de proxy simples
+
+Para um exemplo de proxy simples, temos a seguinte rota da fase 3, que redireciona a chamada para uma outra API:
+
+![Consentimento - Arquivo de rotas proxy](./images/consent_proxy_route.png)
+
+&nbsp;
+
+Neste exemplo, trata-se de uma API criada no Mockoon, para fins de demonstração:
+
+![Consentimento - Mockoon proxy](./images/consent_mockoon_proxy.png)
+
+&nbsp;
+
+Iremos estender a imagem oob-phase3-native-with-mocks, para que a rota que criamos seja utilizada pela nova imagem:
+
+![Consentimento - Imagem estendida](./images/consent_image_extended.png)
+
+&nbsp;
+
+Faremos a chamada para a rota que foi criado o proxy, e na API do Mockoon será possível verificar que o objeto do consentimento foi enviado e recebido corretamente pelo header de chave “consent”:
+
+![Consentimento - Mockoon proxy header](./images/consent_proxy_header_mockoon.png)
+
+&nbsp;
+
+### Obtendo através do Camel XML
+
+É possível obter o objeto do consentimento que está no header através do Camel XML; para tal, o mesmo deve ser acessado com a sintaxe “${header.consent}”:
+
+![Consentimento - Arquivo de rotas para obter o consentimento](./images/consent_camel_xml_get_header_consent.png)
+
+&nbsp;
+
+Neste exemplo de rota, estamos logando o conteúdo do header “consent", e criando um novo header com a chave “consentNewHeader”, e utilizando como valor o conteúdo do header “consent”.
+
+Após realizar o procedimento de estender a imagem original e executar a mesma na porta 8080 (vide passos anteriores), teremos como retorno no console e na API do Mockoon respectivamente:
+
+![Consentimento - Log consent](./images/consent_camel_xml_header_consent_logged.png)
+
+Conteúdo do header “consent” logado no console
+
+&nbsp;
+
+![Consentimento - novo header consentimento](./images/consent_camel_xml_header_consent_new_key.png)
+
+Novo header de chave “consentNewHeader”, com o mesmo conteúdo do header de chave “consent”.
 
 &nbsp;
 
