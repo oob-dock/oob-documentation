@@ -395,17 +395,17 @@
 
 **OBS:** APIS de uso interno da plataforma, não expostas no Kong.
 
-| Operação | API                                                   | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações |
-| -------- | ----------------------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ----------- |
-| GET      | /v1/consents/\{ID\}/basic-info$                       | Não          | oob_as           | Não        | Não              |             |
-| GET      | /v1/consents/\{ID\}                                   | Não          | oob_as           | Não        | Não              |             |
-| PUT      | /v1/consents/\{ID\}                                   | Não          | oob_as           | Não        | Não              |             |
-| DELETE   | /v1/consents/\{ID\}                                   | Não          | oob_as           | Não        | Não              |             |
-| POST     | /v1/consents/\{ID\}/consume                           | Não          |                  | Não        | Sim              |             |
-| PUT      | /v1/consents/\{ID\}/legacyIds                         | Não          |                  | Não        | Sim              |             |
-| GET      | /v1/consents/\{ID\}/openBankingIds/\{ID\}/type/\{ID\} | Não          |                  | Não        | Sim              |             |
-| GET      | /v1/domains/permission                                | Não          | oob_as           | Não        | Não              |             |
-| GET      | /v1/domains/resource-type                             | Não          | oob_as           | Não        | Não              |             |
+| Operação | API                                                     | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações |
+| -------- | ------------------------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ----------- |
+| GET      | /v1/consents/\{ID\}/basic-info$                         | Não          | oob_as           | Não        | Não              |             |
+| GET      | /v1/consents/\{ID\}                                     | Não          | oob_as           | Não        | Não              |             |
+| PUT      | /v1/consents/\{ID\}                                     | Não          | oob_as           | Não        | Não              |             |
+| DELETE   | /v1/consents/\{ID\}                                     | Não          | oob_as           | Não        | Não              |             |
+| POST     | /v1/consents/\{ID\}/consume                             | Não          |                  | Não        | Sim              |             |
+| PUT      | /v1/consents/\{ID\}/legacy-ids                          | Não          |                  | Não        | Sim              |             |
+| GET      | /v1/consents/\{ID\}/open-banking-ids/\{ID\}/type/\{ID\} | Não          |                  | Não        | Sim              |             |
+| GET      | /v1/domains/permission                                  | Não          | oob_as           | Não        | Não              |             |
+| GET      | /v1/domains/resource-type                               | Não          | oob_as           | Não        | Não              |             |
 
 ## Observações
 
