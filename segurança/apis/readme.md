@@ -55,38 +55,38 @@
 | GET      | /v1/banking-agents-contractors                              | Sim          | oob_opendata:read  | Não        | Não              |             |
 | GET      | /v1/electronic-channels                                     | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/electronic-channels                                     | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/electronic-channels/{ID}                                | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/electronic-channels/{ID}                                | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/electronic-channels/\{ID\}                              | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/electronic-channels/\{ID\}                              | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/phone-channels                                          | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/phone-channels                                          | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/phone-channels/{ID}                                     | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/phone-channels/{ID}                                     | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/phone-channels/\{ID\}                                   | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/phone-channels/\{ID\}                                   | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/companies                                               | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/companies                                               | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/companies/{ID}                                          | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/companies/{ID}                                          | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/companies/\{ID\}                                        | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/companies/\{ID\}                                        | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/shared-automated-teller-machines                        | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/shared-automated-teller-machines                        | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/shared-automated-teller-machines/{ID}                   | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/shared-automated-teller-machines/{ID}                   | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/shared-automated-teller-machines/\{ID\}                 | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/shared-automated-teller-machines/\{ID\}                 | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/banking-agents                                          | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/banking-agents                                          | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/banking-agents/{ID}                                     | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/banking-agents/{ID}                                     | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/banking-agents/\{ID\}                                   | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/banking-agents/\{ID\}                                   | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/branches                                                | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/branches                                                | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/branches/{ID}                                           | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/branches/{ID}                                           | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/branches/\{ID\}                                         | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/branches/\{ID\}                                         | Sim          | oob_opendata:write | Não        | Não              |             |
 | POST     | /v1/banking-agents-contractors                              | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/banking-agents-contractors/{ID}                         | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/banking-agents-contractors/{ID}                         | Sim          | oob_opendata:write | Não        | Não              |             |
-| GET      | /v1/companies/{ID}                                          | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/branches/{ID}                                           | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/electronic-channels/{ID}                                | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/phone-channels/{ID}                                     | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/banking-agents/{ID}                                     | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/banking-agents-contractors/{ID}                         | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/shared-automated-teller-machines/{ID}                   | Sim          | oob_opendata:read  | Não        | Não              |             |
+| DELETE   | /v1/banking-agents-contractors/\{ID\}                       | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/banking-agents-contractors/\{ID\}                       | Sim          | oob_opendata:write | Não        | Não              |             |
+| GET      | /v1/companies/\{ID\}                                        | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/branches/\{ID\}                                         | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/electronic-channels/\{ID\}                              | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/phone-channels/\{ID\}                                   | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/banking-agents/\{ID\}                                   | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/banking-agents-contractors/\{ID\}                       | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/shared-automated-teller-machines/\{ID\}                 | Sim          | oob_opendata:read  | Não        | Não              |             |
 | GET      | /v1/domains/branch-type                                     | Sim          | oob_opendata:read  | Não        | Não              |             |
 | GET      | /v1/domains/shared-automated-teller-machines-services-names | Sim          | oob_opendata:read  | Não        | Não              |             |
 | GET      | /v1/domains/shared-automated-teller-machines-services-codes | Sim          | oob_opendata:read  | Não        | Não              |             |
@@ -136,40 +136,40 @@
 | GET      | /v1/brand                                                  | Sim          | oob_opendata:read  | Não        | Não              |             |
 | PUT      | /v1/brand                                                  | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/companies                                              | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/companies/{ID}                                         | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/companies/\{ID\}                                       | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/companies                                              | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/companies/{ID}                                         | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/companies/{ID}                                         | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/companies/\{ID\}                                       | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/companies/\{ID\}                                       | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/accounts                                               | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/accounts/{ID}                                          | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/accounts/\{ID\}                                        | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/accounts                                               | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/accounts/{ID}                                          | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/accounts/{ID}                                          | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/accounts/\{ID\}                                        | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/accounts/\{ID\}                                        | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/loans                                                  | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/loans/{ID}                                             | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/loans/\{ID\}                                           | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/loans                                                  | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/loans/{ID}                                             | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/loans/{ID}                                             | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/loans/\{ID\}                                           | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/loans/\{ID\}                                           | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/credit-cards                                           | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/credit-cards/{ID}                                      | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/credit-cards/\{ID\}                                    | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/credit-cards                                           | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/credit-cards/{ID}                                      | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/credit-cards/{ID}                                      | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/credit-cards/\{ID\}                                    | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/credit-cards/\{ID\}                                    | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/financings                                             | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/financings/{ID}                                        | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/financings/\{ID\}                                      | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/financings                                             | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/financings/{ID}                                        | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/financings/{ID}                                        | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/financings/\{ID\}                                      | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/financings/\{ID\}                                      | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/invoice-financings                                     | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/invoice-financings/{ID}                                | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/invoice-financings/\{ID\}                              | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/invoice-financings                                     | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/invoice-financings/{ID}                                | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/invoice-financings/{ID}                                | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/invoice-financings/\{ID\}                              | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/invoice-financings/\{ID\}                              | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/unarranged-account-overdraft                           | Sim          | oob_opendata:read  | Não        | Não              |             |
-| GET      | /v1/unarranged-account-overdraft/{ID}                      | Sim          | oob_opendata:read  | Não        | Não              |             |
+| GET      | /v1/unarranged-account-overdraft/\{ID\}                    | Sim          | oob_opendata:read  | Não        | Não              |             |
 | POST     | /v1/unarranged-account-overdraft                           | Sim          | oob_opendata:write | Não        | Não              |             |
-| PUT      | /v1/unarranged-account-overdraft/{ID}                      | Sim          | oob_opendata:write | Não        | Não              |             |
-| DELETE   | /v1/unarranged-account-overdraft/{ID}                      | Sim          | oob_opendata:write | Não        | Não              |             |
+| PUT      | /v1/unarranged-account-overdraft/\{ID\}                    | Sim          | oob_opendata:write | Não        | Não              |             |
+| DELETE   | /v1/unarranged-account-overdraft/\{ID\}                    | Sim          | oob_opendata:write | Não        | Não              |             |
 | GET      | /v1/domains                                                | Sim          | oob_opendata:read  | Não        | Não              |             |
 | GET      | /v1/domains/credit-card-identification-credit-card-network | Sim          | oob_opendata:read  | Não        | Não              |             |
 | GET      | /v1/domains/credit-card-identification-product-type        | Sim          | oob_opendata:read  | Não        | Não              |             |
@@ -217,12 +217,12 @@
 | GET      | /v1/endpoints            | Sim          | oob_outages:read  | Não        | Não              |             |
 | GET      | /v1/outages              | Sim          | oob_outages:read  | Não        | Não              |             |
 | POST     | /v1/outages              | Sim          | oob_outages:write | Não        | Não              |             |
-| GET      | /v1/outages/{ID}         | Sim          | oob_outages:read  | Não        | Não              |             |
-| PUT      | /v1/outages/{ID}         | Sim          | oob_outages:write | Não        | Não              |             |
-| DELETE   | /v1/outages/{ID}         | Sim          | oob_outages:write | Não        | Não              |             |
+| GET      | /v1/outages/\{ID\}       | Sim          | oob_outages:read  | Não        | Não              |             |
+| PUT      | /v1/outages/\{ID\}       | Sim          | oob_outages:write | Não        | Não              |             |
+| DELETE   | /v1/outages/\{ID\}       | Sim          | oob_outages:write | Não        | Não              |             |
 | GET      | /v1/failures             | Sim          | oob_outages:read  | Não        | Não              |             |
-| GET      | /v1/failures/{ID}        | Sim          | oob_outages:read  | Não        | Não              |             |
-| PUT      | /v1/failures/{ID}        | Sim          | oob_outages:write | Não        | Não              |             |
+| GET      | /v1/failures/\{ID\}      | Sim          | oob_outages:read  | Não        | Não              |             |
+| PUT      | /v1/failures/\{ID\}      | Sim          | oob_outages:write | Não        | Não              |             |
 | GET      | /v1/services             | Sim          | oob_outages:read  | Não        | Não              |             |
 
 ## Financial data
@@ -248,14 +248,14 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                             | Valida token | Escopo de acesso      | Valida JWS | ConsentPermission                             | Valida consentId | Observações |
-| -------- | ----------------------------------------------- | ------------ | --------------------- | ---------- | --------------------------------------------- | ---------------- | ----------- |
-| GET      | /v1/accounts                                    | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              |             |
-| GET      | /v1/accounts/{ID}                               | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              |             |
-| GET      | /v1/accounts/{ID}/bills                         | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_READ              | Sim              |             |
-| GET      | /v1/accounts/{ID}/bills/{ID}/bills/transactions | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ | Sim              |             |
-| GET      | /v1/accounts/{ID}/limits                        | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_LIMITS_READ             | Sim              |             |
-| GET      | /v1/accounts/{ID}/transactions                  | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              |             |
+| Operação | API                                                 | Valida token | Escopo de acesso      | Valida JWS | ConsentPermission                             | Valida consentId | Observações |
+| -------- | --------------------------------------------------- | ------------ | --------------------- | ---------- | --------------------------------------------- | ---------------- | ----------- |
+| GET      | /v1/accounts                                        | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              |             |
+| GET      | /v1/accounts/\{ID\}                                 | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              |             |
+| GET      | /v1/accounts/\{ID\}/bills                           | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_READ              | Sim              |             |
+| GET      | /v1/accounts/\{ID\}/bills/\{ID\}/bills/transactions | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ | Sim              |             |
+| GET      | /v1/accounts/\{ID\}/limits                          | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_LIMITS_READ             | Sim              |             |
+| GET      | /v1/accounts/\{ID\}/transactions                    | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              |             |
 
 ### Accounts
 
@@ -263,13 +263,13 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                | Valida token | Escopo de acesso | Valida JWS | ConsentPermission              | Valida consentId | Observações |
-| -------- | ---------------------------------- | ------------ | ---------------- | ---------- | ------------------------------ | ---------------- | ----------- |
-| GET      | /v1/accounts                       | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              |             |
-| GET      | /v1/accounts/{ID}                  | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              |             |
-| GET      | /v1/accounts/{ID}/overdraft-limits | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              |             |
-| GET      | /v1/accounts/{ID}/balances         | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              |             |
-| GET      | /v1/accounts/{ID}/transactions     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              |             |
+| Operação | API                                  | Valida token | Escopo de acesso | Valida JWS | ConsentPermission              | Valida consentId | Observações |
+| -------- | ------------------------------------ | ------------ | ---------------- | ---------- | ------------------------------ | ---------------- | ----------- |
+| GET      | /v1/accounts                         | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              |             |
+| GET      | /v1/accounts/\{ID\}                  | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              |             |
+| GET      | /v1/accounts/\{ID\}/overdraft-limits | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              |             |
+| GET      | /v1/accounts/\{ID\}/balances         | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              |             |
+| GET      | /v1/accounts/\{ID\}/transactions     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              |             |
 
 ### Loans
 
@@ -277,13 +277,13 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                      | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                | Valida consentId | Observações |
-| -------- | ---------------------------------------- | ------------ | ---------------- | ---------- | -------------------------------- | ---------------- | ----------- |
-| GET      | /v1/contracts                            | Sim          | loans            | Não        | LOANS_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}                       | Sim          | loans            | Não        | LOANS_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}/payments              | Sim          | loans            | Não        | LOANS_PAYMENTS_READ              | Sim              |             |
-| GET      | /v1/contracts/{ID}/scheduled-instalments | Sim          | loans            | Não        | LOANS_SCHEDULED_INSTALMENTS_READ | Sim              |             |
-| GET      | /v1/contracts/{ID}/warranties            | Sim          | loans            | Não        | LOANS_WARRANTIES_READ            | Sim              |             |
+| Operação | API                                        | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                | Valida consentId | Observações |
+| -------- | ------------------------------------------ | ------------ | ---------------- | ---------- | -------------------------------- | ---------------- | ----------- |
+| GET      | /v1/contracts                              | Sim          | loans            | Não        | LOANS_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}                       | Sim          | loans            | Não        | LOANS_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/payments              | Sim          | loans            | Não        | LOANS_PAYMENTS_READ              | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | loans            | Não        | LOANS_SCHEDULED_INSTALMENTS_READ | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/warranties            | Sim          | loans            | Não        | LOANS_WARRANTIES_READ            | Sim              |             |
 
 ### Financings
 
@@ -291,13 +291,13 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                      | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                     | Valida consentId | Observações |
-| -------- | ---------------------------------------- | ------------ | ---------------- | ---------- | ------------------------------------- | ---------------- | ----------- |
-| GET      | /v1/contracts                            | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}                       | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}/payments              | Sim          | financings       | Não        | FINANCINGS_PAYMENTS_READ              | Sim              |             |
-| GET      | /v1/contracts/{ID}/scheduled-instalments | Sim          | financings       | Não        | FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              |             |
-| GET      | /v1/contracts/{ID}/warranties            | Sim          | financings       | Não        | FINANCINGS_WARRANTIES_READ            | Sim              |             |
+| Operação | API                                        | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                     | Valida consentId | Observações |
+| -------- | ------------------------------------------ | ------------ | ---------------- | ---------- | ------------------------------------- | ---------------- | ----------- |
+| GET      | /v1/contracts                              | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}                       | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/payments              | Sim          | financings       | Não        | FINANCINGS_PAYMENTS_READ              | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | financings       | Não        | FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/warranties            | Sim          | financings       | Não        | FINANCINGS_WARRANTIES_READ            | Sim              |             |
 
 ### Unarranged accounts overdraft
 
@@ -305,13 +305,13 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                      | Valida token | Escopo de acesso              | Valida JWS | ConsentPermission                                        | Valida consentId | Observações |
-| -------- | ---------------------------------------- | ------------ | ----------------------------- | ---------- | -------------------------------------------------------- | ---------------- | ----------- |
-| GET      | /v1/contracts                            | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}                       | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}/payments              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ              | Sim              |             |
-| GET      | /v1/contracts/{ID}/scheduled-instalments | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ | Sim              |             |
-| GET      | /v1/contracts/{ID}/warranties            | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ            | Sim              |             |
+| Operação | API                                        | Valida token | Escopo de acesso              | Valida JWS | ConsentPermission                                        | Valida consentId | Observações |
+| -------- | ------------------------------------------ | ------------ | ----------------------------- | ---------- | -------------------------------------------------------- | ---------------- | ----------- |
+| GET      | /v1/contracts                              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}                       | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/payments              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ              | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/warranties            | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ            | Sim              |             |
 
 ### Invoice financings
 
@@ -319,13 +319,13 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                      | Valida token | Escopo de acesso   | Valida JWS | ConsentPermission                             | Valida consentId | Observações |
-| -------- | ---------------------------------------- | ------------ | ------------------ | ---------- | --------------------------------------------- | ---------------- | ----------- |
-| GET      | /v1/contracts                            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}                       | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              |             |
-| GET      | /v1/contracts/{ID}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              |             |
-| GET      | /v1/contracts/{ID}/scheduled-instalments | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              |             |
-| GET      | /v1/contracts/{ID}/warranties            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_WARRANTIES_READ            | Sim              |             |
+| Operação | API                                        | Valida token | Escopo de acesso   | Valida JWS | ConsentPermission                             | Valida consentId | Observações |
+| -------- | ------------------------------------------ | ------------ | ------------------ | ---------- | --------------------------------------------- | ---------------- | ----------- |
+| GET      | /v1/contracts                              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}                       | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              |             |
+| GET      | /v1/contracts/\{ID\}/warranties            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_WARRANTIES_READ            | Sim              |             |
 
 ## Payments
 
@@ -333,12 +333,12 @@
 
 **Cliente API:** TPP
 
-| Operação | API                   | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações |
-| -------- | --------------------- | ------------ | ---------------- | ---------- | ---------------- | ----------- |
-| POST     | /v1/consents          | Sim          | consents         | Sim        | Não              |             |
-| GET      | /v1/consents/{ID}     | Sim          | consents         | Não        | Sim              |             |
-| POST     | /v1/pix/payments      | Sim          | payments         | Sim        | Sim              |             |
-| GET      | /v1/pix/payments/{ID} | Sim          | payments         | Não        | Sim              |             |
+| Operação | API                     | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações |
+| -------- | ----------------------- | ------------ | ---------------- | ---------- | ---------------- | ----------- |
+| POST     | /v1/consents            | Sim          | consents         | Sim        | Não              |             |
+| GET      | /v1/consents/\{ID\}     | Sim          | consents         | Não        | Sim              |             |
+| POST     | /v1/pix/payments        | Sim          | payments         | Sim        | Sim              |             |
+| GET      | /v1/pix/payments/\{ID\} | Sim          | payments         | Não        | Sim              |             |
 
 ## Consent
 
@@ -348,11 +348,11 @@
 
 **Cliente API:** TPP
 
-| Operação | API               | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações        |
-| -------- | ----------------- | ------------ | ---------------- | ---------- | ---------------- | ------------------ |
-| POST     | /v1/consents      | Sim          | consents         | Não        | Não              |                    |
-| GET      | /v1/consents/{ID} | Sim          | consents         | Não        | Não              | [*1](#observações) |
-| DELETE   | /v1/consents/{ID} | Sim          | consents         | Não        | Não              | [*1](#observações) |
+| Operação | API                 | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações        |
+| -------- | ------------------- | ------------ | ---------------- | ---------- | ---------------- | ------------------ |
+| POST     | /v1/consents        | Sim          | consents         | Não        | Não              |                    |
+| GET      | /v1/consents/\{ID\} | Sim          | consents         | Não        | Não              | [*1](#observações) |
+| DELETE   | /v1/consents/\{ID\} | Sim          | consents         | Não        | Não              | [*1](#observações) |
 
 ### Resources
 
@@ -373,16 +373,16 @@
 - Portal gestão consentimento (backoffice)
 - Portal gestão consentimento (cliente)
 
-| Operação | API                            | Valida token | Escopo de acesso                 | Valida JWS | Valida consentId | Observações        |
-| -------- | ------------------------------ | ------------ | -------------------------------- | ---------- | ---------------- | ------------------ |
-| GET      | /v1/domains/permission         | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
-| GET      | /v1/domains/consent-type       | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
-| GET      | /v1/domains/consent-status     | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
-| *GET     | /v1/domains/resource-type      | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
-| *DELETE  | /v1/authorisations/{ID}        | Sim          | oob_consents:write, oob_customer | Não        | Não              | [*2](#observações) |
-| *PUT     | /v1/authorisations/{ID}/accept | Sim          | oob_consents:write, oob_customer | Não        | Não              | [*2](#observações) |
-| *GET     | /v1/consents                   | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
-| *GET     | /v1/consents/{ID}              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | [*2](#observações) |
+| Operação | API                              | Valida token | Escopo de acesso                 | Valida JWS | Valida consentId | Observações        |
+| -------- | -------------------------------- | ------------ | -------------------------------- | ---------- | ---------------- | ------------------ |
+| GET      | /v1/domains/permission           | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
+| GET      | /v1/domains/consent-type         | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
+| GET      | /v1/domains/consent-status       | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
+| *GET     | /v1/domains/resource-type        | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
+| *DELETE  | /v1/authorisations/\{ID\}        | Sim          | oob_consents:write, oob_customer | Não        | Não              | [*2](#observações) |
+| *PUT     | /v1/authorisations/\{ID\}/accept | Sim          | oob_consents:write, oob_customer | Não        | Não              | [*2](#observações) |
+| *GET     | /v1/consents                     | Sim          | oob_consents:read, oob_customer  | Não        | Não              |                    |
+| *GET     | /v1/consents/\{ID\}              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | [*2](#observações) |
 
 ### OOB Internal consents
 
@@ -395,17 +395,17 @@
 
 **OBS:** APIS de uso interno da plataforma, não expostas no Kong.
 
-| Operação | API                                             | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações |
-| -------- | ----------------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ----------- |
-| GET      | /v1/consents/{ID}/basic-info$                   | Não          | oob_as           | Não        | Não              |             |
-| GET      | /v1/consents/{ID}                               | Não          | oob_as           | Não        | Não              |             |
-| PUT      | /v1/consents/{ID}                               | Não          | oob_as           | Não        | Não              |             |
-| DELETE   | /v1/consents/{ID}                               | Não          | oob_as           | Não        | Não              |             |
-| POST     | /v1/consents/{ID}/consume                       | Não          |                  | Não        | Sim              |             |
-| PUT      | /v1/consents/{ID}/legacyIds                     | Não          |                  | Não        | Sim              |             |
-| GET      | /v1/consents/{ID}/openBankingIds/{ID}/type/{ID} | Não          |                  | Não        | Sim              |             |
-| GET      | /v1/domains/permission                          | Não          | oob_as           | Não        | Não              |             |
-| GET      | /v1/domains/resource-type                       | Não          | oob_as           | Não        | Não              |             |
+| Operação | API                                                   | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações |
+| -------- | ----------------------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ----------- |
+| GET      | /v1/consents/\{ID\}/basic-info$                       | Não          | oob_as           | Não        | Não              |             |
+| GET      | /v1/consents/\{ID\}                                   | Não          | oob_as           | Não        | Não              |             |
+| PUT      | /v1/consents/\{ID\}                                   | Não          | oob_as           | Não        | Não              |             |
+| DELETE   | /v1/consents/\{ID\}                                   | Não          | oob_as           | Não        | Não              |             |
+| POST     | /v1/consents/\{ID\}/consume                           | Não          |                  | Não        | Sim              |             |
+| PUT      | /v1/consents/\{ID\}/legacyIds                         | Não          |                  | Não        | Sim              |             |
+| GET      | /v1/consents/\{ID\}/openBankingIds/\{ID\}/type/\{ID\} | Não          |                  | Não        | Sim              |             |
+| GET      | /v1/domains/permission                                | Não          | oob_as           | Não        | Não              |             |
+| GET      | /v1/domains/resource-type                             | Não          | oob_as           | Não        | Não              |             |
 
 ## Observações
 
