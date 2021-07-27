@@ -23,6 +23,7 @@ As exigências para eles são:
 | ----------- | ---------------- | ------------------------------------------- | ---------------- | ---------------------------------------------------------------------------- | ----------------------------- | ---------------------------------------------- |
 | Regulatório | Sim              | Authorization Server                        | Transporte       | `https://<dominio-AS-OBB-1>`                                                 | HTTPS EV ou HTTPS [^1]        | <https://as-obb.banco.com.br>                  |
 | Regulatório | Sim              | Authorization Server (mTLS)                 | Transporte       | `https://<dominio-AS-OBB-2>`<br>Sugestão: `https://matls-<dominio-AS-OBB-1>` | Certificado ICP-Brasil e mTLS | <https://matls-as-obb.banco.com.br>            |
+| Regulatório | Sim              | Authorization Server                        | Assinatura       |                                                                              | Certificado BRSEAL            | Ver [^3]                                       |
 | Regulatório | Depende do banco | Authorization Server do Banco [^2]          | Transporte       | `https://<dominio-AS-banco>`                                                 | HTTPS EV ou HTTPS [^1]        | <https://as-cliente.banco.com.br>              |
 | Regulatório | Depende do banco | Resource Server - open-data (HTTPS)         | Transporte       | `https://<dominio-RS-1>`                                                     | HTTPS                         | <https://api.banco.com.br>                     |
 | Regulatório | Sim              | Resource Server - Não open-data (mTLS)      | Transporte       | `https://<dominio-RS-2>`                                                     | Certificado ICP-Brasil e mTLS | <https://matls-api.banco.com.br>               |
@@ -32,6 +33,8 @@ As exigências para eles são:
 
 [^1]: Instalações com autenticação APP2APP não precisam de certificado EV por não conter front-end web para autenticação pelo cliente do banco
 [^2]: Apenas para instalações com autenticação WEB2WEB utilizando federation entre o AS OOB e o AS do Banco
+[^3]: [Documentação](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-certificate-standards-1_ID1.html#name-signature-certificate)
+      e [Exemplo](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-certificate-standards-1_ID1.html#name-configuration-template-for-s)
 
 Basicamente, os requisitos de segurança se dividem em dois tipos: HTTPS e HTTPS
 com mTLS.
@@ -50,6 +53,20 @@ certificado para servidores WEB da ICP-Brasil, conforme a sessão [5.2.1](https:
 da especificação de segurança do OBB, além do mais o ponto de conexão (WAF,
 firewall, proxy reverso) no banco pode exigir o certificado cliente,
 aumentando a segurança através de mTLS.
+
+## Certificado de assinatura
+
+Os participantes do Open Banking Brasil precisam assinar diversas requisições
+para provar a autenticidade da solicitação, essas assinaturas são efetuadas com
+certificados do tipo BRSEAL descrito no  [Guia de Operação do Diretório Central](https://openbanking-brasil.github.io/areadesenvolvedor/documents/OpenBanking-Guia_Operacao_Diretorio_Central.pdf).
+
+Os certificados de assinatura no ambiente de produção são emitidos por
+certificadoras homologadas ICP-Brasil e Open Banking Brasil, os certificados
+para ambientes não-produtivos são emitidos pelo próprio Diretório de
+Participantes do Open Banking Brasil.
+
+A instituição pode usar o mesmo certificado de assinatura esteja ela agindo como
+iniciadora de pagamento/receptora ou detentora de conta/transmissora.
 
 ## HTTPS
 
