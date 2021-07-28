@@ -1,0 +1,37 @@
+title APP2APP Flow OOB
+
+participant "TPP" as tpp
+participant "Mobile" as mobile
+participant "App Midway" as banco
+participant "AS-Midway" as idp
+participant "AS-OOB" as as
+participant "Consentimento" as consentimento
+participant "Legado Banco" as legado
+
+entryspacing 0.9
+tpp->mobile:URL Inicio OAuth
+mobile->banco:URL Inicio OAuth
+banco->as:GET na URL + Header Accept "application/json"
+as->as:Validar o request
+as-->banco:REDIRECT pra interaction/{id} (Cookies)
+banco->as:GET interaction/{id} (Cookie)
+as-->banco:JSON {step:"login", "path_login":"login", "path_abort": "abort"}
+banco->idp:Autentica o usuário\n(OB exige 2 fatores de\n autenticação consentimento\nde pagamento)
+idp-->banco:Autenticado (JWT assinado Claims:CPF e nome)
+banco->as:POST interaction/{id}/login\ncom resultado (JWT assinado) (Cookies)
+as->as:Confirmar o JWT
+as-->banco:REDIRECT para interaction/{id} (Cookies)
+banco->as:GET interaction/{id} (Cookies)
+as->consentimento:GET /consentimento/{id} (discovery)
+consentimento->legado:Faz discovery
+consentimento<--legado:Lista de produtos
+as<--consentimento:Dados do consentimento
+banco<--as:JSON {step:"consentimento", "path_confirm": "confirm",\n"path_abort": "abort", "url_logo_tpp": "url", "dados_consentimento":{dados-consentimento}} (Cookies)
+banco->banco:Exibe e confirmar consentimento, seleciona produtos
+banco->as:POST interaction/{id}/confirm\n(Seleção de produtos) (Cookies) 
+as->consentimento:Registra seleção de produtos e \nconfirma consentimento
+as<--consentimento:OK
+banco<--as:REDIRECT http://TPP?AutorizationCode=123123
+banco->banco:Tela de transição\npara TPP (exibir logo)
+banco->mobile:Abre a URL de redirect
+mobile->tpp:URL de redirect

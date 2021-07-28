@@ -1,0 +1,124 @@
+{
+	"info": {
+		"_postman_id": "d7a86ecf-0cc0-4bec-82c8-1146b81d720e",
+		"name": "OOB Authorization Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "session",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3007/v1/auth",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3007",
+					"path": [
+						"v1",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interaction/1abb933530ff",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3007/v1/interaction/1abb933530ff",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3007",
+					"path": [
+						"v1",
+						"interaction",
+						"1abb933530ff"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interaction/1abb933530ff",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3007/v1/interaction/1abb933530ff/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3007",
+					"path": [
+						"v1",
+						"interaction",
+						"1abb933530ff",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interaction/0242ac130004",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3007/v1/interaction/0242ac130004",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3007",
+					"path": [
+						"v1",
+						"interaction",
+						"0242ac130004"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interaction/0242ac130004",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"resources\": [\r\n        {\r\n            \"id\": \"49fe29f1-95a9-4521-8f48-a9700e392b48\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3007/v1/interaction/0242ac130004/consent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3007",
+					"path": [
+						"v1",
+						"interaction",
+						"0242ac130004",
+						"consent"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
