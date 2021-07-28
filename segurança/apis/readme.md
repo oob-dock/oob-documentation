@@ -235,12 +235,12 @@
 
 | Operação | API                              | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                       | Valida consentId | Observações |
 | -------- | -------------------------------- | ------------ | ---------------- | ---------- | --------------------------------------- | ---------------- | ----------- |
-| GET      | /v1/business/identifications     | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ | Sim              |             |
-| GET      | /v1/business/financial-relations | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              |             |
-| GET      | /v1/business/qualifications      | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              |             |
-| GET      | /v1/personal/identifications     | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ | Sim              |             |
-| GET      | /v1/personal/financial-relations | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              |             |
-| GET      | /v1/personal/qualifications      | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              |             |
+| GET      | /v1/business/identifications     | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ | Sim              |             |
+| GET      | /v1/business/financial-relations | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              |             |
+| GET      | /v1/business/qualifications      | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              |             |
+| GET      | /v1/personal/identifications     | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ | Sim              |             |
+| GET      | /v1/personal/financial-relations | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              |             |
+| GET      | /v1/personal/qualifications      | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              |             |
 
 ### Credit cards accounts
 

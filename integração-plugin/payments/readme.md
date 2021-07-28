@@ -41,10 +41,14 @@ Para o endpoint `/pix/payments`, por exemplo, a rota deve estar definida no plug
 
 &nbsp;
 
-| Endpoint                      | Rota do Camel                                 |
-|-------------------------------|-----------------------------------------------|
-| /pix/payments                 | ```direct:paymentsPostPixPayments```          |
-| /pix/payments/\{paymentId\}   | ```direct:paymentsGetPixPaymentsPaymentId```  |
+Arquivos de schemas compartilhados
+
+[commons-schema.json](schemas/commons-schema.json)
+
+| Endpoint                      | Rota do Camel                                 | Request JSON Schema                                                         | Response JSON Schema                                                          |
+|-------------------------------|-----------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
+| /pix/payments                 | ```direct:paymentsPostPixPayments```          | [request.json](schemas/paymentsPostPixPayments/request-schema.json)         | [response.json](schemas/paymentsPostPixPayments/response-schema.json)         |
+| /pix/payments/\{paymentId\}   | ```direct:paymentsGetPixPaymentsPaymentId```  | [request.json](schemas/paymentsGetPixPaymentsPaymentId/request-schema.json) | [response.json](schemas/paymentsGetPixPaymentsPaymentId/response-schema.json) |
 
 &nbsp;
 

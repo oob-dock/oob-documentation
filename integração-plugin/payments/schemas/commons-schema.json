@@ -1,0 +1,331 @@
+{
+    "definitions": {
+        "CorrelationId": {
+            "type": "string",
+            "description": "UUID que identifica o correlation ID da requisição realizada",
+            "format": "uuid",
+            "example": "97623ed1-4732-4bf2-8d4b-ae7aced5443b"
+        },
+        "CreatePixPaymentData": {
+            "type": "object",
+            "description": "Objeto contendo dados do pagamento e do recebedor (creditor).",
+            "required": [
+                "localInstrument",
+                "payment",
+                "creditorAccount"
+            ],
+            "properties": {
+                "localInstrument": {
+                    "$ref": "#/definitions/EnumLocalInstrument"
+                },
+                "payment": {
+                    "$ref": "#/definitions/PaymentPix"
+                },
+                "creditorAccount": {
+                    "$ref": "#/definitions/CreditorAccount"
+                },
+                "remittanceInformation": {
+                    "$ref": "#/definitions/RemittanceInformation"
+                },
+                "qrCode": {
+                    "description": "Obs: Campo reservado para uso futuro. Sequência de caracteres que corresponde ao QR Code disponibilizado para o pagador. É a sequência de caracteres que seria lida pelo leitor de QR Code, e deve propiciar o retorno dos dados do pagador após consulta na DICT. Essa funcionalidade é possível tanto para QR Code estático quanto para QR Code dinâmico. No arranjo do Pix esta é a mesma sequência gerada e/ou lida pela funcionalidade Pix Copia e Cola. Este campo deverá ser no formato UTF-8. [Restrição] Preenchimento obrigatório para pagamentos por QR Code, observado o tamanho máximo de 512 bytes.",
+                    "type": "string",
+                    "pattern": "[\\w\\W\\s]*",
+                    "maxLength": 512,
+                    "example": "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012BR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123ABCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76"
+                },
+                "proxy": {
+                    "$ref": "#/definitions/Proxy"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PaymentPix": {
+            "type": "object",
+            "description": "Objeto contendo dados do pagameto como moeda e valor",
+            "required": [
+                "amount",
+                "currency"
+            ],
+            "properties": {
+                "amount": {
+                    "description": "Valor da transação com 2 casas decimais.",
+                    "type": "string",
+                    "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+                    "minLength": 4,
+                    "maxLength": 19,
+                    "example": "100000.04"
+                },
+                "currency": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 3,
+                    "description": "Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'. Todos os valores monetários informados estão representados com a moeda vigente do Brasil.",
+                    "pattern": "^([A-Z]{3})$",
+                    "example": "BRL"
+                }
+            },
+            "additionalProperties": false
+        },
+        "CreditorAccount": {
+            "type": "object",
+            "description": "Objeto que contém a identificação da conta de destino do beneficiário/recebedor.",
+            "required": [
+                "ispb",
+                "number",
+                "accountType"
+            ],
+            "properties": {
+                "ispb": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 8,
+                    "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.",
+                    "pattern": "^[0-9]{8}$",
+                    "example": "12345678"
+                },
+                "issuer": {
+                    "type": "string",
+                    "maxLength": 4,
+                    "description": "Código da Agência emissora da conta sem dígito. (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória). [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).",
+                    "pattern": "^\\d{4}$",
+                    "example": "1774"
+                },
+                "number": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 20,
+                    "description": "Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir), se houver valor alfanumérico, este deve ser convertido para 0.",
+                    "pattern": "^\\d{3,20}$",
+                    "example": "1234567890"
+                },
+                "accountType": {
+                    "$ref": "#/definitions/EnumAccountPaymentsType"
+                }
+            },
+            "additionalProperties": false
+        },
+        "EnumAccountPaymentsType": {
+            "type": "string",
+            "description": "Tipos de contas usadas para pagamento via Pix. Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica. Segue descrição de cada valor do ENUM para o escopo do Pix.  CACC - Current - Conta Corrente.  SLRY - Salary - Conta-Salário.  SVGS - Savings - Conta de Poupança.  TRAN - TransactingAccount - Conta de Pagamento pré-paga.",
+            "enum": [
+                "CACC",
+                "SLRY",
+                "SVGS",
+                "TRAN"
+            ],
+            "example": "CACC"
+        },
+        "EndToEndId": {
+            "type": "string",
+            "minLength": 32,
+            "maxLength": 32,
+            "description": "Deve ser preenchido no formato padrão ExxxxxxxxyyyyMMddHHmmkkkkkkkkkkk (32 caracteres; “case sensitive”, isso é, diferencia letras maiúsculas e minúsculas), sendo: “E” – fixo (1 caractere);  xxxxxxxx – identificação do agente que gerou o ´EndToEndId´, podendo ser: o ISPB do participante direto ou o ISPB do participante indireto (8 caracteres numéricos [0-9]);  yyyyMMddHHmm – data, hora e minuto (12 caracteres), seguindo o horário UTC, da submissão da ordem de pagamento, caso a liquidação seja prioritária, ou prevista para o envio da ordem ao sistema de liquidação, caso seja realizado um agendamento. Para ordens prioritárias e não prioritárias, aceita-se o preenchimento, pelo agente que gerou o ´EndToEndId´, com uma tolerância máxima de 12 horas, para o futuro e para o passado, em relação ao horário efetivo de processamento da ordem pelo SPI;  kkkkkkkkkkk – sequencial criado pelo agente que gerou o ´EndToEndId´ (11 caracteres alfanuméricos [a-z/A-Z/0-9]). Deve ser único dentro de cada “yyyyMMddHHmm”. Admite-se que o ´EndToEndId´ seja gerado pelo participante direto, pelo participante indireto ou pelo iniciador de pagamento. Ele deve ser único, não podendo ser repetido em qualquer outra operação enviada ao SPI.",
+            "pattern": "^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$",
+            "example": "E9040088820210128000800123873170"
+        },
+        "RemittanceInformation": {
+            "description": "Deve ser preenchido sempre que o usuário pagador inserir alguma informação adicional em um pagamento, a ser enviada ao recebedor.",
+            "type": "string",
+            "pattern": "[\\w\\W\\s]*",
+            "maxLength": 140,
+            "example": "Pagamento da nota XPTO035-002."
+        },
+        "Proxy": {
+            "description": "Chave cadastrada no DICT pertencente ao recebedor. Os tipos de chaves podem ser: telefone, e-mail, cpf/cnpj ou chave aleatória. No caso de telefone celular deve ser informado no padrão E.1641. Para e-mail deve ter o formato xxxxxxxx@xxxxxxx.xxx(.xx) e no máximo 77 caracteres. No caso de CPF deverá ser informado com 11 números, sem pontos ou traços. Para o caso de CNPJ deverá ser informado com 14 números, sem pontos ou traços. No caso de chave aleatória deve ser informado o UUID gerado pelo DICT, conforme formato especificado na RFC41223. [Restrição] Obrigatório quando o campo localInstrument for igual a DICT.",
+            "type": "string",
+            "pattern": "[\\w\\W\\s]*",
+            "maxLength": 77,
+            "example": "12345678901"
+        },
+        "ResponsePixPaymentData": {
+            "type": "object",
+            "description": "Objeto contendo dados do pagamento e da conta do recebedor (creditor).",
+            "required": [
+                "paymentId",
+                "endToEndId",
+                "consentId",
+                "creationDateTime",
+                "statusUpdateDateTime",
+                "status",
+                "localInstrument",
+                "payment",
+                "creditorAccount"
+            ],
+            "properties": {
+                "paymentId": {
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/PaymentId"
+                        }
+                    ],
+                    "description": "Código ou identificador único informado pela instituição detentora da conta para representar a iniciação de pagamento individual. O `paymentId` deve ser diferente do `endToEndId`. Este é o identificador que deverá ser utilizado na consulta ao status da iniciação de pagamento efetuada."
+                },
+                "endToEndId": {
+                    "$ref": "#/definitions/EndToEndId"
+                },
+                "consentId": {
+                    "type": "string",
+                    "maxLength": 256,
+                    "description": "Identificador único do consentimento criado para a iniciação de pagamento solicitada. Deverá ser um URN - Uniform Resource Name.\nUm URN, conforme definido na RFC8141 é um Uniform Resource Identifier - URI - que é atribuído sob o URI scheme \"urn\" e um namespace URN específico, com a intenção de que o URN seja um identificador de recurso persistente e independente da localização.\nConsiderando a string urn:bancoex:C1DD33123 como exemplo para consentId temos:\no namespace(urn)\no identificador associado ao namespace da instituição transnmissora (bancoex)\no identificador específico dentro do namespace (C1DD33123).\nInformações mais detalhadas sobre a construção de namespaces devem ser consultadas na RFC8141.",
+                    "pattern": "^urn:[a-zA-Z0-9][a-zA-Z0-9-]{0,31}:[a-zA-Z0-9()+,\\-.:=@;$_!*'%\\/?#]+$",
+                    "example": "urn:bancoex:C1DD33123"
+                },
+                "creationDateTime": {
+                    "type": "string",
+                    "description": "Data e hora em que o recurso foi criado. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC(UTC time format).",
+                    "maxLength": 20,
+                    "format": "date-time",
+                    "example": "2021-05-21T08:30:00Z"
+                },
+                "statusUpdateDateTime": {
+                    "type": "string",
+                    "description": "Data e hora da última atualização da iniciação de pagamento. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC(UTC time format).",
+                    "maxLength": 20,
+                    "format": "date-time",
+                    "example": "2021-05-21T08:30:00Z"
+                },
+                "proxy": {
+                    "$ref": "#/definitions/Proxy"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Estado atual da iniciação de pagamento. O estado evolui na seguinte ordem: 1. PDNG (PENDING) - Iniciação de pagamento ou transação de pagamento está pendente. Checagens adicionais em realização. 2. PART (PARTIALLY ACCEPTED) - Aguardando autorização múltipla alçada. 3. ACSP (ACCEPTED_SETTLEMENT_IN_PROCESS) - Iniciação de pagamento aceita e processamento do pagamento foi iniciado. 4. ACSC (ACCEPTED_SETTLEMENT_COMPLETED_DEBITOR_ACCOUNT) - Débito realizado na conta do pagador.  5. ACCC (ACCEPTED_SETTLEMENT_COMPLETED) - Crédito realizado na instituição de destino.  Em caso insucesso:  RJCT (REJECTED) - Instrução de pagamento rejeitada.",
+                    "enum": [
+                        "PDNG",
+                        "PART",
+                        "ACSP",
+                        "ACSC",
+                        "ACCC",
+                        "RJCT"
+                    ],
+                    "example": "PDNG"
+                },
+                "rejectionReason": {
+                    "type": "string",
+                    "description": "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status. ABORTED_SETTLEMENT_TIMEOUT - Liquidação da transação interrompida devido a timeout no SPI (AB03). ERROR_CREDITOR_AGENT - Transação interrompida devido a erro no participante do usuário recebedor (AB09). TIMEOUT_DEBTOR_AGENT - Timeout do participante emissor da ordem de pagamento (AB11).INVALID_CREDITOR_ACCOUNT_NUMBER - Número da conta transacional do usuário recebedor inexistente ou inválido (AC03).BLOCKED_ACCOUNT - Conta transacional do usuário recebedor encontra-se bloqueada (AC06).CLOSED_CREDITOR_ACCOUNT_NUMBER - Número da conta transacional do usuário recebedor encerrada (AC07).INVALID_CREDITOR_ACCOUNTTYPE - Tipo incorreto para a conta transacional do usuário recebedor (AC14).TRANSACTION_NOT_SUPPORTED - Tipo de transação não é suportado/autorizado na conta transacional do usuário recebedor (AG03). Exemplo: transferência para conta salário.NOT_ALLOWED_BOOK_TRANSFER - Não é permitida ordem de pagamento/devolução no SPI cujos recursos sejam transferidos de uma conta transacional para outra em uma mesma instituição participante ou entre participantes que utilizem o serviço de liquidação de um mesmo participante liquidante no SPI (booktransfer) (AG12).FORBIDDEN_RETURN_PAYMENT - Não é permitido devolver a devolução de um pagamento instantâneo (AG13).INCORRECT_AGENT - Participante direto não é liquidante do participante do usuário pagador / participante do usuário recebedor (AGNT).ZERO_AMOUNT - Ordem de pagamento instantâneo com valor zero (AM01).NOT_ALLOWED_AMOUNT - Ordem de pagamento/devolução em valor que faz superar o limite permitido para o tipo de conta transacional creditada (AM02).INSUFFICIENT_FUNDS - Saldo insuficiente na conta PI do participante do usuário pagador (AM04).WRONG_AMOUNT - Devolução de pagamento em valor que faz superar o valor da ordem de pagamento instantâneo correspondente (AM09).INVALID_AMOUNT - Divergência entre a somatória dos valores do bloco ‘valorDoDinheiroOuCompra’ e o campo ‘valor’ (AM12).INVALID_NUMBER_OF_TRANSACTIONS - Quantidade de transações inválida (AM18).INCONSISTENT_WITH_END_CUSTOMER - CPF/CNPJ do usuário recebedor não é consistente com o titular da conta transacional especificada (BE01).INVALID_IDENTIFICATION_CODE - Código de situação de pagamento ou de erro inválido (BE15).INVALID_CREDITOR_IDENTIFICATION_CODE - QR Code rejeitado pelo participante do usuário recebedor (BE17).CREDITOR_IDENTIFIER_INCORRECT - CPF/CNPJ do usuário recebedor incorreto (CH11).ELEMENT_CONTENT_FORMALLY_INCORRECT - Elemento da mensagem incorreto (CH16).ORDER_REJECTED - Ordem rejeitada pelo participante do usuário recebedor (DS04). NOT_ALLOWED_PAYMENT - Participante que assinou a mensagem não é autorizado a realizar a operação na conta PI debitada. No caso em que o participante que assinou a mensagem não é o titular da conta PI debitada nem é o liquidante no SPI do participante do usuário pagador (DS0G).NOT_ALLOWED_ACCOUNT - ISPB do participante que submeteu a resposta à ordem de pagamento/devolução diferente do ISPB do participante creditado pela ordem (DS0H).USER_NOT_YET_ACTIVATED - Participante não se encontra cadastrado ou ainda não iniciou a operação no SPI (DS27).INVALID_CREATION_DATE - Data e Hora do envio da mensagem inválida (DT02).INVALID_CUT_OFF_DATE - Transação extrapola o prazo máximo para devolução de pagamento instantâneo regulamentado pelo Arranjo PIX (DT05).SETTLEMENT_FAILED - Erro no processamento do pagamento instantâneo (ED05).INVALID_PURPOSE - Inconsistência entre a finalidade da transação e o preenchimento do bloco elementos Structured (FF07).INVALID_END_TO_END_ID - Identificador da operação mal formatado (FF08).INVALID_DEBTOR_CLEARING_SYSTEM_MEMBER_IDENTIFIER - ISPB do participante do usuário pagador inválido ou inexistente (RC09).INVALID_CREDITOR_CLEARING_SYSTEM_MEMBER_IDENTIFIER - ISPB do participante do usuário recebedor inválido ou inexistente (RC10).REGULATORY_REASON - Ordem de pagamento em que o usuário pagador é sancionado por resolução do Conselho de Segurança das Nações Unidas (CSNU). Nos casos em que o usuário recebedor for o sancionado, a ordem de pagamento não deve ser rejeitada (RR4). SPECIFIC_SERVICE_OFFERED_BY_CREDITOR_AGENT - A transação original não está relacionada ao serviço de Saque Pix (SL02). INVALID_BILL - Validação de expiração, validação de vencimento, Status Válido (INDT). OPERATION_WINDOW - Requisição está fora da janela de funcionamento (IDEA). INCOMPATIBLE_DATE - Data do pagamento divergente da data consentida ou divergente da data atual do QR Code (TERM). MISMATCH_AMOUNT - O valor informado no consentimento não é o mesmo valor do informado no payload de pagamento (OB01).OVER_LIMIT - O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente (OB02). INVALID_CONSENT - Consentimento inválido (status não é 'authorised' ou está expirado) (OB03). DENIED_MULTIPLE_AUTHORISATIONS - Um (ou mais) aprovadores na detentora recusaram a operação (OB04). EXPIRED_MULTIPLE_AUTHORISATIONS - Um (ou mais) aprovadores na detentora não tomaram ação para aprovar a operação (OB05). EXPIRED_BILL - O QR Code não é mais válido (OB06). [Restrição] Esse motivo deverá ser enviado quando o campo /data/status for igual a RJCT (REJECTED).",
+                    "enum": [
+                        "ABORTED_SETTLEMENT_TIMEOUT",
+                        "ERROR_CREDITOR_AGENT",
+                        "TIMEOUT_DEBTOR_AGENT",
+                        "INVALID_CREDITOR_ACCOUNT_NUMBER",
+                        "BLOCKED_ACCOUNT",
+                        "CLOSED_CREDITOR_ACCOUNT_NUMBER",
+                        "INVALID_CREDITOR_ACCOUNTTYPE",
+                        "TRANSACTION_NOT_SUPPORTED",
+                        "NOT_ALLOWED_BOOK_TRANSFER",
+                        "FORBIDDEN_RETURN_PAYMENT",
+                        "INCORRECT_AGENT",
+                        "ZERO_AMOUNT",
+                        "NOT_ALLOWED_AMOUNT",
+                        "INSUFFICIENT_FUNDS",
+                        "WRONG_AMOUNT",
+                        "INVALID_AMOUNT",
+                        "INVALID_NUMBER_OF_TRANSACTIONS",
+                        "INCONSISTENT_WITH_END_CUSTOMER",
+                        "INVALID_IDENTIFICATION_CODE",
+                        "INVALID_CREDITOR_IDENTIFICATION_CODE",
+                        "CREDITOR_IDENTIFIER_INCORRECT",
+                        "ELEMENT_CONTENT_FORMALLY_INCORRECT",
+                        "ORDER_REJECTED",
+                        "NOT_ALLOWED_PAYMENT",
+                        "NOT_ALLOWED_ACCOUNT",
+                        "USER_NOT_YET_ACTIVATED",
+                        "INVALID_CREATION_DATE",
+                        "INVALID_CUT_OFF_DATE",
+                        "SETTLEMENT_FAILED",
+                        "INVALID_PURPOSE",
+                        "INVALID_END_TO_END_ID",
+                        "INVALID_DEBTOR_CLEARING_SYSTEM_MEMBER_IDENTIFIER",
+                        "INVALID_CREDITOR_CLEARING_SYSTEM_MEMBER_IDENTIFIER",
+                        "REGULATORY_REASON",
+                        "SPECIFIC_SERVICE_OFFERED_BY_CREDITOR_AGENT",
+                        "INVALID_BILL",
+                        "OPERATION_WINDOW",
+                        "INCOMPATIBLE_DATE",
+                        "MISMATCH_AMOUNT",
+                        "OVER_LIMIT",
+                        "INVALID_CONSENT",
+                        "DENIED_MULTIPLE_AUTHORISATIONS",
+                        "EXPIRED_MULTIPLE_AUTHORISATIONS",
+                        "EXPIRED_BILL"
+                    ],
+                    "example": "USER_NOT_YET_ACTIVATED"
+                },
+                "localInstrument": {
+                    "$ref": "#/definitions/EnumLocalInstrument"
+                },
+                "payment": {
+                    "$ref": "#/definitions/PaymentPix"
+                },
+                "remittanceInformation": {
+                    "$ref": "#/definitions/RemittanceInformation"
+                },
+                "creditorAccount": {
+                    "$ref": "#/definitions/CreditorAccount"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PaymentId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "key": {
+                        "description": "Nome do campo do identificador no sistema de origem",
+                        "type": "string"
+                    },
+                    "value": {
+                        "description": "Valor do campo do identificador no sistema de origem",
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "key"
+                ],
+                "additionalItems": false
+            }
+        },
+        "BrandName": {
+            "type": "string",
+            "description": "Nome da Marca reportada pelo participante do Open Banking",
+            "example": "Opus Software",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "BrandId": {
+            "type": "string",
+            "description": "Identificador da marca reportada pelo participante do Open Banking",
+            "example": "TC123AC",
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "ExternalPaymentId": {
+            "type": "string",
+            "description": "Identificador da operação de pagamento no open banking.",
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,99}$",
+            "example": "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl"
+        },
+        "IdempotencyKey": {
+            "type": "string",
+            "description": "Identificador de solicitação exclusivo para suportar a idempotência.",
+            "maxLength": 40,
+            "pattern": "^(?!\\s)(.*)(\\S)$",
+            "example": "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl"
+        },
+        "EnumLocalInstrument": {
+            "type": "string",
+            "description": "Especifica a forma de iniciação do pagamento: - MANU - Inserção manual de dados da conta transacional - DICT - Inserção manual de chave Pix - QRDN - QR code dinâmico (*Domínio reservado para uso futuro*) - QRES - QR code estático (*Domínio reservado para uso futuro*)",
+            "enum": [
+                "MANU",
+                "DICT",
+                "QRDN",
+                "QRES"
+            ],
+            "example": "DICT"
+        }
+    }
+}

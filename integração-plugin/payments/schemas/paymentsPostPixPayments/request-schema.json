@@ -1,0 +1,38 @@
+{
+    "type": "object",
+    "required": [
+        "correlationId",
+        "idempotencyKey",
+        "brandName",
+        "brandId",
+        "requestBody"
+    ],
+    "properties": {
+        "correlationId": {
+            "$ref": "../commons-schema.json#/definitions/CorrelationId"
+        },
+        "idempotencyKey": {
+            "$ref": "../commons-schema.json#/definitions/IdempotencyKey"
+        },
+        "brandName": {
+            "$ref": "../commons-schema.json#/definitions/BrandName"
+        },
+        "brandId": {
+            "$ref": "../commons-schema.json#/definitions/BrandId"
+        },
+        "requestBody": {
+            "type":"object",
+            "description": "Payload para criação da iniciação do pagamento Pix.",
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data":{
+                    "$ref": "../commons-schema.json#/definitions/CreatePixPaymentData"
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {}
+}
