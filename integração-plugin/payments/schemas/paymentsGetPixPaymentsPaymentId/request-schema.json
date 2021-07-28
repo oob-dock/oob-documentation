@@ -1,0 +1,25 @@
+{
+    "type": "object",
+    "required": [
+        "correlationId",
+        "paymentId",
+        "brandName",
+        "brandId"
+    ],
+    "properties": {
+        "correlationId": {
+            "$ref": "../commons-schema.json#/definitions/CorrelationId"
+        },
+        "paymentId": {
+            "$ref": "../commons-schema.json#/definitions/PaymentId"
+        },
+        "brandName": {
+            "$ref": "../commons-schema.json#/definitions/BrandName"
+        },
+        "brandId": {
+            "$ref": "../commons-schema.json#/definitions/BrandId"
+        }
+    },
+    "additionalProperties": false,
+    "definitions": {}
+}
