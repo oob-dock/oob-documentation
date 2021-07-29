@@ -30,7 +30,8 @@ A tabela abaixo contém uma lista das variáveis suportadas atualmente.
 |---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------|
 | camel.main.routes-include-pattern     | Indica os locais onde o Camel deve procurar por rotas                                                                           |              |
 | apis.validation.json-schema.enabled   | Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin com as specs definidas (afeta performance) | false        |
-| apis.validation.openapi.enabled       | Habilita a validação dos objetos de request/response recebidos/devolvidos pela API com a especificação do Open Banking Brasil   | true         |
+| apis.validation.openapi.enabled-request       | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Banking Brasil   | true         |
+| apis.validation.openapi.enabled-response       | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Banking Brasil (afeta performance)   | false         |
 
 &nbsp;
 
@@ -40,7 +41,7 @@ A tabela abaixo contém uma lista das variáveis suportadas atualmente.
 
 ## Rotas do Camel
 
-As subseções seguintes contêm todos os ]`endpoints` que precisam ter rotas defnidas no camel e para os quais é necessário a criação de um ou mais plugins.
+As subseções seguintes contêm todos os `endpoints` que precisam ter rotas defnidas no camel e para os quais é necessário a criação de um ou mais plugins.
 
 Para o endpoint `/accounts/{accountId}/balances`, por exemplo, a rota deve estar definida no plugin como:
 ```
