@@ -2,8 +2,8 @@ title APP2APP Flow OOB
 
 participant "TPP" as tpp
 participant "Mobile" as mobile
-participant "App Midway" as banco
-participant "AS-Midway" as idp
+participant "App Instituição" as banco
+participant "AS-Instituição" as idp
 participant "AS-OOB" as as
 participant "Consentimento" as consentimento
 participant "Legado Banco" as legado
