@@ -1,24 +1,22 @@
 {
 	"info": {
 		"_postman_id": "d7a86ecf-0cc0-4bec-82c8-1146b81d720e",
-		"name": "OOB Authorization Server",
+		"name": "AS Mock",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "session",
+			"name": "auth",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3007/v1/auth",
-					"protocol": "http",
+					"raw": "{{host}}/v2/auth",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3007",
 					"path": [
-						"v1",
+						"v2",
 						"auth"
 					]
 				}
@@ -31,14 +29,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3007/v1/interaction/1abb933530ff",
-					"protocol": "http",
+					"raw": "{{host}}/v2/interaction/1abb933530ff",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3007",
 					"path": [
-						"v1",
+						"v2",
 						"interaction",
 						"1abb933530ff"
 					]
@@ -47,22 +43,49 @@
 			"response": []
 		},
 		{
-			"name": "interaction/1abb933530ff",
+			"name": "interaction/1abb933530ff/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"jwt\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJNeSBNb2JpbGUgQVBQIiwiaWF0IjoxNjI2OTgwMDk4LCJleHAiOjE2NTg1MTYwOTgsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0OjMwMDAiLCJzdWIiOiJteV9tb2JpbGVfYXBwIiwiY2xpZW50X2lkIjoiVFBQMSIsImNwZiI6IjU2MTU5MTA4MDE4IiwiY3BuaiI6IjM3NzU1MzA0MDAwMTc5IiwibmFtZSI6Ikpvc8OpIGRhIFNpbHZhIn0.Hq_3-L_OBEaCoCe1BWDun4Fw5Czv6IhROHcbgdJ4Sr8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{host}}/v2/interaction/1abb933530ff/login",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v2",
+						"interaction",
+						"1abb933530ff",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interaction/1abb933530ff/abort",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3007/v1/interaction/1abb933530ff/login",
-					"protocol": "http",
+					"raw": "{{host}}/v2/interaction/1abb933530ff/abort",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3007",
 					"path": [
-						"v1",
+						"v2",
 						"interaction",
 						"1abb933530ff",
-						"login"
+						"abort"
 					]
 				}
 			},
@@ -74,14 +97,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3007/v1/interaction/0242ac130004",
-					"protocol": "http",
+					"raw": "{{host}}/v2/interaction/0242ac130004",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3007",
 					"path": [
-						"v1",
+						"v2",
 						"interaction",
 						"0242ac130004"
 					]
@@ -90,13 +111,13 @@
 			"response": []
 		},
 		{
-			"name": "interaction/0242ac130004",
+			"name": "interaction/0242ac130004/consent",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"resources\": [\r\n        {\r\n            \"id\": \"49fe29f1-95a9-4521-8f48-a9700e392b48\"\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"selectedResources\": [\r\n        \"1f575a14-e1e6-407f-91bb-05d1707e5a4a\"\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -104,14 +125,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3007/v1/interaction/0242ac130004/consent",
-					"protocol": "http",
+					"raw": "{{host}}/v2/interaction/0242ac130004/consent",
 					"host": [
-						"localhost"
+						"{{host}}"
 					],
-					"port": "3007",
 					"path": [
-						"v1",
+						"v2",
 						"interaction",
 						"0242ac130004",
 						"consent"
@@ -119,6 +138,99 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "interaction/0242ac130004/abort",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v2/interaction/0242ac130004/abort",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v2",
+						"interaction",
+						"0242ac130004",
+						"abort"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interaction/c871ebc1a9c1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v2/interaction/c871ebc1a9c1",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v2",
+						"interaction",
+						"c871ebc1a9c1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "interaction/c871ebc1a9c1/error",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{host}}/v2/interaction/c871ebc1a9c1/error",
+					"host": [
+						"{{host}}"
+					],
+					"path": [
+						"v2",
+						"interaction",
+						"c871ebc1a9c1",
+						"error"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "host",
+			"value": "http://localhost:3007"
+		},
+		{
+			"key": "host_local",
+			"value": "http://localhost:3007"
+		},
+		{
+			"key": "host_ngrok",
+			"value": "http://e2e5195e9345.ngrok.io"
 		}
 	]
 }

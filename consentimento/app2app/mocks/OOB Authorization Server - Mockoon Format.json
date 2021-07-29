@@ -26,7 +26,7 @@
                                 "headers": [
                                     {
                                         "key": "Location",
-                                        "value": "http://e2e5195e9345.ngrok.io/v2/interaction/1abb933530ff"
+                                        "value": "http://31d9eb9ced49.ngrok.io/v2/interaction/1abb933530ff"
                                     },
                                     {
                                         "key": "Set-Cookie",
@@ -88,7 +88,7 @@
                                 "headers": [
                                     {
                                         "key": "Location",
-                                        "value": "http://e2e5195e9345.ngrok.io/v2/interaction/0242ac130004"
+                                        "value": "http://31d9eb9ced49.ngrok.io/v2/interaction/0242ac130004"
                                     }
                                 ],
                                 "filePath": "",
@@ -175,38 +175,12 @@
                                 "headers": [
                                     {
                                         "key": "Location",
-                                        "value": "https://tpp?AuthorizationCode=123456"
+                                        "value": "https://tpp?code=VMo9CR9O0SUkan_Wo29vr7_RSrLDXDuTupnl9to1Qwh&state=d6f8919a-a872-40b2-96ad-4685ba87f5aa"
                                     }
                                 ],
                                 "filePath": "",
                                 "sendFileAsBody": false,
                                 "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false
-                            },
-                            {
-                                "uuid": "",
-                                "body": "{}",
-                                "latency": 0,
-                                "statusCode": 400,
-                                "label": " (copy)",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [
-                                    {
-                                        "target": "body",
-                                        "modifier": "resources.0.id",
-                                        "value": "!([A-Z]*[0-9]*-*)\\w+",
-                                        "isRegex": false
-                                    },
-                                    {
-                                        "target": "body",
-                                        "modifier": "",
-                                        "value": "",
-                                        "isRegex": false
-                                    }
-                                ],
                                 "rulesOperator": "OR",
                                 "disableTemplating": false
                             }
@@ -252,7 +226,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n    \"step\": \"error\",\n    \"proceedPath\": \"/v2/interaction/c871ebc1a9c1/error\",\n    \"errorType\": \"CPF_MISMATCH\",\n    \"errorDescription\": \"\"\n}",
+                                "body": "{\n    \"step\": \"error\",\n    \"errorPath\": \"/v2/interaction/c871ebc1a9c1/error\",\n    \"errorType\": \"CPF_MISMATCH\",\n    \"errorDescription\": \"\"\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -275,7 +249,7 @@
                     {
                         "uuid": "",
                         "documentation": "",
-                        "method": "post",
+                        "method": "get",
                         "endpoint": "interaction/c871ebc1a9c1/error",
                         "responses": [
                             {
