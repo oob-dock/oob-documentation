@@ -4,17 +4,21 @@
 
 ### Criação do(s) secret(s) para armazenar as chaves privadas
 
-As chaves privadas do AS devem ser persistidas de forma segura, é altamente recomendado utilizar um cofre de senhas para essa persistência.
-Caso isso não seja possível, secrets tradicionais podem ser criados no Kubernetes para persistir essas informações.
+As chaves privadas do AS devem ser persistidas de forma segura, é altamente
+recomendado utilizar um cofre de senhas para essa persistência.
+Caso isso não seja possível, secrets tradicionais podem ser criados no Kubernetes
+para persistir essas informações.
 O procedimento abaixo descreve uma das formas para se criar este secret.
 
-O comando abaixo pode ser utilizado para se criar um secret com o conteúdo de um diretório:
+O comando abaixo pode ser utilizado para se criar um secret com o conteúdo de um
+diretório:
 
 ```shell
 kubectl -n <NOME_DO_NAMESPACE> create secret generic <NOME_DO_SECRET> --from-file=<CAMINHO_DO_DIRETORIO>
 ```
 
-Considere, por exemplo que as chaves estejam previamente criadas e armazenadas em um diretório local:
+Considere, por exemplo que as chaves estejam previamente criadas e armazenadas
+em um diretório local:
 
 ```shell
 ls /tmp/as
@@ -61,6 +65,7 @@ Configuração de acesso ao banco
 * username: Nome do usuário de acesso ao banco
 * password: Senha do usuário de acesso ao banco
 * host: Host do banco
+* port: Porta do banco
 * type: Tipo do banco. Default: "postgres"
   
 ### api/baseUrlOobConsents
@@ -69,17 +74,20 @@ Endereço do serviço de consentimento
 
 ### customer/federationJwksUrl
 
-Endereço onde o serviço deve buscar o JWKS com a chave pública para validar os tokens JWT emitidos para clientes do banco.
+Endereço onde o serviço deve buscar o JWKS com a chave pública para validar os
+tokens JWT emitidos para clientes do banco.
 
 ### privateKeys
 
-Lista de chaves privadas utilizadas para encriptar ou assinar mensagens. A lista deve conter pelo menus uma chave com use = sig (assinatura) e uma com use = enc (encriptação)
+Lista de chaves privadas utilizadas para encriptar ou assinar mensagens. A lista
+deve conter pelo menos uma chave com use = sig (assinatura) e uma com use = enc (encriptação).
 
 * certSecretName: Nome do secret que contém a chave privada
 * certSecretKey: Nome da propriedade do secret que contém a chave privada
 * kid: Identificador da chave (Obtido do diretório de participantes)
 * alg: Algoritmo a ser utilizado com a chave
-* use: Finalidade de uso da chave pelo authorization server. Os valores possíveis são `sig` (assinatura) ou `enc` (encriptação)
+* use: Finalidade de uso da chave pelo authorization server. Os valores
+possíveis são `sig` (assinatura) ou `enc` (encriptação)
 
 Exemplo:
 
@@ -99,12 +107,14 @@ Exemplo:
 
 As chaves devem ser geradas no diretório de participantes:
 
-* brcil=chave de assinatura
-* brcac=chave de encriptação cripto
+* BRSEAL=chave de assinatura
+* BRCAC=chave de encriptação
 
 ### clients
 
-Configura os clientes estáticos (não registrados dinâmicamente) no authorization server. Deve ser utilizado para cadastrar sistemas internos do banco que irão gerar tokens para acessar à plataforma OOB.
+Configura os clientes estáticos (não registrados dinâmicamente) no authorization
+server. Deve ser utilizado para cadastrar sistemas internos do banco que irão
+gerar tokens para acessar à plataforma OOB.
 
 * clientSecretName: Nome do secret que contém o secret de acesso do cliente
 * clientSecretKey: Nome da propriedade do secret que contém o secret de acesso do cliente
@@ -129,7 +139,8 @@ Exemplo:
       allowedScopes: "openid"
 ```
 
-Pelo menos um cliente deve ser configurado no authorization server para ser usado nos módulos que fazem introspection do token.
+Pelo menos um cliente deve ser configurado no authorization server para ser
+usado nos módulos que fazem introspection do token.
 
 ## Exposição
 
