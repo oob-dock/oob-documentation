@@ -141,3 +141,8 @@ Exemplo:
 
 Pelo menos um cliente deve ser configurado no authorization server para ser
 usado nos módulos que fazem introspection do token.
+
+## Exposição
+
+Como o acesso ao Authorization Server não é feito através do Kong, um ingress
+precisa ser criado. [Mais detalhes aqui](../readme.md)
