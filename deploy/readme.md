@@ -15,16 +15,15 @@ ingress com as configurações abaixo no arquivo values.yaml
 
 ```yaml
 ingress:
-  enabled: true <-Indica se o ingress deve ser criado
-  annotations: <- Define as anotações para o ingress
-    kubernetes.io/ingress.class: nginx <- Necessário ?
-    cert-manager.io/cluster-issuer: letsencrypt-prod
+  enabled: true # Indica se o ingress deve ser criado
+  annotations: # Define as anotações para o ingress
+    kubernetes.io/ingress.class: nginx
   hosts:
-    - host: auth.bank.com.br <- Define o hostname utilizado para acessar o ingress
+    - host: auth.bank.com.br # Define o hostname utilizado para acessar o ingress
       paths:
-        - / <- Define o path utilizado para acessar o ingress, geralmente "/"
+        - / # Define o path utilizado para acessar o ingress, geralmente "/"
   tls: 
-    - secretName: auth-tls <- Define o secret que contém o certificado caso o ingress aceite conexões HTTPS
+    - secretName: auth-tls # Define o secret que contém o certificado caso o ingress aceite conexões HTTPS
       hosts:
-        - auth.bank.com.br <- Define o hostname da rota relacionada a essa configuração de tls
+        - auth.bank.com.br # Define o hostname da rota relacionada a essa configuração de tls
 ```
