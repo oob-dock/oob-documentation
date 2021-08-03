@@ -79,7 +79,7 @@ A estrutura de um arquivo JWKS é a seguinte, basta adicionar cada JWK no atribu
 
 ### Verificando conteúdo do certificado cliente
 
-Basta fazer uma chamada utilizando o certificado deseja como certificado cliente
+Basta fazer uma chamada utilizando o certificado desejado como certificado cliente
 para a URL <https://prod.idrix.eu/secure/> e ver as propriedades do seu certificado.
 
 ### Gerando chaves JWKS para teste
