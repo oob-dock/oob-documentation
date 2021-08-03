@@ -1,5 +1,11 @@
 # Domínios e certificados para Opus Open Banking
 
+***
+
+**ATENÇÃO**: Jamais disponibilize suas chaves privadas em serviços da internet.
+
+***
+
 Este documento compila a documentação do Open Banking Brasil (OBB) descrevendo
 os domínios, endpoints e requisitos de segurança para uma implantação do produto
 Opus Open Banking (OOB).
@@ -79,3 +85,20 @@ específico é o HTTPS padrão.
 da especificação de segurança do OBB que descreve o uso de TLS1.2 e suporte para
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` e `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
 nos endpoints do Authorization Server e Resource Server regulatórios
+
+## Ambientes não-produtivos vs produtivos
+
+Os ambientes não-produtivos possuem um relaxamento nas exigências dos
+certificados. O sandbox do diretório de participantes age como CA para os
+certificados de ambientes não-produtivo, permitindo um autosserviço por parte
+da instituição na geração desses certificados.
+
+É necessário que a instituição tenha os certificados HTTPS (EV e não EV)
+preferencialmente gerados por algum CA válido nos navegadores. O serviço
+gratuito [Let's Encrypt](https://letsencrypt.org/) pode ser usado como emissor
+desses certificados.
+
+O certificado de assinatura deve ser gerado no ambiente de sandbox do diretório
+de participantes, o [guia de geração dos certificados](./tpp.md) para TPP contém informações
+úteis para a geração e transformação de formatos dos certificados.
+
