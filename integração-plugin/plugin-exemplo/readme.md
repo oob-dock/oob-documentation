@@ -1,4 +1,4 @@
-# Documentação para Criação de Plugin Externo
+# Exemplo de criação e execução de plugin Camel
 
 Essa página descreve a criação de um exemplo de plugin Camel chamando um serviço
 HTTP. Os serviços de exemplo são os da API de pagamento de PIX no módulo de payments.
