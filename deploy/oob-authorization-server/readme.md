@@ -208,6 +208,22 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
+### brand
+
+Diversas configurações gerais da marca:
+
+#### name
+
+Nome da marca.
+
+Ex: `BCred`
+
+#### logo
+
+URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento do consentimento.
+
+Ex: `https://marca.com.br/logo.svg`
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
