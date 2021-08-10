@@ -624,10 +624,13 @@ formato descrito em [response-error-schema.json](error/schemas/response-error-sc
 
 As mensagens de erro que são retornadas podem ser retornadas para o TPP ou exibidas
 na tela então é importante não incluir erros técnicos nas descrições.
-Se o erro foi gerado por algo que o usuário pode compreender, como falta de saldo
-ou seleção inválida, essa descrição pode ser retornada mas se for um erro técnico
-como falha de rede ou de sistema o objeto de erro deve conter uma descrição genérica
-como "não foi possível realizar a operação, tente novamente".
+Se o erro foi gerado por algo que o usuário pode compreender essa descrição pode
+ser retornada mas se for um erro técnico como falha de rede ou de sistema o
+objeto de erro deve conter uma descrição genérica como "não foi possível
+realizar a operação, tente novamente".
+
+É importante lembrar que falhas de sistema (códigos 5xx) podem afetar o SLA
+do banco pois são contabilizadas como indisponibilidade se forem muito frequêntes.
 
 ## Componentes Suportados
 
