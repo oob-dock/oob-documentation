@@ -177,3 +177,15 @@ Exemplo de response para um produto selecionável:
   ]
 }
 ```
+
+## Tratamentos adicionais
+
+### Filtro de contas
+
+Em algumas situações a conta utilizada para uma operação financeira é
+definida pelo cliente antes da seleção de contas, na aplicação iniciadora do
+pagamento. Nestes cenários o objeto debtorAccount estará preenchido no
+consentimento e a lista retornada deve ser filtrada para retornar somente a
+conta pré-selecionada ou uma lista vazia caso essa não sejá uma opção selecionável
+para o cliente. Esse tratamento deve ser feito no conector ou serviço remoto de listagem
+de contas.

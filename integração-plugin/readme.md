@@ -10,6 +10,7 @@ Esta documentação tem como objetivo guiar o desenvolvimento de plugins para se
 - [Exemplo de Plugins e Extensão da Imagem Docker](#exemplo-de-plugins-e-extensão-da-imagem-docker)
 - [Consumindo o objeto de consentimento](#consumindo-o-objeto-de-consentimento)
 - [Injetando Variáveis de Ambiente](#injetando-variáveis-de-ambiente)
+- [Tratamento de erro](#tratamento-de-erro)
 - [Componentes Suportados](#componentes-suportados)
 - [Data Formats Suportados](#data-formats-suportados)
 - [Linguages Suportadas](#linguagens-suportadas)
@@ -615,6 +616,21 @@ ENV routes.customers.personal-identifications=$route
 ```
 
 &nbsp;
+
+## Tratamento de erro
+
+Em caso de falha no plugin ou sistema remoto o objeto retornado deve seguir o
+formato descrito em [response-error-schema.json](error/schemas/response-error-schema.json).
+
+As mensagens de erro que são retornadas podem ser retornadas para o TPP ou exibidas
+na tela então é importante não incluir erros técnicos nas descrições.
+Se o erro foi gerado por algo que o usuário pode compreender essa descrição pode
+ser retornada mas se for um erro técnico como falha de rede ou de sistema o
+objeto de erro deve conter uma descrição genérica como "não foi possível
+realizar a operação, tente novamente".
+
+É importante lembrar que falhas de sistema (códigos 5xx) podem afetar o SLA
+do banco pois são contabilizadas como indisponibilidade se forem muito frequêntes.
 
 ## Componentes Suportados
 
