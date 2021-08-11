@@ -7,7 +7,7 @@
                 "uuid": "",
                 "lastMigration": 15,
                 "name": "OOB Authorization  Server",
-                "endpointPrefix": "v2",
+                "endpointPrefix": "",
                 "latency": 0,
                 "port": 3007,
                 "routes": [
@@ -26,7 +26,7 @@
                                 "headers": [
                                     {
                                         "key": "Location",
-                                        "value": "http://31d9eb9ced49.ngrok.io/v2/interaction/1abb933530ff"
+                                        "value": "/interaction/1abb933530ff"
                                     },
                                     {
                                         "key": "Set-Cookie",
@@ -52,7 +52,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n  \"step\": \"login\",\n  \"proceedPath\": \"/v2/interaction/1abb933530ff/login\",\n  \"abortPath\": \"/v2/interaction/1abb933530ff/abort\",\n  \"data\": null\n}",
+                                "body": "{\n  \"step\": \"login\",\n  \"proceedPath\": \"/interaction/1abb933530ff/login\",\n  \"abortPath\": \"/interaction/1abb933530ff/abort\",\n  \"data\": null\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -88,7 +88,7 @@
                                 "headers": [
                                     {
                                         "key": "Location",
-                                        "value": "http://31d9eb9ced49.ngrok.io/v2/interaction/0242ac130004"
+                                        "value": "/interaction/0242ac130004"
                                     }
                                 ],
                                 "filePath": "",
@@ -105,7 +105,7 @@
                     {
                         "uuid": "",
                         "documentation": "",
-                        "method": "post",
+                        "method": "get",
                         "endpoint": "interaction/1abb933530ff/abort",
                         "responses": [
                             {
@@ -139,7 +139,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\r\n    \"step\": \"consent\",\r\n    \"proceedPath\": \"/v2/interaction/0242ac130004/consent\",\r\n    \"abortPath\": \"/v2/interaction/0242ac130004/abort\",\r\n    \"data\": {\r\n        \"urlLogoTpp\": \"\",\r\n        \"consent\": {\r\n            \"brandId\": \"49fe29f1-95a9-4521-8f48-a9700e392b48\",\r\n            \"type\": \"PAYMENT\",\r\n            \"createdOn\": \"2021-01-30T17:32:28Z\",\r\n            \"tppName\": \"GuiaBolsa\",\r\n            \"externalId\": \"urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf\",\r\n            \"personDocumentType\": \"CPF\",\r\n            \"personDocumentNumber\": \"77721813700\",\r\n            \"expiresOn\": \"2022-01-30T17:31:28Z\",\r\n            \"creditor\": {\r\n                \"creditorPersonType\": \"PESSOA_NATURAL\",\r\n                \"creditorCpfCnpj\": \"58764789000137\",\r\n                \"creditorName\": \"Marco Antonio de Brito\"\r\n            },\r\n            \"payment\": {\r\n                \"type\": \"PIX\",\r\n                \"date\": \"2021-01-01\",\r\n                \"currency\": \"BRL\",\r\n                \"amount\": \"100000.12\"\r\n            },\r\n            \"resources\": [\r\n                {\r\n                    \"id\": \"ecac5687-7ffe-4b55-9cae-735a52bd8cc6\",\r\n                    \"type\": \"PAYMENT\",\r\n                    \"name\": [\r\n                        {\r\n                            \"key\": \"Agência\",\r\n                            \"value\": \"001\"\r\n                        },\r\n                        {\r\n                            \"key\": \"Conta Corrente\",\r\n                            \"value\": \"123456\"\r\n                        }\r\n                    ],\r\n                    \"hasMultipleAuthorisers\": false,\r\n                    \"defaultSelected\": false\r\n                },\r\n                {\r\n                    \"id\": \"49fe29f1-95a9-4521-8f48-a9700e392b48\",\r\n                    \"type\": \"PAYMENT\",\r\n                    \"name\": [\r\n                        {\r\n                            \"key\": \"Agência\",\r\n                            \"value\": \"002\"\r\n                        },\r\n                        {\r\n                            \"key\": \"Conta Corrente\",\r\n                            \"value\": \"789012\"\r\n                        }\r\n                    ],\r\n                    \"hasMultipleAuthorisers\": false,\r\n                    \"defaultSelected\": true\r\n                }\r\n            ]\r\n        }\r\n    }\r\n}",
+                                "body": "{\r\n    \"step\": \"consent\",\r\n    \"proceedPath\": \"/interaction/0242ac130004/consent\",\r\n    \"abortPath\": \"/interaction/0242ac130004/abort\",\r\n    \"data\": {\r\n        \"customerName\": \"Ivo Leitão\",\r\n\t\t    \"brandName\": \"Banco ABC\",\r\n\t\t    \"brandLogoUrl\": \"http://www.brand.com/logo.svg\",\r\n        \"tppLogoUrl\": \"http://www.tpp.com/logo.svg\",\r\n        \"consent\": {\r\n            \"brandId\": \"49fe29f1-95a9-4521-8f48-a9700e392b48\",\r\n            \"type\": \"PAYMENT\",\r\n            \"createdOn\": \"2021-01-30T17:32:28Z\",\r\n            \"tppName\": \"Guia Bolsa\",\r\n            \"externalId\": \"urn:amazingbank:de5f0e8a-9201-43a4-8497-673b58ce0a1c\",\r\n            \"personDocumentType\": \"CPF\",\r\n            \"personDocumentNumber\": \"12312312333\",\r\n            \"expiresOn\": \"2022-01-30T17:31:28Z\",\r\n            \"resources\": [\r\n               {\r\n                    \"id\": \"2994b3b7-fa7c-43d6-a7e1-ca2d30349938\",\r\n                    \"type\": \"PAYMENT\",\r\n                    \"name\": [\r\n                        {\r\n                            \"key\": \"Agencia\",\r\n                            \"value\": \"1234\"\r\n                        },\r\n                        {\r\n                            \"key\": \"Conta Corrente\",\r\n                            \"value\": \"12345-6\"\r\n                        }\r\n                    ],\r\n                    \"hasMultipleAuthorisers\": false\r\n                },\r\n              {\r\n                    \"id\": \"49fe29f1-95a9-4521-8f48-a9700e392b48\",\r\n                    \"type\": \"PAYMENT\",\r\n                    \"name\": [\r\n                        {\r\n                            \"key\": \"Agencia\",\r\n                            \"value\": \"0002\"\r\n                        },\r\n                        {\r\n                            \"key\": \"Conta Corrente\",\r\n                            \"value\": \"78910-1\"\r\n                        }\r\n                    ],\r\n                    \"hasMultipleAuthorisers\": false\r\n                }\r\n            ],\r\n           \"paymentData\": {\r\n                \"creditor\": {\r\n                    \"personType\": \"PESSOA_NATURAL\",\r\n                    \"cpfCnpj\": \"99999999999\",\r\n                    \"name\": \"Marco Antonio de Brito\"\r\n                },\r\n                \"payment\": {\r\n                    \"type\": \"PIX\",\r\n                    \"date\": \"2021-12-01\",\r\n                    \"currency\": \"BRL\",\r\n                    \"amount\": \"100000.12\"\r\n                },\r\n                \"debtorAccount\": {\r\n                    \"ispb\": \"12345678\",\r\n                    \"issuer\": \"1774\",\r\n                    \"number\": \"1234567890\",\r\n                    \"accountType\": \"CACC\"\r\n                }\r\n            }\r\n        }\r\n    }\r\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -226,7 +226,7 @@
                         "responses": [
                             {
                                 "uuid": "",
-                                "body": "{\n    \"step\": \"error\",\n    \"errorPath\": \"/v2/interaction/c871ebc1a9c1/error\",\n    \"errorType\": \"CPF_MISMATCH\",\n    \"errorDescription\": \"\"\n}",
+                                "body": "{\n    \"step\": \"error\",\n    \"errorPath\": \"/interaction/c871ebc1a9c1/error\",\n    \"errorType\": \"CPF_MISMATCH\",\n    \"errorDescription\": \"\"\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",

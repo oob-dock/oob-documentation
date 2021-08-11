@@ -11,13 +11,34 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v2/auth",
+					"raw": "{{host}}/auth?request_uri=urn:ietf:params:oauth:request_uri:TIKnAGi1OYdxBv5qP-r3_&client_id=OOB-MItTZ80LIVR2eq9g_zlCf&redirect_uri=https:/www.certification.openid.net/test/a/opusopenbanking/callback&scope=openid%20accounts%20resources%20consent:urn:amazingbank:1fd8712b-5759-4316-8c77-7045a86866fc&response_type=code%20id_token",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"auth"
+					],
+					"query": [
+						{
+							"key": "request_uri",
+							"value": "urn:ietf:params:oauth:request_uri:TIKnAGi1OYdxBv5qP-r3_"
+						},
+						{
+							"key": "client_id",
+							"value": "OOB-MItTZ80LIVR2eq9g_zlCf"
+						},
+						{
+							"key": "redirect_uri",
+							"value": "https:/www.certification.openid.net/test/a/opusopenbanking/callback"
+						},
+						{
+							"key": "scope",
+							"value": "openid%20accounts%20resources%20consent:urn:amazingbank:1fd8712b-5759-4316-8c77-7045a86866fc"
+						},
+						{
+							"key": "response_type",
+							"value": "code%20id_token"
+						}
 					]
 				}
 			},
@@ -29,12 +50,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v2/interaction/1abb933530ff",
+					"raw": "{{host}}/interaction/1abb933530ff",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"1abb933530ff"
 					]
@@ -57,12 +77,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v2/interaction/1abb933530ff/login",
+					"raw": "{{host}}/interaction/1abb933530ff/login",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"1abb933530ff",
 						"login"
@@ -74,15 +93,14 @@
 		{
 			"name": "interaction/1abb933530ff/abort",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v2/interaction/1abb933530ff/abort",
+					"raw": "{{host}}/interaction/1abb933530ff/abort",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"1abb933530ff",
 						"abort"
@@ -97,12 +115,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v2/interaction/0242ac130004",
+					"raw": "{{host}}/interaction/0242ac130004",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"0242ac130004"
 					]
@@ -125,12 +142,11 @@
 					}
 				},
 				"url": {
-					"raw": "{{host}}/v2/interaction/0242ac130004/consent",
+					"raw": "{{host}}/interaction/0242ac130004/consent",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"0242ac130004",
 						"consent"
@@ -142,15 +158,14 @@
 		{
 			"name": "interaction/0242ac130004/abort",
 			"request": {
-				"method": "POST",
+				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v2/interaction/0242ac130004/abort",
+					"raw": "{{host}}/interaction/0242ac130004/abort",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"0242ac130004",
 						"abort"
@@ -165,12 +180,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v2/interaction/c871ebc1a9c1",
+					"raw": "{{host}}/interaction/c871ebc1a9c1",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"c871ebc1a9c1"
 					]
@@ -184,12 +198,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "{{host}}/v2/interaction/c871ebc1a9c1/error",
+					"raw": "{{host}}/interaction/c871ebc1a9c1/error",
 					"host": [
 						"{{host}}"
 					],
 					"path": [
-						"v2",
 						"interaction",
 						"c871ebc1a9c1",
 						"error"
