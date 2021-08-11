@@ -45,6 +45,28 @@ As exigências para eles são:
 Basicamente, os requisitos de segurança se dividem em dois tipos: HTTPS e HTTPS
 com mTLS.
 
+## Unificação de FQDNs
+
+Uma possibilidade na instalação do Opus Open Banking na instituição é da
+unificação de todos os endpoints externos pelos requisitos de segurança, isso
+diminui a quantidade necessária de certificados EV e ICP-Brasil.
+
+A unificação dos endpoints pode ser feita basicamente em dois endpoints, um
+HTTPS tradicional com certificado EV e outro endpoint HTTPS MTLS com certificado
+ICP-Brasil. 
+
+Essa unificação passa a necessitar de um tratamento de proxy reverso que deve
+ser configurado adequadamente para rotear as requisições para os serviços
+corretos, uma vez que o FQDN deixou de ter o contexto do serviço propriamente dito.
+
+Sabendo então dessa perda de contexto, é interessante que os FQDNs usados não
+induzam nenhum serviço, ficando com o único ponto em comum o cotexto do "open
+banking" em si. Dessa forma os FQDNs sugeridos para uma instalação Open Banking
+Brasil são:
+
+- `openbanking.<instituição>.com.br` para os endpoints HTTPS e HTTPS EV
+- `mtls-openbanking.<instituição>.com.br` para os endpoints HTTPS MTLS ICP-Brasil
+
 ## HTTPS EV
 
 Os endpoints que hospedam algum front-end para clientes da instituição precisam
