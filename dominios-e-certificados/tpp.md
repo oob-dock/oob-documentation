@@ -18,6 +18,41 @@ Informações importantes:
 - Verifique todos os campos **múltiplas vezes** antes de concluir o cadastro
 - Atenção especial aos endereços **`REDIRECT URI`**
 
+### redirect_uri para testes e certificação
+
+As seguintes URL são sugeridas como redirect_uri na criação de Software
+Statement no diretório de participantes:
+
+Para ferramentas de testes do Opus Open Banking:
+
+- `https://tpp-client1.127.0.0.1.nip.io/cb`
+- `https://tpp-client1.127.0.0.1.nip.io:3100/auth`
+- `https://tpp-client1.127.0.0.1.nip.io:3100/cb`
+- `https://tpp-client2.127.0.0.1.nip.io:3100/auth`
+- `https://tpp-client2.127.0.0.1.nip.io:3100/cb`
+- `https://tpp-client3.127.0.0.1.nip.io:3100/auth`
+- `https://tpp-client3.127.0.0.1.nip.io:3100/cb`
+- `https://tpp.127.0.0.1.nip.io:3100/auth`
+- `https://tpp.127.0.0.1.nip.io:3100/cb`
+- `https://tpp.localhost:3100/auth`
+- `https://tpp.localhost:3100/cb`
+
+Para a ferramenta de certificação OpenID executando localmente (<https://gitlab.com/openid/conformance-suite>):
+
+- `https://www.certification.127.0.0.1.nip.io:8443/test/a/<alias>/callback` 
+- `https://www.certification.127.0.0.1.nip.io:8443/test/a/<alias>/callback?dummy1=lorem&dummy2=ipsum`
+
+Para a ferramenta de certificação OpenID (<https://www.certification.openid.net/>):
+
+- `https://www.certification.openid.net/test/a/<alias>/callback`
+- `https://www.certification.openid.net/test/a/<alias>/callback?dummy1=lorem&dummy2=ipsum`
+
+**Importante**: As URLs de certificação devem ter o `<alias>` trocado por uma
+string que identifique de forma única a instalação a ser certificada, conforme
+o [guia de certificação](https://openid.net/certification/connect_op_testing/#:~:text=You%20must%20select%20an%20%E2%80%9CALIAS%E2%80%9D%20to%20use)
+da OpenID, isso impede que execuções das instituições interfiram umas com
+as outras.
+
 ### Certificados TPP
 
 As aplicações clientes (TPPs) necessitam 2 certificados distintos:
