@@ -53,7 +53,7 @@ diminui a quantidade necessária de certificados EV e ICP-Brasil.
 
 A unificação dos endpoints pode ser feita basicamente em dois endpoints, um
 HTTPS tradicional com certificado EV e outro endpoint HTTPS MTLS com certificado
-ICP-Brasil. 
+ICP-Brasil.
 
 Essa unificação passa a necessitar de um tratamento de proxy reverso que deve
 ser configurado adequadamente para rotear as requisições para os serviços
@@ -66,6 +66,20 @@ Brasil são:
 
 - `openbanking.<instituição>.com.br` para os endpoints HTTPS e HTTPS EV
 - `mtls-openbanking.<instituição>.com.br` para os endpoints HTTPS MTLS ICP-Brasil
+
+O WAF (ou proxy reverso) deve receber requisições para as duas URLs e rotear
+para o Kong ou authorization server em função do path acessado:
+
+**Authorization server:**
+
+- /auth
+- /.well-known
+- /apple-app-site-association
+
+**Kong:**
+
+- /open-banking
+- Qualquer outra rota
 
 ## HTTPS EV
 
@@ -121,6 +135,14 @@ gratuito [Let's Encrypt](https://letsencrypt.org/) pode ser usado como emissor
 desses certificados.
 
 O certificado de assinatura deve ser gerado no ambiente de sandbox do diretório
-de participantes, o [guia de geração dos certificados](./tpp.md) para TPP contém informações
-úteis para a geração e transformação de formatos dos certificados.
+de participantes, o [guia de geração dos certificados](./tpp.md) para TPP contém
+informações úteis para a geração e transformação de formatos dos certificados.
 
+## Configuração da terminação de mTLS
+
+Para rotas com mTLS, o WAF deve passar para os serviços internos o header
+`X-SSL-Client-Cert` com o certificado utilizado pelo cliente.
+
+**Para rotas sem mTLS, o WAF não deve repassar o header X-SSL-Client-Cert se ele
+for recebido do cliente. O recebimento deste header de fora de um ambiente controlado
+pode gerar falhas de segurança.**
