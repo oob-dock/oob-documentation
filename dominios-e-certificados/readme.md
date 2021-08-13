@@ -103,7 +103,7 @@ específico é o HTTPS padrão.
 
 ## Considerações TLS para componentes regulatórios
 
-É necessário observar os critérios para TLS na sessão [6.1.2](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-financial-api-1_ID1.html#section-6.1.2)
+É necessário observar os critérios para TLS na sessão [6.2.2](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-financial-api-1_ID2.html#section-6.2.2)
 da especificação de segurança do OBB que descreve o uso de TLS1.2 e suporte para
 `TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256` e `TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384`
 nos endpoints do Authorization Server e Resource Server regulatórios
