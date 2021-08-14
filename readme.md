@@ -10,7 +10,7 @@
   - [Certificados do diretório central (SANDBOX)](dominios-e-certificados/tpp.md)
 - [Segurança](segurança/readme.md)
 
-# Certificação
+## Certificação
 
 [Roteiro para envio da certificação OpenID Foundation](certificacao/enviando-certificacao.md)
 
