@@ -208,6 +208,10 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
+#### consent.unsupportedRedirectUrl
+
+Ao iniciar autenticação no AS, caso não haja suporte `web` no `consent.channels`, redirecionamos o cliente para esta URL.
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
