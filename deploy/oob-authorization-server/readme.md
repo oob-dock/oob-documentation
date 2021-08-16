@@ -208,6 +208,19 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
+#### CONSENT_LOGIN_SCREEN_MOCK_ENABLED
+
+Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em ambientes não produtivos.
+
+Valores suportados: `0`ou `1`
+Configuração em produção: `0`
+
+#### CONSENT_LOGIN_SCREEN_MOCK_PASSWORD
+
+Senha utilizada na tela de login mockada. Caso a senha digitada seja diferente desta configuração, exibimos uma tela de erro.
+
+Valores suportados: qualquer string
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
