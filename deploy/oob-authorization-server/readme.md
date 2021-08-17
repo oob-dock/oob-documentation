@@ -216,13 +216,6 @@ ambientes não produtivos.
 Valores suportados: `0`ou `1`
 Configuração em produção: `0`
 
-#### CONSENT_LOGIN_SCREEN_MOCK_PASSWORD
-
-Senha utilizada na tela de login mockada. Caso a senha digitada seja diferente
-desta configuração, exibimos uma tela de erro.
-
-Valores suportados: qualquer string
-
 ### brand
 
 Diversas configurações gerais da marca:
@@ -243,3 +236,9 @@ Ex: `https://marca.com.br/logo.svg`
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
 precisa ser criado. [Mais detalhes aqui](../readme.md)
+
+## Ambiente de Certificação
+
+### Senha para autenticação
+
+testeOpenBanking
