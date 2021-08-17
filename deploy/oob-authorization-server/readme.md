@@ -210,16 +210,34 @@ Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 
 #### CONSENT_LOGIN_SCREEN_MOCK_ENABLED
 
-Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em ambientes não produtivos.
+Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em
+ambientes não produtivos.
 
 Valores suportados: `0`ou `1`
 Configuração em produção: `0`
 
 #### CONSENT_LOGIN_SCREEN_MOCK_PASSWORD
 
-Senha utilizada na tela de login mockada. Caso a senha digitada seja diferente desta configuração, exibimos uma tela de erro.
+Senha utilizada na tela de login mockada. Caso a senha digitada seja diferente
+desta configuração, exibimos uma tela de erro.
 
 Valores suportados: qualquer string
+
+### brand
+
+Diversas configurações gerais da marca:
+
+#### name
+
+Nome da marca.
+
+Ex: `BCred`
+
+#### logo
+
+URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento do consentimento.
+
+Ex: `https://marca.com.br/logo.svg`
 
 ## Exposição
 
