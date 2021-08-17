@@ -210,7 +210,24 @@ Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 
 #### consent.unsupportedRedirectUrl
 
-Ao iniciar autenticação no AS, caso não haja suporte `web` no `consent.channels`, redirecionamos o cliente para esta URL.
+Ao iniciar autenticação no AS, caso não haja suporte `web` no `consent.channels`,
+redirecionamos o cliente para esta URL.
+
+### brand
+
+Diversas configurações gerais da marca:
+
+#### name
+
+Nome da marca.
+
+Ex: `BCred`
+
+#### logo
+
+URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento do consentimento.
+
+Ex: `https://marca.com.br/logo.svg`
 
 ## Exposição
 
