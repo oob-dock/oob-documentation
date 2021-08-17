@@ -239,6 +239,6 @@ precisa ser criado. [Mais detalhes aqui](../readme.md)
 
 ## Ambiente de Certificação
 
-### Senha para autenticação
+### Senha para autenticação (tela de mock do login)
 
 testeOpenBanking
