@@ -37,7 +37,9 @@ Para ferramentas de testes do Opus Open Banking:
 - `https://tpp.localhost:3100/auth`
 - `https://tpp.localhost:3100/cb`
 
-Para a ferramenta de certificação OpenID executando localmente (<https://gitlab.com/openid/conformance-suite>):
+Para a ferramenta de certificação OpenID (<https://gitlab.com/openid/conformance-suite>)
+ou a certificação funcional (<https://gitlab.com/obb1/certification>)
+executando localmente:
 
 - `https://www.certification.127.0.0.1.nip.io:8443/test/a/<alias>/callback` 
 - `https://www.certification.127.0.0.1.nip.io:8443/test/a/<alias>/callback?dummy1=lorem&dummy2=ipsum`
@@ -46,6 +48,10 @@ Para a ferramenta de certificação OpenID (<https://www.certification.openid.ne
 
 - `https://www.certification.openid.net/test/a/<alias>/callback`
 - `https://www.certification.openid.net/test/a/<alias>/callback?dummy1=lorem&dummy2=ipsum`
+
+Para a ferramenta de certificação funcional (<http://web.conformance.directory.openbankingbrasil.org.br/>)
+
+- `https://web.conformance.directory.openbankingbrasil.org.br/test/a/<alias>/callback`
 
 **Importante**: As URLs de certificação devem ter o `<alias>` trocado por uma
 string que identifique de forma única a instalação a ser certificada, conforme
