@@ -21,8 +21,8 @@ exibir os dados necessários e tomar as ações junto ao usuário para então se
 um dos caminhos através de um POST para a URL daquele path
 - Todos os requests feitos pelo App ao Authorization Server O2B
 devem incluir os cookies.
-- Fazer hook apenas na URL inicial de autenticação, isso depende da instalação
-feita na sua organização
+- Apenas a URL inicial de autenticação deve ser utilizada no Deep Link (Android)
+ou Universal Link (iOS). Esta URL depende da instalação feita na sua organização.
 
 Seguindo os passos do fluxo:
 
