@@ -208,6 +208,11 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
+#### consent.unsupportedRedirectUrl
+
+URL que o cliente será redirecionado caso não haja suporte `web` na configuração
+`consent.channels`.
+
 ### brand
 
 Diversas configurações gerais da marca:
