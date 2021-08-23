@@ -210,8 +210,8 @@ Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 
 #### consent.unsupportedRedirectUrl
 
-Ao iniciar autenticação no AS, caso não haja suporte `web` no `consent.channels`,
-redirecionamos o cliente para esta URL.
+URL que o cliente será redirecionado caso não haja suporte `web` na configuração
+`consent.channels`.
 
 ### brand
 
