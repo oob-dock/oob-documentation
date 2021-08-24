@@ -6,59 +6,93 @@ participant "App Instituição" as banco
 participant "BFF-Instituição" as bff
 participant "AS-Instituição" as idp
 participant "AS-OOB" as as
-participant "Consentimento" as consentimento
-participant "Legado Banco" as legado
 
 entryspacing 0.9
 tpp->mobile:URL Inicio OAuth
 mobile->banco:URL Inicio OAuth
+
+group start 
+
 banco->bff:GET na URL + Header Accept "application/json"
+note over bff:Guardar URL do AS para\ncomparação de URLs absolutas
+
 bff->as:GET na URL + Header Accept "application/json"
 
-as->as:Validar o request
+end 
 
-as-->bff:REDIRECT pra interaction/{id} (Cookies)
-bff-->banco:REDIRECT pra interaction/{id} (Cookies)
+loop Processador de eventos
 
-banco->bff:GET interaction/{id} (Cookie)
-bff->as:GET interaction/{id} (Cookie)
+as->as:Processa o request
+as-->bff:RESPONSE\n(ver casos abaixo)
 
-as-->bff:JSON {step:"login", \n"proceedPath":"/interaction/{id}/login", \n"abortPath": "/interaction/{id}/abort"} (Cookies)
-bff-->banco:JSON {step:"login", \n"proceedPath":"/interaction/{id}/login", \n"abortPath": "/interaction/{id}/abort"} (Cookies)
+alt case REDIRECT TO AS
 
-banco->bff: POST /interaction/{id}/login (Cookies) \n+ Request autenticação
+as-->bff:HTTP STATUS 302 / 303\nREDIRECT para URL do AS (Cookies)\nURLs absolutas e relativas
+
+bff->as:GET URL (Cookies)
+
+else case LOGIN
+
+as-->bff:HTTP STATUS 200\nJSON {step:"login", \n"proceedPath":"<proceedURL>", \n"abortPath": "<abortURL>"} (Cookies)
+bff-->banco:Solicita credenciais do usuário
+banco->banco:Solicita credenciais ao usuário
+
+alt case Sucesso
+banco->bff: Credenciais do usuário
 bff->idp:Autentica o usuário\n(OB exige 2 fatores de\n autenticação consentimento\nde pagamento)
 
 idp-->bff:Autenticado
-bff->bff:Gera JWT assinado: claims \nCPF,\nCNPJ,\n Nome Completo
+bff->bff:Gera JWT assinado\nclaims: CPF,\nCNPJ,\n Nome Completo
 
-bff->as:POST interaction/{id}/login\ncom resultado (JWT assinado) (Cookies)
-as->as:Valida assinatura JWT \nno JWKS da Instituição
+bff->as:POST <proceedURL>\ncom JWT assinado (Cookies)
 
-as-->bff:REDIRECT para interaction/{id} (Cookies)
-bff-->banco:REDIRECT para interaction/{id} (Cookies)
+else case Abort
 
-banco->bff:GET interaction/{id} (Cookies)
-bff->as:GET interaction/{id} (Cookies)
+banco->bff: Usuário aborta operação
+bff->as:GET <abortURL>\n(Cookies)
 
-as->consentimento:GET /consentimento/{id} (discovery)
-consentimento->legado:Faz discovery
-consentimento<--legado:Lista de produtos
+end 
 
-as<--consentimento:Dados do consentimento
-bff<--as:JSON {step:"consent", \n"proceedPath": "/interaction/{id}/consent",\n"path_abort": "/interaction/{id}/abort", \n"data": "{tppLogoUrl: "url", consent:{dadosConsentimento}}"} (Cookies)
-banco<--bff:JSON {step:"consent", \n"proceedPath": "/interaction/{id}/consent",\n"path_abort": "/interaction/{id}/abort", \n"data": "{tppLogoUrl: "url", consent:{dadosConsentimento}}"} (Cookies)
+else case CONSENT
 
+bff<--as:JSON {\nstep:"consent", \n"proceedPath": "<proceedURL>",\n"path_abort": "<abortURL>", \n"data": {tppLogoUrl: "<logoURL>", consent:{dadosConsentimento}}}\n(Cookies)
+banco<--bff:Solicita confirmação do consentimento
 banco->banco:Exibe e confirma consentimento, seleciona produtos
 
-banco->bff:POST interaction/{id}/consent\n(Seleção de produtos) (Cookies) 
-bff->as:POST interaction/{id}/consent\n(Seleção de produtos) (Cookies) 
+alt case Sucesso
 
-as->consentimento:Registra seleção de produtos e \nconfirma consentimento
-as<--consentimento:OK
-bff<--as:REDIRECT http://TPP?code=123123
-banco<--bff:REDIRECT http://TPP?code=123123
+banco->bff:Informa seleção do consentimento
+bff->as:POST <proceedURL>\ncom seleção de produtos (Cookies) 
+
+else case Abort
+
+banco->bff: Usuário aborta operação
+bff->as:GET <abortURL>\n(Cookies)
+
+end 
+
+else case Erro
+
+as-->bff:JSON {\nstep:"error", \n"errorPath": "<errorURL>",\n"errorType": "<errorType>", \n"errorDescription": "<description>"}\n(Cookies)
+banco<--bff:Informar erro ao usuário
+
+banco->banco:Tela de transição\ncom mensagem de erro\npara TPP (exibir logo)
+
+banco->mobile:Abre a <errorURL>
+destroyafter banco
+mobile->tpp:<URL>
+
+else case Consentimento terminado
+
+as-->bff:HTTP STATUS 302 / 303\nREDIRECT para URL não-AS\nou HEADER X-Target com valor TPP
+banco<--bff:REDIRECT <URL>
 
 banco->banco:Tela de transição\npara TPP (exibir logo)
-banco->mobile:Abre a URL de redirect
-mobile->tpp:URL de redirect
+
+banco->mobile:Abre a <URL>
+destroyafter banco
+mobile->tpp:<URL>
+
+end 
+
+end
