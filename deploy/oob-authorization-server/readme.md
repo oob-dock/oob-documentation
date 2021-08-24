@@ -123,9 +123,11 @@ server. Deve ser utilizado para cadastrar sistemas internos do banco que irão
 gerar tokens para acessar à plataforma OOB.
 
 * clientSecretName: Nome do secret que contém o secret de acesso do cliente
-* clientSecretKey: Nome da propriedade do secret que contém o secret de acesso do cliente
+* clientSecretKey: Nome da propriedade do secret que contém o secret de acesso
+do cliente
 * clientId: ClientId de acesso do cliente
-* redirectUris: URLs do cliente autorizadas para redirect em fluxos de autenticação web
+* redirectUris: URLs do cliente autorizadas para redirect em fluxos de
+autenticação web
 * responseTypes: ResponseType para o cliente
 * grantTypes: Grant types permitidos para o cliente
 * tokenEndpointAuthMethod: Tipo de autorização para o cliente
@@ -154,7 +156,7 @@ Diversas configurações gerais do Authorization Server (AS):
 
 #### issuer
 
-FQDN público do AS para fins de divulgação da configuração no endereço 
+FQDN público do AS para fins de divulgação da configuração no endereço
 `openid-configuration`. Utilizar o FQDN sem MTLS.
 
 Ex: `https://auth.oob.opus-software.com.br/`
@@ -208,6 +210,14 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
+#### CONSENT_LOGIN_SCREEN_MOCK_ENABLED
+
+Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em
+ambientes não produtivos.
+
+Valores suportados: `0`ou `1`
+Configuração em produção: `0`
+
 #### consent.unsupportedRedirectUrl
 
 URL que o cliente será redirecionado caso não haja suporte `web` na configuração
@@ -225,7 +235,8 @@ Ex: `BCred`
 
 #### logo
 
-URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento do consentimento.
+URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento
+do consentimento.
 
 Ex: `https://marca.com.br/logo.svg`
 
@@ -310,3 +321,9 @@ additionalVars:
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
 precisa ser criado. [Mais detalhes aqui](../readme.md)
+
+## Ambiente de Certificação
+
+### Senha para autenticação (tela de mock do login)
+
+testeOpenBanking
