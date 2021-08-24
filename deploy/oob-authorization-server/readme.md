@@ -232,6 +232,83 @@ URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento 
 
 Ex: `https://marca.com.br/logo.svg`
 
+## additionalVars
+
+Utilizado para definir configurações opcionais na aplicação. Essa configuração
+permite definir uma lista de propriedades a serem passadas para a aplicação no formato:
+
+```yaml
+additionalVars:
+  - name: FIRST_PROPERTY
+    value: "FIRST_VALUE"
+  - name: SECOND_PROPERTY
+    value: "SECOND_VALUE"
+```
+
+As configurações que podem ser definidas neste formato estão listadas abaixo:
+
+### AS_LOG_REQUESTS
+
+Define se a aplicação deve logar os requests recebidos. É recomendável ativar
+somente em ambientes de desenvolvimento. Em produção é desaconselhável.
+
+**Formato:** `0` ou `1`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: AS_LOG_REQUESTS
+    value: "1"
+```
+
+### CONSENT_UNSUPPORTED_REDIRECT_URL
+
+URL utilizada para redirecionar o cliente quando o canal web (`consent.channels`)
+não está ativado e o cliente tenta acessar a aplicação utilizando um browser.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CONSENT_UNSUPPORTED_REDIRECT_URL
+    value: "https://play.google.com/store/apps/details?id=com.google.android.apps.maps"
+```
+
+### APPLE_APP_ID
+
+AppId da aplicação IOS, utilizada no universal link. [Mais detalhes no site da Apple](https://developer.apple.com/library/archive/documentation/General/Conceptual/AppSearch/UniversalLinks.html)
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLE_APP_ID
+    value: "9999999999.com.apple.wwdc"
+```
+
+### Configuração dos headers de certificado SSL
+
+Configuração dos headers onde o certificado utilizado pelo cliente no mTLS é
+enviado para a aplicação. Essa configuração pode ser omitida caso os headers
+padrão sejam utilizados (X-SSL-*)
+
+- SSL_CLIENT_HEADER_NAME
+- SSL_CLIENT_VERIFY_HEADER_NAME
+- SSL_CLIENT_CERT_HEADER_NAME
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: SSL_CLIENT_HEADER_NAME
+    value: "SSL-Client"
+  - name: SSL_CLIENT_VERIFY_HEADER_NAME
+    value: "SSL-Client-Verify"
+  - name: SSL_CLIENT_CERT_HEADER_NAME
+    value: "SSL-Client-Cert"
+```
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress

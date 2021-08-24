@@ -3,6 +3,7 @@ title APP2APP Flow OOB
 participant "TPP" as tpp
 participant "Mobile" as mobile
 participant "App Instituição" as banco
+participant "BFF-Instituição" as bff
 participant "AS-Instituição" as idp
 participant "AS-OOB" as as
 participant "Consentimento" as consentimento
@@ -11,27 +12,53 @@ participant "Legado Banco" as legado
 entryspacing 0.9
 tpp->mobile:URL Inicio OAuth
 mobile->banco:URL Inicio OAuth
-banco->as:GET na URL + Header Accept "application/json"
+banco->bff:GET na URL + Header Accept "application/json"
+bff->as:GET na URL + Header Accept "application/json"
+
 as->as:Validar o request
-as-->banco:REDIRECT pra interaction/{id} (Cookies)
-banco->as:GET interaction/{id} (Cookie)
-as-->banco:JSON {step:"login", "path_login":"login", "path_abort": "abort"}
-banco->idp:Autentica o usuário\n(OB exige 2 fatores de\n autenticação consentimento\nde pagamento)
-idp-->banco:Autenticado (JWT assinado Claims:CPF e nome)
-banco->as:POST interaction/{id}/login\ncom resultado (JWT assinado) (Cookies)
-as->as:Confirmar o JWT
-as-->banco:REDIRECT para interaction/{id} (Cookies)
-banco->as:GET interaction/{id} (Cookies)
+
+as-->bff:REDIRECT pra interaction/{id} (Cookies)
+bff-->banco:REDIRECT pra interaction/{id} (Cookies)
+
+banco->bff:GET interaction/{id} (Cookie)
+bff->as:GET interaction/{id} (Cookie)
+
+as-->bff:JSON {step:"login", \n"proceedPath":"/interaction/{id}/login", \n"abortPath": "/interaction/{id}/abort"} (Cookies)
+bff-->banco:JSON {step:"login", \n"proceedPath":"/interaction/{id}/login", \n"abortPath": "/interaction/{id}/abort"} (Cookies)
+
+banco->bff: POST /interaction/{id}/login (Cookies) \n+ Request autenticação
+bff->idp:Autentica o usuário\n(OB exige 2 fatores de\n autenticação consentimento\nde pagamento)
+
+idp-->bff:Autenticado
+bff->bff:Gera JWT assinado: claims \nCPF,\nCNPJ,\n Nome Completo
+
+bff->as:POST interaction/{id}/login\ncom resultado (JWT assinado) (Cookies)
+as->as:Valida assinatura JWT \nno JWKS da Instituição
+
+as-->bff:REDIRECT para interaction/{id} (Cookies)
+bff-->banco:REDIRECT para interaction/{id} (Cookies)
+
+banco->bff:GET interaction/{id} (Cookies)
+bff->as:GET interaction/{id} (Cookies)
+
 as->consentimento:GET /consentimento/{id} (discovery)
 consentimento->legado:Faz discovery
 consentimento<--legado:Lista de produtos
+
 as<--consentimento:Dados do consentimento
-banco<--as:JSON {step:"consentimento", "path_confirm": "confirm",\n"path_abort": "abort", "url_logo_tpp": "url", "dados_consentimento":{dados-consentimento}} (Cookies)
-banco->banco:Exibe e confirmar consentimento, seleciona produtos
-banco->as:POST interaction/{id}/confirm\n(Seleção de produtos) (Cookies) 
+bff<--as:JSON {step:"consent", \n"proceedPath": "/interaction/{id}/consent",\n"path_abort": "/interaction/{id}/abort", \n"data": "{tppLogoUrl: "url", consent:{dadosConsentimento}}"} (Cookies)
+banco<--bff:JSON {step:"consent", \n"proceedPath": "/interaction/{id}/consent",\n"path_abort": "/interaction/{id}/abort", \n"data": "{tppLogoUrl: "url", consent:{dadosConsentimento}}"} (Cookies)
+
+banco->banco:Exibe e confirma consentimento, seleciona produtos
+
+banco->bff:POST interaction/{id}/consent\n(Seleção de produtos) (Cookies) 
+bff->as:POST interaction/{id}/consent\n(Seleção de produtos) (Cookies) 
+
 as->consentimento:Registra seleção de produtos e \nconfirma consentimento
 as<--consentimento:OK
-banco<--as:REDIRECT http://TPP?AutorizationCode=123123
+bff<--as:REDIRECT http://TPP?code=123123
+banco<--bff:REDIRECT http://TPP?code=123123
+
 banco->banco:Tela de transição\npara TPP (exibir logo)
 banco->mobile:Abre a URL de redirect
 mobile->tpp:URL de redirect
