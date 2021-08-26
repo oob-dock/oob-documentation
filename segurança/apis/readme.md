@@ -336,9 +336,9 @@
 | Operação | API                     | Valida token | Escopo de acesso | Valida JWS | Valida consentId | Observações |
 | -------- | ----------------------- | ------------ | ---------------- | ---------- | ---------------- | ----------- |
 | POST     | /v1/consents            | Sim          | payments         | Sim        | Não              |             |
-| GET      | /v1/consents/\{ID\}     | Sim          | payments         | Não        | Sim              |             |
+| GET      | /v1/consents/\{ID\}     | Sim          | payments         | Não        | Não              |             |
 | POST     | /v1/pix/payments        | Sim          | payments         | Sim        | Sim              |             |
-| GET      | /v1/pix/payments/\{ID\} | Sim          | payments         | Não        | Sim              |             |
+| GET      | /v1/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              |             |
 
 ## Consent
 
