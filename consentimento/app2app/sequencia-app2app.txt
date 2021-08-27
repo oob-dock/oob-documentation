@@ -55,7 +55,7 @@ end
 
 else case CONSENT
 
-bff<--as:JSON {\nstep:"consent", \n"proceedPath": "<proceedURL>",\n"path_abort": "<abortURL>", \n"data": {tppLogoUrl: "<logoURL>", consent:{dadosConsentimento}}}\n(Cookies)
+bff<--as:JSON {\nstep:"consent", \n"proceedPath": "<proceedURL>",\n"abortPath": "<abortURL>", \n"data": {customerName: "<nomeCliente>", brandName: "<nomeDaBrand>",\nbrandLogoUrl: "<urlLogoBrand>" tppLogoUrl: "<urlLogoTpp>",\nconsent:{dadosConsentimento}}}\n(Cookies)
 banco<--bff:Solicita confirmação do consentimento
 banco->banco:Exibe e confirma consentimento, seleciona produtos
 
