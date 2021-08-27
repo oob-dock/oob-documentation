@@ -183,10 +183,6 @@ utilizar o endereço de sandbox do diretório de participantes.
 
 Referência: [Open Banking Brasil SSA Key Store and Issuer Details](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-dynamic-client-registration-1_ID1.html#name-open-banking-brasil-ssa-key)
 
-#### dcr_check_enabled
-
-Uso interno. Configurar com o valor `1`
-
 #### regulatory_ttl
 
 TTL em segundos dos tokens emitidos pelo AS aos TPPs. O item [5.2.2-13](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-financial-api-1_ID2.html#section-5.2.2-3.13.1)
