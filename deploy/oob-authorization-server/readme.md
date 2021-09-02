@@ -291,6 +291,20 @@ additionalVars:
     value: "9999999999.com.apple.wwdc"
 ```
 
+### ANDROID_PACKAGE_NAME
+
+application ID declarado no arquivo build.gradle. [Mais detalhes no site do Android](https://developer.android.com/training/app-links/verify-site-associations)
+
+### ANDROID_CERT_FINGERPRINTS
+
+SHA256 fingerprints do certificado de assinatura do seu aplicativo
+
+O seguinte comando gera o fingerprint via Java keytool:
+
+`
+keytool -list -v -keystore my-release-key.keystore
+`
+
 ### Configuração dos headers de certificado SSL
 
 Configuração dos headers onde o certificado utilizado pelo cliente no mTLS é
