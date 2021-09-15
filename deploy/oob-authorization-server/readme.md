@@ -227,6 +227,8 @@ Diversas configurações gerais da marca:
 
 Nome simplificado da marca, só deve conter letras minúsculas e hífen ( - ). O tamanho máximo é de 36 caracteres. Essa informação é utilizada para identificar a marca dentro do sistema e integrações, ela não será exibida ao cliente. Deve ser único por marca em instituições que possuem mais de uma marca.
 
+Ex: `cbanco`
+
 #### name
 
 Nome da marca. Essa variável será utilizada para mostrar o nome da marca na tela de redirecionamento do cliente durante o uso do fluxo web.
