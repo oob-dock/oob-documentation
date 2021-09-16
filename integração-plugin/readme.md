@@ -29,7 +29,7 @@ Esta documentação tem como objetivo guiar o desenvolvimento de plugins para se
 
 Um plugin é um artefato responsável por estender uma ou mais funcionalidades de um software. 
 
-No caso do Opus Open Banking (O2B) espeficamente, espera-se que o plugin receba um objeto de entrada conforme spec(s) previamente definida(s) por parte do O2B e, a partir dele, realize a(s) chamada(s) necessária(s) ao(s) sistema(s) legado(s) (ou quaisquer outros que sejam pertinentes) da instituição financeira, retornando para o O2B um objeto de resposta, de sucesso ou erro, em conformidade com spec(s) previamente definida(s).
+No caso do Opus Open Banking (OOB) espeficamente, espera-se que o plugin receba um objeto de entrada conforme spec(s) previamente definida(s) por parte do OOB e, a partir dele, realize a(s) chamada(s) necessária(s) ao(s) sistema(s) legado(s) (ou quaisquer outros que sejam pertinentes) da instituição financeira, retornando para o OOB um objeto de resposta, de sucesso ou erro, em conformidade com spec(s) previamente definida(s).
 
 &nbsp;
 
@@ -37,9 +37,9 @@ No caso do Opus Open Banking (O2B) espeficamente, espera-se que o plugin receba 
 
 &nbsp;
 
-O carregamento do plugin é feito em tempo de execução através do redirecionamento das chamadas realizadas no O2B para as rotas a serem implementadas no plugin.
+O carregamento do plugin é feito em tempo de execução através do redirecionamento das chamadas realizadas no OOB para as rotas a serem implementadas no plugin.
 
-Por padrão, a aplicação do O2B busca os arquivos de rota no diretório `/work` da imagem. Porém, tal caminho pode ser modificado na imagem estendida criada pelo plugin, desde que a variável de ambiente `camel.main.routes-include-pattern` (vide [Variáveis de Configuração Suportadas](#variáveis-de-configuração-suportadas)) reflita essa mudança, assim como quaisquer outros arquivos que venham a ser copiados para a imagem e suas referências (vide [Adicionando o plugin à uma imagem existente](#adicionando-o-plugin-à-uma-imagem-existente)).
+Por padrão, a aplicação do OOB busca os arquivos de rota no diretório `/work` da imagem. Porém, tal caminho pode ser modificado na imagem estendida criada pelo plugin, desde que a variável de ambiente `camel.main.routes-include-pattern` (vide [Variáveis de Configuração Suportadas](#variáveis-de-configuração-suportadas)) reflita essa mudança, assim como quaisquer outros arquivos que venham a ser copiados para a imagem e suas referências (vide [Adicionando o plugin à uma imagem existente](#adicionando-o-plugin-à-uma-imagem-existente)).
 
 &nbsp;
 
@@ -47,21 +47,21 @@ Por padrão, a aplicação do O2B busca os arquivos de rota no diretório `/work
 
 &nbsp;
 
-### O2B - Opus Open Banking
+### OOB - Opus Open Banking
 
 - Verificar se existe um consentimento válido por parte do cliente para a requisição `HTTP` sendo realizada e, caso não haja, recusar a requisição;
 - Validar se o `request` recebido na requisição `HTTP` (tanto *headers* quanto *body*) está de acordo com os padrões definidos pelo OBB;
 - Retorna o devido erro, de acordo com as especificações do OBB, caso o `request` recebido na requisição `HTTP` não seja válido;
 - Realizar os mapeamentos necessários entre o `id` de um recurso no OBB e o equivalente no(s) sistema(s) legado(s) da instituição financeira, e vice-versa;
 - Converter o `response` retornado pelo plugin e adicionar os metadados necessário para retornar um objeto de `response` em conformidade com a especificação do OBB;
-- Validar se o objeto de `response` retornado pelo plugin está em acordo com a(s) spec(s) previamente definidas pelo O2B;
+- Validar se o objeto de `response` retornado pelo plugin está em acordo com a(s) spec(s) previamente definidas pelo OOB;
 - Gerar retornos de erros nos formatos especificados pelo OBB no caso de haver erros de processamento interno, ou na chamada do plugin, ou no objeto de `response` retornado pelo plugin. 
 
 ### Plugin
 
-- Possuir uma interface de entrada em conformidade com a(s) spec(s) previamente definidas pelo O2B;
+- Possuir uma interface de entrada em conformidade com a(s) spec(s) previamente definidas pelo OOB;
 - Realizar chamadas ao(s) sistema(s) legado(s) da instituição financeira (ou qualquer outro sistema que seja pertinente) para obtenção dos dados a serem retornados na requisição;
-- Retornar um objeto de `response` (tanto em caso de sucesso, quanto de erro) em conformidade com a(s) spec(s) previamente definidas pelo O2B;
+- Retornar um objeto de `response` (tanto em caso de sucesso, quanto de erro) em conformidade com a(s) spec(s) previamente definidas pelo OOB;
 - Para as chamadas que utilizam *id de idempotência*, realizar o devido controle do mesmo;
 -  Realizar as consultas necessárias (quando houver) ao objeto de consentimento enviado no header `consent` da requisição para decisão em relação aos dados a serem retornados.
  
@@ -84,7 +84,7 @@ A Opus entregará à instituição financeira duas imagens distintas:
 
 Nesta seção são apresentados alguns exemplos de criação de plugin, assim como um passo a passo de como estender uma imagem para incluir um plugin.
 
-Aqui nós estamos dando exemplos de plugin suscintos que realizam uma chamada direta à um serviço HTTP externo ou que retorna um JSON estático sempre. Porém, é possível realizar chamadas para diversos componentes do Camel que são suportados em modo nativo no Quarkus. Nesta [seção](#componentes-suportados) você encontra todos os componentes suportados para quarkus camel nativo que são suportados pelo O2B.
+Aqui nós estamos dando exemplos de plugin suscintos que realizam uma chamada direta à um serviço HTTP externo ou que retorna um JSON estático sempre. Porém, é possível realizar chamadas para diversos componentes do Camel que são suportados em modo nativo no Quarkus. Nesta [seção](#componentes-suportados) você encontra todos os componentes suportados para quarkus camel nativo que são suportados pelo OOB.
 
 &nbsp;
 
@@ -685,7 +685,7 @@ Abaixo seguem os diferentes tipos de timeout que podem ser configurados:
 
 - socketTimeout: Define o timeout em milissegundos para aguardar dados, ou seja, o período máximo de inatividade entre dois pacotes seguidos de dados. Se for utilizado o valor 0, é considerado timeout infinito. Um valor negativo é interpretado como indefinido (valor padrão);
 
-Caso o timeout seja excedido, será lançada uma exceção, cujo tratamento é realizado pelo O2B, devolvendo um http status code 500, com uma mensagem genérica de erro.
+Caso o timeout seja excedido, será lançada uma exceção, cujo tratamento é realizado pelo OOB, devolvendo um http status code 500, com uma mensagem genérica de erro.
 
 &nbsp;
 
