@@ -22,7 +22,6 @@
     - [Consents](#consents)
     - [Resources](#resources)
     - [OOB consents](#oob-consents)
-    - [OOB Internal consents](#oob-internal-consents)
   - [Observações](#observações)
 
 ## Channels catalog
@@ -383,29 +382,6 @@
 | *PUT     | /v1/authorisations/\{ID\}/accept | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *GET     | /v1/consents                     | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
 | *GET     | /v1/consents/\{ID\}              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
-
-### OOB Internal consents
-
-**Base path:** /open-banking/oob-internal-consents
-
-**Cliente API:**
-
-- AS OOB
-- Serviços OOB
-
-**OBS:** APIS de uso interno da plataforma, não expostas no Kong.
-
-| Operação | API                                                     | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/consents/\{ID\}/basic-info$                         | Não          | oob_as           | Não        | Não              | Não  |     |
-| GET      | /v1/consents/\{ID\}                                     | Não          | oob_as           | Não        | Não              | Não  |     |
-| PUT      | /v1/consents/\{ID\}                                     | Não          | oob_as           | Não        | Não              | Não  |     |
-| DELETE   | /v1/consents/\{ID\}                                     | Não          | oob_as           | Não        | Não              | Não  |     |
-| POST     | /v1/consents/\{ID\}/consume                             | Não          |                  | Não        | Sim              | Não  |     |
-| PUT      | /v1/consents/\{ID\}/legacy-ids                          | Não          |                  | Não        | Sim              | Não  |     |
-| GET      | /v1/consents/\{ID\}/open-banking-ids/\{ID\}/type/\{ID\} | Não          |                  | Não        | Sim              | Não  |     |
-| GET      | /v1/domains/permission                                  | Não          | oob_as           | Não        | Não              | Não  |     |
-| GET      | /v1/domains/resource-type                               | Não          | oob_as           | Não        | Não              | Não  |     |
 
 ## Observações
 
