@@ -212,7 +212,7 @@ Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em
 ambientes não produtivos.
 
 Valores suportados: `0`ou `1`
-Configuração em produção: `0`
+Valor default: `0`
 
 #### consent.unsupportedRedirectUrl
 
