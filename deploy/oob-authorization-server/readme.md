@@ -212,7 +212,7 @@ Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em
 ambientes não produtivos.
 
 Valores suportados: `0`ou `1`
-Configuração em produção: `0`
+Valor default: `0`
 
 #### consent.unsupportedRedirectUrl
 
@@ -223,11 +223,17 @@ URL que o cliente será redirecionado caso não haja suporte `web` na configura�
 
 Diversas configurações gerais da marca:
 
+#### id
+
+Nome simplificado da marca, só deve conter letras minúsculas e hífen ( - ). O tamanho máximo é de 36 caracteres. Essa informação é utilizada para identificar a marca dentro do sistema e integrações, ela não será exibida ao cliente. Deve ser único por marca em instituições que possuem mais de uma marca.
+
+Ex: `cbanco`
+
 #### name
 
-Nome da marca.
+Nome da marca. Essa variável será utilizada para mostrar o nome da marca na tela de redirecionamento do cliente durante o uso do fluxo web.
 
-Ex: `BCred`
+Ex: `C banco`
 
 #### logo
 
