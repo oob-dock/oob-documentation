@@ -54,7 +54,7 @@ Onde:
   - Reestruturação dos arquivos de schema
   - Reestruturação do objeto de consentimento
     - Separação dos schemas de consentimento de compartilhamento de dados e pagamentos
-    - Criação do consent-costumer-acceptance para ser utilizado na interface de
+    - Criação do consent-customer-acceptance para ser utilizado na interface de
       consentimento para o cliente (não utilizado nos conectores)
     - Alteração na estrutura de dados para se aproximar do formato da especificação
       do Open Banking Brasil

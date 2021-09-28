@@ -93,8 +93,8 @@ Os produtos selecionáveis devem ter seus conectores respeitando os seguintes sc
 
 | Tipo     | JSON Schema                                                                                        |
 | -------- | -------------------------------------------------------------------------------------------------- |
-| Request  | [discovery-resource-request.json](schemas/discovery-resource-request.json)                         |
-| Response | [discovery-selectable-resource-response.json](schemas/discovery-selectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/v1/discovery/discovery-resource-request.json)                         |
+| Response | [discovery-selectable-resource-response.json](../schemas/v1/discovery//discovery-selectable-resource-response.json) |
 
 Exemplo de response para um produto selecionável:
 
@@ -147,8 +147,8 @@ schemas:
 
 | Tipo     | JSON Schema                                                                                              |
 | -------- | -------------------------------------------------------------------------------------------------------- |
-| Request  | [discovery-resource-request.json](schemas/discovery-resource-request.json)                               |
-| Response | [discovery-nonselectable-resource-response.json](schemas/discovery-nonselectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/v1/discovery//discovery-resource-request.json)                               |
+| Response | [discovery-nonselectable-resource-response.json](../schemas/v1/discovery//discovery-nonselectable-resource-response.json) |
 
 *[DRAFT: O schema do consentimento dentro do request está em revisão]*
 
@@ -186,6 +186,6 @@ Em algumas situações a conta utilizada para uma operação financeira é
 definida pelo cliente antes da seleção de contas, na aplicação iniciadora do
 pagamento. Nestes cenários o objeto debtorAccount estará preenchido no
 consentimento e a lista retornada deve ser filtrada para retornar somente a
-conta pré-selecionada ou uma lista vazia caso essa não sejá uma opção selecionável
+conta pré-selecionada ou uma lista vazia caso essa não seja uma opção selecionável
 para o cliente. Esse tratamento deve ser feito no conector ou serviço remoto de listagem
 de contas.
