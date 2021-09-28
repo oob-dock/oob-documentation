@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$defs": {
+        "BrandId": {
+            "type": "string",
+            "description": "Identificador da marca reportada pelo participante do Open Banking",
+            "examples": [
+                "cbanco"
+            ],
+            "minLength": 1,
+            "maxLength": 50
+        },
+        "IdempotencyKey": {
+            "type": "string",
+            "description": "Identificador de solicitação exclusivo para suportar a idempotência. Deve ser tratado em todos os requests onde estiver presente. Um segundo request recebido como mesmo IdempotencyKey não deve realizar novamente as alterações feitas pelo primeiro e não deve retornar erro. Este campo é sensível à requests processados em paralelo",
+            "maxLength": 40,
+            "pattern": "^(?!\\s)(.*)(\\S)$",
+            "examples": [
+                "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl"
+            ]
+        },
+        "Guid": {
+            "type": "string",
+            "description": "campo no formato GUID",
+            "examples": [
+                "49fe29f1-95a9-4521-8f48-a9700e392b48"
+            ],
+            "pattern": "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$",
+            "maxLength": 36
+        },
+        "RequestMeta": {
+            "type": "object",
+            "description": "Objeto que contém dados referentes ao contexto no qual o request for recebido",
+            "required": [
+                "correlationId",
+                "brandId"
+            ],
+            "properties": {
+                "correlationId": {
+                    "type": "string",
+                    "description": "UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros",
+                    "format": "uuid",
+                    "examples": [
+                        "97623ed1-4732-4bf2-8d4b-ae7aced5443b"
+                    ]
+                },
+                "brandId": {
+                    "$ref": "#/$defs/BrandId"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
