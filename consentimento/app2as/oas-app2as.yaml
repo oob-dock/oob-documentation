@@ -36,7 +36,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GeneralError'
-  "/app/command/{id}":
+  "/app/commands/{id}":
     get:
       tags:
         - DeepLink
@@ -62,7 +62,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GeneralError'
-  "/app/command/{id}/authentication":
+  "/app/commands/{id}/authentication":
     put:
       tags:
         - App
@@ -91,7 +91,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GeneralError'
-  "/app/command/{id}/consent":
+  "/app/commands/{id}/consent":
     put:
       tags:
         - App
@@ -183,37 +183,80 @@ components:
         customerName:
           type: string
           description: Nome do cliente autenticado
-        # TODO: VIRAR OBJETO ??
-        brandName:
-          type: string
-          description: Nome da marca da instituição
-        brandLogoUrl:
-          type: string
-          description: URL do logotipo da marca da instituição
-        # TODO: VIRAR OBJETO ??
-        tppName:
-          #TODO: NINGUÉM NUNCA RECLAMOU DA FALTA DISSO?
-          type: string 
-          description: "Nome do TPP"
-        tppLogoUrl:
-          type: string
-          description: URL do logotipo (SVG)
+        brand:
+          type: object
+          description: Informações sobre a marca da instituição
+          properties:
+            name:
+              type: string
+              description: Nome da marca da instituição
+            logoUrl:
+              type: string
+              description: URL do logotipo da marca da instituição
+        tpp:
+          type: object
+          description: Informações sobre o TPP
+          properties:
+            name:
+              type: string 
+              description: "Nome do TPP"
+            logoUrl:
+              type: string
+              description: URL do logotipo (SVG)
         consent:
           #TODO: Adicionar schema do consentimento
           type: object
           description: "Consentimento solicitado com resources a serem selecionados"
         permissions:
-          type: object
-          description: "Descricação das permissões do consentimento. Exclusivo de consentimento de compartilhamento de dados. TODO: SCHEMA"
+          $ref: '#/components/schemas/ResponseDomainPermissionSchema'
+          description: "Descrição das permissões do consentimento. Exclusivo de consentimento de compartilhamento de dados."
         resourceTypes:
-          type: object
-          description: "Tipos de recursos do consentimento. Exclusivo de consentimento de compartilhamento de dados. TODO: SCHEMA"
+          $ref: '#/components/schemas/ResponseDomainResourceSchema'
+          description: "Tipos de recursos do consentimento. Exclusivo de consentimento de compartilhamento de dados."
+    
+    ResponseDomainPermissionSchema:
+      type: array
+      items:
+        $ref: '#/components/schemas/Permission'
+
+    Permission:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Permite a visualização das contas, incluindo agência e número da conta
+        name:
+          type: string
+          example: ACCOUNTS_READ
+        title:
+          type: string
+          example: Permite a visualização das contas
+
+    ResponseDomainResourceSchema:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceType'
+
+    ResourceType:
+      type: object
+      properties:
+        name:
+          type: string
+          example: ACCOUNT
+        permissions:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+          example: Dados da conta
+
     ErrorCommand:
       type: object
       allOf:
         - $ref: "#/components/schemas/Redirect"
       properties:
-        errorType:
+        type:
           type: string
           description: Tipo do erro
           enum:
@@ -258,11 +301,14 @@ components:
           type: string
           description: ID do comando a ser utilizado na resposta
           maxLength: 40
-      oneOf:
-        - $ref: '#/components/schemas/ConsentCommand'
-        - $ref: '#/components/schemas/CompletedCommand'
-        - $ref: '#/components/schemas/ErrorCommand'
-        - $ref: '#/components/schemas/AuthenticateCommand'
+        authenticateCommand:
+          $ref: '#/components/schemas/AuthenticateCommand'
+        consentCommand:
+          $ref: '#/components/schemas/ConsentCommand'
+        errorCommand:
+          $ref: '#/components/schemas/ErrorCommand'
+        completedCommand:
+          $ref: '#/components/schemas/CompletedCommand'
   parameters:
     CommandId:
       name: id

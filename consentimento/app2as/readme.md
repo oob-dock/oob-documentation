@@ -23,9 +23,9 @@ O aplicativo também pode ser acionado durante fluxo hybrid flow com Hand-off,
 onde o usuário está utilizando o TPP no desktop e a instituição só possui
 autenticação através do seu aplicativo. Nesse cenário o Authorization Server
 (AS) do Opus Open Banking (OOB) exibirá um QR-code com uma URL que também deve
-ser interceptada pelo aplicativo. Utilizar uma URL que está registrada no
-aplicativo permite o usuário realizar a leitura através de qualquer aplicativo
-capaz de ler QR-code além do próprio aplicativo da instituição.
+ser interceptada pelo aplicativo. Utilizar uma URL interceptável pelo aplicativo
+permite o usuário realizar a leitura do QR-code através de qualquer aplicativo
+além do próprio da instituição.
 
 Desta forma, temos dois padrões de URLs que precisam ser interceptados pelo
 aplicativo da instituição como vemos na tabela abaixo:
@@ -64,14 +64,14 @@ novo `command` como retorno, inclusive a chamada inicial originada na
 interceptação dos deep links / universal links.
 
 É responsabilidade do aplicativo executar cada `command` até que o AS retorne
-um `command` com estado final, esse loop é o chamamos de loop de comandos.
+um `command` com estado final, esse loop é o que chamamos de loop de comandos.
 
 Importante ressaltar que o tratamento do retorno de todas as chamadas possíveis
 contra o AS deve ser único, uma vez que o schema do retorno das APIs é o mesmo
 e a próxima ação que o aplicativo deve executar é retornada no tipo do comando
 da resposta ao invés de uma sequência pré-determinada de ações.
 
-Atualmente o AS possui os seguintes `command`:
+Atualmente o AS possui os seguintes `command`s:
 
 | Command      | Ação                                                                                                    | Finaliza o loop |
 | ------------ | ------------------------------------------------------------------------------------------------------- | --------------- |
@@ -100,14 +100,15 @@ O aplicativo deve então garantir a autenticação do usuário segundo o ACR
 solicitado e enviar o resultado do comando ao AS OOB.
 
 Caso o usuário tenha se autenticado corretamente, a instituição deve emitir um
-token JWT assinado com as claims `cpf`, `cnpj` e `name` e enviar ao AS através
-da API `PUT /app/command/{id}/authenticate`, onde o `id` é o `commandId` do
-comando executado. 
+token JWT assinado com as claims `cpf`, `cnpj`, `name`, `jti` e `iat` e enviar
+ao AS através da API `PUT /app/command/{id}/authenticate`, onde o `id` é o
+`commandId` do comando executado.
 
-O comando de autenticação retorna uma propriedade `jti`, o envio da claim `jti`
-no JWT é usado para evitar a ocorrência de replay-attacks. O envio da claim
-`iat` também é exigida para evitar garantir o horário da emissão do token dentro
-de uma janela de tolerância dentro do AS OOB.
+As claims `cpf`, `cnpj` e `name` são referentes ao usuário logado, a claim `jti`
+deve conter o mesmo valor do retornado no comando da autenticação e o `iat` deve
+conter o epoch da emissão do JWT. O `jti` é usado para evitar replay-attacks e
+o `iat` para  garantir o horário da emissão do token dentro de uma janela de
+tolerância dentro do AS OOB.
 
 Importante ressaltar que o token JWT não deve ser assinado no aplicativo,
 evitando a exposição da chave privada de assinatura. A chave pública utilizada
@@ -182,9 +183,9 @@ erro, também deve solicitar que o sistema operacional do dispositivo abra a URL
 de retorno enviada no comando, garantindo que o TPP seja informado do motivo do
 erro e retome fluxo conforme o esperado pelo Guia de Experiência do Open Banking.
 
-A propriedade `isHandOff` indica se o fluxo é um hybrid flow com handoff e a
-propriedade `redirectTo` contém a URL que deve ser aberta no sistema operacional
-do dispositivo para retorno ao TPP.
+A propriedade `isHandOff` indica se o fluxo é um hybrid flow com handoff e para
+os casos de que o valor for `false`, a propriedade `redirectTo` contém a URL que
+deve ser aberta no sistema operacional do dispositivo para retorno ao TPP.
 
 ### Comando `completed`
 
