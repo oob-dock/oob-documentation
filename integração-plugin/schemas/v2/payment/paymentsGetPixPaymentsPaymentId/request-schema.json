@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "type": "object",
+    "required": [
+        "correlationId",
+        "paymentId",
+        "brandId",
+        "consent"
+    ],
+    "properties": {
+        "requestMeta": {
+            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+        },
+        "consent": {
+            "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+        },
+        "paymentId": {
+            "$ref": "../common/common-schema.json#/$defs/PaymentId"
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {}
+}

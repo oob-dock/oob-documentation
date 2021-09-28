@@ -50,17 +50,3 @@ Arquivos de schemas compartilhados
 |-------------------------------|-----------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
 | /pix/payments                 | ```direct:paymentsPostPixPayments```          | [request.json](schemas/paymentsPostPixPayments/request-schema.json)         | [response.json](schemas/paymentsPostPixPayments/response-schema.json)         |
 | /pix/payments/\{paymentId\}   | ```direct:paymentsGetPixPaymentsPaymentId```  | [request.json](schemas/paymentsGetPixPaymentsPaymentId/request-schema.json) | [response.json](schemas/paymentsGetPixPaymentsPaymentId/response-schema.json) |
-
-&nbsp;
-
-## Headers
-
-Informações que devem ser passadas no header das chamadas
-
-&nbsp;
-
-| Parâmetro                     | Descrição                                     |
-|-------------------------------|-----------------------------------------------|
-| X-Brand-ID                    | Identificador da Marca                        |
-| X-Brand-Name                  | Nome da Marca                                 |
-| Authorization                  | Token de autorização                                 |

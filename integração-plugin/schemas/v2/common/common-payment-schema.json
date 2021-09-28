@@ -1,0 +1,168 @@
+{
+    "$schema": "http://json-schema.org/schema",
+    "$defs": {
+        "Identification": {
+            "type": "object",
+            "description": "Somente para consentimentos de pagamento. Objeto contendo os dados do recebedor (creditor).",
+            "required": [
+                "personType",
+                "cpfCnpj",
+                "name"
+            ],
+            "properties": {
+                "personType": {
+                    "$ref": "#/$defs/EnumPaymentPersonType"
+                },
+                "cpfCnpj": {
+                    "type": "string",
+                    "minLength": 11,
+                    "maxLength": 14,
+                    "pattern": "^\\d{11}$|^\\d{14}$",
+                    "examples": [
+                        "58764789000137"
+                    ],
+                    "description": "Identificação da pessoa envolvida na transação.  \nPreencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.  \nO CPF será utilizado com 11 números e deverá ser informado sem pontos ou traços.  \nO CNPJ será utilizado com 14 números e deverá ser informado sem pontos ou traços.\n"
+                },
+                "name": {
+                    "type": "string",
+                    "maxLength": 140,
+                    "pattern": "[\\w\\W\\s]*",
+                    "examples": [
+                        "Marco Antonio de Brito"
+                    ],
+                    "description": "Em caso de pessoa natural deve ser informado o nome completo do titular da conta do recebedor.  \nEm caso de pessoa jurídica deve ser informada a razão social ou o nome fantasia da conta do recebedor.\n"
+                }
+            },
+            "additionalProperties": false
+        },
+        "EnumPaymentPersonType": {
+            "type": "string",
+            "maxLength": 15,
+            "enum": [
+                "PESSOA_NATURAL",
+                "PESSOA_JURIDICA"
+            ],
+            "description": "Titular, pessoa natural ou juridica a quem se referem os dados de recebedor (creditor).\n",
+            "examples": [
+                "PESSOA_NATURAL"
+            ]
+        },
+        "EnumLocalInstrument": {
+            "type": "string",
+            "maxLength": 4,
+            "enum": [
+                "MANU",
+                "DICT",
+                "QRDN",
+                "QRES",
+                "INIC"
+            ],
+            "examples": [
+                "DICT"
+            ],
+            "description": "Especifica a forma de iniciação do pagamento:\n- MANU - Inserção manual de dados da conta transacional\n- DICT - Inserção manual de chave Pix\n- QRDN - QR code dinâmico\n- QRES - QR code estático\n- INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.\n"
+        },
+        "CreditorAccount": {
+            "type": "object",
+            "description": "Objeto que contém a identificação da conta de destino do beneficiário/recebedor.  \n",
+            "required": [
+                "ispb",
+                "number",
+                "accountType"
+            ],
+            "properties": {
+                "ispb": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 8,
+                    "pattern": "^[0-9]{8}$",
+                    "examples": [
+                        "12345678"
+                    ],
+                    "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "maxLength": 4,
+                    "pattern": "^\\d{4}$",
+                    "examples": [
+                        "1774"
+                    ],
+                    "description": "Código da Agência emissora da conta sem dígito.  \n(Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,  \nno exercício de atividades da instituição, não podendo ser móvel ou transitória).  \n[Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).\n"
+                },
+                "number": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 20,
+                    "pattern": "^\\d{3,20}$",
+                    "examples": [
+                        "1234567890"
+                    ],
+                    "description": "Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir),  \nse houver valor alfanumérico, este deve ser convertido para 0.\n"
+                },
+                "accountType": {
+                    "$ref": "#/$defs/EnumAccountPaymentsType"
+                }
+            },
+            "additionalProperties": false
+        },
+        "EnumAccountPaymentsType": {
+            "type": "string",
+            "maxLength": 4,
+            "enum": [
+                "CACC",
+                "SLRY",
+                "SVGS",
+                "TRAN"
+            ],
+            "examples": [
+                "CACC"
+            ],
+            "description": "Tipos de contas usadas para pagamento via Pix.  \nModalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,  \nconta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.  \nSegue descrição de cada valor do ENUM para o escopo do Pix.  \nCACC - Current - Conta Corrente.  \nSLRY - Salary - Conta-Salário.  \nSVGS - Savings - Conta de Poupança.  \nTRAN - TransactingAccount - Conta de Pagamento pré-paga.\n"
+        },
+        "DebtorAccount": {
+            "type": "object",
+            "description": "Somente para consentimentos de pagamento. Objeto que contém a identificação da conta de origem do pagador.  \nAs informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do pagamento.\n",
+            "required": [
+                "ispb",
+                "number",
+                "accountType"
+            ],
+            "properties": {
+                "ispb": {
+                    "type": "string",
+                    "minLength": 8,
+                    "maxLength": 8,
+                    "pattern": "^[0-9]{8}$",
+                    "examples": [
+                        "12345678"
+                    ],
+                    "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.\n"
+                },
+                "issuer": {
+                    "type": "string",
+                    "maxLength": 4,
+                    "pattern": "^\\d{4}$",
+                    "examples": [
+                        "1774"
+                    ],
+                    "description": "Código da Agência emissora da conta sem dígito.  \n(Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,  \nno exercício de atividades da instituição, não podendo ser móvel ou transitória).  \n[Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).\n"
+                },
+                "number": {
+                    "type": "string",
+                    "minLength": 3,
+                    "maxLength": 20,
+                    "pattern": "^\\d{3,20}$",
+                    "examples": [
+                        "1234567890"
+                    ],
+                    "description": "Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir),  \nse houver valor alfanumérico, este deve ser convertido para 0.\n"
+                },
+                "accountType": {
+                    "$ref": "#/$defs/EnumAccountPaymentsType"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

@@ -1,11 +1,6 @@
 {
-    "definitions": {
-        "CorrelationId": {
-            "type": "string",
-            "description": "UUID que identifica o correlation ID da requisição realizada",
-            "format": "uuid",
-            "example": "97623ed1-4732-4bf2-8d4b-ae7aced5443b"
-        },
+    "$schema": "http://json-schema.org/schema",
+    "$defs": {
         "CreatePixPaymentData": {
             "type": "object",
             "description": "Objeto contendo dados do pagamento e do recebedor (creditor).",
@@ -17,29 +12,44 @@
             ],
             "properties": {
                 "localInstrument": {
-                    "$ref": "#/definitions/EnumLocalInstrument"
+                    "$ref": "../../common/common-payment-schema.json#/$defs/EnumLocalInstrument"
                 },
                 "payment": {
-                    "$ref": "#/definitions/PaymentPix"
+                    "$ref": "#/$defs/PaymentPix"
                 },
                 "creditorAccount": {
-                    "$ref": "#/definitions/CreditorAccount"
+                    "$ref": "../../common/common-payment-schema.json#/$defs/CreditorAccount"
                 },
                 "remittanceInformation": {
-                    "$ref": "#/definitions/RemittanceInformation"
+                    "$ref": "#/$defs/RemittanceInformation"
                 },
                 "qrCode": {
-                    "description": "Obs: Campo reservado para uso futuro. Sequência de caracteres que corresponde ao QR Code disponibilizado para o pagador. É a sequência de caracteres que seria lida pelo leitor de QR Code, e deve propiciar o retorno dos dados do pagador após consulta na DICT. Essa funcionalidade é possível tanto para QR Code estático quanto para QR Code dinâmico. No arranjo do Pix esta é a mesma sequência gerada e/ou lida pela funcionalidade Pix Copia e Cola. Este campo deverá ser no formato UTF-8. [Restrição] Preenchimento obrigatório para pagamentos por QR Code, observado o tamanho máximo de 512 bytes.",
                     "type": "string",
-                    "pattern": "[\\w\\W\\s]*",
                     "maxLength": 512,
-                    "example": "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012BR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123ABCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76"
+                    "pattern": "[\\w\\W\\s]*",
+                    "examples": [
+                        "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012\nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\n"
+                    ],
+                    "description": "Sequência de caracteres que corresponde ao QR Code disponibilizado para o pagador.\nÉ a sequência de caracteres que seria lida pelo leitor de QR Code, e deve propiciar o retorno dos dados do pagador após consulta na DICT.\nEssa funcionalidade é possível tanto para QR Code estático quanto para QR Code dinâmico.\nNo arranjo do Pix esta é a mesma sequência gerada e/ou lida pela funcionalidade Pix Copia e Cola.\nEste campo deverá ser no formato UTF-8.\n[Restrição] Preenchimento obrigatório para pagamentos por QR Code, observado o tamanho máximo de 512 bytes.\n"
                 },
                 "proxy": {
-                    "$ref": "#/definitions/Proxy"
+                    "$ref": "#/$defs/Proxy"
                 },
                 "cnpjInitiator": {
-                    "$ref": "#/definitions/CnpjInitiator"
+                    "$ref": "#/$defs/CnpjInitiator"
+                },
+                "transactionIdentification": {
+                    "$ref": "#/$defs/TransactionIdentification"
+                },
+                "ibgeTownCode": {
+                    "type": "string",
+                    "minLength": 7,
+                    "maxLength": 7,
+                    "pattern": "^\\d{7}$",
+                    "examples": [
+                        "5300108"
+                    ],
+                    "description": "Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).\nPara o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.\nO preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.\nEste campo faz referência ao campo CodMun do arranjo Pix.\n"
                 }
             },
             "additionalProperties": false
@@ -58,7 +68,9 @@
                     "pattern": "^((\\d{1,16}\\.\\d{2}))$",
                     "minLength": 4,
                     "maxLength": 19,
-                    "example": "100000.04"
+                    "examples": [
+                        "100000.04"
+                    ]
                 },
                 "currency": {
                     "type": "string",
@@ -66,59 +78,12 @@
                     "maxLength": 3,
                     "description": "Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'. Todos os valores monetários informados estão representados com a moeda vigente do Brasil.",
                     "pattern": "^([A-Z]{3})$",
-                    "example": "BRL"
+                    "examples": [
+                        "BRL"
+                    ]
                 }
             },
             "additionalProperties": false
-        },
-        "CreditorAccount": {
-            "type": "object",
-            "description": "Objeto que contém a identificação da conta de destino do beneficiário/recebedor.",
-            "required": [
-                "ispb",
-                "number",
-                "accountType"
-            ],
-            "properties": {
-                "ispb": {
-                    "type": "string",
-                    "minLength": 8,
-                    "maxLength": 8,
-                    "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.",
-                    "pattern": "^[0-9]{8}$",
-                    "example": "12345678"
-                },
-                "issuer": {
-                    "type": "string",
-                    "maxLength": 4,
-                    "description": "Código da Agência emissora da conta sem dígito. (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória). [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).",
-                    "pattern": "^\\d{4}$",
-                    "example": "1774"
-                },
-                "number": {
-                    "type": "string",
-                    "minLength": 3,
-                    "maxLength": 20,
-                    "description": "Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir), se houver valor alfanumérico, este deve ser convertido para 0.",
-                    "pattern": "^\\d{3,20}$",
-                    "example": "1234567890"
-                },
-                "accountType": {
-                    "$ref": "#/definitions/EnumAccountPaymentsType"
-                }
-            },
-            "additionalProperties": false
-        },
-        "EnumAccountPaymentsType": {
-            "type": "string",
-            "description": "Tipos de contas usadas para pagamento via Pix. Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica. Segue descrição de cada valor do ENUM para o escopo do Pix.  CACC - Current - Conta Corrente.  SLRY - Salary - Conta-Salário.  SVGS - Savings - Conta de Poupança.  TRAN - TransactingAccount - Conta de Pagamento pré-paga.",
-            "enum": [
-                "CACC",
-                "SLRY",
-                "SVGS",
-                "TRAN"
-            ],
-            "example": "CACC"
         },
         "EndToEndId": {
             "type": "string",
@@ -126,35 +91,42 @@
             "maxLength": 32,
             "description": "Deve ser preenchido no formato padrão ExxxxxxxxyyyyMMddHHmmkkkkkkkkkkk (32 caracteres; “case sensitive”, isso é, diferencia letras maiúsculas e minúsculas), sendo: “E” – fixo (1 caractere);  xxxxxxxx – identificação do agente que gerou o ´EndToEndId´, podendo ser: o ISPB do participante direto ou o ISPB do participante indireto (8 caracteres numéricos [0-9]);  yyyyMMddHHmm – data, hora e minuto (12 caracteres), seguindo o horário UTC, da submissão da ordem de pagamento, caso a liquidação seja prioritária, ou prevista para o envio da ordem ao sistema de liquidação, caso seja realizado um agendamento. Para ordens prioritárias e não prioritárias, aceita-se o preenchimento, pelo agente que gerou o ´EndToEndId´, com uma tolerância máxima de 12 horas, para o futuro e para o passado, em relação ao horário efetivo de processamento da ordem pelo SPI;  kkkkkkkkkkk – sequencial criado pelo agente que gerou o ´EndToEndId´ (11 caracteres alfanuméricos [a-z/A-Z/0-9]). Deve ser único dentro de cada “yyyyMMddHHmm”. Admite-se que o ´EndToEndId´ seja gerado pelo participante direto, pelo participante indireto ou pelo iniciador de pagamento. Ele deve ser único, não podendo ser repetido em qualquer outra operação enviada ao SPI, [Restrição] O ´EndToEndId´ deve ser informado obrigatoriamente caso o status do pagamento seja ACCEPTED_SETTLEMENT_COMPLETED.",
             "pattern": "^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$",
-            "example": "E9040088820210128000800123873170"
+            "examples": [
+                "E9040088820210128000800123873170"
+            ]
         },
         "RemittanceInformation": {
             "description": "Deve ser preenchido sempre que o usuário pagador inserir alguma informação adicional em um pagamento, a ser enviada ao recebedor.",
             "type": "string",
             "pattern": "[\\w\\W\\s]*",
             "maxLength": 140,
-            "example": "Pagamento da nota XPTO035-002."
+            "examples": [
+                "Pagamento da nota XPTO035-002."
+            ]
         },
         "Proxy": {
             "description": "Chave cadastrada no DICT pertencente ao recebedor. Os tipos de chaves podem ser: telefone, e-mail, cpf/cnpj ou chave aleatória. No caso de telefone celular deve ser informado no padrão E.1641. Para e-mail deve ter o formato xxxxxxxx@xxxxxxx.xxx(.xx) e no máximo 77 caracteres. No caso de CPF deverá ser informado com 11 números, sem pontos ou traços. Para o caso de CNPJ deverá ser informado com 14 números, sem pontos ou traços. No caso de chave aleatória deve ser informado o UUID gerado pelo DICT, conforme formato especificado na RFC41223. [Restrição] Obrigatório quando o campo localInstrument for igual a DICT.",
             "type": "string",
             "pattern": "[\\w\\W\\s]*",
             "maxLength": 77,
-            "example": "12345678901"
+            "examples": [
+                "12345678901"
+            ]
         },
-        "CnpjInitiator":{
-          "type": "string",
-          "pattern": "^\\d{14}$",
-          "maxLength": 14,
-          "example": 50685362000135,
-          "description": "CNPJ do Iniciador de Pagamento devidamente habilitado para a prestação de Serviço de Iniciação no Pix."
+        "CnpjInitiator": {
+            "type": "string",
+            "pattern": "^\\d{14}$",
+            "maxLength": 14,
+            "examples": [
+                "50685362000135"
+            ],
+            "description": "CNPJ do Iniciador de Pagamento devidamente habilitado para a prestação de Serviço de Iniciação no Pix."
         },
         "ResponsePixPaymentData": {
             "type": "object",
             "description": "Objeto contendo dados do pagamento e da conta do recebedor (creditor).",
             "required": [
                 "paymentId",
-                "consentId",
                 "creationDateTime",
                 "statusUpdateDateTime",
                 "status",
@@ -165,39 +137,31 @@
             ],
             "properties": {
                 "paymentId": {
-                    "allOf": [
-                        {
-                            "$ref": "#/definitions/PaymentId"
-                        }
-                    ],
-                    "description": "Código ou identificador único informado pela instituição detentora da conta para representar a iniciação de pagamento individual. O `paymentId` deve ser diferente do `endToEndId`. Este é o identificador que deverá ser utilizado na consulta ao status da iniciação de pagamento efetuada."
+                    "$ref": "#/$defs/PaymentId"
                 },
                 "endToEndId": {
-                    "$ref": "#/definitions/EndToEndId"
-                },
-                "consentId": {
-                    "type": "string",
-                    "maxLength": 256,
-                    "description": "Identificador único do consentimento criado para a iniciação de pagamento solicitada. Deverá ser um URN - Uniform Resource Name.\nUm URN, conforme definido na RFC8141 é um Uniform Resource Identifier - URI - que é atribuído sob o URI scheme \"urn\" e um namespace URN específico, com a intenção de que o URN seja um identificador de recurso persistente e independente da localização.\nConsiderando a string urn:bancoex:C1DD33123 como exemplo para consentId temos:\no namespace(urn)\no identificador associado ao namespace da instituição transnmissora (bancoex)\no identificador específico dentro do namespace (C1DD33123).\nInformações mais detalhadas sobre a construção de namespaces devem ser consultadas na RFC8141.",
-                    "pattern": "^urn:[a-zA-Z0-9][a-zA-Z0-9-]{0,31}:[a-zA-Z0-9()+,\\-.:=@;$_!*'%\\/?#]+$",
-                    "example": "urn:bancoex:C1DD33123"
+                    "$ref": "#/$defs/EndToEndId"
                 },
                 "creationDateTime": {
                     "type": "string",
                     "description": "Data e hora em que o recurso foi criado. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC(UTC time format).",
                     "maxLength": 20,
                     "format": "date-time",
-                    "example": "2021-05-21T08:30:00Z"
+                    "examples": [
+                        "2021-05-21T08:30:00Z"
+                    ]
                 },
                 "statusUpdateDateTime": {
                     "type": "string",
                     "description": "Data e hora da última atualização da iniciação de pagamento. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC(UTC time format).",
                     "maxLength": 20,
                     "format": "date-time",
-                    "example": "2021-05-21T08:30:00Z"
+                    "examples": [
+                        "2021-05-21T08:30:00Z"
+                    ]
                 },
                 "proxy": {
-                    "$ref": "#/definitions/Proxy"
+                    "$ref": "#/$defs/Proxy"
                 },
                 "status": {
                     "type": "string",
@@ -210,7 +174,9 @@
                         "ACCC",
                         "RJCT"
                     ],
-                    "example": "PDNG"
+                    "examples": [
+                        "PDNG"
+                    ]
                 },
                 "rejectionReason": {
                     "type": "string",
@@ -261,22 +227,37 @@
                         "EXPIRED_MULTIPLE_AUTHORISATIONS",
                         "EXPIRED_BILL"
                     ],
-                    "example": "USER_NOT_YET_ACTIVATED"
+                    "examples": [
+                        "USER_NOT_YET_ACTIVATED"
+                    ]
                 },
                 "localInstrument": {
-                    "$ref": "#/definitions/EnumLocalInstrument"
+                    "$ref": "../../common/common-payment-schema.json#/$defs/EnumLocalInstrument"
                 },
                 "payment": {
-                    "$ref": "#/definitions/PaymentPix"
+                    "$ref": "#/$defs/PaymentPix"
                 },
                 "remittanceInformation": {
-                    "$ref": "#/definitions/RemittanceInformation"
+                    "$ref": "#/$defs/RemittanceInformation"
                 },
                 "creditorAccount": {
-                    "$ref": "#/definitions/CreditorAccount"
+                    "$ref": "../../common/common-payment-schema.json#/$defs/CreditorAccount"
                 },
                 "cnpjInitiator": {
-                    "$ref": "#/definitions/CnpjInitiator"
+                    "$ref": "#/$defs/CnpjInitiator"
+                },
+                "transactionIdentification": {
+                    "$ref": "#/$defs/TransactionIdentification"
+                },
+                "ibgeTownCode": {
+                    "type": "string",
+                    "minLength": 7,
+                    "maxLength": 7,
+                    "pattern": "^\\d{7}$",
+                    "examples": [
+                        "5300108"
+                    ],
+                    "description": "Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).\nPara o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.\nO preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.\nEste campo faz referência ao campo CodMun do arranjo Pix.\n"
                 }
             },
             "additionalProperties": false
@@ -286,60 +267,47 @@
             "type": "array",
             "items": {
                 "type": "object",
-                "properties": {
-                    "key": {
-                        "description": "Nome do campo do identificador no sistema de origem",
-                        "type": "string"
-                    },
-                    "value": {
-                        "description": "Valor do campo do identificador no sistema de origem",
-                        "type": "string"
-                    }
-                },
                 "required": [
                     "key"
                 ],
+                "properties": {
+                    "key": {
+                        "description": "Nome do campo do identificador no sistema de origem",
+                        "type": "string",
+                        "examples": [
+                            "internalPaymentId"
+                        ]
+                    },
+                    "value": {
+                        "description": "Valor do campo do identificador no sistema de origem",
+                        "type": "string",
+                        "examples": [
+                            "1234"
+                        ]
+                    }
+                },
                 "additionalItems": false
-            }
-        },
-        "BrandName": {
-            "type": "string",
-            "description": "Nome da Marca reportada pelo participante do Open Banking",
-            "example": "Opus Software",
-            "minLength": 1,
-            "maxLength": 50
-        },
-        "BrandId": {
-            "type": "string",
-            "description": "Identificador da marca reportada pelo participante do Open Banking",
-            "example": "TC123AC",
-            "minLength": 1,
-            "maxLength": 50
+            },
+            "minItems": 10,
+            "maxItems": 9
         },
         "ExternalPaymentId": {
             "type": "string",
             "description": "Identificador da operação de pagamento no open banking.",
             "maxLength": 100,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,99}$",
-            "example": "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl"
+            "examples": [
+                "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl"
+            ]
         },
-        "IdempotencyKey": {
+        "TransactionIdentification": {
+            "description": "Trata-se de um identificador de transação que deve ser retransmitido intacto pelo PSP do pagador ao gerar a ordem de pagamento. Essa informação permitirá ao recebedor identificar e correlacionar a transferência, quando recebida, com a apresentação das instruções ao pagador.",
             "type": "string",
-            "description": "Identificador de solicitação exclusivo para suportar a idempotência.",
-            "maxLength": 40,
-            "pattern": "^(?!\\s)(.*)(\\S)$",
-            "example": "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl"
-        },
-        "EnumLocalInstrument": {
-            "type": "string",
-            "description": "Especifica a forma de iniciação do pagamento: - MANU - Inserção manual de dados da conta transacional - DICT - Inserção manual de chave Pix - QRDN - QR code dinâmico (*Domínio reservado para uso futuro*) - QRES - QR code estático (*Domínio reservado para uso futuro*)",
-            "enum": [
-                "MANU",
-                "DICT",
-                "QRDN",
-                "QRES"
-            ],
-            "example": "DICT"
+            "maxLength": 25,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]{0,24}$",
+            "examples": [
+                "E00038166201907261559y6j6"
+            ]
         }
     }
 }
