@@ -1,0 +1,91 @@
+# Definição de interfaces de conectores (Schemas)
+
+Definição do formato das mensagem enviadas e recebidas pelos conectores no
+formato json schema.
+
+As definições seguem a estrutura de pastas **versão**/**nome_módulo**/**endpoint**
+
+Onde:
+
+- **versão**: Versão da interface (detalhada abaixo).
+
+- **nome_módulo**: Nome do módulo da plataforma OOB onde o conector deve ser inserido.
+
+- **endpoint**: Nome do endpoint que representa uma rota ou ponto de integração
+  entre o OOB e os sistemas internos.
+
+Dentro de cada um desses diretórios estão presentes a definição do objeto de
+request (que será enviado para o conector), do objeto de response (que deve ser
+retornado pelo conector em caso de sucesso ao realizar a operação) e do objeto de
+erro (que deve ser retornado pelo conector em caso de falha). Nos casos onde o
+retorno de erro não está definido, deve-se usar o formado padrão, descrito no
+arquivo `response-error-schema.json`.
+
+Os diretórios `common` possuem a definição de objetos utilizados em mais de um
+ponto de integração.
+
+## Definição de versão dos artefatos
+
+Os artefatos são versionados no padrão semantic versioning (SemVer):
+
+\<**Major**\>.\<**Minor**\>.\<**Patch**\>
+
+Onde:
+
+- **Major**: Incrementado quando a versão das interfaces possui incompatibilidades
+  com a versão anterior. Ou seja, os conectores precisarão sem alterados para
+  trabalhar com a nova versão do OOB. Para cada nova versão major um diretório é
+  criado, dessa forma é possível acessar as versões anteriores.
+
+- **Minor**: Incrementado quando a interface foi alterada mas ainda é compatível
+  com as versões anteriores dentro da mesma Major. Os conectores podem ser
+  alterado para utilizar as alterações, mas não é obrigatório.
+
+- **Patch**: Incrementado quando uma alteração é feita nos documentos sem
+  alterar a interface, como a correção em uma descrição, exemplo de preenchimento
+  ou detalhamento do formato. Os conectores podem ser alterado para utilizar as
+  alterações, mas não é obrigatório.
+
+## Changelog
+
+### 21/09/2021 - v2.0.0
+
+- Geral
+  - Reestruturação dos arquivos de schema
+  - Reestruturação do objeto de consentimento
+    - Separação dos schemas de consentimento de compartilhamento de dados e pagamentos
+    - Criação do consent-customer-acceptance para ser utilizado na interface de
+      consentimento para o cliente (não utilizado nos conectores)
+    - Alteração na estrutura de dados para se aproximar do formato da especificação
+      do Open Banking Brasil
+    - Substituição do campo tppName pelo campo tpp contendo um objeto com dados do
+      tpp
+  - Inclusão do campos abaixo no consentimento de pagamento:
+    - details
+    - ibgeTownCode
+- Consent
+  - Inclusão do campo data no retorno do discovery de pagamento, onde estará o
+    objeto de resposta, **tornando essa versão incompatível com interfaces na
+    versão 1.x.x**
+  - Inclusão do campo requestMeta nos requests. Os campos correlationId e brandId
+    foram movidos para este novo objeto **tornando essa versão incompatível com
+    interfaces na versão 1.x.x**
+- Payment
+  - Remoção dos campos abaixo nos reponses:
+    - consentId
+    - correlationId
+  - Remoção dos campos abaixo nos requests:
+    - brandName
+  - Remoção do header consent dos requests, **tornando essa versão incompatível
+    com interfaces na versão 1.x.x**
+  - Inclusão do campo consent nos requests
+  - Inclusão dos campos abaixo no request de iniciação de pagamento PIX:
+    - transactionIdentification
+    - ibgeTownCode
+  - Inclusão dos campos abaixo nos responses de iniciação e consulta de
+    pagamento PIX:
+    - transactionIdentification
+    - ibgeTownCode
+  - Inclusão do campo requestMeta nos requests. Os campos correlationId e brandId
+    foram movidos para este novo objeto **tornando essa versão incompatível com
+    interfaces na versão 1.x.x**

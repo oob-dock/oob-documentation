@@ -212,7 +212,7 @@ Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em
 ambientes não produtivos.
 
 Valores suportados: `0`ou `1`
-Configuração em produção: `0`
+Valor default: `0`
 
 #### consent.unsupportedRedirectUrl
 
@@ -223,11 +223,17 @@ URL que o cliente será redirecionado caso não haja suporte `web` na configura�
 
 Diversas configurações gerais da marca:
 
+#### id
+
+Nome simplificado da marca, só deve conter letras minúsculas e hífen ( - ). O tamanho máximo é de 36 caracteres. Essa informação é utilizada para identificar a marca dentro do sistema e integrações, ela não será exibida ao cliente. Deve ser único por marca em instituições que possuem mais de uma marca.
+
+Ex: `cbanco`
+
 #### name
 
-Nome da marca.
+Nome da marca. Essa variável será utilizada para mostrar o nome da marca na tela de redirecionamento do cliente durante o uso do fluxo web.
 
-Ex: `BCred`
+Ex: `C banco`
 
 #### logo
 
@@ -290,6 +296,20 @@ additionalVars:
   - name: APPLE_APP_ID
     value: "9999999999.com.apple.wwdc"
 ```
+
+### ANDROID_PACKAGE_NAME
+
+application ID declarado no arquivo build.gradle. [Mais detalhes no site do Android](https://developer.android.com/training/app-links/verify-site-associations)
+
+### ANDROID_CERT_FINGERPRINTS
+
+SHA256 fingerprints do certificado de assinatura do seu aplicativo
+
+O seguinte comando gera o fingerprint via Java keytool:
+
+`
+keytool -list -v -keystore my-release-key.keystore
+`
 
 ### Configuração dos headers de certificado SSL
 

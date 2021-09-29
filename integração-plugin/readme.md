@@ -6,16 +6,75 @@ Esta documentação tem como objetivo guiar o desenvolvimento de plugins para se
 
 Índice:
 
-- [Introdução](#introdução)
-- [Exemplo de Plugins e Extensão da Imagem Docker](#exemplo-de-plugins-e-extensão-da-imagem-docker)
-- [Consumindo o objeto de consentimento](#consumindo-o-objeto-de-consentimento)
-- [Injetando Variáveis de Ambiente](#injetando-variáveis-de-ambiente)
-- [Tratamento de erro](#tratamento-de-erro)
-- [Configuração de timeout](#configuração-de-timeout)
-- [Componentes Suportados](#componentes-suportados)
-- [Data Formats Suportados](#data-formats-suportados)
-- [Linguages Suportadas](#linguagens-suportadas)
-- [Glossário](#glossario)
+- [Documentação para Criação de Plugin Externo](#documentação-para-criação-de-plugin-externo)
+  - [Introdução](#introdução)
+    - [O que é um Plugin](#o-que-é-um-plugin)
+    - [Como a Aplicação Realiza o Carregamento do Plugin](#como-a-aplicação-realiza-o-carregamento-do-plugin)
+    - [Responsabilidade de Processamento](#responsabilidade-de-processamento)
+    - [OOB - Opus Open Banking](#oob---opus-open-banking)
+    - [Plugin](#plugin)
+    - [Disponibilização de Imagens Docker](#disponibilização-de-imagens-docker)
+  - [Exemplo de Plugins e Extensão da Imagem Docker](#exemplo-de-plugins-e-extensão-da-imagem-docker)
+    - [Utilizando Proxy Simples](#utilizando-proxy-simples)
+    - [Utilizando Mock](#utilizando-mock)
+    - [Adicionando o Plugin à Uma Imagem Existente](#adicionando-o-plugin-à-uma-imagem-existente)
+      - [Dockerfile Para o Plugin de Proxy Simples](#dockerfile-para-o-plugin-de-proxy-simples)
+      - [Dockerfile Para o Plugin de Mock](#dockerfile-para-o-plugin-de-mock)
+  - [Injetando Variáveis de Ambiente](#injetando-variáveis-de-ambiente)
+    - [Injetando Via Dockerfile](#injetando-via-dockerfile)
+    - [Exemplos](#exemplos)
+    - [Injetando Variáveis no Build](#injetando-variáveis-no-build)
+    - [Injetando Variáveis na Execução do Container](#injetando-variáveis-na-execução-do-container)
+    - [Consumindo Variáveis de Ambiente via Camel](#consumindo-variáveis-de-ambiente-via-camel)
+      - [Exemplo com Proxy Simples](#exemplo-com-proxy-simples)
+      - [Exemplo com Mock](#exemplo-com-mock)
+  - [Tratamento de erro](#tratamento-de-erro)
+  - [Configuração de timeout](#configuração-de-timeout)
+  - [Tratamento de headers](#tratamento-de-headers)
+  - [Componentes Suportados](#componentes-suportados)
+    - [ACTIVEMQ](#activemq)
+    - [AMQP](#amqp)
+    - [ATLASMAP](#atlasmap)
+    - [DATA FORMAT](#data-format)
+    - [DIRECT](#direct)
+    - [ELASTICSEARCH REST](#elasticsearch-rest)
+    - [EXEC](#exec)
+    - [FILE](#file)
+    - [HTTP](#http)
+    - [JING](#jing)
+    - [LOG](#log)
+    - [MOCK](#mock)
+    - [MSV](#msv)
+    - [PLATFORM HTTP](#platform-http)
+    - [REF](#ref)
+    - [REST](#rest)
+    - [SEDA](#seda)
+    - [TIMER](#timer)
+    - [VALIDATOR](#validator)
+    - [VELOCITY](#velocity)
+    - [VM](#vm)
+  - [Data Formats Suportados](#data-formats-suportados)
+    - [Jackson](#jackson)
+    - [Gson](#gson)
+    - [CSV](#csv)
+    - [Flatpack](#flatpack)
+    - [Bindy](#bindy)
+    - [TidyMarkup](#tidymarkup)
+    - [BASE64](#base64)
+    - [SNAKEYAML](#snakeyaml)
+    - [JACKSONXML](#jacksonxml)
+  - [Linguagens suportadas](#linguagens-suportadas)
+    - [Bean Method](#bean-method)
+    - [CORE](#core)
+    - [HL7 Terser](#hl7-terser)
+    - [JSON PATH](#json-path)
+    - [XML JAXP](#xml-jaxp)
+    - [XPATH](#xpath)
+    - [XQUERY](#xquery)
+  - [Descontinuado - documentação de versões anteriores das integrações](#descontinuado---documentação-de-versões-anteriores-das-integrações)
+    - [Consumindo o objeto de consentimento **(somente para schemas v1)**](#consumindo-o-objeto-de-consentimento-somente-para-schemas-v1)
+      - [Exemplo de proxy simples](#exemplo-de-proxy-simples)
+      - [Obtendo através do Camel XML](#obtendo-através-do-camel-xml)
 
 &nbsp;
 
@@ -63,8 +122,8 @@ Por padrão, a aplicação do OOB busca os arquivos de rota no diretório `/work
 - Realizar chamadas ao(s) sistema(s) legado(s) da instituição financeira (ou qualquer outro sistema que seja pertinente) para obtenção dos dados a serem retornados na requisição;
 - Retornar um objeto de `response` (tanto em caso de sucesso, quanto de erro) em conformidade com a(s) spec(s) previamente definidas pelo OOB;
 - Para as chamadas que utilizam *id de idempotência*, realizar o devido controle do mesmo;
--  Realizar as consultas necessárias (quando houver) ao objeto de consentimento enviado no header `consent` da requisição para decisão em relação aos dados a serem retornados.
- 
+-  Realizar as consultas necessárias (quando houver) ao objeto de consentimento enviado na requisição para decisão em relação aos dados a serem retornados.
+
 &nbsp;
 
 ### Disponibilização de Imagens Docker
@@ -100,7 +159,8 @@ Considere que iremos criar um plugin contendo duas rotas, as quais escutam chama
 
 Para isso, iremos criar os seguintes arquivos de rota do Camel:
 
-*personal_qualifications_route.xml*
+`personal_qualifications_route.xml`
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -118,7 +178,8 @@ Para isso, iremos criar os seguintes arquivos de rota do Camel:
 
 &nbsp;
 
-*business_qualifications_route.xml*
+`business_qualifications_route.xml`
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -162,7 +223,8 @@ Para isso, iremos criar dois tipos de arquivos distintos:
 
 1. Arquivos contendo os mocks a serem retornado
 
-*personal_qualifications.json*
+`personal_qualifications.json`
+
 ```json
 {
     "correlationId": "1fe4ae88-db5f-4bc9-b49b-5290d3acefe4",
@@ -188,7 +250,8 @@ Para isso, iremos criar dois tipos de arquivos distintos:
 
 &nbsp;
 
-*business_qualifications.json*
+`business_qualifications.json`
+
 ```json
 {
     "correlationId": "64d0ba85-ea54-4bc7-9c33-f949ce166f63",
@@ -220,7 +283,8 @@ Para isso, iremos criar dois tipos de arquivos distintos:
 
 2. Arquivos de rotas do Camel
 
-*personal_qualifications_route.xml*
+`personal_qualifications_route.xml`
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -238,7 +302,8 @@ Para isso, iremos criar dois tipos de arquivos distintos:
 
 &nbsp;
 
-*business_qualifications_route.xml*
+`business_qualifications_route.xml`
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -253,7 +318,7 @@ Para isso, iremos criar dois tipos de arquivos distintos:
     </route>
 </routes>
 ```
- 
+
 &nbsp;
 
 Com esses arquivos criados, é necessário realizar a extensão da imagem para adição do plugin. Os passos necessários para realizar essa extensão podem ser vistos nesta [Seção](#adicionando-o-plugin-à-uma-imagem-existente).
@@ -315,6 +380,7 @@ Após criação da imagem, o seguinte comando deve ser rodado para que ela seja 
 ```sh
 docker run -d -p 8080:8080 oob-with-plugin-example-native
 ```
+
 ![Estender Imagem - Docker run](./images/estender_imagem__docker_run.png)
 
 &nbsp;
@@ -324,6 +390,7 @@ Neste ponto, ao realizar uma nova requisição aos endpoints deve-se obter como 
 ```sh
 curl --location --request GET 'http://localhost:8080/open-banking/customers/v1/personal/qualifications'
 ```
+
 ![Estender Imagem - Chamada Com Plugin](./images/estender_imagem__personal_com_plugin.png)
 
 &nbsp;
@@ -331,6 +398,7 @@ curl --location --request GET 'http://localhost:8080/open-banking/customers/v1/p
 ```sh
 curl --location --request GET 'http://localhost:8080/open-banking/customers/v1/business/qualifications'
 ```
+
 ![Estender Imagem - Chamada Com Plugin](./images/estender_imagem__business_com_plugin.png)
 
 &nbsp;
@@ -346,6 +414,7 @@ Considere que o plugin de proxy simples criado possui a seguinte estrutura de di
 &nbsp;
 
 O `Dockerfile` deve ser criado como segue:
+
 ```dockerfile
 FROM oob-without-route-example-native:latest
 COPY --chown=1001:root routes/ /plugin/routes/
@@ -360,7 +429,6 @@ Onde:
 - A linha 2 copia todos os arquivos contidos no diretório `/routes` do plugin para o diretório `/plugin/routes` da imagem;
 - A linha 4 cria uma variárel chamada `routes` e atribui à ela o padrão de caminho onde estão os arquivos de rota na imagem. Nesse caso espeífico, o padrão está sendo determinado como todos os arquivos cuja a nomenclatura terminal com `_route.xml` dentro do diretório `/plugin/routes`;
 - A linha 5 atribui a variável criada na linha 4 à variável de ambiente `camel.main.routes-include-pattern`. Essa variável de ambiente é responsável por informar ao Camel onde os arquivos de rotas devem ser procurados.
-
 
 &nbsp;
 
@@ -395,64 +463,6 @@ Onde:
 
 &nbsp;
 
-## Consumindo o objeto de consentimento
-
-Suponha que temos a imagem oob-phase3-native-with-mocks, que já realiza a chamada do serviço para obter o consentimento por meio do id informado no header com a chave “X-Consent-ID”:
-
-![Consentimento - Lista de imagens](./images/consent_docker_images.png)
-
-&nbsp;
-
-### Exemplo de proxy simples
-
-Para um exemplo de proxy simples, temos a seguinte rota da fase 3, que redireciona a chamada para uma outra API:
-
-![Consentimento - Arquivo de rotas proxy](./images/consent_proxy_route.png)
-
-&nbsp;
-
-Neste exemplo, trata-se de uma API criada no Mockoon, para fins de demonstração:
-
-![Consentimento - Mockoon proxy](./images/consent_mockoon_proxy.png)
-
-&nbsp;
-
-Iremos estender a imagem oob-phase3-native-with-mocks, para que a rota que criamos seja utilizada pela nova imagem:
-
-![Consentimento - Imagem estendida](./images/consent_image_extended.png)
-
-&nbsp;
-
-Faremos a chamada para a rota que foi criado o proxy, e na API do Mockoon será possível verificar que o objeto do consentimento foi enviado e recebido corretamente pelo header de chave “consent”:
-
-![Consentimento - Mockoon proxy header](./images/consent_proxy_header_mockoon.png)
-
-&nbsp;
-
-### Obtendo através do Camel XML
-
-É possível obter o objeto do consentimento que está no header através do Camel XML; para tal, o mesmo deve ser acessado com a sintaxe “${header.consent}”:
-
-![Consentimento - Arquivo de rotas para obter o consentimento](./images/consent_camel_xml_get_header_consent.png)
-
-&nbsp;
-
-Neste exemplo de rota, estamos logando o conteúdo do header “consent", e criando um novo header com a chave “consentNewHeader”, e utilizando como valor o conteúdo do header “consent”.
-
-Após realizar o procedimento de estender a imagem original e executar a mesma na porta 8080 (vide passos anteriores), teremos como retorno no console e na API do Mockoon respectivamente:
-
-![Consentimento - Log consent](./images/consent_camel_xml_header_consent_logged.png)
-
-Conteúdo do header “consent” logado no console
-
-&nbsp;
-
-![Consentimento - novo header consentimento](./images/consent_camel_xml_header_consent_new_key.png)
-
-Novo header de chave “consentNewHeader”, com o mesmo conteúdo do header de chave “consent”.
-
-&nbsp;
-
 ## Injetando Variáveis de Ambiente
 
 &nbsp;
@@ -460,10 +470,12 @@ Novo header de chave “consentNewHeader”, com o mesmo conteúdo do header de 
 ### Injetando Via Dockerfile
 
 Necessário adicionar as seguintes linhas no Dockerfile
-```
+
+```dockerfile
 ARG <nome_variavel>=<valor_variavel>
 ENV env_var_name=$<nome_variavel>
 ```
+
 &nbsp;
 
 ### Exemplos
@@ -473,7 +485,8 @@ Os exemplos abaixo assumem que os arquivos de rota estão contidos no diretório
 &nbsp;
 
 Adicionando um novo arquivo de rota via variável de ambiente
-```
+
+```dockerfile
 ARG route=file:/work/routes.xml
 ENV camel.main.routes-include-pattern=$route
 ```
@@ -481,7 +494,8 @@ ENV camel.main.routes-include-pattern=$route
 &nbsp;
 
 Adicionando múltiplos arquivos de rota via variável de ambiente
-```
+
+```dockerfile
 ARG route=file:/work/routes1.xml,file:/work/routes2.xml
 ENV camel.main.routes-include-pattern=$route
 ```
@@ -489,7 +503,8 @@ ENV camel.main.routes-include-pattern=$route
 &nbsp;
 
 Adicionando múltiplos arquivos de um diretório
-```
+
+```dockerfile
 ARG route=file:/work/*.xml
 ENV camel.main.routes-include-pattern=$route
 ```
@@ -497,7 +512,8 @@ ENV camel.main.routes-include-pattern=$route
 &nbsp;
 
 ### Injetando Variáveis no Build
-```
+
+```shell
 docker build -t <nome_imagem> --build-arg <nome_variavel>=<valor_variavel> .
 ```
 
@@ -505,7 +521,7 @@ docker build -t <nome_imagem> --build-arg <nome_variavel>=<valor_variavel> .
 
 ### Injetando Variáveis na Execução do Container
 
-```
+```shell
 docker run --env <nome_variavel>=<valor_variavel> -p 8080:8080 <nome_imagem>
 ```
 
@@ -520,6 +536,7 @@ docker run --env <nome_variavel>=<valor_variavel> -p 8080:8080 <nome_imagem>
 &nbsp;
 
 Tomando como exemplo o [plugin com proxy simples](#utilizando-proxy-simples), considere o arquivo de rotas `business_qualifications_route.xml` apresentado:
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -540,6 +557,7 @@ Tomando como exemplo o [plugin com proxy simples](#utilizando-proxy-simples), co
 Iremos modificá-lo para utilizar uma variável de ambiente chamada `routes.customers.uri-legado` no lugar do valor estático para a URI do sistema legado `http://mockbin.org/bin/ad5a2df2-38db-47df-a418-cf260719a3b1`. 
 
 Para isso, precisamos inicialmente modicar o arquivo `business_qualifications_route.xml`, de forma que ele consuma a variável de ambiente mencionada, o que é feito através do comando `{{env:<nome_variavel>}}`:
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -560,7 +578,8 @@ Para isso, precisamos inicialmente modicar o arquivo `business_qualifications_ro
 Após isso, basta realizar a injeção do variável de ambiente `routes.customers.uri-legado` utilizando umas das abordagens apresentadas mas acima nesta mesma [seção](#injetando-variáveis-de-ambiente).
 
 Por exemplo, poderíamos injetar o valor no momento de execução da imagem, via comando `run`:
-```
+
+```shell
 docker run --env routes.customers.uri-legado=http://mockbin.org/bin/ad5a2df2-38db-47df-a418-cf260719a3b1 -p 8080:8080 <nome_imagem>
 ```
 
@@ -571,6 +590,7 @@ docker run --env routes.customers.uri-legado=http://mockbin.org/bin/ad5a2df2-38d
 &nbsp;
 
 Tomando como exemplo o [plugin com arquivo de mock](#utilizando-mock), considere o arquivo de rotas `personal_qualifications_route.xml` apresentado:
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -591,6 +611,7 @@ Tomando como exemplo o [plugin com arquivo de mock](#utilizando-mock), considere
 Iremos modificá-lo para utilizar uma variável de ambiente chamada `routes.customers.personal-identifications` no lugar do valor estático `velocity:file://plugin/sucesso.json?allowContextMapAll=true`. 
 
 Para isso, precisamos inicialmente modicar o arquivo `personal_qualifications_route.xml`, de forma que ele consuma a variável de ambiente mencionada, o que é feito através do comando `{{env:<nome_variavel>}}`:
+
 ```xml
 <routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xmlns="http://camel.apache.org/schema/spring"
@@ -611,6 +632,7 @@ Para isso, precisamos inicialmente modicar o arquivo `personal_qualifications_ro
 Após isso, basta realizar a injeção do variável de ambiente `routes.customers.personal-identifications` utilizando umas das abordagens apresentadas mas acima nesta mesma [seção](#injetando-variáveis-de-ambiente).
 
 Por exemplo, poderíamos injetar o valor via `Dockerfile`, através da edição das linhas abaixo:
+
 ```dockerfile
 ARG route=file://plugin/sucesso.json?allowContextMapAll=true
 ENV routes.customers.personal-identifications=$route
@@ -689,9 +711,24 @@ Caso o timeout seja excedido, será lançada uma exceção, cujo tratamento é r
 
 &nbsp;
 
+&nbsp;
+
+## Tratamento de headers
+
+Os headers recebidos pelo OOB no request REST são enviados para o conector no
+contexto do Camel. Dessa forma, qualquer header relevante para a análise de
+segurança (como headers FAPI e user agent) ou qualquer header gerado pelo TPP ou
+infraestrutura pode se acessado no conector.
+
+É possível obter um header no XML do Camel com a sintaxe “${header.nomeHeader}”:
+![Consentimento - Arquivo de rotas para obter o consentimento](./images/consent_camel_xml_get_header_consent.png)
+
+&nbsp;
+
 ## Componentes Suportados
 
 ### ACTIVEMQ
+
 ```
 Envie mensagens para(ou consome do) Apache ActiveMQ. Esse componente é uma extensão do Camel JMS Component.
 
@@ -701,6 +738,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### AMQP
+
 ```
 Mensagens com o AMQP protocol usando o Apache QPid Client
 
@@ -714,6 +752,7 @@ Para a utilização do AMQP de forma apropriada talvez seja necessário adiciona
 &nbsp;
 
 ### ATLASMAP
+
 ```
 Transforma mensagens usando o AtrasMap transformation.
 
@@ -723,6 +762,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### DATA FORMAT
+
 ```
 Usa o Camel Data Format como um Camel Component comum.
 
@@ -732,6 +772,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### DIRECT
+
 ```
 Chamada de outro endpoint pelo mesmo Camel Context de forma síncrona.
 
@@ -741,6 +782,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### ELASTICSEARCH REST
+
 ```
 Envia requisições para com ElasticSearch via RESP API.
 
@@ -750,6 +792,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### EXEC
+
 ```
 Executa comandos no sistema operacional em uso.
 
@@ -759,6 +802,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### FILE
+
 ```
 Lê e escreve arquivos.
 
@@ -768,6 +812,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### HTTP
+
 ```
 Envia requisições para servidores HTTP externos usando o Apache HTTP Client 4.x.
 
@@ -777,6 +822,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### JING
+
 ```
 Valida XML em comparação ao RelaxNG schema (XML Syntax ou Compact Syntax) usando Jing library.
 
@@ -786,6 +832,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### LOG
+
 ```
 Cria log de mensagens no mecanismo de log em uso.
 
@@ -795,6 +842,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### MOCK
+
 ```
 Teste rotas e regras usando mocks.
 
@@ -804,6 +852,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### MSV
+
 ```
 Valida XML payloads usando Multi-Shema Validator (MSV).
 
@@ -813,6 +862,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### PLATFORM HTTP
+
 ```
 Essa extensão permite a criação de endpoints HTTP para consumir requisições HTTP.
 
@@ -822,6 +872,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### REF
+
 ```
 Roteia mensagens para um endpoint de forma dinâmica pelo nome no Camel Registry.
 
@@ -831,6 +882,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### REST
+
 ```
 Expõe serviçõs REST e suas especificações OpenApi ou chama serviçoes REST externos.
 
@@ -840,6 +892,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### SEDA
+
 ```
 Chama outros endpoints assícronamente em qualquer Camel Context no mesmo JVM.
 
@@ -849,6 +902,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### TIMER
+
 ```
 Gera mensagens em intervalos específicos usando java.util.Timer.
 
@@ -858,6 +912,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### VALIDATOR
+
 ```
 Valida o payload usando XML Schema e JAXP Validation.
 
@@ -867,6 +922,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### VELOCITY
+
 ```
 Transforma mensagens usando o Velocity template.
 
@@ -876,6 +932,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### VM
+
 ```
 Chama outro endpoint no mesmo CamelContext de forma assíncrona.
 
@@ -887,6 +944,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 ## Data Formats Suportados
 
 ### Jackson
+
 ```
 Combinação de POJOs para JSON e vice-versa usando Jackson.
 
@@ -896,6 +954,7 @@ Conversão e documentação: https://camel.apache.org/camel-quarkus/latest/refer
 &nbsp;
 
 ### Gson
+
 ```
 Conversão de POJOs para JSON e vice-versa usando Gson. Gson é um Data Format que utiliza a biblioteca Gson.
 
@@ -905,6 +964,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### CSV
+
 ```
 Manipulação de CSV (Comma Separated Values).
 
@@ -914,6 +974,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### Flatpack
+
 ```
 Manipulação de arquivo posicional utilizando a biblioteca FlatPack.
 
@@ -923,6 +984,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### Bindy
+
 ```
 Conversão entre POJOs e CSV (Comma separated values), POJOs e arquivo posicional and entre POJOs e pares chave-valor (KVP) utilizando Camel Bindy.
 
@@ -932,6 +994,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### TidyMarkup
+
 ```
 TidyMarkup é um Data Format que utiliza TagSoup para organizar HTML. Pode ser utilizado para converter HTML desorganizados, retornando um  HTML devidamente estruturado.
 
@@ -941,6 +1004,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### BASE64
+
 ```
 Utilizado para codificação e decodificação de base64.
 
@@ -950,6 +1014,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### SNAKEYAML
+
 ```
 Conversão de objetos Java em YAML e vice-versa.
 
@@ -959,6 +1024,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 &nbsp;
 
 ### JACKSONXML
+
 ```
 Jackson XML é um Data Format que utiliza a biblioteca Jackson com a extensão XMLMapper para converter payloads XML em objetos Java e vice-versa.
 
@@ -970,6 +1036,7 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 ## Linguagens suportadas
 
 ### Bean Method
+
 ````
 Chama o método do Java bean especificado passando o Exchange, o Corpo ou cabeçalhos específicos para ele.
 
@@ -979,6 +1046,7 @@ https://camel.apache.org/camel-quarkus/latest/reference/extensions/bean.html
 &nbsp;
 
 ### CORE
+
 ````
 Funcionalidade central e linguagens básicas do Camel: Constant, ExchangeProperty, Header, Ref, Ref, Simple e Tokeinze.
 
@@ -988,6 +1056,7 @@ https://camel.apache.org/camel-quarkus/latest/reference/extensions/core.html
 &nbsp;
 
 ### HL7 Terser
+
 ````
 Combinação/conversão de objetos HL7 (Health Care) utilizando o decodificador HL7 MLLP.
 
@@ -997,6 +1066,7 @@ https://camel.apache.org/camel-quarkus/latest/reference/extensions/hl7.html
 &nbsp;
 
 ### JSON PATH
+
 ````
 Valida uma expressão JsonPath em relação a um corpo de mensagem JSON.
 
@@ -1007,6 +1077,7 @@ https://camel.apache.org/camel-quarkus/latest/reference/extensions/jsonpath.html
 &nbsp;
 
 ### XML JAXP
+
 ````
 Tokeniza cargas úteis XML usando a expressão de caminho especificada.
 
@@ -1017,6 +1088,7 @@ https://camel.apache.org/camel-quarkus/latest/reference/extensions/xml-jaxp.html
 &nbsp;
 
 ### XPATH
+
 ````
 Valida uma expressão XPath em relação a uma carga XML.
 
@@ -1026,8 +1098,79 @@ https://camel.apache.org/camel-quarkus/latest/reference/extensions/xpath.html
 &nbsp;
 
 ### XQUERY
+
 ````
 Consulta e/ou transforma payloads XML usando XQuery e Saxon.
 
 https://camel.apache.org/camel-quarkus/latest/reference/extensions/saxon.html
 ````
+&nbsp;
+
+## Descontinuado - documentação de versões anteriores das integrações
+
+A utilização de headers para enviar o objeto de consentimento foi removida a
+partir da versão 2.0.0 da interface de integração. A documentação abaixo
+aplica-se somente à versões anteriores a esta.
+
+&nbsp;
+
+### Consumindo o objeto de consentimento **(somente para schemas v1)**
+
+&nbsp;
+
+Suponha que temos a imagem oob-phase3-native-with-mocks, de um serviço que se
+comunica com um conector camel:
+
+![Consentimento - Lista de imagens](./images/consent_docker_images.png)
+
+&nbsp;
+
+#### Exemplo de proxy simples
+
+Para um exemplo de proxy simples, temos a seguinte rota da fase 3, que redireciona a chamada para uma outra API:
+
+![Consentimento - Arquivo de rotas proxy](./images/consent_proxy_route.png)
+
+&nbsp;
+
+Neste exemplo, trata-se de uma API criada no Mockoon, para fins de demonstração:
+
+![Consentimento - Mockoon proxy](./images/consent_mockoon_proxy.png)
+
+&nbsp;
+
+Iremos estender a imagem oob-phase3-native-with-mocks, para que a rota que criamos seja utilizada pela nova imagem:
+
+![Consentimento - Imagem estendida](./images/consent_image_extended.png)
+
+&nbsp;
+
+Faremos a chamada para a rota que foi criado o proxy, e na API do Mockoon será possível verificar que o objeto do consentimento foi enviado e recebido corretamente pelo header de chave “consent”:
+
+![Consentimento - Mockoon proxy header](./images/consent_proxy_header_mockoon.png)
+
+&nbsp;
+
+#### Obtendo através do Camel XML
+
+É possível obter o objeto do consentimento que está no header através do Camel XML; para tal, o mesmo deve ser acessado com a sintaxe “${header.consent}”:
+
+![Consentimento - Arquivo de rotas para obter o consentimento](./images/consent_camel_xml_get_header_consent.png)
+
+&nbsp;
+
+Neste exemplo de rota, estamos logando o conteúdo do header “consent", e criando um novo header com a chave “consentNewHeader”, e utilizando como valor o conteúdo do header “consent”.
+
+Após realizar o procedimento de estender a imagem original e executar a mesma na porta 8080 (vide passos anteriores), teremos como retorno no console e na API do Mockoon respectivamente:
+
+![Consentimento - Log consent](./images/consent_camel_xml_header_consent_logged.png)
+
+Conteúdo do header “consent” logado no console
+
+&nbsp;
+
+![Consentimento - novo header consentimento](./images/consent_camel_xml_header_consent_new_key.png)
+
+Novo header de chave “consentNewHeader”, com o mesmo conteúdo do header de chave “consent”.
+
+&nbsp;

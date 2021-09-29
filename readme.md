@@ -2,7 +2,9 @@
 
 ## Opus Open Banking
 
-- [Integração (plugins Camel)](integração-plugin/readme.md)
+- Integração de segurança
+  - [Geração de Consentimento com aplicativo da instituição](consentimento/app2as/readme.md)
+- [Integração plugins Camel](integração-plugin/readme.md)
   - [Discovery de produtos](integração-plugin/discovery/readme.md)
   - [Financial data (Fase 2)](integração-plugin/financial-data/readme.md)
   - [Payments (Fase 3)](integração-plugin/payments/readme.md)

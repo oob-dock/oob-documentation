@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/schema",
+	"type": "object",
+	"required": [
+		"errors"
+	],
+	"properties": {
+		"errors": {
+			"type": "array",
+			"description": "Listagem de erros ocorridos ao processar a solicitação",
+			"minItems": 1,
+			"maxItems": 13,
+			"items": {
+				"type": "object",
+				"required": [
+					"code",
+					"title",
+					"detail"
+				],
+				"properties": {
+					"code": {
+						"type": "string",
+						"description": "Código de erro específico do endpoint",
+						"minLength": 1,
+						"maxLength": 255,
+						"pattern": "\\w+(\\W\\w+)*",
+						"examples": [ "500" ]
+					},
+					"title": {
+						"type": "string",
+						"description": "Título legível por humanos deste erro específico",
+						"minLength": 1,
+						"maxLength": 255,
+						"pattern": "\\w+(\\W\\w+)*",
+						"examples": [ "Erro interno" ]
+					},
+					"detail": {
+						"type": "string",
+						"description": "Descrição legível por humanos deste erro específico",
+						"minLength": 1,
+						"maxLength": 2048,
+						"pattern": "\\w+(\\W\\w+)*",
+						"examples": [ "Um erro interno ocorreu ao processar a solicitação, tente novamente mais tarde." ]
+					}
+				},
+				"additionalProperties": false
+			}
+		}
+	},
+	"additionalProperties": false
+}
