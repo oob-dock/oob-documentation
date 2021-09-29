@@ -204,16 +204,14 @@ components:
               type: string
               description: URL do logotipo (SVG)
         consent:
-          #TODO: Adicionar schema do consentimento
-          type: object
-          description: "Consentimento solicitado com resources a serem selecionados"
+          $ref: './schemas/ConsentCustomerAcceptance.yaml#/ConsentCustomerAcceptance'
         permissions:
           $ref: '#/components/schemas/ResponseDomainPermissionSchema'
           description: "Descrição das permissões do consentimento. Exclusivo de consentimento de compartilhamento de dados."
         resourceTypes:
           $ref: '#/components/schemas/ResponseDomainResourceSchema'
           description: "Tipos de recursos do consentimento. Exclusivo de consentimento de compartilhamento de dados."
-    
+
     ResponseDomainPermissionSchema:
       type: array
       items:
