@@ -1,0 +1,320 @@
+openapi: 3.0.0
+info:
+  description: |-
+    Opus Open Banking - Authorization Server Mobile Application authorization &
+    consent API
+  version: 0.1.1
+  title: OOB Authorization Server Apps API
+tags:
+  - name: DeepLink
+    description: |-
+      Links para aplicação tratar via deep link/universal link e iniciar um fluxo de autenticação.
+      Os links devem ser repassados integralmente para o AS adicionando o content-type "applicatoin/json"
+  - name: App
+    description: |-
+      APIs para os aplicativos da instituição realizarem a autenticação e aceite dos consentimentos de fase 2 e 3
+paths:
+  /auth:
+    get:
+      tags:
+        - DeepLink
+      summary: Início do fluxo de autenticação por TPPs
+      description: |-
+        Request interceptado pelo aplicativo da instituição via deeplink e
+        enviado ao AS para instruções do consentimento
+      operationId: getAuthAuth
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/ResponseCommand"
+        default:
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralError'
+  "/app/commands/{id}":
+    get:
+      tags:
+        - DeepLink
+      summary: Início do fluxo de autenticação por QR
+      description: |-
+        Request interceptado pelo aplicativo da instituição via deeplink ou leitura direta do QR
+        e enviado ao AS para instruções do consentimento
+      operationId: getAuthApp
+      parameters:
+        - $ref: '#/components/parameters/CommandId'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema: 
+                $ref: "#/components/schemas/ResponseCommand"
+        "404":
+          description: Command not found
+        default:
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralError'
+  "/app/commands/{id}/authentication":
+    put:
+      tags:
+        - App
+      summary: Envia o resultado de um comando de autenticação para o OOB AS
+      description: Envia o resultado de um comando de autenticação para o OOB Authorization Server
+      operationId: postCommandAuthentication
+      parameters:
+        - $ref: '#/components/parameters/CommandId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authenticate'
+        description: Payload para resposta do comando de autenticação
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseCommand"
+        default:
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralError'
+  "/app/commands/{id}/consent":
+    put:
+      tags:
+        - App
+      summary: Envia o resultado de um comando de consentimento para o OOB AS
+      description: Envia o resultado de um comando de consentimento para o OOB Authorization Server
+      operationId: postCommandConsent
+      parameters:
+        - $ref: '#/components/parameters/CommandId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Consent'
+        description: Payload para resposta do comando de autenticação
+        required: true
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseCommand"
+        default:
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralError'
+servers:
+  - url: https://open-banking.instituicao.com.br/auth
+components:
+  schemas:
+    GeneralError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    Refused:
+      type: object
+      required:
+        - refused
+      properties:
+        refused:
+          type: boolean
+          description: Indicativo de recusa do consentimento
+          example: false
+
+    Authenticate:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Refused"
+      properties:
+        jwt:
+          #TODO: Adicionar schema do JWT
+          type: string
+          description: |-
+            JWT assinado segundo a estrutura definida em ???; envio obrigatório 
+            se não ouve recusa do consentimento. 
+    Consent:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Refused"
+      properties:
+        selectedResources:
+          type: array
+          description: Array com os IDs dos recursos do consentimento selecionados pelo usuário
+          items:
+            type: string
+          maxItems: 100
+    AuthenticateCommand:
+      type: object
+      properties:
+        acr:
+          type: string
+          description: Nível exigido na autenticação
+          enum:
+            - urn:brasil:openbanking:loa3
+            - urn:brasil:openbanking:loa2
+        jti:
+          type: string
+          description: jti a ser usado no JWT assinado para evitar replay attack
+          maxLength: 40
+    ConsentCommand:
+      type: object
+      properties:
+        customerName:
+          type: string
+          description: Nome do cliente autenticado
+        brand:
+          type: object
+          description: Informações sobre a marca da instituição
+          properties:
+            name:
+              type: string
+              description: Nome da marca da instituição
+            logoUrl:
+              type: string
+              description: URL do logotipo da marca da instituição
+        tpp:
+          type: object
+          description: Informações sobre o TPP
+          properties:
+            name:
+              type: string 
+              description: "Nome do TPP"
+            logoUrl:
+              type: string
+              description: URL do logotipo (SVG)
+        consent:
+          $ref: './schemas/ConsentCustomerAcceptance.yaml#/ConsentCustomerAcceptance'
+        permissions:
+          $ref: '#/components/schemas/ResponseDomainPermissionSchema'
+          description: "Descrição das permissões do consentimento. Exclusivo de consentimento de compartilhamento de dados."
+        resourceTypes:
+          $ref: '#/components/schemas/ResponseDomainResourceSchema'
+          description: "Tipos de recursos do consentimento. Exclusivo de consentimento de compartilhamento de dados."
+
+    ResponseDomainPermissionSchema:
+      type: array
+      items:
+        $ref: '#/components/schemas/Permission'
+
+    Permission:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Permite a visualização das contas, incluindo agência e número da conta
+        name:
+          type: string
+          example: ACCOUNTS_READ
+        title:
+          type: string
+          example: Permite a visualização das contas
+
+    ResponseDomainResourceSchema:
+      type: array
+      items:
+        $ref: '#/components/schemas/ResourceType'
+
+    ResourceType:
+      type: object
+      properties:
+        name:
+          type: string
+          example: ACCOUNT
+        permissions:
+          type: array
+          items:
+            type: string
+        title:
+          type: string
+          example: Dados da conta
+
+    ErrorCommand:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Redirect"
+      properties:
+        type:
+          type: string
+          description: Tipo do erro
+          enum:
+            - CPF_MISMATCH
+            - CNPJ_MISMATCH
+            - GENERIC_ERROR
+        message:
+          type: string
+          description: Mensagem de erro que deve ser exibida na tela antes do redirecionamento final
+    Redirect:
+      type: object
+      properties:
+        redirect:
+          type: object
+          properties:
+            isHandOff:
+              type: boolean
+              description: |-
+                Indicativo da autorização ter ocorrido via hand-off e não exigir redirect.
+                A orientação para o usuário deve ser para o mesmo continuar a transação no
+                dispositivo que iniciou a operação.
+            redirectTo:
+              type: string
+              description: |-
+                URL para abrir no sistema operacional de retorno ao TPP,
+                apenas para hybrid-flow tradicional (sem hand-off)
+    CompletedCommand:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/Redirect"
+    ResponseCommand:
+      type: object
+      properties:
+        command:
+          type: string
+          enum:
+            - authenticate
+            - consent
+            - error
+            - completed
+        commandId:
+          type: string
+          description: ID do comando a ser utilizado na resposta
+          maxLength: 40
+        authenticateCommand:
+          $ref: '#/components/schemas/AuthenticateCommand'
+        consentCommand:
+          $ref: '#/components/schemas/ConsentCommand'
+        errorCommand:
+          $ref: '#/components/schemas/ErrorCommand'
+        completedCommand:
+          $ref: '#/components/schemas/CompletedCommand'
+  parameters:
+    CommandId:
+      name: id
+      in: path
+      description: |
+        ID do comando que está sendo referenciado. Pode ter sido obtido diretamente
+        via deeplink ou através de algum PUT de resposta de um comando anterior.
+      required: true
+      schema:
+        type: string
+        maxLength: 40

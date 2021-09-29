@@ -1,0 +1,100 @@
+title APP2AS Loop de comandos
+
+participant "TPP" as tpp
+participant "Device" as device
+participant "App Instituição" as app
+participant "BFF-Instituição" as bff
+participant "AS-Instituição" as idp
+participant "API-AS-OOB" as as
+
+entryspacing 0.6
+
+tpp->device:GET /auth/auth
+device->app:GET /auth/auth
+
+group start 
+
+app->as:GET /auth/auth
+
+end 
+
+loop Loop de comandos
+
+as-->app:RESPONSE\n(ver casos abaixo)
+
+alt case Solicitar autenticação
+
+as-->app: Command authenticate
+app->app:Solicita credenciais ao usuário
+
+alt case Sucesso
+app->bff: Autentica usuário
+bff->idp: Autentica usuário
+
+idp-->bff:Autenticado
+note over bff:A geração do JWT a ser enviado para o AS\ndo OOB deve ser feita no backend para\nevitar a exposição das chaves de assinatura
+bff->bff:Gera JWT de\nautenticação assinado
+
+bff-->app: JWT assinado
+app->as:PUT /app/command/{id}/authentication
+
+else case Abort
+
+app->as: PUT /app/command/{id}/authentication {refused: true}
+
+end 
+
+else case Solicitar Consentimento
+
+app<--as:Command consent
+note over app:Atenção para o consentimento solicitado
+app->app:Exibe e confirma o consentimento,\n seleciona produtos
+
+alt case Sucesso
+
+app->as:PUT /app/command/{id}/consent
+
+else case Abort
+
+app->as:PUT /app/command/{id}/consent {refused: true}
+
+end 
+
+else case Informar error
+
+as-->app: Command error
+
+app->app:Tela de transição\ncom mensagem de erro\npara TPP (exibir logo)
+
+alt case Hybrid-Flow Tradicional (Redirect)
+
+app->device:Abre a <URL> de redirect
+device->tpp:<URL>
+
+end 
+
+destroyafter app
+
+else case Informar sucesso
+
+as-->app: Command completed
+
+alt case Hand-Off
+
+app->app: Informa o usuário para continuar\no processo no dispositivo original
+
+
+else case Hybrid-Flow Tradicional (Redirect)
+
+app->app:Tela de transição\npara TPP (exibir logo)
+
+app->device:Abre a <URL>
+device->tpp:<URL>
+
+end 
+
+destroyafter app
+
+end
+
+end
