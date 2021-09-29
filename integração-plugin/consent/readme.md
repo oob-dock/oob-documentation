@@ -150,7 +150,8 @@ schemas:
 | Request  | [discovery-resource-request.json](../schemas/v1/discovery/discovery-resource-request.json)                               |
 | Response | [discovery-nonselectable-resource-response.json](../schemas/v1/discovery/discovery-nonselectable-resource-response.json) |
 
-*[DRAFT: O schema do consentimento dentro do request está em revisão]*
+*[DRAFT: O schema do consentimento dentro do request
+está em revisão]*
 
 Exemplo de response para um produto selecionável:
 
