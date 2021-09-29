@@ -2,7 +2,7 @@
     "$schema": "http://json-schema.org/schema",
     "$defs": {
         "ConsentCustomerAcceptance": {
-            "description": "Consentimento de pagamento",
+            "description": "Detalhes do consentimento",
             "type": "object",
             "required": [
                 "type",
