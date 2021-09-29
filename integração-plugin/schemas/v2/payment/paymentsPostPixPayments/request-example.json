@@ -1,0 +1,74 @@
+{
+    "idempotencyKey": "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl",
+    "consent": {
+      "brandId": "cbanco",
+      "creationDateTime": "2021-05-21T08:30:00Z",
+      "tpp": {
+        "name": "GuiaBolsa"
+      },
+      "externalId": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf",
+      "loggedUser": {
+        "document": {
+          "identification": "11111111111",
+          "rel": "CPF"
+        }
+      },
+      "expirationDateTime": "2021-05-21T08:30:00Z",
+      "creditor": {
+        "personType": "PESSOA_NATURAL",
+        "cpfCnpj": "11111111111",
+        "name": "Marco Antonio de Brito"
+      },
+      "payment": {
+        "type": "PIX",
+        "date": "2021-01-01",
+        "currency": "BRL",
+        "amount": "100000.04",
+        "details": {
+          "localInstrument": "QRDN",
+          "creditorAccount": {
+            "ispb": "12345678",
+            "number": "1234567890",
+            "accountType": "CACC",
+            "issuer": "1774"
+          }
+        },
+        "ibgeTownCode": "5300108"
+      },
+      "resources": [
+        {
+          "type": "PAYMENT",
+          "resourceLegacyId": [
+            {
+              "key": "internalAccountId",
+              "value": "1234"
+            }
+          ],
+          "hasMultipleAuthorisers": false
+        }
+      ]
+    },
+    "requestBody": {
+      "data": {
+        "localInstrument": "QRDN",
+        "payment": {
+          "amount": "100000.04",
+          "currency": "BRL"
+        },
+        "creditorAccount": {
+          "ispb": "12345678",
+          "number": "1234567890",
+          "accountType": "CACC",
+          "issuer": "1774"
+        },
+        "cnpjInitiator": "50685362000135",
+        "qrCode": "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012\nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\n",
+        "remittanceInformation": "Pagamento da nota XPTO035-002.",
+        "transactionIdentification": "E00038166201907261559y6j6"
+      }
+    },
+    "requestMeta": {
+      "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3",
+      "brandId": "cbanco"
+    }
+  }

@@ -14,12 +14,12 @@ Por padrão, a aplicação permite a modificação de algumas configurações vi
 
 A tabela abaixo contém uma lista das variáveis suportadas atualmente.
 
-| Variável                              | Objetivo                                                              | Valor Padrão |
-|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|--------------|
-| camel.main.routes-include-pattern     | Indica os locais onde o Camel deve procurar por rotas                                                                           |              |
-| apis.validation.json-schema.enabled   | Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin com as specs definidas (afeta performance) | false        |
-| apis.validation.openapi.enabled-request       | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Banking Brasil   | true         |
-| apis.validation.openapi.enabled-response       | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Banking Brasil (afeta performance)   | false         |
+| Variável                                 | Objetivo                                                                                                                        | Valor Padrão |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| camel.main.routes-include-pattern        | Indica os locais onde o Camel deve procurar por rotas                                                                           |              |
+| apis.validation.json-schema.enabled      | Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin com as specs definidas (afeta performance) | false        |
+| apis.validation.openapi.enabled-request  | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Banking Brasil                       | true         |
+| apis.validation.openapi.enabled-response | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Banking Brasil (afeta performance) | false        |
 
 &nbsp;
 
@@ -42,11 +42,7 @@ Para o endpoint `/pix/payments`, por exemplo, a rota deve estar definida no plug
 
 &nbsp;
 
-Arquivos de schemas compartilhados
-
-[commons-schema.json](schemas/commons-schema.json)
-
-| Endpoint                      | Rota do Camel                                 | Request JSON Schema                                                         | Response JSON Schema                                                          |
-|-------------------------------|-----------------------------------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------|
-| /pix/payments                 | ```direct:paymentsPostPixPayments```          | [request.json](schemas/paymentsPostPixPayments/request-schema.json)         | [response.json](schemas/paymentsPostPixPayments/response-schema.json)         |
-| /pix/payments/\{paymentId\}   | ```direct:paymentsGetPixPaymentsPaymentId```  | [request.json](schemas/paymentsGetPixPaymentsPaymentId/request-schema.json) | [response.json](schemas/paymentsGetPixPaymentsPaymentId/response-schema.json) |
+| Endpoint                    | Rota do Camel                                |
+| --------------------------- | -------------------------------------------- |
+| /pix/payments               | ```direct:paymentsPostPixPayments```         |
+| /pix/payments/\{paymentId\} | ```direct:paymentsGetPixPaymentsPaymentId``` |

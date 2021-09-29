@@ -23,12 +23,12 @@
                     "type": "array",
                     "items": {
                         "type": "object",
+                        "required": [
+                            "resourceName",
+                            "resourceLegacyId",
+                            "authorizers"
+                        ],
                         "properties": {
-                            "required": [
-                                "resourceName",
-                                "resourceLegacyId",
-                                "authorizers"
-                            ],
                             "resourceName": {
                                 "description": "Array de chave e valor com o nome do recurso, esses dados serão apresentados nos frontends no formato: 'Key1: Value1 Key2: Value2 ...'",
                                 "type": "array",
