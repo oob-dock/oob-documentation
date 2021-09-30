@@ -31,7 +31,23 @@
 						],
 						"properties": {
 							"code": {
-								"$ref": "#/$defs/EnumErrorsCreatePayment"
+								"type": "string",
+								"enum": [
+									"SALDO_INSUFICIENTE",
+									"BENEFICIARIO_INCOMPATIVEL",
+									"VALOR_INCOMPATIVEL",
+									"VALOR_ACIMA_LIMITE",
+									"VALOR_INVALIDO",
+									"COBRANCA_INVALIDA",
+									"CONSENTIMENTO_INVALIDO",
+									"JANELA_OPER_INVALIDA",
+									"NAO_INFORMADO",
+									"PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO"
+								],
+								"examples": [
+									"SALDO_INSUFICIENTE"
+								],
+								"description": "Códigos de erros previstos na criação da iniciação de pagamento:\n• SALDO_INSUFICIENTE – Esta conta não possui saldo suficiente para realizar o pagamento.\n• BENEFICIARIO_INCOMPATIVEL – O beneficiário informado no consentimento não é o mesmo do esperado pelo DICT.\n• VALOR_INCOMPATIVEL – O valor informado no consentimento não é o mesmo valor do informado no payload de pagamento.\n• VALOR_ACIMA_LIMITE – O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente.\n• VALOR_INVALIDO – O valor enviado não é válido para o QR Code informado.\n• COBRANCA_INVALIDA – Validação de expiração, validação de vencimento, Status Válido.\n• CONSENTIMENTO_INVALIDO – Consentimento inválido (status não é \"authorised\" ou está expirado).\n• JANELA_OPER_INVALIDA – Requisição está fora da janela de funcionamento.\n• NAO_INFORMADO – Não informada pela detentora de conta.\n• PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO: Dados do pagamento divergentes dos dados do consentimento.\n"
 							},
 							"title": {
 								"type": "string",
@@ -57,25 +73,6 @@
 				}
 			},
 			"additionalProperties": false
-		},
-		"EnumErrorsCreatePayment": {
-			"type": "string",
-			"enum": [
-				"SALDO_INSUFICIENTE",
-				"BENEFICIARIO_INCOMPATIVEL",
-				"VALOR_INCOMPATIVEL",
-				"VALOR_ACIMA_LIMITE",
-				"VALOR_INVALIDO",
-				"COBRANCA_INVALIDA",
-				"CONSENTIMENTO_INVALIDO",
-				"JANELA_OPER_INVALIDA",
-				"NAO_INFORMADO",
-				"PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO"
-			],
-			"examples": [
-				"SALDO_INSUFICIENTE"
-			],
-			"description": "Códigos de erros previstos na criação da iniciação de pagamento:\n• SALDO_INSUFICIENTE – Esta conta não possui saldo suficiente para realizar o pagamento.\n• BENEFICIARIO_INCOMPATIVEL – O beneficiário informado no consentimento não é o mesmo do esperado pelo DICT.\n• VALOR_INCOMPATIVEL – O valor informado no consentimento não é o mesmo valor do informado no payload de pagamento.\n• VALOR_ACIMA_LIMITE – O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente.\n• VALOR_INVALIDO – O valor enviado não é válido para o QR Code informado.\n• COBRANCA_INVALIDA – Validação de expiração, validação de vencimento, Status Válido.\n• CONSENTIMENTO_INVALIDO – Consentimento inválido (status não é \"authorised\" ou está expirado).\n• JANELA_OPER_INVALIDA – Requisição está fora da janela de funcionamento.\n• NAO_INFORMADO – Não informada pela detentora de conta.\n• PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO: Dados do pagamento divergentes dos dados do consentimento.\n"
 		}
 	}
 }
