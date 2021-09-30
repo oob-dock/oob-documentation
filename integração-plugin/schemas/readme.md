@@ -92,18 +92,26 @@ Onde:
 
 ### 30/09/2021 - v2.1.0
 
+- Geral
+  - Correção da url do schema utilizado para o draft 07
 - Consent
   - Ajuste de erro de sintaxe no exemplo de request de discoverPayments
 - Payment
-  - Ajuste nas quantidades mínima e máxima de itens no campo PaymentId para 1 e 10 respectivamente
-  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação paymentsPostPixPayments:
+  - Ajuste nas quantidades mínima e máxima de itens no campo PaymentId para
+  1 e 10 respectivamente
+  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação
+  paymentsPostPixPayments:
     - requestMeta
-  - Remoção dos campos abaixo como obrigatórios no schema de request da operação paymentsPostPixPayments:
+  - Remoção dos campos abaixo como obrigatórios no schema de request da operação
+  paymentsPostPixPayments:
     - correlationId
     - brandId
-  - Ajuste do campo code da definição ResponseErrorCreatePixPayment no schema de erro da operação paymentsPostPixPayments
-  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação paymentsGetPixPaymentsPaymentId:
+  - Ajuste do campo code da definição ResponseErrorCreatePixPayment no schema de
+  erro da operação paymentsPostPixPayments
+  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação
+  paymentsGetPixPaymentsPaymentId:
     - requestMeta
-  - Remoção dos campos abaixo como obrigatórios no schema de request da operação paymentsGetPixPaymentsPaymentId:
+  - Remoção dos campos abaixo como obrigatórios no schema de request da operação
+  paymentsGetPixPaymentsPaymentId:
     - correlationId
     - brandId
