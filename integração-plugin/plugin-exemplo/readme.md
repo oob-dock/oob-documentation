@@ -27,7 +27,8 @@ O container com o módulo payments deve ser executado utilizando o plugin camel
 do exemplo:
 
 ```shell
-docker run -it --rm -p 8080:8080 -v "/files/mock-routes.xml":/work/mock-routes.xml -e camel.main.routes-include-pattern=file:/work/mock-routes.xml 618430153747.dkr.ecr.sa-east-1.amazonaws.com/opus-open-banking-release/oob-payment:0.9.0.835453b
+docker run -it --rm -p 8080:8080 -v "/files/mock-routes.xml":/work/mock-routes.xml
+-e camel.main.routes-include-pattern=file:/work/mock-routes.xml 618430153747.dkr.ecr.sa-east-1.amazonaws.com/opus-open-banking-release/oob-payment:0.9.0.835453b
 ```
 
 Os parâmetros são:
@@ -46,9 +47,37 @@ Se for iniciado da forma correta o log do container deve indicar que as rotas
 foram carregadas:
 
 ```json
-{"timestamp":"2021-08-05T12:16:09.811-03:00","sequence":538,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.apache.camel.impl.engine.AbstractCamelContext","level":"INFO","message":"    Started paymentsPostPixPaymentsRoute (direct://paymentsPostPixPayments)","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"bcf30664a105","processName":"NativeImageGeneratorRunner$JDK9Plus","processId":241}
+{
+    "timestamp": "2021-08-05T12:16:09.811-03:00",
+    "sequence": 538,
+    "loggerClassName": "org.slf4j.impl.Slf4jLogger",
+    "loggerName": "org.apache.camel.impl.engine.AbstractCamelContext",
+    "level": "INFO",
+    "message": "    Started paymentsPostPixPaymentsRoute (direct://paymentsPostPixPayments)",
+    "threadName": "main",
+    "threadId": 1,
+    "mdc": {},
+    "ndc": "",
+    "hostName": "bcf30664a105",
+    "processName": "NativeImageGeneratorRunner$JDK9Plus",
+    "processId": 241
+}
 
-{"timestamp":"2021-08-05T12:16:09.811-03:00","sequence":539,"loggerClassName":"org.slf4j.impl.Slf4jLogger","loggerName":"org.apache.camel.impl.engine.AbstractCamelContext","level":"INFO","message":"    Started paymentsGetPixPaymentsPaymentIdRoute (direct://paymentsGetPixPaymentsPaymentId)","threadName":"main","threadId":1,"mdc":{},"ndc":"","hostName":"bcf30664a105","processName":"NativeImageGeneratorRunner$JDK9Plus","processId":241}
+{
+    "timestamp": "2021-08-05T12:16:09.811-03:00",
+    "sequence": 539,
+    "loggerClassName": "org.slf4j.impl.Slf4jLogger",
+    "loggerName": "org.apache.camel.impl.engine.AbstractCamelContext",
+    "level": "INFO",
+    "message": "    Started paymentsGetPixPaymentsPaymentIdRoute (direct://paymentsGetPixPaymentsPaymentId)",
+    "threadName": "main",
+    "threadId": 1,
+    "mdc": {},
+    "ndc": "",
+    "hostName": "bcf30664a105",
+    "processName": "NativeImageGeneratorRunner$JDK9Plus",
+    "processId": 241
+}
 ```
 
 ## Testando o plugin
