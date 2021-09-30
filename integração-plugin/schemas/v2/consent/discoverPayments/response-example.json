@@ -1,33 +1,33 @@
 {
-    "data": {
-      "resources": [
-        {
-          "resourceName": [
-            {
-              "key": "Agência",
-              "value": "1234"
-            }
-            {
-              "key": "Conta",
-              "value": "1234-5"
-            }
-          ],
-          "resourceLegacyId": [
-            {
-              "key": "internalAccountId",
-              "value": "1234"
-            }
-          ],
-          "resourceBalanceCurrency": "BRL",
-          "resourceBalanceAmount": "100000.04",
-          "authorizers": [
-            {
-              "cpf": "11111111111",
-              "name": "Marco Antonio de Brito"
-            }
-          ],
-          "defaultSelected": true
-        }
-      ]
-    }
+  "data": {
+    "resources": [
+      {
+        "resourceName": [
+          {
+            "key": "Agência",
+            "value": "1234"
+          },
+          {
+            "key": "Conta",
+            "value": "1234-5"
+          }
+        ],
+        "resourceLegacyId": [
+          {
+            "key": "internalAccountId",
+            "value": "1234"
+          }
+        ],
+        "resourceBalanceCurrency": "BRL",
+        "resourceBalanceAmount": "100000.04",
+        "authorizers": [
+          {
+            "cpf": "11111111111",
+            "name": "Marco Antonio de Brito"
+          }
+        ],
+        "defaultSelected": true
+      }
+    ]
   }
+}
