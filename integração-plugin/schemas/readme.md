@@ -93,7 +93,7 @@ Onde:
 ### 30/09/2021 - v2.1.0
 
 - Geral
-  - Correção da url do schema utilizado para o draft 2020-12
+  - Correção da url do schema utilizado para o draft 07
 - Consent
   - Ajuste de erro de sintaxe no exemplo de request de discoverPayments
 - Payment
