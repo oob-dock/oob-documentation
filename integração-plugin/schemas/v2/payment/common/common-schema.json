@@ -288,8 +288,8 @@
                 },
                 "additionalItems": false
             },
-            "minItems": 10,
-            "maxItems": 9
+            "minItems": 1,
+            "maxItems": 10
         },
         "ExternalPaymentId": {
             "type": "string",
