@@ -39,7 +39,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"standard-happy-flow\",\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"standard-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Standard Happy Flow",
@@ -65,7 +65,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"consent-expired\",\n  \"errorCommand\": {\n    \"type\": \"GENERIC_ERROR\",\n    \"message\": \"Isso é uma mensagem de erro\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"consent-expired\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"GENERIC_ERROR\",\n    \"message\": \"Isso é uma mensagem de erro\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Error - Consent Expired",
@@ -91,7 +91,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Error - Invalid CPF Flow",
@@ -147,7 +147,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"handoff-happy-flow\",\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"handoff-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Handoff Happy  Flow",
@@ -203,7 +203,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\r\n    \"command\": \"consent\",\r\n    \"commandId\": \"{{urlParam 'id'}}-C\",\r\n    \"consentCommand\": {\r\n        \"customerName\": \"João Maria José\",\r\n        \"brand\": {\r\n            \"name\": \"CBanco\",\r\n            \"logoUrl\": \"https://www.opus-software.com.br/wp-content/uploads/2019/01/opus_logo.png\"\r\n        },\r\n        \"tpp\": {\r\n            \"name\": \"Opus GuiaBolsa\",\r\n            \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\r\n        },\r\n        \"consent\": {\r\n            \"type\": \"PAYMENT\",\r\n            \"brandId\": \"cbanco\",\r\n            \"creationDateTime\": \"{{now}}\",\r\n            \"tpp\": {\r\n                \"name\": \"GuiaBolsa\"\r\n            },\r\n            \"externalId\": \"urn:cbanco:de5f0e8a-9201-43a4-8497-673b58ce0a1c\",\r\n            \"loggedUser\": {\r\n                \"document\": {\r\n                    \"identification\": \"12312312333\",\r\n                    \"rel\": \"CPF\"\r\n                }\r\n            },\r\n            \"resources\": [\r\n                {\r\n                    \"id\": \"2994b3b7-fa7c-43d6-a7e1-ca2d30349938\",\r\n                    \"type\": \"PAYMENT\",\r\n                    \"name\": [\r\n                        {\r\n                            \"key\": \"Agencia\",\r\n                            \"value\": \"1234\"\r\n                        },\r\n                        {\r\n                            \"key\": \"Conta Corrente\",\r\n                            \"value\": \"12345-6\"\r\n                        }\r\n                    ],\r\n                    \"balanceCurrency\": \"BRL\",\r\n                    \"balanceAmount\": 5239.12,\r\n                    \"hasMultipleAuthorisers\": false\r\n                }\r\n            ],\r\n            \"expirationDateTime\": \"{{dateTimeShift date=(now) minutes=5}}\",\r\n            \"creditor\": {\r\n                \"personType\": \"PESSOA_NATURAL\",\r\n                \"cpfCnpj\": \"00000000191\",\r\n                \"name\": \"Marco Antonio de Brito\"\r\n            },\r\n            \"payment\": {\r\n                \"type\": \"PIX\",\r\n                \"date\": \"{{now 'yyyy-MM-dd'}}\",\r\n                \"currency\": \"BRL\",\r\n                \"amount\": \"218.12\",\r\n                \"ibgeTownCode\": \"5300108\",\r\n                \"details\": {\r\n                    \"localInstrument\": \"DICT\",\r\n                    \"qrCode\": \"00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012\\nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\\n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\\nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\\n\",\r\n                    \"proxy\": \"12345678901\",\r\n                    \"creditorAccount\": {\r\n                        \"ispb\": \"12345678\",\r\n                        \"issuer\": \"1774\",\r\n                        \"number\": \"1234567890\",\r\n                        \"accountType\": \"CACC\"\r\n                    }\r\n                }\r\n            },\r\n            \"debtorAccount\": {\r\n                \"ispb\": \"12345678\",\r\n                \"issuer\": \"1774\",\r\n                \"number\": \"1234567890\",\r\n                \"accountType\": \"CACC\"\r\n            }\r\n        }\r\n    }\r\n}",
+                                "body": "{\r\n    \"command\": \"consent\",\r\n    \"commandId\": \"{{urlParam 'id'}}-C\",\r\n    \"tpp\": {\r\n        \"name\": \"Opus GuiaBolsa\",\r\n        \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\r\n    },\r\n    \"consentCommand\": {\r\n        \"customerName\": \"João Maria José\",\r\n        \"brand\": {\r\n            \"name\": \"CBanco\",\r\n            \"logoUrl\": \"https://www.opus-software.com.br/wp-content/uploads/2019/01/opus_logo.png\"\r\n        },\r\n        \"consent\": {\r\n            \"type\": \"PAYMENT\",\r\n            \"brandId\": \"cbanco\",\r\n            \"creationDateTime\": \"{{now}}\",\r\n            \"tpp\": {\r\n                \"name\": \"GuiaBolsa\"\r\n            },\r\n            \"externalId\": \"urn:cbanco:de5f0e8a-9201-43a4-8497-673b58ce0a1c\",\r\n            \"loggedUser\": {\r\n                \"document\": {\r\n                    \"identification\": \"12312312333\",\r\n                    \"rel\": \"CPF\"\r\n                }\r\n            },\r\n            \"resources\": [\r\n                {\r\n                    \"id\": \"2994b3b7-fa7c-43d6-a7e1-ca2d30349938\",\r\n                    \"type\": \"PAYMENT\",\r\n                    \"name\": [\r\n                        {\r\n                            \"key\": \"Agencia\",\r\n                            \"value\": \"1234\"\r\n                        },\r\n                        {\r\n                            \"key\": \"Conta Corrente\",\r\n                            \"value\": \"12345-6\"\r\n                        }\r\n                    ],\r\n                    \"balanceCurrency\": \"BRL\",\r\n                    \"balanceAmount\": 5239.12,\r\n                    \"hasMultipleAuthorisers\": false\r\n                }\r\n            ],\r\n            \"expirationDateTime\": \"{{dateTimeShift date=(now) minutes=5}}\",\r\n            \"creditor\": {\r\n                \"personType\": \"PESSOA_NATURAL\",\r\n                \"cpfCnpj\": \"00000000191\",\r\n                \"name\": \"Marco Antonio de Brito\"\r\n            },\r\n            \"payment\": {\r\n                \"type\": \"PIX\",\r\n                \"date\": \"{{now 'yyyy-MM-dd'}}\",\r\n                \"currency\": \"BRL\",\r\n                \"amount\": \"218.12\",\r\n                \"ibgeTownCode\": \"5300108\",\r\n                \"details\": {\r\n                    \"localInstrument\": \"DICT\",\r\n                    \"qrCode\": \"00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012\\nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\\n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\\nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\\n\",\r\n                    \"proxy\": \"12345678901\",\r\n                    \"creditorAccount\": {\r\n                        \"ispb\": \"12345678\",\r\n                        \"issuer\": \"1774\",\r\n                        \"number\": \"1234567890\",\r\n                        \"accountType\": \"CACC\"\r\n                    }\r\n                }\r\n            },\r\n            \"debtorAccount\": {\r\n                \"ispb\": \"12345678\",\r\n                \"issuer\": \"1774\",\r\n                \"number\": \"1234567890\",\r\n                \"accountType\": \"CACC\"\r\n            }\r\n        }\r\n    }\r\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Happy flows",
@@ -235,7 +235,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"cpf-mismatch\",\n  \"errorCommand\": {\n    \"type\": \"CPF_MISMATCH\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"cpf-mismatch\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"CPF_MISMATCH\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Error - Invalid CPF Flow",
@@ -291,7 +291,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"completed\",\n  \"commandId\": \"f217c8c0-fe89-45eb-8067-aff63842f9c3\",\n  \"completedCommand\": {\n    \"redirect\": {\n      \"isHandOff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+                                "body": "{\n  \"command\": \"completed\",\n  \"commandId\": \"f217c8c0-fe89-45eb-8067-aff63842f9c3\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"completedCommand\": {\n    \"redirect\": {\n      \"isHandOff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Not handoff happy flow",
@@ -317,7 +317,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"completed\",\n  \"commandId\": \"f217c8c0-fe89-45eb-8067-aff63842f9c3\",\n  \"completedCommand\": {\n    \"redirect\": {\n      \"isHandOff\": true\n    }\n  }\n}",
+                                "body": "{\n  \"command\": \"completed\",\n  \"commandId\": \"f217c8c0-fe89-45eb-8067-aff63842f9c3\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"completedCommand\": {\n    \"redirect\": {\n      \"isHandOff\": true\n    }\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Handoff Happy flow",
