@@ -1,4 +1,5 @@
 ConsentCustomerAcceptance:
+  description: Detalhes do consentimento
   type: object
   required:
     - type
@@ -156,6 +157,16 @@ ConsentCustomerAcceptance:
                     - 2134 XXXX XXXX 3123
             minItems: 1
             maxItems: 10
+          balanceCurrency:
+            description: Moeda do saldo do recurso.
+            type: string
+            examples:
+              - BRL
+          balanceAmount:
+            description: Valor do saldo do recurso.
+            type: number
+            examples:
+              - 3192.32
           hasMultipleAuthorisers:
             type: boolean
             examples:
@@ -193,7 +204,7 @@ ConsentCustomerAcceptance:
           maxLength: 14
           pattern: ^\d{11}$|^\d{14}$
           examples:
-            - "58764789000137"
+            - "11111111111"
           description: |
             Identificação da pessoa envolvida na transação.  
             Preencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.  
