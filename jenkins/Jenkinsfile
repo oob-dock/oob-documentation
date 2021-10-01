@@ -1,0 +1,20 @@
+pipeline {
+	agent any
+	options {
+		disableConcurrentBuilds()
+	}
+	stages {
+		stage('Git Sync'){
+			when { branch 'master' }
+			steps{	
+				build job: "/oob-git-sync"
+			}
+		}
+		stage('Integration Schema Replication'){
+			when { branch 'master' }
+			steps{	
+				build job: "/oob-schema-replication"
+			}
+		}
+	}
+}
