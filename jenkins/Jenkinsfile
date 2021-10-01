@@ -1,0 +1,13 @@
+pipeline {
+	options {
+		disableConcurrentBuilds()
+	}
+	stages {
+		stage('Git Sync'){
+			when { branch 'master' }
+			steps{	
+				build job: "/oob-git-sync"
+			}
+		}
+	}
+}
