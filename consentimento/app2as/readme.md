@@ -205,4 +205,26 @@ o aplicativo da instituição e o AS conforme descrito anteriormente.
 
 ## Mock para integração
 
-WIP
+O mock para auxiliar no desenvolvimento da integração está disponível na
+ferramenta [Mockoon](https://mockoon.com/) e definido nesse [arquivo JSON](./mockoon.json).
+
+Vários cenários estão mockados e são acionados através das respectivas URLs iniciais:
+
+| Cenário                                     | URL para iniciar processo                         |
+| ------------------------------------------- | ------------------------------------------------- |
+| Hybrid-flow / Pagamento                     | <http://localhost:3301/auth/auth?id=standard>     |
+| Hybrid-flow hand-off / Pagamento            | <http://localhost:3301/auth/app/commands/handoff> |
+| Hybrid-flow / CPF_MISMATCH na autenticação  | <http://localhost:3301/auth/auth?id=cpf>          |
+| Hybrid-flow / GENERIC_ERROR no link inicial | <http://localhost:3301/auth/auth?id=expired>      |
+
+Para executar o mock basta importar o JSON na ferramenta Mockoon e iniciar o
+servidor do _environment_ "OOB Authroization Server Apps API".
+
+## Changelog
+
+### 01/10/2021 - v2.1.1
+
+- Mock da nova interface
+- Adição das informações do TPP (nome e logotipo) em todos os comandos
+- Remoção das inforamções do TPP do ConsentCommand
+  

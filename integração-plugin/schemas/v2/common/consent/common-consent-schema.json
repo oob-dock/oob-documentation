@@ -125,6 +125,20 @@
                         "minItems": 1,
                         "maxItems": 10
                     },
+                    "balanceCurrency": {
+                        "description": "Moeda do saldo do recurso.",
+                        "type": "string",
+                        "examples": [
+                            "BRL"
+                        ]
+                    },
+                    "balanceAmount": {
+                        "description": "Valor do saldo do recurso.",
+                        "type": "number",
+                        "examples": [
+                            3192.32
+                        ]
+                    },
                     "hasMultipleAuthorisers": {
                         "type": "boolean",
                         "examples": [

@@ -115,3 +115,9 @@ Onde:
   paymentsGetPixPaymentsPaymentId:
     - correlationId
     - brandId
+
+### 01/10/2021 - v2.1.1
+
+- Consent
+  - Adição dos campos balanceCurrency e balanceAmount no schema do consentimento
+    para integração com o aplicativo da instituição

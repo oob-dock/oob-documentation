@@ -193,16 +193,6 @@ components:
             logoUrl:
               type: string
               description: URL do logotipo da marca da instituição
-        tpp:
-          type: object
-          description: Informações sobre o TPP
-          properties:
-            name:
-              type: string 
-              description: "Nome do TPP"
-            logoUrl:
-              type: string
-              description: URL do logotipo (SVG)
         consent:
           $ref: './schemas/ConsentCustomerAcceptance.yaml#/ConsentCustomerAcceptance'
         permissions:
@@ -299,6 +289,16 @@ components:
           type: string
           description: ID do comando a ser utilizado na resposta
           maxLength: 40
+        tpp:
+          type: object
+          description: Informações sobre o TPP
+          properties:
+            name:
+              type: string 
+              description: "Nome do TPP"
+            logoUrl:
+              type: string
+              description: URL do logotipo (SVG)
         authenticateCommand:
           $ref: '#/components/schemas/AuthenticateCommand'
         consentCommand:
