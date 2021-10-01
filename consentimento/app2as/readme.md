@@ -222,7 +222,7 @@ servidor do _environment_ "OOB Authroization Server Apps API".
 
 ## Changelog
 
-### 01/10/2021 - v2.1.1
+### 2021-10-01 - v2.1.1
 
 - Mock da nova interface
 - Adição das informações do TPP (nome e logotipo) em todos os comandos

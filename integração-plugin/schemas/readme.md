@@ -48,7 +48,39 @@ Onde:
 
 ## Changelog
 
-### 21/09/2021 - v2.0.0
+### 2021-10-01 - v2.1.1
+
+- Consent
+  - Adição dos campos balanceCurrency e balanceAmount no schema do consentimento
+    para integração com o aplicativo da instituição
+
+### 2021-09-30 - v2.1.0
+
+- Geral
+  - Correção da url do schema utilizado para o draft 07
+- Consent
+  - Ajuste de erro de sintaxe no exemplo de request de discoverPayments
+- Payment
+  - Ajuste nas quantidades mínima e máxima de itens no campo PaymentId para
+    1 e 10 respectivamente
+  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação
+    paymentsPostPixPayments:
+    - requestMeta
+  - Remoção dos campos abaixo como obrigatórios no schema de request da operação
+    paymentsPostPixPayments:
+    - correlationId
+    - brandId
+  - Ajuste do campo code da definição ResponseErrorCreatePixPayment no schema de
+    erro da operação paymentsPostPixPayments
+  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação
+    paymentsGetPixPaymentsPaymentId:
+    - requestMeta
+  - Remoção dos campos abaixo como obrigatórios no schema de request da operação
+    paymentsGetPixPaymentsPaymentId:
+    - correlationId
+    - brandId
+
+### 2021-09-21 - v2.0.0
 
 - Geral
   - Reestruturação dos arquivos de schema
@@ -89,35 +121,3 @@ Onde:
   - Inclusão do campo requestMeta nos requests. Os campos correlationId e brandId
     foram movidos para este novo objeto **tornando essa versão incompatível com
     interfaces na versão 1.x.x**
-
-### 30/09/2021 - v2.1.0
-
-- Geral
-  - Correção da url do schema utilizado para o draft 07
-- Consent
-  - Ajuste de erro de sintaxe no exemplo de request de discoverPayments
-- Payment
-  - Ajuste nas quantidades mínima e máxima de itens no campo PaymentId para
-  1 e 10 respectivamente
-  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação
-  paymentsPostPixPayments:
-    - requestMeta
-  - Remoção dos campos abaixo como obrigatórios no schema de request da operação
-  paymentsPostPixPayments:
-    - correlationId
-    - brandId
-  - Ajuste do campo code da definição ResponseErrorCreatePixPayment no schema de
-  erro da operação paymentsPostPixPayments
-  - Inclusão dos campos abaixo como obrigatórios no schema de request da operação
-  paymentsGetPixPaymentsPaymentId:
-    - requestMeta
-  - Remoção dos campos abaixo como obrigatórios no schema de request da operação
-  paymentsGetPixPaymentsPaymentId:
-    - correlationId
-    - brandId
-
-### 01/10/2021 - v2.1.1
-
-- Consent
-  - Adição dos campos balanceCurrency e balanceAmount no schema do consentimento
-    para integração com o aplicativo da instituição
