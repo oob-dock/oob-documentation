@@ -48,7 +48,7 @@ Onde:
 
 ## Changelog
 
-### 2021-10-06 - v2.1.2
+### 2021-10-06 - v2.2.0
 
 - Consent
   - Adição do campo authorizers na definição AcceptedResources no schema comum do
