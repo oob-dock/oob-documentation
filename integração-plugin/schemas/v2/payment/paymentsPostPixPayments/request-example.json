@@ -44,6 +44,12 @@
               "value": "1234"
             }
           ],
+          "authorizers": [
+            {
+              "cpf": "22222222222",
+              "name": "Marco Antonio de Brito"
+            }
+          ],
           "hasMultipleAuthorisers": false
         }
       ]
