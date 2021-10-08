@@ -1,0 +1,67 @@
+{
+    "source": "mockoon:1.15.0",
+    "data": [
+        {
+            "type": "environment",
+            "item": {
+                "uuid": "",
+                "lastMigration": 17,
+                "name": "mock_api",
+                "endpointPrefix": "payments/v1",
+                "latency": 70,
+                "port": 5000,
+                "hostname": "0.0.0.0",
+                "routes": [
+                    {
+                        "uuid": "",
+                        "documentation": "Método para criar a iniciação de pagamento",
+                        "method": "post",
+                        "endpoint": "pix",
+                        "responses": [
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"instPayId\": \"e33b469a-c121-41b4-87d1-b2c0947c108a\",\n  \"endToEndId\": \"E9040088820210128000800123348752\",\n  \"initiationTimestampUTC\": \"2021-10-05T18:00:00Z\",\n  \"statusTimestampUTC\": \"2021-10-05T18:00:00Z\",\n  \"paymentForm\": \"DICT\",\n  \"key\": \"12345678901\",\n  \"status\": {\n    \"code\": \"1\"\n  },\n \"transaction\": {\n   \"amount\": \"123.45\",\n   \"currency\": \"BRL\"\n },\n \"additionalInformation\": \"Teste criar pagamento\",\n \"payee\": {\n   \"ispb\": \"12345678\",\n   \"issuer\": \"1774\",\n   \"number\": \"6251965162\",\n   \"accountType\": \"CACC\"\n },\n \"initiatorDocument\": \"00000000000191\"\n}",
+                                "latency": 80,
+                                "statusCode": 201,
+                                "label": "",
+                                "headers": [],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            }
+                        ],
+                        "enabled": true,
+                        "randomResponse": false,
+                        "sequentialResponse": false
+                    }
+                ],
+                "proxyMode": false,
+                "proxyHost": "",
+                "proxyRemovePrefix": false,
+                "https": false,
+                "cors": true,
+                "headers": [
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                    }
+                ],
+                "proxyReqHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ],
+                "proxyResHeaders": [
+                    {
+                        "key": "",
+                        "value": ""
+                    }
+                ]
+            }
+        }
+    ]
+}

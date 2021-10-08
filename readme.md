@@ -19,3 +19,4 @@
 ## Ferramentas úteis
 
 - [JSON Schema](ferramentas-auxiliares/json-schema/readme.md)
+- [Connector Tester](ferramentas-auxiliares/connector-tester/readme.md)
