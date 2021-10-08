@@ -3,6 +3,10 @@
         xsi:schemaLocation="
             http://camel.apache.org/schema/spring
             http://camel.apache.org/schema/spring/camel-spring.xsd">
+     <route id="discoverPaymentsConsentsRoute">
+        <from uri="direct:discoverPaymentsConsents"/>
+        <to uri="direct:getMockError"/>
+    </route>
     <route id="paymentsPostPixPaymentsRoute">
         <from uri="direct:paymentsPostPixPayments"/>
         <unmarshal>
@@ -25,12 +29,16 @@
                 </setHeader>
             </when>
             <otherwise>
-                <to uri="direct:getMockErrorPostPixResponse"/>
+                <to uri="direct:getMockError"/>
             </otherwise>
         </choice>        
     </route>
-    <route id="getMockErrorPostPix">
-        <from uri="direct:getMockErrorPostPixResponse"/>
+    <route id="paymentsGetPixPaymentsPaymentIdRoute">
+        <from uri="direct:paymentsGetPixPaymentsPaymentId"/>
+        <to uri="direct:getMockError"/>
+    </route>
+    <route id="getMockError">
+        <from uri="direct:getMockError"/>
         <to uri="velocity:file://work/error/response-error-example.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
         <setHeader name="CamelHttpResponseCode">
             <constant>500</constant>
