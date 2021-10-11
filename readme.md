@@ -4,6 +4,7 @@
 
 - Integração de segurança
   - [Geração de Consentimento com aplicativo da instituição](consentimento/app2as/readme.md)
+  - [Hybrid-flow com handoff (biblioteca javascript)](consentimento/app2as-handoff/readme.md)
 - [Integração plugins Camel](integração-plugin/readme.md)
   - [Discovery de produtos](integração-plugin/discovery/readme.md)
   - [Financial data (Fase 2)](integração-plugin/financial-data/readme.md)
