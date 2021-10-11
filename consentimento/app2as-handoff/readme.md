@@ -167,7 +167,7 @@ do [Node.js](https://nodejs.org/en/download/):
 
 ```bash
 cd /src
-npx http-server -p 3030 --cors
+npx http-server -p 3030 --cors -c-1
 ```
 
 É possível iniciar os cenários mockados através das seguintes URLs:
