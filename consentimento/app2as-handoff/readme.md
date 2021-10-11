@@ -111,11 +111,11 @@ Schema baseado no `completedCommand` da interface APP2AS:
 }
 ```
 
-| Propriedade                             | Descrição                                                             |
-| --------------------------------------- | --------------------------------------------------------------------- |
-| `tpp.name`                              | Nome do TPP para exibição na tela de retorno                          |
-| `tpp.logoUrl`                           | URL com o logotipo do TPP para exibição na tela de retorno            |
-| `completedCommand.redirect.redrirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário |
+| Propriedade                            | Descrição                                                             |
+| -------------------------------------- | --------------------------------------------------------------------- |
+| `tpp.name`                             | Nome do TPP para exibição na tela de retorno                          |
+| `tpp.logoUrl`                          | URL com o logotipo do TPP para exibição na tela de retorno            |
+| `completedCommand.redirect.redirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário |
 
 ### handoffError
 
@@ -123,11 +123,13 @@ Schema baseado no `errorCommand` da interface APP2AS:
 
 ```json
 {
-    "tpp": { 
+    "tpp": {
         "name": "<string>",
         "logoUrl": "<string>"
     },
-    "completedCommand": { 
+    "errorCommand": {
+        "type": "<string>",
+        "message": "<string>",
         "redirect": {
             "redirectTo": "<string>"
         }
@@ -135,15 +137,16 @@ Schema baseado no `errorCommand` da interface APP2AS:
 }
 ```
 
-| Propriedade                         | Descrição                                                                                            |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| `tpp.name`                          | Nome do TPP para exibição na tela de retorno.                                                        |
-| `tpp.logoUrl`                       | URL com o logotipo do TPP para exibição na tela de retorno                                           |
-| `errorCommand.type`                 | Tipo do erro. Mesmo `enum` do APP2AS: `CPF_MISMATCH`, `CNPJ_MISMATCH`, `GENERIC_ERROR`, `OIDC_ERROR` |
-| `errorCommand.message`              | Mensagem de erro para exibir ao usuário na tela de retorno                                           |
-| `errorCommand.redirect.redrirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário                                |
+| Propriedade                        | Descrição                                                                                            |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| `tpp.name`                         | Nome do TPP para exibição na tela de retorno.                                                        |
+| `tpp.logoUrl`                      | URL com o logotipo do TPP para exibição na tela de retorno                                           |
+| `errorCommand.type`                | Tipo do erro. Mesmo `enum` do APP2AS: `CPF_MISMATCH`, `CNPJ_MISMATCH`, `GENERIC_ERROR`, `OIDC_ERROR` |
+| `errorCommand.message`             | Mensagem de erro para exibir ao usuário na tela de retorno                                           |
+| `errorCommand.redirect.redirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário                                |
 
-As informações `tpp`, `redirectTo` e `message` podem não estar presentes no retorno.
+As informações `tpp.name`, `tpp.logoUrl`, `errorCommand.message` e
+`errorCommand.redirect.redirectTo` podem não estar presentes no retorno.
 
 ## Exemplo
 
