@@ -155,8 +155,8 @@ instituição deve fazer, hospedar e configurar a URL na instalação do OOB.
 A aplicação de exemplo está utilizando a versão mockada da biblioteca [oob-handoff.js](./src/v1/oob-handoff.js)
 que simula 3 cenários distintos através dos identificadores listados na tabela abaixo.
 
-| Identificador        | Cenário                                        |
-| -------------------- | ---------------------------------------------- |
+| Identificador            | Cenário                                        |
+| ------------------------ | ---------------------------------------------- |
 | L3YxL21vY2svc3VjY2Vzcw== | Consentimento efetuado com sucesso             |
 | L3YxL21vY2svY3BmLWVycm9y | Erro de CPF_MISMATCH                           |
 | L3YxL21vY2svdGltZW91dA== | Tempo esgotado para conclusão do consentimento |
@@ -172,8 +172,8 @@ npx http-server -p 3030 --cors
 
 É possível iniciar os cenários mockados através das seguintes URLs:
 
-| Cenário | URL |
-| --- | --- |
-| Sucesso | <http://lvh.me:3030/sample.html#L3YxL21vY2svc3VjY2Vzcw==> |
+| Cenário      | URL                                                       |
+| ------------ | --------------------------------------------------------- |
+| Sucesso      | <http://lvh.me:3030/sample.html#L3YxL21vY2svc3VjY2Vzcw==> |
 | CPF_MISMATCH | <http://lvh.me:3030/sample.html#L3YxL21vY2svY3BmLWVycm9y> |
-| Timeout | <http://lvh.me:3030/sample.html#L3YxL21vY2svdGltZW91dA==> |
+| Timeout      | <http://lvh.me:3030/sample.html#L3YxL21vY2svdGltZW91dA==> |
