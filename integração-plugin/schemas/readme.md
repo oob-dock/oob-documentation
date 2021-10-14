@@ -48,6 +48,13 @@ Onde:
 
 ## Changelog
 
+### 2021-10-14 - v2.2.0
+
+- Consent
+  - Adição do campo FailingResources no schema comum do consentimento
+  - Adição do campo FailingResources no schema do consentimento para integração
+    com o aplicativo da instituição.
+
 ### 2021-10-06 - v2.2.0
 
 - Consent
