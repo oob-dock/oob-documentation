@@ -176,6 +176,12 @@
                         "examples": [
                             "false"
                         ]
+                    },
+                    "defaultSelected": {
+                        "type": "boolean",
+                        "examples": [
+                            "true"
+                        ]
                     }
                 },
                 "additionalProperties": false

@@ -54,6 +54,8 @@ Onde:
   - Adição do campo FailingResources no schema comum do consentimento
   - Adição do campo FailingResources no schema do consentimento para integração
     com o aplicativo da instituição.
+  - Adição do campo defaultSelected na definição AvailableResources no schema
+    comum do consentimento
 
 ### 2021-10-06 - v2.2.0
 
