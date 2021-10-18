@@ -216,10 +216,11 @@ detentora da conta através de um conector.
 
 Dentre as validações que podem ser feitas pela instituição estão:
 
-- Verificar se o usuário logado é um cliente conhecido e ativo;
+- Verificar se o usuário logado no TPP é um cliente conhecido e ativo;
 - Verificar se o tipo de operação é aceito pela instituição;
 - Verificar se os valores selecionados estão de acordo com os limites definidos
-  pela instituição.
+  pela instituição;
+- Verificar se a operação está de acordo com as políticas antifraude.
 
 Outra função dessa integração é controlar a liberação do acesso ao Open Banking
 para os clientes de forma escalonada. Dessa forma os sistemas internos da instituição
@@ -228,7 +229,7 @@ podem definir se a operação pode ser realizada levando em conta:
 - Se o cliente foi selecionado para acessar a operação, enquanto o acesso ainda
   está restrito a uma porcentagem pré-selecionada;
 - Se a operação está sendo realizada dendro dos horários pré-estabelecidos;
-- Se os valores estão dentro do range pré-estabelecidos;
+- Se os valores estão dentro dos limites pré-estabelecidos;
 - Se a operação selecionada pode ser realizada através da interface de Open Banking;
 
 A tabela a seguir lista os pontos de integração para a aceitação da criação de

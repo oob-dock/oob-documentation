@@ -21,7 +21,8 @@
                 "currency": "BRL",
                 "amount": "100000.04",
                 "details": {
-                    "localInstrument": "QRDN",
+                    "localInstrument": "DICT",
+                    "proxy": "12345678901",
                     "creditorAccount": {
                         "ispb": "12345678",
                         "number": "1234567890",
