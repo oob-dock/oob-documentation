@@ -2,7 +2,7 @@
 
 O discovery de recursos no Opus Open Banking é um dos pontos de integração entre
 o Opus Open Banking e os sistemas de legado da instituição, e é a integração
-responsável pela descoberta dos produtos vinculados à um consentimento. O
+responsável pela descoberta dos produtos vinculados a um consentimento. O
 discovery de recursos acontece em dois momentos distintos dentro do Open Banking.
 
 ## Momentos de discovery
