@@ -1,4 +1,4 @@
-# API Payments
+# API Payment
 
 Esse documento apresenta as **Rotas do Camel** e **Configurações Suportadas** para
 o serviço de payments, o qual equivale às [APIs de **Pix**](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-3-apis-do-open-banking-brasil-api-pagamentos)

@@ -1,11 +1,25 @@
-# Discovery de recursos no Opus Open Banking
+# API Consent
+
+- [API Consent](#api-consent)
+  - [Discovery de recursos no Opus Open Banking](#discovery-de-recursos-no-opus-open-banking)
+    - [Momentos de discovery](#momentos-de-discovery)
+    - [Consentimento e os produtos](#consentimento-e-os-produtos)
+    - [Tratamento dos identificadores](#tratamento-dos-identificadores)
+    - [Conectores de discovery](#conectores-de-discovery)
+      - [Conector de produto selecionável](#conector-de-produto-selecionável)
+      - [Conector de produto não selecionável](#conector-de-produto-não-selecionável)
+    - [Tratamentos adicionais](#tratamentos-adicionais)
+      - [Filtro de contas](#filtro-de-contas)
+  - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
+
+## Discovery de recursos no Opus Open Banking
 
 O discovery de recursos no Opus Open Banking é um dos pontos de integração entre
 o Opus Open Banking e os sistemas de legado da instituição, e é a integração
 responsável pela descoberta dos produtos vinculados à um consentimento. O
 discovery de recursos acontece em dois momentos distintos dentro do Open Banking.
 
-## Momentos de discovery
+### Momentos de discovery
 
 O primeiro momento de discovery ocorre durante a fase de aceitação do
 consentimento pelo cliente da instituição. Consentimentos de compartilhamento de
@@ -37,7 +51,7 @@ seus tipos:
 
 [^1]: O produto **PAYMENT** é uma forma de permitir que a seleção da origem de recursos para um pagamento seja independente do produto ACCOUNT, permitindo pagamentos através de cartão de crédito ou outra origem distinta que a instituição eventualmente possua.
 
-## Consentimento e os produtos
+### Consentimento e os produtos
 
 Vimos no tópico anterior os momentos possíveis de discovery e a relação entre os
 momentos e os produtos. Outro ponto importante é a relação entre as permissões
@@ -61,7 +75,7 @@ UNARRANGED_ACCOUNT_OVERDRAFT quando ocorrer uma chamada no
 ```GET /resources/v1/resources```. O discovery é sempre efetuado de forma
 paralela para minimizar o tempo de resposta das APIs.
 
-## Tratamento dos identificadores
+### Tratamento dos identificadores
 
 Um ponto importante no Open Banking é a
 [formação e estabilidade do ID](https://openbanking-brasil.github.io/areadesenvolvedor/#formacao-e-estabilidade-do-id)
@@ -78,7 +92,7 @@ Open Banking utilizam uma estrutura de array de chaves (key) e valores (value)
 quando referenciam um identificador de legado. É sobre essa estrutura que a
 geração do identificador Open Banking é gerada.
 
-## Conectores de discovery
+### Conectores de discovery
 
 Os conectores de discovery de fato são implementados em Apache Camel igual aos
 demais conectores de integração entre o Opus Open Banking e os sistemas legados
@@ -87,13 +101,13 @@ do banco.
 A interface do conector deve respeitar um dos dois modelos de produtos:
 selecionável e não-selecionável
 
-### Conector de produto selecionável
+#### Conector de produto selecionável
 
 Os produtos selecionáveis devem ter seus conectores respeitando os seguintes schemas:
 
-| Tipo     | JSON Schema                                                                                        |
-| -------- | -------------------------------------------------------------------------------------------------- |
-| Request  | [discovery-resource-request.json](../schemas/v1/discovery/discovery-resource-request.json)                         |
+| Tipo     | JSON Schema                                                                                                         |
+| -------- | ------------------------------------------------------------------------------------------------------------------- |
+| Request  | [discovery-resource-request.json](../schemas/v1/discovery/discovery-resource-request.json)                          |
 | Response | [discovery-selectable-resource-response.json](../schemas/v1/discovery//discovery-selectable-resource-response.json) |
 
 Exemplo de response para um produto selecionável:
@@ -140,13 +154,13 @@ Exemplo de response para um produto selecionável:
 }
 ```
 
-### Conector de produto não selecionável
+#### Conector de produto não selecionável
 
 Os produtos não selecionáveis devem ter seus conectores respeitando os seguintes
 schemas:
 
-| Tipo     | JSON Schema                                                                                              |
-| -------- | -------------------------------------------------------------------------------------------------------- |
+| Tipo     | JSON Schema                                                                                                              |
+| -------- | ------------------------------------------------------------------------------------------------------------------------ |
 | Request  | [discovery-resource-request.json](../schemas/v1/discovery/discovery-resource-request.json)                               |
 | Response | [discovery-nonselectable-resource-response.json](../schemas/v1/discovery/discovery-nonselectable-resource-response.json) |
 
@@ -179,9 +193,9 @@ Exemplo de response para um produto selecionável:
 }
 ```
 
-## Tratamentos adicionais
+### Tratamentos adicionais
 
-### Filtro de contas
+#### Filtro de contas
 
 Em algumas situações a conta utilizada para uma operação financeira é
 definida pelo cliente antes da seleção de contas, na aplicação iniciadora do
@@ -190,3 +204,47 @@ consentimento e a lista retornada deve ser filtrada para retornar somente a
 conta pré-selecionada ou uma lista vazia caso essa não seja uma opção selecionável
 para o cliente. Esse tratamento deve ser feito no conector ou serviço remoto de listagem
 de contas.
+
+## Aprovação de criação de consentimento
+
+Quando a API de criação de um consentimento é chamada por um *TPP*, a plataforma
+OOB deve avaliar se este consentimento pode ou não ser criado. As validações técnicas
+(formato de mensagem, limites de chamadas) e de segurança (validade das credenciais,
+permissões de acesso) são feitas dentro da própria plataforma. As validações de
+negócio, entretanto, são delegadas para um sistema de retaguarda da instituição
+detentora da conta através de um conector.
+
+Dentre as validações que podem ser feitas pela instituição estão:
+
+- Verificar se o usuário logado é um cliente conhecido e ativo;
+- Verificar se o tipo de operação é aceito pela instituição;
+- Verificar se os valores selecionados estão de acordo com os limites definidos
+  pela instituição.
+
+Outra função dessa integração é controlar a liberação do acesso ao Open Banking
+para os clientes de forma escalonada. Dessa forma os sistemas internos da instituição
+podem definir se a operação pode ser realizada levando em conta:
+
+- Se o cliente foi selecionado para acessar a operação, enquanto o acesso ainda
+  está restrito a uma porcentagem pré-selecionada;
+- Se a operação está sendo realizada dendro dos horários pré-estabelecidos;
+- Se os valores estão dentro do range pré-estabelecidos;
+- Se a operação selecionada pode ser realizada através da interface de Open Banking;
+
+A tabela a seguir lista os pontos de integração para a aceitação da criação de
+um consentimento:
+
+| Tipo do consentimento | Nome da rota Camel                         |
+| --------------------- | ------------------------------------------ |
+| Pagamento             | ```direct:approvePaymentConsentCreation``` |
+
+O retorno desses pontos de integração devem ser:
+
+- Uma mensagem de sucesso (geralmente um objeto vazio) quando o consentimento
+  puder ser criado;
+- Uma mensagem de erro de negócio, descrita no schema de integração com um enum
+  específico no campo *code*, definindo o motivo pelo qual o consentimento foi negado;
+- Uma mensagem de erro genérica, definida pelo schema
+  [response-error-schema.json](../schemas/v2/common/response-error-schema.json)
+  quando um erro técnico impedir que a solicitação possa ser avaliada, como um
+  erro de rede ou um sistema inoperante.

@@ -1,0 +1,9 @@
+{
+    "errors": [
+        {
+            "code": "FORMA_PGTO_INVALIDA",
+            "title": "Forma de pagamento inválida.",
+            "detail": "Meio de pagamento inválido."
+        }
+    ]
+}
