@@ -219,17 +219,17 @@ Valor default: `0`
 URL que o cliente será redirecionado caso não haja suporte `web` na configuração
 `consent.channels`.
 
-### brand id
+### brand.id
 
 Vide a [definição](../shared-definitions.md#brand-id)
 
-### brand name
+### brand.name
 
 Nome da marca. Essa variável será utilizada para mostrar o nome da marca na tela
 de redirecionamento do cliente durante o uso do fluxo web, e também é retornada na
 integração APP2AS.
 
-#### logo
+#### brand.logo
 
 URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento
 do consentimento.
