@@ -48,6 +48,12 @@ Onde:
 
 ## Changelog
 
+### 2021-10-18 - v2.3.0
+
+- Consent
+  - Inclusão de um novo ponto de integração para aprovar a criação de
+    consentimentos de pagamento (approvePaymentConsentCreation)
+
 ### 2021-10-06 - v2.2.0
 
 - Consent

@@ -266,6 +266,20 @@ additionalVars:
     value: "1"
 ```
 
+### AUTH_JWT_JTI_VALIDATION
+
+Define se o processo de autenticação definido na integração [APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do `jti` informado no payload durante o request.
+
+**Formato:** `0` ou `1`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: AUTH_JWT_JTI_VALIDATION
+    value: "1"
+```
+
 ### CONSENT_UNSUPPORTED_REDIRECT_URL
 
 URL utilizada para redirecionar o cliente quando o canal web (`consent.channels`)

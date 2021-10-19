@@ -2,7 +2,7 @@
 
 ***
 
-**ATENÇÃO**: Jamais disponibilize suas chaves privadas em serviços da internet.
+**:warning: ATENÇÃO**: Jamais disponibilize suas chaves privadas em serviços da internet.
 
 ***
 

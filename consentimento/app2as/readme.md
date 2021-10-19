@@ -222,6 +222,10 @@ servidor do _environment_ "OOB Authroization Server Apps API".
 
 ## Changelog
 
+### 2021-10-15 - v2.1.2
+
+- Adição da estrutura do Jwt recebido no comando authenticate ao [oas-app2as.yaml](oas-app2as.yaml).
+
 ### 2021-10-01 - v2.1.1
 
 - Mock da nova interface
