@@ -1,0 +1,59 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "requestMeta",
+        "requestBody"
+    ],
+    "properties": {
+        "requestMeta": {
+            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+        },
+        "requestBody": {
+            "type": "object",
+            "description": "Payload para criação do consentimento para iniciação do pagamento.",
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "$ref": "#/$defs/CreatePaymentConsent"
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "CreatePaymentConsent": {
+            "type": "object",
+            "description": "Objeto contendo as informações de consentimento para a iniciação de pagamento individual.",
+            "required": [
+                "tpp",
+                "loggedUser",
+                "creditor",
+                "payment"
+            ],
+            "properties": {
+                "tpp": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/TPP"
+                },
+                "loggedUser": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser"
+                },
+                "BusinessEntity": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/BusinessEntity"
+                },
+                "creditor": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/Identification"
+                },
+                "payment": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/PaymentConsent"
+                },
+                "debtorAccount": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

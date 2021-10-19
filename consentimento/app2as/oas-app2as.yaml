@@ -141,18 +141,46 @@ components:
           type: boolean
           description: Indicativo de recusa do consentimento
           example: false
-
+    JWT:
+      type: object
+      required:      
+        - iat
+        - jti
+        - cpf        
+      properties:
+        iat:
+          type: integer
+          description: epoch da emissão do JWT
+          example: 1618664738
+        jti:
+          type: string
+          description: id para evitar reuso do jwt 
+          example: e8f172c9-6f83-4d36-9dbb-e3ce7ca8a39b
+        cpf:
+          type: string
+          description: cpf do usuário logado
+          example: 32180490089
+        cnpj:
+          type: string
+          description: cnpj do usuário logado
+          example: 77202036000182
+        name:
+          type: string
+          description: nome do usuário logado
+          example: João Maria José
     Authenticate:
       type: object
       allOf:
         - $ref: "#/components/schemas/Refused"
       properties:
         jwt:
-          #TODO: Adicionar schema do JWT
-          type: string
+          example: "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVVc01MRndYejV6TWhrSm9vMWxjbklNMnBBcExjM2tjXzJXVjhZS1lDM00ifQ.eyJpYXQiOjE2MzQyNTYwMDAsImp0aSI6ImU2Y2RlNTFmLTc5OWMtNDQxMC04YmRhLWQ2NTY3M2NiMDQzYyIsIm5hbWUiOiJKb8OjbyBNYXJpYSBKb3PDqSIsImNwZiI6IjAwMDAwMDAwMTkxIn0.Td7bXLVCWKfyx2RRAD439UcEw95QNI1OHMnF2qAzEzDKxw7b7itCVRXiBOnWz37ZYhhVUZUSc7Kg0QBMZvOLM_FGpGjNTcMVfYfxEQQifMM3X5OhzyHzM8M1nHqwHr-7jxMaBbxevTSmMGgxoL-lmNZjNxz9LSNUa-I5RX4RPVq9wxfhE_7Qx07rpazFxDo0fO8rAdYb3fzaEI8RxfMgaFXdd9fMdZPTvBX7QQhhG39r8sSTitn0FLs6RQHs7c1zPlR2odiGHBY5dMmuhUMZ6VnKAFbL0fhPx873-IRe0aD3gPiUK-eUeacK__XcEFjbRRJqOcYx4A7naGbZOe23RQ"
+          type: object
           description: |-
-            JWT assinado segundo a estrutura definida em ???; envio obrigatório 
-            se não ouve recusa do consentimento. 
+            JWT assinado segundo a estrutura definida, envio obrigatório 
+            se não ouve recusa do consentimento.
+          allOf:
+            - $ref: "#/components/schemas/JWT"
     Consent:
       type: object
       allOf:
@@ -187,6 +215,9 @@ components:
           type: object
           description: Informações sobre a marca da instituição
           properties:
+            id:
+              type: string
+              description: ID da marca da instituição
             name:
               type: string
               description: Nome da marca da instituição
