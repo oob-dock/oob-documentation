@@ -178,6 +178,7 @@
                         ]
                     },
                     "defaultSelected": {
+                        "description": "Indica se o recurso deve estar selecionado por padrão na tela do consentimento",
                         "type": "boolean",
                         "examples": [
                             "true"
