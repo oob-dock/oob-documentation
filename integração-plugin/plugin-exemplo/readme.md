@@ -43,13 +43,21 @@ que está executando o container.
 - `-e camel.main.routes-include-pattern=file:/work/mock-routes.xml`: Indica para
 a aplicação onde encontrar o arquivo do plugin dentro do container.
 
+Para chamar o serviço remoto em um plugin **com as configurações**, pode-se adicioná-las no comando ```docker run``` ou criar os arquivos docker-compose.yml, Dockerfile e env_variables.env com as configurações e executar através dos comandos ```docker-compose build``` seguido por ```docker-compose up```. 
+
+![Estender Imagem - docker-compose](./images/docker-compose-payments.png)
+
+![Estender Imagem - Dockerfile](./images/Dockerfile-payments.png)
+
+![Estender Imagem - env_variables](./images/env_variables-payments.png)
+
 Se for iniciado da forma correta o log do container deve indicar que as rotas
 foram carregadas:
 
 ```json
 {
-    "timestamp": "2021-08-05T12:16:09.811-03:00",
-    "sequence": 538,
+    "timestamp": "2021-10-20T14:56:56.819-03:00",
+    "sequence": 554,
     "loggerClassName": "org.slf4j.impl.Slf4jLogger",
     "loggerName": "org.apache.camel.impl.engine.AbstractCamelContext",
     "level": "INFO",
@@ -58,14 +66,14 @@ foram carregadas:
     "threadId": 1,
     "mdc": {},
     "ndc": "",
-    "hostName": "bcf30664a105",
+    "hostName": "2d44a51eed49",
     "processName": "NativeImageGeneratorRunner$JDK9Plus",
-    "processId": 241
-}
+    "processId": 200
+} 
 
 {
-    "timestamp": "2021-08-05T12:16:09.811-03:00",
-    "sequence": 539,
+    "timestamp": "2021-10-20T14:56:56.819-03:00",
+    "sequence": 555,
     "loggerClassName": "org.slf4j.impl.Slf4jLogger",
     "loggerName": "org.apache.camel.impl.engine.AbstractCamelContext",
     "level": "INFO",
@@ -74,9 +82,9 @@ foram carregadas:
     "threadId": 1,
     "mdc": {},
     "ndc": "",
-    "hostName": "bcf30664a105",
+    "hostName": "2d44a51eed49",
     "processName": "NativeImageGeneratorRunner$JDK9Plus",
-    "processId": 241
+    "processId": 200
 }
 ```
 
@@ -91,6 +99,20 @@ Para executar as chamadas utilizaremos a collection no Postman contida no arquiv
 ![Estender Imagem - Postman POST payment](./images/postman-post-payment.png)
 
 ![Estender Imagem - Postman GET payment](./images/postman-get-payment.png)
+
+Para decodificar o corpo da requisição e da resposta é utilizada a plataforma [jwt.io] e configurar o algoritmo para **PS256**.
+
+Requisição do POST:
+
+![Estender Imagem - Postman JWT Request Post](./images/jwt-post-payment-request.png)
+
+Resposta do POST:
+
+![Estender Imagem - Postman JWT Response Post](./images/jwt-post-payment-response.png)
+
+Resposta do GET:
+
+![Estender Imagem - Postman JWT Response Get](./images/jwt-get-payment-response.png)
 
 As chamadas recebidas pelo Mockoon podem ser vistas no botão "environment logs"
 

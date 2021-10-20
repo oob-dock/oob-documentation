@@ -5,10 +5,10 @@
             http://camel.apache.org/schema/spring/camel-spring.xsd">
     <route id="paymentsPostPixPaymentsRoute">
         <from uri="direct:paymentsPostPixPayments"/>
-        <to uri="http://192.168.0.110:3002/mockoon/open-banking/payments/v1/paymentsPostPixPaymentsRoute?bridgeEndpoint=true&amp;httpMethod=POST"/>
+        <to uri="http://192.168.0.27:3002/mockoon/open-banking/payments/v1/paymentsPostPixPaymentsRoute?bridgeEndpoint=true&amp;httpMethod=POST"/>
     </route>
     <route id="paymentsGetPixPaymentsPaymentIdRoute">
         <from uri="direct:paymentsGetPixPaymentsPaymentId"/>
-        <to uri="http://192.168.0.110:3002/mockoon/open-banking/payments/v1/paymentsGetPixPaymentsPaymentIdRoute?bridgeEndpoint=true&amp;httpMethod=POST"/>
+        <to uri="http://192.168.0.27:3002/mockoon/open-banking/payments/v1/paymentsGetPixPaymentsPaymentIdRoute?bridgeEndpoint=true&amp;httpMethod=GET"/>
     </route>
 </routes>

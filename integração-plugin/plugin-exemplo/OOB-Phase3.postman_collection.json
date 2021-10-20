@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "9aaedfb8-ff27-4677-9fb9-be56ad0ab59b",
+		"_postman_id": "30cec40f-3137-4f56-b2f4-de308ba33061",
 		"name": "OOB-Phase3",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -10,41 +10,45 @@
 			"item": [
 				{
 					"name": "paymentsPostPixPayments",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
 								"key": "X-Correlation-ID",
-								"value": "4d70a384-d6da-4540-812b-47011a616544",
+								"value": "{{$guid}}",
 								"type": "text"
 							},
 							{
 								"key": "x-idempotency-key",
-								"value": "629b0b6d-1e68-4ba7-b9f8-5bd488cbc609",
+								"value": "{{$guid}}",
 								"type": "text"
 							},
 							{
-								"key": "consent",
-								"value": "{\"id\":\"24b20278-525a-4fa7-884b-2b981eb3afa7\",\"idInstance\":\"d3316136-0533-425d-a988-b945c1ad6b82\",\"tpp\":{\"id\":\"eaf928a8-99b1-44cd-b392-17c581f0485c\",\"name\":\"GuiaBolsa\"},\"idBrand\":\"7ce9177e-542d-4a66-b810-ac2281fbf3ae\",\"externalId\":\"urn:oob-bank:24b20278-525a-4fa7-884b-2b981eb3afa7\",\"type\":\"DATA_SHARING\",\"personDocumentType\":\"CPF\",\"personDocumentNumber\":\"77721813700\",\"shaPersonDocumentNumber\":\"58F22F8540F42DB8BB9D3FFC5A81A370F2236DB16A92C5ECA2BF34C0022F7676\",\"businessDocumentType\":\"CNPJ\",\"businessDocumentNumber\":\"33273542000197\",\"shaBusinessDocumentNumber\":\"754F44BE22C8C3D6A47D928E184EFCF79D57B34E23C13161CDC994276846C4E1\",\"createdOn\":\"2021-01-30T17:32:28Z\",\"expiresOn\":\"2022-01-30T17:31:28Z\",\"transactionFrom\":\"2000-01-01T03:00:00Z\",\"transactionTo\":\"2030-01-01T03:00:00Z\",\"status\":\"AUTHORISED\",\"usageCount\":\"23\",\"lastUsage\":\"2021-05-28T17:43:21Z\",\"updatedOn\":\"2021-02-01T12:32:12Z\",\"permissions\":[\"CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ\"],\"resources\":[{\"id\":\"TXpRMU9UQTROMWhZV2xSU1FUazJSMDl\",\"type\":\"PAYMENT\",\"shaInfo\":\"87BCA615C9EF157618AB9ADEE39430EBFCC017B3B4FE9976B195FE4AB5D33E3D\",\"info\":[{\"key\":\"paymentCode\",\"value\":\"4fcf7297-abfe-4a1f-bd69-f13909f8575e\"},{\"key\":\"paymentOrigin\",\"value\":\"UIuhbg79JUHGjf97kdyhyfg9a2g\"},{\"key\":\"paymentDestination\",\"value\":\"9086ijgIFGpijg87KJG8795t9Gt\"}],\"name\":[{\"key\":\"Cartão de crédito\",\"value\":\"2134 XXXX XXXX 3123\"}],\"status\":\"AVAILABLE\",\"businessDocumentNumber\":\"50685362006773\",\"shaBusinessDocumentNumber\":\"FB42A9C8E1B1878B0AD6E80BAE7936FC5D6548DD02AC490B16EE48EAE08736FB\"}],\"authorizations\":[{\"id\":\"383ae62b-180d-4a7c-abc7-0b5cf189d7f1\",\"personDocumentNumber\":\"25872252137\",\"shaPersonDocumentNumber\":\"C35EDD9B31C2162EAE0550AD7684A6CA7F9B350717607E04F1BED4A359EFCA38\",\"personName\":\"Juan Kaique Cláudio Fernandes\",\"isRequirer\":\"true\",\"status\":\"AUTHORISED\"}]}",
+								"key": "X-Brand-ID",
+								"value": "opus",
 								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/jwt",
+								"type": "text"
+							},
+							{
+								"key": "errorCode",
+								"value": "403",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"data\": {\r\n    \"localInstrument\": \"DICT\",\r\n    \"payment\": {\r\n      \"amount\": \"100000.12\",\r\n      \"currency\": \"BRL\"\r\n    },\r\n    \"creditorAccount\": {\r\n      \"ispb\": \"12345678\",\r\n      \"issuer\": \"1774\",\r\n      \"number\": \"1234567890\",\r\n      \"accountType\": \"CACC\"\r\n    },\r\n    \"remittanceInformation\": \"Pagamento da nota XPTO035-002.\",\r\n    \"qrCode\": \"00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012  \\nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062  \\n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB  \\nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\\n\",\r\n    \"proxy\": \"12345678901\"\r\n  }\r\n}",
+							"raw": "eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImxvY2FsSW5zdHJ1bWVudCI6IkRJQ1QiLCJwYXltZW50Ijp7ImFtb3VudCI6IjEuMjMiLCJjdXJyZW5jeSI6IkJSTCJ9LCJjcmVkaXRvckFjY291bnQiOnsiaXNwYiI6IjEyMzQ1Njc4IiwibnVtYmVyIjoiMTIzNDU2Nzg5MCIsImFjY291bnRUeXBlIjoiQ0FDQyIsImlzc3VlciI6IjE3NzQifSwiY25wakluaXRpYXRvciI6IjAwMDAwMDAwMDAwMTkxIiwicmVtaXR0YW5jZUluZm9ybWF0aW9uIjoiUGFnYW1lbnRvIGRhIG5vdGEgWFBUTzAzNS0wMDIuIiwicHJveHkiOiIxMjM0NTY3ODkwMSIsInRyYW5zYWN0aW9uSWRlbnRpZmljYXRpb24iOiJFMDAwMzgxNjYyMDE5MDcyNjE1NTl5Nmo2IiwiaWJnZVRvd25Db2RlIjoiNTMwMDEwOCJ9LCJhdWQiOiJodHRwczovL29wdXMtc29mdHdhcmUuY29tLmJyIiwiaXNzIjoiNTc2MGU5ZTMtYjZjMS00YjAzLTgyNzYtMzhmNDEzNDRiMDA2IiwianRpIjoiMDVjZjc0MGItNGQ1My00NzAyLThjMzItN2M1YjNhYjYxNDAwIiwiaWF0IjoxNjMxNzIzMjgyfQ.KW9ouCs4VHOvI5roJ_v3tBdStPBY3S-_Yj1gVWGcAijq1V7rw9aO2YCQBu-dtoMYq0OiHMjxePOjKq7clFrhaMe5TAHfW8iDVhkKXIjzHhU56fDgjNbYZv5R-0BzgD5T4rZEPNaSof6ihlLtcu15BoWRP5o9TCRQyZSP1ZTtYCRd_YfX3uFR40tqfl--ZJOc1O-xOPbzxKUU_9ESLeBg7nQamKem7voH191h1d63DIO3oyXil7dw15x07CnWUdkcHpMO4KWPn1vusBSvfpf8NjBC9VJhKnlKLHlxouZtd9x4YpWE_2jfrk9ywScIFqMLca6jqmG6lQ1KSTTJ_XJHGA",
 							"options": {
 								"raw": {
-									"language": "json"
+									"language": "text"
 								}
 							}
 						},
@@ -70,17 +74,33 @@
 						"header": [
 							{
 								"key": "X-Correlation-ID",
-								"value": "74e531c4-06df-4adb-a294-6ff701930599",
+								"value": "{{$guid}}",
 								"type": "text"
 							},
 							{
-								"key": "consent",
-								"value": "{\"id\":\"24b20278-525a-4fa7-884b-2b981eb3afa7\",\"idInstance\":\"d3316136-0533-425d-a988-b945c1ad6b82\",\"tpp\":{\"id\":\"eaf928a8-99b1-44cd-b392-17c581f0485c\",\"name\":\"GuiaBolsa\"},\"idBrand\":\"7ce9177e-542d-4a66-b810-ac2281fbf3ae\",\"externalId\":\"urn:oob-bank:24b20278-525a-4fa7-884b-2b981eb3afa7\",\"type\":\"DATA_SHARING\",\"personDocumentType\":\"CPF\",\"personDocumentNumber\":\"77721813700\",\"shaPersonDocumentNumber\":\"58F22F8540F42DB8BB9D3FFC5A81A370F2236DB16A92C5ECA2BF34C0022F7676\",\"businessDocumentType\":\"CNPJ\",\"businessDocumentNumber\":\"33273542000197\",\"shaBusinessDocumentNumber\":\"754F44BE22C8C3D6A47D928E184EFCF79D57B34E23C13161CDC994276846C4E1\",\"createdOn\":\"2021-01-30T17:32:28Z\",\"expiresOn\":\"2022-01-30T17:31:28Z\",\"transactionFrom\":\"2000-01-01T03:00:00Z\",\"transactionTo\":\"2030-01-01T03:00:00Z\",\"status\":\"AUTHORISED\",\"usageCount\":\"23\",\"lastUsage\":\"2021-05-28T17:43:21Z\",\"updatedOn\":\"2021-02-01T12:32:12Z\",\"permissions\":[\"CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ\"],\"resources\":[{\"id\":\"TXpRMU9UQTROMWhZV2xSU1FUazJSMDl\",\"type\":\"PAYMENT\",\"shaInfo\":\"87BCA615C9EF157618AB9ADEE39430EBFCC017B3B4FE9976B195FE4AB5D33E3D\",\"info\":[{\"key\":\"paymentCode\",\"value\":\"4fcf7297-abfe-4a1f-bd69-f13909f8575e\"},{\"key\":\"paymentOrigin\",\"value\":\"UIuhbg79JUHGjf97kdyhyfg9a2g\"},{\"key\":\"paymentDestination\",\"value\":\"9086ijgIFGpijg87KJG8795t9Gt\"}],\"name\":[{\"key\":\"Cartão de crédito\",\"value\":\"2134 XXXX XXXX 3123\"}],\"status\":\"AVAILABLE\",\"businessDocumentNumber\":\"50685362006773\",\"shaBusinessDocumentNumber\":\"FB42A9C8E1B1878B0AD6E80BAE7936FC5D6548DD02AC490B16EE48EAE08736FB\"}],\"authorizations\":[{\"id\":\"383ae62b-180d-4a7c-abc7-0b5cf189d7f1\",\"personDocumentNumber\":\"25872252137\",\"shaPersonDocumentNumber\":\"C35EDD9B31C2162EAE0550AD7684A6CA7F9B350717607E04F1BED4A359EFCA38\",\"personName\":\"Juan Kaique Cláudio Fernandes\",\"isRequirer\":\"true\",\"status\":\"AUTHORISED\"}]}",
+								"key": "X-Brand-ID",
+								"value": "gfh546u3hey6uet467ie",
 								"type": "text"
+							},
+							{
+								"key": "X-Brand-Name",
+								"value": "OPUS",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/jwt",
+								"type": "text"
+							},
+							{
+								"key": "errorCode",
+								"value": "404",
+								"type": "text",
+								"disabled": true
 							}
 						],
 						"url": {
-							"raw": "{{HostBase}}/payments/v1/pix/payments/87BCA615C9EF157618AB9ADEE39430EBFCC017B3B4FE9976B195FE4AB5D33E3D",
+							"raw": "{{HostBase}}/payments/v1/pix/payments/:paymentId",
 							"host": [
 								"{{HostBase}}"
 							],
@@ -89,7 +109,13 @@
 								"v1",
 								"pix",
 								"payments",
-								"87BCA615C9EF157618AB9ADEE39430EBFCC017B3B4FE9976B195FE4AB5D33E3D"
+								":paymentId"
+							],
+							"variable": [
+								{
+									"key": "paymentId",
+									"value": "EE883F009A81FA6D5CFF5BA549F281CE40342B4A2B0908BD33D7874A861C40E7"
+								}
 							]
 						}
 					},
@@ -98,13 +124,64 @@
 			]
 		}
 	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{OAuth_Token}}",
+				"type": "string"
+			}
+		]
+	},
 	"event": [
 		{
 			"listen": "prerequest",
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					""
+					"// Refresh the OAuth token if necessary",
+					"var tokenDate = new Date(2021,1,1);",
+					"var tokenTimestamp = pm.collectionVariables.get(\"OAuth_Timestamp\");",
+					"if(tokenTimestamp){",
+					"  tokenDate = Date.parse(tokenTimestamp);",
+					"}",
+					"var expiresInTime = pm.collectionVariables.get(\"OAuth_ExpiresInTime\");",
+					"if( !expiresInTime){",
+					"    expiresInTime = 300000; // Set default expiration time to 5 minutes",
+					"}",
+					"if((new Date() - tokenDate) >= expiresInTime) ",
+					"{",
+					"   var uuid = require('uuid');",
+					"   var myUUID = uuid.v4();",
+					"",
+					"   pm.sendRequest({",
+					"      url:  pm.collectionVariables.get(\"TokenEndpoint\"), ",
+					"      method: 'POST',",
+					"      header: {",
+					"        'Accept': 'application/json',",
+					"        'Content-Type': 'application/x-www-form-urlencoded',",
+					"      },",
+					"      body: {",
+					"          mode: 'urlencoded',",
+					"          urlencoded: [",
+					"              {key: \"grant_type\", value: \"client_credentials\", disabled: false},",
+					"              {key: \"client_id\", value: pm.collectionVariables.get(\"TokenClientId\"), disabled: false},",
+					"              {key: \"client_secret\", value: pm.collectionVariables.get(\"TokenClientSecret\"), disabled: false},",
+					"              {key: \"scope\", value: pm.collectionVariables.get(\"TokenScope\") + myUUID, disabled: false}",
+					"          ]",
+					"      }",
+					"  }, function (err, res) {",
+					"        pm.collectionVariables.set(\"OAuth_Token\", res.json().access_token);",
+					"        pm.collectionVariables.set(\"OAuth_Timestamp\", new Date());",
+					"        ",
+					"        // Set the ExpiresInTime variable to the time given in the response if it exists",
+					"        if(res.json().expires_in){",
+					"            expiresInTime = res.json().expires_in * 1000;",
+					"        }",
+					"        pm.collectionVariables.set(\"OAuth_ExpiresInTime\", expiresInTime);",
+					"  });",
+					"}"
 				]
 			}
 		},
@@ -122,6 +199,34 @@
 		{
 			"key": "HostBase",
 			"value": "http://localhost:8080/open-banking"
+		},
+		{
+			"key": "TokenEndpoint",
+			"value": "https://obb.qa.oob.opus-software.com.br/auth/token"
+		},
+		{
+			"key": "TokenClientId",
+			"value": "as_client_test"
+		},
+		{
+			"key": "TokenClientSecret",
+			"value": "as_client_test"
+		},
+		{
+			"key": "TokenScope",
+			"value": "payments consent:urn:amazingbank:"
+		},
+		{
+			"key": "OAuth_Timestamp",
+			"value": ""
+		},
+		{
+			"key": "OAuth_ExpiresInTime",
+			"value": ""
+		},
+		{
+			"key": "OAuth_Token",
+			"value": ""
 		}
 	]
 }
