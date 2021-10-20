@@ -35,7 +35,7 @@ Abaixo temos a lista de features suportadas pelo Opus Open Banking:
 | core           | Funções básicas e obrigatórias do Opus Open Banking                                  |
 | open-data      | Compartilhamento de dados abertos (Fase 1 do Open Banking Brasil)                    |
 | financial-data | Compartilhamento de dados que requerem consentimento (Fase 2 do Open Banking Brasil) |
-| payments       | Pagamentos (Fase 3 do Open Banking Brasil)                    |
+| payments       | Pagamentos (Fase 3 do Open Banking Brasil)                                           |
 
 ### Features x Scopes
 
