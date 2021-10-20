@@ -20,22 +20,30 @@ Ex: `cbanco`
 
 ## Suporte a features do Opus Open Banking
 
-Com o objetivo de otimizar o uso de recursos, monitorar e expor endpoints suportados pela instituição, implementamos o suporte a features.
+Com o objetivo de otimizar o uso de recursos, monitorar e expor endpoints
+suportados pela instituição, implementamos o suporte a features.
 
-Todos os endpoints que são expostos no Kong estão obrigatoriamente atrelados a uma feature.
+Todos os endpoints que são expostos no Kong estão obrigatoriamente atrelados a
+uma feature.
 
-## Features suportadas
+### Features suportadas
 
-- core
-- open-data
-- financial-data
-- payments
+Abaixo temos a lista de features suportadas pelo Opus Open Banking:
 
-## Features x Scopes
+| Feature        | Descrição                                                                            |
+| -------------- | ------------------------------------------------------------------------------------ |
+| core           | Funções básicas e obrigatórias do Opus Open Banking                                  |
+| open-data      | Compartilhamento de dados abertos (Fase 1 do Open Banking Brasil)                    |
+| financial-data | Compartilhamento de dados que requerem consentimento (Fase 2 do Open Banking Brasil) |
+| payments       | Pagamentos do Open Banking Brasil (Fase 3 do Open Banking Brasil)                    |
 
-|   Feature    |   Scopes    |
-|  ---  |  ---  |
-|   core   |   openid, oob_customer, oob_consents:read, oob_opendata:read, oob_opendata:write, oob_outages:read, oob_outages:write, profile, offline_access   |
-|  open-data    |  openid  |
-|  financial-data  |   openid, accounts, credit-cards-accounts, customers, invoice-financings, financings, loans, unarranged-accounts-overdraft, resources  |
-|  payments   |  openid, payments, consents, resources  |
+### Features x Scopes
+
+Cada feature definida na tabela acima suporta os seguintes escopos:
+
+| Feature        | Scopes                                                                                                                                       |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| core           | openid, oob_customer, oob_consents:read, oob_opendata:read, oob_opendata:write, oob_outages:read, oob_outages:write, profile, offline_access |
+| open-data      | openid                                                                                                                                       |
+| financial-data | openid, accounts, credit-cards-accounts, customers, invoice-financings, financings, loans, unarranged-accounts-overdraft, resources          |
+| payments       | openid, payments, consents, resources                                                                                                        |

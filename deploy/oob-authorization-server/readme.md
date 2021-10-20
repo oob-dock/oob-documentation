@@ -238,9 +238,10 @@ Ex: `https://marca.com.br/logo.svg`
 
 ### features
 
-Quais [features](../shared-definitions.md) são suportadas pela instalação. Como explicado neste link, cada feature configurada fará com que o AS aceite a emissão de tokens para determinados conjuntos de scopes.
+Indica as [features](../shared-definitions.md) suportadas pela instalação,
+fazendo uma restrição de segurança aos serviços Open Banking suportados nas features.
 
-Se durante o processo de DCR o novo client pedir em seu cadastro o suporte à scope(s) que não estão configurados para serem aceitos pelo AS em sua instalação ele receberá um erro.
+**Ex:**
 
 ```yaml
 features: "core,open-data,financial-data,payments"
@@ -278,7 +279,9 @@ additionalVars:
 
 ### AUTH_JWT_JTI_VALIDATION
 
-Define se o processo de autenticação definido na integração [APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do `jti` informado no payload durante o request.
+Define se o processo de autenticação definido na integração
+[APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do 
+`jti` informado no payload durante o request.
 
 **Formato:** `0` ou `1`
 
@@ -335,9 +338,9 @@ Configuração dos headers onde o certificado utilizado pelo cliente no mTLS é
 enviado para a aplicação. Essa configuração pode ser omitida caso os headers
 padrão sejam utilizados (X-SSL-*)
 
-- SSL_CLIENT_HEADER_NAME
-- SSL_CLIENT_VERIFY_HEADER_NAME
-- SSL_CLIENT_CERT_HEADER_NAME
+* SSL_CLIENT_HEADER_NAME
+* SSL_CLIENT_VERIFY_HEADER_NAME
+* SSL_CLIENT_CERT_HEADER_NAME
 
 **Ex:**
 
