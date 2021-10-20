@@ -219,11 +219,11 @@ Valor default: `0`
 URL que o cliente será redirecionado caso não haja suporte `web` na configuração
 `consent.channels`.
 
-### brand.id
+#### brand.id
 
 Vide a [definição](../shared-definitions.md#brand-id)
 
-### brand.name
+#### brand.name
 
 Nome da marca. Essa variável será utilizada para mostrar o nome da marca na tela
 de redirecionamento do cliente durante o uso do fluxo web, e também é retornada na
@@ -235,6 +235,16 @@ URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento
 do consentimento.
 
 Ex: `https://marca.com.br/logo.svg`
+
+### features
+
+Quais [features](../shared-definitions.md) são suportadas pela instalação. Como explicado neste link, cada feature configurada fará com que o AS aceite a emissão de tokens para determinados conjuntos de scopes.
+
+Se durante o processo de DCR o novo client pedir em seu cadastro o suporte à scope(s) que não estão configurados para serem aceitos pelo AS em sua instalação ele receberá um erro.
+
+```yaml
+features: "core,open-data,financial-data,payments"
+```
 
 ## additionalVars
 
