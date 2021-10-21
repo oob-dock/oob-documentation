@@ -219,11 +219,11 @@ Valor default: `0`
 URL que o cliente será redirecionado caso não haja suporte `web` na configuração
 `consent.channels`.
 
-### brand.id
+#### brand.id
 
 Vide a [definição](../shared-definitions.md#brand-id)
 
-### brand.name
+#### brand.name
 
 Nome da marca. Essa variável será utilizada para mostrar o nome da marca na tela
 de redirecionamento do cliente durante o uso do fluxo web, e também é retornada na
@@ -235,6 +235,17 @@ URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento
 do consentimento.
 
 Ex: `https://marca.com.br/logo.svg`
+
+### features
+
+Indica as [features](../shared-definitions.md) suportadas pela instalação,
+fazendo uma restrição de segurança aos serviços Open Banking suportados nas features.
+
+**Ex:**
+
+```yaml
+features: "core,open-data,financial-data,payments"
+```
 
 ## additionalVars
 
@@ -268,7 +279,9 @@ additionalVars:
 
 ### AUTH_JWT_JTI_VALIDATION
 
-Define se o processo de autenticação definido na integração [APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do `jti` informado no payload durante o request.
+Define se o processo de autenticação definido na integração
+[APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do 
+`jti` informado no payload durante o request.
 
 **Formato:** `0` ou `1`
 
@@ -325,9 +338,9 @@ Configuração dos headers onde o certificado utilizado pelo cliente no mTLS é
 enviado para a aplicação. Essa configuração pode ser omitida caso os headers
 padrão sejam utilizados (X-SSL-*)
 
-- SSL_CLIENT_HEADER_NAME
-- SSL_CLIENT_VERIFY_HEADER_NAME
-- SSL_CLIENT_CERT_HEADER_NAME
+* SSL_CLIENT_HEADER_NAME
+* SSL_CLIENT_VERIFY_HEADER_NAME
+* SSL_CLIENT_CERT_HEADER_NAME
 
 **Ex:**
 
