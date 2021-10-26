@@ -342,7 +342,7 @@ Para definir os parâmetros pré-estabelecidos pelo OBB, são utilizadas variáv
 | VALIDATOR_CYCLE2_SPECIALDAYS_END | Horário de encerramento do serviço para os dias da semana definidos no ciclo 2| ```"235959"```|
 | VALIDATOR_CYCLE3_DAY1 | Data de início do ciclo 3 | ```"20211201"``` |
 | VALIDATOR_CYCLE3_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 3 | ```"MANU,DICT,INIC,QRDN,QRES"``` |
-| VALIDATOR_CYCLE3_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 3 | ```[]``` |
+| VALIDATOR_CYCLE3_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 3 | ```DISABLED``` |
 | VALIDATOR_CYCLE3_CUSTOMDAYS | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 3 | ```ENABLED```|
 | VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 3 | ```"Mon,Tue,Wed"```|
 | VALIDATOR_CYCLE3_WORKINGDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 3 | ```"080000"```|
@@ -354,7 +354,7 @@ Para definir os parâmetros pré-estabelecidos pelo OBB, são utilizadas variáv
 | VALIDATOR_CYCLE4_DAY1| Data de início do ciclo 4 | ```"20211201"``` |
 | VALIDATOR_CYCLE4_FINALDAY | Tipos de iniciação de pagamentos disponíveis no ciclo 4 | ```"20220217"``` |
 | VALIDATOR_CYCLE4_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 4 | ```"MANU,DICT,INIC,QRDN,QRES"``` |
-| VALIDATOR_CYCLE4_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 4 | ```[]``` |
+| VALIDATOR_CYCLE4_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 4 | ```DISABLED``` |
 | VALIDATOR_CYCLE4_CUSTOMDAYS | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 4 | ```DISABLED```|
 | VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 4 | ```DISABLED```|
 | VALIDATOR_CYCLE4_WORKINGDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 4 | ```DISABLED```|
