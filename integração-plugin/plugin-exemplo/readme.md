@@ -100,7 +100,7 @@ Para executar as chamadas utilizaremos a collection no Postman contida no arquiv
 
 ![Estender Imagem - Postman GET payment](./images/postman-get-payment.png)
 
-Para decodificar o corpo da requisição e da resposta é utilizada a plataforma [jwt.io] e configurar o algoritmo para **PS256**.
+Para decodificar os corpos da requisição e da resposta é utilizada a plataforma [jwt.io]. Configurar o algoritmo para **PS256**.
 
 Requisição do POST:
 

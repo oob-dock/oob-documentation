@@ -140,48 +140,7 @@
 			"script": {
 				"type": "text/javascript",
 				"exec": [
-					"// Refresh the OAuth token if necessary",
-					"var tokenDate = new Date(2021,1,1);",
-					"var tokenTimestamp = pm.collectionVariables.get(\"OAuth_Timestamp\");",
-					"if(tokenTimestamp){",
-					"  tokenDate = Date.parse(tokenTimestamp);",
-					"}",
-					"var expiresInTime = pm.collectionVariables.get(\"OAuth_ExpiresInTime\");",
-					"if( !expiresInTime){",
-					"    expiresInTime = 300000; // Set default expiration time to 5 minutes",
-					"}",
-					"if((new Date() - tokenDate) >= expiresInTime) ",
-					"{",
-					"   var uuid = require('uuid');",
-					"   var myUUID = uuid.v4();",
-					"",
-					"   pm.sendRequest({",
-					"      url:  pm.collectionVariables.get(\"TokenEndpoint\"), ",
-					"      method: 'POST',",
-					"      header: {",
-					"        'Accept': 'application/json',",
-					"        'Content-Type': 'application/x-www-form-urlencoded',",
-					"      },",
-					"      body: {",
-					"          mode: 'urlencoded',",
-					"          urlencoded: [",
-					"              {key: \"grant_type\", value: \"client_credentials\", disabled: false},",
-					"              {key: \"client_id\", value: pm.collectionVariables.get(\"TokenClientId\"), disabled: false},",
-					"              {key: \"client_secret\", value: pm.collectionVariables.get(\"TokenClientSecret\"), disabled: false},",
-					"              {key: \"scope\", value: pm.collectionVariables.get(\"TokenScope\") + myUUID, disabled: false}",
-					"          ]",
-					"      }",
-					"  }, function (err, res) {",
-					"        pm.collectionVariables.set(\"OAuth_Token\", res.json().access_token);",
-					"        pm.collectionVariables.set(\"OAuth_Timestamp\", new Date());",
-					"        ",
-					"        // Set the ExpiresInTime variable to the time given in the response if it exists",
-					"        if(res.json().expires_in){",
-					"            expiresInTime = res.json().expires_in * 1000;",
-					"        }",
-					"        pm.collectionVariables.set(\"OAuth_ExpiresInTime\", expiresInTime);",
-					"  });",
-					"}"
+					""
 				]
 			}
 		},
@@ -202,15 +161,15 @@
 		},
 		{
 			"key": "TokenEndpoint",
-			"value": "https://obb.qa.oob.opus-software.com.br/auth/token"
+			"value": ""
 		},
 		{
 			"key": "TokenClientId",
-			"value": "as_client_test"
+			"value": ""
 		},
 		{
 			"key": "TokenClientSecret",
-			"value": "as_client_test"
+			"value": ""
 		},
 		{
 			"key": "TokenScope",
