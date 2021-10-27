@@ -28,19 +28,13 @@
 							},
 							{
 								"key": "X-Brand-ID",
-								"value": "opus",
+								"value": "cbanco",
 								"type": "text"
 							},
 							{
 								"key": "Content-Type",
 								"value": "application/jwt",
 								"type": "text"
-							},
-							{
-								"key": "errorCode",
-								"value": "403",
-								"type": "text",
-								"disabled": true
 							}
 						],
 						"body": {
@@ -79,24 +73,13 @@
 							},
 							{
 								"key": "X-Brand-ID",
-								"value": "gfh546u3hey6uet467ie",
-								"type": "text"
-							},
-							{
-								"key": "X-Brand-Name",
-								"value": "OPUS",
+								"value": "cbanco",
 								"type": "text"
 							},
 							{
 								"key": "Content-Type",
 								"value": "application/jwt",
 								"type": "text"
-							},
-							{
-								"key": "errorCode",
-								"value": "404",
-								"type": "text",
-								"disabled": true
 							}
 						],
 						"url": {
