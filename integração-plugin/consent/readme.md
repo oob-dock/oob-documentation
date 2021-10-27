@@ -11,6 +11,15 @@
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
+    - [Arquivo de rota implementado pela OPUS](#arquivo-de-rota-implementado-pela-opus)
+    - [Alteração dos valores padrões das variáveis de ambiente](#alteração-dos-valores-padrões-das-variáveis-de-ambiente)
+      - [Regras de preenchimento para a alteração do validador de dia de início do ciclo](#regras-de-preenchimento-para-a-alteração-do-validador-de-dia-de-início-do-ciclo)
+      - [Regras de preenchimento para a alteração do validador de valor máximo de pagamento](#regras-de-preenchimento-para-a-alteração-do-validador-de-valor-máximo-de-pagamento)
+      - [Regras de preenchimento para a alteração do validador de lista de CPF/CNPJ dos usuários autorizados](#regras-de-preenchimento-para-a-alteração-do-validador-de-lista-de-cpfcnpj-dos-usuários-autorizados)
+      - [Regras de preenchimento para a alteração do validador de dia da semana e horário de funcionamento](#regras-de-preenchimento-para-a-alteração-do-validador-de-dia-da-semana-e-horário-de-funcionamento)
+      - [Regras de preenchimento para a alteração do validador de iniciação de transação de pagamentos do arranjo PIX do ciclo](#regras-de-preenchimento-para-a-alteração-do-validador-de-iniciação-de-transação-de-pagamentos-do-arranjo-pix-do-ciclo)
+    - [Serviços auxiliares](#serviços-auxiliares)
+    - [Criação de arquivo de rota customizada](#criação-de-arquivo-de-rota-customizada)
 
 ## Discovery de recursos no Opus Open Banking
 
@@ -251,12 +260,14 @@ O retorno desses pontos de integração devem ser:
   erro de rede ou um sistema inoperante.
 
 A tabela a seguir corresponde aos schemas do Request e do Response do conector:
-| Tipo     | JSON Schema                                                                                                              |
-| -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Request  | [approvePaymentConsent-request.json](../schemas/v2/consent/approvePaymentConsentCreation/request-schema.json)                               |
+
+| Tipo     | JSON Schema                                                                                                     |
+| -------- | --------------------------------------------------------------------------------------------------------------- |
+| Request  | [approvePaymentConsent-request.json](../schemas/v2/consent/approvePaymentConsentCreation/request-schema.json)   |
 | Response | [approvePaymentConsent-response.json](../schemas/v2/consent/approvePaymentConsentCreation/response-schema.json) |
 
 Exemplo de Request:
+
 ```json
 {
     "requestBody": {
@@ -306,169 +317,192 @@ Exemplo de Request:
     }
 }
 ```
-### Arquivo de rota implementado pela OPUS
-A OPUS já fornece um arquivo da rota approvePaymentConsentCreation com as regras padrões definidas pelo próprio [Open Banking Brasil - OBB](https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=171). Para utilizá-lo, basta configurar a variável de ambiente camel.main.routes-include-pattern durante a criação do container, indicando o diretório onde o arquivo arquivo se encontra: specs/approvePaymentConsentCreation-routes.xml.
 
-Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota approvePaymentConsentCreation criado pela OPUS:
+### Arquivo de rota implementado pela OPUS
+
+A OPUS já fornece um arquivo da rota approvePaymentConsentCreation com as regras
+padrões definidas pelo próprio [Open Banking Brasil - OBB](https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=171).
+Para utilizá-lo, basta configurar a variável de ambiente `camel.main.routes-include-pattern`
+durante a criação do container, indicando o diretório onde o arquivo arquivo se
+encontra: `specs/approvePaymentConsentCreation-routes.xml`.
+
+Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota
+`approvePaymentConsentCreation` criado pela OPUS:
 
 ```dockerfile
 ARG approvePaymentRoute=file:/specs/approvePaymentConsentCreation-routes.xml
 ENV camel.main.routes-include-pattern=$approvePaymentRoute
 ```
 
-Para definir os parâmetros pré-estabelecidos pelo OBB, são utilizadas variáveis de ambiente cujos valores padrões foram definidos de acordo com as regras estabelecidas pelo OBB.
-| Nome da variável | Definição | Valor default |
-| ---------------- | --------- | ------------- |
-| VALIDATOR_CYCLE1_PAYMENTS_MAX_AMOUNT | Valor máximo de transferência de pagamento no ciclo 1 | ```"1000.00"``` |
-| VALIDATOR_CYCLE1_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 1 | ```"MANU,DICT,INIC"``` |
-| VALIDATOR_CYCLE1_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 1 |```[]``` |
-| VALIDATOR_CYCLE1_CUSTOMDAYS| Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 1 | ```ENABLED```|
-| VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 1| ```"Mon,Tue,Wed,Thu,Fri"```|
-| VALIDATOR_CYCLE1_WORKINGDAYS_START| Horário de início do serviço para os dias da semana definidos no ciclo 1 | ```"080000"```|
-| VALIDATOR_CYCLE1_WORKINGDAYS_END| Horário de encerramento do serviço para os dias da semana definidos no ciclo 1 | ```"200000"```|
-| VALIDATOR_CYCLE1_SPECIALDAYS_WEEKDAYS| Dias da semana em que o serviço se encontra disponível no ciclo 1 | ```DISABLED```|
-| VALIDATOR_CYCLE1_SPECIALDAYS_START| Horário de início do serviço para os dias da semana definidos no ciclo 1 | ```DISABLED```|
-| VALIDATOR_CYCLE1_SPECIALDAYS_END| Horário de encerramento do serviço para os dias da semana definidos no ciclo 1 |```DISABLED```|
-| VALIDATOR_CYCLE2_PAYMENTS_MAX_AMOUNT | Valor máximo de transferência de pagamento no ciclo 2 | ```"1000.00"``` |
-| VALIDATOR_CYCLE2_DAY1 | Data de início do ciclo 2 | ```"20211115"``` |
-| VALIDATOR_CYCLE2_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 2 | ```"MANU,DICT,INIC"``` |
-| VALIDATOR_CYCLE2_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 2 | ```[]``` |
-| VALIDATOR_CYCLE2_CUSTOMDAYS | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 2 | ```ENABLED```|
-| VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 2 | ```"Mon,Tue,Wed,qua"```|
-| VALIDATOR_CYCLE2_WORKINGDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 2 |```"080000"```|
-| VALIDATOR_CYCLE2_WORKINGDAYS_END | Horário de encerramento do serviço para os dias da semana definidos no ciclo 2 |```"200000"```|
-| VALIDATOR_CYCLE2_SPECIALDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 2 |```"Thu,Fri"```|
-| VALIDATOR_CYCLE2_SPECIALDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 2 | ```"000000"```|
-| VALIDATOR_CYCLE2_SPECIALDAYS_END | Horário de encerramento do serviço para os dias da semana definidos no ciclo 2| ```"235959"```|
-| VALIDATOR_CYCLE3_DAY1 | Data de início do ciclo 3 | ```"20211201"``` |
-| VALIDATOR_CYCLE3_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 3 | ```"MANU,DICT,INIC,QRDN,QRES"``` |
-| VALIDATOR_CYCLE3_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 3 | ```DISABLED``` |
-| VALIDATOR_CYCLE3_CUSTOMDAYS | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 3 | ```ENABLED```|
-| VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 3 | ```"Mon,Tue,Wed"```|
-| VALIDATOR_CYCLE3_WORKINGDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 3 | ```"080000"```|
-| VALIDATOR_CYCLE3_WORKINGDAYS_END | Horário de encerramento do serviço para os dias da semana definidos no ciclo 3 | ```"200000"```|
-| VALIDATOR_CYCLE3_SPECIALDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 3 | ```"Thu,Fri"```|
-| VALIDATOR_CYCLE3_SPECIALDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 3 | ```"000000"```|
-| VALIDATOR_CYCLE3_SPECIALDAYS_END | Horário de encerramento do serviço para os dias da semana definidos no ciclo 3| ```"235959"```|
-| VALIDATOR_CYCLE3_PAYMENTS_MAX_AMOUNT | Valor máximo de transferência de pagamento no ciclo 3 | ```"1000.00"``` |
-| VALIDATOR_CYCLE4_DAY1| Data de início do ciclo 4 | ```"20211201"``` |
-| VALIDATOR_CYCLE4_FINALDAY | Tipos de iniciação de pagamentos disponíveis no ciclo 4 | ```"20220217"``` |
-| VALIDATOR_CYCLE4_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 4 | ```"MANU,DICT,INIC,QRDN,QRES"``` |
-| VALIDATOR_CYCLE4_CPF | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 4 | ```DISABLED``` |
-| VALIDATOR_CYCLE4_CUSTOMDAYS | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 4 | ```DISABLED```|
-| VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 4 | ```DISABLED```|
-| VALIDATOR_CYCLE4_WORKINGDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 4 | ```DISABLED```|
-| VALIDATOR_CYCLE4_WORKINGDAYS_END | Horário de encerramento do serviço para os dias da semana definidos no ciclo 4 | ```DISABLED```|
-| VALIDATOR_CYCLE4_SPECIALDAYS_WEEKDAYS | Dias da semana em que o serviço se encontra disponível no ciclo 4 | ```DISABLED```|
-| VALIDATOR_CYCLE4_SPECIALDAYS_START | Horário de início do serviço para os dias da semana definidos no ciclo 4 | ```DISABLED```|
-| VALIDATOR_CYCLE4_SPECIALDAYS_END | Horário de encerramento do serviço para os dias da semana definidos no ciclo 4 |```DISABLED```|
-| VALIDATOR_CYCLE4_PAYMENTS_MAX_AMOUNT | Valor máximo de transferência de pagamento no ciclo 4 | ```DISABLED``` |
+Para definir os parâmetros pré-estabelecidos pelo OBB, são utilizadas variáveis
+de ambiente cujos valores padrões foram definidos de acordo com as regras
+estabelecidas pelo OBB.
+
+| Nome da variável                          | Definição                                                                                             | Valor default                    |
+| ----------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------- |
+| VALIDATOR_CYCLE1_PAYMENTS_MAX_AMOUNT      | Valor máximo de transferência de pagamento no ciclo 1                                                 | ```"1000.00"```                  |
+| VALIDATOR_CYCLE1_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 1                                               | ```"MANU,DICT,INIC"```           |
+| VALIDATOR_CYCLE1_CPF                      | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 1                                   | ```[]```                         |
+| VALIDATOR_CYCLE1_CUSTOMDAYS               | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 1 | ```ENABLED```                    |
+| VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 1                                     | ```"Mon,Tue,Wed,Thu,Fri"```      |
+| VALIDATOR_CYCLE1_WORKINGDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 1                              | ```"080000"```                   |
+| VALIDATOR_CYCLE1_WORKINGDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 1                        | ```"200000"```                   |
+| VALIDATOR_CYCLE1_SPECIALDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 1                                     | ```DISABLED```                   |
+| VALIDATOR_CYCLE1_SPECIALDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 1                              | ```DISABLED```                   |
+| VALIDATOR_CYCLE1_SPECIALDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 1                        | ```DISABLED```                   |
+| VALIDATOR_CYCLE2_PAYMENTS_MAX_AMOUNT      | Valor máximo de transferência de pagamento no ciclo 2                                                 | ```"1000.00"```                  |
+| VALIDATOR_CYCLE2_DAY1                     | Data de início do ciclo 2                                                                             | ```"20211115"```                 |
+| VALIDATOR_CYCLE2_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 2                                               | ```"MANU,DICT,INIC"```           |
+| VALIDATOR_CYCLE2_CPF                      | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 2                                   | ```[]```                         |
+| VALIDATOR_CYCLE2_CUSTOMDAYS               | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 2 | ```ENABLED```                    |
+| VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 2                                     | ```"Mon,Tue,Wed,qua"```          |
+| VALIDATOR_CYCLE2_WORKINGDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 2                              | ```"080000"```                   |
+| VALIDATOR_CYCLE2_WORKINGDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 2                        | ```"200000"```                   |
+| VALIDATOR_CYCLE2_SPECIALDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 2                                     | ```"Thu,Fri"```                  |
+| VALIDATOR_CYCLE2_SPECIALDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 2                              | ```"000000"```                   |
+| VALIDATOR_CYCLE2_SPECIALDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 2                        | ```"235959"```                   |
+| VALIDATOR_CYCLE3_DAY1                     | Data de início do ciclo 3                                                                             | ```"20211201"```                 |
+| VALIDATOR_CYCLE3_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 3                                               | ```"MANU,DICT,INIC,QRDN,QRES"``` |
+| VALIDATOR_CYCLE3_CPF                      | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 3                                   | ```DISABLED```                   |
+| VALIDATOR_CYCLE3_CUSTOMDAYS               | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 3 | ```ENABLED```                    |
+| VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 3                                     | ```"Mon,Tue,Wed"```              |
+| VALIDATOR_CYCLE3_WORKINGDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 3                              | ```"080000"```                   |
+| VALIDATOR_CYCLE3_WORKINGDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 3                        | ```"200000"```                   |
+| VALIDATOR_CYCLE3_SPECIALDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 3                                     | ```"Thu,Fri"```                  |
+| VALIDATOR_CYCLE3_SPECIALDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 3                              | ```"000000"```                   |
+| VALIDATOR_CYCLE3_SPECIALDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 3                        | ```"235959"```                   |
+| VALIDATOR_CYCLE3_PAYMENTS_MAX_AMOUNT      | Valor máximo de transferência de pagamento no ciclo 3                                                 | ```"1000.00"```                  |
+| VALIDATOR_CYCLE4_DAY1                     | Data de início do ciclo 4                                                                             | ```"20211201"```                 |
+| VALIDATOR_CYCLE4_FINALDAY                 | Tipos de iniciação de pagamentos disponíveis no ciclo 4                                               | ```"20220217"```                 |
+| VALIDATOR_CYCLE4_PAYMENTS_LOCALINSTRUMENT | Tipos de iniciação de pagamentos disponíveis no ciclo 4                                               | ```"MANU,DICT,INIC,QRDN,QRES"``` |
+| VALIDATOR_CYCLE4_CPF                      | CPF/CNPJ dos usuário permitidos a iniciarem um pagamento no ciclo 4                                   | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_CUSTOMDAYS               | Parâmetro que indica se há configuração de dia da semana e de horário de funcionamento para o ciclo 4 | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 4                                     | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_WORKINGDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 4                              | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_WORKINGDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 4                        | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_SPECIALDAYS_WEEKDAYS     | Dias da semana em que o serviço se encontra disponível no ciclo 4                                     | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_SPECIALDAYS_START        | Horário de início do serviço para os dias da semana definidos no ciclo 4                              | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_SPECIALDAYS_END          | Horário de encerramento do serviço para os dias da semana definidos no ciclo 4                        | ```DISABLED```                   |
+| VALIDATOR_CYCLE4_PAYMENTS_MAX_AMOUNT      | Valor máximo de transferência de pagamento no ciclo 4                                                 | ```DISABLED```                   |
 
 ### Alteração dos valores padrões das variáveis de ambiente
-É possível alterar os valores dos parâmetros da tabela acima, definindo no `Dockerfile` seus valores durante a criação do container.
 
-Exemplo de alteração do valor máximo de pagamento e dos dias da semana em que o serviço de pagamento está disponível durante o ciclo 1  - R$1000,00 para R$500,00 e todos os dias úteis da semana para apenas quarta, quinta e sexta-feira:
+É possível alterar os valores dos parâmetros da tabela acima, definindo as variáveis
+de ambiente como uma variável de ambiente opcional (additionalVars) na instalação
+do helm chart.
 
-```dockerfile
-ENV VALIDATOR_CYCLE1_PAYMENTS_MAXAMOUNT=500.00
-ENV VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS="Wed,Thu,Fri"
-```
+#### Regras de preenchimento para a alteração do validador de dia de início do ciclo
 
-**Regras de preenchimento para a alteração do validador de dia de início do ciclo**
+**Obs:** Como durante o ciclo 1 apenas os usuários pré-selecionados pela instituição
+terão acesso ao serviço, foi definido que não haverá uma data de início para o
+ciclo 1, sendo que sua última data corresponde ao dia antes do início do ciclo 2.
+Dessa forma, será possível que a instituição cliente realize testes sem a necessidade
+de alterar os parâmetros default.
 
-**Obs:** Como durante o ciclo 1 apenas os usuários pré-selecionados pela instituição terão acesso ao serviço, foi definido que não haverá uma data de início para o ciclo 1, sendo que sua última data corresponde ao dia antes do início do ciclo 2. Dessa forma, será possível que a instituição cliente realize testes sem a necessidade de alterar os parâmetros default.
+**Obs 2:** Após o fim do ciclo 4 (VALIDATOR_CYCLE4_FINALDAY), todos os validadores
+serão desativados.
 
-**Obs 2:** Após o fim do ciclo 4 (VALIDATOR_CYCLE4_FINALDAY), todos os validadores serão desativados.
-| Nome da variável | Formatação | Regra | Valores possíveis
-| ---------------- | --------- | ------------- | ----------|
-| VALIDATOR_CYCLE2_DAY1 | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas ' "" '. |["yyyyMMdd"]|
-| VALIDATOR_CYCLE3_DAY1 | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas ' "" '. |["yyyyMMdd"]|
-| VALIDATOR_CYCLE4_DAY1 | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas ' "" '. |["yyyyMMdd"]|
-| VALIDATOR_CYCLE4_FINALDAY | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas ' "" '. |["yyyyMMdd"]|
+| Nome da variável          | Formatação   | Regra                                                                        | Valores possíveis |
+| ------------------------- | ------------ | ---------------------------------------------------------------------------- | ----------------- |
+| VALIDATOR_CYCLE2_DAY1     | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas `""`. | ["yyyyMMdd"]      |
+| VALIDATOR_CYCLE3_DAY1     | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas `""`. | ["yyyyMMdd"]      |
+| VALIDATOR_CYCLE4_DAY1     | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas `""`. | ["yyyyMMdd"]      |
+| VALIDATOR_CYCLE4_FINALDAY | `"yyyyMMdd"` | Parâmetro deve possuir 8 dígitos e eles devem estar entre aspas duplas `""`. | ["yyyyMMdd"]      |
 
-Regra geral: VALIDATOR_CYCLE2_DAY1 < VALIDATOR_CYCLE3_DAY1 < VALIDATOR_CYCLE4_DAY1 < VALIDATOR_CYCLE4_FINALDAY
+Regra geral: VALIDATOR_CYCLE2_DAY1 < VALIDATOR_CYCLE3_DAY1 < VALIDATOR_CYCLE4_DAY1
+< VALIDATOR_CYCLE4_FINALDAY
 
-**Regras de preenchimento para a alteração do validador de valor máximo de pagamento**
-| Nome da variável | Formatação | Regra | Valores possíveis
-| ---------------- | --------- | ------------- | ----------|
-| VALIDATOR_CYCLE1_PAYMENTS_MAX_AMOUNT | ```"DDDDD.DD"``` | Valor > 0, utilizar ponto '.' para a separação entre o inteiro e o decimal e deve estar entre aspas duplas ' "" '. Para desativar o limite do valor de pagamento, definir o parâmetro como DISABLED | ["DDDDDD.DD", DISABLED]
-| VALIDATOR_CYCLE2_PAYMENTS_MAX_AMOUNT | ```"DDDDD.DD"``` | Valor > 0, utilizar ponto '.' para a separação entre o inteiro e o decimal e deve estar entre aspas duplas ' "" '. Para desativar o limite do valor de pagamento, definir o parâmetro como DISABLED | ["DDDDDD.DD", DISABLED]
-| VALIDATOR_CYCLE3_PAYMENTS_MAX_AMOUNT | ```"DDDDD.DD"``` | Valor > 0, utilizar ponto '.' para a separação entre o inteiro e o decimal e deve estar entre aspas duplas ' "" '. Para desativar o limite do valor de pagamento, definir o parâmetro como DISABLED | ["DDDDDD.DD", DISABLED]
+#### Regras de preenchimento para a alteração do validador de valor máximo de pagamento
 
-**Regras de preenchimento para a alteração do validador de lista de CPF/CNPJ dos usuários autorizados**
+| Nome da variável                     | Formatação       | Regra                                                                                                                                                                                             | Valores possíveis       |
+| ------------------------------------ | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------- |
+| VALIDATOR_CYCLE1_PAYMENTS_MAX_AMOUNT | ```"DDDDD.DD"``` | Valor > 0, utilizar ponto `.` para a separação entre o inteiro e o decimal e deve estar entre aspas duplas `""`. Para desativar o limite do valor de pagamento, definir o parâmetro como DISABLED | ["DDDDDD.DD", DISABLED] |
+| VALIDATOR_CYCLE2_PAYMENTS_MAX_AMOUNT | ```"DDDDD.DD"``` | Valor > 0, utilizar ponto `.` para a separação entre o inteiro e o decimal e deve estar entre aspas duplas `""`. Para desativar o limite do valor de pagamento, definir o parâmetro como DISABLED | ["DDDDDD.DD", DISABLED] |
+| VALIDATOR_CYCLE3_PAYMENTS_MAX_AMOUNT | ```"DDDDD.DD"``` | Valor > 0, utilizar ponto `.` para a separação entre o inteiro e o decimal e deve estar entre aspas duplas `""`. Para desativar o limite do valor de pagamento, definir o parâmetro como DISABLED | ["DDDDDD.DD", DISABLED] |
 
-**Obs:** Caso não seja adicionada nenhuma lista de CPF/CNPJ nos ciclos 1 e 2, nenhum usuário terá permissão para acessar o serviço de pagamento por padrão.
-| Nome da variável | Formatação | Regra | Valores possíveis
-| ---------------- | --------- | ------------- | ----------|
-| VALIDATOR_CYCLE1_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED| ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED]|
-| VALIDATOR_CYCLE2_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED| ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED]|
-| VALIDATOR_CYCLE3_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED| ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED]|
-| VALIDATOR_CYCLE4_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED| ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED]|
+#### Regras de preenchimento para a alteração do validador de lista de CPF/CNPJ dos usuários autorizados
 
-**Regras de preenchimento para a alteração do validador de dia da semana e horário de funcionamento**
-| Nome da variável | Formatação | Regra | Valores possíveis
-| ---------------- | --------- | ------------- | ----------|
-|VALIDATOR_CYCLE1_CUSTOMDAYS| `VALOR` | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.|[ENABLED, DISABLED]|
-|VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE1_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE1_WORKINGDAYS_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE1_WORKINGDAYS_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE1_SPECIALDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE1_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE1_SPECIAL_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE1_SPECIAL_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE2_CUSTOMDAYS| `VALOR` | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.|[ENABLED, DISABLED]|
-|VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE2_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE2_WORKINGDAYS_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE2_WORKINGDAYS_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE2_SPECIALDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE2_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE2_SPECIAL_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE2_SPECIAL_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE3_CUSTOMDAYS| `VALOR` | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.|[ENABLED, DISABLED]|
-|VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE3_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE3_WORKINGDAYS_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE3_WORKINGDAYS_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE3_SPECIALDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE3_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE3_SPECIAL_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE3_SPECIAL_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE4_CUSTOMDAYS| `VALOR` | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.|[ENABLED, DISABLED]|
-|VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE4_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE4_WORKINGDAYS_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE4_WORKINGDAYS_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE4_SPECIALDAYS_WEEKDAYS| `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE4_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED|["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE]|
-|VALIDATOR_CYCLE4_SPECIAL_START| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
-|VALIDATOR_CYCLE4_SPECIAL_END| `"hhMMss"` | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas ' "" ', sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também. | ["hhMMss", DISABLED]|
+**Obs:** Caso não seja adicionada nenhuma lista de CPF/CNPJ nos ciclos 1 e 2, nenhum
+usuário terá permissão para acessar o serviço de pagamento por padrão.
 
-**Regras de preenchimento para a alteração do validador de iniciação de transação de pagamentos do arranjo PIX do ciclo**
-| Nome da variável | Formatação | Regra | Valores possíveis
-| ---------------- | --------- | ------------- | ----------|
-|VALIDATOR_CYCLE1_PAYMENTS_LOCALINSTRUMENT|`"MMMM,MMMM"`|A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED]|
-|VALIDATOR_CYCLE2_PAYMENTS_LOCALINSTRUMENT|`"MMMM,MMMM"`|A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED]|
-|VALIDATOR_CYCLE3_PAYMENTS_LOCALINSTRUMENT|`"MMMM,MMMM"`|A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED]|
-|VALIDATOR_CYCLE4_PAYMENTS_LOCALINSTRUMENT|`"MMMM,MMMM"`|A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED]|
+| Nome da variável     | Formatação                         | Regra                                                                                                                                                                                                                | Valores possíveis                        |
+| -------------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| VALIDATOR_CYCLE1_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED | ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED] |
+| VALIDATOR_CYCLE2_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED | ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED] |
+| VALIDATOR_CYCLE3_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED | ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED] |
+| VALIDATOR_CYCLE4_CPF | ```"DDDDDDDDDDD,DDDDDDDDDDDDDD"``` | A lista dos CPF/CNPJ deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Para liberar o serviço para todos os clientes, definir o parâmetro como DISABLED | ["DDDDDDDDDDD,DDDDDDDDDDDDDD", DISABLED] |
+
+#### Regras de preenchimento para a alteração do validador de dia da semana e horário de funcionamento
+
+| Nome da variável                      | Formatação      | Regra                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | Valores possíveis                        |
+| ------------------------------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| VALIDATOR_CYCLE1_CUSTOMDAYS           | `VALOR`         | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.                                                                                                                                                                                                                                                                                                                                                                                                                          | [ENABLED, DISABLED]                      |
+| VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE1_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED                                                                                                                                                                                                                                     | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE1_WORKINGDAYS_START    | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                       | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE1_WORKINGDAYS_END      | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                             | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE1_SPECIALDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE1_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE1_SPECIAL_START        | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE1_SPECIAL_END          | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE1_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE2_CUSTOMDAYS           | `VALOR`         | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.                                                                                                                                                                                                                                                                                                                                                                                                                          | [ENABLED, DISABLED]                      |
+| VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE2_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED                                                                                                                                                                                                                                     | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE2_WORKINGDAYS_START    | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                       | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE2_WORKINGDAYS_END      | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                             | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE2_SPECIALDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE2_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE2_SPECIAL_START        | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE2_SPECIAL_END          | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE2_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE3_CUSTOMDAYS           | `VALOR`         | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.                                                                                                                                                                                                                                                                                                                                                                                                                          | [ENABLED, DISABLED]                      |
+| VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE3_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED                                                                                                                                                                                                                                     | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE3_WORKINGDAYS_START    | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                       | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE3_WORKINGDAYS_END      | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                             | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE3_SPECIALDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE3_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE3_SPECIAL_START        | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE3_SPECIAL_END          | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE3_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE4_CUSTOMDAYS           | `VALOR`         | Para os casos em que há horários de funcionamento distintos entre os dias da semana (ex: padrão do ciclo 1 e 2), parâmetro `deve` ser configurado como ENABLED. Caso contrário (ex: padrão do ciclo 3 e ciclo 4), DISABLED.                                                                                                                                                                                                                                                                                                                                                                                                                          | [ENABLED, DISABLED]                      |
+| VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE4_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED                                                                                                                                                                                                                                     | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE4_WORKINGDAYS_START    | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS seja DISABLED, definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                       | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE4_WORKINGDAYS_END      | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_WORKINGDAYS_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                             | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE4_SPECIALDAYS_WEEKDAYS | `"Hhh,Hhh,Hhh"` | A lista dos dias da semana de funcionamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Este parâmetro foi criado a fim de atender os casos em que há variação de horário de funcionamento entre os dias da semana (ex: ciclo 2 - nas seg, ter e qua funciona das 08:00:00 ~ 20:00:00 e nas qui e sex, 00:00:00 ~ 23:59:59) Caso não tenha nenhuma exceção de dia da semana e/ou de horário de funcionamento, definir o parâmetro como DISABLED. **Obs**: Caso VALIDATOR_CYCLE4_CUSTOMDAYS seja definido como DISABLED, esse parâmetro também `deve` ser preenchido como DISABLED | ["Sun,Mon,Tue,Wed,Thu,Fri,Sat", DISABLE] |
+| VALIDATOR_CYCLE4_SPECIAL_START        | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+| VALIDATOR_CYCLE4_SPECIAL_END          | `"hhMMss"`      | Parâmetro deve possuir seis dígitos e devem estar entre aspas duplas `""`, sendo que "hh" corresponde às horas, "MM" minutos, e "ss" segundos. **Obs**: Caso VALIDATOR_CYCLE4_SPECIAL_WEEKDAYS seja DISABLED, `deve-se` definir este parâmetro como DISABLED também.                                                                                                                                                                                                                                                                                                                                                                                 | ["hhMMss", DISABLED]                     |
+
+#### Regras de preenchimento para a alteração do validador de iniciação de transação de pagamentos do arranjo PIX do ciclo
+
+| Nome da variável                          | Formatação    | Regra                                                                                                                                                                                                                                       | Valores possíveis                      |
+| ----------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| VALIDATOR_CYCLE1_PAYMENTS_LOCALINSTRUMENT | `"MMMM,MMMM"` | A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED] |
+| VALIDATOR_CYCLE2_PAYMENTS_LOCALINSTRUMENT | `"MMMM,MMMM"` | A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED] |
+| VALIDATOR_CYCLE3_PAYMENTS_LOCALINSTRUMENT | `"MMMM,MMMM"` | A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED] |
+| VALIDATOR_CYCLE4_PAYMENTS_LOCALINSTRUMENT | `"MMMM,MMMM"` | A lista dos meios de iniciação de pagamento deve estar entre aspas duplas '"lista"' e entre cada item deve existir apenas uma vírgula ',' sem espaçamento. Caso deseja-se liberar todos os meios de pagamento, definir valor como DISABLED. | ["MANU,DICT,INIC,QRDN,QRES", DISABLED] |
 
 ### Serviços auxiliares
+
 Serviços auxiliares foram criados em Java a fim de facilitar a implementação do conector.
 
 Os serviços e suas respectivas funcionalidades são:
-| Nome do serviço | Descrição | Comando de chamada no arquivo .xml |
-| ---------------- | --------- | ------------- |
-| getDayOfTheWeek | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira) | `${bean:camelUtils.getDayOfTheWeek}`|
+
+| Nome do serviço | Descrição                                                                       | Comando de chamada no arquivo .xml   |
+| --------------- | ------------------------------------------------------------------------------- | ------------------------------------ |
+| getDayOfTheWeek | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira) | `${bean:camelUtils.getDayOfTheWeek}` |
 
 Exemplo de chamada do serviço getDayOfTheWeek:
+
 ```xml
 <setProperty name="currentWeekday">
   <simple>${bean:camelUtils.getDayOfTheWeek}</simple>
 </setProperty>
 ```
 
-
 ### Criação de arquivo de rota customizada
-A solução desenvolvida pela OPUS permite que a instituição parceira construa seu próprio serviço de aprovação de criação de consentimento, apontando para uma base de clientes externa. Neste caso, a instuição deve solicitar à Opus o código fonte do conector.
 
-Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota approvePaymentConsentCreation criado pela instituição parceira:
+A solução desenvolvida pela OPUS permite que a instituição parceira construa seu
+próprio serviço de aprovação de criação de consentimento, apontando para uma base
+de clientes externa. Neste caso, a instuição deve solicitar à Opus o código fonte
+do conector.
+
+Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota
+`approvePaymentConsentCreation` criado pela instituição parceira:
 
 ```dockerfile
 ARG approvePaymentRoute=file:/specs/custom-approvePaymentConsentCreation-routes.xml
 ENV camel.main.routes-include-pattern=$approvePaymentRoute
 ```
-
-
