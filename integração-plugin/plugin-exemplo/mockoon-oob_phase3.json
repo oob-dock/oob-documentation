@@ -1,34 +1,35 @@
 {
-    "source": "mockoon:1.14.1",
+    "source": "mockoon:1.16.0",
     "data": [
         {
             "type": "environment",
             "item": {
-                "uuid": "",
-                "lastMigration": 15,
+                "uuid": "7c012b56-b916-459f-9381-38b4f1bd38d3",
+                "lastMigration": 18,
                 "name": "Mock OOB Phase 3 API",
                 "endpointPrefix": "mockoon",
                 "latency": 0,
                 "port": 3002,
                 "routes": [
                     {
-                        "uuid": "",
+                        "uuid": "f98d7941-5166-44a6-8a39-6b8d1edb3c65",
                         "documentation": "",
                         "method": "post",
-                        "endpoint": "open-banking/payments/v1/paymentsGetPixPaymentsPaymentIdRoute",
+                        "endpoint": "open-banking/payments/v1/paymentsPostPixPaymentsRoute",
                         "responses": [
                             {
-                                "uuid": "",
-                                "body": "{\r\n    \"correlationId\": \"64d0ba85-ea54-4bc7-9c33-f949ce166f63\",\r\n    \"data\": {\r\n        \"paymentId\": {\r\n            \"paymentCode\": \"4fcf7297-abfe-4a1f-bd69-f13909f8575e\",\r\n            \"paymentOrigin\": \"UIuhbg79JUHGjf97kdyhyfg9a2g\",\r\n            \"paymentDestination\": \"9086ijgIFGpijg87KJG8795t9Gt\"\r\n        },\r\n        \"endToEndId\": \"E9040088820210128000800123873170\",\r\n        \"consentId\": \"urn:bancoex:C1DD33123\",\r\n        \"creationDateTime\": \"2020-07-21T08:30:00Z\",\r\n        \"statusUpdateDateTime\": \"2020-07-21T08:30:00Z\",\r\n        \"proxy\": \"12345678901\",\r\n        \"status\": \"PDNG\",\r\n        \"rejectionReason\": \"USER_NOT_YET_ACTIVATED\",\r\n        \"localInstrument\": \"DICT\",\r\n        \"payment\": {\r\n            \"amount\": \"100000.12\",\r\n            \"currency\": \"BRL\"\r\n        },\r\n        \"remittanceInformation\": \"Pagamento da nota RSTO035-002.\",\r\n        \"creditorAccount\": {\r\n            \"ispb\": \"12345678\",\r\n            \"issuer\": \"1774\",\r\n            \"number\": \"1234567890\",\r\n            \"accountType\": \"CACC\"\r\n        }\r\n    }\r\n  }",
+                                "uuid": "ff5547f4-0fc1-4a6a-988d-7c12782296e4",
+                                "body": "{\n  \"correlationId\": \"4fb76224-4c71-4d63-b852-e687ca6e524f\",\n  \"data\": {\n    \"consentId\": \"urn:default-bank:2595cfc0-8f08-4a23-bef1-8976d0e46082\",\n    \"paymentId\": [\n      {\n        \"key\": \"internalPaymentId\",\n        \"value\": \"1234\"\n      }\n    ],\n    \"creationDateTime\": \"2021-05-21T08:30:00Z\",\n    \"statusUpdateDateTime\": \"2021-05-21T08:30:00Z\",\n    \"status\": \"RJCT\",\n    \"localInstrument\": \"DICT\",\n    \"proxy\": \"39079931870\",\n    \"payment\": {\n      \"amount\": \"1.23\",\n      \"currency\": \"BRL\"\n    },\n    \"creditorAccount\": {\n      \"ispb\": \"31872495\",\n      \"number\": \"24400\",\n      \"accountType\": \"CACC\",\n      \"issuer\": \"0001\"\n    },\n    \"cnpjInitiator\": \"00000000000191\",\n    \"rejectionReason\": \"WRONG_AMOUNT\",\n    \"endToEndId\": \"E9040088820210128000800123873170\",\n    \"remittanceInformation\": \"Pagamento da nota XPTO035-002.\",\n    \"transactionIdentification\": \"E00038166201907261559y6j6\",\n    \"ibgeTownCode\": \"4236875\"\n  }\n}",
                                 "latency": 0,
-                                "statusCode": 200,
+                                "statusCode": 201,
                                 "label": "",
                                 "headers": [],
                                 "filePath": "",
                                 "sendFileAsBody": false,
                                 "rules": [],
                                 "rulesOperator": "OR",
-                                "disableTemplating": false
+                                "disableTemplating": false,
+                                "fallbackTo404": false
                             }
                         ],
                         "enabled": true,
@@ -36,14 +37,14 @@
                         "sequentialResponse": false
                     },
                     {
-                        "uuid": "",
+                        "uuid": "76419f86-1c67-40f2-882b-3fedc376cedc",
                         "documentation": "",
-                        "method": "post",
-                        "endpoint": "open-banking/payments/v1/paymentsPostPixPaymentsRoute",
+                        "method": "get",
+                        "endpoint": "open-banking/payments/v1/paymentsGetPixPaymentsPaymentIdRoute",
                         "responses": [
                             {
-                                "uuid": "",
-                                "body": "{\r\n    \"correlationId\": \"64d0ba85-ea54-4bc7-9c33-f949ce166f63\",\r\n    \"data\": {\r\n        \"paymentId\": {\r\n            \"paymentCode\": \"4fcf7297-abfe-4a1f-bd69-f13909f8575e\",\r\n            \"paymentOrigin\": \"UIuhbg79JUHGjf97kdyhyfg9a2g\",\r\n            \"paymentDestination\": \"9086ijgIFGpijg87KJG8795t9Gt\"\r\n        },\r\n        \"endToEndId\": \"E9040088820210128000800123873170\",\r\n        \"consentId\": \"urn:bancoex:C1DD33123\",\r\n        \"creationDateTime\": \"2020-07-21T08:30:00Z\",\r\n        \"statusUpdateDateTime\": \"2020-07-21T08:30:00Z\",\r\n        \"proxy\": \"12345678901\",\r\n        \"status\": \"PDNG\",\r\n        \"rejectionReason\": \"USER_NOT_YET_ACTIVATED\",\r\n        \"localInstrument\": \"DICT\",\r\n        \"payment\": {\r\n            \"amount\": \"100000.12\",\r\n            \"currency\": \"BRL\"\r\n        },\r\n        \"remittanceInformation\": \"Pagamento da nota RSTO035-002.\",\r\n        \"creditorAccount\": {\r\n            \"ispb\": \"12345678\",\r\n            \"issuer\": \"1774\",\r\n            \"number\": \"1234567890\",\r\n            \"accountType\": \"CACC\"\r\n        }\r\n    }\r\n  }",
+                                "uuid": "5b755350-8673-4265-9b88-5330dc32b9f6",
+                                "body": "{\n  \"correlationId\": \"4fb76224-4c71-4d63-b852-e687ca6e524f\",\n  \"data\": {\n    \"consentId\": \"urn:default-bank:2595cfc0-8f08-4a23-bef1-8976d0e46082\",\n    \"paymentId\": [\n      {\n        \"key\": \"internalPaymentId\",\n        \"value\": \"1234\"\n      }\n    ],\n    \"creationDateTime\": \"2021-05-21T08:30:00Z\",\n    \"statusUpdateDateTime\": \"2021-05-21T08:30:00Z\",\n    \"status\": \"RJCT\",\n    \"localInstrument\": \"DICT\",\n    \"proxy\": \"39079931870\",\n    \"payment\": {\n      \"amount\": \"1.23\",\n      \"currency\": \"BRL\"\n    },\n    \"creditorAccount\": {\n      \"ispb\": \"31872495\",\n      \"number\": \"24400\",\n      \"accountType\": \"CACC\",\n      \"issuer\": \"0001\"\n    },\n    \"cnpjInitiator\": \"00000000000191\",\n    \"rejectionReason\": \"WRONG_AMOUNT\",\n    \"endToEndId\": \"E9040088820210128000800123873170\",\n    \"remittanceInformation\": \"Pagamento da nota XPTO035-002.\",\n    \"transactionIdentification\": \"E00038166201907261559y6j6\",\n    \"ibgeTownCode\": \"4236875\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "",
@@ -52,7 +53,8 @@
                                 "sendFileAsBody": false,
                                 "rules": [],
                                 "rulesOperator": "OR",
-                                "disableTemplating": false
+                                "disableTemplating": false,
+                                "fallbackTo404": false
                             }
                         ],
                         "enabled": true,
@@ -82,7 +84,8 @@
                         "key": "",
                         "value": ""
                     }
-                ]
+                ],
+                "hostname": "0.0.0.0"
             }
         }
     ]
