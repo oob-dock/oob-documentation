@@ -26,7 +26,12 @@ ou produção.
 
 ### oidc
 
-Configuração
+Configuração do open id connect
+
+* authServerUrl: URL do servidor de autorização
+* introspectionPath: Path para chamada do introspection
+* clientId: Client criado na configuração do oob-authorization-server
+* clientSecret: Secret do client criado na configuração do oob-authorization-server
 
 ### signature
 

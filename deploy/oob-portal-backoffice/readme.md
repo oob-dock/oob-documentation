@@ -15,7 +15,7 @@ Ex: `https://kong.bank.com.br`
 ## Exposição
 
 Como o acesso ao Portal Back Office não é feito através do Kong, um ingress
-precisa ser criado. [Mais detalhes aqui](../readme.md)
+precisa ser criado. [Mais detalhes aqui](../readme.md#criação-de-ingresses)
 
 ```yaml
 ingress:
