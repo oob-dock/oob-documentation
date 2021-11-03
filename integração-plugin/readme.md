@@ -32,6 +32,7 @@ serviços relacionados à(s) fase(s) do Open Banking Brasil (OBB).
   - [Tratamento de erro](#tratamento-de-erro)
   - [Configuração de timeout](#configuração-de-timeout)
   - [Tratamento de headers](#tratamento-de-headers)
+  - [Implementação de cache](./cache/readme.md)
   - [Componentes Suportados](#componentes-suportados)
     - [ACTIVEMQ](#activemq)
     - [AMQP](#amqp)

@@ -1,0 +1,105 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://camel.apache.org/schema/spring" xsi:schemaLocation="
+            http://camel.apache.org/schema/spring
+            http://camel.apache.org/schema/spring/camel-spring.xsd">
+
+    <!-- TOKEN SERVICE -->
+    <route id="authorizationTokenService">
+        <from uri="direct:tokenService"/>
+        <!-- BUILD REQUEST -->
+        <setBody>
+            <constant>client_id={{env:CLIENT_ID}}&amp;client_secret={{env:CLIENT_SECRET}}&amp;grant_type=client_credentials</constant>
+        </setBody>
+        <setHeader name="Content-Type">
+            <constant>application/x-www-form-urlencoded</constant>
+        </setHeader>
+
+        <!-- REQUEST TOKEN -->
+        <toD uri="{{env:TOKEN_ENDPOINT}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=POST"/>
+        <unmarshal>
+            <json library="Gson" contentTypeHeader="true"/>
+        </unmarshal>
+        <setProperty name="TokenBody">
+            <simple>${in.body}</simple>
+        </setProperty>
+
+        <!-- SET AUTHORIZATION -->
+        <setHeader name="Authorization">
+            <simple>Bearer ${exchangeProperty[TokenBody[access_token]]}</simple>
+        </setHeader>
+
+        <!-- CLEAN HEADER -->
+        <removeHeaders pattern="Content-Type"/>
+    </route>
+
+    <!-- GET TOKEN -->
+    <route id="getAuthorizationToken">
+        <from uri="direct:getToken"/>
+        <!-- GET TOKEN IN CACHE -->
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <to uri="caffeine-cache://token?evictionType=TIME_BASED&amp;expireAfterWriteTime=290&amp;key=1"/>
+
+        <choice>
+            <when>
+                <!-- UPDATE TOKEN IN CACHE -->
+                <simple>${in.headers[CamelCaffeineActionHasResult]} == false</simple>
+                <to uri="direct:tokenService"/>
+                <setHeader name="CamelCaffeineAction">
+                    <constant>PUT</constant>
+                </setHeader>
+                <setBody>
+                    <simple>${in.headers.Authorization}</simple>
+                </setBody>
+                <to uri="caffeine-cache://token?evictionType=TIME_BASED&amp;expireAfterWriteTime=290&amp;key=1"/>
+            </when>
+            <otherwise>
+                <setHeader name="Authorization">
+                    <simple>${in.body}</simple>
+                </setHeader>
+            </otherwise>
+        </choice>
+        <removeHeaders pattern="CamelCaffeineAction|CamelCaffeineActionHasResult|CamelCaffeineActionSucceeded"/>
+    </route>
+
+    <!-- PAYMENTS DISCOVERY -->
+    <route id="consentGetPaymentAuthorizationsAndResourcesFromLegacyRoute">
+        <from uri="direct:discoverPayments" />
+
+        <!-- SAVE INITIAL BODY -->
+        <unmarshal>
+            <json library="Gson"/>
+        </unmarshal>
+        <setProperty name="requestProperties">
+            <simple>${in.body}</simple>
+        </setProperty>
+
+        <!-- OBTAINS TOKEN FROM CACHE -->
+        <to uri="direct:getToken"/>
+
+        <setHeader name="Content-Type">
+            <constant>application/json</constant>
+        </setHeader>
+
+        <!-- REQUEST TO LEGACY -->
+        <toD uri="{{env:LEGACY_ENDPOINT}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET"/>
+
+        <choice>
+            <!-- VERIFY ERROR CONDITION -->
+            <when>
+                <simple>${header.CamelHttpResponseCode} != '200'</simple>
+                <!-- ERROR HANDLING LOGIC -->
+
+            </when>
+            <otherwise>
+                <unmarshal>
+                    <json library="Gson"/>
+                </unmarshal>
+
+                <!-- SUCCESS LOGIC -->
+
+            </otherwise>
+        </choice>
+    </route>
+</routes>
