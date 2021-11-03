@@ -11,7 +11,12 @@ ou por tempo (em segundos, que atende melhor a necessidade). É possível també
 estabelecer o tempo para o cache expirar, e se deve ocorrer após o tempo de acesso
 ou escrita ser ultrapassado.
 
-**Atenção**: o cache do componente é armazenado em memória.
+**:warning: Atenção**: o cache do componente é armazenado em memória, sendo assim
+o mesmo será perdido caso o container seja reiniciado (será feita uma nova chamada
+para obter os dados). Além disto é preciso ter cautela quanto ao tempo de vida do
+mesmo, não deve ser muito curto (pois não haverá muita vantagem em armazená-lo) e
+nem muito longo (pois é possível que os dados estejam desatualizados).
+
 Abaixo seguem dois exemplos de arquivos de rotas Camel XML com as configurações
 de cache, sendo respectivamente para as APIs consent e payment.
 
