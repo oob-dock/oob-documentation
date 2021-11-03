@@ -14,7 +14,8 @@
         "ResponseErrorCreateConsent": {
             "type": "object",
             "required": [
-                "errors"
+                "errors",
+                "restrictionType"
             ],
             "properties": {
                 "errors": {
@@ -58,6 +59,17 @@
                         },
                         "additionalProperties": false
                     }
+                },
+                "restrictionType": {
+                    "type": "string",
+                    "enum": [
+                        "MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED",
+                        "TRANSACTION_TIME_NOT_ALLOWED",
+                        "LIMIT_OF_USERS",
+                        "OTHER"
+                    ],
+                    "example": "TRANSACTION_TIME_NOT_ALLOWED",
+                    "description": "Código indicando o motivo da recusa na criação do consentimento: \n• MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED: Valor da transação acima do permitido. \n• TRANSACTION_TIME_NOT_ALLOWED: Transação fora dos horários permitidos. \n• LIMIT_OF_USERS: Limite de usuários atingido para o ciclo atual do Open Banking. \n• OTHER: Outro motivo. \n"
                 }
             },
             "additionalProperties": false
