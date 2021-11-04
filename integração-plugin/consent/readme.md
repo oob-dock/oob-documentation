@@ -254,8 +254,8 @@ O retorno desses pontos de integração devem ser:
   puder ser criado;
 - Uma mensagem de erro de negócio, descrita no schema de integração com um enum
   específico no campo *code*, definindo o motivo pelo qual o consentimento foi
-  negado. Essa mensagem possui também o campo *restrictionType* informando o
-  tipo de restrição que reprovou o consentimento;
+  negado. Essa mensagem possui também o campo opcional *restrictionType* informando
+  o tipo de restrição que reprovou o consentimento;
 - Uma mensagem de erro genérica, definida pelo schema
   [response-error-schema.json](../schemas/v2/common/response-error-schema.json)
   quando um erro técnico impedir que a solicitação possa ser avaliada, como um
