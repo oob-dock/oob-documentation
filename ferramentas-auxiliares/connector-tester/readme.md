@@ -38,7 +38,7 @@ são responsáveis por direcionar as chamadas aos sistemas de retaguarda da inst
 A ferramenta está disponibilizada no ECR da Opus, e pode ser obtida da seguinte maneira:
 
 ```sh
-docker pull 618430153747.dkr.ecr.sa-east-1.amazonaws.com/digital-banking-microservices/oob-connector-tester:latest
+docker pull 618430153747.dkr.ecr.sa-east-1.amazonaws.com/opus-open-banking-release/oob-connector-tester:latest
 ```
 
 ![Docker pull connector tester](./images/docker_pull_connector_tester.png)
@@ -49,7 +49,7 @@ A imagem da ferramenta pode ser executada sem ser estendida, a partir do seguint
 comando:
 
 ```sh
-docker run -it -p 8080:8080 618430153747.dkr.ecr.sa-east-1.amazonaws.com/digital-banking-microservices/oob-connector-tester:latest
+docker run -it -p 8080:8080 618430153747.dkr.ecr.sa-east-1.amazonaws.com/opus-open-banking-release/oob-connector-tester:latest
 ```
 
 ![Docker run connector tester](./images/docker_run_connector_tester.png)
@@ -145,6 +145,7 @@ da chamada no swagger, sendo que a resposta para a chamada realizada será:
 
 - Correção do bug que concatenava os paths das rotas do Camel XML com os endpoints
 de consentimento chamados no swagger
+- Correção da URL para baixar a imagem da ferramenta
 
 ### 2021-10-07 - v1.0.0
 
