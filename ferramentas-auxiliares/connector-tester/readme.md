@@ -10,6 +10,7 @@ e apresentar um exemplo de montagem de ambiente para execução da mesma.
   - [Como obter a imagem da ferramenta](#como-obter-a-imagem-da-ferramenta)
   - [Como executar a ferramenta](#como-executar-a-ferramenta)
   - [Como estender a imagem da ferramenta](#como-estender-a-imagem-da-ferramenta)
+  - [Changelog](#changelog)
 
 ## Introdução
 
@@ -22,9 +23,9 @@ A aplicação possui endpoints REST que representam todos os pontos de integraç
 de todos os módulos do OOB, e é possível incluir as rotas (os mesmos arquivos Camel
 XML que serão usados no ambiente de produção, vide o seguinte [link](../../integração-plugin/readme.md)),
 e testar via swagger. Os endpoints não têm lógica de negócio, eles apenas chamam
-os conectores exatamente como os módulos do OOB. Os endpoint recebem um json no
+os conectores exatamente como os módulos do OOB. Os endpoints recebem um json no
 formato esperado pelo conector, ou seja, de acordo com a sua especificação. Essa
-ferramenta não tem os endpoints no formato openbank que precisam ser transformado
+ferramenta não tem os endpoints no formato openbank que precisam ser transformados
 para o formato do conector. Dessa forma, toda informação de input do conector
 (consentimento, headers, etc) deve estar presente na chamada do swagger.
 
@@ -36,8 +37,8 @@ são responsáveis por direcionar as chamadas aos sistemas de retaguarda da inst
 
 A ferramenta está disponibilizada no ECR da Opus, e pode ser obtida da seguinte maneira:
 
-```text
-docker pull 618430153747.dkr.ecr.sa-east-1.amazonaws.com/digital-banking-microservices/oob-connector-tester:latest
+```sh
+docker pull 618430153747.dkr.ecr.sa-east-1.amazonaws.com/opus-open-banking-release/oob-connector-tester:latest
 ```
 
 ![Docker pull connector tester](./images/docker_pull_connector_tester.png)
@@ -47,8 +48,8 @@ docker pull 618430153747.dkr.ecr.sa-east-1.amazonaws.com/digital-banking-microse
 A imagem da ferramenta pode ser executada sem ser estendida, a partir do seguinte
 comando:
 
-```text
-docker run -it -p 8080:8080 618430153747.dkr.ecr.sa-east-1.amazonaws.com/digital-banking-microservices/oob-connector-tester:latest
+```sh
+docker run -it -p 8080:8080 618430153747.dkr.ecr.sa-east-1.amazonaws.com/opus-open-banking-release/oob-connector-tester:latest
 ```
 
 ![Docker run connector tester](./images/docker_run_connector_tester.png)
@@ -137,3 +138,15 @@ da chamada no swagger, sendo que a resposta para a chamada realizada será:
   }
 }
 ```
+
+## Changelog
+
+### 2021-11-05 - v1.0.1
+
+- Correção do bug que concatenava os paths das rotas do Camel XML com os endpoints
+de consentimento chamados no swagger
+- Correção da URL para baixar a imagem da ferramenta
+
+### 2021-10-07 - v1.0.0
+
+- Versão inicial da documentação
