@@ -117,8 +117,8 @@ Exemplo:
       kid: "95NrL0TaTttM2-Awq0uCPqqE1gRYN9PRfYleHPlMv1w"
       alg: "RSA-OAEP"
       use: "enc"
-      passphraseSecretName: "oob-as-keys-passphrase"
-      passphraseSecretKey: "AvRyzDiY0DxIZsIbIo"
+      passphraseSecretName: "oob-as-keys"
+      passphraseSecretKey: "enc.key.passphrase"
 ```
 
 As chaves devem ser geradas no diretório de participantes:
