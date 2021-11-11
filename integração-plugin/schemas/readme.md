@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2021-11-03 - v2.4.0
+
+- Consent
+  - Inclusão do campo restrictionType no retorno de erro do approvePaymentConsentCreation
+
 ### 2021-10-18 - v2.3.0
 
 - Consent
