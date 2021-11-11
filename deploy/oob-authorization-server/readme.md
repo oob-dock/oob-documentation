@@ -65,10 +65,22 @@ Configuração de acesso ao banco
 * username: Nome do usuário de acesso ao banco
 * password: Senha do usuário de acesso ao banco
 * host: Host do banco
-* port: Porta do banco
 * type: Tipo do banco. Default: "postgres"
   
+Exemplo:
+
+```yaml
+  db:
+    name: "authorization_server"
+    username: "authorization_server"
+    password: "authorization_server"
+    host: "postgres.local"
+    type: "postgres"
+```
+  
 ### api/baseUrlOobConsents
+
+- Endereço base do serviço de consentimento
 
 Apontamento interno no K8s
 
@@ -208,11 +220,6 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
-#### consent.unsupportedRedirectUrl
-
-URL que o cliente será redirecionado caso não haja suporte `web` na configuração
-`consent.channels`.
-
 #### brand.id
 
 Vide a [definição](../shared-definitions.md#brand-id)
@@ -222,6 +229,8 @@ Vide a [definição](../shared-definitions.md#brand-id)
 Nome da marca. Essa variável será utilizada para mostrar o nome da marca na tela
 de redirecionamento do cliente durante o uso do fluxo web, e também é retornada na
 integração APP2AS.
+
+Ex: `C Banco`
 
 #### brand.logo
 
