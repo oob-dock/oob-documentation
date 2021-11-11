@@ -94,6 +94,14 @@ deve conter pelo menos uma chave com use = sig (assinatura) e uma com use = enc 
 * alg: Algoritmo a ser utilizado com a chave
 * use: Finalidade de uso da chave pelo authorization server. Os valores
 possíveis são `sig` (assinatura) ou `enc` (encriptação)
+* passphraseSecretName: Nome do secret que contém a senha para a chave privada
+  (opcional)
+* passphraseSecretKey: Nome da propriedade do secret que contém a senha para a
+  chave privada (opcional)
+
+As propriedades `passphraseSecretName` e `passphraseSecretKey` só devem ser
+definidas para chaves criptografadas. Se elas não forem informadas assume-se que
+as chaves são abertas.
 
 Exemplo:
 
@@ -103,12 +111,14 @@ Exemplo:
       certSecretKey: "sig.key"
       kid: "MPguImG0DEQwu9ZUvwDzw_0xybh1yAETY9VBLdYXibo"
       alg: "PS256"
-      use: "sig"
+      use: "sig" 
     - certSecretName: "oob-as-keys"
       certSecretKey: "enc.key"
       kid: "95NrL0TaTttM2-Awq0uCPqqE1gRYN9PRfYleHPlMv1w"
       alg: "RSA-OAEP"
       use: "enc"
+      passphraseSecretName: "oob-as-keys-passphrase"
+      passphraseSecretKey: "AvRyzDiY0DxIZsIbIo"
 ```
 
 As chaves devem ser geradas no diretório de participantes:
