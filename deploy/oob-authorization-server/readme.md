@@ -111,7 +111,7 @@ Exemplo:
       certSecretKey: "sig.key"
       kid: "MPguImG0DEQwu9ZUvwDzw_0xybh1yAETY9VBLdYXibo"
       alg: "PS256"
-      use: "sig" 
+      use: "sig"
     - certSecretName: "oob-as-keys"
       certSecretKey: "enc.key"
       kid: "95NrL0TaTttM2-Awq0uCPqqE1gRYN9PRfYleHPlMv1w"
