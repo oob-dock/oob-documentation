@@ -36,30 +36,11 @@ Exemplo:
 
 ### liquibase/contexts
 
-Controle de execução do banco de dados
-
-Utilizar "demo" para criar dados de exemplo na base.
-Utilizar "default para ambientes de homologação ou produção."
+Vide a [definição](../shared-definitions.md#liquibase-contexts)
 
 ### oidc
 
-Configuração de segurança para validar os tokens de acesso recebidos
-em requests
-
-* authServerUrl: Endereço do oob-authorization-server. O endereço pode 
-ser um apontamento interno no K8s
-* introspectionPath: Caminho do endpoint de introspection
-* clientId: Cliente criado na configuração do oob-authorization-server
-* clientSecret: Secret de acesso do cliente
-
-Exemplo:
-
-```yaml
-    authServerUrl: "http://oob-authorization-server"
-    introspectionPath: "/auth/token/introspection"
-    clientId: "oob-internal-client"
-    clientSecret: "oob-internal-client" 
-```
+Vide a [definição](../shared-definitions.md#oidc)
 
 ### signature
 
