@@ -20,11 +20,33 @@ Ex: `cbanco`
 
 ## Liquibase Contexts
 
-Contexto que deve ser utilizado para criar a base de dados. Utilizar "demo" para
-criar dados de exemplo na base. Utilizar "default" para ambientes de homologação
-ou produção.
+Contexto que deve ser utilizado para criar a base de dados.
+
+Utilizar "demo" para criar dados de exemplo na base.
+
+Utilizar "default" para ambientes de homologação ou produção.
 
 **Formato:** `demo` ou `default`
+
+## oidc
+
+Configuração de segurança para validar os tokens de acesso recebidos
+em requests
+
+* authServerUrl: Endereço do oob-authorization-server. O endereço pode ser um
+apontamento interno no K8s
+* introspectionPath: Caminho do endpoint de introspection
+* clientId: Cliente criado na configuração do oob-authorization-server
+* clientSecret: Secret de acesso do cliente
+
+Exemplo:
+
+```yaml
+    authServerUrl: "http://oob-authorization-server"
+    introspectionPath: "/auth/token/introspection"
+    clientId: "oob-internal-client"
+    clientSecret: "oob-internal-client" 
+```
 
 ## auth_server_url
 

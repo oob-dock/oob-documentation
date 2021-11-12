@@ -63,12 +63,7 @@ Vide a [definição](../shared-definitions.md#brand-id)
 
 ### oidc
 
-Configurações referentes ao OpenId Connect
-
-* authServerUrl: Url do servidor de autenticação
-* clientId: ClientId de acesso do cliente
-* clientSecret: Secret de acsso do cliente
-* introspectionPath: Caminho da funcionalidade de instrospection
+Vide a [definição](../shared-definitions.md#oidc)
 
 ## additionalVars
 
