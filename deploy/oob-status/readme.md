@@ -17,49 +17,100 @@ Configuração de acesso ao banco
 
 ### liquibase/contexts
 
-Contexto que deve ser utilizado para criar a base de dados. Utilizar "demo" para
-criar dados de exemplo na base. Utilizar "default" para ambientes de homologação
-ou produção.
+Vide a [definição](../shared-definitions.md#liquibase-contexts)
 
 ### services
 
 Configuração dos endereços dos serviços monitorados/utilizados pela API
 
-* prometheus/baseAddress: Endereço base do prometheus
+* prometheus/baseAddress: Endereço base do prometheus. Pode ser utilizado um apontamento
+interno no Kubernetes
 
-**Ex:** `http://prometheus-server` #Apontamento interno no K8s
+**Ex:** `http://prometheus-server`
 
-* channels/baseAddress: Endereço base da API de canais (fase 1)
+* channels/baseAddress: Endereço base da API de canais (fase 1). Pode ser utilizado
+um apontamento interno no Kubernetes
 
-**Ex:** `http://oob-channels-catalog` #Apontamento interno no K8s
+**Ex:** `http://oob-channels-catalog`
 
 * productsServices/baseAddress: Endereço base da API de produtos e serviços
-(fase 1)
+(fase 1). Pode ser utilizado um apontamento interno no Kubernetes
 
-**Ex:** `http://oob-products-services-catalog` #Apontamento interno no K8s
+**Ex:** `http://oob-products-services-catalog`
 
 * financialData/baseAddress: Endereço base da API de dados financeiros
-(fase 2)
+(fase 2). Pode ser utilizado um apontamento interno no Kubernetes
 
-**Ex:** `http://oob-financial-data` #Apontamento interno no K8s
+**Ex:** `http://oob-financial-data`
 
 * payment/baseAddress: Endereço base da api de pagamentos
-(fase 3)
+(fase 3). Pode ser utilizado um apontamento interno no Kubernetes
 
-**Ex:** `http://oob-payment` #Apontamento interno no K8s
+**Ex:** `http://oob-payment`
 
-* consent/baseAddress: Endereço base da API de consentimento
+* consent/baseAddress: Endereço base da API de consentimento. Pode ser utilizado
+um apontamento interno no Kubernetes
 
-**Ex:** `http://oob-consent` #Apontamento interno no K8s
+**Ex:** `http://oob-consent`
 
 ### features
 
-Define as features da instalação
-
-**Ex:** core,open-data,financial-data,payments
+Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-banking)
 
 ### plugins/metrics/brandId
 
-Identificação da marca da instalação
+Vide a [definição](../shared-definitions.md#brand-id)
 
-**Ex:** cbanco
+### oidc
+
+Configurações referentes ao OpenId Connect
+
+* authServerUrl: Url do servidor de autenticação
+* clientId: ClientId de acesso do cliente
+* clientSecret: Secret de acsso do cliente
+* introspectionPath: Caminho da funcionalidade de instrospection
+
+## additionalVars
+
+Utilizado para definir configurações opcionais na aplicação. Essa configuração
+permite definir uma lista de propriedades a serem passadas para a aplicação no formato:
+
+```yaml
+additionalVars:
+  - name: FIRST_PROPERTY
+    value: "FIRST_VALUE"
+  - name: SECOND_PROPERTY
+    value: "SECOND_VALUE"
+```
+
+As configurações que podem ser definidas neste formato estão listadas abaixo:
+
+### QUARKUS_LOG_LEVEL
+
+Define o nível de detalhe do log da aplicação. É recomendável ativar o nível DEBUG
+somente em ambientes de desenvolvimento/homologação, ou para facilitar a análise
+de erros em produção. Em produção é aconselhável utilizar o nível INFO.
+
+**Formato:** `DEBUG` ou `INFO`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: QUARKUS_LOG_LEVEL
+    value: "DEBUG"
+```
+
+### DAEMON_INCIDENT_ENABLED
+
+Indica se o daemon de incidentes está habilitado. Em produção deve estar ativado.
+
+**Formato:** `true` ou `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: DAEMON_INCIDENT_ENABLED
+    value: "true"
+```

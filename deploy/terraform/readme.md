@@ -1,8 +1,16 @@
-# Instalação do Kong
+# Configuração das rotas do Kong
 
 ## Instalação
 
-A instalação do módulo é feita via terraform
+A configuração do módulo é feita via terraform, sendo que existem dois módulos
+base que podem ser utilizados:
+
+* kubernetes: deve ser utilizado por clientes que possuem uma marca única
+
+* kubernetes_multibrand: deve ser utilizado por clientes que possuem mais de uma
+marca listada no diretório de participantes (por exemplo, instituições distintas).
+Neste caso várias das configurações estão na estrutura brands, e devem ser
+declaradas para cada marca.
 
 ## Configuração
 
@@ -33,7 +41,8 @@ Porta da API de status
 
 ### oob_products_services_catalog_api_host
 
-Host da API de produtos e serviços
+Host da API de produtos e serviços. Deve ser preenchido somente se a feature open-data
+(Fase 1 do Open Banking Brasil) estiver habilitada.
 
 **Ex:** "oob-products-services-catalog"
 
@@ -45,7 +54,8 @@ Porta da API de produtos e serviços
 
 ### oob_channels_catalog_api_host
 
-Host da API de canais
+Host da API de canais. Deve ser preenchido somente se a feature open-data
+(Fase 1 do Open Banking Brasil) estiver habilitada.
 
 **Ex:** "oob-channels-catalog"
 
@@ -107,13 +117,15 @@ URI para acesso ao prometheus
 
 ### api_docs_enabled
 
-Indica se a documentação da API deve ser habilitada ou não
+Indica se a documentação da API deve ser habilitada ou não, sendo útil somente
+para desenvolvimento. Não é recomendada para produção.
 
 **Formato:** `true` ou `false`
 
 ### oob_financial_data_api_host
 
-Host da API de dados financeiros
+Host da API de dados financeiros. Deve ser preenchido somente se a feature financial-data
+(Fase 2 do Open Banking Brasil) estiver habilitada.
 
 **Ex:** "oob-financial-data"
 
@@ -125,7 +137,8 @@ Porta da API de dados financeiros
 
 ### oob_payment_api_host
 
-Host da API de pagamento
+Host da API de pagamento. Deve ser preenchido somente se a feature payments
+(Fase 3 do Open Banking Brasil) estiver habilitada.
 
 **Ex:** "oob-payment"
 
@@ -137,25 +150,19 @@ Porta da API de pagamento
 
 ### introspection_client_id
 
-Identificador do cliente para instrospection do token
-
-**Ex:** "oob-internal-client"
+Vide a [definição](../shared-definitions.md#introspection_client_id)
 
 ### introspection_client_secret
 
-Segredo do cliente para instrospection do token
+Vide a [definição](../shared-definitions.md#introspection_client_secret)
 
 ### auth_server_url
 
-URL para acesso ao servidor de autorização
-
-**Ex:** "<http://oob-authorization-server>"
+Vide a [definição](../shared-definitions.md#auth_server_url)
 
 ### auth_server_base_path
 
-Caminho base para acessar o servidor de autorização
-
-**Ex:** "/auth/"
+Vide a [definição](../shared-definitions.md#auth_server_base_path)
 
 ### public_fqdn
 
@@ -171,12 +178,10 @@ FQDN público onde as APIs do open banking podem ser acessadas com mTLS
 
 ### supported_features
 
-Módulos suportados pela instituição
+Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-banking)
 
 **Ex:** ["core", "open-data", "financial-data", "payments"]
 
 ### brand_id
 
-Identificador da marca
-
-**Ex:** "cbanco"
+Vide a [definição](../shared-definitions.md#brand-id)

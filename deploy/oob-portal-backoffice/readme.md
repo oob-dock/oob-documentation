@@ -8,7 +8,8 @@ A instalação do módulo é feita via Helm Chart
 
 ### baseApiUrl
 
-Endereço externo do Kong
+Endereço público pelo qual o portal (que roda no browser do usuário) consegue
+acessar as APIs do OOB.
 
 Ex: `https://kong.bank.com.br`
 

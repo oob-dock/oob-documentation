@@ -18,6 +18,38 @@ errada entre em contato com a Opus.
 
 Ex: `cbanco`
 
+## Liquibase Contexts
+
+Contexto que deve ser utilizado para criar a base de dados. Utilizar "demo" para
+criar dados de exemplo na base. Utilizar "default" para ambientes de homologação
+ou produção.
+
+**Formato:** `demo` ou `default`
+
+## auth_server_url
+
+URL para acesso ao servidor de autorização
+
+**Ex:** "<http://oob-authorization-server>"
+
+## auth_server_base_path
+
+Caminho base para acessar o servidor de autorização
+
+**Ex:** "/auth/"
+
+## introspection_client_id
+
+Identificador do cliente para instrospection
+
+**Ex:** "oob-internal-client"
+
+## introspection_client_secret
+
+Segredo do cliente para instrospection
+
+**Ex:** "secret123"
+
 ## Suporte a features do Opus Open Banking
 
 Com o objetivo de otimizar o uso de recursos, monitorar e expor endpoints
