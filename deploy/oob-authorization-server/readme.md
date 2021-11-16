@@ -220,6 +220,12 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
+#### consent.unsupportedRedirectUrl
+
+URL que o cliente será redirecionado caso não haja suporte `web` na configuração
+
+Ex: `https://play.google.com/store/apps/details?id=com.google.android.apps.maps`
+
 #### brand.id
 
 Vide a [definição](../shared-definitions.md#brand-id)
@@ -310,19 +316,6 @@ Define se o processo de autenticação definido na integração
 additionalVars:
   - name: AUTH_JWT_JTI_VALIDATION
     value: "1"
-```
-
-### CONSENT_UNSUPPORTED_REDIRECT_URL
-
-URL utilizada para redirecionar o cliente quando o canal web (`consent.channels`)
-não está ativado e o cliente tenta acessar a aplicação utilizando um browser.
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: CONSENT_UNSUPPORTED_REDIRECT_URL
-    value: "https://play.google.com/store/apps/details?id=com.google.android.apps.maps"
 ```
 
 ### APPLE_APP_ID
