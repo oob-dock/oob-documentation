@@ -43,12 +43,12 @@ geração do consentimento de fato.
 
 De posse de uma URL interceptada, o primeiro passo é realizar o request `GET`
 de fato na URL acionada, incluindo todos os parâmetros de query-string que
-possam existir, adicionado o header `Content-Type` com o valor
+possam existir, adicionado o header `Accept` com o valor
 `application/json`, esse header informa o AS que a chamada está sendo realizada
 pelo aplicativo e não pelo navegador.
 
 O AS sabendo que a chamada foi realizada pelo aplicativo através do header
-`Content-Type` passará a funcionar como uma API Rest, respondendo os requests
+`Accept` passará a funcionar como uma API Rest, respondendo os requests
 sempre no formato JSON. A adição do header é obrigatória em todas as chamadas
 entre o aplicativo da instituição e o AS do OOB.
 
