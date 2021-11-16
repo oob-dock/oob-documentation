@@ -303,6 +303,19 @@ additionalVars:
     value: "1"
 ```
 
+### AS_LOG_LEVEL
+
+Define o nível do log que será exibido no console da aplicação. Em produção é aconselhável
+ser level `info`.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: AS_LOG_LEVEL
+    value: "debug"
+```
+
 ### CONSENT_UNSUPPORTED_REDIRECT_URL
 
 URL utilizada para redirecionar o cliente quando o canal web (`consent.channels`)
