@@ -63,7 +63,6 @@ serviços relacionados à(s) fase(s) do Open Banking Brasil (OBB).
     - [Bindy](#bindy)
     - [TidyMarkup](#tidymarkup)
     - [BASE64](#base64)
-    - [SNAKEYAML](#snakeyaml)
     - [JACKSONXML](#jacksonxml)
   - [Linguagens suportadas](#linguagens-suportadas)
     - [Bean Method](#bean-method)
@@ -1130,16 +1129,6 @@ Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/refe
 Utilizado para codificação e decodificação de base64.
 
 Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/reference/extensions/base64.html
-```
-
-&nbsp;
-
-### SNAKEYAML
-
-```text
-Conversão de objetos Java em YAML e vice-versa.
-
-Usabilidade e documentação: https://camel.apache.org/camel-quarkus/latest/reference/extensions/snakeyaml.html
 ```
 
 &nbsp;
