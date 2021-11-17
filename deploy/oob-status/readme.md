@@ -86,7 +86,9 @@ Define o nível de detalhe do log da aplicação. É recomendável ativar o nív
 somente em ambientes de desenvolvimento/homologação, ou para facilitar a análise
 de erros em produção. Em produção é aconselhável utilizar o nível INFO.
 
-**Formato:** `DEBUG` ou `INFO`
+**Formato:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
+
+**Default:** `INFO`
 
 **Ex:**
 
@@ -101,6 +103,8 @@ additionalVars:
 Indica se o daemon de incidentes está habilitado. Em produção deve estar ativado.
 
 **Formato:** `true` ou `false`
+
+**Default:** `true`
 
 **Ex:**
 

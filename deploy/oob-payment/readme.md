@@ -32,7 +32,7 @@ interno no Kubernetes
 
 ### signature
 
-Chave privada utilizada para encriptar ou assinar mensagens. Deve conter uma
+Chave privada utilizada para assinar mensagens. Deve conter uma
 chave de assinatura.
 
 * certSecretName: Nome do secret que contém a chave privada. Default: "oob-as-keys"
@@ -106,7 +106,9 @@ Define o nível de detalhe do log da aplicação. É recomendável ativar o nív
 somente em ambientes de desenvolvimento/homologação, ou para facilitar a análise
 de erros em produção. Em produção é aconselhável utilizar o nível INFO.
 
-**Formato:** `DEBUG` ou `INFO`
+**Formato:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
+
+**Default:** `INFO`
 
 **Ex:**
 
@@ -123,11 +125,30 @@ com as specs definidas (afeta performance). Em produção é aconselhável desat
 
 **Formato:** `true` ou `false`
 
+**Default:** `false`
+
 **Ex:**
 
 ```yaml
 additionalVars:
   - name: APIS_VALIDATION_JSON
+    value: "true"
+```
+
+### APIS_VALIDATION_OPENAPI_ENABLED-REQUEST
+
+Habilita a validação dos objetos de request recebidos pela API com a especificação
+do Open Banking Brasil. É aconselhável sempre estar ativo.
+
+**Formato:** `true` ou `false`
+
+**Default:** `true`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APIS_VALIDATION_OPENAPI_ENABLED-REQUEST
     value: "true"
 ```
 
@@ -137,6 +158,8 @@ Habilita a validação dos objetos de response devolvidos pela API com a especif
 do Open Banking Brasil (afeta performance). Em produção é aconselhável desativar.
 
 **Formato:** `true` ou `false`
+
+**Default:** `false`
 
 **Ex:**
 
