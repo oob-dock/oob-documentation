@@ -696,13 +696,6 @@ The Base64 data format is used for base64 encoding and decoding.
 For usage and documentation: https://camel.apache.org/camel-quarkus/latest/reference/extensions/base64.html
 ```
 
-### SNAKEYAML
-```
-Marshal and unmarshal Java objects to and from YAML using SnakeYAML
-
-For usage and documentation: https://camel.apache.org/camel-quarkus/latest/reference/extensions/snakeyaml.html
-```
-
 ### JACKSONXML
 ```
 Jackson XML is a Data Format which uses the Jackson library with the XMLMapper extension to unmarshal an XML payload into Java objects or to marshal Java objects into an XML payload.
