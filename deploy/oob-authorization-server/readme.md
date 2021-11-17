@@ -65,14 +65,26 @@ Configuração de acesso ao banco
 * username: Nome do usuário de acesso ao banco
 * password: Senha do usuário de acesso ao banco
 * host: Host do banco
-* port: Porta do banco
 * type: Tipo do banco. Default: "postgres"
+  
+Exemplo:
+
+```yaml
+  db:
+    name: "authorization_server"
+    username: "authorization_server"
+    password: "authorization_server"
+    host: "postgres.local"
+    type: "postgres"
+```
   
 ### api/baseUrlOobConsents
 
-Endereço base do serviço de consentimento
+- Endereço base do serviço de consentimento
 
-Ex: `https://api.oob.opus-software.com.br/`
+Apontamento interno no K8s
+
+Ex: `http://oob-consent`
 
 ### customer/federationJwksUrl
 
@@ -82,6 +94,8 @@ instituição.*
 Endereço onde o serviço deve buscar o JWKS com a chave pública para validar os
 tokens JWT emitidos pelo aplicativo responsável pela autenticação dos clientes
 do banco.
+
+Ex: `https://idp.bank.com.br/jwks.jwks`
 
 ### privateKeys
 
@@ -148,8 +162,8 @@ Exemplo:
 ```yaml
   clients:
     - clientSecretName: "oob-as-clients"
-      clientSecretKey: "backend-x-secret"
-      clientId: "backend-x"
+      clientSecretKey: "oob-internal-client"
+      clientId: "oob-internal-client"
       redirectUris: ""
       responseTypes: ""
       grantTypes: "client_credentials"
@@ -169,7 +183,7 @@ Diversas configurações gerais do Authorization Server (AS):
 FQDN público do AS para fins de divulgação da configuração no endereço
 `openid-configuration`. Utilizar o FQDN sem MTLS.
 
-Ex: `https://auth.oob.opus-software.com.br/`
+Ex: `https://auth.bank.com.br`
 
 #### authBasePath
 
@@ -216,18 +230,11 @@ devem ser HTTPS.
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
 `mobile` e `web,mobile`.
 
-#### CONSENT_LOGIN_SCREEN_MOCK_ENABLED
-
-Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em
-ambientes não produtivos.
-
-Valores suportados: `0`ou `1`
-Valor default: `0`
-
 #### consent.unsupportedRedirectUrl
 
 URL que o cliente será redirecionado caso não haja suporte `web` na configuração
-`consent.channels`.
+
+Ex: `https://play.google.com/store/apps/details?id=com.google.android.apps.maps`
 
 #### brand.id
 
@@ -239,12 +246,14 @@ Nome da marca. Essa variável será utilizada para mostrar o nome da marca na te
 de redirecionamento do cliente durante o uso do fluxo web, e também é retornada na
 integração APP2AS.
 
+Ex: `C Banco`
+
 #### brand.logo
 
 URL contendo o logotipo da marca, a ser utilizado nas telas de redirecionamento
 do consentimento.
 
-Ex: `https://marca.com.br/logo.svg`
+Ex: `https://www.opus-software.com.br/wp-content/uploads/2019/01/opus_logo.png`
 
 ### features
 
@@ -254,7 +263,7 @@ fazendo uma restrição de segurança aos serviços Open Banking suportados nas 
 **Ex:**
 
 ```yaml
-features: "core,open-data,financial-data,payments"
+features: "core,payments"
 ```
 
 ## additionalVars
@@ -287,6 +296,22 @@ additionalVars:
     value: "1"
 ```
 
+#### CONSENT_LOGIN_SCREEN_MOCK_ENABLED
+
+Habilita ou desabilita a exibiçao da tela de login mockada. Utilizar apenas em
+ambientes não produtivos.
+
+**Formato:** `0`ou `1`
+Valor default: `0`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CONSENT_LOGIN_SCREEN_MOCK_ENABLED
+    value: "0"
+```
+
 ### AUTH_JWT_JTI_VALIDATION
 
 Define se o processo de autenticação definido na integração
@@ -301,19 +326,6 @@ Define se o processo de autenticação definido na integração
 additionalVars:
   - name: AUTH_JWT_JTI_VALIDATION
     value: "1"
-```
-
-### CONSENT_UNSUPPORTED_REDIRECT_URL
-
-URL utilizada para redirecionar o cliente quando o canal web (`consent.channels`)
-não está ativado e o cliente tenta acessar a aplicação utilizando um browser.
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: CONSENT_UNSUPPORTED_REDIRECT_URL
-    value: "https://play.google.com/store/apps/details?id=com.google.android.apps.maps"
 ```
 
 ### APPLE_APP_ID
