@@ -90,6 +90,10 @@ As configurações que podem ser definidas neste formato estão listadas abaixo:
 
 Utilizado para definir o nível do log da aplicação. Em produção é aconselhável ser level = `INFO`.
 
+**Valores possíveis:** `OFF`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`, `ALL`
+
+Valor default: `INFO`
+
 **Ex:**
 
 ```yaml
@@ -102,12 +106,16 @@ additionalVars:
 
 Utilizado para definir o nível do log para o console da aplicação.
 
+**Valores possíveis:** `OFF`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`, `ALL`
+
+Valor default: `INFO`
+
 **Ex:**
 
 ```yaml
 additionalVars:
   - name: QUARKUS_LOG_CONSOLE_LEVEL
-    value: "DEBUG"
+    value: "INFO"
 ```
 
 ### QUARKUS_LOG_CONSOLE_JSON
@@ -116,17 +124,21 @@ Utilizado para definir se o log deve ser no formato JSON.
 
 **Formato:** `true` ou `false`
 
+Valor default: `true`
+
 **Ex:**
 
 ```yaml
 additionalVars:
   - name: QUARKUS_LOG_CONSOLE_JSON
-    value: "false"
+    value: "true"
 ```
 
 ### APPLICATION_VALIDATION_CURRENCY
 
 Utilizado para definir o código da moeda nacional segundo modelo ISO-4217.
+
+Valor default: `BRL`
 
 **Ex:**
 
@@ -144,6 +156,8 @@ consentimento e deverá ser um URN - Uniform Resource Name.
 Considerando a string urn:bancoex como exemplo para consentId temos:
  - o namespace(urn), conforme definido na [RFC8141](https://datatracker.ietf.org/doc/html/rfc8141) 
  - o identificador associado ao namespace da instituição transnmissora (bancoex) 
+
+Valor default: `urn:amazingbank`
 
 **Ex:**
 
