@@ -129,7 +129,7 @@ Exemplo:
       alg: "PS256"
       use: "sig"
       passphraseSecretName: "oob-as-keys"
-      passphraseSecretKey: "enc.sig.passphrase"
+      passphraseSecretKey: "sig.key.passphrase"
     - certSecretName: "oob-as-keys"
       certSecretKey: "enc.key"
       kid: "95NrL0TaTttM2-Awq0uCPqqE1gRYN9PRfYleHPlMv1w"
