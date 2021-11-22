@@ -45,11 +45,21 @@ Vide a [definição](../shared-definitions.md#oidc)
 ### signature
 
 Chave de assinatura para mensagens. Devem ser utilizados os mesmos valores do
-certificado do authorization server com use = `sig`
+certificado do authorization server com use = `sig`.
+Vide a [definição](../shared-definitions.md#formatos-de-chave-privada-suportados)
+para detalhes sobre os formatos de chaves suportados.
 
 * kid: Identificador da chave (Obtido do diretório de participantes)
 * certSecretName: Nome do secret que contém a chave privada
 * certSecretKey: Nome da propriedade do secret que contém a chave privada
+* passphraseSecretName: Nome do secret que contém a senha para a chave privada
+  (opcional)
+* passphraseSecretKey: Nome da propriedade do secret que contém a senha para a
+  chave privada (opcional)
+
+As propriedades `passphraseSecretName` e `passphraseSecretKey` só devem ser
+definidas para chaves criptografadas. Se elas não forem informadas assume-se que
+as chaves são abertas.
 
 Exemplo:
 
@@ -57,6 +67,8 @@ Exemplo:
     kid: "MPguImG0DEQwu9ZUvwDzw_0xybh1yAETY9VBLdYXibo"
     certSecretName: "oob-as-keys"
     certSecretKey: "sig.key"
+    passphraseSecretName: "oob-as-keys"
+    passphraseSecretKey: "sig.key.passphrase"
 ```
 
 ### organisation/id

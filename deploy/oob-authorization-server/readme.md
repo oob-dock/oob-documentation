@@ -101,6 +101,8 @@ Ex: `https://idp.bank.com.br/jwks.jwks`
 
 Lista de chaves privadas utilizadas para encriptar ou assinar mensagens. A lista
 deve conter pelo menos uma chave com use = sig (assinatura) e uma com use = enc (encriptação).
+Vide a [definição](../shared-definitions.md#formatos-de-chave-privada-suportados)
+para detalhes sobre os formatos de chaves suportados.
 
 * certSecretName: Nome do secret que contém a chave privada
 * certSecretKey: Nome da propriedade do secret que contém a chave privada
@@ -126,13 +128,13 @@ Exemplo:
       kid: "MPguImG0DEQwu9ZUvwDzw_0xybh1yAETY9VBLdYXibo"
       alg: "PS256"
       use: "sig"
+      passphraseSecretName: "oob-as-keys"
+      passphraseSecretKey: "sig.key.passphrase"
     - certSecretName: "oob-as-keys"
       certSecretKey: "enc.key"
       kid: "95NrL0TaTttM2-Awq0uCPqqE1gRYN9PRfYleHPlMv1w"
       alg: "RSA-OAEP"
       use: "enc"
-      passphraseSecretName: "oob-as-keys"
-      passphraseSecretKey: "enc.key.passphrase"
 ```
 
 As chaves devem ser geradas no diretório de participantes:
