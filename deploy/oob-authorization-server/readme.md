@@ -342,6 +342,23 @@ additionalVars:
     value: "9999999999.com.apple.wwdc"
 ```
 
+### AS_LOG_LEVEL
+
+Define o nível do log que será exibido no console da aplicação. Em produção é aconselhável
+ser level `info`.
+
+**Valores possíveis:** `emerg`, `error`, `warn`, `info`, `debug`
+
+Valor default: `info`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: AS_LOG_LEVEL
+    value: "debug"
+```
+
 ### ANDROID_PACKAGE_NAME
 
 application ID declarado no arquivo build.gradle. [Mais detalhes no site do Android](https://developer.android.com/training/app-links/verify-site-associations)
