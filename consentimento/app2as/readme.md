@@ -188,8 +188,8 @@ os casos de que o valor for `false`, a propriedade `redirectTo`, quando retornad
 contém a URL que deve ser aberta no sistema operacional do dispositivo para
 retorno ao TPP.
 
-Para a propriedade `redirectTo` o retorno é opcional, de forma que podem existir
-casos em que a propriedade não será retornada.
+O aplicativo deve orientar o usuário adequadamente para os cenários que a propriedade
+`redirectTo` não esteja presente.
 
 ### Comando `completed`
 
