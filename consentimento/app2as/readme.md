@@ -184,8 +184,12 @@ de retorno enviada no comando, garantindo que o TPP seja informado do motivo do
 erro e retome fluxo conforme o esperado pelo Guia de Experiência do Open Banking.
 
 A propriedade `isHandOff` indica se o fluxo é um hybrid flow com handoff e para
-os casos de que o valor for `false`, a propriedade `redirectTo` contém a URL que
-deve ser aberta no sistema operacional do dispositivo para retorno ao TPP.
+os casos de que o valor for `false`, a propriedade `redirectTo`, quando retornada,
+contém a URL que deve ser aberta no sistema operacional do dispositivo para
+retorno ao TPP.
+
+O aplicativo deve orientar o usuário adequadamente para os cenários que a propriedade
+`redirectTo` não esteja presente.
 
 ### Comando `completed`
 
@@ -221,6 +225,10 @@ Para executar o mock basta importar o JSON na ferramenta Mockoon e iniciar o
 servidor do _environment_ "OOB Authroization Server Apps API".
 
 ## Changelog
+
+### 2021-11-30 - v2.1.3
+
+- Adição das informações da propriedade redirectTo para casos de erro.
 
 ### 2021-10-15 - v2.1.2
 
