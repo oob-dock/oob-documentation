@@ -101,7 +101,7 @@ solicitado e enviar o resultado do comando ao AS OOB.
 
 Caso o usuário tenha se autenticado corretamente, a instituição deve emitir um
 token JWT assinado com as claims `cpf`, `cnpj`, `name`, `jti` e `iat` e enviar
-ao AS através da API `PUT /app/command/{id}/authenticate`, onde o `id` é o
+ao AS através da API `PUT /app/commands/{id}/authentication`, onde o `id` é o
 `commandId` do comando executado.
 
 As claims `cpf`, `cnpj` e `name` são referentes ao usuário logado, a claim `jti`
@@ -225,6 +225,10 @@ Para executar o mock basta importar o JSON na ferramenta Mockoon e iniciar o
 servidor do _environment_ "OOB Authroization Server Apps API".
 
 ## Changelog
+
+### 2021-12-13 - v2.1.4
+
+- Alteração do caminho de envio da solicitação de autenticação do usuário.
 
 ### 2021-11-30 - v2.1.3
 
