@@ -1,11 +1,7 @@
 # Configurações via Terraform
 
-## Configuração das rotas do Kong
-
-### Instalação
-
-A configuração do módulo é feita via terraform, sendo que existem dois módulos
-base que podem ser utilizados:
+A configuração dos sistemas externos aos OOB é feita via terraform, sendo que
+existem dois módulos base que podem ser utilizados:
 
 * kubernetes: deve ser utilizado por clientes que possuem uma marca única
 
@@ -13,6 +9,10 @@ base que podem ser utilizados:
 marca listada no diretório de participantes (por exemplo, instituições distintas).
 Neste caso várias das configurações estão na estrutura brands, e devem ser
 declaradas para cada marca.
+
+## Configuração das rotas do Kong
+
+A configuração das rotas no Kong é obrigatória para o funcionamento do sistema
 
 ### Configuração
 
@@ -194,11 +194,22 @@ Vide a [definição](../shared-definitions.md#brand-id)
 
 ## Configuração do Grafana
 
-### Instalação
+A configuração do Grafana é opcional. Caso ela seja ativada, um dashboard será
+criado com informações sobre o status do Kong. Por padrão, essa configuração
+está desativada então os parâmetros listados abaixo só precisam ser informados caso
+a configuração do Grafana seja necessária.
 
-Configuração opcional para a criação do dashboard do Kong no Grafana
+Essa configuração pode ser feita ativando a flag `configure_kong_grafana_dashboard`
+no módulo kubernetes (ou kubernetes_multibrand) ou executando o módulo grafana
+separadamente, com os mesmos parâmetros.
 
 ### Configuração
+
+#### configure_kong_grafana_dashboard
+
+Ativa a criação do dashboard do Kong no Grafana
+
+**Ex:** true
 
 #### grafana_uri
 
