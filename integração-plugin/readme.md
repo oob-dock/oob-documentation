@@ -33,6 +33,7 @@ serviços relacionados à(s) fase(s) do Open Banking Brasil (OBB).
   - [Configuração de timeout](#configuração-de-timeout)
   - [Tratamento de headers](#tratamento-de-headers)
   - [Implementação de cache](./cache/readme.md)
+  - [Classe utilitária camelHelper](#classe-utilitária-camelHelper)
   - [Componentes Suportados](#componentes-suportados)
     - [ACTIVEMQ](#activemq)
     - [AMQP](#amqp)
@@ -837,6 +838,169 @@ infraestrutura pode se acessado no conector.
 ![Consentimento - Arquivo de rotas para obter o consentimento](./images/consent_camel_xml_get_header_consent.png)
 
 &nbsp;
+
+## Classe utilitária camelHelper
+
+Existe uma classe utilitária de nome camelHelper que tem como objetivo fornecer
+algumas funções que são úteis para o desenvolvimentos dos conectores, a fim de
+facilitar alguns procedimentos, tais como completar strings com determinado caractere,
+conversão de datas, etc. Abaixo seguem as funções disponíveis na mesma, e a maneira
+para utilizar as funcionalidades.
+
+### lPad
+
+Esta função tem como objetivo retornar uma string o o tamanho informado,
+completando a mesma com o caractere informado à esquerda. Segue a assinatura
+da mesma:
+
+public String lPad(String inputString, char character, int length)
+
+onde:
+
+**inputString** -> refere-se à string original que deve ser modificada;
+
+**character** -> caractere que deve ser utilizado para completar a string para
+atingir o tamanho especificado.
+Exemplo: '0';
+
+**length** -> tamanho total da string a ser retornada;
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="lPad">
+    <simple>${bean:camelHelper.lPad("191", '0', 14)}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: 00000000000191
+
+Caso o tamanho informado seja menor ou igual ao da string de entrada, retorna a mesma
+sem modificação.
+
+### getCurrentZonedDateTime
+
+Esta função tem como objetivo retornar a data e hora de um determinado fuso horário,
+sendo que as partes de data e hora serão separadas por uma string definida na chamada.
+Segue a assinatura da mesma:
+
+public String getCurrentZonedDateTime(String zone, String separator, String dateFormat,
+String timeFormat)
+
+onde:
+
+**zone** -> refere-se ao time zone para o qual deseja-se obter a data e hora atuais.
+Para mais informações sobre as zonas disponíveis, [clique aqui](https://www.joda.org/joda-time/timezones.html).
+Exemplo: America/Sao_Paulo;
+
+**separator** -> string que define a separação entre as partes de data e hora.
+Exemplo: ";";
+
+**dateFormat** -> Formato para retornar a data atual. Exemplo: "dd/MM/yyyy";
+
+**timeFormat** -> Formato para retornar a hora atual. Exemplo: "HH:mm:ss";
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="getCurrentZonedDateTime">
+    <simple>${bean:camelHelper.getCurrentZonedDateTime("America/Sao_Paulo", ";", "yyyy-MM-dd", "HH-mm-ss")}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria algo do tipo: 2021-12-21;13-30-00
+
+Caso a zona ou formatos de data e hora sejam inválidos, loga o erro no console,
+e retorna uma string vazia.
+
+### getSplittedStringFromPosition
+
+Esta função tem como objetivo retornar o resultado da quebra de uma string conforme
+um separador especificado, e na posição informada. Segue a assinatura da mesma:
+
+public String getSplittedStringFromPosition(String text, String separator, int position)
+
+onde:
+
+**text** -> texto que deve ser quebrado;
+
+**separator** -> string que define o separador a ser utilizado na quebra da string.
+Exemplo: ";";
+
+**position** -> posição a ser retornada conforme o resultado da quebra da string;
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="getSplittedStringFromPosition">
+    <simple>${bean:camelHelper.getSplittedStringFromPosition("teste;quebra;texto", ";", 0)}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: teste
+
+Caso a posição informada seja maior ou igual ao total de itens resultantes da quebra,
+retorna o texto original.
+
+### getUTCFromDateTimeZoned
+
+Esta função tem como objetivo retornar a data e hora de um determinado fuso horário
+no fuso UTC, e no formato ISO sem milissegundos (yyyy-MM-ddTHH:mm:ssZ). Segue a
+assinatura da mesma:
+
+public String getUTCFromDateTimeZoned(String dateTime, String pattern, String zoneOrigin)
+
+onde:
+
+**dateTime** -> string que contém a data e hora a serem convertidas.
+Exemplo: "21/12/2021 13-30-00";
+
+**pattern** -> formato da data e hora informados. Exemplo: "dd/MM/yyyy HH-mm-ss";
+
+**zoneOrigin** -> refere-se ao time zone de origem da data e hora informados.
+Para mais informações sobre as zonas disponíveis, [clique aqui](https://www.joda.org/joda-time/timezones.html).
+Exemplo: America/Sao_Paulo;
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="getUTCFromDateTimeZoned">
+    <simple>${bean:camelHelper.getUTCFromDateTimeZoned("21/12/2021 13-30-00", "dd/MM/yyyy HH-mm-ss", "America/Sao_Paulo")}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: 2021-12-21T16:30:00Z
+
+Caso a data, formato e/ou zona sejam inválidos, loga o erro no console e retorna
+uma string vazia.
+
+### getStringFromNumberWithPlaces
+
+Esta função tem como objetivo um número na forma de string, e com a quantidade
+de casas decimais informadas. Segue a assinatura da mesma:
+
+public String getStringFromNumberWithPlaces(String number, Integer decimalPlaces)
+
+onde:
+
+**number** -> string que contém o número a ser formatado.
+Exemplo: "1.1";
+
+**decimalPlaces** -> quantidade de casas decimais para formatar o número.
+Exemplo: 4;
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="getStringFromNumberWithPlaces">
+    <simple>${bean:camelHelper.getStringFromNumberWithPlaces("1.1", 4)}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: 1.100
+
+Caso seja informado um número inválido, ou fora do formato americano (separador
+decimal diferente de "."), loga o erro no console, e retorna uma string vazia.
 
 ## Componentes Suportados
 
