@@ -141,6 +141,12 @@ da chamada no swagger, sendo que a resposta para a chamada realizada será:
 
 ## Changelog
 
+### 2021-12-23 - v1.1.0
+
+- Complementação do exemplo do uso da ferramenta, implementando
+todas as rotas existentes na mesma
+- Atualização das imagens da documentação
+
 ### 2021-11-05 - v1.0.1
 
 - Correção do bug que concatenava os paths das rotas do Camel XML com os endpoints
