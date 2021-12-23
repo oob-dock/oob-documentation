@@ -890,7 +890,8 @@ String timeFormat)
 onde:
 
 **zone** -> refere-se ao time zone para o qual deseja-se obter a data e hora atuais.
-Para mais informações sobre as zonas disponíveis, [clique aqui](https://www.joda.org/joda-time/timezones.html).
+Para mais informações sobre as zonas disponíveis, [clique aqui](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
 Exemplo: America/Sao_Paulo;
 
 **separator** -> string que define a separação entre as partes de data e hora.
@@ -958,7 +959,8 @@ Exemplo: "21/12/2021 13-30-00";
 **pattern** -> formato da data e hora informados. Exemplo: "dd/MM/yyyy HH-mm-ss";
 
 **zoneOrigin** -> refere-se ao time zone de origem da data e hora informados.
-Para mais informações sobre as zonas disponíveis, [clique aqui](https://www.joda.org/joda-time/timezones.html).
+Para mais informações sobre as zonas disponíveis, [clique aqui](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
+
 Exemplo: America/Sao_Paulo;
 
 Exemplo de chamada no camel:
