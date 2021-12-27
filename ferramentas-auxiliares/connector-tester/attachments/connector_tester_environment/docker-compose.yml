@@ -1,11 +1,11 @@
 version: "3.9"
 services:
-    oob-connector-tester:
-        build:
-          context: ./payment
+    oob-connector-custom:
+        build: 
+          context: ./connectorCustom
           dockerfile: Dockerfile
-        image: connector-tester:exemplo
+        image: oob-connector-custom:teste
         ports:
           - "8080:8080"
         env_file: 
-          - env_variables.env
+          - ./connectorCustom/env_variables.env
