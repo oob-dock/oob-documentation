@@ -281,7 +281,7 @@ URI para acesso ao prometheus
 A melhor forma de utilizar os scripts Terraform enviados é criar um novo script
 que chama os módulos entregues e define o local de armazenamento do estado. Esse
 script pode conter também as variáveis definidas para o ambiente onde a instalação
-está sendo feita, assim as messas configurações serão utilizadas nas próximas execuções.
+está sendo feita, assim as mesmas configurações serão utilizadas nas próximas execuções.
 
 A estrutura sugerida possui três arquivos:
 
@@ -292,7 +292,7 @@ homologação, etc) na execução do script)
 arquivos desse tipo pode ser criados para definir configurações de ambientes distintos.
 Esse arquivo deve ser especificado no comando de execução do script Terraform.
 
-É altamente recomendável que esses arquivos senha persistidos em algum mecanismos
+É altamente recomendável que esses arquivos sejam persistidos em algum mecanismos
 de versionamento, como um servidor GIT, sempre se atentando à presença de dados sensíveis.
 
 Exemplos:
@@ -300,7 +300,7 @@ Exemplos:
 ### main.tf
 
 ```HCL
-## O exemplo abaixo utiliza o s3 para persistência do estado, entretanto qualquer
+## O exemplo abaixo utiliza o AWS S3 para persistência do estado, entretanto qualquer
 ## mecanismo de persistência pode ser utilizado. É importante que o mesmo mecanismo
 ## seja utilizado em todas as execuções do script e que os dados gerados na execução
 ## anterior estejam disponíveis nesse mecanismo para a próxima.
