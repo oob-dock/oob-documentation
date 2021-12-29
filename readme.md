@@ -15,7 +15,7 @@
 
 ## Certificação
 
-[Roteiro para envio da certificação OpenID Foundation](certificacao/enviando-certificacao.md)
+[Roteiro para envio da certificação OpenID Foundation](certificacao/seguranca/enviando-certificacao.md)
 
 ## Ferramentas úteis
 
