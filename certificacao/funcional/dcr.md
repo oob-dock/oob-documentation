@@ -75,7 +75,7 @@ Substitua os `<alias>` pelo valor que está sendo usando no certificador funcion
 ## Software Statement
 
 Acesse o [diretório de participantes de sandbox](https://web.sandbox.directory.openbankingbrasil.org.br/)
-com um usuário com privilégio de alteração de `software statements.
+com um usuário com privilégio de alteração de `software statements`.
 
 Iremos utilizar o mesmo software statement utilizado na certificação de DCR, todos
 os passos a seguir são referentes à ele.
