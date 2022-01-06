@@ -53,6 +53,32 @@ um apontamento interno no Kubernetes
 
 **Ex:** `http://oob-consent`
 
+Configuração dos endereços base dos serviços acessíveis externamente (possivelmente o mesmo pra todos) 
+
+* channels/externalHost: Endereço externo base da API de canais (fase 1).
+
+**Ex:** `https://mtls-obb.qa.oob.opus-software.com.br`
+
+* productsServices/externalHost: Endereço externo base da API de produtos e serviços
+(fase 1).
+
+**Ex:** `https://mtls-obb.qa.oob.opus-software.com.br`
+
+* financialData/externalHost: Endereço externo base da API de dados financeiros
+(fase 2).
+
+**Ex:** `https://mtls-obb.qa.oob.opus-software.com.br`
+
+* payment/externalHost: Endereço externo base da api de pagamentos
+(fase 3).
+
+**Ex:** `https://mtls-obb.qa.oob.opus-software.com.br`
+
+* consent/externalHost: Endereço externo base da API de consentimento.
+
+**Ex:** `https://mtls-obb.qa.oob.opus-software.com.br`
+
+
 ### features
 
 Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-banking)
