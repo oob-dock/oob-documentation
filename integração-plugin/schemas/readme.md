@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2022-01-05 - v2.4.1
+
+- Payment
+  - Alteração do campo transactionIdentification para ter tamanho máximo de 35 caracteres
+
 ### 2021-11-03 - v2.4.0
 
 - Consent
