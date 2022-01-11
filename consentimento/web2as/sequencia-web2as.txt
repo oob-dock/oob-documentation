@@ -28,18 +28,18 @@ else case Abort
 
 custom->as:PUT /auth/app/commands/{commandId}/authentication {refused: true}
 custom<--as:Command error
-browser<--custom:HTML: Tela de transição + {redirect_to}
+browser<--custom:HTML: Tela de transição + {redirectTo}
 browser->user:"Erro, será redirecionado para..."
 note over browser:após n segundos
-browser->tpp: GET {redirect_to}
+browser->tpp: GET {redirectTo}
 
 end
 
 alt case Telas padrão de geração de consentimento do OOB
 
 custom<--as:Command completed
-browser<--custom: HTTP:REDIRECT:\n/auth/commands/{commandId}/resumeconsent
-browser->as: GET /auth/commands/{commandId}/resumeconsent
+browser<--custom:HTTP:REDIRECT: {redirectTo} (AS-OOB)
+browser->as:GET {redirectTo} (AS-OOB)
 browser<--as: HTML: tela de consentimento
 note over browser, as: OOB resolve o consentimento
 
@@ -54,10 +54,10 @@ user->browser: Concede consentimento
 browser->custom:Envia o consentimento
 custom->as: PUT /auth/app/commands/{commandId}/consent
 custom<--as:Command completed
-browser<--custom:HTML: Tela de transição + {redirect_to}
+browser<--custom:HTML: Tela de transição + {redirectTo}
 browser->user:"OK, será redirecionado para..."
 note over browser:após n segundos
-browser->tpp: GET {redirect_to}
+browser->tpp: GET {redirectTo}
 
 else case Abort
 
@@ -65,10 +65,10 @@ user->browser: Recusa consentimento
 browser->custom:Recusa consentimento
 custom->as: PUT /auth/app/commands/{commandId}/consent {refused: true}
 custom<--as:Command error
-browser<--custom:HTML: Tela de transição + {redirect_to}
+browser<--custom:HTML: Tela de transição + {redirectTo}
 browser->user:"Erro, será redirecionado para..."
 note over browser:após n segundos
-browser->tpp: GET {redirect_to}
+browser->tpp: GET {redirectTo}
 
 end 
 

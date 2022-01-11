@@ -141,3 +141,9 @@ geração do consentimento.
 O tratamento é o mesmo do comando `error` porém a mensagem a ser exibida ao
 usuário é do sucesso do consentimento. O tratamento de retorno ao TPP deve
 ser seguido como descrito no `error`.
+
+## Changelog
+
+### 2022-01-11 - v1.0.0
+
+- Versão inicial do arquivo.

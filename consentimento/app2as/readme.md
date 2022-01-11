@@ -1,9 +1,9 @@
-# Integração via aplicativo para Geração de Consentimento
+# Integração via aplicativo mobile para Geração de Consentimento
 
-A integração por aplicativo para a geração do consentimento é a melhor
+A integração por aplicativo mobile para a geração do consentimento é a melhor
 experiência de uso para o cliente da instituição, permitindo a inclusão das
-funcionalidades de Open Banking dentro do aplicativo da instituição já familiar
-ao cliente final.
+funcionalidades de Open Banking dentro do aplicativo mobile da instituição já
+familiar ao cliente final.
 
 A Geração do Consentimento é um momento crítico, inserido no meio do fluxo de
 OIDC e exigindo integrações não tradicionais, em especial o início da Geração do
@@ -59,7 +59,7 @@ deste loop de eventos pode ser conferida [neste link](../loop-comandos.md).
 ## Diagrama de sequência
 
 O diagrama de sequência a seguir ilustra de forma resumida o funcionamento entre
-o aplicativo mobile da instituição e o AS conforme descrito anteriormente.
+o aplicativo mobile da instituição e o AS conforme descrito no loop de comandos.
 
 ![Diagrama de sequência](images/sequencia-app2as.svg)
 
@@ -84,7 +84,7 @@ servidor do _environment_ "OOB Authroization Server Apps API".
 
 ### 2022-01-11 - v2.1.5
 
-- Isolando a definição do loop de comandos em uma outra página
+- Isolando a definição do loop de comandos em uma outra página.
 
 ### 2021-12-13 - v2.1.4
 
