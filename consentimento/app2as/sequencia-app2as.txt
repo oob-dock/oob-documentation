@@ -4,7 +4,7 @@ participant "TPP" as tpp
 participant "Device" as device
 participant "App Instituição" as app
 participant "BFF-Instituição" as bff
-participant "AS-Instituição" as idp
+participant "IDP-Instituição" as idp
 participant "API-AS-OOB" as as
 
 entryspacing 0.6
