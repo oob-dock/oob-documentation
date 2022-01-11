@@ -395,6 +395,38 @@ additionalVars:
     value: "SSL-Client-Cert"
 ```
 
+### CUSTOM_WEB_APP_AUTH_URL
+
+Template da URL de autenticação customizada definida pela instituição.
+
+Quando essa variável estiver definida a autenticação de usuários acontecerá
+via web utilizando a tela de login da instituição. O identificador inicial
+do fluxo de autenticação será mesclado na URL definida nessa variável no lugar
+do `<IDENTIFICADOR>`.
+
+**Formato:**
+
+A mescla permite a instituição receber o identificador através da `query string`,
+`fragment` ou `url`, como exibido na tabela abaixo:
+
+
+| Formato      | URL Exemplo                                                         |
+| ------------ | ------------------------------------------------------------------- |
+| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>` |
+| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
+| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
+
+É recomendado o uso de fragment sempre que possível, dado que ele também remove
+o identificador do histórico de navegação.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CUSTOM_WEB_APP_AUTH_URL
+    value: "https://ev.instituicao.com.br#<IDENTIFICADOR>"
+```
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
