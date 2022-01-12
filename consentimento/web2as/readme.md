@@ -29,13 +29,13 @@ A mescla permite a instituição receber o identificador através da `query stri
 | Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
 | URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
 
- O exemplo fornecido na documentação trafega o identificador através do fragment
- da URL e deve ser o formato utilizado se possível, ele também remove o
- identificador do histórico de navegação, evitando qualquer confusão por parte
- do cliente em tentar utilizar uma URL antiga de consentimento.
+ O exemplo fornecido na documentação utiliza o formato **Fragment** que é o mais
+ recomendado dentre as opções existentes, pois ele também remove o identificador
+ do histórico de navegação, evitando qualquer confusão por parte do cliente (por
+ exemplo ao tentar utilizar uma URL antiga de consentimento).
 
-Tal configuração pode ser conferida com detalhes e exemplo na página que descreve
-as [configurações do AS](../deploy/oob-authorization-server/readme.md).
+Tal configuração (`TBD`) pode ser conferida com detalhes e exemplo na página que
+descreve as [configurações do AS](../deploy/oob-authorization-server/readme.md).
 
 Se essa configuração estiver definida o AS entenderá que se trata de um fluxo
 de autenticação web customizado e retornará então para a aplicação de
@@ -53,7 +53,7 @@ padrão fornecidas junto do Opus Open Banking, ou ainda optar por utilizar suas
 próprias telas de geração de consentimento.
 
 Há uma configuração no AS que permite definir qual será a escolha da instituição.
-O nome e exemplo podem ser conferidos na página de
+O nome (`TBD`) e exemplo podem ser conferidos na página de
 [configurações do AS](../deploy/oob-authorization-server/readme.md).
 
 Caso a instituição opte por utilizar suas próprias telas de geração de consentimento

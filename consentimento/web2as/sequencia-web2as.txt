@@ -29,8 +29,7 @@ else case Abort
 custom->as:PUT /auth/app/commands/{commandId}/authentication {refused: true}
 custom<--as:Command error
 browser<--custom:HTML: Tela de transição + {redirectTo}
-browser->user:"Erro, será redirecionado para..."
-note over browser:após n segundos
+note over browser:Exibe tela de erro e após\nn segundos realiza o\nredirecionamento
 browser->tpp: GET {redirectTo}
 
 end
@@ -55,7 +54,7 @@ browser->custom:Envia o consentimento
 custom->as: PUT /auth/app/commands/{commandId}/consent
 custom<--as:Command completed
 browser<--custom:HTML: Tela de transição + {redirectTo}
-browser->user:"OK, será redirecionado para..."
+note over browser:Exibe tela de sucesso e\napós n segundos realiza o\nredirecionamento
 note over browser:após n segundos
 browser->tpp: GET {redirectTo}
 
@@ -66,8 +65,7 @@ browser->custom:Recusa consentimento
 custom->as: PUT /auth/app/commands/{commandId}/consent {refused: true}
 custom<--as:Command error
 browser<--custom:HTML: Tela de transição + {redirectTo}
-browser->user:"Erro, será redirecionado para..."
-note over browser:após n segundos
+note over browser:Exibe tela de erro e após\nn segundos realiza o\nredirecionamento
 browser->tpp: GET {redirectTo}
 
 end 
