@@ -53,7 +53,7 @@ um apontamento interno no Kubernetes
 
 **Ex:** `http://oob-consent`
 
-Configuração dos endereços base dos serviços acessíveis externamente mtls ou não 
+Configuração dos endereços base dos serviços acessíveis externamente mtls ou não
 
 * publicFqdn: Endereço externo base da API sem mtls
 
@@ -62,7 +62,6 @@ Configuração dos endereços base dos serviços acessíveis externamente mtls o
 * publicFqdnMtls: Endereço externo base da API com mtls
 
 **Ex:** `https://mtls-obb.qa.oob.opus-software.com.br`
-
 
 ### features
 
