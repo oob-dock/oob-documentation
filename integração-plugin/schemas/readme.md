@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2022-01-13 - v2.5.0
+
+- Payment
+  - Adicionado status SASP e SASC para pix agendado e rejectionReason CONSENT_REVOKED
+
 ### 2021-11-03 - v2.4.0
 
 - Consent
