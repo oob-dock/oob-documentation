@@ -1,10 +1,9 @@
 # Integração via aplicativo web para Geração de Consentimento
 
-Caso a instituição não possua aplicativo mobile próprio uma alternativa
-é a de realizar a autenticação através de sua própria página de login. Uma
-vez realizado o login, a instituição pode optar por utilizar as
-telas de geração de consentimento padrão do Opus Open Banking ou então suas
-próprias telas customizadas.
+Caso a instituição necessite, ela pode autenticar seus correntistas através
+de sua própria página de login. Uma vez realizado o login, a instituição pode
+optar por utilizar as telas de geração de consentimento padrão do Opus Open
+Banking ou então suas próprias telas customizadas.
 
 ## Open API Specification
 
@@ -15,16 +14,20 @@ As definições da API Rest estão definidas em Open API Specification 3.0 [aqui
 O início do fluxo ocorre a partir da chamada do primeiro `GET` à URL de
 autenticação junto ao AS (`https://<EV-FQDN-open-banking>/auth/auth`).
 
-O AS possui uma configuração que define o template da URL de autenticação
-customizada definida pela instituição, desta forma o identificador inicial
+Após receber esse `GET`, o AS então redireciona o browser do usuário para a
+URL do sistema responsável pela autenticação da instituição. Essa URL é
+configurável dentro do AS.
+
+Tal configuração define o template da URL de autenticação
+customizada da instituição, desta forma o identificador inicial
 do fluxo de autenticação que será tratado pela página de login pode ser
 mesclado na URL da forma que a instituição desejar.
 
 A mescla permite a instituição receber o identificador através da `query string`,
 `fragment` ou `url`, como exibido na tabela abaixo:
 
-| Formato      | URL Exemplo                                                         |
-| ------------ | ------------------------------------------------------------------- |
+| Formato      | URL Exemplo                                            |
+| ------------ | ------------------------------------------------------ |
 | Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>` |
 | Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
 | URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
@@ -58,9 +61,10 @@ O nome (`TBD`) e exemplo podem ser conferidos na página de
 
 Caso a instituição opte por utilizar suas próprias telas de geração de consentimento
 a parte do fluxo relativa à escolha dos recursos e aprovação/recusa do
-consentimento ficará por conta da própria instituição, que deverá se comunicar via
-API com o AS para informar os recursos selecionados, bem como a aprovação/recusa
-do consentimento em questão.
+consentimento, bem como a tela final responsável por realizar a transição da
+geração do consentimento de volta para o TPP, ficará por conta da própria
+instituição, que deverá se comunicar via API com o AS para informar os recursos
+selecionados, bem como a aprovação/recusa do consentimento em questão.
 
 ## Diagrama de sequência
 
