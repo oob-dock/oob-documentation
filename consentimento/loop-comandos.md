@@ -56,7 +56,7 @@ Importante ressaltar que o token JWT não deve ser assinado no aplicativo,
 evitando a exposição da chave privada de assinatura. A chave pública utilizada
 na assinatura deve estar exposta através de URL contendo o JWKS. O endereço do
 JWKS é configurável na instalação do OOB através da configuração
-`customer/federationJwksUrl` do [AS](../../deploy/oob-authorization-server/readme.md).
+`customer/federationJwksUrl` do [AS](../deploy/oob-authorization-server/readme.md).
 
 Um exemplo do conteúdo do JSON a ser utilizado no token JWT:
 
