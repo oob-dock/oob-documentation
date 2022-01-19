@@ -11,7 +11,7 @@ Consentimento que é justamente o início do fluxo de redirects do hybrid flow O
 
 ## Open API Specification
 
-As definições da API Rest estão definidas em Open API Specification 3.0 [aqui](../oas-web&app2as.yaml).
+As definições da API Rest estão definidas em Open API Specification 3.0 [aqui](../oas-webapp2as.yaml).
 
 ## Deep Link e Universal Link
 
@@ -96,7 +96,7 @@ servidor do _environment_ "OOB Authroization Server Apps API".
 
 ### 2021-10-15 - v2.1.2
 
-- Adição da estrutura do Jwt recebido no comando authenticate ao [oas-web&app2as.yaml](../oas-web&app2as.yaml).
+- Adição da estrutura do Jwt recebido no comando authenticate ao [oas-webapp2as.yaml](../oas-webapp2as.yaml).
 
 ### 2021-10-01 - v2.1.1
 
