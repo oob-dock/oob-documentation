@@ -7,7 +7,7 @@ Banking ou então suas próprias telas customizadas.
 
 ## Open API Specification
 
-As definições da API Rest estão definidas em Open API Specification 3.0 [aqui](oas-app2as.yaml).
+As definições da API Rest estão definidas em Open API Specification 3.0 [aqui](../oas-webapp2as.yaml).
 
 ## Iniciando o fluxo de login web customizado
 

@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   description: |-
-    Opus Open Banking - Authorization Server Mobile Application authorization &
+    Opus Open Banking - Authorization Server Mobile and Web Application authorization &
     consent API
   version: 0.1.1
   title: OOB Authorization Server Apps API
