@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2022-01-20 - v2.6.0
+
+- Geral
+  - Inclusão do campo schedule no consentimento de pagamento
+
 ### 2022-01-13 - v2.5.0
 
 - Payment
