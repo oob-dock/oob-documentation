@@ -169,6 +169,8 @@
                     "enum": [
                         "PDNG",
                         "PART",
+                        "SASP",
+                        "SASC",
                         "ACSP",
                         "ACSC",
                         "ACCC",
@@ -225,7 +227,8 @@
                         "INVALID_CONSENT",
                         "DENIED_MULTIPLE_AUTHORISATIONS",
                         "EXPIRED_MULTIPLE_AUTHORISATIONS",
-                        "EXPIRED_BILL"
+                        "EXPIRED_BILL",
+                        "CONSENT_REVOKED"
                     ],
                     "examples": [
                         "USER_NOT_YET_ACTIVATED"
