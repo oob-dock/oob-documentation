@@ -35,7 +35,7 @@ segurança do Open Banking Brasil definidos no atributo ACR do comando.
 O ACR pode ser `urn:brasil:openbanking:loa2` ou `urn:brasil:openbanking:loa3`,
 de forma reduzida o LoA2 (Level Of Assurance 2) exige que o usuário utilize no
 mínimo um fator de autenticação e o LoA3 exige no mínimo dois fatores distintos
-conforme a [especificação de segurança](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-financial-api-1_ID2.html#name-requesting-the-urnbrasilope)
+conforme a [especificação de segurança](https://openbanking-brasil.github.io/specs-seguranca/open-banking-brasil-financial-api-1_ID3.html#name-requesting-the-urnbrasilope)
 do Open Banking Brasil.
 
 O aplicativo deve então garantir a autenticação do usuário segundo o ACR
