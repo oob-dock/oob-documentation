@@ -487,6 +487,31 @@
                     "PAYMENT"
                 ]
             ]
+        },
+        "AuthExtraData": {
+            "type": "array",
+            "description": "Array de chave e valor com dados da instituição, esses dados serão enviados para o conector de discovery e podem ser utilizados como filtros para escolha de recursos.",
+            "items": {
+                "type": "object",
+                "required": [
+                    "key",
+                    "value"
+                ],
+                "properties": {
+                    "key": {
+                        "type": "string",
+                        "examples": [
+                            "agencia"
+                        ]
+                    },
+                    "value": {
+                        "type": "string",
+                        "examples": [
+                            "0011"
+                        ]
+                    }
+                }
+            }
         }
     }
 }
