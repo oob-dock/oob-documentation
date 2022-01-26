@@ -42,7 +42,7 @@ O aplicativo deve então garantir a autenticação do usuário segundo o ACR
 solicitado e enviar o resultado do comando ao AS OOB.
 
 Caso o usuário tenha se autenticado corretamente, a instituição deve emitir um
-token JWT assinado com as claims `cpf`, `cnpj`, `name`, `jti`, `iat` e, de forma 
+token JWT assinado com as claims `cpf`, `cnpj`, `name`, `jti`, `iat` e, de forma
 opcional, `authExtraData` e enviar ao AS através da API `PUT /app/commands/{id}/authentication`,
 onde o `id` é o `commandId` do comando executado.
 
@@ -51,13 +51,15 @@ deve conter o mesmo valor do retornado no comando da autenticação e o `iat` de
 conter o epoch da emissão do JWT. O `jti` é usado para evitar replay-attacks e
 o `iat` para  garantir o horário da emissão do token dentro de uma janela de
 tolerância dentro do AS OOB. O `authExtraData`, caso preenchido, é usado para
-adição de informações extras do usuário e também para outras formas de autenticação,  
-onde devem ser preenchidos os campos `key` e `value`.
+adição de informações extras do usuário e também para outras formas de autenticação,
+onde devem ser preenchidos os campos `key` e `value`, como podemos ver no exemplo
+mais abaixo.
 
 Caso a instituição não solicite as credencias de cpf ou cnpj no momento da autenticação,
 a claim `authExtraData` deve receber as credencias utilizadas pela instituição para
-autenticação. Vale ressaltar que caso o cpf e cnpj não sejam utilizados como credencias,
-o token JTW deve sempre conter a claim de `cpf` e, se existente, a claim de `cnpj`.
+autenticação. Vale ressaltar que caso o cpf e cnpj não sejam utilizados como credencias
+no processo de autenticação do correntista, o token JWT deve sempre conter a
+claim de `cpf` e, se existente, a claim de `cnpj`.
 
 Importante ressaltar que o token JWT não deve ser assinado no aplicativo,
 evitando a exposição da chave privada de assinatura. A chave pública utilizada
@@ -78,6 +80,10 @@ Um exemplo do conteúdo do JSON a ser utilizado no token JWT:
         {
             "key": "agencia",
             "value": "1234"
+        },
+        {
+            "key": "conta",
+            "value": "1234-5"
         }
     ]
 }
@@ -159,7 +165,7 @@ ser seguido como descrito no `error`.
 
 ### 2022-01-24 - v1.0.1
 
-- Adição da nova claim authExtraData no JSON do token JWT para utilização no command authenticate.
+- Adição da nova claim `authExtraData` no JSON do token JWT para utilização no command authenticate.
 
 ### 2022-01-11 - v1.0.0
 
