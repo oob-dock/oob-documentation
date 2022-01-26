@@ -427,6 +427,28 @@ additionalVars:
     value: "https://ev.instituicao.com.br#<IDENTIFICADOR>"
 ```
 
+### CUSTOM_WEB_APP_CONSENT_ENABLED
+
+Esta variável funciona em conjunto à variável `CUSTOM_WEB_APP_AUTH_URL`. Uma vez
+que a URL de autenticação customizada tenha sido definida, esta configuração
+determina se o fluxo de autenticação web utilizará telas customizadas para o
+fluxo de geração de consentimentos ou se usará as telas padrão fornecidas pelo
+Opus Open Banking. Quando seu valor for definido como `0` as telas padrão serão
+utilizadas, quando definido como `1` as telas customizadas deverão renderizar
+o fluxo da geração do consentimento.
+
+**Formato:** `0` ou `1`
+
+**Valor default:** `0`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CUSTOM_WEB_APP_CONSENT_ENABLED
+    value: "1"
+```
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
