@@ -50,6 +50,8 @@ Onde:
 
 ### 2022-01-13 - v2.5.0
 
+- Geral
+  - Inclusão do campo schedule no consentimento de pagamento
 - Payment
   - Adicionado status SASP e SASC para pix agendado e rejectionReason CONSENT_REVOKED
 
