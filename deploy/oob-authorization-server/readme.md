@@ -66,7 +66,7 @@ Configuração de acesso ao banco
 * password: Senha do usuário de acesso ao banco
 * host: Host do banco
 * type: Tipo do banco. Default: "postgres"
-  
+
 Exemplo:
 
 ```yaml
@@ -77,7 +77,7 @@ Exemplo:
     host: "postgres.local"
     type: "postgres"
 ```
-  
+
 ### api/baseUrlOobConsents
 
 - Endereço base do serviço de consentimento
@@ -317,7 +317,7 @@ additionalVars:
 ### AUTH_JWT_JTI_VALIDATION
 
 Define se o processo de autenticação definido na integração
-[APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do 
+[APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do
 `jti` informado no payload durante o request.
 
 **Formato:** `0` ou `1`
@@ -393,6 +393,76 @@ additionalVars:
     value: "SSL-Client-Verify"
   - name: SSL_CLIENT_CERT_HEADER_NAME
     value: "SSL-Client-Cert"
+```
+
+### HANDOFF_RESOURCE_URL
+
+Template da URL da página de handoff implementada pela instituição,
+utilizando a biblioteca javascript hospedada no authorization server.
+
+Quando essa variável estiver definida o fluxo de handoff estará ativo
+e se a instituição não possui tela de login via web configurada então o handoff
+será utilizado. O identificador inicial do fluxo de handoff será mesclado
+na URL definida nessa variável no lugar do `<IDENTIFICADOR>`.
+
+**Formato:**
+
+A mescla permite a instituição receber o identificador através da `query string`,
+`fragment` ou `url`, como exibido na tabela abaixo:
+
+| Formato      | URL Exemplo                                                         |
+| ------------ | ------------------------------------------------------------------- |
+| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>` |
+| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
+| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
+
+É recomendado o uso de fragment sempre que possível, dado que ele também remove
+o identificador do histórico de navegação.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: HANDOFF_RESOURCE_URL"
+    value: "https://ev.instituicao.com.br/pagina_handoff.html#<IDENTIFICACAO>"
+```
+
+### HANDOFF_TYPECODE_CHARSET
+
+Conjunto de caracteres a serem utilizados na geração de typeCode para o handoff.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: HANDOFF_TYPECODE_CHARSET"
+    value: "BCDFGHJKLMNPQRSTVWXZ"
+```
+
+### HANDOFF_TYPECODE_FORMAT
+
+Formato utilizado para a geração do typeCode para o handoff, '*' representa
+onde será colocado o caracter definido no charset. Recomenda-se utilizar de 6
+a mais caracteres para evitar repetição.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: HANDOFF_TYPECODE_FORMAT"
+    value: "********"
+```
+
+### HANDOFF_TYPECODE_EXPIRES_SECONDS
+
+Expiração do uso do typeCode em segundos, após expirar não pode mais ser utilizado.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: HANDOFF_TYPECODE_EXPIRES_SECONDS"
+    value: "360"
 ```
 
 ## Exposição
