@@ -48,6 +48,13 @@ Onde:
 
 ## Changelog
 
+### 2022-01-26 - v2.4.2
+
+- Consent
+  - Inclusão do campo authExtraData no schema comum do consentimento
+  - Inclusão do campo authExtraData no schema consentimento de pagamento
+  - Inclusão do campo authExtraData no request de exemplo do discovery de pagamento
+
 ### 2022-01-05 - v2.4.1
 
 - Payment
