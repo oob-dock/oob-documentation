@@ -508,3 +508,62 @@ Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota
 ARG approvePaymentRoute=file:/specs/custom-approvePaymentConsentCreation-routes.xml
 ENV camel.main.routes-include-pattern=$approvePaymentRoute
 ```
+
+## Verificação do status do pagamento agendado no sistema legado da instituição
+
+A verificação do status do pagamento agendado é o ponto de integração entre o
+Opus Open Banking e o sistema legado da instituição, responsável pela atualização
+do status do consentimento para os casos em que o pagamento é revogado fora do
+sistema do Opus Open Banking.
+
+### O que mudou com a adição do pagamento agendado?
+
+Foi definido pelo [Open Banking Brasil - OBB](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-3-apis-do-open-banking-brasil) que um novo valor possível para o status do
+consentimento será adicionado: REVOKED (REVOGADO). O status de um consentimento
+só poderá ser alterado para REVOKED, quando seu respectivo pagamento for do tipo
+agendado e cancelado por algum motivo, seja pelo próprio usuário ou pela
+instituição iniciadora ou detentora do pagamento.
+
+A razão para a criação de uma rota de verificação do status do pagamento agendado
+é devido à possibilidade de cancelar o pagamento fora do sistema do Open Banking,
+sendo necessário existir um meio em que o sistema do Opus Open Banking consiga
+verificar a situação do pagamento a fim de atualizar as informações de seu respectivo
+consentimento, caso ele seja revogado.
+
+### Momentos da verificação do status do pagamento no sistema legado
+
+O único momento em que a verificação do status do pagamento no sistema legado
+ocorrerá é durante a verificação das informações de um consentimento através do
+serviço GET Consent. Para não ocorrer chamadas desnecessárias no sistema legado,
+foram definidas condições para que elas ocorram.
+
+As condições são:
+
+- O pagamento ao qual o consentimento se refere deve ser do tipo agendado;
+- O status atual do consentimento deve ser CONSUMED;
+- Durante a última verificação, foi informado que o pagamento ainda não tinha
+sido finalizado, e nem revogado;
+
+A tabela a seguir lista os pontos de integração para a verificação do status do pagamento:
+
+| Tipo do consentimento | Nome da rota Camel                         |
+| --------------------- | ------------------------------------------ |
+| Pagamento             | ```direct:checkPaymentStatus``` |
+
+A tabela a seguir corresponde aos schemas do Request e do Response do conector:
+
+| Tipo     | JSON Schema                                                                                       | Exemplo |
+| -------- | ------------------------------------------------------------------------------------------------- | ------- |
+| Request  | [checkPaymentStatus-request.json](../schemas/v2/consent/checkPaymentStatus/request-schema.json)   | [checkPaymentStatus-request-example.json](../schemas/v2/consent/checkPaymentStatus/request-example.json) |
+| Response | [checkPaymentStatus-response.json](../schemas/v2/consent/checkPaymentStatus/request-example.json) | [checkPaymentStatus-response-example.json](../schemas/v2/consent/checkPaymentStatus/response-example.json) |
+
+Vale a pena ressaltar que para qualquer resposta obtida pelo conector que não
+siga os padrões definidos pelo schema acima - seja erro, má formatação ou falta
+de informação - as informações apresentadas ao usuário durante a chamada para o
+serviço do GET Consent serão aquelas já existentes no sistema do Opus Open Banking.
+Dessa forma, caso o pagamento tenha sido cancelado fora do sistema do
+Opus Open Banking, as informações apresentadas ao usuário estarão desatualizadas.
+No entanto, na próxima vez em que ocorrer a pesquisa do mesmo consentimento, a
+verificação de seu respectivo pagamento no sistema legado ocorrerá novamente, e
+caso o retorno obtido atenda os padrões definidos, seus dados serão atualizados 
+e apresentados de forma correta ao usuário.
