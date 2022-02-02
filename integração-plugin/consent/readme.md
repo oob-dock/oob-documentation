@@ -525,19 +525,19 @@ agendado e cancelado por algum motivo, seja pelo próprio usuário ou pela
 instituição iniciadora ou detentora do pagamento.
 
 A razão para a criação de uma rota de verificação do status do pagamento agendado
-é devido à possibilidade de cancelar o pagamento fora do sistema do Open Banking,
-sendo necessário existir um meio em que o sistema do Opus Open Banking consiga
-verificar a situação do pagamento a fim de atualizar as informações de seu respectivo
+é devido à possibilidade de cancelar o pagamento fora do sistema do Opus Open Banking,
+sendo necessário existir um meio que permita verificar a situação do pagamento a
+fim de atualizar as informações de seu respectivo
 consentimento, caso ele seja revogado.
 
 ### Momentos da verificação do status do pagamento no sistema legado
 
 O único momento em que a verificação do status do pagamento no sistema legado
 ocorrerá é durante a verificação das informações de um consentimento através do
-serviço GET Consent. Para não ocorrer chamadas desnecessárias no sistema legado,
-foram definidas condições para que elas ocorram.
+serviço GET Consent.
 
-As condições são:
+Para não ocorrer chamadas desnecessárias no sistema legado,
+foram definidas as seguintes condições para que elas ocorram:
 
 - O pagamento ao qual o consentimento se refere deve ser do tipo agendado;
 - O status atual do consentimento deve ser CONSUMED;
@@ -548,14 +548,14 @@ A tabela a seguir lista os pontos de integração para a verificação do status
 
 | Tipo do consentimento | Nome da rota Camel                         |
 | --------------------- | ------------------------------------------ |
-| Pagamento             | ```direct:checkPaymentStatus``` |
+| Pagamento             | ```direct:checkPaymentStatus```            |
 
 A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 
 | Tipo     | JSON Schema                                                                                       | Exemplo |
 | -------- | ------------------------------------------------------------------------------------------------- | ------- |
 | Request  | [checkPaymentStatus-request.json](../schemas/v2/consent/checkPaymentStatus/request-schema.json)   | [checkPaymentStatus-request-example.json](../schemas/v2/consent/checkPaymentStatus/request-example.json) |
-| Response | [checkPaymentStatus-response.json](../schemas/v2/consent/checkPaymentStatus/request-example.json) | [checkPaymentStatus-response-example.json](../schemas/v2/consent/checkPaymentStatus/response-example.json) |
+| Response | [checkPaymentStatus-response.json](../schemas/v2/consent/checkPaymentStatus/response-schema.json) | [checkPaymentStatus-response-example.json](../schemas/v2/consent/checkPaymentStatus/response-example.json) |
 
 Vale a pena ressaltar que para qualquer resposta obtida pelo conector que não
 siga os padrões definidos pelo schema acima - seja erro, má formatação ou falta
@@ -567,3 +567,13 @@ No entanto, na próxima vez em que ocorrer a pesquisa do mesmo consentimento, a
 verificação de seu respectivo pagamento no sistema legado ocorrerá novamente, e
 caso o retorno obtido atenda os padrões definidos, seus dados serão atualizados 
 e apresentados de forma correta ao usuário.
+
+A tabela abaixo possui mais alguns exemplos de respostas que a rota checkPaymentStatus pode retornar:
+
+| Caso | Exemplo de Resposta                         |
+| --------------------- | ------------------------------------------ |
+| Revogação realizada pelo USER             | [revokedByUser.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_revokedByUser.json) |
+| Revogação realizada pelo TPP             | [revokedByTPP.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_revokedByTPP.json) |
+| Revogação realizada pelo ASPSP             | [revokedByASPSP.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_revokedByASPSP.json) |
+| Pagamento rejeitado sem revogação             | [rejected.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_rejectedPayment.json) |
+| Pagamento pendente             | [pendingPayment.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_pendingPayment.json) |
