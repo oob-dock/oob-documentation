@@ -197,6 +197,12 @@ num FQDN exclusivo, configurar com o valor `/`.
 
 Ex: `/auth/`
 
+#### authNonFapiBasePath
+
+Base path do AS não regulatório. Essa configuração sempre deve terminar com `/`.
+
+Ex: `/auth-nonfapi/`
+
 #### central_directory_jwks
 
 Endereço do JWKS do diretório de participantes. Ambientes não-produtivos devem
