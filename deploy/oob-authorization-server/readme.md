@@ -430,7 +430,7 @@ additionalVars:
 ### HANDOFF_TYPECODE_CHARSET
 
 Conjunto de caracteres a serem utilizados na geração de typeCode para o handoff.
-Se está configuração não estiver presente a geração do typeCode não será realizada.
+Se esta configuração não estiver presente a geração do typeCode não será realizada.
 
 **Ex:**
 
