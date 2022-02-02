@@ -430,6 +430,7 @@ additionalVars:
 ### HANDOFF_TYPECODE_CHARSET
 
 Conjunto de caracteres a serem utilizados na geração de typeCode para o handoff.
+Se está configuração não estiver presente a geração do typeCode não será realizada.
 
 **Ex:**
 
@@ -451,18 +452,6 @@ a mais caracteres para evitar repetição.
 additionalVars:
   - name: HANDOFF_TYPECODE_FORMAT"
     value: "********"
-```
-
-### HANDOFF_TYPECODE_EXPIRES_SECONDS
-
-Expiração do uso do typeCode em segundos, após expirar não pode mais ser utilizado.
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: HANDOFF_TYPECODE_EXPIRES_SECONDS"
-    value: "360"
 ```
 
 ## Exposição
