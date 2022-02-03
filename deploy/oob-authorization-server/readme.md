@@ -405,6 +405,9 @@ e se a instituição não possui tela de login via web configurada então o hand
 será utilizado. O identificador inicial do fluxo de handoff será mesclado
 na URL definida nessa variável no lugar do `<IDENTIFICADOR>`.
 
+**IMPORTANTE**: Caso não queira habilitar o fluxo de handoff, não preencha a variável.
+Se ele estiver preenchido com um valor incorreto, o fluxo será interrompido por erro.
+
 **Formato:**
 
 A mescla permite a instituição receber o identificador através da `query string`,
