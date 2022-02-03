@@ -1,0 +1,35 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "type": "object",
+            "description": "Objeto para o caso de revogação realizada com sucesso.",
+            "required": [
+                "paymentId",
+                "action"
+            ],
+            "properties": {
+                "paymentId": {
+                    "type": "string",
+                    "description": "Id do pagamento para o qual foi realizado a revogação.",
+                    "examples": [
+                        "1234"
+                    ]
+                },
+                "action": {
+                    "type": "string",
+                    "description": "Ação realizada.",
+                    "examples": [
+                        "schedule_revoked"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

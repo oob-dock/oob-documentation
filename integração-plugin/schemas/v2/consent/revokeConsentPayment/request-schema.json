@@ -1,0 +1,54 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "requestMeta",
+        "requestBody"
+    ],
+    
+    "properties": {
+        "requestMeta": {
+            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+        },
+        "requestBody": {
+            "type": "object",
+            "description": "Payload para revogação de pagamento Pix agendado.",
+            "properties": {
+                "paymentId": {
+                    "$ref": "../../common/common-schema.json#/$defs/PaymentId"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "Objeto contendo dados de revogação.",
+                    "required": [
+                        "status",
+                        "revocation"
+                    ],
+                    "properties": {
+                        "status": {
+                            "type": "string",
+                            "maxLength": 22,
+                            "enum": [
+                                "AWAITING_AUTHORISATION",
+                                "AUTHORISED",
+                                "REJECTED",
+                                "CONSUMED",
+                                "REVOKED"
+                            ],
+                            "description": "Retorna o estado do consentimento. Estados possíveis: \n- AWAITING_AUTHORISATION - Aguardando autorização\n- AUTHORISED - Autorizado\n- REJECTED - Rejeitado\n- CONSUMED - Consumido\n- REVOKED - Revogado",
+                            "examples": [
+                                "REVOKED"
+                            ]
+                        },
+                        "revocation": {
+                            "$ref": "../../common/common-schema.json#/$defs/RevokeSchedulePix"
+                        }
+                    },
+                    "additionalProperties": false
+                }
+            },
+            "additionalProperties": false
+        }
+    },
+    "additionalProperties": false
+}

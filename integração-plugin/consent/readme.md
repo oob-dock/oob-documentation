@@ -508,3 +508,36 @@ Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota
 ARG approvePaymentRoute=file:/specs/custom-approvePaymentConsentCreation-routes.xml
 ENV camel.main.routes-include-pattern=$approvePaymentRoute
 ```
+
+## Revogação do consentimento de pagamento
+
+A revogação de um consentimento de pagamento só é possível para o caso do pagamento 
+ser do tipo Pix Agendado, o consentimento estar consumido (status CONSUMED) e a data 
+da solicitação de revogação ser anterior a data de agendamento do pagamento do Pix. 
+Com a revogação o status do consentimento é atualizado para REVOKED.
+
+A rota para realizar a regovação de um pagamento Pix Agendado foi criada pois é possível 
+revogar fora do sistema Open Banking. Por meio da rota é verificada a possibilidade de
+revogar o consentimento de pagamento desta solicitação e assim fazer a revogação.
+
+A tabela a seguir lista o ponto de integração para a revogação do consentimento do  pagamento:
+
+| Tipo do consentimento | Nome da rota Camel                         |
+| --------------------- | ------------------------------------------ |
+| Pagamento             | ```direct:consentPaymentRevocation```            |
+
+A tabela a seguir corresponde aos schemas do Request e do Response do conector:
+
+| Tipo     | JSON Schema                                                                                           | Exemplo |
+| -------- | ----------------------------------------------------------------------------------------------------- | ------- |
+| Request  | [revokeConsentPayment-request.json](../schemas/v2/consent/revokeConsentPayment/request-schema.json)   | [revokeConsentPayment-request-example.json](../schemas/v2/consent/revokeConsentPayment/request-example.json) |
+
+| Response | [revokeConsentPayment-response.json](../schemas/v2/consent/revokeConsentPayment/response-schema.json) | [revokeConsentPayment-response-example.json](../schemas/v2/consent/revokeConsentPayment/response-example.json) |
+
+Caso seja enviado um payload na requisição que não atenda ao objeto definido no JSON Schema
+ou não seja possível regovar o consentimento do pagamento por não atender os requisitos que 
+possibilitem a revogação, será retornado um objeto de erro a exemplo deste genérico 
+[revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
+
+
+

@@ -1,6 +1,92 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema",
     "$defs": {
+        "PaymentId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "required": [
+                    "key"
+                ],
+                "properties": {
+                    "key": {
+                        "description": "Nome do campo do identificador no sistema de origem",
+                        "type": "string",
+                        "examples": [
+                            "internalPaymentId"
+                        ]
+                    },
+                    "value": {
+                        "description": "Valor do campo do identificador no sistema de origem",
+                        "type": "string",
+                        "examples": [
+                            "1234"
+                        ]
+                    }
+                },
+                "additionalItems": false
+            },
+            "minItems": 1,
+            "maxItems": 10
+        },
+        "RevokeSchedulePix": {
+            "type": "object",
+            "description": "Objeto que contém as informações das circunstância da revogação. [Restrição] O campo loggedUser deve ser preenchido quando a revogação for feita pelo usuário final, ou seja, se o campo data.revocation.revokedBy estiver com o valor 'USER'",
+            "required": [
+                "revokedBy",
+                "reason"
+            ],
+            "properties": {
+                "loggedUser": {
+                    "$ref": "./consent/common-consent-schema.json#/$defs/LoggedUser"
+                },
+                "revokedBy": {
+                    "type": "",
+                    "maxLength": 8,
+                    "enum": [
+                        "USER",
+                        "ASPSP",
+                        "TPP"
+                    ],
+                    "description": "Define qual das partes envolvidas na transação está realizando a revogação. Valores possíveis: \n- USER - Revogado pelo usuário\n- ASPSP - Provedor de serviços de pagamento para serviços de conta - Detentora de conta\n- TPP - Instituições Provedoras - iniciadora de pagamentos",
+                    "examples": [
+                        "TPP"
+                    ]
+                },
+                "reason": {
+                    "$ref": "#/$defs/RevocationReason"
+                }
+            },
+            "additionalProperties": false
+        },
+        "RevocationReason": {
+            "type": "string",
+            "description": "Define a razão pela qual o consentimento foi revogado.",
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Define o código da razão pela qual o consentimento foi revogado. Valores possíveis:\n- FRAUD - Indica suspeita de fraude\n- ACCOUNT_CLOSURE - Indica que a conta do usuário foi encerrada\n- OTHER - Indica que motivo do cancelamento está fora dos motivos pré-estabelecidos.",
+                    "maxLength": "22",
+                    "examples": [
+                        "FRAUD"
+                    ]
+                },
+                "additionalInformation": {
+                    "type": "string",
+                    "description": "Contém informações adicionais definidas pelo requisitante da revogação. [Restrição] Obrigatório quando o campo revokedBy for igual a TPP ou ASPSP e o motivo de revogação for OTHER.",
+                    "maxLength": "140",
+                    "pattern": "[\\w\\W\\s]*",
+                    "examples": [
+                        "Suspeita de fraude"
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
         "BrandId": {
             "type": "string",
             "description": "Identificador da marca reportada pelo participante do Open Banking",

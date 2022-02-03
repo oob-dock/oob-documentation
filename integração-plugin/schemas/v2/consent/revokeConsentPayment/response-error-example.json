@@ -1,0 +1,7 @@
+{
+  "errors": [{
+      "code": "NAO_INFORMADO",
+      "title": "Não informado.",
+      "detail": "The scheduling could not be cancelled"
+  }]
+}

@@ -1,0 +1,51 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "errors"
+    ],
+    "properties": {
+        "errors": {
+            "type": "array",
+            "description": "Objeto para o caso de retorno de erro ao tentar revogar um pagamento do tipo pix agendado.",
+            "additionalItems": true,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "title",
+                            "detail"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "description": "Código de erro.",
+                                "examples": [
+                                    "NAO_INFORMADO"
+                                ]
+                            },
+                            "title": {
+                                "type": "string",
+                                "description": "Título do erro.",
+                                "examples": [
+                                    "Não informado."
+                                ]
+                            },
+                            "detail": {
+                                "type": "string",
+                                "description": "Detalhes do erro.",
+                                "examples": [
+                                    "The scheduling could not be cancelled"
+                                ]
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        }
+    },
+    "additionalProperties": false
+  }

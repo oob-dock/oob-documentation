@@ -1,0 +1,6 @@
+{
+    "data" : {
+        "paymentId": "1234",
+        "action": "schedule_revoked"
+    }
+}
