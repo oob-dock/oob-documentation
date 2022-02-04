@@ -512,7 +512,7 @@ ENV camel.main.routes-include-pattern=$approvePaymentRoute
 ## Verificação do status do pagamento agendado no sistema legado da instituição
 
 A verificação do status do pagamento agendado é o ponto de integração entre o
-Opus Open Banking e o sistema legado da instituição, responsável pela atualização
+Opus Open Banking e o sistema legado da instituição responsável pela atualização
 do status do consentimento para os casos em que o pagamento é revogado fora do
 sistema do Opus Open Banking.
 
@@ -520,7 +520,7 @@ sistema do Opus Open Banking.
 
 Foi definido pelo [Open Banking Brasil - OBB](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-3-apis-do-open-banking-brasil) que um novo valor possível para o status do
 consentimento será adicionado: REVOKED (REVOGADO). O status de um consentimento
-só poderá ser alterado para REVOKED, quando seu respectivo pagamento for do tipo
+só poderá ser alterado para REVOKED, quando seu status atual for CONSUMED, e seu respectivo pagamento for do tipo
 agendado e cancelado por algum motivo, seja pelo próprio usuário ou pela
 instituição iniciadora ou detentora do pagamento.
 
@@ -537,7 +537,7 @@ ocorrerá é durante a verificação das informações de um consentimento atrav
 serviço GET Consent.
 
 Para não ocorrer chamadas desnecessárias no sistema legado,
-foram definidas as seguintes condições para que elas ocorram:
+foram definidas as seguintes condições:
 
 - O pagamento ao qual o consentimento se refere deve ser do tipo agendado;
 - O status atual do consentimento deve ser CONSUMED;
@@ -577,3 +577,8 @@ A tabela abaixo possui mais alguns exemplos de respostas que a rota checkPayment
 | Revogação realizada pelo ASPSP             | [revokedByASPSP.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_revokedByASPSP.json) |
 | Pagamento rejeitado sem revogação             | [rejected.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_rejectedPayment.json) |
 | Pagamento pendente             | [pendingPayment.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_pendingPayment.json) |
+
+Já os **headers** enviados para a rota checkPaymentStatus são:
+| Nome do campo | Descrição                                             | Tipo          |
+| ------------- | ------------------------------------------------------| ------------- |
+| correlationId | CorrelationId correspondente ao GET Consent realizado | String        |
