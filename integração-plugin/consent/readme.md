@@ -513,12 +513,18 @@ ENV camel.main.routes-include-pattern=$approvePaymentRoute
 
 A revogação de um consentimento de pagamento só é possível para o caso do pagamento 
 ser do tipo Pix Agendado, o consentimento estar consumido (status CONSUMED) e a data 
-da solicitação de revogação ser anterior a data de agendamento do pagamento do Pix. 
+da solicitação de revogação ser até o dia anterior, ou seja, a meia noite no fuso 
+horário de Brasília do dia imediatamente anterior a data alvo da liquidação do pagamento. 
 Com a revogação o status do consentimento é atualizado para REVOKED.
 
-A rota para realizar a regovação de um pagamento Pix Agendado foi criada pois é possível 
-revogar fora do sistema Open Banking. Por meio da rota é verificada a possibilidade de
-revogar o consentimento de pagamento desta solicitação e assim fazer a revogação.
+A rota para realizar a revogação de um pagamento Pix Agendado foi criada para atender o que foi 
+definido no guia de experiência do usuário, possibilitando estes 5 cenários de revogação:
+
+1.	Revogação pelo usuário na iniciadora na área de gestão de pagamentos do open banking 
+2.	Revogação pelo usuário na detentora na área de gestão de pagamentos do open banking 
+3.	Revogação pelo usuário na detentora na área de gestão de Pix
+4.	Revogação pela iniciadora sem a presença do usuário
+5.	Revogação pela detentora sem a presença do usuário
 
 A tabela a seguir lista o ponto de integração para a revogação do consentimento do  pagamento:
 
@@ -536,7 +542,7 @@ A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 
 Caso seja enviado um payload na requisição que não atenda ao objeto definido no JSON Schema
 ou não seja possível regovar o consentimento do pagamento por não atender os requisitos que 
-possibilitem a revogação, será retornado um objeto de erro a exemplo deste genérico 
+possibilitem a revogação, será retornado um objeto de erro a exemplo deste  
 [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
 
 

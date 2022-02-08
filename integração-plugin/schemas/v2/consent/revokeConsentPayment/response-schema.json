@@ -14,17 +14,16 @@
             ],
             "properties": {
                 "paymentId": {
-                    "type": "string",
-                    "description": "Id do pagamento para o qual foi realizado a revogação.",
-                    "examples": [
-                        "1234"
-                    ]
+                    "$ref": "../../payment/common/common-schema.json#/$defs/PaymentId"
                 },
                 "action": {
                     "type": "string",
                     "description": "Ação realizada.",
+                    "enum": [
+                        "SCHEDULE_REVOKED"
+                    ],
                     "examples": [
-                        "schedule_revoked"
+                        "SCHEDULE_REVOKED"
                     ]
                 }
             },

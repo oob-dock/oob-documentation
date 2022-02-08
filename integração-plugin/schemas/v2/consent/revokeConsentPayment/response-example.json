@@ -1,6 +1,11 @@
 {
     "data" : {
-        "paymentId": "1234",
+        "paymentId": [
+            {
+                "key": "internalPaymentId",
+                "value": "1234"
+            }
+        ],
         "action": "schedule_revoked"
     }
 }

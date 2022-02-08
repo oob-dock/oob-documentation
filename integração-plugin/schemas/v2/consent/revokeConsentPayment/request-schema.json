@@ -15,7 +15,7 @@
             "description": "Payload para revogação de pagamento Pix agendado.",
             "properties": {
                 "paymentId": {
-                    "$ref": "../../common/common-schema.json#/$defs/PaymentId"
+                    "$ref": "../../payment/common/common-schema.json#/$defs/PaymentId"
                 },
                 "data": {
                     "type": "object",
@@ -29,13 +29,9 @@
                             "type": "string",
                             "maxLength": 22,
                             "enum": [
-                                "AWAITING_AUTHORISATION",
-                                "AUTHORISED",
-                                "REJECTED",
-                                "CONSUMED",
                                 "REVOKED"
                             ],
-                            "description": "Retorna o estado do consentimento. Estados possíveis: \n- AWAITING_AUTHORISATION - Aguardando autorização\n- AUTHORISED - Autorizado\n- REJECTED - Rejeitado\n- CONSUMED - Consumido\n- REVOKED - Revogado",
+                            "description": "Retorna o estado do consentimento. [Restrição] O único valor válido é REVOKED. (caso contrário a detentora deve retornar erro HTTP 400)",
                             "examples": [
                                 "REVOKED"
                             ]
