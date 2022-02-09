@@ -1,0 +1,9 @@
+{
+  "errors": [
+      {
+          "code": "INFORMACAO_USUARIO_REQUERIDA",
+          "title": "Informação usuário requerida.",
+          "detail": "O campo data.revocation.loggedUser deve ser preenchido quando o campo data.revocation.revokedBy estiver com o valor USER"
+      }
+  ]
+}
