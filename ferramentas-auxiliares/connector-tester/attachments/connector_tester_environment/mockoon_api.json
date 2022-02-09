@@ -1,67 +1,134 @@
 {
-    "source": "mockoon:1.15.0",
-    "data": [
+  "uuid": "de4cf79d-0d12-4fef-9d51-666e3b3c45d2",
+  "lastMigration": 18,
+  "name": "mock_api",
+  "endpointPrefix": "pix/v1",
+  "latency": 70,
+  "port": 5000,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "c7fac703-2d80-4445-94d3-8e254419ac15",
+      "documentation": "Método para criar a iniciação de pagamento",
+      "method": "get",
+      "endpoint": "discovery/account/v1/:documentNumber",
+      "responses": [
         {
-            "type": "environment",
-            "item": {
-                "uuid": "",
-                "lastMigration": 17,
-                "name": "mock_api",
-                "endpointPrefix": "payments/v1",
-                "latency": 70,
-                "port": 5000,
-                "hostname": "0.0.0.0",
-                "routes": [
-                    {
-                        "uuid": "",
-                        "documentation": "Método para criar a iniciação de pagamento",
-                        "method": "post",
-                        "endpoint": "pix",
-                        "responses": [
-                            {
-                                "uuid": "",
-                                "body": "{\n  \"instPayId\": \"e33b469a-c121-41b4-87d1-b2c0947c108a\",\n  \"endToEndId\": \"E9040088820210128000800123348752\",\n  \"initiationTimestampUTC\": \"2021-10-05T18:00:00Z\",\n  \"statusTimestampUTC\": \"2021-10-05T18:00:00Z\",\n  \"paymentForm\": \"DICT\",\n  \"key\": \"12345678901\",\n  \"status\": {\n    \"code\": \"1\"\n  },\n \"transaction\": {\n   \"amount\": \"123.45\",\n   \"currency\": \"BRL\"\n },\n \"additionalInformation\": \"Teste criar pagamento\",\n \"payee\": {\n   \"ispb\": \"12345678\",\n   \"issuer\": \"1774\",\n   \"number\": \"6251965162\",\n   \"accountType\": \"CACC\"\n },\n \"initiatorDocument\": \"00000000000191\"\n}",
-                                "latency": 80,
-                                "statusCode": 201,
-                                "label": "",
-                                "headers": [],
-                                "filePath": "",
-                                "sendFileAsBody": false,
-                                "rules": [],
-                                "rulesOperator": "OR",
-                                "disableTemplating": false,
-                                "fallbackTo404": false
-                            }
-                        ],
-                        "enabled": true,
-                        "randomResponse": false,
-                        "sequentialResponse": false
-                    }
-                ],
-                "proxyMode": false,
-                "proxyHost": "",
-                "proxyRemovePrefix": false,
-                "https": false,
-                "cors": true,
-                "headers": [
-                    {
-                        "key": "Content-Type",
-                        "value": "application/json"
-                    }
-                ],
-                "proxyReqHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ],
-                "proxyResHeaders": [
-                    {
-                        "key": "",
-                        "value": ""
-                    }
-                ]
-            }
+          "uuid": "e2c3ee9a-a035-40dc-8e81-2aa3ed7ca204",
+          "body": "{\n  \"accountIdentifier\": \"948586e9-fbb9-4326-92e5-f2c550ab8569\",\n  \"issuer\": \"0001\",\n  \"accountNumber\": \"245874\",\n  \"accountVerifier\": \"7\",\n  \"clientDocument\": \"59457888057\",\n  \"clientName\": \"Jose da Silva\"\n}",
+          "latency": 80,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
         }
-    ]
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "0f10d8d4-1bc2-44a3-9591-48901358de16",
+      "documentation": "Método para criar a iniciação de pagamento",
+      "method": "post",
+      "endpoint": "pix",
+      "responses": [
+        {
+          "uuid": "c6db4956-91ed-4336-9b83-68cebcb130d7",
+          "body": "{\n  \"instPayId\": \"e33b469a-c121-41b4-87d1-b2c0947c108a\",\n  \"endToEndId\": \"E9040088820210128000800123348752\",\n  \"initiationTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"statusTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"paymentForm\": \"DICT\",\n  \"key\": \"person@company.com\",\n  \"status\": {\n    \"code\": \"1\"\n  },\n \"transaction\": {\n   \"amount\": \"1.23\",\n   \"currency\": \"BRL\"\n },\n \"additionalInformation\": \"teste pagamento verdecard\",\n \"payee\": {\n   \"ispb\": \"12345678\",\n   \"issuer\": \"0001\",\n   \"number\": \"159753\",\n   \"accountType\": \"CACC\"\n },\n \"initiatorDocument\": \"00000000000191\"\n}",
+          "latency": 80,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "1176971a-dcd7-4cdc-91ec-d21dc69fb3ba",
+      "documentation": "Método para criar a iniciação de pagamento",
+      "method": "get",
+      "endpoint": "pix/status/:paymentId",
+      "responses": [
+        {
+          "uuid": "726c4385-31c3-4c83-89f5-57c2af4bbf8d",
+          "body": "{\n  \"instPayId\": \"e33b469a-c121-41b4-87d1-b2c0947c108a\",\n  \"endToEndId\": \"E9040088820210128000800123348752\",\n  \"initiationTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"statusTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"paymentForm\": \"DICT\",\n  \"key\": \"person@company.com\",\n  \"status\": {\n    \"code\": \"1\"\n  },\n \"transaction\": {\n   \"amount\": \"1.23\",\n   \"currency\": \"BRL\"\n },\n \"additionalInformation\": \"teste pagamento verdecard\",\n \"payee\": {\n   \"ispb\": \"12345678\",\n   \"issuer\": \"0001\",\n   \"number\": \"159753\",\n   \"accountType\": \"CACC\"\n },\n \"initiatorDocument\": \"00000000000191\"\n}",
+          "latency": 80,
+          "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "90fc8acc-0998-4838-a670-127df200c4b2",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "getCurrentCycle",
+      "responses": [
+        {
+          "uuid": "afd737c6-d85b-4eab-b905-60f1589e708f",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "https": false,
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ]
 }

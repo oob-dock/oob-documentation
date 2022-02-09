@@ -306,8 +306,8 @@
         "TransactionIdentification": {
             "description": "Trata-se de um identificador de transação que deve ser retransmitido intacto pelo PSP do pagador ao gerar a ordem de pagamento. Essa informação permitirá ao recebedor identificar e correlacionar a transferência, quando recebida, com a apresentação das instruções ao pagador.",
             "type": "string",
-            "maxLength": 25,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]{0,24}$",
+            "maxLength": 35,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9]{0,34}$",
             "examples": [
                 "E00038166201907261559y6j6"
             ]

@@ -43,6 +43,12 @@
                 }
             },
             "ibgeTownCode": "5300108"
-        }
+        },
+        "authExtraData": [
+            {
+                "key": "agencia",
+                "value": "0011"
+            }
+        ]
     }
 }

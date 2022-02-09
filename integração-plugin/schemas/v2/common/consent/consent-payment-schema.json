@@ -47,6 +47,9 @@
                 },
                 "debtorAccount": {
                     "$ref": "../common-payment-schema.json#/$defs/DebtorAccount"
+                },
+                "authExtraData": {
+                    "$ref": "./common-consent-schema.json#/$defs/AuthExtraData"
                 }
             },
             "additionalProperties": false
