@@ -101,3 +101,13 @@ Cada feature definida na tabela acima suporta os seguintes escopos:
 | open-data      | openid                                                                                                                                       |
 | financial-data | openid, accounts, credit-cards-accounts, customers, invoice-financings, financings, loans, unarranged-accounts-overdraft, resources          |
 | payments       | openid, payments, consents, resources                                                                                                        |
+
+## Formatos de chave privada suportados
+
+No produto são suportados os formatos de chave PKCS1 e PKCS8. O suporte a PKCS1
+é feito principalmente sobre o uso do algoritmo RSA para criptografia. Já o
+suporte a PKCS8 é devido ao fato de ser um padrão que permite manipular chaves
+privadas para todos os algoritmos, não apenas para o RSA.
+
+Para ambos formatos há suporte de uso de senha, a fim de aumentar a segurança no
+uso de chaves, dificultando o uso da mesma por partes não autorizadas.

@@ -32,13 +32,22 @@ interno no Kubernetes
 
 ### signature
 
-Chave privada utilizada para assinar mensagens. Deve conter uma
-chave de assinatura.
+Chave privada utilizada para assinar mensagens. Deve conter uma chave de assinatura.
+Vide a [definição](../shared-definitions.md#formatos-de-chave-privada-suportados)
+para detalhes sobre os formatos de chaves suportados.
 
 * certSecretName: Nome do secret que contém a chave privada. Default: "oob-as-keys"
 * certSecretKey: Nome da propriedade do secret que contém a chave privada. Default:
 "sig.key"
 * kid: Identificador da chave (Obtido do diretório de participantes)
+* passphraseSecretName: Nome do secret que contém a senha para a chave privada
+  (opcional)
+* passphraseSecretKey: Nome da propriedade do secret que contém a senha para a
+  chave privada (opcional)
+
+As propriedades `passphraseSecretName` e `passphraseSecretKey` só devem ser
+definidas para chaves criptografadas. Se elas não forem informadas assume-se que
+as chaves são abertas.
 
 Exemplo:
 
@@ -46,6 +55,8 @@ Exemplo:
   signature:
     certSecretName: "oob-as-keys"
     certSecretKey: "sig.key"
+    passphraseSecretName: "oob-as-keys"
+    passphraseSecretKey: "sig.key.passphrase"
     kid: "uGe7YNnhE83esu86xeqGJMIQi8IamA8FTSaLd1pkXy8"
 ```
 
