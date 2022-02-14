@@ -44,6 +44,9 @@ formato utilizado se possível, ele também remove o identificador do histórico
 de navegação, evitando qualquer confusão por parte do cliente em tentar utilizar
 uma URL antiga de consentimento.
 
+A página também deve apontar para a instalação do AS (endereço público) ao iniciar
+a biblioteca através da configuração **oobAsPublicUrl** conforme instrução abaixo.
+
 ## Como usar a biblioteca
 
 Após importar a biblioteca na página HTML a variável `oobHandoff` conterá o
@@ -54,6 +57,7 @@ eventos que serão disparados.
 ```Javascript
 oobHandoff.init({
     oobStartCode: '<IDENTIFICADOR>',
+    oobAsPublicUrl: '<OOB_AS_PUBLIC_URL>',
     onHandoffReady: function(handoffReady) {
         // Texto para QR e código alternativo para digitação prontos
     },
@@ -99,11 +103,11 @@ Schema baseado no `completedCommand` da interface APP2AS:
 
 ```json
 {
-    "tpp": { 
+    "tpp": {
         "name": "<string>",
         "logoUrl": "<string>"
     },
-    "completedCommand": { 
+    "completedCommand": {
         "redirect": {
             "redirectTo": "<string>"
         }
