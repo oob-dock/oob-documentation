@@ -44,7 +44,7 @@ paths:
       description: |-
         Request interceptado pelo aplicativo da instituição via deeplink ou leitura direta do QR
         e enviado ao AS para instruções do consentimento
-      operationId: getAuthApp
+      operationId: getAuthHandOff
       parameters:
         - $ref: '#/components/parameters/CommandId'
       responses:
