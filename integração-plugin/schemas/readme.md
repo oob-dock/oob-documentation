@@ -48,6 +48,12 @@ Onde:
 
 ## Changelog
 
+### 2022-02-15 - v2.5.1
+
+- Consent
+  - Adicionado código de erro AGENDAMENTO_INVALIDO na criação do consentimento
+  - Ajustes nas descrições dos erros para revogação de consentimento
+
 ### 2022-01-13 - v2.5.0
 
 - Geral
