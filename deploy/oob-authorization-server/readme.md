@@ -419,11 +419,11 @@ Se ele estiver preenchido com um valor incorreto, o fluxo será interrompido por
 A mescla permite a instituição receber o identificador através da `query string`,
 `fragment` ou `url`, como exibido na tabela abaixo:
 
-| Formato      | URL Exemplo                                                         |
-| ------------ | ------------------------------------------------------------------- |
-| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>` |
-| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
-| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
+| Formato      | URL Exemplo                                                                |
+| ------------ | -------------------------------------------------------------------        |
+| Query string | `https://ev.instituicao.com.br/pagina_handoff.html?codigo=<IDENTIFICADOR>` |
+| Fragment     | `https://ev.instituicao.com.br/pagina_handoff.html#<IDENTIFICADOR>`        |
+| URL          | `https://ev.instituicao.com.br/pagina_handoff.html/<IDENTIFICADOR>`        |
 
 É recomendado o uso de fragment sempre que possível, dado que ele também remove
 o identificador do histórico de navegação.

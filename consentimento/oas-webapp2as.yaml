@@ -3,7 +3,7 @@ info:
   description: |-
     Opus Open Banking - Authorization Server Mobile and Web Application authorization &
     consent API
-  version: 0.1.1
+  version: 0.1.2
   title: OOB Authorization Server Apps API
 tags:
   - name: DeepLink
@@ -44,6 +44,31 @@ paths:
       description: |-
         Request interceptado pelo aplicativo da instituição via deeplink ou leitura direta do QR
         e enviado ao AS para instruções do consentimento
+      operationId: getAuthApp
+      parameters:
+        - $ref: '#/components/parameters/CommandId'
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ResponseCommand"
+        "404":
+          description: Command not found
+        default:
+          description: Erro inesperado.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeneralError'
+  "/app/commands/{id}":
+    get:
+      tags:
+        - App
+      summary: Retorna informações sobre o command
+      description: |-
+        Retorna informações sobre o command de authenticate, a ser utilizada pelos aplicativos web ou mobile
       operationId: getAuthApp
       parameters:
         - $ref: '#/components/parameters/CommandId'
