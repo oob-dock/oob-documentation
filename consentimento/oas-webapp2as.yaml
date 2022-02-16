@@ -197,7 +197,7 @@ components:
           type: string
           description: informações adicionais sobre o login
           example: |-
-            [ { "key": "agencia", "value": "1234" }, { "key": "conta", "value": "542345234" }  ]
+            [ { "key": "agencia", "value": "1234" }, { "key": "conta", "value": "542345234" } ]
 
     Authenticate:
       type: object
