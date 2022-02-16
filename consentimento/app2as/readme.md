@@ -33,7 +33,7 @@ aplicativo da instituição como vemos na tabela abaixo:
 | Origem                       | URL                                                    |
 | ---------------------------- | ------------------------------------------------------ |
 | Mesmo dispositivo            | `https://<EV-FQDN-open-banking>/auth/auth`             |
-| Outro dispositivo (Hand-Off) | `https://<EV-FQDN-open-banking>/auth/app/command/{id}` |
+| Outro dispositivo (Hand-Off) | `https://<EV-FQDN-open-banking>/auth/handoff/{id}`     |
 
 ### O que fazer ao interceptar uma URL?
 

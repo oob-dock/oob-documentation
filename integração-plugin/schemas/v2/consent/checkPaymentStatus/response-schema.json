@@ -1,0 +1,106 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "$ref": "#/$defs/CheckPaymentStatusResponse"
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "CheckPaymentStatusResponse": {
+            "description": "Retorno do status atual do pagamento",
+            "type": "object",
+            "required": [
+                "status"
+            ],
+            "properties": {
+                "status": {
+                    "$ref": "../../payment/common/common-schema.json#/$defs/ResponsePixPaymentData/status"
+                },
+                "rejectionReason": {
+                    "$ref": "../../payment/common/common-schema.json#/$defs/ResponsePixPaymentData/rejectionReason"
+                },
+                "revocation": {
+                    "description": "Informações respectivas à revogação do pagamento. [Restrição] Esse campo deve ser enviado apenas quando o campo data/status for igual a RJCT (REJECTED) e o rejectionReason igual a CONSENT_REVOKED.",
+                    "type": "object",
+                    "required": [
+                        "revokedBy",
+                        "revocationDateTime",
+                        "reason"
+                    ],
+                    "properties": {
+                        "loggedUser": {
+                            "description": "Usuário (pessoa natural) que estava logado na instituição durante a revogação do pagamento. [Restrição] Esse campo deve ser enviado apenas quando o campo data/revocation/revocationBy for igual a USER.",
+                            "type": "object",
+                            "required": [
+                                "document"
+                            ],
+                            "properties": {
+                                "document": {
+                                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser/document"
+                                }
+                            },
+                            "additionalItems": false
+                        },
+                        "revokedBy": {
+                            "description": "Indica quem realizou o pedido de revogação do pagamento.",
+                            "type": "string",
+                            "enum": [
+                                "USER",
+                                "TPP",
+                                "ASPSP"
+                            ],
+                            "examples": [
+                                "USER"
+                            ]
+                        },
+                        "revocationDateTime": {
+                            "description": "Data e hora em que o pedido de revogação do pagamento foi realizado. [Restrição] O pagamento pode ser revogado apenas até o dia anterior da data agendada para a liquidação do pagamento.",
+                            "type": "string",
+                            "maxLength": 20,
+                            "format": "date-time",
+                            "examples": [
+                                "2022-01-10T08:30:00Z"
+                            ]
+                        },
+                        "reason": {
+                            "description": "Descreve o motivo dado para a revogação do pagamento.",
+                            "type": "object",
+                            "required": [
+                                "code"
+                            ],
+                            "properties": {
+                                "code": {
+                                    "description": "Código correspondente ao motivo para a revogação do pagamento. [Restrição] Os valores FRAUD e ACCOUNT_CLOSURE são válidos apenas para o caso em que o campo data/revocation/revokedBy for igual a TPP ou ASPSP, ou seja, somente no caso de revogação unilateral pela iniciadora ou detentora do pagamento.",
+                                    "type": "string",
+                                    "enum": [
+                                        "FRAUD",
+                                        "ACCOUNT_CLOSURE",
+                                        "OTHER"
+                                    ],
+                                    "examples": [
+                                        "OTHER"
+                                    ]
+                                },
+                                "additionalInformation": {
+                                    "description": "Informação adicional sobre o motivo da revogação do pagemento. [Restrição] Obrigatório apenas para o caso em que o campo data/revocation/reason/code for igual a OTHER e o data/revocation/revokedBy for igual a TPP ou ASPSP, ou seja a revogação é realizada pela iniciadora ou detentora do pagamento.",
+                                    "type": "string",
+                                    "examples": [
+                                        "Saldo insuficiente na conta do usuário"
+                                    ]
+                                }
+                            },
+                            "additionalItems": false
+                        }
+                    },
+                    "additionalItems": false
+                }
+            },
+            "additionalItems": false
+        }
+    }
+}

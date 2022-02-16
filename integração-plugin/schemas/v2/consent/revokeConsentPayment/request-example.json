@@ -1,0 +1,30 @@
+{
+    "requestMeta": {
+        "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3",
+        "brandId": "cbanco"
+    },
+    "requestBody": {
+        "paymentId": [
+            {
+                "key": "internalPaymentId",
+                "value": "1234"
+            }
+        ],
+        "data": {
+            "status": "REVOKED",
+            "revocation": {
+                "loggedUser": {
+                    "document": {
+                        "identification": "99999999999",
+                        "rel": "CPF"
+                    }
+                },
+                "revokedBy": "TPP",
+                "reason": {
+                    "code": "FRAUD",
+                    "additionalInformation": "Risco de fraude identificado"
+                }
+            }
+        }
+    }
+}
