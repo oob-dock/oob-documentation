@@ -250,7 +250,7 @@ components:
               type: string
               description: URL do logotipo da marca da instituição
         consent:
-          $ref: './schemas/ConsentCustomerAcceptance.yaml#/ConsentCustomerAcceptance'
+          $ref: './app2as/schemas/ConsentCustomerAcceptance.yaml#/ConsentCustomerAcceptance'
         permissions:
           $ref: '#/components/schemas/ResponseDomainPermissionSchema'
           description: "Descrição das permissões do consentimento. Exclusivo de consentimento de compartilhamento de dados."
