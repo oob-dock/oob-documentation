@@ -193,13 +193,19 @@ components:
           type: string
           description: nome do usuário logado
           example: João Maria José
+        authExtraData:
+          type: string
+          description: informações adicionais sobre o login
+          example: |-
+            [ { "key": "agencia", "value": "1234" }, { "key": "conta", "value": "542345234" }  ]
+
     Authenticate:
       type: object
       allOf:
         - $ref: "#/components/schemas/Refused"
       properties:
         jwt:
-          example: "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVVc01MRndYejV6TWhrSm9vMWxjbklNMnBBcExjM2tjXzJXVjhZS1lDM00ifQ.eyJpYXQiOjE2MzQyNTYwMDAsImp0aSI6ImU2Y2RlNTFmLTc5OWMtNDQxMC04YmRhLWQ2NTY3M2NiMDQzYyIsIm5hbWUiOiJKb8OjbyBNYXJpYSBKb3PDqSIsImNwZiI6IjAwMDAwMDAwMTkxIn0.Td7bXLVCWKfyx2RRAD439UcEw95QNI1OHMnF2qAzEzDKxw7b7itCVRXiBOnWz37ZYhhVUZUSc7Kg0QBMZvOLM_FGpGjNTcMVfYfxEQQifMM3X5OhzyHzM8M1nHqwHr-7jxMaBbxevTSmMGgxoL-lmNZjNxz9LSNUa-I5RX4RPVq9wxfhE_7Qx07rpazFxDo0fO8rAdYb3fzaEI8RxfMgaFXdd9fMdZPTvBX7QQhhG39r8sSTitn0FLs6RQHs7c1zPlR2odiGHBY5dMmuhUMZ6VnKAFbL0fhPx873-IRe0aD3gPiUK-eUeacK__XcEFjbRRJqOcYx4A7naGbZOe23RQ"
+          example: "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVVc01MRndYejV6TWhrSm9vMWxjbklNMnBBcExjM2tjXzJXVjhZS1lDM00ifQ.eyJpYXQiOjE2MzQyNTYwMDAsImp0aSI6ImU2Y2RlNTFmLTc5OWMtNDQxMC04YmRhLWQ2NTY3M2NiMDQzYyIsIm5hbWUiOiJKb8OjbyBNYXJpYSBKb3PDqSIsImNwZiI6IjMyMTgwNDkwMDg5IiwiY25waiI6Ijc3MjAyMDM2MDAwMTgyIiwiYXV0aEV4dHJhRGF0YSI6W3sia2V5IjoiYWdlbmNpYSIsInZhbHVlIjoiMTIzNCJ9LHsia2V5IjoiY29udGEiLCJ2YWx1ZSI6IjU0MjM0NTIzNCJ9XX0.gfwOaScdb5qs9nRMSxlBkWJ18b_rUiE4YLr2T6H_yTeK37qLCG26KGFbNDxJsPW-xer4i4Q7-zrW_Kbcb9LhZ4BODnsLMFZsJRrauvbRR7gdY42peL_MVwcYBXHEh7ooCwTp-MM9Vv4QcHP8mu1QieaNEYprAWpQfNbbl4Yee0XY7fy8EZ2I5d-7hv0Lv5vPU1F1qhY15rAZuhtWImTJjnmNS5SKZTDq5lod80DIx9k4Jw9SUAteYccIC1HkniwxQtGow_dbLUt-Kf9p9DRSI9HXeDApNIIBvNss1VlwqGRQrw67iQ6qdoxc4Q3frMDmdVFmw1cw0Bfb95aoNCKlbg"
           type: object
           description: |-
             JWT assinado segundo a estrutura definida, envio obrigatório
