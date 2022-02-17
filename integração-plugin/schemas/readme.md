@@ -48,18 +48,12 @@ Onde:
 
 ## Changelog
 
-### 2022-02-15 - v2.5.1
+### 2022-02-08 - v2.6
 
 - Consent
-  - Adicionado código de erro AGENDAMENTO_INVALIDO na criação do consentimento
-  - Ajustes nas descrições dos erros para revogação de consentimento
-
-### 2022-01-13 - v2.5.0
-
-- Geral
-  - Inclusão do campo schedule no consentimento de pagamento
+  - Inclusão do schema de consentimento para TED/TEF
 - Payment
-  - Adicionado status SASP e SASC para pix agendado e rejectionReason CONSENT_REVOKED
+  - Inclusão dos schemas para criar solicitação e consulta de status de pagamento TED/TEF
 
 ### 2022-01-26 - v2.4.2
 
@@ -92,7 +86,7 @@ Onde:
     com o aplicativo da instituição.
   - Adição do campo defaultSelected na definição AvailableResources no schema
     comum do consentimento
-    
+
 ### 2021-10-06 - v2.2.0
 
 - Consent
