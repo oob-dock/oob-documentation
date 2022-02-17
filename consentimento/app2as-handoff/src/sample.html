@@ -12,7 +12,7 @@
         oobHandoff.init({
             // Get oobStartCode from URL fragment (https://example.com/#oobStartCode)
             oobStartCode: window.location.hash.substring(1),
-            oobAsPublicUrl: 'https://obb.qa.oob.opus-software.com.br',
+            oobAsPublicUrl: 'https://obb.as-instituicao.com.br',
             onHandoffReady(e) {
                 console.log(`Handoff ready qrCode: ${e.qrCode}, timeoutSeconds: ${e.timeoutSeconds}, typeCode: ${e.typeCode}`);
                 showQR(e);

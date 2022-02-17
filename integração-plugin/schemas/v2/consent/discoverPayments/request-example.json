@@ -37,6 +37,11 @@
                     "issuer": "1774"
                 }
             },
+            "schedule": {
+                "single": {
+                    "date": "2023-01-01"
+                }
+            },
             "ibgeTownCode": "5300108"
         },
         "authExtraData": [
