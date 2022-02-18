@@ -48,6 +48,13 @@ Onde:
 
 ## Changelog
 
+### 2022-02-08 - v2.6
+
+- Consent
+  - Inclusão do schema de consentimento para TED/TEF
+- Payment
+  - Inclusão dos schemas para criar solicitação e consulta de status de pagamento TED/TEF
+
 ### 2022-01-26 - v2.4.2
 
 - Consent
@@ -79,7 +86,7 @@ Onde:
     com o aplicativo da instituição.
   - Adição do campo defaultSelected na definição AvailableResources no schema
     comum do consentimento
-    
+
 ### 2021-10-06 - v2.2.0
 
 - Consent

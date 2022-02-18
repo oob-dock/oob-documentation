@@ -1,0 +1,35 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "requestMeta",
+        "idempotencyKey",
+        "consent",
+        "requestBody"
+    ],
+    "properties": {
+        "requestMeta": {
+            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+        },
+        "idempotencyKey": {
+            "$ref": "../../common/common-schema.json#/$defs/IdempotencyKey"
+        },
+        "consent": {
+            "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+        },
+        "requestBody": {
+            "type": "object",
+            "description": "Payload para criação da iniciação do pagamento Pix.",
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "$ref": "../common/common-schema.json#/$defs/CreateTedTefPaymentData"
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {}
+}
