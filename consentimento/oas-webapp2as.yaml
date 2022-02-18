@@ -3,16 +3,16 @@ info:
   description: |-
     Opus Open Banking - Authorization Server Mobile and Web Application authorization &
     consent API
-  version: 0.1.2
+  version: 0.1.3
   title: OOB Authorization Server Apps API
 tags:
   - name: DeepLink
     description: |-
       Links para aplicação tratar via deep link/universal link e iniciar um fluxo de autenticação.
-      Os links devem ser repassados integralmente para o AS adicionando o content-type "applicatoin/json"
+      Os links devem ser repassados integralmente para o AS.
   - name: App
     description: |-
-      APIs para os aplicativos da instituição realizarem a autenticação e aceite dos consentimentos de fase 2 e 3
+      APIs para os aplicativos da instituição (mobile e web) realizarem a autenticação e aceite dos consentimentos de fase 2 e 3
 paths:
   /auth:
     get:

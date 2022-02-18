@@ -401,6 +401,59 @@ additionalVars:
     value: "SSL-Client-Cert"
 ```
 
+### CUSTOM_WEB_APP_AUTH_URL
+
+Template da URL de autenticação customizada definida pela instituição.
+
+Quando essa variável estiver definida a autenticação de usuários acontecerá
+via web utilizando a tela de login da instituição. O identificador inicial
+do fluxo de autenticação será mesclado na URL definida nessa variável no lugar
+do `<IDENTIFICADOR>`.
+
+**Formato:**
+
+A mescla permite a instituição receber o identificador através da `query string`,
+`fragment` ou `url`, como exibido na tabela abaixo:
+
+| Formato      | URL Exemplo                                                         |
+| ------------ | ------------------------------------------------------------------- |
+| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>`              |
+| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`                     |
+| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`                     |
+
+É recomendado o uso de fragment sempre que possível, dado que ele também remove
+o identificador do histórico de navegação.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CUSTOM_WEB_APP_AUTH_URL
+    value: "https://ev.instituicao.com.br#<IDENTIFICADOR>"
+```
+
+### CUSTOM_WEB_APP_CONSENT_ENABLED
+
+Esta variável funciona em conjunto à variável `CUSTOM_WEB_APP_AUTH_URL`. Uma vez
+que a URL de autenticação customizada tenha sido definida, esta configuração
+determina se o fluxo de autenticação web utilizará telas customizadas para o
+fluxo de geração de consentimentos ou se usará as telas padrão fornecidas pelo
+Opus Open Banking. Quando seu valor for definido como `0` as telas padrão serão
+utilizadas, quando definido como `1` as telas customizadas deverão renderizar
+o fluxo da geração do consentimento.
+
+**Formato:** `0` ou `1`
+
+**Valor default:** `0`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CUSTOM_WEB_APP_CONSENT_ENABLED
+    value: "1"
+```
+
 ### HANDOFF_RESOURCE_URL
 
 Template da URL da página de handoff implementada pela instituição,
@@ -420,7 +473,7 @@ A mescla permite a instituição receber o identificador através da `query stri
 `fragment` ou `url`, como exibido na tabela abaixo:
 
 | Formato      | URL Exemplo                                                                |
-| ------------ | -------------------------------------------------------------------        |
+| ------------ | -------------------------------------------------------------------------- |
 | Query string | `https://ev.instituicao.com.br/pagina_handoff.html?codigo=<IDENTIFICADOR>` |
 | Fragment     | `https://ev.instituicao.com.br/pagina_handoff.html#<IDENTIFICADOR>`        |
 | URL          | `https://ev.instituicao.com.br/pagina_handoff.html/<IDENTIFICADOR>`        |
