@@ -144,7 +144,7 @@
                 },
                 "creationDateTime": {
                     "type": "string",
-                    "description": "Data e hora em que o recurso foi criado. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC(UTC time format).",
+                    "description": "Data e hora em que o recurso foi criado. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC (UTC time format).",
                     "maxLength": 20,
                     "format": "date-time",
                     "examples": [
@@ -153,7 +153,7 @@
                 },
                 "statusUpdateDateTime": {
                     "type": "string",
-                    "description": "Data e hora da última atualização da iniciação de pagamento. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC(UTC time format).",
+                    "description": "Data e hora da última atualização da iniciação de pagamento. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC (UTC time format).",
                     "maxLength": 20,
                     "format": "date-time",
                     "examples": [
