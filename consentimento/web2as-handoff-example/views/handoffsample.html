@@ -1,0 +1,150 @@
+<!-- Página de exemplo de integração com a biblioteca de handoff do Authorization Server (AS) -->
+<!DOCTYPE html>
+<html>
+
+<!-- O script de handoff deve ser carregado do Authorization Server (AS) -->
+<script src="AS_BASE_URL/auth/handoff/v1/oob-handoff.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/130527/qrcode.js"></script>
+
+<script>
+    $(document).ready(function () {
+        oobHandoff.init({
+            // Obtém o oobStartCode do fragment vindo na URL (https://example.com/#oobStartCode)
+            oobStartCode: window.location.hash.substring(1),
+            oobAsPublicUrl: 'AS_BASE_URL',
+            onHandoffReady(e) {
+                console.log(`Handoff ready qrCode: ${e.qrCode}, timeoutSeconds: ${e.timeoutSeconds}, typeCode: ${e.typeCode}`);
+                showQR(e);
+                startCountdown(e.timeoutSeconds);
+            },
+            onHandoffQRRead() {
+                // Usuário realizou a leitura do QR code no dispositivo móvel
+                console.log('Handoff QR Read');
+                showQRRead();
+            },
+            onHandoffTimedOut() {
+                // Timeout do fluxo OIDC
+                console.log('Handoff timed-out');
+                showTimeout();
+            },
+            onHandoffCompleted(e) {
+                // Usuário aceitou o consentimento com sucesso
+                console.log('Handoff completedCommand', e);
+                showCompleted(e);
+            },
+            onHandoffError(e) {
+                // Falha no consentimento
+                console.log('Handoff errorCommand', e);
+                showError(e);
+            }
+        });
+
+        // Reomove o fragment da URL do browser e do histórico
+        window.location.replace("#");
+        if (typeof window.history.replaceState == 'function') {
+           history.replaceState({}, '', window.location.href.slice(0, -1));
+        }
+    });
+
+    function showQR(e) {
+        $('#step').empty();
+        $('#step').qrcode({ width: 200, height: 200, text: e.qrCode })
+        $('#step').append(`<p>Code: ${e.typeCode}</p>`);
+    }
+
+    function showQRRead() {
+        $('#step')
+            .empty()
+            .append('<p>QR lido no seu celular</p><p>Mantenha essa janela aberta</p>');
+    }
+
+    function showTimeout() {
+        $('#step')
+            .empty()
+            .append('<p>Tempo esgotado, tente novamente</p>');
+    }
+
+    function showCompleted(e) {
+        $('#step')
+            .empty()
+            .append(`<p>Consentimento conclu&#237;do com sucesso, redirecionando para o aplicativo ${e?.tpp?.name}</p>`)
+            .append(`<p><img src='${e.tpp.logoUrl}'></p>`);
+
+        handleRedirect(e?.completedCommand?.redirect);
+    }
+
+    function showError(e) {
+        $('#step')
+            .empty()
+            .append('<p>Ops... ocorreu algo errado</p>')
+            .append(`<p>Tipo do erro: ${e.errorCommand.type}</p>`);
+
+        if (e.errorCommand?.message) {
+            $('#step').append(`<p>Mensagem: ${e.errorCommand.message}</p>`);
+        }
+
+        if (e?.tpp?.logoUrl) {
+            $('#step')
+                .append(`<p><img src='${e.tpp.logoUrl}'></p>`)
+                .append(`<p>${e.tpp.name}</p>`);
+        }
+
+        handleRedirect(e?.errorCommand?.redirect);
+    }
+
+    function startCountdown(seconds) {
+        var started = new Date().getTime();
+        var showTimer = function () {
+            var s = parseInt(seconds - (new Date().getTime() - started) / 1000);
+            if (s > 0) {
+                $('#countdown').text(`Expira em ${(s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s}`);
+                setTimeout(showTimer, 750);
+            } else {
+                $('#countdown').text('Timeout');
+            }
+        };
+        showTimer();
+    }
+
+    function handleRedirect(redirect) {
+        if (!(redirect?.redirectTo)) return;
+        setTimeout(function () { window.location.href = redirect.redirectTo }, 5000);
+    }
+</script>
+
+<body>
+    <div id="countdown">
+    </div>
+    <div id="step">
+        Iniciando...
+    </div>
+</body>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        min-height: 100%;
+        background: #fff;
+        color: #000;
+    }
+
+    body {
+        font-size: 1.4rem;
+        text-rendering: optimizeLegibility;
+    }
+
+    img {
+        max-height: 50px;
+        max-width: 50px;
+        height: auto;
+        width: auto;
+    }
+</style>
+
+</html>
