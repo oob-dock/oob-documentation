@@ -508,3 +508,114 @@ Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota
 ARG approvePaymentRoute=file:/specs/custom-approvePaymentConsentCreation-routes.xml
 ENV camel.main.routes-include-pattern=$approvePaymentRoute
 ```
+
+## Verificação do status do pagamento agendado no sistema legado da instituição
+
+A verificação do status do pagamento agendado é o ponto de integração entre o
+Opus Open Banking e o sistema legado da instituição responsável pela atualização
+do status do consentimento para os casos em que o pagamento é revogado fora do
+sistema do Opus Open Banking.
+
+### O que mudou com a adição do pagamento agendado?
+
+Foi definido pelo [Open Banking Brasil - OBB](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-3-apis-do-open-banking-brasil) que um novo valor possível para o status do
+consentimento será adicionado: REVOKED (REVOGADO). O status de um consentimento
+só poderá ser alterado para REVOKED, quando seu status atual for CONSUMED, e seu respectivo pagamento for do tipo
+agendado e cancelado por algum motivo, seja pelo próprio usuário ou pela
+instituição iniciadora ou detentora do pagamento.
+
+A razão para a criação de uma rota de verificação do status do pagamento agendado
+é devido à possibilidade de cancelar o pagamento fora do sistema do Opus Open Banking,
+sendo necessário existir um meio que permita verificar a situação do pagamento a
+fim de atualizar as informações de seu respectivo
+consentimento, caso ele seja revogado.
+
+### Momentos da verificação do status do pagamento no sistema legado
+
+O único momento em que a verificação do status do pagamento no sistema legado
+ocorrerá é durante a verificação das informações de um consentimento através do
+serviço GET Consent.
+
+Para não ocorrer chamadas desnecessárias no sistema legado,
+foram definidas as seguintes condições:
+
+- O pagamento ao qual o consentimento se refere deve ser do tipo agendado;
+- O status atual do consentimento deve ser CONSUMED;
+- Durante a última verificação, foi informado que o pagamento ainda não tinha
+sido finalizado, e nem revogado;
+
+A tabela a seguir lista os pontos de integração para a verificação do status do pagamento:
+
+| Tipo do consentimento | Nome da rota Camel                         |
+| --------------------- | ------------------------------------------ |
+| Pagamento             | ```direct:checkPaymentStatus```            |
+
+A tabela a seguir corresponde aos schemas do Request e do Response do conector:
+
+| Tipo     | JSON Schema                                                                                       | Exemplo |
+| -------- | ------------------------------------------------------------------------------------------------- | ------- |
+| Request  | [checkPaymentStatus-request.json](../schemas/v2/consent/checkPaymentStatus/request-schema.json)   | [checkPaymentStatus-request-example.json](../schemas/v2/consent/checkPaymentStatus/request-example.json) |
+| Response | [checkPaymentStatus-response.json](../schemas/v2/consent/checkPaymentStatus/response-schema.json) | [checkPaymentStatus-response-example.json](../schemas/v2/consent/checkPaymentStatus/response-example.json) |
+
+Vale a pena ressaltar que para qualquer resposta obtida pelo conector que não
+siga os padrões definidos pelo schema acima - seja erro, má formatação ou falta
+de informação - as informações apresentadas ao usuário durante a chamada para o
+serviço do GET Consent serão aquelas já existentes no sistema do Opus Open Banking.
+Dessa forma, caso o pagamento tenha sido cancelado fora do sistema do
+Opus Open Banking, as informações apresentadas ao usuário estarão desatualizadas.
+No entanto, na próxima vez em que ocorrer a pesquisa do mesmo consentimento, a
+verificação de seu respectivo pagamento no sistema legado ocorrerá novamente, e
+caso o retorno obtido atenda os padrões definidos, seus dados serão atualizados 
+e apresentados de forma correta ao usuário.
+
+A tabela abaixo possui mais alguns exemplos de respostas que a rota checkPaymentStatus pode retornar:
+
+| Caso | Exemplo de Resposta                         |
+| --------------------- | ------------------------------------------ |
+| Revogação realizada pelo USER             | [revokedByUser.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_revokedByUser.json) |
+| Revogação realizada pelo TPP             | [revokedByTPP.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_revokedByTPP.json) |
+| Revogação realizada pelo ASPSP             | [revokedByASPSP.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_revokedByASPSP.json) |
+| Pagamento rejeitado sem revogação             | [rejected.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_rejectedPayment.json) |
+| Pagamento pendente             | [pendingPayment.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_pendingPayment.json) |
+
+Já os **headers** enviados para a rota checkPaymentStatus são:
+| Nome do campo | Descrição                                             | Tipo          |
+| ------------- | ------------------------------------------------------| ------------- |
+| correlationId | CorrelationId correspondente ao GET Consent realizado | String        |
+
+
+## Revogação do consentimento de pagamento
+
+A revogação de um consentimento de pagamento só é possível para o caso do pagamento 
+ser do tipo Pix Agendado, o consentimento estar consumido (status CONSUMED) e a data 
+da solicitação de revogação ser até o dia anterior, ou seja, a meia noite no fuso 
+horário de Brasília do dia imediatamente anterior a data alvo da liquidação do pagamento. 
+Com a revogação o status do consentimento é atualizado para REVOKED.
+
+A rota para realizar a revogação de um pagamento Pix Agendado foi criada para atender o que foi 
+definido no guia de experiência do usuário, possibilitando estes 5 cenários de revogação:
+
+1.	Revogação pelo usuário na iniciadora na área de gestão de pagamentos do open banking 
+2.	Revogação pelo usuário na detentora na área de gestão de pagamentos do open banking 
+3.	Revogação pelo usuário na detentora na área de gestão de Pix
+4.	Revogação pela iniciadora sem a presença do usuário
+5.	Revogação pela detentora sem a presença do usuário
+
+A tabela a seguir lista o ponto de integração para a revogação do consentimento do  pagamento:
+
+| Tipo do consentimento | Nome da rota Camel                         |
+| --------------------- | ------------------------------------------ |
+| Pagamento             | ```direct:consentPaymentRevocation```            |
+
+A tabela a seguir corresponde aos schemas do Request e do Response do conector:
+
+| Tipo     | JSON Schema                                                                                           | Exemplo |
+| -------- | ----------------------------------------------------------------------------------------------------- | ------- |
+| Request  | [revokeConsentPayment-request.json](../schemas/v2/consent/revokeConsentPayment/request-schema.json)   | [revokeConsentPayment-request-example.json](../schemas/v2/consent/revokeConsentPayment/request-example.json) |
+
+| Response | [revokeConsentPayment-response.json](../schemas/v2/consent/revokeConsentPayment/response-schema.json) | [revokeConsentPayment-response-example.json](../schemas/v2/consent/revokeConsentPayment/response-example.json) |
+
+Caso seja enviado um payload na requisição que não atenda ao objeto definido no JSON Schema
+ou não seja possível regovar o consentimento do pagamento por não atender os requisitos que 
+possibilitem a revogação, será retornado um objeto de erro a exemplo deste  
+[revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
