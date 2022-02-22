@@ -57,11 +57,11 @@ Configuração dos endereços base dos serviços acessíveis externamente mtls o
 
 * publicFqdn: Endereço externo base da API sem mtls
 
-**Ex:** `https://obb.qa.oob.opus-software.com.br`
+**Ex:** `obb.qa.oob.opus-software.com.br`
 
 * publicFqdnMtls: Endereço externo base da API com mtls
 
-**Ex:** `https://mtls-obb.qa.oob.opus-software.com.br`
+**Ex:** `mtls-obb.qa.oob.opus-software.com.br`
 
 ### features
 
