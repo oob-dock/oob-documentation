@@ -95,6 +95,14 @@
                                 }
                             },
                             "additionalItems": false
+                        },
+                        "revokerName": {
+                            "description": "Nome da aplicação/operador que solicitou a atualização do status do pagamento",
+                            "type": "string",
+                            "examples": [
+                                "AmazingBank",
+                                "AgentName"
+                            ]
                         }
                     },
                     "additionalItems": false
