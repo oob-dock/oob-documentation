@@ -592,184 +592,16 @@ components:
                 Em caso de pessoa jurídica deve ser informada a razão social ou o nome fantasia da conta do recebedor.
           additionalProperties: false
         payment:
-          type: object
-          description: Somente para consentimentos de pagamento. Objeto contendo dados de pagamento para consentimento.
-          required:
-            - type
-            - date
-            - currency
-            - amount
-            - details
-          properties:
-            type:
-              type: string
-              maxLength: 3
-              enum:
-                - PIX
-              example:
-                - PIX
-              description: |
-                Este campo define o tipo de pagamento que será iniciado após a autorização do consentimento.
-            date:
-              type: string
-              format: date
-              maxLength: 10
-              pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
-              example:
-                - "2021-01-01"
-              description: Data do pagamento, conforme especificação RFC-3339.
-            currency:
-              type: string
-              maxLength: 3
-              pattern: ^([A-Z]{3})$
-              example:
-                - BRL
-              description: |
-                Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'.
-                Todos os valores monetários informados estão representados com a moeda vigente do Brasil.
-            amount:
-              type: string
-              minLength: 4
-              maxLength: 19
-              pattern: ^((\d{1,16}\.\d{2}))$
-              example:
-                - "100000.12"
-              description: |
-                Valor da transação com 2 casas decimais.
-            ibgeTownCode:
-              type: string
-              minLength: 7
-              maxLength: 7
-              pattern: ^\d{7}$
-              example:
-                - "5300108"
-              description: |
-                Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).
-                Para o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.
-                O preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.
-                Este campo faz referência ao campo CodMun do arranjo Pix.
-            details:
-              type: object
-              description: |
-                Objeto contendo os detalhes do pagamento.
-              required:
-                - localInstrument
-                - creditorAccount
-              properties:
-                localInstrument:
-                  type: string
-                  maxLength: 4
-                  enum:
-                    - MANU
-                    - DICT
-                    - QRDN
-                    - QRES
-                    - INIC
-                  example:
-                    - DICT
-                  description: |
-                    Especifica a forma de iniciação do pagamento:
-                    - MANU - Inserção manual de dados da conta transacional
-                    - DICT - Inserção manual de chave Pix
-                    - QRDN - QR code dinâmico
-                    - QRES - QR code estático
-                    - INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.
-                qrCode:
-                  type: string
-                  maxLength: 512
-                  pattern: '[\w\W\s]*'
-                  example:
-                    - |
-                      00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012
-                      BR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062
-                      530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB
-                      CD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76
-                  description: |
-                    Sequência de caracteres que corresponde ao QR Code disponibilizado para o pagador.
-                    É a sequência de caracteres que seria lida pelo leitor de QR Code, e deve propiciar o retorno dos dados do pagador após consulta na DICT.
-                    Essa funcionalidade é possível tanto para QR Code estático quanto para QR Code dinâmico.
-                    No arranjo do Pix esta é a mesma sequência gerada e/ou lida pela funcionalidade Pix Copia e Cola.
-                    Este campo deverá ser no formato UTF-8.
-                    [Restrição] Preenchimento obrigatório para pagamentos por QR Code, observado o tamanho máximo de 512 bytes.
-                proxy:
-                  type: string
-                  maxLength: 77
-                  pattern: '[\w\W\s]*'
-                  example:
-                    - "12345678901"
-                  description: |
-                    Chave cadastrada no DICT pertencente ao recebedor. Os tipos de chaves podem ser: telefone, e-mail, cpf/cnpj ou chave aleatória.
-                    No caso de telefone celular deve ser informado no padrão E.1641.
-                    Para e-mail deve ter o formato xxxxxxxx@xxxxxxx.xxx(.xx) e no máximo 77 caracteres.
-                    No caso de CPF deverá ser informado com 11 números, sem pontos ou traços.
-                    Para o caso de CNPJ deverá ser informado com 14 números, sem pontos ou traços.
-                    No caso de chave aleatória deve ser informado o UUID gerado pelo DICT, conforme formato especificado na RFC41223.
-                    Se informado, a detentora da conta deve validar o proxy no DICT quando localInstrument for igual a DICT, QRDN ou QRES e validar o campo creditorAccount.
-                    Esta validação é opcional caso o localInstrument for igual a INIC.
-                    [Restrição]
-                    Se localInstrument for igual a MANU, o campo proxy não deve ser preenchido.
-                    Se localInstrument for igual INIC, DICT, QRDN ou QRES, o campo proxy deve ser sempre preenchido com a chave Pix.
-                creditorAccount:
-                  type: object
-                  description: |
-                    Objeto que contém a identificação da conta de destino do beneficiário/recebedor.
-                  required:
-                    - ispb
-                    - number
-                    - accountType
-                  properties:
-                    ispb:
-                      type: string
-                      minLength: 8
-                      maxLength: 8
-                      pattern: ^[0-9]{8}$
-                      example:
-                        - "12345678"
-                      description: |
-                        Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.
-                    issuer:
-                      type: string
-                      maxLength: 4
-                      pattern: ^\d{4}$
-                      example:
-                        - "1774"
-                      description: |
-                        Código da Agência emissora da conta sem dígito.
-                        (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,
-                        no exercício de atividades da instituição, não podendo ser móvel ou transitória).
-                        [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).
-                    number:
-                      type: string
-                      minLength: 3
-                      maxLength: 20
-                      pattern: ^\d{3,20}$
-                      example:
-                        - "1234567890"
-                      description: |
-                        Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir),
-                        se houver valor alfanumérico, este deve ser convertido para 0.
-                    accountType:
-                      type: string
-                      maxLength: 4
-                      enum:
-                        - CACC
-                        - SLRY
-                        - SVGS
-                        - TRAN
-                      example:
-                        - CACC
-                      description: |
-                        Tipos de contas usadas para pagamento via Pix.
-                        Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,
-                        conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.
-                        Segue descrição de cada valor do ENUM para o escopo do Pix.
-                        CACC - Current - Conta Corrente.
-                        SLRY - Salary - Conta-Salário.
-                        SVGS - Savings - Conta de Poupança.
-                        TRAN - TransactingAccount - Conta de Pagamento pré-paga.
-                  additionalProperties: false
-              additionalProperties: false
-          additionalProperties: false
+          discriminator:
+            propertyName: type
+            mapping:
+                PIX: '#/components/schemas/PixPaymentConsent'
+                TED: '#/components/schemas/TedPaymentConsent'
+                TEF: '#/components/schemas/TefPaymentConsent'
+          oneOf:
+              - $ref: '#/components/schemas/PixPaymentConsent'
+              - $ref: '#/components/schemas/TedPaymentConsent'
+              - $ref: '#/components/schemas/TefPaymentConsent'
         debtorAccount:
           type: object
           description: |
@@ -872,6 +704,581 @@ components:
             - - ACCOUNTS_READ
               - ACCOUNTS_OVERDRAFT_LIMITS_READ
               - RESOURCES_READ
+      additionalProperties: false
+    TefPaymentConsent:
+      type: object
+      description: Somente para consentimentos de pagamento TEF. Objeto contendo dados de pagamento para consentimento.
+      required:
+        - type
+        - date
+        - currency
+        - amount
+        - creditorAccount
+      properties:
+        type:
+          type: string
+          maxLength: 3
+          enum:
+            - TEF
+          example:
+            - TEF
+          description: |
+            Este campo define o tipo de pagamento que será iniciado após a autorização do consentimento.
+        date:
+          type: string
+          format: date
+          maxLength: 10
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
+          example:
+            - "2021-01-01"
+          description: |
+            Data do pagamento, conforme especificação RFC-3339.
+            Mutuamente exclusivo com o campo date. Este campo é obrigatório no caso de agendamento. Neste caso, o campo date não deve ser informado.
+        schedule:
+          type: object
+          description: |
+            Define o agendamento do pagamento. Utilizado somente na funcionalidade de agendamento de pagamentos
+            Mutuamente exclusivo com o campo date. Este campo é obrigatório no caso de agendamento. Neste caso, o campo date não deve ser informado.
+          properties:
+            single:
+              type: object
+              description: Define a política de agendamento único.
+              additionalProperties: false
+              required:
+                - date
+              properties:
+                date:
+                  type: string
+                  format: date
+                  maxLength: 10
+                  pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                  example: '2021-01-01'
+                  description: |
+                    Define a data alvo da liquidação do pagamento. O fuso horário de Brasilia deve ser utilizado para criação e racionalização sobre os dados deste campo.
+                    OBS:Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília.
+          required:
+                - single
+          additionalProperties: false
+        currency:
+          type: string
+          maxLength: 3
+          pattern: ^([A-Z]{3})$
+          example:
+            - BRL
+          description: |
+            Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'.
+            Todos os valores monetários informados estão representados com a moeda vigente do Brasil.
+        amount:
+          type: string
+          minLength: 4
+          maxLength: 19
+          pattern: ^((\d{1,16}\.\d{2}))$
+          example:
+            - "100000.12"
+          description: |
+            Valor da transação com 2 casas decimais.
+        creditorAccount:
+              type: object
+              description: |
+                Objeto que contém a identificação da conta de destino do beneficiário/recebedor.
+              required:
+                - ispb
+                - number
+                - accountType
+              properties:
+                ispb:
+                  type: string
+                  minLength: 8
+                  maxLength: 8
+                  pattern: ^[0-9]{8}$
+                  example:
+                    - "12345678"
+                  description: |
+                    Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.
+                issuer:
+                  type: string
+                  maxLength: 4
+                  pattern: ^\d{4}$
+                  example:
+                    - "1774"
+                  description: |
+                    Código da Agência emissora da conta sem dígito.
+                    (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,
+                    no exercício de atividades da instituição, não podendo ser móvel ou transitória).
+                    [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).
+                number:
+                  type: string
+                  minLength: 3
+                  maxLength: 20
+                  pattern: ^\d{3,20}$
+                  example:
+                    - "1234567890"
+                  description: |
+                    Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir),
+                    se houver valor alfanumérico, este deve ser convertido para 0.
+                accountType:
+                  type: string
+                  maxLength: 4
+                  enum:
+                    - CACC
+                    - SLRY
+                    - SVGS
+                    - TRAN
+                  example:
+                    - CACC
+                  description: |
+                    Tipos de contas usadas para pagamento via Tef.
+                    Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,
+                    conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.
+                    Segue descrição de cada valor do ENUM para o escopo do Tef.
+                    CACC - Current - Conta Corrente.
+                    SLRY - Salary - Conta-Salário.
+                    SVGS - Savings - Conta de Poupança.
+                    TRAN - TransactingAccount - Conta de Pagamento pré-paga.
+              additionalProperties: false
+      additionalProperties: false
+    TedPaymentConsent:
+      type: object
+      description: Somente para consentimentos de pagamento TED. Objeto contendo dados de pagamento para consentimento.
+      required:
+        - type
+        - date
+        - currency
+        - amount
+        - creditorAccount
+        - purpose
+      properties:
+        type:
+          type: string
+          maxLength: 3
+          enum:
+            - TED
+          example:
+            - TED
+          description: |
+            Este campo define o tipo de pagamento que será iniciado após a autorização do consentimento.
+        date:
+          type: string
+          format: date
+          maxLength: 10
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
+          example:
+            - "2021-01-01"
+          description: Data do pagamento, conforme especificação RFC-3339.
+        schedule:
+          type: object
+          description: |
+            Define o agendamento do pagamento. Utilizado somente na funcionalidade de agendamento de pagamentos
+            Mutuamente exclusivo com o campo date. Este campo é obrigatório no caso de agendamento. Neste caso, o campo date não deve ser informado.
+          properties:
+            single:
+              type: object
+              description: Define a política de agendamento único.
+              additionalProperties: false
+              required:
+                - date
+              properties:
+                date:
+                  type: string
+                  format: date
+                  maxLength: 10
+                  pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                  example: '2021-01-01'
+                  description: |
+                    Define a data alvo da liquidação do pagamento. O fuso horário de Brasilia deve ser utilizado para criação e racionalização sobre os dados deste campo.
+                    OBS:Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília.
+          required:
+                - single
+          additionalProperties: false
+        currency:
+          type: string
+          maxLength: 3
+          pattern: ^([A-Z]{3})$
+          example:
+            - BRL
+          description: |
+            Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'.
+            Todos os valores monetários informados estão representados com a moeda vigente do Brasil.
+        amount:
+          type: string
+          minLength: 4
+          maxLength: 19
+          pattern: ^((\d{1,16}\.\d{2}))$
+          example:
+            - "100000.12"
+          description: |
+            Valor da transação com 2 casas decimais.
+        creditorAccount:
+              type: object
+              description: |
+                Objeto que contém a identificação da conta de destino do beneficiário/recebedor.
+              required:
+                - ispb
+                - number
+                - accountType
+              properties:
+                ispb:
+                  type: string
+                  minLength: 8
+                  maxLength: 8
+                  pattern: ^[0-9]{8}$
+                  example:
+                    - "12345678"
+                  description: |
+                    Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.
+                issuer:
+                  type: string
+                  maxLength: 4
+                  pattern: ^\d{4}$
+                  example:
+                    - "1774"
+                  description: |
+                    Código da Agência emissora da conta sem dígito.
+                    (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,
+                    no exercício de atividades da instituição, não podendo ser móvel ou transitória).
+                    [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).
+                number:
+                  type: string
+                  minLength: 3
+                  maxLength: 20
+                  pattern: ^\d{3,20}$
+                  example:
+                    - "1234567890"
+                  description: |
+                    Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir),
+                    se houver valor alfanumérico, este deve ser convertido para 0.
+                accountType:
+                  type: string
+                  maxLength: 4
+                  enum:
+                    - CACC
+                    - SLRY
+                    - TRAN
+                  example:
+                    - CACC
+                  description: |
+                    Tipos de contas usadas para pagamento via Ted.
+                    Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,
+                    conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.
+                    A iniciação de pagamentos para TED não suporta todos os tipos de contas de crédito
+                    disponíveis pelo Open Banking, sendo suportado somente conta corrente, poupança e pagamentos
+                    Segue descrição de cada valor do ENUM para o escopo do Ted.
+                    CACC - Current - Conta Corrente.
+                    SVGS - Savings - Conta de Poupança.
+                    TRAN - TransactingAccount - Conta de Pagamento pré-paga.
+        purpose:
+          type: number
+          enum: [1,10,100,101,103,104,107,108,109,11,110,111,112,113,114,117,12,121,123,124,13,131,132,136,139,14,149,15,150,157,175,18,19,2,200,201,202,203,204,205,206,207,208,209,23,27,28,29,3,30,300,301,302,303,31,33,34,35,36,37,38,39,4,40,41,42,43,44,45,47,5,50,500,501,502,504,505,507,508,509,510,511,512,513,514,515,516,517,518,519,520,6,7,8,9,97,99999]
+          description: >
+            Define a finalidade da transferência
+            1 - Pagamento de Impostos, Tributos e Taxas
+            10 - Crédito em Conta
+            100 - Depósito Judicial
+            101 - Pensão Alimentícia
+            103 - Cessão de créditos - Liquid.principal por aquis.créditos ou direitos creditórios ou fluxo de caixa garant.por créditos, por ordem cliente PJ financ.
+            104 - Cessão de créditos - Liquidação principal por aquisição de créditos ou direitos creditórios, por ordem de FIDC ou cia securitizadora
+            107 - Cessão de créditos - Repasse contratual de fluxo de caixa ou de recebíveis pagos, por ordem de cliente PJ financeira
+            108 - Cessão de créditos - Repasse contratual de fluxo de caixa ou de recebíveis pagos antecipadamente, por ordem de cliente PJ financeira
+            109 - Cessão de créditos - Ajustes diversos
+            11 - Pagamento a Corretoras
+            110 - Transferência entre contas de mesma titularidade
+            111 - Crédito para investidor em cliente da IF Creditada
+            112 - Débito de investidor em cliente da IF Debitada
+            113 - Pagamento de Operações de Crédito por Cliente
+            114 - Resgate de aplicação financeira de cliente para conta de sua titularidade
+            117 - Aplicação financeira em nome do cliente remetente
+            12 - Pagamento de Boleto Bancário em Cartório
+            121 - Pagamento da TIR - Pix Saque e/ou Pix Troco
+            123 - Cessão de créditos - Liquid.princ.por recompra de créditos ou direitos creditórios ou fluxo de caixa garant.por créditos, por ordem cliente PJ financ.
+            124 - Cessão de créditos - Liquidação principal por recompra de créditos ou direitos creditórios, por ordem de FIDC ou cia securitizadora
+            13 - Pagamento de Tarifas pela Prestação de Serviços de Arrecadação de Convênios
+            131 - FGCoop - Recolhimento Fundo Garantidor do Cooperativismo de Crédito
+            132 - FGCoop - devolução de recolhimento a maior
+            136 - FGTS - Saque Emergencial
+            139 - Crédito ao consumidor decorrente de programa de incentivo fiscal
+            14 - Repasse de Valores Referentes a Títulos Liquidados em Cartórios de Protesto
+            149 - Auxílio Emergencial Lei 13.982
+            15 - Liquidação Financeira de Operadora de Cartão
+            150 - Benefício Emergencial de Preservação do Emprego e da Renda - BEm
+            157 - Tributos Municipais ISS - LCP 157
+            175 - Tributos Municipais ISS TERCEIROS - LCP 157
+            18 - Operações Seguro Habitacional - SFH
+            19 - Operações do FDS - Caixa
+            2 - Pagamento à Concessionárias de Serviço Público
+            200 - Transferência Internacional em Reais
+            201 - Ajuste Posição Mercado Futuro
+            202 - Repasse de Valores do BNDES
+            203 - Liquidação de Compromissos Junto ao BNDES
+            204 - Operações de Compra e Venda de Ações - Bolsas de Valores e Mercado de Balcão
+            205 - Contratos Referenciados em Ações ou Índices de Ações - Bolsas de Valores, de Mercadorias e de futuros
+            206 - Operação de Câmbio - Não Interbancária
+            207 - Operações no Mercado de Renda Fixa e de Renda Variável com Utilização de Intermediário
+            208 - Operação de Câmbio - Mercado Interbancário - Instituições sem conta Reservas Bancárias
+            209 - Pagamento de Operações com identificação de destinatário final
+            23 - Taxa de Administração
+            27 - Pagamento de Acordo / Execução Judicial
+            28 - Liquidação de Empréstimos Consignados
+            29 - Pagamento de bolsa auxílio
+            3 - Pagamentos de Dividendos
+            30 - Remuneração a cooperado
+            300 - Restituição de Imposto de Renda
+            301 - Ordem Bancária do Tesouro - OBT
+            302 - Pagamento de multas ao BACEN por atrasos de importação
+            303 - Restituição de tributos - RFB
+            31 - Pagamento de prebenda (Remuneração a padres e sacerdotes)
+            33 - Pagamento de juros sobre capital próprio
+            34 - Pagamento de rendimentos ou amortização s/ cotas e/ou debêntures
+            35 - Taxa de Serviço
+            36 - Pagamento de cheque para não correntista
+            37 - Pagamento de juros e/ou amortização de títulos depositados em garantia nas Câmaras
+            38 - Estorno ou Restituição - Diversos
+            39 - Pagamento de Vale Transporte
+            4 - Pagamento de Salários
+            40 - Simples Nacional
+            41 - Repasse de valores para o FUNDEB
+            42 - Repasse de Valores de Convênio Centralizado
+            43 - Patrocínio com Incentivo Fiscal
+            44 - Doação com Incentivo Fiscal
+            45 - Transferência de conta corrente de instituição não bancária para sua Conta de Liquidação
+            47 - Pagamento de Rescisão de Contrato de Trabalho
+            5 - Pagamento de Fornecedores
+            50 - Reembolso de despesas com estruturação de operações de renda fixa e variável
+            500 - Restituição de Prêmios de Seguros
+            501 - Pagamento de Indenização de Sinistro de Seguro
+            502 - Pagamento de Prêmio de Co-Seguro
+            504 - Pagamento de Indenização de Sinistro de Co-Seguro
+            505 - Pagamento de Prêmio de Resseguro
+            507 - Pagamento de Indenização de Sinistro de Resseguro
+            508 - Restituição de Indenização de Sinistro de Resseguro
+            509 - Pagamento de Despesas com Sinistros
+            510 - Pagamento de Inspeções/Vistorias Prévias
+            511 - Pagamento de Resgate de Título da Capitalização
+            512 - Pagamento de Sorteio de Título de Capitalização
+            513 - Pagamento de Devolução de Mensalidade de Título de Capitalização
+            514 - Restituição de Contribuição de Plano Previdenciário
+            515 - Pagamento de Benefício Previdenciário de Pecúlio
+            516 - Pagamento de Benefício Previdenciário de Pensão
+            517 - Pagamento de Benefício Previdenciário de Aposentadoria
+            518 - Pagamento de Resgate Previdenciário
+            519 - Pagamento de Comissão de Corretagem
+            520 - Pagamento de Transferências/Portabilidade de Reserva de Seguro/Previdência
+            6 - Pagamento de Honorários
+            7 - Pagamento de Aluguéis e Taxas de Condomínio
+            8 - Pagamento de Duplicatas e Títulos
+            9 - Pagamento de Mensalidade Escolar
+            97 - Compra de Moeda Estrangeira pelo FSB - Fundo Soberano do Brasil
+            99999 - Outros
+          example:
+            - 1
+        purposeAdditionalInfo:
+          type: string
+          description: Define o complemento da finalidade da transferência de forma textual.
+          example:
+            - Informações adicionais
+      additionalProperties: false
+    PixPaymentConsent:
+      type: object
+      description: Somente para consentimentos de pagamento PIX. Objeto contendo dados de pagamento para consentimento.
+      required:
+        - type
+        - date
+        - currency
+        - amount
+        - details
+      properties:
+        type:
+          type: string
+          maxLength: 3
+          enum:
+            - PIX
+          example:
+            - PIX
+          description: |
+            Este campo define o tipo de pagamento que será iniciado após a autorização do consentimento.
+        date:
+          type: string
+          format: date
+          maxLength: 10
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
+          example:
+            - "2021-01-01"
+          description: Data do pagamento, conforme especificação RFC-3339.
+        schedule:
+          type: object
+          description: |
+            Define o agendamento do pagamento. Utilizado somente na funcionalidade de agendamento de pagamentos
+            Mutuamente exclusivo com o campo date. Este campo é obrigatório no caso de agendamento. Neste caso, o campo date não deve ser informado.
+          properties:
+            single:
+              type: object
+              description: Define a política de agendamento único.
+              additionalProperties: false
+              required:
+                - date
+              properties:
+                date:
+                  type: string
+                  format: date
+                  maxLength: 10
+                  pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                  example: '2021-01-01'
+                  description: |
+                    Define a data alvo da liquidação do pagamento. O fuso horário de Brasilia deve ser utilizado para criação e racionalização sobre os dados deste campo.
+                    OBS:Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília.
+          required:
+                - single
+          additionalProperties: false
+        currency:
+          type: string
+          maxLength: 3
+          pattern: ^([A-Z]{3})$
+          example:
+            - BRL
+          description: |
+            Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'.
+            Todos os valores monetários informados estão representados com a moeda vigente do Brasil.
+        amount:
+          type: string
+          minLength: 4
+          maxLength: 19
+          pattern: ^((\d{1,16}\.\d{2}))$
+          example:
+            - "100000.12"
+          description: |
+            Valor da transação com 2 casas decimais.
+        ibgeTownCode:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: ^\d{7}$
+          example:
+            - "5300108"
+          description: |
+            Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).
+            Para o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.
+            O preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.
+            Este campo faz referência ao campo CodMun do arranjo Pix.
+        details:
+          type: object
+          description: |
+            Objeto contendo os detalhes do pagamento.
+          required:
+            - localInstrument
+            - creditorAccount
+          properties:
+            localInstrument:
+              type: string
+              maxLength: 4
+              enum:
+                - MANU
+                - DICT
+                - QRDN
+                - QRES
+                - INIC
+              example:
+                - DICT
+              description: |
+                Especifica a forma de iniciação do pagamento:
+                - MANU - Inserção manual de dados da conta transacional
+                - DICT - Inserção manual de chave Pix
+                - QRDN - QR code dinâmico
+                - QRES - QR code estático
+                - INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.
+            qrCode:
+              type: string
+              maxLength: 512
+              pattern: '[\w\W\s]*'
+              example:
+                - |
+                  00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012
+                  BR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062
+                  530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB
+                  CD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76
+              description: |
+                Sequência de caracteres que corresponde ao QR Code disponibilizado para o pagador.
+                É a sequência de caracteres que seria lida pelo leitor de QR Code, e deve propiciar o retorno dos dados do pagador após consulta na DICT.
+                Essa funcionalidade é possível tanto para QR Code estático quanto para QR Code dinâmico.
+                No arranjo do Pix esta é a mesma sequência gerada e/ou lida pela funcionalidade Pix Copia e Cola.
+                Este campo deverá ser no formato UTF-8.
+                [Restrição] Preenchimento obrigatório para pagamentos por QR Code, observado o tamanho máximo de 512 bytes.
+            proxy:
+              type: string
+              maxLength: 77
+              pattern: '[\w\W\s]*'
+              example:
+                - "12345678901"
+              description: |
+                Chave cadastrada no DICT pertencente ao recebedor. Os tipos de chaves podem ser: telefone, e-mail, cpf/cnpj ou chave aleatória.
+                No caso de telefone celular deve ser informado no padrão E.1641.
+                Para e-mail deve ter o formato xxxxxxxx@xxxxxxx.xxx(.xx) e no máximo 77 caracteres.
+                No caso de CPF deverá ser informado com 11 números, sem pontos ou traços.
+                Para o caso de CNPJ deverá ser informado com 14 números, sem pontos ou traços.
+                No caso de chave aleatória deve ser informado o UUID gerado pelo DICT, conforme formato especificado na RFC41223.
+                Se informado, a detentora da conta deve validar o proxy no DICT quando localInstrument for igual a DICT, QRDN ou QRES e validar o campo creditorAccount.
+                Esta validação é opcional caso o localInstrument for igual a INIC.
+                [Restrição]
+                Se localInstrument for igual a MANU, o campo proxy não deve ser preenchido.
+                Se localInstrument for igual INIC, DICT, QRDN ou QRES, o campo proxy deve ser sempre preenchido com a chave Pix.
+            creditorAccount:
+              type: object
+              description: |
+                Objeto que contém a identificação da conta de destino do beneficiário/recebedor.
+              required:
+                - ispb
+                - number
+                - accountType
+              properties:
+                ispb:
+                  type: string
+                  minLength: 8
+                  maxLength: 8
+                  pattern: ^[0-9]{8}$
+                  example:
+                    - "12345678"
+                  description: |
+                    Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.
+                issuer:
+                  type: string
+                  maxLength: 4
+                  pattern: ^\d{4}$
+                  example:
+                    - "1774"
+                  description: |
+                    Código da Agência emissora da conta sem dígito.
+                    (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,
+                    no exercício de atividades da instituição, não podendo ser móvel ou transitória).
+                    [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).
+                number:
+                  type: string
+                  minLength: 3
+                  maxLength: 20
+                  pattern: ^\d{3,20}$
+                  example:
+                    - "1234567890"
+                  description: |
+                    Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir),
+                    se houver valor alfanumérico, este deve ser convertido para 0.
+                accountType:
+                  type: string
+                  maxLength: 4
+                  enum:
+                    - CACC
+                    - SLRY
+                    - SVGS
+                    - TRAN
+                  example:
+                    - CACC
+                  description: |
+                    Tipos de contas usadas para pagamento via Pix.
+                    Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,
+                    conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.
+                    Segue descrição de cada valor do ENUM para o escopo do Pix.
+                    CACC - Current - Conta Corrente.
+                    SLRY - Salary - Conta-Salário.
+                    SVGS - Savings - Conta de Poupança.
+                    TRAN - TransactingAccount - Conta de Pagamento pré-paga.
+              additionalProperties: false
+          additionalProperties: false
       additionalProperties: false
   parameters:
     CommandId:
