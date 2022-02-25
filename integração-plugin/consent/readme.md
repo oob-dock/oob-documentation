@@ -605,17 +605,32 @@ A tabela a seguir lista o ponto de integração para a revogação do consentime
 
 | Tipo do consentimento | Nome da rota Camel                         |
 | --------------------- | ------------------------------------------ |
-| Pagamento             | ```direct:consentPaymentRevocation```            |
+| Pagamento             | ```direct:consentPaymentRevocation```      |
 
 A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 
 | Tipo     | JSON Schema                                                                                           | Exemplo |
 | -------- | ----------------------------------------------------------------------------------------------------- | ------- |
 | Request  | [revokeConsentPayment-request.json](../schemas/v2/consent/revokeConsentPayment/request-schema.json)   | [revokeConsentPayment-request-example.json](../schemas/v2/consent/revokeConsentPayment/request-example.json) |
-
 | Response | [revokeConsentPayment-response.json](../schemas/v2/consent/revokeConsentPayment/response-schema.json) | [revokeConsentPayment-response-example.json](../schemas/v2/consent/revokeConsentPayment/response-example.json) |
 
 Caso seja enviado um payload na requisição que não atenda ao objeto definido no JSON Schema
 ou não seja possível regovar o consentimento do pagamento por não atender os requisitos que 
 possibilitem a revogação, será retornado um objeto de erro a exemplo deste  
 [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
+
+# Criação de consentimento - TED/TEF
+Com a entrada dos pagamentos do tipo TED e TEF no OpenBanking, percebeu-se a necessidade de uma nova rota a fim de conferir se a transferência que o usuário deseja realizar está dentro das regras da entidade em que a sua conta bancária se reside. Como esses dois métodos de transferência possuem regras muito específicas para cada banco (dias e horário de atendimento, valor máximo de transferência em um certo período do dia) e para cada um de seus usuários (valor disponível para transferência), é necessário que haja um canal de comunicação entre o sistema do OpusOpenBanking e o sistema legado para permitir a criação de um consentimento de pagamento. 
+
+Foi desenvolvida uma rota camel "approvePaymentConsentCreationTedTef" para verificar a possibilidade do usuário criar um consentimento dada as características do pagamento que deseja realizar do tipo TED ou TEF. Ela envia um corpo contendo todas as propriedades do consentimento de pagamento que deseja ser criado, e espera do sistema legado uma resposta confirmando a permissão da criação do consentimento ou o motivo de sua recusa, ficando a cargo da entidade parceira validar a criação do pagamento dos tipos TED e TEF de acordo com suas próprias regras - dia da semana, feriado, horário, valor máximo de transferência, etc.
+
+Ponto de integração para a verificação da permissão de consentimento
+| Tipo do consentimento | Nome da rota Camel                                 |
+| --------------------- | -------------------------------------------------- |
+| Pagamento             | ```direct:approvePaymentConsentCreationTedTef```   |
+
+Tabela com os schemas do Request e do Response da rota approvePaymentConsentCreationTedTef
+| Tipo                                           | JSON Schema                                                                                       | Exemplos |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------- |
+| Request                                        | [approvePaymentConsentCreationTedTef-request.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/request-schema.json)   | [approvePaymentConsentCreationTedTef-TED-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-ted-example.json);  [approvePaymentConsentCreationTedTef-TEF-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-tef-example.json) |
+| Response para a criação do consentimento| [approvePaymentConsentCreationTedTef-response.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-schema.json) | [approvePaymentConsentCreationTedTef-denied-response-example.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-error-example.json); [approvePaymentConsentCreationTedTef-allowed-response-example.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-allowed-example.json)|

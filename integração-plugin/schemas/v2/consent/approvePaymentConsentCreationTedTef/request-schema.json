@@ -1,0 +1,15 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "description": "Contém informações respectivas ao consentimento a ser criado.",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "$ref": "../../common/consent/common-consent-schema.json#/$defs/TedTefPaymentConsent"
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {}
+}
