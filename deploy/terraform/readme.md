@@ -31,6 +31,7 @@
       - [auth_server_base_path](#auth_server_base_path)
       - [public_fqdn](#public_fqdn)
       - [public_fqdn_mtls](#public_fqdn_mtls)
+      - [internal_fqdn](#internal_fqdn)
       - [supported_features](#supported_features)
       - [brand_id](#brand_id)
   - [Configuração do Grafana](#configuração-do-grafana)
@@ -226,6 +227,12 @@ FQDN público onde as APIs do open banking podem ser acessadas
 FQDN público onde as APIs do open banking podem ser acessadas com mTLS
 
 **Ex:** "mtls-oob.endereco.com.br"
+
+#### internal_fqdn
+
+Parâmetro opcional para inclusão de um FQDN interno onde as APIs de Backoffice do open banking podem ser acessadas
+
+**Ex:** "internal.endereco.com.br"
 
 #### supported_features
 
