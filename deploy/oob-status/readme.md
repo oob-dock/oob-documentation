@@ -53,6 +53,16 @@ um apontamento interno no Kubernetes
 
 **Ex:** `http://oob-consent`
 
+Configuração dos endereços base dos serviços acessíveis externamente mtls ou não
+
+* publicFqdn: Endereço externo base da API sem mtls
+
+**Ex:** `obb.qa.oob.opus-software.com.br`
+
+* publicFqdnMtls: Endereço externo base da API com mtls
+
+**Ex:** `mtls-obb.qa.oob.opus-software.com.br`
+
 ### features
 
 Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-banking)

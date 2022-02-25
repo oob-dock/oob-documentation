@@ -13,8 +13,9 @@ A biblioteca de handoff foi feita para a instituição obter todas as informaç�
 relativas ao fluxo de handoff de um consentimento, desde os dados para exibição
 do QR como os eventos relativos ao fluxo.
 
-O AS OOB hospeda a biblioteca na URL `TBD` e deve ser referenciada diretamente
-ao invés de ser copiada e referenciada em outro servidor web.
+O AS OOB hospeda a biblioteca na URL `https://as.instituicao.com.br/auth/handoff/v1/oob-handoff.js`
+e deve ser referenciada diretamente ao invés de ser copiada e referenciada
+em outro servidor web.
 
 ## Fluxo OOB handoff
 
@@ -26,7 +27,7 @@ redirecionando o navegador para a página de exibição do handoff feita pela in
 O AS possui uma configuração que define o template da URL de handoff feita pela
 instituição, desta forma o identificador da intenção de consentimento que será
 tratado pela página de handoff pode ser mesclado na URL da forma que a
-instituição desejar. Ver `TBD`
+instituição desejar. Ver [HANDOFF_RESOURCE_URL](../../deploy/oob-authorization-server/readme.md)
 
 A mescla permite a instituição receber o identificador através da
 `query string`, `fragment` ou `url`, como exibido na tabela abaixo:
