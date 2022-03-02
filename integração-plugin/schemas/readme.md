@@ -48,12 +48,13 @@ Onde:
 
 ## Changelog
 
-### 2022-02-21 - v2.6
+### 2022-03-02 - v2.6
 
 - Consent
   - Inclusão do schema de consentimento para TED/TEF
 - Payment
-  - Inclusão dos schemas para criar solicitação e consulta de status de pagamento TED/TEF
+  - Inclusão dos schemas para criar solicitação e consulta de status de pagamento
+  TED/TEF
 
 ### 2022-02-15 - v2.5.1
 
