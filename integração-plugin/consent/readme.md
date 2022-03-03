@@ -581,29 +581,33 @@ A tabela abaixo possui mais alguns exemplos de respostas que a rota checkPayment
 | Pagamento pendente             | [pendingPayment.json](../schemas/v2/consent/checkPaymentStatus/response-examples/response_pendingPayment.json) |
 
 Já os **headers** enviados para a rota checkPaymentStatus são:
-| Nome do campo | Descrição                                             | Tipo          |
-| ------------- | ------------------------------------------------------| ------------- |
-| correlationId | CorrelationId correspondente ao GET Consent realizado | String        |
 
+| Nome do campo | Descrição                                             | Tipo  |
+| ------------- | ------------------------------------------------------| ----- |
+| correlationId | CorrelationId correspondente ao GET Consent realizado | String|
 
 ## Revogação do consentimento de pagamento
 
-A revogação de um consentimento de pagamento só é possível para o caso do pagamento 
-ser do tipo Pix Agendado, o consentimento estar consumido (status CONSUMED) e a data 
-da solicitação de revogação ser até o dia anterior, ou seja, a meia noite no fuso 
-horário de Brasília do dia imediatamente anterior a data alvo da liquidação do pagamento. 
+A revogação de um consentimento de pagamento só é possível para o caso do pagamento
+ser do tipo Pix Agendado, o consentimento estar consumido (status CONSUMED) e a data
+da solicitação de revogação ser até o dia anterior, ou seja, a meia noite no fuso
+horário de Brasília do dia imediatamente anterior a data alvo da liquidação do pagamento.
 Com a revogação o status do consentimento é atualizado para REVOKED.
 
-A rota para realizar a revogação de um pagamento Pix Agendado foi criada para atender o que foi 
-definido no guia de experiência do usuário, possibilitando estes 5 cenários de revogação:
+A rota para realizar a revogação de um pagamento Pix Agendado foi criada para
+atender o que foi definido no guia de experiência do usuário, possibilitando estes
+5 cenários de revogação:
 
-1.	Revogação pelo usuário na iniciadora na área de gestão de pagamentos do open banking 
-2.	Revogação pelo usuário na detentora na área de gestão de pagamentos do open banking 
-3.	Revogação pelo usuário na detentora na área de gestão de Pix
-4.	Revogação pela iniciadora sem a presença do usuário
-5.	Revogação pela detentora sem a presença do usuário
+1. Revogação pelo usuário na iniciadora na área de gestão de pagamentos do open
+banking
+2. Revogação pelo usuário na detentora na área de gestão de pagamentos do open
+banking
+3. Revogação pelo usuário na detentora na área de gestão de Pix
+4. Revogação pela iniciadora sem a presença do usuário
+5. Revogação pela detentora sem a presença do usuário
 
-A tabela a seguir lista o ponto de integração para a revogação do consentimento do  pagamento:
+A tabela a seguir lista o ponto de integração para a revogação do consentimento
+do pagamento:
 
 | Tipo do consentimento | Nome da rota Camel                         |
 | --------------------- | ------------------------------------------ |
@@ -616,13 +620,26 @@ A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 | Request  | [revokeConsentPayment-request.json](../schemas/v2/consent/revokeConsentPayment/request-schema.json)   | [revokeConsentPayment-request-example.json](../schemas/v2/consent/revokeConsentPayment/request-example.json) |
 | Response | [revokeConsentPayment-response.json](../schemas/v2/consent/revokeConsentPayment/response-schema.json) | [revokeConsentPayment-response-example.json](../schemas/v2/consent/revokeConsentPayment/response-example.json) |
 
-Caso seja enviado um payload na requisição que não atenda ao objeto definido no JSON Schema
-ou não seja possível regovar o consentimento do pagamento por não atender os requisitos que 
-possibilitem a revogação, será retornado um objeto de erro a exemplo deste  
-[revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
+Caso seja enviado um payload na requisição que não atenda ao objeto definido no
+JSON Schema ou não seja possível regovar o consentimento do pagamento por não atender
+os requisitos que possibilitem a revogação, será retornado um objeto de erro a
+exemplo deste [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
 
 ## Criação de consentimento TED/TEF
-Com a entrada dos pagamentos do tipo TED e TEF no OpenBanking, percebeu-se a necessidade de uma nova rota a fim de conferir se a transferência que o usuário deseja realizar está dentro das regras da entidade em que a sua conta bancária se reside. Como esses dois métodos de transferência possuem regras muito específicas para cada banco (dias e horário de atendimento, valor máximo de transferência em um certo período do dia) e para cada um de seus usuários (valor disponível para transferência), foi desenvolvida uma rota camel "approvePaymentConsentCreationTedTef" para verificar a possibilidade do usuário criar um consentimento dada as características do pagamento que deseja realizar do tipo TED ou TEF. Ela envia um corpo contendo todas as propriedades do consentimento de pagamento que deseja ser criado, e espera do sistema legado uma resposta confirmando a permissão da criação do consentimento ou o motivo de sua recusa, ficando a cargo da entidade parceira validar a criação do pagamento dos tipos TED e TEF de acordo com suas próprias regras - dia da semana, feriado, horário, valor máximo de transferência, etc.
+
+Com a entrada dos pagamentos do tipo TED e TEF no OpenBanking, percebeu-se a
+necessidade de uma nova rota a fim de conferir se a transferência que o usuário
+deseja realizar está dentro das regras da entidade em que a sua conta bancária
+se reside. Como esses dois métodos de transferência possuem regras muito
+específicas para cada instuição e para cada um de seus usuários, foi desenvolvida
+uma rota camel "approvePaymentConsentCreationTedTef" para verificar a possibilidade
+do usuário criar um consentimento dada as características do pagamento que deseja
+realizar do tipo TED ou TEF. Ela envia um corpo contendo todas as propriedades do
+consentimento de pagamento que deseja ser criado, e espera do sistema legado uma
+resposta confirmando a permissão da criação do consentimento ou o motivo de sua
+recusa, ficando a cargo da entidade parceira validar a criação do pagamento dos
+tipos TED e TEF de acordo com suas próprias regras - dia da semana, feriado, horário,
+valor máximo de transferência, etc.
 
 Ponto de integração para a verificação da permissão de consentimento
 
@@ -632,7 +649,7 @@ Ponto de integração para a verificação da permissão de consentimento
 
 Tabela com os schemas do Request e do Response da rota approvePaymentConsentCreationTedTef
 
-| Tipo                                           | JSON Schema                                                                                       | Exemplos |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------- |
+| Tipo                                           | JSON Schema  | Exemplos |
+| ---------------------------------------------- | ------------ | -------- |
 | Request                                        | [approvePaymentConsentCreationTedTef-request.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/request-schema.json)   | [approvePaymentConsentCreationTedTef-TED-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-ted-example.json);  [approvePaymentConsentCreationTedTef-TEF-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-tef-example.json) |
 | Response para a criação do consentimento| [approvePaymentConsentCreationTedTef-response.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-schema.json) | [approvePaymentConsentCreationTedTef-denied-response-example.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-error-example.json); [approvePaymentConsentCreationTedTef-allowed-response-example.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-allowed-example.json)|
