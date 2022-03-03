@@ -20,6 +20,8 @@
       - [Regras de preenchimento para a alteração do validador de iniciação de transação de pagamentos do arranjo PIX do ciclo](#regras-de-preenchimento-para-a-alteração-do-validador-de-iniciação-de-transação-de-pagamentos-do-arranjo-pix-do-ciclo)
     - [Serviços auxiliares](#serviços-auxiliares)
     - [Criação de arquivo de rota customizada](#criação-de-arquivo-de-rota-customizada)
+  - [Revogação do consentimento de pagamento](#revogação-do-consentimento-de-pagamento)
+  - [Criação de consentimento para pagamentos TED/TEF](#criação-de-consentimento-TED/TEF)
 
 ## Discovery de recursos no Opus Open Banking
 
@@ -619,17 +621,19 @@ ou não seja possível regovar o consentimento do pagamento por não atender os 
 possibilitem a revogação, será retornado um objeto de erro a exemplo deste  
 [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
 
-# Criação de consentimento - TED/TEF
+## Criação de consentimento TED/TEF
 Com a entrada dos pagamentos do tipo TED e TEF no OpenBanking, percebeu-se a necessidade de uma nova rota a fim de conferir se a transferência que o usuário deseja realizar está dentro das regras da entidade em que a sua conta bancária se reside. Como esses dois métodos de transferência possuem regras muito específicas para cada banco (dias e horário de atendimento, valor máximo de transferência em um certo período do dia) e para cada um de seus usuários (valor disponível para transferência), é necessário que haja um canal de comunicação entre o sistema do OpusOpenBanking e o sistema legado para permitir a criação de um consentimento de pagamento. 
 
 Foi desenvolvida uma rota camel "approvePaymentConsentCreationTedTef" para verificar a possibilidade do usuário criar um consentimento dada as características do pagamento que deseja realizar do tipo TED ou TEF. Ela envia um corpo contendo todas as propriedades do consentimento de pagamento que deseja ser criado, e espera do sistema legado uma resposta confirmando a permissão da criação do consentimento ou o motivo de sua recusa, ficando a cargo da entidade parceira validar a criação do pagamento dos tipos TED e TEF de acordo com suas próprias regras - dia da semana, feriado, horário, valor máximo de transferência, etc.
 
 Ponto de integração para a verificação da permissão de consentimento
+
 | Tipo do consentimento | Nome da rota Camel                                 |
 | --------------------- | -------------------------------------------------- |
 | Pagamento             | ```direct:approvePaymentConsentCreationTedTef```   |
 
 Tabela com os schemas do Request e do Response da rota approvePaymentConsentCreationTedTef
+
 | Tipo                                           | JSON Schema                                                                                       | Exemplos |
 | ---------------------------------------------- | ------------------------------------------------------------------------------------------------- | ------- |
 | Request                                        | [approvePaymentConsentCreationTedTef-request.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/request-schema.json)   | [approvePaymentConsentCreationTedTef-TED-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-ted-example.json);  [approvePaymentConsentCreationTedTef-TEF-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-tef-example.json) |
