@@ -48,6 +48,17 @@ Onde:
 
 ## Changelog
 
+### 2022-03-03 - v2.5.2
+
+- Geral
+  - Correção de inconsistências nos schemas compartilhados
+- Consent
+  - Ajustes no schema da rota checkPaymentStatus para utilizar definições compartilhadas
+  - Ajustes na resposta da rota revokeConsentPayment para utilizar o enum correto
+   no campo action
+- Payment
+  - Ajustes no schema compartilhado de payment para criar definições compartilhadas
+
 ### 2022-02-15 - v2.5.1
 
 - Consent

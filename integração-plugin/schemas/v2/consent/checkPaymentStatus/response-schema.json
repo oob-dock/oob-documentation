@@ -19,10 +19,10 @@
             ],
             "properties": {
                 "status": {
-                    "$ref": "../../payment/common/common-schema.json#/$defs/ResponsePixPaymentData/status"
+                    "$ref": "../../payment/common/common-schema.json#/$defs/Status"
                 },
                 "rejectionReason": {
-                    "$ref": "../../payment/common/common-schema.json#/$defs/ResponsePixPaymentData/rejectionReason"
+                    "$ref": "../../payment/common/common-schema.json#/$defs/RejectionReason"
                 },
                 "revocation": {
                     "description": "Informações respectivas à revogação do pagamento. [Restrição] Esse campo deve ser enviado apenas quando o campo data/status for igual a RJCT (REJECTED) e o rejectionReason igual a CONSENT_REVOKED.",
@@ -34,17 +34,7 @@
                     ],
                     "properties": {
                         "loggedUser": {
-                            "description": "Usuário (pessoa natural) que estava logado na instituição durante a revogação do pagamento. [Restrição] Esse campo deve ser enviado apenas quando o campo data/revocation/revocationBy for igual a USER.",
-                            "type": "object",
-                            "required": [
-                                "document"
-                            ],
-                            "properties": {
-                                "document": {
-                                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser/document"
-                                }
-                            },
-                            "additionalItems": false
+                            "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser"
                         },
                         "revokedBy": {
                             "description": "Indica quem realizou o pedido de revogação do pagamento.",

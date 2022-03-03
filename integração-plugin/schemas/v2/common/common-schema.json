@@ -13,7 +13,7 @@
                     "$ref": "./consent/common-consent-schema.json#/$defs/LoggedUser"
                 },
                 "revokedBy": {
-                    "type": "",
+                    "type": "string",
                     "maxLength": 8,
                     "enum": [
                         "USER",
@@ -32,7 +32,7 @@
             "additionalProperties": false
         },
         "RevocationReason": {
-            "type": "string",
+            "type": "object",
             "description": "Define a razão pela qual o consentimento foi revogado.",
             "required": [
                 "code"
@@ -41,7 +41,7 @@
                 "code": {
                     "type": "string",
                     "description": "Define o código da razão pela qual o consentimento foi revogado. Valores possíveis:\n- FRAUD - Indica suspeita de fraude\n- ACCOUNT_CLOSURE - Indica que a conta do usuário foi encerrada\n- OTHER - Indica que motivo do cancelamento está fora dos motivos pré-estabelecidos.",
-                    "maxLength": "22",
+                    "maxLength": 22,
                     "enum": [
                         "FRAUD",
                         "ACCOUNT_CLOSURE",
@@ -54,7 +54,7 @@
                 "additionalInformation": {
                     "type": "string",
                     "description": "Contém informações adicionais definidas pelo requisitante da revogação. [Restrição] Obrigatório quando o campo revokedBy for igual a TPP ou ASPSP e o motivo de revogação for OTHER.",
-                    "maxLength": "140",
+                    "maxLength": 140,
                     "pattern": "[\\w\\W\\s]*",
                     "examples": [
                         "Suspeita de fraude"

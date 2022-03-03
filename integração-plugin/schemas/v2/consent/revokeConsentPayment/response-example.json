@@ -6,6 +6,6 @@
                 "value": "1234"
             }
         ],
-        "action": "schedule_revoked"
+        "action": "SCHEDULE_REVOKED"
     }
 }
