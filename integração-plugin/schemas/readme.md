@@ -48,6 +48,12 @@ Onde:
 
 ## Changelog
 
+### 2022-02-25 - v2.5.2
+
+- Consent
+  - Inclusão do campo purpose no schema comum do consentimento
+  - Inclusão do campo purposeAdditionalInfo no schema comum do consentimento
+
 ### 2022-02-15 - v2.5.1
 
 - Consent
@@ -92,7 +98,7 @@ Onde:
     com o aplicativo da instituição.
   - Adição do campo defaultSelected na definição AvailableResources no schema
     comum do consentimento
-    
+
 ### 2021-10-06 - v2.2.0
 
 - Consent
