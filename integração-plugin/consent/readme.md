@@ -12,6 +12,8 @@
       - [Filtro de contas](#filtro-de-contas)
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
     - [Arquivo de rota implementado pela OPUS](#arquivo-de-rota-implementado-pela-opus)
+      - [Parâmetros para pagamentos TED e TEF](#parâmetros-para-pagamentos-ted-e-tef)
+      - [Parâmetros definidos para a verificação dos ciclos](#parâmetros-definidos-para-a-verificação-dos-ciclos)
     - [Alteração dos valores padrões das variáveis de ambiente](#alteração-dos-valores-padrões-das-variáveis-de-ambiente)
       - [Regras de preenchimento para a alteração do validador de dia de início do ciclo](#regras-de-preenchimento-para-a-alteração-do-validador-de-dia-de-início-do-ciclo)
       - [Regras de preenchimento para a alteração do validador de valor máximo de pagamento](#regras-de-preenchimento-para-a-alteração-do-validador-de-valor-máximo-de-pagamento)
@@ -21,7 +23,6 @@
     - [Serviços auxiliares](#serviços-auxiliares)
     - [Criação de arquivo de rota customizada](#criação-de-arquivo-de-rota-customizada)
   - [Revogação do consentimento de pagamento](#revogação-do-consentimento-de-pagamento)
-  - [Criação de consentimento para pagamentos TED/TEF](#criação-de-consentimento-TED/TEF)
 
 ## Discovery de recursos no Opus Open Banking
 
@@ -232,6 +233,10 @@ Dentre as validações que podem ser feitas pela instituição estão:
 - Verificar se os valores selecionados estão de acordo com os limites definidos
   pela instituição;
 - Verificar se a operação está de acordo com as políticas antifraude.
+- Para os casos em que o pagamento é do tipo TED ou TEF, fica a cargo da instuição
+parceira verificar se as características da criação de consentimento estão de
+acordo com suas regras - dia da semana, feriado, horário,
+valor máximo de transferência, etc..
 
 Outra função dessa integração é controlar a liberação do acesso ao Open Banking
 para os clientes de forma escalonada. Dessa forma os sistemas internos da instituição
@@ -239,7 +244,7 @@ podem definir se a operação pode ser realizada levando em conta:
 
 - Se o cliente foi selecionado para acessar a operação, enquanto o acesso ainda
   está restrito a uma porcentagem pré-selecionada;
-- Se a operação está sendo realizada dendro dos horários pré-estabelecidos;
+- Se a operação está sendo realizada dentro dos horários pré-estabelecidos;
 - Se os valores estão dentro dos limites pré-estabelecidos;
 - Se a operação selecionada pode ser realizada através da interface de Open Banking;
 
@@ -325,7 +330,8 @@ Exemplo de Request:
 ### Arquivo de rota implementado pela OPUS
 
 A OPUS já fornece um arquivo da rota approvePaymentConsentCreation com as regras
-padrões definidas pelo próprio [Open Banking Brasil - OBB](https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=171).
+padrões definidas para a liberação escalonada do OpenBanking pelo próprio [Open
+Banking Brasil - OBB](https://www.bcb.gov.br/estabilidadefinanceira/exibenormativo?tipo=Instru%C3%A7%C3%A3o%20Normativa%20BCB&numero=171).
 Para utilizá-lo, basta configurar a variável de ambiente `camel.main.routes-include-pattern`
 durante a criação do container, indicando o diretório onde o arquivo arquivo se
 encontra: `specs/approvePaymentConsentCreation-routes.xml`.
@@ -337,6 +343,33 @@ Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota
 ARG approvePaymentRoute=file:/specs/approvePaymentConsentCreation-routes.xml
 ENV camel.main.routes-include-pattern=$approvePaymentRoute
 ```
+
+Vale a pena ressaltar que esta implementação **não** valida as regras relacionadas
+ao **TED** e **TEF**.
+
+#### Parâmetros para pagamentos TED e TEF
+
+Como esses dois métodos de transferência possuem normas muito
+específicas para cada instuição e para cada um de seus usuários, concluiu-se que
+seria mais seguro deixar a cargo da instituição parceira a verificação de suas
+próprias regras para as transferências bancárias do tipo TED e TEF. Dessa forma,
+foi criada uma variável de ambiente correspondente ao endpoint em que a rota enviará
+os dados do consentimento para a validação no sistema legado.
+
+| Nome da variável      | Definição | Tipo |
+| --------------------- | --------- | ---- |
+| tedtef_validation_url | Endpoint fornecido pela instituição parceira para a
+validação das regras dos pagamentos TED e TEF | POST |
+
+Tabela com os schemas do Request e do Response do endpoint de validação da criação
+de pagamentos dos tipos TED e TED
+
+| Tipo                                           | JSON Schema  | Exemplos |
+| ---------------------------------------------- | ------------ | -------- |
+| Request                                        | [tedTefValidation-request.json](../schemas/v2/consent/tedTefValidationUrl/request-schema.json)   | [tedTefValidation-TED-request-example.json](../schemas/v2/tedTefValidationUrl/examples/request-ted-example.json);  [tedTefValidation-TEF-request-example.json](../schemas/v2/tedTefValidationUrl/examples/request-tef-example.json) |
+| Response para a criação do consentimento| [tedTefValidation-response.json](../schemas/v2/consent/tedTefValidationUrl/response-schema.json) | [tedTefValidation-denied-response-example.json](../schemas/v2/consent/tedTefValidationUrl/response-error-example.json); [tedTefValidation-success-response-example.json](../schemas/v2/consent/tedTefValidationUrl/response-success-example.json)|
+
+#### Parâmetros definidos para a verificação dos ciclos
 
 Para definir os parâmetros pré-estabelecidos pelo OBB, são utilizadas variáveis
 de ambiente cujos valores padrões foram definidos de acordo com as regras
@@ -624,32 +657,3 @@ Caso seja enviado um payload na requisição que não atenda ao objeto definido 
 JSON Schema ou não seja possível regovar o consentimento do pagamento por não atender
 os requisitos que possibilitem a revogação, será retornado um objeto de erro a
 exemplo deste [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
-
-## Criação de consentimento TED/TEF
-
-Com a entrada dos pagamentos do tipo TED e TEF no OpenBanking, percebeu-se a
-necessidade de uma nova rota a fim de conferir se a transferência que o usuário
-deseja realizar está dentro das regras da entidade em que a sua conta bancária
-se reside. Como esses dois métodos de transferência possuem regras muito
-específicas para cada instuição e para cada um de seus usuários, foi desenvolvida
-uma rota camel "approvePaymentConsentCreationTedTef" para verificar a possibilidade
-do usuário criar um consentimento dada as características do pagamento que deseja
-realizar do tipo TED ou TEF. Ela envia um corpo contendo todas as propriedades do
-consentimento de pagamento que deseja ser criado, e espera do sistema legado uma
-resposta confirmando a permissão da criação do consentimento ou o motivo de sua
-recusa, ficando a cargo da entidade parceira validar a criação do pagamento dos
-tipos TED e TEF de acordo com suas próprias regras - dia da semana, feriado, horário,
-valor máximo de transferência, etc.
-
-Ponto de integração para a verificação da permissão de consentimento
-
-| Tipo do consentimento | Nome da rota Camel                                 |
-| --------------------- | -------------------------------------------------- |
-| Pagamento             | ```direct:approvePaymentConsentCreationTedTef```   |
-
-Tabela com os schemas do Request e do Response da rota approvePaymentConsentCreationTedTef
-
-| Tipo                                           | JSON Schema  | Exemplos |
-| ---------------------------------------------- | ------------ | -------- |
-| Request                                        | [approvePaymentConsentCreationTedTef-request.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/request-schema.json)   | [approvePaymentConsentCreationTedTef-TED-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-ted-example.json);  [approvePaymentConsentCreationTedTef-TEF-request-example.json](../schemas/v2/approvePaymentConsentCreationTedTef/examples/request-tef-example.json) |
-| Response para a criação do consentimento| [approvePaymentConsentCreationTedTef-response.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-schema.json) | [approvePaymentConsentCreationTedTef-denied-response-example.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-error-example.json); [approvePaymentConsentCreationTedTef-allowed-response-example.json](../schemas/v2/consent/approvePaymentConsentCreationTedTef/response-allowed-example.json)|
