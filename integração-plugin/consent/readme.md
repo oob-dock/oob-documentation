@@ -358,8 +358,7 @@ os dados do consentimento para a validação no sistema legado.
 
 | Nome da variável      | Definição | Tipo |
 | --------------------- | --------- | ---- |
-| tedtef_validation_url | Endpoint fornecido pela instituição parceira para a
-validação das regras dos pagamentos TED e TEF | POST |
+| tedtef_validation_url | Endpoint fornecido pela instituição parceira para a validação das regras dos pagamentos TED e TEF | POST |
 
 Tabela com os schemas do Request e do Response do endpoint de validação da criação
 de pagamentos dos tipos TED e TED
