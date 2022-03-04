@@ -417,22 +417,32 @@
                     "$ref": "#/$defs/Details"
                 },
                 "schedule": {
-                    "type": "Object",
+                    "type": "object",
                     "required": [
                         "single"
                     ],
                     "properties": {
                         "single": {
-                            "type": "string",
-                            "format": "date",
-                            "maxLength": 10,
-                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
-                            "examples": [
-                                "2023-01-01"
+                            "type": "object",
+                            "required": [
+                                "date"
                             ],
-                            "description": "Define a data alvo da liquidação do pagamento.O fuso horário de Brasilia deve ser utilizado para criação e racionalização sobre os dados deste campo."
-                        }
-                    }
+                            "properties": {
+                                "date": {
+                                    "type": "string",
+                                    "format": "date",
+                                    "maxLength": 10,
+                                    "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                                    "examples": [
+                                        "2023-01-01"
+                                    ],
+                                    "description": "Define a data alvo da liquidação do pagamento.O fuso horário de Brasilia deve ser utilizado para criação e racionalização sobre os dados deste campo."
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "additionalProperties": false
                 }
             },
             "additionalProperties": false
