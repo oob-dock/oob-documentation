@@ -1,0 +1,13 @@
+{
+    "data": {
+        "paymentId": [
+            {
+                "key": "instPayId",
+                "value": "${body.instPayId}"
+            }
+        ],
+#if(${body.status} == "CANCELLED")
+        "action": "SCHEDULE_REVOKED"
+#end        
+    }
+}
