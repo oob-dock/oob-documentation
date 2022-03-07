@@ -48,13 +48,19 @@ Onde:
 
 ## Changelog
 
-### 2022-03-02 - v2.6
+### 2022-03-07 - v2.6
 
 - Consent
   - Inclusão do schema de consentimento para TED/TEF
 - Payment
   - Inclusão dos schemas para criar solicitação e consulta de status de pagamento
   TED/TEF
+
+### 2022-02-25 - v2.5.2
+
+- Consent
+  - Inclusão do campo purpose no schema comum do consentimento
+  - Inclusão do campo purposeAdditionalInfo no schema comum do consentimento
 
 ### 2022-02-15 - v2.5.1
 
