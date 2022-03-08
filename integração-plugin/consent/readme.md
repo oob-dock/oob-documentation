@@ -11,6 +11,7 @@
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
+      - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
   - [Serviços auxiliares](#serviços-auxiliares)
   - [Revogação do consentimento de pagamento](#revogação-do-consentimento-de-pagamento)
 
@@ -311,6 +312,24 @@ podem ser encontradas [aqui](../schemas/v2/consent/approvePaymentConsentCreation
 
 Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo da rota
 `approvePaymentConsentCreation`:
+
+```dockerfile
+ARG approvePaymentRoute=file:/specs/custom-approvePaymentConsentCreation-routes.xml
+ENV camel.main.routes-include-pattern=$approvePaymentRoute
+```
+
+### Solução provisória para rota approvePaymentConsentCreation
+
+A fim de facilitar o desenvolvimento da solução das entidades parceiras, a Opus
+Software fornece um arquivo .xml (approvePaymentConsentCreation-routes.xml) com
+uma **solução temporária** da rota "approvePaymentConsentCreation".
+Ela aprova qualquer consentimento, sem aplicar nenhuma regra de verificação, e
+deve ser utilizada **apenas** para desenvolvimento e enquanto os serviços de
+aprovação dos consentimentos de pagamentos do sistema legado não estiverem
+adaptados para os pagamentos do tipo TED e TEF.
+
+Exemplo de comando utilizado no `Dockerfile` para utilizar a solução temporária
+para a rota `approvePaymentConsentCreation`:
 
 ```dockerfile
 ARG approvePaymentRoute=file:/specs/approvePaymentConsentCreation-routes.xml
