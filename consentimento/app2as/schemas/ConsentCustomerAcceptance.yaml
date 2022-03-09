@@ -19,7 +19,7 @@ ConsentCustomerAcceptance:
     brandId:
       type: string
       description: Identificador da marca reportada pelo participante do Open Banking
-      examples:
+      example:
         - cbanco
       minLength: 1
       maxLength: 50
@@ -27,7 +27,7 @@ ConsentCustomerAcceptance:
       description: Data e hora em que o consentimento foi criado. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC (UTC time format).
       type: string
       format: date-time
-      examples:
+      example:
         - "2021-05-21T08:30:00Z"
       pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
       maxLength: 20
@@ -41,13 +41,13 @@ ConsentCustomerAcceptance:
         name:
           type: string
           description: Nome do TPP que solicitou o consentimento
-          examples:
+          example:
             - GuiaBolsa
           maxLength: 100
     externalId:
       type: string
       description: Identificador do consentimento utilizado fora da plataforma OOB
-      examples:
+      example:
         - urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
       maxLength: 100
     loggedUser:
@@ -69,14 +69,14 @@ ConsentCustomerAcceptance:
               type: string
               maxLength: 11
               description: Número do documento de identificação oficial do usuário.
-              examples:
+              example:
                 - "11111111111"
               pattern: ^\d{11}$
             rel:
               type: string
               maxLength: 3
               description: Tipo do documento de identificação oficial do usuário.
-              examples:
+              example:
                 - CPF
               pattern: ^[A-Z]{3}$
     businessDocumentType:
@@ -98,14 +98,14 @@ ConsentCustomerAcceptance:
               type: string
               maxLength: 14
               description: Número do documento de identificação oficial do titular pessoa jurídica.
-              examples:
+              example:
                 - "11111111111111"
               pattern: ^\d{14}$
             rel:
               type: string
               maxLength: 4
               description: Tipo do documento de identificação oficial do titular pessoa jurídica.
-              examples:
+              example:
                 - CNPJ
               pattern: ^[A-Z]{4}$
     resources:
@@ -122,7 +122,7 @@ ConsentCustomerAcceptance:
           id:
             type: string
             description: campo no formato GUID
-            examples:
+            example:
               - 49fe29f1-95a9-4521-8f48-a9700e392b48
             pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
             maxLength: 36
@@ -137,7 +137,7 @@ ConsentCustomerAcceptance:
               - UNARRANGED_ACCOUNT_OVERDRAFT
               - INVOICE_FINANCING
               - PAYMENT
-            examples:
+            example:
               - PAYMENT
           name:
             type: array
@@ -149,27 +149,27 @@ ConsentCustomerAcceptance:
               properties:
                 key:
                   type: string
-                  examples:
+                  example:
                     - Cartão de crédito
                 value:
                   type: string
-                  examples:
+                  example:
                     - 2134 XXXX XXXX 3123
             minItems: 1
             maxItems: 10
           balanceCurrency:
             description: Moeda do saldo do recurso.
             type: string
-            examples:
+            example:
               - BRL
           balanceAmount:
             description: Valor do saldo do recurso.
             type: number
-            examples:
+            example:
               - 3192.32
           hasMultipleAuthorisers:
             type: boolean
-            examples:
+            example:
               - "false"
         additionalProperties: false
       maxItems: 1000
@@ -178,7 +178,7 @@ ConsentCustomerAcceptance:
       type: string
       maxLength: 20
       format: date-time
-      examples:
+      example:
         - "2021-05-21T08:30:00Z"
     creditor:
       type: object
@@ -196,213 +196,45 @@ ConsentCustomerAcceptance:
             - PESSOA_JURIDICA
           description: |
             Titular, pessoa natural ou juridica a quem se referem os dados de recebedor (creditor).
-          examples:
+          example:
             - PESSOA_NATURAL
         cpfCnpj:
           type: string
           minLength: 11
           maxLength: 14
           pattern: ^\d{11}$|^\d{14}$
-          examples:
+          example:
             - "11111111111"
           description: |
-            Identificação da pessoa envolvida na transação.  
-            Preencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.  
-            O CPF será utilizado com 11 números e deverá ser informado sem pontos ou traços.  
+            Identificação da pessoa envolvida na transação.
+            Preencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.
+            O CPF será utilizado com 11 números e deverá ser informado sem pontos ou traços.
             O CNPJ será utilizado com 14 números e deverá ser informado sem pontos ou traços.
         name:
           type: string
           maxLength: 140
           pattern: '[\w\W\s]*'
-          examples:
+          example:
             - Marco Antonio de Brito
           description: |
-            Em caso de pessoa natural deve ser informado o nome completo do titular da conta do recebedor.  
+            Em caso de pessoa natural deve ser informado o nome completo do titular da conta do recebedor.
             Em caso de pessoa jurídica deve ser informada a razão social ou o nome fantasia da conta do recebedor.
       additionalProperties: false
     payment:
-      type: object
-      description: Somente para consentimentos de pagamento. Objeto contendo dados de pagamento para consentimento.
-      required:
-        - type
-        - date
-        - currency
-        - amount
-        - details
-      properties:
-        type:
-          type: string
-          maxLength: 3
-          enum:
-            - PIX
-          examples:
-            - PIX
-          description: |
-            Este campo define o tipo de pagamento que será iniciado após a autorização do consentimento.
-        date:
-          type: string
-          format: date
-          maxLength: 10
-          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
-          examples:
-            - "2021-01-01"
-          description: Data do pagamento, conforme especificação RFC-3339.
-        currency:
-          type: string
-          maxLength: 3
-          pattern: ^([A-Z]{3})$
-          examples:
-            - BRL
-          description: |
-            Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'.
-            Todos os valores monetários informados estão representados com a moeda vigente do Brasil.
-        amount:
-          type: string
-          minLength: 4
-          maxLength: 19
-          pattern: ^((\d{1,16}\.\d{2}))$
-          examples:
-            - "100000.12"
-          description: |
-            Valor da transação com 2 casas decimais.
-        ibgeTownCode:
-          type: string
-          minLength: 7
-          maxLength: 7
-          pattern: ^\d{7}$
-          examples:
-            - "5300108"
-          description: |
-            Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).
-            Para o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.
-            O preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.
-            Este campo faz referência ao campo CodMun do arranjo Pix.
-        details:
-          type: object
-          description: |
-            Objeto contendo os detalhes do pagamento.
-          required:
-            - localInstrument
-            - creditorAccount
-          properties:
-            localInstrument:
-              type: string
-              maxLength: 4
-              enum:
-                - MANU
-                - DICT
-                - QRDN
-                - QRES
-                - INIC
-              examples:
-                - DICT
-              description: |
-                Especifica a forma de iniciação do pagamento:
-                - MANU - Inserção manual de dados da conta transacional
-                - DICT - Inserção manual de chave Pix
-                - QRDN - QR code dinâmico
-                - QRES - QR code estático
-                - INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.
-            qrCode:
-              type: string
-              maxLength: 512
-              pattern: '[\w\W\s]*'
-              examples:
-                - |
-                  00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012
-                  BR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062
-                  530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB
-                  CD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76
-              description: |
-                Sequência de caracteres que corresponde ao QR Code disponibilizado para o pagador.
-                É a sequência de caracteres que seria lida pelo leitor de QR Code, e deve propiciar o retorno dos dados do pagador após consulta na DICT.
-                Essa funcionalidade é possível tanto para QR Code estático quanto para QR Code dinâmico.
-                No arranjo do Pix esta é a mesma sequência gerada e/ou lida pela funcionalidade Pix Copia e Cola.
-                Este campo deverá ser no formato UTF-8.
-                [Restrição] Preenchimento obrigatório para pagamentos por QR Code, observado o tamanho máximo de 512 bytes.
-            proxy:
-              type: string
-              maxLength: 77
-              pattern: '[\w\W\s]*'
-              examples:
-                - "12345678901"
-              description: |
-                Chave cadastrada no DICT pertencente ao recebedor. Os tipos de chaves podem ser: telefone, e-mail, cpf/cnpj ou chave aleatória.
-                No caso de telefone celular deve ser informado no padrão E.1641.
-                Para e-mail deve ter o formato xxxxxxxx@xxxxxxx.xxx(.xx) e no máximo 77 caracteres.
-                No caso de CPF deverá ser informado com 11 números, sem pontos ou traços.
-                Para o caso de CNPJ deverá ser informado com 14 números, sem pontos ou traços.
-                No caso de chave aleatória deve ser informado o UUID gerado pelo DICT, conforme formato especificado na RFC41223.
-                Se informado, a detentora da conta deve validar o proxy no DICT quando localInstrument for igual a DICT, QRDN ou QRES e validar o campo creditorAccount.
-                Esta validação é opcional caso o localInstrument for igual a INIC.
-                [Restrição]
-                Se localInstrument for igual a MANU, o campo proxy não deve ser preenchido.
-                Se localInstrument for igual INIC, DICT, QRDN ou QRES, o campo proxy deve ser sempre preenchido com a chave Pix.
-            creditorAccount:
-              type: object
-              description: |
-                Objeto que contém a identificação da conta de destino do beneficiário/recebedor.
-              required:
-                - ispb
-                - number
-                - accountType
-              properties:
-                ispb:
-                  type: string
-                  minLength: 8
-                  maxLength: 8
-                  pattern: ^[0-9]{8}$
-                  examples:
-                    - "12345678"
-                  description: |
-                    Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.
-                issuer:
-                  type: string
-                  maxLength: 4
-                  pattern: ^\d{4}$
-                  examples:
-                    - "1774"
-                  description: |
-                    Código da Agência emissora da conta sem dígito.  
-                    (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,  
-                    no exercício de atividades da instituição, não podendo ser móvel ou transitória).  
-                    [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).
-                number:
-                  type: string
-                  minLength: 3
-                  maxLength: 20
-                  pattern: ^\d{3,20}$
-                  examples:
-                    - "1234567890"
-                  description: |
-                    Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir),  
-                    se houver valor alfanumérico, este deve ser convertido para 0.
-                accountType:
-                  type: string
-                  maxLength: 4
-                  enum:
-                    - CACC
-                    - SLRY
-                    - SVGS
-                    - TRAN
-                  examples:
-                    - CACC
-                  description: |
-                    Tipos de contas usadas para pagamento via Pix.  
-                    Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,  
-                    conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.  
-                    Segue descrição de cada valor do ENUM para o escopo do Pix.  
-                    CACC - Current - Conta Corrente.  
-                    SLRY - Salary - Conta-Salário.  
-                    SVGS - Savings - Conta de Poupança.  
-                    TRAN - TransactingAccount - Conta de Pagamento pré-paga.
-              additionalProperties: false
-          additionalProperties: false
-      additionalProperties: false
+      discriminator:
+        propertyName: type
+        mapping:
+              PIX: './PixPaymentConsent.yaml'
+              TED: './TedPaymentConsent.yaml'
+              TEF: './TefPaymentConsent.yaml'
+      oneOf:
+        - $ref: './PixPaymentConsent.yaml'
+        - $ref: './TedPaymentConsent.yaml'
+        - $ref: './TefPaymentConsent.yaml'
     debtorAccount:
       type: object
       description: |
-        Somente para consentimentos de pagamento. Objeto que contém a identificação da conta de origem do pagador.  
+        Somente para consentimentos de pagamento. Objeto que contém a identificação da conta de origem do pagador.
         As informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do pagamento.
       required:
         - ispb
@@ -414,7 +246,7 @@ ConsentCustomerAcceptance:
           minLength: 8
           maxLength: 8
           pattern: ^[0-9]{8}$
-          examples:
+          example:
             - "12345678"
           description: |
             Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.
@@ -422,22 +254,22 @@ ConsentCustomerAcceptance:
           type: string
           maxLength: 4
           pattern: ^\d{4}$
-          examples:
+          example:
             - "1774"
           description: |
-            Código da Agência emissora da conta sem dígito.  
-            (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,  
-            no exercício de atividades da instituição, não podendo ser móvel ou transitória).  
+            Código da Agência emissora da conta sem dígito.
+            (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,
+            no exercício de atividades da instituição, não podendo ser móvel ou transitória).
             [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).
         number:
           type: string
           minLength: 3
           maxLength: 20
           pattern: ^\d{3,20}$
-          examples:
+          example:
             - "1234567890"
           description: |
-            Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir),  
+            Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir),
             se houver valor alfanumérico, este deve ser convertido para 0.
         accountType:
           type: string
@@ -447,16 +279,16 @@ ConsentCustomerAcceptance:
             - SLRY
             - SVGS
             - TRAN
-          examples:
+          example:
             - CACC
           description: |
-            Tipos de contas usadas para pagamento via Pix.  
-            Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,  
-            conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.  
-            Segue descrição de cada valor do ENUM para o escopo do Pix.  
-            CACC - Current - Conta Corrente.  
-            SLRY - Salary - Conta-Salário.  
-            SVGS - Savings - Conta de Poupança.  
+            Tipos de contas usadas para pagamento.
+            Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas,
+            conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.
+            Segue descrição de cada valor do ENUM.
+            CACC - Current - Conta Corrente.
+            SLRY - Salary - Conta-Salário.
+            SVGS - Savings - Conta de Poupança.
             TRAN - TransactingAccount - Conta de Pagamento pré-paga.
       additionalProperties: false
     permissions:
@@ -497,7 +329,7 @@ ConsentCustomerAcceptance:
           - RESOURCES_READ
       minItems: 1
       maxItems: 30
-      examples:
+      example:
         - - ACCOUNTS_READ
           - ACCOUNTS_OVERDRAFT_LIMITS_READ
           - RESOURCES_READ
