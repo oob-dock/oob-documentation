@@ -1,4 +1,4 @@
-FROM oob-connector-tester-native:latest
+FROM 618430153747.dkr.ecr.sa-east-1.amazonaws.com/digital-banking-microservices/oob-connector-tester:latest
 
 COPY --chown=1001:root ./routes.xml  /work/
 COPY --chown=1001:root ./response-discovery.vm  /work/models/
