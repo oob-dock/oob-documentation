@@ -365,7 +365,6 @@
             "description": "Somente para consentimentos de pagamento. Objeto contendo dados de pagamento para consentimento.",
             "required": [
                 "type",
-                "date",
                 "currency",
                 "amount"
             ],

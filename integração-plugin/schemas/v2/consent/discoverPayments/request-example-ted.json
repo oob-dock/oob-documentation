@@ -22,25 +22,25 @@
             "cpfCnpj": "11111111111",
             "name": "Marco Antonio de Brito"
         },
-        "payment":{
-            "type":"TED",
-            "date":"2021-01-01",
-            "schedule":{
-               "single":{
-                  "date":"2021-01-01"
-               }
+        "payment": {
+            "type": "TED",
+            "date": "2021-01-01",
+            "schedule": {
+                "single": {
+                    "date": "2021-01-01"
+                }
             },
-            "currency":"BRL",
-            "amount":"100000.12",
-            "creditorAccount":{
-               "ispb":"12345678",
-               "issuer":"1774",
-               "number":"1234567890",
-               "accountType":"CACC"
+            "currency": "BRL",
+            "amount": "100000.12",
+            "creditorAccount": {
+                "ispb": "12345678",
+                "issuer": "1774",
+                "number": "1234567890",
+                "accountType": "CACC"
             },
-            "purpose":1,
-            "purposeAdditionalInfo":"Informações adicionais"
-         },
+            "purpose": 99999,
+            "purposeAdditionalInfo": "Informações adicionais"
+        },
         "authExtraData": [
             {
                 "key": "agencia",

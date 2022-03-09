@@ -29,7 +29,13 @@
             "date": "2021-01-01",
             "currency": "BRL",
             "amount": "123.45",
-            "purpose": 1,
+            "creditorAccount": {
+                "ispb": "12345678",
+                "number": "1234567890",
+                "accountType": "CACC",
+                "issuer": "1774"
+            },
+            "purpose": 99999,
             "purposeAdditionalInfo": "Informações adicionais"
         },
         "resources": [
