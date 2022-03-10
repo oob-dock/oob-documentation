@@ -366,8 +366,7 @@
             "required": [
                 "type",
                 "currency",
-                "amount",
-                "details"
+                "amount"
             ],
             "properties": {
                 "type": {
@@ -402,19 +401,6 @@
                     ],
                     "description": "Valor da transação com 2 casas decimais.\n"
                 },
-                "ibgeTownCode": {
-                    "type": "string",
-                    "minLength": 7,
-                    "maxLength": 7,
-                    "pattern": "^\\d{7}$",
-                    "examples": [
-                        "5300108"
-                    ],
-                    "description": "Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).\nPara o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.\nO preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.\nEste campo faz referência ao campo CodMun do arranjo Pix.\n"
-                },
-                "details": {
-                    "$ref": "#/$defs/Details"
-                },
                 "schedule": {
                     "type": "object",
                     "required": [
@@ -443,14 +429,15 @@
                     },
                     "additionalProperties": false
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "EnumPaymentType": {
             "type": "string",
             "maxLength": 3,
             "enum": [
-                "PIX"
+                "PIX",
+                "TED",
+                "TEF"
             ],
             "examples": [
                 "PIX"
@@ -537,6 +524,56 @@
                             "0011"
                         ]
                     }
+                }
+            }
+        },
+        "PixPaymentConsent": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/PaymentConsent"
+                }
+            ],
+            "type": "object",
+            "description": "Somente para consentimentos de pagamento pix. Objeto contendo dados de pagamento para consentimento.",
+            "required": [
+                "details"
+            ],
+            "properties": {
+                "ibgeTownCode": {
+                    "type": "string",
+                    "minLength": 7,
+                    "maxLength": 7,
+                    "pattern": "^\\d{7}$",
+                    "examples": [
+                        "5300108"
+                    ],
+                    "description": "Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).\nPara o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.\nO preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.\nEste campo faz referência ao campo CodMun do arranjo Pix.\n"
+                },
+                "details": {
+                    "$ref": "#/$defs/Details"
+                }
+            }
+        },
+        "TedTefPaymentConsent": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/PaymentConsent"
+                }
+            ],
+            "type": "object",
+            "description": "Somente para consentimentos de pagamento TED. Objeto contendo dados de pagamento para consentimento.",
+            "required": [
+                "creditorAccount"
+            ],
+            "properties": {
+                "creditorAccount": {
+                    "$ref": "../common-payment-schema.json#/$defs/CreditorAccount"
+                },
+                "purpose": {
+                    "$ref": "../common-payment-schema.json#/$defs/EnumPurpose"
+                },
+                "purposeAdditionalInfo": {
+                    "$ref": "../common-payment-schema.json#/$defs/PurposeAdditionalInfo"
                 }
             }
         }

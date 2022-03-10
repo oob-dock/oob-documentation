@@ -56,7 +56,9 @@ como:
 
 &nbsp;
 
-| Endpoint                    | Rota do Camel                                |
-| --------------------------- | -------------------------------------------- |
-| /pix/payments               | ```direct:paymentsPostPixPayments```         |
-| /pix/payments/\{paymentId\} | ```direct:paymentsGetPixPaymentsPaymentId``` |
+| Endpoint                        | Rota do Camel                                   |
+| ------------------------------- | ----------------------------------------------- |
+| /pix/payments                   | ```direct:paymentsPostPixPayments```            |
+| /pix/payments/\{paymentId\}     | ```direct:paymentsGetPixPaymentsPaymentId```    |
+| /ted-tef/payments               | ```direct:paymentsPostTedTefPayments```         |
+| /ted-tef/payments/\{paymentId\} | ```direct:paymentsGetTedTefPaymentsPaymentId``` |
