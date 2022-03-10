@@ -365,10 +365,8 @@
             "description": "Somente para consentimentos de pagamento. Objeto contendo dados de pagamento para consentimento.",
             "required": [
                 "type",
-                "date",
                 "currency",
-                "amount",
-                "details"
+                "amount"
             ],
             "properties": {
                 "type": {
@@ -403,19 +401,6 @@
                     ],
                     "description": "Valor da transação com 2 casas decimais.\n"
                 },
-                "ibgeTownCode": {
-                    "type": "string",
-                    "minLength": 7,
-                    "maxLength": 7,
-                    "pattern": "^\\d{7}$",
-                    "examples": [
-                        "5300108"
-                    ],
-                    "description": "Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).\nPara o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.\nO preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.\nEste campo faz referência ao campo CodMun do arranjo Pix.\n"
-                },
-                "details": {
-                    "$ref": "#/$defs/Details"
-                },
                 "schedule": {
                     "type": "Object",
                     "required": [
@@ -433,30 +418,16 @@
                             "description": "Define a data alvo da liquidação do pagamento.O fuso horário de Brasilia deve ser utilizado para criação e racionalização sobre os dados deste campo."
                         }
                     }
-                },
-                "creditorAccount": {
-                    "$ref": "../common-payment-schema.json#/$defs/CreditorAccount"
-                },
-                "purpose": {
-                    "$ref": "#/$defs/EnumPurposeTed"
-                },
-                "purposeAdditionalInfo": {
-                    "type": "string",
-                    "maxLength": 200,
-                    "pattern": "^[a-zA-Z0-9_\\s]*$",
-                    "examples": [
-                        "Informações adicionais"
-                    ],
-                    "description": "Define o complemento da finalidade da transferência de forma textual.\n"
                 }
-            },
-            "additionalProperties": false
+            }
         },
         "EnumPaymentType": {
             "type": "string",
             "maxLength": 3,
             "enum": [
-                "PIX"
+                "PIX",
+                "TED",
+                "TEF"
             ],
             "examples": [
                 "PIX"
@@ -546,111 +517,55 @@
                 }
             }
         },
-        "EnumPurposeTed": {
-            "type": "integer",
-            "enum": [
-                1,
-                10,
-                100,
-                101,
-                103,
-                104,
-                107,
-                108,
-                109,
-                11,
-                110,
-                111,
-                112,
-                113,
-                114,
-                117,
-                12,
-                121,
-                123,
-                124,
-                13,
-                131,
-                132,
-                136,
-                139,
-                14,
-                149,
-                15,
-                150,
-                157,
-                175,
-                18,
-                19,
-                2,
-                200,
-                201,
-                202,
-                203,
-                204,
-                205,
-                206,
-                207,
-                208,
-                209,
-                23,
-                27,
-                28,
-                29,
-                3,
-                30,
-                300,
-                301,
-                302,
-                303,
-                31,
-                33,
-                34,
-                35,
-                36,
-                37,
-                38,
-                39,
-                4,
-                40,
-                41,
-                42,
-                43,
-                44,
-                45,
-                47,
-                5,
-                50,
-                500,
-                501,
-                502,
-                504,
-                505,
-                507,
-                508,
-                509,
-                510,
-                511,
-                512,
-                513,
-                514,
-                515,
-                516,
-                517,
-                518,
-                519,
-                520,
-                6,
-                7,
-                8,
-                9,
-                97,
-                99999
+        "PixPaymentConsent": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/PaymentConsent"
+                }
             ],
-            "examples": [
-                99999
+            "type": "object",
+            "description": "Somente para consentimentos de pagamento pix. Objeto contendo dados de pagamento para consentimento.",
+            "required": [
+                "details"
             ],
-            "description": "Este campo define a finalidade da transferência quando o tipo de pagamento do consentimento é do tipo TED.\n"
+            "properties": {
+                "ibgeTownCode": {
+                    "type": "string",
+                    "minLength": 7,
+                    "maxLength": 7,
+                    "pattern": "^\\d{7}$",
+                    "examples": [
+                        "5300108"
+                    ],
+                    "description": "Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).\nPara o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.\nO preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.\nEste campo faz referência ao campo CodMun do arranjo Pix.\n"
+                },
+                "details": {
+                    "$ref": "#/$defs/Details"
+                }
+            }
+        },
+        "TedTefPaymentConsent": {
+            "allOf": [
+                {
+                    "$ref": "#/$defs/PaymentConsent"
+                }
+            ],
+            "type": "object",
+            "description": "Somente para consentimentos de pagamento TED. Objeto contendo dados de pagamento para consentimento.",
+            "required": [
+                "creditorAccount"
+            ],
+            "properties": {
+                "creditorAccount": {
+                    "$ref": "../common-payment-schema.json#/$defs/CreditorAccount"
+                },
+                "purpose": {
+                    "$ref": "../common-payment-schema.json#/$defs/EnumPurpose"
+                },
+                "purposeAdditionalInfo": {
+                    "$ref": "../common-payment-schema.json#/$defs/PurposeAdditionalInfo"
+                }
+            }
         }
     }
 }

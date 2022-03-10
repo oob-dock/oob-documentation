@@ -50,7 +50,14 @@
                     "$ref": "../common-payment-schema.json#/$defs/Identification"
                 },
                 "payment": {
-                    "$ref": "./common-consent-schema.json#/$defs/PaymentConsent"
+                    "oneOf": [
+                        {
+                            "$ref": "./common-consent-schema.json#/$defs/PixPaymentConsent"
+                        },
+                        {
+                            "$ref": "./common-consent-schema.json#/$defs/TedTefPaymentConsent"
+                        }
+                    ]
                 },
                 "debtorAccount": {
                     "$ref": "../common-payment-schema.json#/$defs/DebtorAccount"
