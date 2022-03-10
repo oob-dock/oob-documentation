@@ -24,7 +24,7 @@
                 "errors": {
                     "type": "array",
                     "minItems": 1,
-                    "maxItems": 3,
+                    "maxItems": 5,
                     "items": {
                         "type": "object",
                         "required": [
@@ -65,14 +65,7 @@
                     }
                 },
                 "restrictionType": {
-                    "type": "string",
-                    "enum": [
-                        "MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED",
-                        "TRANSACTION_TIME_NOT_ALLOWED",
-                        "LIMIT_OF_USERS"
-                    ],
-                    "example": "TRANSACTION_TIME_NOT_ALLOWED",
-                    "description": "Código indicando o motivo da recusa na criação do consentimento. Deve ser preenchido em situações onde o motivo está listado e portanto possui tratamento específico na aplicação: \n• MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED: Valor da transação acima do permitido. \n• TRANSACTION_TIME_NOT_ALLOWED: Transação fora dos horários permitidos. \n• LIMIT_OF_USERS: Limite de usuários atingido para o ciclo atual do Open Banking. \n"
+                    "$ref": "#/$defs/ErrorRestrictionType"
                 }
             },
             "additionalProperties": false
@@ -87,7 +80,7 @@
 				"errors": {
 					"type": "array",
 					"minItems": 1,
-					"maxItems": 9,
+					"maxItems": 6,
 					"items": {
 						"type": "object",
 						"required": [
@@ -134,17 +127,20 @@
 					}
 				},
                 "restrictionType": {
-                    "type": "string",
-                    "enum": [
-                        "MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED",
-                        "TRANSACTION_TIME_NOT_ALLOWED",
-                        "LIMIT_OF_USERS"
-                    ],
-                    "example": "TRANSACTION_TIME_NOT_ALLOWED",
-                    "description": "Código indicando o motivo da recusa na criação do consentimento. Deve ser preenchido em situações onde o motivo está listado e portanto possui tratamento específico na aplicação: \n• MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED: Valor da transação acima do permitido. \n• TRANSACTION_TIME_NOT_ALLOWED: Transação fora dos horários permitidos. \n• LIMIT_OF_USERS: Limite de usuários atingido para o ciclo atual do Open Banking. \n"
+                    "$ref": "#/$defs/ErrorRestrictionType"
                 }
 			},
 			"additionalProperties": false
-		}
+		},
+        "ErrorRestrictionType": {
+            "type": "string",
+            "enum": [
+                "MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED",
+                "TRANSACTION_TIME_NOT_ALLOWED",
+                "LIMIT_OF_USERS"
+            ],
+            "example": "TRANSACTION_TIME_NOT_ALLOWED",
+            "description": "Código indicando o motivo da recusa na criação do consentimento. Deve ser preenchido em situações onde o motivo está listado e portanto possui tratamento específico na aplicação: \n• MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED: Valor da transação acima do permitido. \n• TRANSACTION_TIME_NOT_ALLOWED: Transação fora dos horários permitidos. \n• LIMIT_OF_USERS: Limite de usuários atingido para o ciclo atual do Open Banking. \n"
+        }
     }
 }
