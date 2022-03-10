@@ -1,9 +1,9 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema",
-    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreateConsent caso o consentimento não possa ser criado por uma restrição de negócio. Deve ser um responseError padrão se for um erro de sistema",
+    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreatePixConsent caso o consentimento não possa ser criado por uma restrição de negócio. Deve ser um responseError padrão se for um erro de sistema",
     "oneOf": [
         {
-            "$ref": "#/$defs/ResponseErrorCreateConsent"
+            "$ref": "#/$defs/ResponseErrorCreatePixConsent"
         },
         {
             "$ref": "../../common/response-error-schema.json"
@@ -14,7 +14,7 @@
     ],
     "additionalProperties": false,
     "$defs": {
-        "ResponseErrorCreateConsent": {
+        "ResponseErrorCreatePixConsent": {
             "type": "object",
             "description": "Listagem de erros ocorridos ao processar a solicitação de criação de pagamento do tipo PIX",
             "required": [
