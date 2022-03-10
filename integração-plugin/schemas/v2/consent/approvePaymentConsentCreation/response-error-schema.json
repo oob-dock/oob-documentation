@@ -44,7 +44,7 @@
                                     "AGENDAMENTO_INVALIDO"
                                 ],
                                 "example": "FORMA_PGTO_INVALIDA",
-                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos:  \n• FORMA_PGTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PGTO_INVALIDA: Data de pagamento inválida.  \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.  \n• NAO_INFORMADO: Não informado. \n• AGENDAMENTO_INVALIDO: Data de agendamento inválida \n"
+                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos"
                             },
                             "title": {
                                 "type": "string",
@@ -102,7 +102,7 @@
 								"examples": [
 									"VALOR_ACIMA_LIMITE"
 								],
-								"description": "Códigos de erros previstos na criação da iniciação de pagamento:\n• \n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta. \n• AGENDAMENTO_INVALIDO: Data de agendamento inválida \n"
+								"description": "Códigos de erros previstos na criação da iniciação de pagamento"
 							},
 							"title": {
 								"type": "string",
