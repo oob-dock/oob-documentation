@@ -49,7 +49,7 @@
                 "payment": {
                     "oneOf": [
                         {
-                            "$ref": "../../common/consent/common-consent-schema.json#/$defs/PaymentConsent"
+                            "$ref": "../../common/consent/common-consent-schema.json#/$defs/PixPaymentConsent"
                         }, 
                         {
                             "$ref": "../../common/consent/common-consent-schema.json#/$defs/TedTefPaymentConsent"
