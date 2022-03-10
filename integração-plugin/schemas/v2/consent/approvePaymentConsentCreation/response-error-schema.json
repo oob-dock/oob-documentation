@@ -40,24 +40,25 @@
                                     "FORMA_PGTO_INVALIDA",
                                     "DATA_PGTO_INVALIDA",
                                     "DETALHE_PGTO_INVALIDO",
-                                    "NAO_INFORMADO"
+                                    "NAO_INFORMADO",
+                                    "AGENDAMENTO_INVALIDO"
                                 ],
                                 "example": "FORMA_PGTO_INVALIDA",
-                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos:  \n• FORMA_PGTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PGTO_INVALIDA: Data de pagamento inválida.  \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.  \n• NAO_INFORMADO: Não informado. \n"
+                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos:  \n• FORMA_PGTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PGTO_INVALIDA: Data de pagamento inválida.  \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.  \n• NAO_INFORMADO: Não informado. \n• AGENDAMENTO_INVALIDO: Data de agendamento inválida \n"
                             },
                             "title": {
                                 "type": "string",
                                 "maxLength": 255,
                                 "pattern": "\\w*\\W*",
                                 "example": "Forma de pagamento inválida.",
-                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PGTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PGTO_INVALIDA: Data de pagamento inválida. \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.\n• NAO_INFORMADO: Não informado. \n"
+                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PGTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PGTO_INVALIDA: Data de pagamento inválida. \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.\n• NAO_INFORMADO: Não informado. \n• AGENDAMENTO_INVALIDO: Agendamento inválido. \n"
                             },
                             "detail": {
                                 "type": "string",
                                 "maxLength": 2048,
                                 "pattern": "\\w*\\W*",
                                 "example": "Meio de pagamento inválido.",
-                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PGTO_INVALIDA – Meio de pagamento inválido.  \n• DATA_PGTO_INVALIDA – Data de pagamento inválida no contexto, por exemplo, data no passado. Para pagamentos únicos deve ser informada a data atual, do dia corrente.  \n• DETALHE_PGTO_INVALIDO: O campo [nome_campo] não atende os requisitos de preenchimento.  \n• NAO_INFORMADO – Não reportado/identificado pela instituição detentora de conta.  \n•"
+                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PGTO_INVALIDA – Meio de pagamento inválido.  \n• DATA_PGTO_INVALIDA – Data de pagamento inválida no contexto, por exemplo, data no passado. Para pagamentos únicos deve ser informada a data atual, do dia corrente.  \n• DETALHE_PGTO_INVALIDO: O campo [nome_campo] não atende os requisitos de preenchimento.  \n• NAO_INFORMADO – Não reportado/identificado pela instituição detentora de conta.  \n• AGENDAMENTO_INVALIDO: O campo data.payment.schedule.single.date deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília. O campo data.payment.schedule.single.date deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília. \n•"
                             }
                         },
                         "additionalProperties": false
@@ -102,12 +103,13 @@
 									"DETALHE_PGTO_INVALIDO",
 									"TIPO_CONTA_NAO_SUPORTADO",
 									"NAO_INFORMADO",
-									"JANELA_HORARIO_NAO_PERMITIDA"
+									"JANELA_HORARIO_NAO_PERMITIDA",
+                                    "AGENDAMENTO_INVALIDO"
 								],
 								"examples": [
 									"VALOR_ACIMA_LIMITE"
 								],
-								"description": "Códigos de erros previstos na criação da iniciação de pagamento:\n• \n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta.\n"
+								"description": "Códigos de erros previstos na criação da iniciação de pagamento:\n• \n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta. \n• AGENDAMENTO_INVALIDO: Data de agendamento inválida \n"
 							},
 							"title": {
 								"type": "string",
@@ -116,7 +118,7 @@
 								"examples": [
 									"Valor de pagamento acima do limite."
 								],
-								"description": "Título específico do erro reportado, de acordo com o código enviado:\n• \n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido. \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta.\n"
+								"description": "Título específico do erro reportado, de acordo com o código enviado:\n• \n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido. \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta.\n• AGENDAMENTO_INVALIDO: Agendamento inválido. \n"
 							},
 							"detail": {
 								"type": "string",
@@ -125,7 +127,7 @@
 								"examples": [
 									"O valor de pagamento está acima do limite."
 								],
-								"description": "Descrição específica do erro de acordo com o código reportado:\n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido. \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta.\n"
+								"description": "Descrição específica do erro de acordo com o código reportado:\n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido. \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta.\n• AGENDAMENTO_INVALIDO: O campo data.payment.schedule.single.date deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília. O campo data.payment.schedule.single.date deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília. \n"
 							}
 						},
 						"additionalProperties": false

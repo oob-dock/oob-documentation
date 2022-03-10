@@ -19,7 +19,7 @@
         },
         "requestBody": {
             "type": "object",
-            "description": "Payload para criação da iniciação do pagamento Pix.",
+            "description": "Payload para criação da iniciação do pagamento TED/TEF.",
             "required": [
                 "data"
             ],
