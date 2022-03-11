@@ -380,6 +380,7 @@ components:
         - externalId
         - loggedUser
         - expirationDateTime
+        - creditor
       properties:
         type:
           description: Tipo do consentimento
@@ -704,13 +705,29 @@ components:
             - - ACCOUNTS_READ
               - ACCOUNTS_OVERDRAFT_LIMITS_READ
               - RESOURCES_READ
+        failingResources:
+          type: array
+          items:
+            description: Lista opcional de recursos que falharam no discovery
+            type: string
+            enum:
+              - CUSTOMER
+              - CREDIT_CARD_ACCOUNT
+              - ACCOUNT
+              - LOAN
+              - FINANCING
+              - UNARRANGED_ACCOUNT_OVERDRAFT
+              - INVOICE_FINANCING
+              - PAYMENT
+          maxItems: 1000
+          example:
+            - PAYMENT
       additionalProperties: false
     TefPaymentConsent:
       type: object
       description: Somente para consentimentos de pagamento TEF. Objeto contendo dados de pagamento para consentimento.
       required:
         - type
-        - date
         - currency
         - amount
         - creditorAccount
@@ -842,7 +859,6 @@ components:
       description: Somente para consentimentos de pagamento TED. Objeto contendo dados de pagamento para consentimento.
       required:
         - type
-        - date
         - currency
         - amount
         - creditorAccount
@@ -953,6 +969,7 @@ components:
                   enum:
                     - CACC
                     - SLRY
+                    - SVGS
                     - TRAN
                   example:
                     - CACC
@@ -964,6 +981,7 @@ components:
                     disponíveis pelo Open Banking, sendo suportado somente conta corrente, poupança e pagamentos
                     Segue descrição de cada valor do ENUM para o escopo do Ted.
                     CACC - Current - Conta Corrente.
+                    SLRY - Salary - Conta-Salário.
                     SVGS - Savings - Conta de Poupança.
                     TRAN - TransactingAccount - Conta de Pagamento pré-paga.
         purpose:
@@ -1081,7 +1099,6 @@ components:
       description: Somente para consentimentos de pagamento PIX. Objeto contendo dados de pagamento para consentimento.
       required:
         - type
-        - date
         - currency
         - amount
         - details

@@ -2,7 +2,6 @@ type: object
 description: Somente para consentimentos de pagamento TED. Objeto contendo dados de pagamento para consentimento.
 required:
   - type
-  - date
   - currency
   - amount
   - creditorAccount
@@ -113,6 +112,7 @@ properties:
             enum:
               - CACC
               - SLRY
+              - SVGS
               - TRAN
             example:
               - CACC
@@ -124,6 +124,7 @@ properties:
               disponíveis pelo Open Banking, sendo suportado somente conta corrente, poupança e pagamentos
               Segue descrição de cada valor do ENUM para o escopo do Ted.
               CACC - Current - Conta Corrente.
+              SLRY - Salary - Conta-Salário.
               SVGS - Savings - Conta de Poupança.
               TRAN - TransactingAccount - Conta de Pagamento pré-paga.
   purpose:
