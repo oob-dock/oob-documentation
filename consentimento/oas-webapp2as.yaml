@@ -263,6 +263,9 @@ components:
         resourceTypes:
           $ref: '#/components/schemas/ResponseDomainResourceSchema'
           description: "Tipos de recursos do consentimento. Exclusivo de consentimento de compartilhamento de dados."
+        tedPurposes:
+          $ref: '#/components/schemas/ResponseTedPurposesResourceSchema'
+          description: "Descrição dos objetivos possíveis do TED. Exclusivo de consentimento de pagamento do tipo TED."
 
     ResponseDomainPermissionSchema:
       type: array
@@ -300,6 +303,21 @@ components:
         title:
           type: string
           example: Dados da conta
+    
+    ResponseTedPurposesResourceSchema:
+      type: array
+      items:
+        $ref: '#/components/schemas/TedPurpose'
+
+    TedPurpose:
+      type: object
+      properties:
+        name:
+          type: string
+          example: 1
+        description:
+          type: string
+          example: Pagamento de Impostos, Tributos e Taxas
 
     ErrorCommand:
       type: object
