@@ -9,6 +9,7 @@ ConsentCustomerAcceptance:
     - externalId
     - loggedUser
     - expirationDateTime
+    - creditor
   properties:
     type:
       description: Tipo do consentimento
@@ -333,4 +334,22 @@ ConsentCustomerAcceptance:
         - - ACCOUNTS_READ
           - ACCOUNTS_OVERDRAFT_LIMITS_READ
           - RESOURCES_READ
+    failingResources:
+      type: array
+      items:
+        description: Lista opcional de recursos que falharam no discovery
+        type: string
+        enum:
+          - CUSTOMER
+          - CREDIT_CARD_ACCOUNT
+          - ACCOUNT
+          - LOAN
+          - FINANCING
+          - UNARRANGED_ACCOUNT_OVERDRAFT
+          - INVOICE_FINANCING
+          - PAYMENT
+      maxItems: 1000
+      example:
+        - PAYMENT
+      additionalProperties: false
   additionalProperties: false
