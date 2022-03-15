@@ -258,13 +258,16 @@ components:
         consent:
           $ref: '#/components/schemas/ConsentCustomerAcceptance'
         permissions:
-          $ref: '#/components/schemas/ResponseDomainPermissionSchema'
+          allOf:
+            - $ref: '#/components/schemas/ResponseDomainPermissionSchema'
           description: "Descrição das permissões do consentimento. Exclusivo de consentimento de compartilhamento de dados."
         resourceTypes:
-          $ref: '#/components/schemas/ResponseDomainResourceSchema'
+          allOf:
+            - $ref: '#/components/schemas/ResponseDomainResourceSchema'      
           description: "Tipos de recursos do consentimento. Exclusivo de consentimento de compartilhamento de dados."
         tedPurposes:
-          $ref: '#/components/schemas/ResponseTedPurposesResourceSchema'
+          allOf:
+            - $ref: '#/components/schemas/ResponseDomainTedPurposesSchema'
           description: "Descrição dos objetivos possíveis do TED. Exclusivo de consentimento de pagamento do tipo TED."
 
     ResponseDomainPermissionSchema:
@@ -304,7 +307,7 @@ components:
           type: string
           example: Dados da conta
     
-    ResponseTedPurposesResourceSchema:
+    ResponseDomainTedPurposesSchema:
       type: array
       items:
         $ref: '#/components/schemas/TedPurpose'
