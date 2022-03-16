@@ -2,7 +2,6 @@ type: object
 description: Somente para consentimentos de pagamento PIX. Objeto contendo dados de pagamento para consentimento.
 required:
   - type
-  - date
   - currency
   - amount
   - details

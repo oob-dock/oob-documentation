@@ -1,18 +1,22 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema",
-    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreateConsent caso o consentimento não possa ser criado por uma restrição de negócio. Deve ser um responseError padrão se for um erro de sistema",
+    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreatePixConsent caso o consentimento não possa ser criado por uma restrição de negócio. Deve ser um responseError padrão se for um erro de sistema",
     "oneOf": [
         {
-            "$ref": "#/$defs/ResponseErrorCreateConsent"
+            "$ref": "#/$defs/ResponseErrorCreatePixConsent"
         },
         {
             "$ref": "../../common/response-error-schema.json"
+        },
+        {
+            "$ref": "#/$defs/ResponseErrorCreateTedTefConsent"
         }
     ],
     "additionalProperties": false,
     "$defs": {
-        "ResponseErrorCreateConsent": {
+        "ResponseErrorCreatePixConsent": {
             "type": "object",
+            "description": "Listagem de erros ocorridos ao processar a solicitação de criação de pagamento do tipo PIX",
             "required": [
                 "errors"
             ],
@@ -20,7 +24,7 @@
                 "errors": {
                     "type": "array",
                     "minItems": 1,
-                    "maxItems": 3,
+                    "maxItems": 5,
                     "items": {
                         "type": "object",
                         "required": [
@@ -37,44 +41,106 @@
                                     "DATA_PGTO_INVALIDA",
                                     "DETALHE_PGTO_INVALIDO",
                                     "NAO_INFORMADO",
-                                    "AGENDAMENTO_INVALIDO",
-                                    "TIPO_CONTA_NAO_SUPORTADO",
-                                    "JANELA_HORARIO_NAO_PERMITIDA",
-                                    "VALOR_ACIMA_LIMITE"
+                                    "AGENDAMENTO_INVALIDO"
                                 ],
                                 "example": "FORMA_PGTO_INVALIDA",
-                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos."
+                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos"
                             },
                             "title": {
                                 "type": "string",
                                 "maxLength": 255,
                                 "pattern": "\\w*\\W*",
                                 "example": "Forma de pagamento inválida.",
-                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PGTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PGTO_INVALIDA: Data de pagamento inválida. \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.\n• NAO_INFORMADO: Não informado.\n• AGENDAMENTO_INVALIDO: Agendamento inválido. \n• TIPO_CONTA_NAO_SUPORTADO: Tipo de conta não suportada. \n• JANELA_HORARIO_NAO_PERMITIDA: Consentimento inválido. \n• VALOR_ACIMA_LIMITE: Valor acima do limite. \n"
+                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PGTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PGTO_INVALIDA: Data de pagamento inválida. \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.\n• NAO_INFORMADO: Não informado. \n• AGENDAMENTO_INVALIDO: Agendamento inválido. \n"
                             },
                             "detail": {
                                 "type": "string",
                                 "maxLength": 2048,
                                 "pattern": "\\w*\\W*",
                                 "example": "Meio de pagamento inválido.",
-                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PGTO_INVALIDA – Meio de pagamento inválido.  \n• DATA_PGTO_INVALIDA – Data de pagamento inválida no contexto, por exemplo, data no passado. Para pagamentos únicos deve ser informada a data atual, do dia corrente.  \n• DETALHE_PGTO_INVALIDO: O campo [nome_campo] não atende os requisitos de preenchimento.  \n• NAO_INFORMADO – Não reportado/identificado pela instituição detentora de conta.  \n• AGENDAMENTO_INVALIDO: O campo data.payment.schedule.single.date deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília. O campo data.payment.schedule.single.date deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília. \n• TIPO_CONTA_NAO_SUPORTADO: Tipo de conta não suportado pelo arranjo alvo. \n• JANELA_HORARIO_NAO_PERMITIDA: Janela de horário do arranjo de pagamento alvo não permitida. \n• VALOR_ACIMA_LIMITE: O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente. \n"
+                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PGTO_INVALIDA – Meio de pagamento inválido.  \n• DATA_PGTO_INVALIDA – Data de pagamento inválida no contexto, por exemplo, data no passado. Para pagamentos únicos deve ser informada a data atual, do dia corrente.  \n• DETALHE_PGTO_INVALIDO: O campo [nome_campo] não atende os requisitos de preenchimento.  \n• NAO_INFORMADO – Não reportado/identificado pela instituição detentora de conta.  \n• AGENDAMENTO_INVALIDO: O campo data.payment.schedule.single.date deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília. O campo data.payment.schedule.single.date deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília. \n•"
                             }
                         },
                         "additionalProperties": false
                     }
                 },
                 "restrictionType": {
-                    "type": "string",
-                    "enum": [
-                        "MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED",
-                        "TRANSACTION_TIME_NOT_ALLOWED",
-                        "LIMIT_OF_USERS"
-                    ],
-                    "example": "TRANSACTION_TIME_NOT_ALLOWED",
-                    "description": "Código indicando o motivo da recusa na criação do consentimento. Deve ser preenchido em situações onde o motivo está listado e portanto possui tratamento específico na aplicação: \n• MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED: Valor da transação acima do permitido. \n• TRANSACTION_TIME_NOT_ALLOWED: Transação fora dos horários permitidos. \n• LIMIT_OF_USERS: Limite de usuários atingido para o ciclo atual do Open Banking. \n"
+                    "$ref": "#/$defs/ErrorRestrictionType"
                 }
             },
             "additionalProperties": false
+        },
+        "ResponseErrorCreateTedTefConsent": {
+			"type": "object",
+			"description": "Listagem de erros ocorridos ao processar a solicitação de criação de pagamento do tipo TED ou TEF",
+			"required": [
+				"errors"
+			],
+			"properties": {
+				"errors": {
+					"type": "array",
+					"minItems": 1,
+					"maxItems": 6,
+					"items": {
+						"type": "object",
+						"required": [
+							"code",
+							"title",
+							"detail"
+						],
+						"properties": {
+							"code": {
+								"type": "string",
+								"enum": [
+									"VALOR_ACIMA_LIMITE",
+									"DETALHE_PGTO_INVALIDO",
+									"TIPO_CONTA_NAO_SUPORTADO",
+									"NAO_INFORMADO",
+									"JANELA_HORARIO_NAO_PERMITIDA",
+                                    "AGENDAMENTO_INVALIDO"
+								],
+								"examples": [
+									"VALOR_ACIMA_LIMITE"
+								],
+								"description": "Códigos de erros previstos na criação da iniciação de pagamento"
+							},
+							"title": {
+								"type": "string",
+								"maxLength": 255,
+								"pattern": "\\w*\\W*",
+								"examples": [
+									"Valor de pagamento acima do limite."
+								],
+								"description": "Título específico do erro reportado, de acordo com o código enviado:\n• \n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido. \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta.\n• AGENDAMENTO_INVALIDO: Agendamento inválido. \n"
+							},
+							"detail": {
+								"type": "string",
+								"maxLength": 2048,
+								"pattern": "\\w*\\W*",
+								"examples": [
+									"O valor de pagamento está acima do limite."
+								],
+								"description": "Descrição específica do erro de acordo com o código reportado:\n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido. \n• DETALHE_PGTO_INVALIDO: Algum dos campos para a criação de consentimento não condiz com os requisitos. \n• TIPO_CONTA_NAO_SUPORTADO: Erro retornado ao tentar criar um consentimento de pagamento com o payment.type = TED e creditorAccount.accountType = SLRY (Conta salário). \n• JANELA_HORARIO_NAO_PERMITIDA: Requisição está fora da janela de funcionamento. \n• NAO_INFORMADO: Não informada pela detentora de conta.\n• AGENDAMENTO_INVALIDO: O campo data.payment.schedule.single.date deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília. O campo data.payment.schedule.single.date deverá ser no máximo um ano corrido a partir da data do consentimento considerando o fuso horário de Brasília. \n"
+							}
+						},
+						"additionalProperties": false
+					}
+				},
+                "restrictionType": {
+                    "$ref": "#/$defs/ErrorRestrictionType"
+                }
+			},
+			"additionalProperties": false
+		},
+        "ErrorRestrictionType": {
+            "type": "string",
+            "enum": [
+                "MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED",
+                "TRANSACTION_TIME_NOT_ALLOWED",
+                "LIMIT_OF_USERS"
+            ],
+            "example": "TRANSACTION_TIME_NOT_ALLOWED",
+            "description": "Código indicando o motivo da recusa na criação do consentimento. Deve ser preenchido em situações onde o motivo está listado e portanto possui tratamento específico na aplicação: \n• MAXIMUM_TRANSACTION_AMOUNT_EXCEEDED: Valor da transação acima do permitido. \n• TRANSACTION_TIME_NOT_ALLOWED: Transação fora dos horários permitidos. \n• LIMIT_OF_USERS: Limite de usuários atingido para o ciclo atual do Open Banking. \n"
         }
     }
 }
