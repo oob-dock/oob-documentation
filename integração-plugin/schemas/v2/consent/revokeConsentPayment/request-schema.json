@@ -5,7 +5,6 @@
         "requestMeta",
         "requestBody"
     ],
-    
     "properties": {
         "requestMeta": {
             "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
@@ -15,7 +14,7 @@
             "description": "Payload para revogação de pagamento Pix agendado.",
             "properties": {
                 "paymentId": {
-                    "$ref": "../../payment/common/common-schema.json#/$defs/PaymentId"
+                    "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
                 },
                 "data": {
                     "type": "object",

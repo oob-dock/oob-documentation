@@ -19,10 +19,17 @@
             ],
             "properties": {
                 "status": {
-                    "$ref": "../../payment/common/common-schema.json#/$defs/Status"
+                    "$ref": "../../payment/common/common-schema.json#/$defs/PaymentStatus"
                 },
                 "rejectionReason": {
-                    "$ref": "../../payment/common/common-schema.json#/$defs/RejectionReason"
+                    "oneOf": [
+                        {
+                            "$ref": "../../common/common-payment-schema.json#/$defs/PixRejectionReason"
+                        }, 
+                        {
+                            "$ref": "../../common/common-payment-schema.json#/$defs/TedTefRejectionReason"
+                        }
+                    ]
                 },
                 "revocation": {
                     "description": "Informações respectivas à revogação do pagamento. [Restrição] Esse campo deve ser enviado apenas quando o campo data/status for igual a RJCT (REJECTED) e o rejectionReason igual a CONSENT_REVOKED.",

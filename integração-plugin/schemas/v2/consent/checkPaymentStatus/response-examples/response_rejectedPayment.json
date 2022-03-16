@@ -1,6 +1,6 @@
 {
-  "data":{
-    "status":"RJCT",
-    "rejectionReason":"BLOCKED_ACCOUNT"
-  }
+    "data": {
+        "status": "RJCT",
+        "rejectionReason": "BLOCKED_ACCOUNT"
+    }
 }

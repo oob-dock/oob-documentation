@@ -48,6 +48,15 @@ Onde:
 
 ## Changelog
 
+### 2022-03-16 - v2.6.1
+
+- Geral
+  - Adicionadas novas definições compartilhadas
+- Consent
+  - Alteração dos schemas para utilizar as novas definições compartilhadas
+- Payment
+  - Alteração dos schemas para utilizar as novas definições compartilhadas
+
 ### 2022-03-07 - v2.6
 
 - Consent
