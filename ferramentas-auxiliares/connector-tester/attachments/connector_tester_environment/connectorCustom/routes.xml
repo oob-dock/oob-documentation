@@ -2,18 +2,16 @@
     xmlns="http://camel.apache.org/schema/spring" xsi:schemaLocation="
             http://camel.apache.org/schema/spring
             http://camel.apache.org/schema/spring/camel-spring.xsd">
+
     <route id="consentGetPaymentAuthorizationsAndResourcesFromLegacyRoute">
         <from uri="direct:discoverPayments" />
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
-
         <setProperty name="documentNumber">
             <jsonpath>$.consent.loggedUser.document.identification</jsonpath>
         </setProperty>
-
         <toD uri="{{env:ROUTE_DISCOVERY}}/account/v1/${exchangeProperty[documentNumber]}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET"/>
-
         <choice>
             <when>
                 <simple>${header.CamelHttpResponseCode} in '200,201,202'</simple>
@@ -30,9 +28,9 @@
             </otherwise>
         </choice>
     </route>
+
     <route id="approvePaymentConsentCreation">
         <from uri="direct:approvePaymentConsentCreation"/>
-
         <to uri="{{env:ROUTE_APPROVE}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET"/>
         <choice>
             <when>
@@ -46,14 +44,13 @@
             </otherwise>
         </choice>
     </route>
-     <route id="consentPaymentRevocation">
-        <from uri="direct:consentPaymentRevocation"/>
 
+    <route id="consentPaymentRevocation">
+        <from uri="direct:consentPaymentRevocation"/>
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
         <to uri="velocity:file://work/models/request-revoke.vm?allowContextMapAll=true"/>
-
         <to uri="{{env:ROUTE_REVOKE}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=PATCH"/>
         <choice>
             <when>
@@ -71,12 +68,12 @@
             </otherwise>
         </choice>
     </route>
-     <route id="checkPaymentStatus">
+
+    <route id="checkPaymentStatus">
         <from uri="direct:checkPaymentStatus"/>
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
-
         <setProperty name="Paymentid">
             <jsonpath>$.paymentId[0].value</jsonpath>
         </setProperty>
@@ -97,12 +94,13 @@
             </otherwise>
         </choice>
     </route>
+
     <route id="paymentsPostPixPaymentsRoute">
         <from uri="direct:paymentsPostPixPayments"/>
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
-        <to uri="velocity:file://work/models/request.vm?allowContextMapAll=true"/>
+        <to uri="velocity:file://work/models/request-pix.vm?allowContextMapAll=true"/>
         <setHeader name="Content-Type">
             <constant>application/json</constant>
         </setHeader>
@@ -113,7 +111,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/models/response-pix.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>201</constant>
                 </setHeader>
@@ -123,12 +121,12 @@
             </otherwise>
         </choice>
     </route>
+
     <route id="paymentsGetPixPaymentsPaymentIdRoute">
         <from uri="direct:paymentsGetPixPaymentsPaymentId"/>
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
-
         <setProperty name="Paymentid">
             <jsonpath>$.paymentId[0].value</jsonpath>
         </setProperty>
@@ -139,7 +137,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/models/response-pix.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>200</constant>
                 </setHeader>
@@ -149,6 +147,61 @@
             </otherwise>
         </choice>
     </route>
+
+    <route id="paymentsPostTedTefPaymentsRoute">
+        <from uri="direct:paymentsPostTedTefPayments"/>
+        <unmarshal>
+            <json library="Gson"/>
+        </unmarshal>
+        <to uri="velocity:file://work/models/request-ted-tef.vm?allowContextMapAll=true"/>
+        <setHeader name="Content-Type">
+            <constant>application/json</constant>
+        </setHeader>
+        <to uri="{{env:ROUTE_CREATE_TED_TEF}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=POST"/>
+        <choice>
+            <when>
+                <simple>${header.CamelHttpResponseCode} in '200,201,202'</simple>
+                <unmarshal>
+                    <json library="Gson"/>
+                </unmarshal>
+                <to uri="velocity:file://work/models/response-ted-tef.vm?allowContextMapAll=true"/>
+                <setHeader name="CamelHttpResponseCode">
+                    <constant>201</constant>
+                </setHeader>
+            </when>
+            <otherwise>
+                <to uri="direct:getMockError"/>
+            </otherwise>
+        </choice>
+    </route>
+    
+    <route id="paymentsGetTedTefPaymentsPaymentIdRoute">
+        <from uri="direct:paymentsGetTedTefPaymentsPaymentId"/>
+        <unmarshal>
+            <json library="Gson"/>
+        </unmarshal>
+
+        <setProperty name="Paymentid">
+            <jsonpath>$.paymentId[0].value</jsonpath>
+        </setProperty>
+        <toD uri="{{env:ROUTE_STATUS_TED_TEF}}/status/${exchangeProperty[Paymentid]}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET"/>
+        <choice>
+            <when>
+                <simple>${header.CamelHttpResponseCode} in '200,201,202'</simple>
+                <unmarshal>
+                    <json library="Gson"/>
+                </unmarshal>
+                <to uri="velocity:file://work/models/response-ted-ted.vm?allowContextMapAll=true"/>
+                <setHeader name="CamelHttpResponseCode">
+                    <constant>200</constant>
+                </setHeader>
+            </when>
+            <otherwise>
+                <to uri="direct:getMockError"/>
+            </otherwise>
+        </choice>
+    </route>
+
     <route id="getMockError">
         <from uri="direct:getMockError"/>
         <to uri="velocity:file://work/error/response-error-example.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
@@ -156,6 +209,7 @@
             <constant>500</constant>
         </setHeader>
     </route>
+
     <route id="getMockErrorApprove">
         <from uri="direct:getMockErrorApprove"/>
         <to uri="velocity:file://work/error/response-error-approvePaymentConsentCreation.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
@@ -163,4 +217,5 @@
             <constant>500</constant>
         </setHeader>
     </route>
+
 </routes>

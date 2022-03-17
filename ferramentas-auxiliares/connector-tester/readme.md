@@ -141,6 +141,10 @@ da chamada no swagger, sendo que a resposta para a chamada realizada será:
 
 ## Changelog
 
+### 2022-03-16 - v1.3.0
+
+- Novas rotas referentes ao pagamento ted-tef adicionadas
+
 ### 2022-03-04 - v1.2.0
 
 - Novas rotas referentes à funcionalidade de agendamento adicionadas

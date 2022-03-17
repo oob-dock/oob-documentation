@@ -1,0 +1,32 @@
+{
+    "consentId":"${body.consent.externalId}",
+    "payer": {
+        "document": "${body.consent.loggedUser.document.identification}",
+        "account": {
+            "branch": "${body.consent.debtorAccount.issuer}",
+            "accountNumber": "${body.consent.debtorAccount.number}"
+        }
+    },
+    "payee": {
+        "name": "${body.consent.creditor.name}",
+        "document": "${body.consent.creditor.cpfCnpj}",
+        "ISPB": "${body.requestBody.creditorAccount.ispb}",
+        "account": {
+            "branch": "${body.requestBody.data.creditorAccount.issuer}",
+            "accountNumber": "${body.requestBody.data.creditorAccount.number}",
+            "accountType": "${body.requestBody.data.creditorAccount.accountType}"
+        }
+    },
+    "transaction": {
+        "value": ${body.requestBody.data.payment.amount},
+        "currency": "${body.requestBody.data.payment.currency}"
+    }
+#if(${body.requestBody.data.purpose})
+    ,
+    "purpose": ${body.requestBody.data.purpose}
+#end
+#if(${body.requestBody.data.purposeAdditionalInfo})
+    ,
+    "purposeAdditionalInfo": "${body.requestBody.data.purposeAdditionalInfo}"
+#end
+}
