@@ -48,6 +48,15 @@ Onde:
 
 ## Changelog
 
+### 2022-03-16 - v2.6.1
+
+- Geral
+  - Adicionadas novas definições compartilhadas
+- Consent
+  - Alteração dos schemas para utilizar as novas definições compartilhadas
+- Payment
+  - Alteração dos schemas para utilizar as novas definições compartilhadas
+
 ### 2022-03-07 - v2.6
 
 - Consent
@@ -55,6 +64,17 @@ Onde:
 - Payment
   - Inclusão dos schemas para criar solicitação e consulta de status de pagamento
   TED/TEF
+
+### 2022-03-03 - v2.5.3
+
+- Geral
+  - Correção de inconsistências nos schemas compartilhados
+- Consent
+  - Ajustes no schema da rota checkPaymentStatus para utilizar definições compartilhadas
+  - Ajustes na resposta da rota revokeConsentPayment para utilizar o enum correto
+   no campo action
+- Payment
+  - Ajustes no schema compartilhado de payment para criar definições compartilhadas
 
 ### 2022-02-25 - v2.5.2
 

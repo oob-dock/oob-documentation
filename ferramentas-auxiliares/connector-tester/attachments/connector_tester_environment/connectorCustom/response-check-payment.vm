@@ -1,0 +1,23 @@
+{
+    "data": {
+#if(${body.status.code} == 5)
+        "status": "RJCT",
+        "rejectionReason":"CONSENT_REVOKED"
+#elseif(${body.status.code} == 3)
+        "status": "ACCC"
+#elseif(${body.status.code} == 6 || ${body.status.code} == 7 || ${body.status.code} == 11 || ${body.status.code} == 13)
+        "status": "RJCT",
+#if(${body.status.code} == 6)
+        "rejectionReason":"NOT_ALLOWED_PAYMENT"
+#elseif(${body.status.code} == 7)
+        "rejectionReason":"SETTLEMENT_FAILED"
+#elseif(${body.status.code} == 11)
+        "rejectionReason":"OVER_LIMIT"
+#else
+        "rejectionReason":"ELEMENT_CONTENT_FORMALLY_INCORRECT"
+#end
+#else
+        "status": "PDNG"
+#end
+    }
+}

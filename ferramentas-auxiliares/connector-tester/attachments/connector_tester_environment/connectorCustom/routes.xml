@@ -42,13 +42,61 @@
                 </setHeader>
             </when>
             <otherwise>
-               <otherwise>
                 <to uri="direct:getMockErrorApprove"/>
-            </otherwise>
             </otherwise>
         </choice>
     </route>
+     <route id="consentPaymentRevocation">
+        <from uri="direct:consentPaymentRevocation"/>
 
+        <unmarshal>
+            <json library="Gson"/>
+        </unmarshal>
+        <to uri="velocity:file://work/models/request-revoke.vm?allowContextMapAll=true"/>
+
+        <to uri="{{env:ROUTE_REVOKE}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=PATCH"/>
+        <choice>
+            <when>
+                <simple>${header.CamelHttpResponseCode} in '200,201,202'</simple>
+                <unmarshal>
+                    <json library="Gson"/>
+                </unmarshal>
+                <to uri="velocity:file://work/models/response-revoke.vm?allowContextMapAll=true"/>
+                <setHeader name="CamelHttpResponseCode">
+                    <constant>200</constant>
+                </setHeader>
+            </when>
+            <otherwise>
+                <to uri="direct:getMockErrorRevoke"/>
+            </otherwise>
+        </choice>
+    </route>
+     <route id="checkPaymentStatus">
+        <from uri="direct:checkPaymentStatus"/>
+        <unmarshal>
+            <json library="Gson"/>
+        </unmarshal>
+
+        <setProperty name="Paymentid">
+            <jsonpath>$.paymentId[0].value</jsonpath>
+        </setProperty>
+        <toD uri="{{env:ROUTE_STATUS_PIX}}/status/${exchangeProperty[Paymentid]}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET"/>
+        <choice>
+            <when>
+                <simple>${header.CamelHttpResponseCode} in '200,201,202'</simple>
+                <unmarshal>
+                    <json library="Gson"/>
+                </unmarshal>
+                <to uri="velocity:file://work/models/response-check-payment.vm?allowContextMapAll=true"/>
+                <setHeader name="CamelHttpResponseCode">
+                    <constant>200</constant>
+                </setHeader>
+            </when>
+            <otherwise>
+                <to uri="direct:getMockError"/>
+            </otherwise>
+        </choice>
+    </route>
     <route id="paymentsPostPixPaymentsRoute">
         <from uri="direct:paymentsPostPixPayments"/>
         <unmarshal>

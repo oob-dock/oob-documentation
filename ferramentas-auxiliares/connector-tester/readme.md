@@ -141,6 +141,10 @@ da chamada no swagger, sendo que a resposta para a chamada realizada será:
 
 ## Changelog
 
+### 2022-03-04 - v1.2.0
+
+- Novas rotas referentes à funcionalidade de agendamento adicionadas
+
 ### 2021-12-23 - v1.1.0
 
 - Complementação do exemplo do uso da ferramenta, implementando

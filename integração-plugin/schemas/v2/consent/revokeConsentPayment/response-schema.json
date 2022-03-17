@@ -14,7 +14,7 @@
             ],
             "properties": {
                 "paymentId": {
-                    "$ref": "../../payment/common/common-schema.json#/$defs/PaymentId"
+                    "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
                 },
                 "action": {
                     "type": "string",

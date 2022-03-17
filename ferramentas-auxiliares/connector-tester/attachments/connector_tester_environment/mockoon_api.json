@@ -1,8 +1,8 @@
 {
   "uuid": "de4cf79d-0d12-4fef-9d51-666e3b3c45d2",
-  "lastMigration": 18,
+  "lastMigration": 19,
   "name": "mock_api",
-  "endpointPrefix": "pix/v1",
+  "endpointPrefix": "payments/v1",
   "latency": 70,
   "port": 5000,
   "hostname": "0.0.0.0",
@@ -67,7 +67,7 @@
           "uuid": "726c4385-31c3-4c83-89f5-57c2af4bbf8d",
           "body": "{\n  \"instPayId\": \"e33b469a-c121-41b4-87d1-b2c0947c108a\",\n  \"endToEndId\": \"E9040088820210128000800123348752\",\n  \"initiationTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"statusTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"paymentForm\": \"DICT\",\n  \"key\": \"person@company.com\",\n  \"status\": {\n    \"code\": \"1\"\n  },\n \"transaction\": {\n   \"amount\": \"1.23\",\n   \"currency\": \"BRL\"\n },\n \"additionalInformation\": \"teste pagamento verdecard\",\n \"payee\": {\n   \"ispb\": \"12345678\",\n   \"issuer\": \"0001\",\n   \"number\": \"159753\",\n   \"accountType\": \"CACC\"\n },\n \"initiatorDocument\": \"00000000000191\"\n}",
           "latency": 80,
-          "statusCode": 201,
+          "statusCode": 200,
           "label": "",
           "headers": [],
           "filePath": "",
@@ -106,12 +106,36 @@
       "enabled": true,
       "randomResponse": false,
       "sequentialResponse": false
+    },
+    {
+      "uuid": "c20e4763-af0d-4610-aa17-d487414ff453",
+      "documentation": "",
+      "method": "patch",
+      "endpoint": "revokePayment",
+      "responses": [
+        {
+          "uuid": "40b9e304-1b70-47e9-8609-d40271e330cc",
+          "body": "{\r\n    \"instPayId\": \"8ad6aee8-8cd3-4438-9588-861506fa361e\",\r\n    \"status\": \"CANCELLED\"\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
     }
   ],
   "proxyMode": false,
   "proxyHost": "",
   "proxyRemovePrefix": false,
-  "https": false,
   "cors": true,
   "headers": [
     {
@@ -130,5 +154,14 @@
       "key": "",
       "value": ""
     }
-  ]
+  ],
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  }
 }

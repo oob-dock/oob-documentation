@@ -23,7 +23,7 @@
             "type": "TED",
             "date": "2021-01-01",
             "currency": "BRL",
-            "amount": "123.45",            
+            "amount": "123.45",
             "creditorAccount": {
                 "ispb": "12345678",
                 "number": "1234567890",
