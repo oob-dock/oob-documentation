@@ -20,7 +20,9 @@
             "currency": "${body.transaction.currency}"
         },
         "creditorAccount": {
+#if(${body.payee.ispb})
             "ispb": "${body.payee.ispb}",
+#end
             "issuer": "${body.payee.issuer}",
             "number": "${body.payee.number}",
             "accountType": "${body.payee.accountType}"

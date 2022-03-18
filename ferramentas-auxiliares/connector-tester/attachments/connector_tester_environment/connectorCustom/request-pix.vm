@@ -13,7 +13,7 @@
         "name": "${body.consent.creditor.name}",
         "document": "${body.consent.creditor.cpfCnpj}",
 #if(${body.requestBody.data.localInstrument} == 'MANU')
-        "ISPB": "${body.requestBody.creditorAccount.ispb}",
+        "ispb": "${body.requestBody.creditorAccount.ispb}",
         "account": {
             "branch": "${body.requestBody.data.creditorAccount.issuer}",
             "accountNumber": "${body.requestBody.data.creditorAccount.number}",
