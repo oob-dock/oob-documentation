@@ -75,7 +75,8 @@ Vários cenários estão mockados e são acionados através das respectivas URLs
 | Hybrid-flow / Pagamento                     | <http://localhost:3301/auth/auth?id=standard>     |
 | Hybrid-flow hand-off / Pagamento            | <http://localhost:3301/auth/app/commands/handoff> |
 | Hybrid-flow / CPF_MISMATCH na autenticação  | <http://localhost:3301/auth/auth?id=cpf>          |
-| Hybrid-flow / GENERIC_ERROR no link inicial | <http://localhost:3301/auth/auth?id=expired>      |
+| Hybrid-flow / CONSENT_EXPIRED no link inicial | <http://localhost:3301/auth/auth?id=expired>      |
+| Hybrid-flow / GENERIC_ERROR no link inicial | <http://localhost:3301/auth/auth?id=generic>      |
 
 Para executar o mock basta importar o JSON na ferramenta Mockoon e iniciar o
 servidor do _environment_ "OOB Authroization Server Apps API".
