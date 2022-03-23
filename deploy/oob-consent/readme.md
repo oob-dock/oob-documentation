@@ -160,7 +160,7 @@ additionalVars:
     value: "BRL"
 ```
 
-### APPLICATION_TEDTEF_ENABLE
+### APPLICATION_TEDTEF_ENABLED
 
 Utilizado para habilitar ou desabilitar consentimentos dos tipos TED/TEF.
 
@@ -172,7 +172,7 @@ Valor default: `false`
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_TEDTEF_ENABLE
+  - name: APPLICATION_TEDTEF_ENABLED
     value: "false"
 ```
 
