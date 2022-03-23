@@ -160,6 +160,22 @@ additionalVars:
     value: "BRL"
 ```
 
+### APPLICATION_TEDTEF_ENABLED
+
+Utilizado para habilitar ou desabilitar consentimentos dos tipos TED/TEF.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_TEDTEF_ENABLED
+    value: "false"
+```
+
 ### CONSENT_EXTERNAL_ID
 
 Utilizado para definir o id referente ao consentId. O consentId é o identificador único do 
