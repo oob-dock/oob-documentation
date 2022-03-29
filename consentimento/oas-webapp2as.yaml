@@ -333,6 +333,7 @@ components:
           enum:
             - CPF_MISMATCH
             - CNPJ_MISMATCH
+            - EXPIRED_CONSENT
             - GENERIC_ERROR
         message:
           type: string
