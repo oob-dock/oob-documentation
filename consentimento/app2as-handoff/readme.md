@@ -88,7 +88,9 @@ Schema:
 {
     "qrCode": "<string>",
     "timeoutSeconds": <int>,
-    "typeCode": "<string>"
+    "typeCode": "<string>",
+    "tppName": "<string>",
+    "tppLogoUrl": "<string>"
 }
 ```
 
@@ -97,6 +99,8 @@ Schema:
 | `qrCode`         | Valor para gerar QR-code a ser exibido para usuário                                                                                  |
 | `timeoutSeconds` | Tempo total disponível para conclusão do consentimento                                                                               |
 | `typeCode`       | Código alternativo para o cliente digitar em caso de falha de leitura do QR-Code. Presente apenas se habilitado na instalação do OOB |
+| `tppName`        | Nome da instituição iniciadora de pagamento                                                                                          |
+| `tppLogoUrl`     | Logomarca da instituição iniciadora de pagamento                                                                                     |
 
 ### handoffCompleted
 
