@@ -1,0 +1,410 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "type": "object",
+                    "required": [
+                        "name",
+                        "companies"
+                    ],
+                    "properties": {
+                        "name": {
+                            "type": "string",
+                            "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.",
+                            "maxLength": 80,
+                            "pattern": "\\w*\\W*"
+                        },
+                        "companies": {
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "required": [
+                                    "name",
+                                    "cnpjNumber"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "maxLength": 80,
+                                        "pattern": "\\w*\\W*"
+                                    },
+                                    "cnpjNumber": {
+                                        "description": "Número completo do CNPJ da instituição responsável pela dependência - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica.\nDeve-se ter apenas os números do CNPJ, sem máscara\n",
+                                        "$ref": "../common/common-schema.json#/$defs/cnpjNumber"
+                                    },
+                                    "urlComplementaryList": {
+                                        "type": "string",
+                                        "maxLength": 1024,
+                                        "pattern": "\\w*\\W*",
+                                        "example": "https://example.com/mobile-banking"
+                                    },
+                                    "branches": {
+                                        "$ref": "#/$defs/branches"
+                                    }
+                                },
+                                "allOf": [
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "cnpjNumber": {
+                                                "$ref": "../common/common-schema.json#/$defs/cnpjNumber"
+                                            }
+                                        }
+                                    }
+                                ]
+                            },
+                            "minItems": 1,
+                            "description": "Companies traz uma lista de todas as instuituições da Marca."
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "$defs": {
+        "branches": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "description": "Dependência de instituições financeiras e demais instituições, autorizadas a funcionar pelo Banco Central do Brasil, destinada à prática das atividades para as quais a instituição esteja regularmente habilitada.",
+                "required": [
+                    "identification",
+                    "postalAddress",
+                    "availability",
+                    "services"
+                ],
+                "properties": {
+                    "identification": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "enum": [
+                                    "AGENCIA",
+                                    "POSTO_ATENDIMENTO",
+                                    "POSTO_ATENDIMENTO_ELETRONICO",
+                                    "UNIDADE_ADMINISTRATIVA_DESMEMBRADA"
+                                ],
+                                "description": " > Tipo da dependência, segundo a regulamentação do Bacen,  na Resolução Nº 4072, de 26 de abril de 2012: Dependência de instituições financeiras e demais instituições, autorizadas a funcionar pelo Banco Central do Brasil, destinada à prática das atividades para as quais a instituição esteja regularmente habilitada. \n* `AGENCIA`: Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória; \n* `POSTO_ATENDIMENTO`: Posto de Atendimento é a dependência subordinada a agência  ou à sede da instituição financeira, destinada ao atendimento ao público no exercício de uma ou mais de suas atividades, podendo ser fixo ou móvel. Segundo Art.15. Os Postos de Atendimento Bancário (PAB), Postos Avançados de Atendimento (PAA), Postos de Atendimento Transitórios (PAT), Postos de Compra de Ouro (PCO), Postos de Atendimento Cooperativo (PAC), Postos de Atendimento de Microcrédito (PAM), Postos Bancários de Arrecadação e Pagamento (PAP) e os Postos de Câmbio atualmente em funcionamento serão considerados PA. \n* `POSTO_ATENDIMENTO_ELETRONICO`: Posto de Atendimento Eletrônico é a dependência constituída por um ou mais terminais de autoatendimento, subordinada a agência ou à sede da instituição, destinada à prestação de serviços por meio eletrônico, podendo ser fixo ou móvel, permanente ou transitório \n* `UNIDADE_ADMINISTRATIVA_DESMEMBRADA `: Unidade Administrativa Desmembrada (UAD) segundo a Resolução 4072 , BCB, 2012, no Art. 8º \"... é dependência destinada à execução de atividades administrativas da instituição, vedado o atendimento ao público\""
+                            },
+                            "code": {
+                                "type": "string",
+                                "maxLength": 4,
+                                "pattern": "^\\d{4}$|^NA$",
+                                "description": "Código identificador da dependência"
+                            },
+                            "checkDigit": {
+                                "type": "string",
+                                "maxLength": 1,
+                                "pattern": "\\w*\\W*",
+                                "description": "Dígito verificador do código da dependência"
+                            },
+                            "name": {
+                                "type": "string",
+                                "maxLength": 100,
+                                "pattern": "\\w*\\W*",
+                                "description": "Nome da dependência"
+                            },
+                            "relatedBranch": {
+                                "type": "string",
+                                "maxLength": 4,
+                                "pattern": "^\\d{4}$",
+                                "description": "Código da agência vinculada ao Posto de Atendimento - se aplicável"
+                            },
+                            "openingDate": {
+                                "type": "string",
+                                "maxLength": 10,
+                                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                                "description": "Data de abertura da dependência (uma string com data conforme especificação RFC-3339. p.ex. 2014-03-19)"
+                            }
+                        },
+                        "required": [
+                            "type",
+                            "code",
+                            "checkDigit",
+                            "name"
+                        ]
+                    },
+                    "postalAddresses": {
+                        "type": "object",
+                        "required": [
+                            "address",
+                            "districtName",
+                            "townName",
+                            "countrySubDivision",
+                            "postCode"
+                        ],
+                        "allOf": [
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "address": {
+                                        "type": "string",
+                                        "description": "Deverá trazer toda a informação referente ao endereço da dependência informada: Tipo de logradouro + Nome do logradouro + Número do Logradouro (se não existir usar ' s/n') + complemento (se houver), como, p.ex.: 'R Diamatina, 59, bloco 35, fundos' 'Praça da Boa Vontade s/n'",
+                                        "maxLength": 150,
+                                        "pattern": "\\w*\\W*",
+                                        "example": "Av Naburo Ykesaki, 1270"
+                                    },
+                                    "additionalInfo": {
+                                        "type": "string",
+                                        "pattern": "\\w*\\W*",
+                                        "description": "Alguns logradouros ainda necessitam ser especificados por meio de complemento",
+                                        "maxLength": 30,
+                                        "example": "Fundos"
+                                    },
+                                    "districtName": {
+                                        "$ref": "../common/common-schema.json#/$defs/districtName"
+                                    },
+                                    "townName": {
+                                        "$ref": "../common/common-schema.json#/$defs/townName"
+                                    },
+                                    "ibgeCode": {
+                                        "$ref": "../common/common-schema.json#/$defs/ibgeCode"
+                                    },
+                                    "countrySubDivision": {
+                                        "type": "string",
+                                        "description": "Enumeração referente a cada sigla da unidade da federação que identifica o estado ou o distrito federal, no qual o endereço está localizado. p.ex. 'AC'. São consideradas apenas as siglas para os estados brasileiros",
+                                        "enum": [
+                                            "AC",
+                                            "AL",
+                                            "AP",
+                                            "AM",
+                                            "BA",
+                                            "CE",
+                                            "DF",
+                                            "ES",
+                                            "GO",
+                                            "MA",
+                                            "MT",
+                                            "MS",
+                                            "MG",
+                                            "PA",
+                                            "PB",
+                                            "PR",
+                                            "PE",
+                                            "PI",
+                                            "RJ",
+                                            "RN",
+                                            "RS",
+                                            "RO",
+                                            "RR",
+                                            "SC",
+                                            "SP",
+                                            "SE",
+                                            "TO"
+                                        ],
+                                        "example": "SP"
+                                    },
+                                    "postCode": {
+                                        "$ref": "../common/common-schema.json#/$defs/postCode"
+                                    },
+                                    "country": {
+                                        "$ref": "../common/common-schema.json#/$defs/country"
+                                    },
+                                    "countryCode": {
+                                        "$ref": "../common/common-schema.json#/$defs/countryCode"
+                                    },
+                                    "geographicCoordinates": {
+                                        "$ref": "../common/common-schema.json#/$defs/geographicCoordinates"
+                                    }
+                                }
+                            }
+                        ]
+                    },
+                    "availability": {
+                        "type": "object",
+                        "properties": {
+                            "standards": {
+                                "type": "array",
+                                "description": "Lista disponibilidade padrão da depêndencia por dias da semana",
+                                "items": {
+                                    "properties": {
+                                        "weekday": {
+                                            "type": "string",
+                                            "enum": [
+                                                "DOMINGO",
+                                                "SEGUNDA_FEIRA",
+                                                "TERCA_FEIRA",
+                                                "QUARTA_FEIRA",
+                                                "QUINTA_FEIRA",
+                                                "SEXTA_FEIRA",
+                                                "SABADO"
+                                            ],
+                                            "description": "Dia da semana de abertura da dependência bancária"
+                                        },
+                                        "openingTime": {
+                                            "type": "string",
+                                            "description": "Horário de abertura da dependência bancária (UTC)",
+                                            "maxLength": 13,
+                                            "pattern": "^(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)|Z$|^NA$"
+                                        },
+                                        "closingTime": {
+                                            "type": "string",
+                                            "description": "Horário de fechamento da dependência bancária (UTC)",
+                                            "maxLength": 13,
+                                            "pattern": "^(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)|Z$|^NA$"
+                                        }
+                                    },
+                                    "required": [
+                                        "weekday",
+                                        "openingTime",
+                                        "closingTime"
+                                    ]
+                                },
+                                "minItems": 1,
+                                "maxItems": 7
+                            },
+                            "exception": {
+                                "type": "string",
+                                "maxLength": 2000,
+                                "pattern": "\\w*\\W*",
+                                "description": "Em campo texto devem ser registradas todas as Exceções para o não atendimento."
+                            },
+                            "isPublicAccessAllowed": {
+                                "type": "boolean",
+                                "description": "Indica se a instalação da Dependência tem acesso restrito a clientes."
+                            }
+                        },
+                        "required": [
+                            "standards",
+                            "exception"
+                        ]
+                    },
+                    "phones": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "type"
+                            ],
+                            "allOf": [
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "enum": [
+                                                "FIXO",
+                                                "MOVEL"
+                                            ],
+                                            "example": "FIXO",
+                                            "description": "Identificação do Tipo de telefone da dependência. p.ex.FIXO, MOVEL."
+                                        },
+                                        "countryCallingCode": {
+                                            "type": "string",
+                                            "maxLength": 4,
+                                            "pattern": "^\\d{1,4}$",
+                                            "example": "55",
+                                            "description": "Número de DDI (Discagem Direta Internacional) para  telefone de acesso ao Canal - se houver. p.ex. '55'"
+                                        },
+                                        "areaCode": {
+                                            "type": "string",
+                                            "maxLength": 2,
+                                            "pattern": "^\\d{2}$",
+                                            "example": "19",
+                                            "description": "Número de DDD (Discagem Direta à Distância) do telefone da dependência - se houver. p.ex. '19'"
+                                        },
+                                        "number": {
+                                            "type": "string",
+                                            "maxLength": 11,
+                                            "pattern": "^([0-9]{8,11})$",
+                                            "example": "35721199",
+                                            "description": "Número de telefone da dependência - se houver"
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+                        "minItems": 1,
+                        "description": "Lista de telefones da Dependência"
+                    },
+                    "services": {
+                        "type": "array",
+                        "description": "Traz a relação de serviços disponbilizados pelo Canal de Atendimento",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "enum": [
+                                        "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+                                        "SAQUE_MOEDA_EM_ESPECIE",
+                                        "RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA",
+                                        "TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES",
+                                        "CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS",
+                                        "APLICACOES_RESGATES_INVESTIMENTOS",
+                                        "EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS",
+                                        "DEPOSITOS_MOEDA_ESPECIE_CHEQUE",
+                                        "OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO",
+                                        "CARTAO_CREDITO",
+                                        "SEGUROS",
+                                        "OPERACOES_ARRENDAMENTO_MERCANTIL",
+                                        "ABERTURA_CONTA_PAGAMENTO_POS_PAGA",
+                                        "COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE",
+                                        "COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO",
+                                        "COMPRA_VENDA_OURO",
+                                        "OUTROS_PRODUTOS_SERVICOS",
+                                        "CANCELAMENTO",
+                                        "INFORMACOES",
+                                        "RECLAMACOES"
+                                    ],
+                                    "description": "Nome dos Serviços efetivamente prestados pelo Canal de Atendimento"
+                                },
+                                "code": {
+                                    "type": "string",
+                                    "enum": [
+                                        "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+                                        "SAQUE_MOEDA_ESPECIE",
+                                        "RECEBE_PAGA_QUALQUER_NATUREZA",
+                                        "TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES",
+                                        "CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS",
+                                        "APLICA_RESGATA_INVESTIMENTOS",
+                                        "EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO",
+                                        "DEPOSITO_MOEDA_ESPECIE_CHEQUE",
+                                        "OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO",
+                                        "CARTAO_CREDITO",
+                                        "SEGUROS",
+                                        "OPERA_ARRENDAMENTO_MERCANTIL",
+                                        "ABERTURA_CONTA_PAGAMENTO_POS_PAGA",
+                                        "COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE",
+                                        "COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO",
+                                        "COMPRA_VENDA_OURO",
+                                        "OUTROS_PRODUTOS_SERVICOS",
+                                        "CANCELAMENTO",
+                                        "INFORMACOES",
+                                        "RECLAMACOES"
+                                    ],
+                                    "description": "Código dos Serviços efetivamente prestados pelo Canal de Atendimento"
+                                },
+                                "additionalInfo": {
+                                    "type": "string",
+                                    "maxLength": 2000,
+                                    "pattern": "\\w*\\W*",
+                                    "description": "Texto livre para complementar informação relativa ao Serviço disponível, quando for selecionada a opção 'OUTROS_PRODUTOS_SERVICOS'"
+                                }
+                            },
+                            "required": [
+                                "code",
+                                "name"
+                            ]
+                        },
+                        "minItems": 1,
+                        "maxItems": 20
+                    }
+                }
+            },
+            "minItems": 1,
+            "description": "Lista de Dependências de uma Instituição"
+        }
+    }
+}
