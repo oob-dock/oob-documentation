@@ -233,6 +233,18 @@ Para caso de adição de `mtls-` nas URLs de endpoint do AS utilizar os valores
 `find`: "^(https://)(.*)$" e `replace`: "https://mtls-$2". Note que as URLs
 devem ser HTTPS.
 
+#### tablesEncryption
+
+Configuração composta por `applicationSecretName` e `applicationSecretKey`, as quais definem respectivamente o nome da chave de encriptação, que será utilizada para tabelas com dados sensíveis no AS, e seu respectivo valor.
+
+Exemplo:
+
+```yaml
+  tablesEncryption:
+    applicationSecretName: "oob-as-table-encryption"
+    applicationSecretKey: "application-secret-key"
+```
+
 #### consent.channels
 
 Tipo de canal suportado para autenticação no AS. Valores suportados: `web`,
