@@ -235,7 +235,10 @@ devem ser HTTPS.
 
 #### tablesEncryption
 
-Configuração composta por `applicationSecretName` e `applicationSecretKey`, as quais definem respectivamente o nome da chave de encriptação, que será utilizada para tabelas com dados sensíveis no AS, e seu respectivo valor.
+Configuração composta por `applicationSecretName` e `applicationSecretKey`, as
+quais definem respectivamente o nome da chave de encriptação, que será utilizada
+para criptografar dados sensíveis antes de persisti-los nas tabelas do banco de
+dados do Authorization Server, e seu respectivo valor.
 
 Exemplo:
 
