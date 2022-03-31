@@ -51,10 +51,7 @@
                         "example": "Empresa da Marca A"
                     },
                     "urlComplementaryList": {
-                        "type": "string",
-                        "pattern": "\\w*\\W*",
-                        "maxLength": 1024,
-                        "example": "https://example.com/mobile-banking"
+                        "$ref": "../common/common-schema.json#/$defs/urlComplementaryList"
                     },
                     "phoneChannels": {
                         "type": "array",
@@ -102,10 +99,7 @@
                                                         "description": "Número de DDI (Discagem Direta Internacional) para telefone de acesso ao Canal - se houver."
                                                     },
                                                     "areaCode": {
-                                                        "type": "string",
-                                                        "maxLength": 2,
-                                                        "pattern": "^\\d{2}$|^NA$",
-                                                        "example": "19",
+                                                        "$ref": "../common/common-schema.json#/$defs/areaCode",
                                                         "description": "Número de DDD (Discagem Direta à Distância) para telefone de acesso ao Canal - se houver."
                                                     },
                                                     "number": {

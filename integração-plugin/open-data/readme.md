@@ -20,14 +20,13 @@ da imagem (via `docker run`).
 
 A tabela abaixo contém uma lista das variáveis suportadas atualmente.
 
-| Variável                                            | Objetivo                                                                                                                        | Valor Padrão                                          |
-| --------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------- |
-| camel.main.routes-include-pattern                   | Indica os locais onde o Camel deve procurar por rotas                                                                           |                                                       |
-| apis.validation.json-schema.enabled                 | Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin com as specs definidas (afeta performance) | false                                                 |
-| apis.validation.openapi.enabled-request             | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Banking Brasil                       | true                                                  |
-| apis.validation.openapi.enabled-response            | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Banking Brasil (afeta performance) | false                                                 |
-| cnpjInitiatorValidation.directoryRolesUrl           | Parametrização da URL para consulta do diretório de participantes do Open Banking Brasil                                        | https://data.directory.openbankingbrasil.org.br/roles |
-| quarkus.cache.caffeine.directory.expire-after-write | Parametrização do tempo de vida do cache do resultado da consulta do diretório de participantes do Open Banking Brasil          | 5M                                                    |
+| Variável                                 | Objetivo                                                                                                                        | Valor Padrão |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------ |
+| camel.main.routes-include-pattern        | Indica os locais onde o Camel deve procurar por rotas                                                                           |              |
+| apis.validation.json-schema.enabled      | Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin com as specs definidas (afeta performance) | false        |
+| apis.validation.openapi.enabled-request  | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Banking Brasil                       | true         |
+| apis.validation.openapi.enabled-response | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Banking Brasil (afeta performance) | false        |
+|                                          |
 
 &nbsp;
 
@@ -56,11 +55,11 @@ como:
 
 &nbsp;
 
-| Endpoint                          | Rota do Camel                                                 |
-| --------------------------------- | ------------------------------------------------------------- |
-| /branches                         | ```direct:openDataGetChannelsBranches```                      |
-| /electronic-channels              | ```direct:openDataGetChannelsElectronicChannels```            |
-| /phone-channels                   | ```direct:openDataGetChannelsPhoneChannels```                 |
-| /banking-agents                   | ```direct:openDataGetChannelsBankingAgents```                 |
-| /shared-automated-teller-machines | ```direct:openDataGetChannelsSharedAutomatedTellerMachines``` |
+| Endpoint                          | Rota do Camel                                 |
+| --------------------------------- | --------------------------------------------- |
+| /branches                         | ```direct:getBranches```                      |
+| /electronic-channels              | ```direct:getElectronicChannels```            |
+| /phone-channels                   | ```direct:getPhoneChannels```                 |
+| /banking-agents                   | ```direct:getBankingAgents```                 |
+| /shared-automated-teller-machines | ```direct:getSharedAutomatedTellerMachines``` |
 

@@ -67,6 +67,65 @@
                     "example": "-180.836519"
                 }
             }
+        },
+        "countrySubDivision": {
+            "type": "string",
+            "description": "Enumeração referente a cada sigla da unidade da federação que identifica o estado ou o distrito federal, no qual o endereço está localizado. p.ex. 'AC'. São consideradas apenas as siglas para os estados brasileiros",
+            "enum": [
+                "AC",
+                "AL",
+                "AP",
+                "AM",
+                "BA",
+                "CE",
+                "DF",
+                "ES",
+                "GO",
+                "MA",
+                "MT",
+                "MS",
+                "MG",
+                "PA",
+                "PB",
+                "PR",
+                "PE",
+                "PI",
+                "RJ",
+                "RN",
+                "RS",
+                "RO",
+                "RR",
+                "SC",
+                "SP",
+                "SE",
+                "TO"
+            ],
+            "example": "SP"
+        },
+        "weekday": {
+            "type": "string",
+            "enum": [
+                "DOMINGO",
+                "SEGUNDA_FEIRA",
+                "TERCA_FEIRA",
+                "QUARTA_FEIRA",
+                "QUINTA_FEIRA",
+                "SEXTA_FEIRA",
+                "SABADO"
+            ],
+            "example": "SEGUNDA_FEIRA"
+        },
+        "areaCode": {
+            "type": "string",
+            "maxLength": 2,
+            "pattern": "^\\d{2}$|^NA$",
+            "example": "19"
+        },
+        "urlComplementaryList": {
+            "type": "string",
+            "pattern": "\\w*\\W*",
+            "maxLength": 1024,
+            "example": "https://empresadaorganizacaoa.com/complementarylist"
         }
     }
 }

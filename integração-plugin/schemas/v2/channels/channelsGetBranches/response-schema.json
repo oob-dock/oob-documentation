@@ -43,10 +43,7 @@
                                         "$ref": "../common/common-schema.json#/$defs/cnpjNumber"
                                     },
                                     "urlComplementaryList": {
-                                        "type": "string",
-                                        "maxLength": 1024,
-                                        "pattern": "\\w*\\W*",
-                                        "example": "https://example.com/mobile-banking"
+                                        "$ref": "../common/common-schema.json#/$defs/urlComplementaryList"
                                     },
                                     "branches": {
                                         "$ref": "#/$defs/branches"
@@ -172,38 +169,7 @@
                                         "$ref": "../common/common-schema.json#/$defs/ibgeCode"
                                     },
                                     "countrySubDivision": {
-                                        "type": "string",
-                                        "description": "Enumeração referente a cada sigla da unidade da federação que identifica o estado ou o distrito federal, no qual o endereço está localizado. p.ex. 'AC'. São consideradas apenas as siglas para os estados brasileiros",
-                                        "enum": [
-                                            "AC",
-                                            "AL",
-                                            "AP",
-                                            "AM",
-                                            "BA",
-                                            "CE",
-                                            "DF",
-                                            "ES",
-                                            "GO",
-                                            "MA",
-                                            "MT",
-                                            "MS",
-                                            "MG",
-                                            "PA",
-                                            "PB",
-                                            "PR",
-                                            "PE",
-                                            "PI",
-                                            "RJ",
-                                            "RN",
-                                            "RS",
-                                            "RO",
-                                            "RR",
-                                            "SC",
-                                            "SP",
-                                            "SE",
-                                            "TO"
-                                        ],
-                                        "example": "SP"
+                                        "$ref": "../common/common-schema.json#/$defs/countrySubDivision"
                                     },
                                     "postCode": {
                                         "$ref": "../common/common-schema.json#/$defs/postCode"
@@ -230,16 +196,7 @@
                                 "items": {
                                     "properties": {
                                         "weekday": {
-                                            "type": "string",
-                                            "enum": [
-                                                "DOMINGO",
-                                                "SEGUNDA_FEIRA",
-                                                "TERCA_FEIRA",
-                                                "QUARTA_FEIRA",
-                                                "QUINTA_FEIRA",
-                                                "SEXTA_FEIRA",
-                                                "SABADO"
-                                            ],
+                                            "$ref": "../common/common-schema.json#/$defs/weekday",
                                             "description": "Dia da semana de abertura da dependência bancária"
                                         },
                                         "openingTime": {
@@ -308,10 +265,7 @@
                                             "description": "Número de DDI (Discagem Direta Internacional) para  telefone de acesso ao Canal - se houver. p.ex. '55'"
                                         },
                                         "areaCode": {
-                                            "type": "string",
-                                            "maxLength": 2,
-                                            "pattern": "^\\d{2}$",
-                                            "example": "19",
+                                            "$ref": "../common/common-schema.json#/$defs/areaCode",
                                             "description": "Número de DDD (Discagem Direta à Distância) do telefone da dependência - se houver. p.ex. '19'"
                                         },
                                         "number": {

@@ -42,10 +42,7 @@
                                         "pattern": "\\w*\\W*"
                                     },
                                     "urlComplementaryList": {
-                                        "type": "string",
-                                        "maxLength": 1024,
-                                        "pattern": "\\w*\\W*",
-                                        "example": "https://example.com/mobile-banking"
+                                        "$ref": "../common/common-schema.json#/$defs/urlComplementaryList"
                                     },
                                     "electronicChannels": {
                                         "$ref": "#/$defs/electronicChannels"
