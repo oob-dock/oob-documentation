@@ -381,6 +381,7 @@
 | *DELETE  | /v1/authorisations/\{ID\}        | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *PUT     | /v1/authorisations/\{ID\}/accept | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *GET     | /v1/consents                     | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
+| *GET     | /v1/consents/consent-owner       | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
 | *GET     | /v1/consents/\{ID\}              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /v1/consents/\{ID\}              | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 
