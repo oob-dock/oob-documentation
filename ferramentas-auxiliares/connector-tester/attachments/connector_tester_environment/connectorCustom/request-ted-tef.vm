@@ -1,6 +1,4 @@
 {
-    "paymentForm": "${body.requestBody.data.localInstrument}",
-    "initiatorDocument": "${body.requestBody.data.cnpjInitiator}", 
     "consentId":"${body.consent.externalId}",
     "payer": {
         "document": "${body.consent.loggedUser.document.identification}",
@@ -12,25 +10,25 @@
     "payee": {
         "name": "${body.consent.creditor.name}",
         "document": "${body.consent.creditor.cpfCnpj}",
-#if(${body.requestBody.data.localInstrument} == 'MANU')
-        "ISPB": "${body.requestBody.creditorAccount.ispb}",
+#if(${body.requestBody.creditorAccount.ispb})
+        "ispb": "${body.requestBody.creditorAccount.ispb}",
+#end
         "account": {
             "branch": "${body.requestBody.data.creditorAccount.issuer}",
             "accountNumber": "${body.requestBody.data.creditorAccount.number}",
             "accountType": "${body.requestBody.data.creditorAccount.accountType}"
         }
     },
-#elseif(${body.requestBody.data.localInstrument} == 'DICT')
-        "key": "${body.requestBody.data.proxy}"
-    },
-#elseif(${body.requestBody.data.localInstrument} == 'QRES' || ${body.requestBody.data.localInstrument} == 'QRDN')
-    "QRCode": "${body.requestBody.data.qrCode}",
-#else
-    "transactionIdentification": "${body.requestBody.data.transactionIdentification}",
-#end
     "transaction": {
         "value": ${body.requestBody.data.payment.amount},
         "currency": "${body.requestBody.data.payment.currency}"
-    },
-    "additionalInformation": "${body.requestBody.data.remittanceInformation}"
+    }
+#if(${body.requestBody.data.purpose})
+    ,
+    "purpose": ${body.requestBody.data.purpose}
+#end
+#if(${body.requestBody.data.purposeAdditionalInfo})
+    ,
+    "purposeAdditionalInfo": "${body.requestBody.data.purposeAdditionalInfo}"
+#end
 }
