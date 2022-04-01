@@ -1,10 +1,10 @@
 {
   "uuid": "667f08c5-efea-43d4-b199-3f9c98efc438",
   "lastMigration": 19,
-  "name": "mock_api (copy)",
+  "name": "mock_api",
   "endpointPrefix": "payments/v1",
   "latency": 70,
-  "port": 5002,
+  "port": 5000,
   "hostname": "0.0.0.0",
   "routes": [
     {
