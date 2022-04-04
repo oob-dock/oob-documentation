@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "description": "Obtém a lista de Adiantamento de Recebíveis de Pessoa Natural.",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "$ref": "../common/common-schema.json#/$defs/ResponsePersonalInvoiceFinancings"
+        }
+    },
+    "additionalProperties": false
+}
+

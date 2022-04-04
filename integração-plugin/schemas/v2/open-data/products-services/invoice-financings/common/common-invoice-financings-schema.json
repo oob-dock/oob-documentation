@@ -1,0 +1,309 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$defs": {
+        "ResponsePersonalInvoiceFinancings": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/PersonalInvoiceFinancingsBrand"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalInvoiceFinancingsBrand": {
+            "type": "object",
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+                },
+                "companies": {
+                    "$ref": "#/$defs/PersonalInvoiceFinancingsCompanies"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalInvoiceFinancingsCompanies": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Companies traz uma lista de todas as instituições da Marca.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "cnpjNumber",
+                            "personalInvoiceFinancings"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Name",
+                                "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
+                            },
+                            "cnpjNumber": {
+                                "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                            },
+                            "urlComplementaryList": {
+                                "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                            },
+                            "personalInvoiceFinancings": {
+                                "$ref": "#/$defs/PersonalInvoiceFinancings"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "PersonalInvoiceFinancings": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "Lista de financiamentos.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "type",
+                            "fees",
+                            "interestRates",
+                            "requiredWarranties",
+                            "termsConditions"
+                        ],
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "description": "Modalidades de direitos creditórios descontados ofertados para pessoas naturais, conforme Circular 4015-Bacen. Direito creditório descontado é a antecipação de créditos relativos por ex. ao: desconto de duplicatas, desconto de cheques,antecipação de fatura de cartão de crédito.",
+                                "Enum": [ 
+                                    "DESCONTO_DUPLICATAS", 
+                                    "DESCONTO_CHEQUES", 
+                                    "ANTECIPACAO_FATURA_CARTAO_CREDITO", 
+                                    "OUTROS_DIREITOS_CREDITORIOS_DESCONTADOS", 
+                                    "OUTROS_TITULOS_DESCONTADOS"
+                                ],
+                                "example": [
+                                    "DESCONTO_DUPLICATAS"
+                                ]
+                            },
+                            "fees": {
+                                "$ref": "#/$defs/PersonalInvoiceFinancingsFees"
+                            },
+                            "interestRates": {
+                                "$ref": "../../../common/common-schema.json#/$defs/InterestRate"
+                            },
+                            "requiredWarranties": {
+                                "type": "array",
+                                "minItems": 1,
+                                "maxItems": 14,
+                                "$ref": "../../../common/common-schema.json#/$defs/RequiredWarranties"
+                            },
+                            "termsConditions": {
+                                "$ref": "../../../common/common-schema.json#/$defs/TermsConditions"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "PersonalInvoiceFinancingsFees": {
+            "type": "object",
+            "minItems": 1,
+            "required": [
+                "services"
+            ],
+            "properties": {
+                "services": {
+                    "$ref": "#/$defs/InvoiceFinancingsService"
+                }
+            },
+            "additionalProperties": false
+        },
+        "InvoiceFinancingsService": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Lista das Tarifas cobradas sobre Serviços.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "code",
+                            "chargingTriggerInfo",
+                            "prices",
+                            "minimum",
+                            "maximum"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$ref": "../../../common/common-schema.json#/$defs/ServiceName",
+                                "description": "Nomes das Tarifas cobradas sobre Serviços ofertados à Modalidade de direitos creditórios descontados. (Campo Livre)."
+                            },
+                            "code": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Code",
+                                "description": "Sigla de identificação do serviço relacionado à Modalidade de Financiamento informada, para pessoa natural. Campo aberto."
+                            },
+                            "chargingTriggerInfo": {
+                                "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                                "description": "Fatores geradores de cobrança que incidem sobre as Modalidades de Financiamentos, para pessoa natural. Campo Livre."
+                            },
+                            "prices": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Price"
+                            },
+                            "minimum": {
+                                "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
+                            },
+                            "maximum": {
+                                "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "ResponseBusinessInvoiceFinancings": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/BusinessInvoiceFinancingsBrand"
+                }
+            },
+            "additionalProperties": false
+        },
+        "BusinessInvoiceFinancingsBrand": {
+            "type": "object",
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "maxLength": 30,
+                    "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+                },
+                "companies": {
+                    "$ref": "#/$defs/BusinessInvoiceFinancingsCompanies"
+                }
+            },
+            "additionalProperties": false
+        },
+        "BusinessInvoiceFinancingsCompanies": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Companies traz uma lista de todas as instituições da Marca.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "cnpjNumber",
+                            "businessInvoiceFinancings"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Name",
+                                "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
+                            },
+                            "cnpjNumber": {
+                                "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                            },
+                            "urlComplementaryList": {
+                                "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                            },
+                            "businessInvoiceFinancings": {
+                                "$ref": "#/$defs/BusinessInvoiceFinancings"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "BusinessInvoiceFinancings": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "Lista de Modalidades de Direitos Creditórios Descontados.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "type",
+                            "fees",
+                            "interestRates",
+                            "requiredWarranties",
+                            "termsConditions"
+                        ],
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "description": "Modalidades de direitos creditórios descontados ofertados para pessoas naturais, conforme Circular 4015-Bacen. Direito creditório descontado é a antecipação de créditos relativos por ex. ao: desconto de duplicatas, desconto de cheques,antecipação de fatura de cartão de crédito.",
+                                "Enum": [ 
+                                    "DESCONTO_DUPLICATAS", 
+                                    "DESCONTO_CHEQUES", 
+                                    "ANTECIPACAO_FATURA_CARTAO_CREDITO", 
+                                    "OUTROS_DIREITOS_CREDITORIOS_DESCONTADOS", 
+                                    "OUTROS_TITULOS_DESCONTADOS"
+                                ],
+                                "example": [
+                                    "DESCONTO_DUPLICATAS"
+                                ]
+                            },
+                            "fees": {
+                                "$ref": "#/$defs/BusinessInvoiceFinancingsFees"
+                            },
+                            "interestRates": {
+                                "$ref": "../../../common/common-schema.json#/$defs/InterestRate"
+                            },
+                            "requiredWarranties": {
+                                "type": "array",
+                                "minItems": 1,
+                                "maxItems": 14,
+                                "$ref": "../../../common/common-schema.json#/$defs/RequiredWarranties"
+                            },
+                            "termsConditions": {
+                                "$ref": "../../../common/common-schema.json#/$defs/TermsConditions"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "BusinessInvoiceFinancingsFees": {
+            "type": "object",
+            "minItems": 1,
+            "required": [
+                "services"
+            ],
+            "properties": {
+                "services": {
+                    "$ref": "#/$defs/InvoiceFinancingsService"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
