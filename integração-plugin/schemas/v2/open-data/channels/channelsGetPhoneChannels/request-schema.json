@@ -6,7 +6,7 @@
     ],
     "properties": {
         "requestMeta": {
-            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+            "$ref": "../../../common/common-schema.json#/$defs/RequestMeta"
         }
     },
     "additionalProperties": false,
