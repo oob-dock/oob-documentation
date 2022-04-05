@@ -1,8 +1,15 @@
-# API Open-Data
+# API Open Data
 
 Esse documento apresenta as **Rotas do Camel** e **Configurações Suportadas** para
-o serviço de open-data, o qual equivale às [APIs de **Fase 1**](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-1-apis-do-open-banking-brasil)
-do Open Banking Brasil.
+o serviço de open-data, o qual equivale à junção das seguintes API do
+Open Banking Brasil:
+
+&nbsp;
+
+- [Canais de atendimento](https://openbanking-brasil.github.io/areadesenvolvedor/#api-canais-de-atendimento-v1-0-2)
+- [Produtos e Serviços](https://openbanking-brasil.github.io/areadesenvolvedor/#api-produtos-e-servicos-v1-0-2)
+
+&nbsp;
 
 A fim de que esse serviço funcione propriamente para cada um dos endpoints das APIs
 acima citadas, deve-se criar um ou mais plugins que contenham rotas para cada uma
@@ -22,18 +29,17 @@ A tabela abaixo contém uma lista das variáveis suportadas atualmente.
 
 | Variável                                 | Objetivo                                                                                                                        | Valor Padrão |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------ |
-| camel.main.routes-include-pattern        | Indica os locais onde o Camel deve procurar por rotas                                                                           |              |
+| camel.main.routes-include-pattern        | Indica os locais onde o Camel deve procurar por rotas                                                                      |            |
 | apis.validation.json-schema.enabled      | Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin com as specs definidas (afeta performance) | false        |
 | apis.validation.openapi.enabled-request  | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Banking Brasil                       | true         |
 | apis.validation.openapi.enabled-response | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Banking Brasil (afeta performance) | false        |
-|                                          |
 
 &nbsp;
 
 **Além das variáveis acima apresentada, dependendo do(s) componente(s) do quarkus
-camel que o plugin venha a utilizar, poderão existir outras de acordo com o que estiver
-específicado na própria documentação do componente sendo utilizado. Além disso, o
-plugin pode criar suas próprias variáveis de ambiente a serem injetadas.
+camel que o plugin venha a utilizar, poderão existir outras de acordo com o que
+estiver específicado na própria documentação do componente sendo utilizado. Além
+disso, o plugin pode criar suas próprias variáveis de ambiente a serem injetadas.
 
 &nbsp;
 
@@ -42,11 +48,11 @@ plugin pode criar suas próprias variáveis de ambiente a serem injetadas.
 As subseções seguintes contêm todos os `endpoints` que precisam ter rotas defnidas
 no camel e para os quais é necessário a criação de um ou mais plugins.
 
-Para o endpoint `/branches `, por exemplo, a rota deve estar definida no plugin
-como:
+Para o endpoint `/personal-accounts`, por exemplo, a rota deve estar
+definida no plugin como:
 
 ```xml
-<from uri="direct:openDataGetChannelsBranches"/>
+<from uri="direct:getPersonalAccounts"/>
 ```
 
 &nbsp;
@@ -63,3 +69,23 @@ como:
 | /banking-agents                   | ```direct:getBankingAgents```                 |
 | /shared-automated-teller-machines | ```direct:getSharedAutomatedTellerMachines``` |
 
+### Accounts
+
+&nbsp;
+
+| Endpoint                                     | Rota do Camel                                             |
+|----------------------------------------------|-----------------------------------------------------------|
+| /personal-accounts                           | ```direct:getPersonalAccounts```                          |
+| /business-accounts                           | ```direct:getBusinessAccounts```                          |
+| /personal-credit-cards                       | ```direct:getPersonalCreditCards```                       |
+| /business-credit-cards                       | ```direct:getBusinessCreditCards```                       |
+| /personal-financings                         | ```direct:getPersonalFinancings```                        |
+| /business-financings                         | ```direct:getBusinessFinancings```                        |
+| /personal-invoice-financings                 | ```direct:getPersonalInvoiceFinancings```                 |
+| /business-invoice-financings                 | ```direct:getBusinessInvoiceFinancings```                 |
+| /personal-loans                              | ```direct:getPersonalLoans```                             |
+| /business-loans                              | ```direct:getBusinessLoans```                             |
+| /personal-unarranged-account-overdraft       | ```direct:getPersonalUnarrangedAccountOverdraft```        |
+| /business-unarranged-account-overdraft       | ```direct:getBusinessUnarrangedAccountOverdraft```        |
+
+&nbsp;

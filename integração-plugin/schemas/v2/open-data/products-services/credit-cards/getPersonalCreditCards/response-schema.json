@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "description": "Obtém dados sobre cartões de crédito pessoa natural.",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "$ref": "../common/common-schema.json#/$defs/PersonalCreditCardResponse"
+        }
+    },
+    "additionalProperties": false
+}
+
+
+                        

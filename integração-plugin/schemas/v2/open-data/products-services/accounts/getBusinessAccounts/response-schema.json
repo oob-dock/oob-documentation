@@ -1,0 +1,15 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "description": "Dados sobre contas pessoa jurídica obtidos com sucesso.",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "$ref": "../common/common-schema.json#/$defs/ResponseBusinessAccounts"
+        }
+    },
+    "additionalProperties": false
+}
+
