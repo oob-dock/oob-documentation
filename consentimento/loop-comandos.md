@@ -1,36 +1,30 @@
 # Loop de comandos
 
 O aplicativo mobile ou web da instituição será guiado pelo AS do
-OOB, realizando algumas tarefas em nome do AS e devolvendo o resultado das
-tarefas, essas tarefas são chamadas de `command`s no OAS. Toda chamada do
-aplicativo contra o AS tem um novo `command` como retorno.
+OOB pelo fluxo do consentimento através da execução de um conjunto de tarefas.
+Nesta documentação e nas auxiliares, chamamos essas tarefas de `command`s.
 
-É responsabilidade do aplicativo executar cada `command` até que o AS retorne
-um `command` com estado final, esse loop é o que chamamos de loop de comandos.
+Atualmente, o AS possui os seguintes `command`s:
 
-Importante ressaltar que o tratamento do retorno de todas as chamadas possíveis
-contra o AS deve ser único, uma vez que o schema do retorno das APIs é o mesmo
-e a próxima ação que o aplicativo deve executar é retornada no tipo do comando
-da resposta ao invés de uma sequência pré-determinada de ações.
+| Command      | Ação do aplicativo                                                                     | Finaliza o loop |
+| ------------ | -------------------------------------------------------------------------------------- | --------------- |
+| authenticate | Solicitar autenticação ao usuário                                                      | Não             |
+| consent      | Exibir a solicitação do TPP, pedindo o consentimento e escolhas de produtos ao usuário | Não             |
+| error        | Exibir mensagem de erro e iniciar fluxo de retorno ao TPP                              | Sim             |
+| completed    | Exibir mensagem de sucesso e iniciar fluxo de retorno ao TPP                           | Sim             |
 
-Atualmente o AS possui os seguintes `command`s:
+>**Importante**: Não existe uma sequência pré-determinada para execução dos `command`s.
+Os comandos possuem o mesmo *schema* de resposta que contêm o comando seguinte a
+ser executado.
 
-| Command      | Ação                                                                                                    | Finaliza o loop |
-| ------------ | ------------------------------------------------------------------------------------------------------- | --------------- |
-| authenticate | Aplicativo deve solicitar autenticação ao usuário                                                       | Não             |
-| consent      | Aplicativo deve exibir solicitação do TPP e solicitar o consentimento e escolhas de produtos ao usuário | Não             |
-| error        | Aplicativo deve exibir mensagem de erro e iniciar fluxo de retorno ao TPP                               | Sim             |
-| completed    | Aplicativo deve exibir mensagem de sucesso e iniciar fluxo de retorno ao TPP                            | Sim             |
+A definição das APIs utilizadas para execução dos comandos está disponível em
+[Open API Specification](./oas-webapp2as.yaml).
 
-Os comandos acima que finalizam o loop são como o nome diz comandos que não
-exigem novas chamadas ao AS e concluem a conversa entre o aplicativo e o AS,
-concluindo desta forma o loop de comandos.
+## Comando `authenticate`
 
-### Comando `authenticate`
-
-O comando `authenticate` é o comando enviado pelo AS ao aplicativo para esse
-solicitar a autenticação do usuário. É importante garantir os requisitos de
-segurança do Open Banking Brasil definidos no atributo ACR do comando.
+O comando `authenticate` é enviado pelo AS ao aplicativo para solicitar a
+autenticação do usuário. É importante garantir os requisitos de segurança do
+Open Banking Brasil definidos no atributo ACR do comando.
 
 O ACR pode ser `urn:brasil:openbanking:loa2` ou `urn:brasil:openbanking:loa3`,
 de forma reduzida o LoA2 (Level Of Assurance 2) exige que o usuário utilize no
@@ -42,30 +36,39 @@ O aplicativo deve então garantir a autenticação do usuário segundo o ACR
 solicitado e enviar o resultado do comando ao AS OOB.
 
 Caso o usuário tenha se autenticado corretamente, a instituição deve emitir um
-token JWT assinado com as claims `cpf`, `cnpj`, `name`, `jti`, `iat` e, de forma
-opcional, `authExtraData` e enviar ao AS através da API `PUT /app/commands/{id}/authentication`,
-onde o `id` é o `commandId` do comando executado.
+token JWT assinado e envia-lo ao AS através da API
+`PUT /app/commands/{id}/authentication`, onde o `id` é o `commandId` do comando executado.
 
-As claims `cpf`, `cnpj` e `name` são referentes ao usuário logado, a claim `jti`
-deve conter o mesmo valor do retornado no comando da autenticação e o `iat` deve
-conter o epoch da emissão do JWT. O `jti` é usado para evitar replay-attacks e
-o `iat` para  garantir o horário da emissão do token dentro de uma janela de
-tolerância dentro do AS OOB. O `authExtraData`, caso preenchido, é usado para
-adição de informações extras do usuário e também para outras formas de autenticação,
-onde devem ser preenchidos os campos `key` e `value`, como podemos ver no exemplo
-mais abaixo.
+>**Importante**: O token JWT não deve ser assinado no aplicativo, evitando a exposição
+da chave privada de assinatura. A chave pública utilizada deve ser exposta via
+URL contendo o *JWKS* a ser configurada através da propriedade [`customer/federationJwksUrl`](../deploy/oob-authorization-server/readme.md#customerfederationjwksurl).
 
-Caso a instituição não solicite as credencias de cpf ou cnpj no momento da autenticação,
-a claim `authExtraData` deve receber as credencias utilizadas pela instituição para
-autenticação. Vale ressaltar que caso o cpf e cnpj não sejam utilizados como credencias
-no processo de autenticação do correntista, o token JWT deve sempre conter a
-claim de `cpf` e, se existente, a claim de `cnpj`.
+O JWT deve possuir as claims abaixo, sendo obrigatórias aquelas marcadas com asterisco:
 
-Importante ressaltar que o token JWT não deve ser assinado no aplicativo,
-evitando a exposição da chave privada de assinatura. A chave pública utilizada
-na assinatura deve estar exposta através de URL contendo o JWKS. O endereço do
-JWKS é configurável na instalação do OOB através da configuração
-`customer/federationJwksUrl` do [AS](../deploy/oob-authorization-server/readme.md).
+- `cpf`**\***: CPF do usuário logado contendo apenas dígitos.
+
+- `name`**\***: Nome do usuário logado.
+
+- `cnpj`: CNPJ da instituição relacionada ao usuário logado contendo apenas dígitos.
+
+- `iat`**\***: Data e hora de emissão do JWT no formato *EPOCH*.
+
+- `jti`**\***: Identificador único do token em formato *UUID* utilizado para evitar
+*replay-attacks*. Deve ser preenchido com o mesmo valor recebido do AS no início
+do loop de comandos.
+
+- `authExtraData`: Cojunto de informações extras relacionadas ao usuário logado
+representadas em um formato de dicionário *chave/valor*. Deve ser utilizado usado
+para envio das credenciais do usuário caso a instituição não utilize *cpf* ou
+*cnpj* para autenticação.
+
+- `consentOwner`: Conjunto de informações definidas pela instituição para
+identificar o dono do consentimento como, por exemplo, agência, conta, CPF e/ou
+CNPJ representadas como dicionário *chave/valor*. Essas informações serão utilizadas
+para a consulta do consentimento via [API de Backoffice](../portal-backoffice/apis-backoffice/readme.md).
+
+>**Importante**: Caso a claim `consentOwner` não seja enviada, a solução OOB
+irá utilizar o `cpf` e `cnpj` do usuário logado para definir o dono do consentimento.
 
 Um exemplo do conteúdo do JSON a ser utilizado no token JWT:
 
@@ -85,11 +88,21 @@ Um exemplo do conteúdo do JSON a ser utilizado no token JWT:
             "key": "conta",
             "value": "1234-5"
         }
+    ],
+    "consentOwner": [
+        {
+            "key": "conta",
+            "value": "542345234"
+        },
+        {
+            "key": "cnpj",
+            "value": "77202036000182"
+        }
     ]
 }
 ```
 
-### Comando `consent`
+## Comando `consent`
 
 O comando `consent` é o comando que solicita a exibição da intenção do
 consentimento solicitado pelo TPP à instituição. As informações do consentimento
@@ -120,7 +133,7 @@ do Usuário do Open Banking Brasil nessa etapa.
 Os recursos selecionados e por consequencia o aceite do consentimento devem ser
 enviados ao AS através da API `PUT /app/command/{id}/consent`.
 
-### Comando `error`
+## Comando `error`
 
 O comando `error` é o comando que indica a ocorrência de algum erro durante o
 fluxo de autenticação OIDC. O erro é descrito no comando, podendo ser erros
@@ -152,7 +165,7 @@ retorno ao TPP.
 O aplicativo deve orientar o usuário adequadamente para os cenários que a propriedade
 `redirectTo` não esteja presente.
 
-### Comando `completed`
+## Comando `completed`
 
 O comando `completed` é o comando que indica a conclusão com sucesso do fluxo de
 geração do consentimento.
@@ -163,9 +176,15 @@ ser seguido como descrito no `error`.
 
 ## Changelog
 
+### 2022-04-06 - v1.1.0
+
+- Adição da nova claim `consentOwner` no JSON do token JWT para utilização no
+command authenticate.
+
 ### 2022-01-24 - v1.0.1
 
-- Adição da nova claim `authExtraData` no JSON do token JWT para utilização no command authenticate.
+- Adição da nova claim `authExtraData` no JSON do token JWT para utilização
+no command authenticate.
 
 ### 2022-01-11 - v1.0.0
 
