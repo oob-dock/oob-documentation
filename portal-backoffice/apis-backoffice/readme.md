@@ -15,16 +15,17 @@ A API de listagem de consentimentos permite a listagem dos consentimentos ligado
 
 **Exemplo**: *99999999999*.
 
-`consent-owner`: Conjunto de informações usadas pela Instituição para identificar o dono do consentimento. Pode conter, por exemplo, agência, conta, CPF, CNPJ que devem ser representados por um dicionário *chave/valor* em formato *JSON URL Encoded*.
+`consent-owner`: Conjunto de informações definidas pela Instituição para identificar o dono do consentimento como, por exemplo, agência, conta, CPF, CNPJ, etc. É representado por um dicionário *chave/valor* em formato *JSON URL Encoded*.
 
 **Exemplo**: Para um identificador formado por agência e conta:
 
 ```json
-[{"key": "conta", "value": "12345"}, {"key": "agencia", "value": "1234-5"}]
+[{"key": "conta", "value": "12345"}, {"key": "agencia", "value": "12345"}]
 ```
 **Json URL encoded**:
-        
-        %5B%7B%22key%22%3A%20%22conta%22%2C%20%22value%22%3A%20%2212345%22%7D%2C%20%7B%22key%22%3A%20%22agencia%22%2C%20%22value%22%3A%20%221234-5%22%7D%5D
+```
+        %5B%7B%22key%22%3A%20%22conta%22%2C%20%22value%22%3A%20%2212345%22%7D%2C%20%7B%22key%22%3A%20%22agencia%22%2C%20%22value%22%3A%20%2212345%22%7D%5D
+```
 
 Além disso, as seguintes informações podem ser utilizadas para filtrar o resultado:
 
@@ -38,19 +39,11 @@ Além disso, as seguintes informações podem ser utilizadas para filtrar o resu
 
 `type`: Limita a consulta a consentimentos de pagamento ou de compartilhamento de dados representados, respectivamente, pelos valores *PAYMENT* e *DATA_SHARING*.
 
-**Exemplo**: PAYMENT.
-
-`status`: Limita a consulta a consentimentos no status informado. Para consentimentos de pagamento, suporta os valores definidos na [máquina de estados do Open Banking](https://openbankingbrasil.atlassian.net/wiki/spaces/DraftOB/pages/50346765/M+quina+de+Estados+-+Pagamentos+-+v1.1.0-rc1.0). Em relação aos consentimentos de compartilhamento de dados, suporta os valores *AWAITING_AUTHORISATION*, *AUTHORISED* e *REJECTED* que variam conforme seu [fluxo básico](https://openbanking-brasil.github.io/areadesenvolvedor/documents/fluxo_basico_consentimento.pdf).
-
-**Exemplo**: AWAITING_AUTHORISATION.
+`status`: Limita a consulta a consentimentos no status informado. Para consentimentos de pagamento, suporta os valores definidos na [máquina de estados do Open Banking](https://openbankingbrasil.atlassian.net/wiki/spaces/DraftOB/pages/50346765/M+quina+de+Estados+-+Pagamentos+-+v1.1.0-rc1.0). Para consentimentos de compartilhamento de dados, suporta os valores *AWAITING_AUTHORISATION*, *AUTHORISED* e *REJECTED* que variam conforme seu [fluxo básico](https://openbanking-brasil.github.io/areadesenvolvedor/documents/fluxo_basico_consentimento.pdf).
 
 `modalityType`[*1](#observações): Limita a consulta a consentimentos de pagamento imediato ou agendado representados, respectivamente, pelos valores *IMMEDIATE* e *SCHEDULED*.
 
-**Exemplo**: IMMEDIATE.
-
-`paymentType`[*1](#observações): Limita a consulta a consentimentos de pagamento. Suporta os tipos: PIX, TED ou TEF
-
-**Exemplo**: TED.
+`paymentType`[*1](#observações): Limita a consulta a consentimentos de pagamento. Suporta os tipos: *PIX*, *TED* ou *TEF*.
 
 ## Detalhamento do consentimento
 
@@ -68,7 +61,7 @@ Responsável pela revogação do consentimento relacionado ao *consentId* inform
 
 ## Autenticação
 
-Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir do fluxo *Client Credentials* do Authorization Server não-regulatório. 
+Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir do fluxo *Client Credentials* no caminho base não-regulatório do Authorization Server. 
 
 A configuração do AS, assim como os detalhes para criação de clients podem ser encontrados na seção de [deploy](../../deploy/oob-authorization-server/readme.md).
 
