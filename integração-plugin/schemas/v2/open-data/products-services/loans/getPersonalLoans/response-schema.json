@@ -7,10 +7,128 @@
     ],
     "properties": {
         "data": {
-            "$ref": "../common/common-schema.json#/$defs/ResponsePersonalLoans"
+            "$ref": "#/$defs/ResponsePersonalLoans"
         }
     },
-    "additionalProperties": false
+    "additionalProperties": false,
+    "$defs": {
+        "ResponsePersonalLoans": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/PersonalLoanBrand"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalLoanBrand": {
+            "type": "object",
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+                },
+                "companies": {
+                    "$ref": "#/$defs/PersonalLoanCompany"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalLoanCompany": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Companies traz uma lista de todas as instituições da Marca.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "cnpjNumber",
+                            "PersonalLoans"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Name",
+                                "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
+                            },
+                            "cnpjNumber": {
+                                "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                            },
+                            "urlComplementaryList": {
+                                "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                            },
+                            "personalLoans": {
+                                "$ref": "#/$defs/PersonalLoans"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "PersonalLoans": {
+            "type": "array",
+            "description": "Lista de modalidades de empréstimos.",
+            "additionalItems": true,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "type",
+                            "fees",
+                            "requiredWarranties",
+                            "termsConditions"
+                        ],
+                        "properties": {
+                            "type": {
+                                "$ref": "#/$defs/PersonalLoanType"
+                            },
+                            "fees": {
+                                "$ref": "../../common/common-schema.json#/$defs/LoanFees"
+                            },
+                            "interestRates": {
+                                "$ref": "../../common/common-schema.json#/$defs/LoanInterestRate"
+                            },
+                            "requiredWarranties": {
+                                "type": "array",
+                                "minItems": 1,
+                                "maxItems": 14,
+                                "$ref": "../../../common/common-schema.json#/$defs/RequiredWarranties"
+                            },
+                            "TermsConditions": {
+                                "$ref": "../../../common/common-schema.json#/$defs/TermsConditions"
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        "PersonalLoanType": {
+            "type": "string",
+            "descricao": "Modalidades de empréstimos ofertados para pessoa Natural, conforme Circular 4015-Bacen. Segundo cartilha do Bacen: Empréstimo é um contrato entre o cliente e uma instituição financeira (banco, cooperativa de crédito, caixa econômica) pelo qual o cliente recebe uma quantia em dinheiro que deverá ser devolvida em prazo determinado, acrescida dos juros acertados. Os recursos obtidos no empréstimo não tem destinação específica.\n EMPRESTIMO_CREDITO_PESSOAL_CONSIGNADO - operações de crédito com retenção de parcela do salário ou benefício do tomador, para o pagamento das prestações do empréstimo – desconto em folha de pagamento – nos termos da legislação em vigor\n EMPRESTIMO_CREDITO_PESSOAL_SEM_CONSIGNACAO - operações de empréstimos às pessoa natural, sem vinculação com aquisição de bem ou serviço e sem retenção de parcela do salário ou benefício do tomador para o pagamento das prestações do empréstimo\n EMPRESTIMO_HOME_EQUITY - empréstimos pessoa natural, garantidos por hipoteca ou por alienação fiduciária de bens imóveis residenciais, sem vinculação a aquisição de bens\n EMPRESTIMO_MICROCREDITO_PRODUTIVO_ORIENTADO - segundo PNMPO é o crédito concedido para financiamento das atividades produtivas, cuja metodologia será estabelecida em regulamento, observada a preferência do relacionamento direto com os empreendedores, admitido o uso de tecnologias digitais e eletrônicas que possam substituir o contato presencial\n EMPRESTIMO_CHEQUE_ESPECIAL - operações de crédito vinculadas à conta corrente, nas quais determinado limite de crédito é disponibilizado aos clientes para utilização de acordo com suas conveniências, sem necessidade de comunicação prévia à instituição financeira\n EMPRESTIMO_CONTA_GARANTIDA - operações de crédito rotativo, nas quais determinado limite de crédito é disponibilizado para utilização pelo cliente, através da simples movimentação da conta corrente e/ou solicitação formal à instituição financeira. As operações classificadas nessa modalidade não devem ter data definida para a amortização do saldo devedor, exceto a estabelecida para vigência do contrato",
+            "Enum": [ 
+                "EMPRESTIMO_CREDITO_PESSOAL_CONSIGNADO", 
+                "EMPRESTIMO_CREDITO_PESSOAL_SEM_CONSIGNACAO", 
+                "EMPRESTIMO_HOME_EQUITY", 
+                "EMPRESTIMO_MICROCREDITO_PRODUTIVO_ORIENTADO", 
+                "EMPRESTIMO_CHEQUE_ESPECIAL", 
+                "EMPRESTIMO_CONTA_GARANTIDA" 
+            ],
+            "example": [
+                "EMPRESTIMO_CREDITO_PESSOAL_CONSIGNADO"
+            ]
+        }
+    }
 }
 
 

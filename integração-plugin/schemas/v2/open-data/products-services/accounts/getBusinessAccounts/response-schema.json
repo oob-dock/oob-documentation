@@ -7,9 +7,181 @@
     ],
     "properties": {
         "data": {
-            "$ref": "../common/common-schema.json#/$defs/ResponseBusinessAccounts"
+            "$ref": "#/$defs/ResponseBusinessAccounts"
         }
     },
-    "additionalProperties": false
+    "additionalProperties": false,
+    "$defs": {
+        "ResponseBusinessAccounts": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/BusinessAccountBrand"
+                }
+            },
+            "additionalProperties": false
+            
+        },
+        "BusinessAccountBrand": {
+            "type": "object",
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+                },
+                "companies": {
+                    "$ref": "#/$defs/BusinessAccountCompany"
+                }
+            },
+            "additionalProperties": false
+        },
+        "BusinessAccountCompany": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Companies traz uma lista de todas as instituições da Marca.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "cnpjNumber",
+                            "businessAccounts"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Name",
+                                "description": "Nome da Instituição, pertencente à marca, responsável pela modalidade de Empréstimos. p.ex.'Empresa da Organização A'"
+                            },
+                            "cnpjNumber": {
+                                "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                            },
+                            "urlComplementaryList": {
+                                "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                            },
+                            "businessAccounts": {
+                                "$ref": "#/$defs/BusinessAccounts"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "BusinessAccounts": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "Lista de tipos de conta.",
+            "additionalItems": false,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "type",
+                            "fees",
+                            "serviceBundles",
+                            "openingClosingChannels",
+                            "transactionMethods",
+                            "termsConditions"
+                        ],
+                        "properties": {
+                            "type": {
+                                "$ref": "../../common/common-schema.json#/$defs/AccountType"
+                            },
+                            "fees": {
+                                "$ref": "#/$defs/Fee"
+                            },
+                            "serviceBundles": {
+                                "$ref": "../../common/common-schema.json#/$defs/ServiceBundle"
+                            },
+                            "openingClosingChannels": {
+                                "$ref": "../../common/common-schema.json#/$defs/OpeningClosingChannels"
+                            },
+                            "additionalInfo": {
+                                "$ref": "../../common/common-schema.json#/$defs/AdditionalInfo"
+                            },
+                            "transactionMethods": {
+                                "$ref": "../../common/common-schema.json#/$defs/TransactionMethods"
+                            },
+                            "termsConditions": {
+                                "$ref": "../../common/common-schema.json#/$defs/AccountsTermsConditions"
+                            },
+                            "incomeRate": {
+                                "$ref": "../../common/common-schema.json#/$defs/AccountsIncomeRate"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        },
+        "Fee": {
+            "type": "object",
+            "description": "Objeto que reúne informações de tarifas de serviços.",
+            "required": [
+                "services"
+            ],
+            "properties": {
+                "services": {
+                    "$ref": "#/$defs/BusinessAccountsService"
+                }
+            },
+            "additionalProperties": false
+        },
+        "BusinessAccountsService": {
+            "type": "array",
+            "description": "Lista das Tarifas cobradas sobre Serviços.",
+            "additionalItems": true,
+            "items": {
+                "anyOf": [
+                    {
+                        "type": "object",
+                        "required": [
+                            "name",
+                            "code",
+                            "chargingTriggerInfo",
+                            "prices",
+                            "minimum",
+                            "maximum"
+                        ],
+                        "properties": {
+                            "name": {
+                                "$ref": "../../../common/common-schema.json#/$defs/ServiceName",
+                                "description": "Nome do Serviço que incide sobre tipo de conta selecionado para pessoa jurídica(Campo Livre)."
+                            },
+                            "code": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Code",
+                                "description": "Sigla de identificação de Outros Serviços que incidem sobre os tipos de contas informados."
+                            },
+                            "chargingTriggerInfo": {
+                                "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                                "description": "Fatos geradores de cobrança que incidem sobre serviço que compõe o Pacote de Serviços."
+                            },
+                            "prices": {
+                                "$ref": "../../../common/common-schema.json#/$defs/Price"
+                            },
+                            "minimum": {
+                                "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
+                            },
+                            "maximum": {
+                                "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                ]
+            }
+        }
+    }
 }
 
