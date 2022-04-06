@@ -1,8 +1,6 @@
 # Instalação do OOB Consent
 
-
 ## Pré-requisitos
-
 
 ## Instalação
 
@@ -19,7 +17,7 @@ Configuração de acesso ao banco
 * password: Senha do usuário de acesso ao banco
 * kind: Tipo do banco. Default: "postgres"
 * dialect: Dialeto que faz a tradução das instruções referentes ao
- banco de dados. Default: "org.hibernate.dialect.PostgreSQLDialect" 
+ banco de dados. Default: "org.hibernate.dialect.PostgreSQLDialect"
 * host: Host do banco
 
 Exemplo:
@@ -76,12 +74,35 @@ Exemplo:
 Deve ser preenchido com o organisationId da instituição cadastrada no diretório
 de participantes.
 
-Utilizar o id de sandbox para ambientes não produtivos e o valor de produção para 
+Utilizar o id de sandbox para ambientes não produtivos e o valor de produção para
 ambientes produtivos.
 
 Essa propriedade é do tipo UUID.
 
 Ex: `7a176f46-75e6-454f-8d04-408d6beaee37`
+
+### application/encryption/key
+
+Deve ser preenchido com a chave a ser utilizada para criptografar os dados sensíveis
+na base de dados. Deve ser utilizada uma chave segura, recomenda-se que possua
+256 bits.
+
+**Atenção**: é necessário que a mesma seja armazenada de forma segura, pois caso
+seja alterada para uma valor diferente do estabelecido inicialmente em produção
+os dados sensíveis dos consentimentos anteriores ficarão inacessíveis.
+
+Ex: `DC28A6ED862722859DD78F4DBF664BBF447C7DC43085C151C7680A80BBF316D4`
+
+### application/encryption/salt
+
+Deve ser preenchido com o salt a ser utilizado para gerar a chave de de criptografia
+em conjunto com a chave informada no item anterior; recomenda-se que possua 64 bits.
+
+**Atenção**: é necessário que a mesma seja armazenada de forma segura, pois caso
+seja alterada para uma valor diferente do estabelecido inicialmente em produção
+os dados sensíveis dos consentimentos anteriores ficarão inacessíveis.
+
+Ex: `6598C77E29BB822B`
 
 ## additionalVars
 
@@ -100,9 +121,11 @@ As configurações que podem ser definidas neste formato estão listadas abaixo:
 
 ### QUARKUS_LOG_LEVEL
 
-Utilizado para definir o nível do log da aplicação. Em produção é aconselhável ser level = `INFO`.
+Utilizado para definir o nível do log da aplicação. Em produção é aconselhável
+ser level = `INFO`.
 
-**Valores possíveis:** `OFF`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`, `ALL`
+**Valores possíveis:** `OFF`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`,
+`ALL`
 
 Valor default: `INFO`
 
@@ -118,7 +141,8 @@ additionalVars:
 
 Utilizado para definir o nível do log para o console da aplicação.
 
-**Valores possíveis:** `OFF`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`, `ALL`
+**Valores possíveis:** `OFF`, `FATAL`, `ERROR`, `WARN`, `INFO`, `DEBUG`, `TRACE`,
+`ALL`
 
 Valor default: `INFO`
 
@@ -178,12 +202,14 @@ additionalVars:
 
 ### CONSENT_EXTERNAL_ID
 
-Utilizado para definir o id referente ao consentId. O consentId é o identificador único do 
-consentimento e deverá ser um URN - Uniform Resource Name.
+Utilizado para definir o id referente ao consentId. O consentId é o identificador
+único do consentimento e deverá ser um URN - Uniform Resource Name.
 
 Considerando a string urn:bancoex como exemplo para consentId temos:
- - o namespace(urn), conforme definido na [RFC8141](https://datatracker.ietf.org/doc/html/rfc8141) 
- - o identificador associado ao namespace da instituição transnmissora (bancoex) 
+
+* o namespace(urn), conforme definido na [RFC8141](https://datatracker.ietf.org/doc/html/rfc8141)
+
+* o identificador associado ao namespace da instituição transnmissora (bancoex)
 
 Valor default: `urn:amazingbank`
 
@@ -195,7 +221,7 @@ additionalVars:
     value: "urn:bancoex"
 ```
 
-Existem additionalVars para utilização do conector de aprovação de consentimento desenvolvido pela Opus, 
-que estão listadas em [consent](../../integração-plugin/consent/readme.md) na seção
- `Arquivo de rota implementado pela OPUS`
-
+Existem additionalVars para utilização do conector de aprovação de consentimento
+desenvolvido pela Opus, que estão listadas em
+[consent](../../integração-plugin/consent/readme.md) na seção
+`Arquivo de rota implementado pela OPUS`
