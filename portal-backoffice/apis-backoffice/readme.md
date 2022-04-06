@@ -1,5 +1,9 @@
 # APIs de Backoffice
-Esta seção descreve as APIs de consentimento a serem utilizadas para vizualização e revogação por meio do Portal Backoffice do Opus Open Banking (OOB ou O2B) e que podem servir como auxiliares para outros sistemas da Instituição.
+Esta seção descreve as APIs de vizualização e revogação de consentimento para o Portal Backoffice do Opus Open Banking.
+
+## Open API Specification
+
+As definições da API Rest em formato Open API Specification 3.0 podem ser encontradas [aqui](./oas-oob-consents.yaml).
 
 ## Listagem de consentimento
 
@@ -7,39 +11,60 @@ Esta seção descreve as APIs de consentimento a serem utilizadas para vizualiza
 
 A API de listagem de consentimentos permite a listagem dos consentimentos ligados a um dono, o qual deve ser identificado em uma das seguintes formas:
 
-- **cpf**: Pessoa física responsável pela criação do consentimento.
+`cpf`: Identifica a pessoa física responsável pela criação do consentimento. Deve conter apenas os dígitos.
 
-- **consent-owner**: Combinação de um conjunto de informações usadas pela Instituição para identificar o dono. Pode ser formada, por exemplo, por agência, conta, CPF, CNPJ etc.
+**Exemplo**: *99999999999*.
+
+`consent-owner`: Conjunto de informações usadas pela Instituição para identificar o dono do consentimento. Pode conter, por exemplo, agência, conta, CPF, CNPJ que devem ser representados por um dicionário *chave/valor* em formato *JSON URL Encoded*.
+
+**Exemplo**: Para um identificador formado por agência e conta:
+
+```json
+[{"key": "conta", "value": "12345"}, {"key": "agencia", "value": "1234-5"}]
+```
+**Json URL encoded**:
+        
+        %5B%7B%22key%22%3A%20%22conta%22%2C%20%22value%22%3A%20%2212345%22%7D%2C%20%7B%22key%22%3A%20%22agencia%22%2C%20%22value%22%3A%20%221234-5%22%7D%5D
 
 Além disso, as seguintes informações podem ser utilizadas para filtrar o resultado:
 
-- **createdOnBegin**: Indica a data de criação mínima a ser considerada para consulta de consentimentos.
+`createdOnBegin`: Indica a data de criação mínima (inclusa) para consulta de consentimentos. Deve ser informada com data e hora no formato específicado na [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339).
 
-- **createdOnEnd**: Indica a data de criação máxima a ser considerada para consulta de consentimentos.
+**Exemplo**: 2022-12-19T16:39:57Z.
 
-- **type**: Limita a consulta a consentimentos de pagamento ou de compartilhamento de dados.
+`createdOnEnd`: Indica a data de criação máxima (inclusa) para consulta de consentimentos. Deve ser informada com data e hora no formato específicado na [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339).
 
-- **status**: Limita a consulta a consentimentos no status informado.
+**Exemplo**: 2023-01-19T16:39:57-01:00.
 
-- **modalityType**[*1](#observações): Limita a consulta a consentimentos de pagamento imediato ou agendado.
+`type`: Limita a consulta a consentimentos de pagamento ou de compartilhamento de dados representados, respectivamente, pelos valores *PAYMENT* e *DATA_SHARING*.
 
-- **paymentType**[*1](#observações): Limita a consulta a consentimentos de pagamento do tipo PIX, TED ou TEF.
+**Exemplo**: PAYMENT.
+
+`status`: Limita a consulta a consentimentos no status informado. Para consentimentos de pagamento, suporta os valores definidos na [máquina de estados do Open Banking](https://openbankingbrasil.atlassian.net/wiki/spaces/DraftOB/pages/50346765/M+quina+de+Estados+-+Pagamentos+-+v1.1.0-rc1.0). Em relação aos consentimentos de compartilhamento de dados, suporta os valores *AWAITING_AUTHORISATION*, *AUTHORISED* e *REJECTED* que variam conforme seu [fluxo básico](https://openbanking-brasil.github.io/areadesenvolvedor/documents/fluxo_basico_consentimento.pdf).
+
+**Exemplo**: AWAITING_AUTHORISATION.
+
+`modalityType`[*1](#observações): Limita a consulta a consentimentos de pagamento imediato ou agendado representados, respectivamente, pelos valores *IMMEDIATE* e *SCHEDULED*.
+
+**Exemplo**: IMMEDIATE.
+
+`paymentType`[*1](#observações): Limita a consulta a consentimentos de pagamento. Suporta os tipos: PIX, TED ou TEF
+
+**Exemplo**: TED.
 
 ## Detalhamento do consentimento
 
         GET /open-banking/oob-consents/v1/consents/{consentId}
 
-Esta API é responsável por recuperar todas as informações de um consentimento, incluindo um histórico das mudanças de status realizadas. A consulta é feita através do consentID interno no formato UUID.
+Esta API é responsável por recuperar todas as informações de um consentimento, incluindo um histórico das mudanças de status realizadas. A consulta é feita através do identificador interno em formato UUID.
 
 ## Revogação de consentimento
 
         PATCH /open-banking/oob-consents/v1/consents/{consentId}
 
-Esta API é responsável pela revogação do consentimento relacionado ao consentId informado. É importante ressaltar que esta operação segue todas as regras do Open Banking, permitindo apenas revogação de consentimentos de pagamento agendado até o dia anterior a data de efetivação do mesmo.
+Responsável pela revogação do consentimento relacionado ao *consentId* informado.
 
-## Open API Specification
-
-As definições da API Rest em formato Open API Specification 3.0 podem ser encontradas [aqui](./oas-oob-consents.yaml).
+**Importante**: é permitida revogação de consentimentos de pagamento agendado APENAS até o dia anterior a data de efetivação do mesmo.
 
 ## Autenticação
 
