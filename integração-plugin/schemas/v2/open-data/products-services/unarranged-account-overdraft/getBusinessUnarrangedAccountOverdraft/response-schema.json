@@ -42,70 +42,54 @@
             "additionalProperties": false
         },
         "BusinessUnarrangedAccountOverdraftCompany": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "description": "Companies traz uma lista de todas as instituições da Marca.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "cnpjNumber",
-                            "businessUnarrangedAccountOverdraft"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../../common/common-schema.json#/$defs/Name",
-                                "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
-                            },
-                            "cnpjNumber": {
-                                "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
-                            },
-                            "urlComplementaryList": {
-                                "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
-                            },
-                            "businessUnarrangedAccountOverdraft": {
-                                "$ref": "#/$defs/BusinessUnarrangedAccountOverdraft"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "cnpjNumber",
+                "businessUnarrangedAccountOverdraft"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
+                },
+                "cnpjNumber": {
+                    "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                },
+                "urlComplementaryList": {
+                    "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                },
+                "businessUnarrangedAccountOverdraft": {
+                    "$ref": "#/$defs/BusinessUnarrangedAccountOverdraft"
+                }
+            },
+            "additionalProperties": false
         },
         "BusinessUnarrangedAccountOverdraft": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "maxItems": 5,
             "description": "Lista de produtos e serviços referente adiantamento a depositante.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "fees",
-                            "interestRates",
-                            "termsConditions"
-                        ],
-                        "properties": {
-                            "fees": {
-                                "$ref": "#/$defs/BusinessUnarrangedAccountOverdraftFee"
-                            },
-                            "interestRates": {
-                                "$ref": "../../../common/common-schema.json#/$defs/InterestRate"
-                            },
-                            "termsConditions": {
-                                "$ref": "../../../common/common-schema.json#/$defs/TermsConditions",
-                                "description": "Campo aberto para informar as condições contratuais relativas à Modalidade de Adiantamento a depositante para pessoa natural. Pode ser informada a URL referente ao endereço onde constam as condições informadas. Endereço eletrônico de acesso ao canal."
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "fees",
+                "interestRates",
+                "termsConditions"
+            ],
+            "properties": {
+                "fees": {
+                    "$ref": "#/$defs/BusinessUnarrangedAccountOverdraftFee"
+                },
+                "interestRates": {
+                    "$ref": "../../../common/common-schema.json#/$defs/InterestRate"
+                },
+                "termsConditions": {
+                    "$ref": "../../../common/common-schema.json#/$defs/TermsConditions",
+                    "description": "Campo aberto para informar as condições contratuais relativas à Modalidade de Adiantamento a depositante para pessoa natural. Pode ser informada a URL referente ao endereço onde constam as condições informadas. Endereço eletrônico de acesso ao canal."
+                }
+            },
+            "additionalProperties": false
         },
         "BusinessUnarrangedAccountOverdraftFee": {
             "type": "object",

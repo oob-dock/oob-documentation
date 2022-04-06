@@ -14,50 +14,41 @@
             ]
         },
         "ServiceBundle": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "description": "Lista dos Pacotes de serviços.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "services",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../common/common-schema.json#/$defs/ServiceName",
-                                "description": "Nome do Pacote de Serviços dado pela instituição."
-                            },
-                            "services": {
-                                "$ref": "#/$defs/ServiceBundleServiceDetail"
-                            },
-                            "prices": {
-                                "$ref": "../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "services",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../common/common-schema.json#/$defs/ServiceName",
+                    "description": "Nome do Pacote de Serviços dado pela instituição."
+                },
+                "services": {
+                    "$ref": "#/$defs/ServiceBundleServiceDetail"
+                },
+                "prices": {
+                    "$ref": "../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         },
         "OpeningClosingChannels": {
-            "type": "array",
+            "type": "string",
             "minItems": 1,
             "maxItems": 7,
             "description": "Lista dos canais para aberturas e encerramento.",
-            "additionalItems": false,
             "Enum": [ 
                 "DEPENDENCIAS_PROPRIAS", 
                 "CORRESPONDENTES_BANCARIOS", 
@@ -67,17 +58,10 @@
                 "CHAT", 
                 "OUTROS" 
             ],
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "string",
-                        "examples": [
-                            "DEPENDENCIAS_PROPRIAS",
-                            "CORRESPONDENTES_BANCARIOS"
-                        ]
-                    }
-                ]
-            }
+            "examples": [
+                "DEPENDENCIAS_PROPRIAS",
+                "CORRESPONDENTES_BANCARIOS"
+            ]
         },
         "AdditionalInfo": {
             "type": "string",
@@ -89,27 +73,19 @@
             ]
         },
         "TransactionMethods": {
-            "type": "array",
+            "type": "string",
             "minItems": 1,
             "maxItems": 4,
             "description": "Lista de formas de movimentação possíveis para a conta.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "string",
-                        "Enum": [ 
-                            "MOVIMENTACAO_ELETRONICA", 
-                            "MOVIMENTACAO_CHEQUE", 
-                            "MOVIMENTACAO_CARTAO", 
-                            "MOVIMENTACAO_PRESENCIAL" 
-                        ],
-                        "examples": [
-                            "MOVIMENTACAO_CARTAO"
-                        ]
-                    }
-                ]
-            }
+            "Enum": [ 
+                "MOVIMENTACAO_ELETRONICA", 
+                "MOVIMENTACAO_CHEQUE", 
+                "MOVIMENTACAO_CARTAO", 
+                "MOVIMENTACAO_PRESENCIAL" 
+            ],
+            "examples": [
+                "MOVIMENTACAO_CARTAO"
+            ]
         },
         "AccountsTermsConditions": {
             "type": "object",
@@ -162,88 +138,72 @@
             "additionalProperties": false
         },
         "AccountsIncomeRate": {
-            "type": "array",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "properties": {
-                            "savingAccount": {
-                                "type": "string",
-                                "maxLength": 2000,
-                                "pattern": "\\w*\\W*",
-                                "minItems": 1,
-                                "maxItems": 1,
-                                "description": "Descrição da Remuneração especificamente para Conta de Poupança. Deve ser preenchido com a determinação legal vigente. Restrição: De preenchimento obrigatório para CONTA_POUPANCA.",
-                                "examples": [
-                                    "Para depósitos até 03/05/2012 – remuneração trimestral de 1,5% + TR, sempre creditada no aniversário da conta; Para depósitos a partir de 04/05/2012 – 70% da Selic + TR quando a Selic for igual ou inferior a 8,5% ao ano e 1,5% + TR caso a Selic seja superior a 8,5%."
-                                ]
-                            },
-                            "prepaidPaymentAccount": {
-                                "type": "string",
-                                "maxLength": 2000,
-                                "pattern": "\\w*\\W*",
-                                "minItems": 1,
-                                "maxItems": 1,
-                                "description": "Campo Livre. Deve explicitar o Percentual em favor do titular da conta de pagamento pré-paga.",
-                                "examples": [
-                                    "NA"
-                                ]
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "type": "object",
+            "properties": {
+                "savingAccount": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "pattern": "\\w*\\W*",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "description": "Descrição da Remuneração especificamente para Conta de Poupança. Deve ser preenchido com a determinação legal vigente. Restrição: De preenchimento obrigatório para CONTA_POUPANCA.",
+                    "examples": [
+                        "Para depósitos até 03/05/2012 – remuneração trimestral de 1,5% + TR, sempre creditada no aniversário da conta; Para depósitos a partir de 04/05/2012 – 70% da Selic + TR quando a Selic for igual ou inferior a 8,5% ao ano e 1,5% + TR caso a Selic seja superior a 8,5%."
+                    ]
+                },
+                "prepaidPaymentAccount": {
+                    "type": "string",
+                    "maxLength": 2000,
+                    "pattern": "\\w*\\W*",
+                    "minItems": 1,
+                    "maxItems": 1,
+                    "description": "Campo Livre. Deve explicitar o Percentual em favor do titular da conta de pagamento pré-paga.",
+                    "examples": [
+                        "NA"
+                    ]
+                }
+            },
+            "additionalProperties": false
         },
         "ServiceBundleServiceDetail": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "description": "Lista dos serviços que compõe o pacote de serviços.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "code",
-                            "chargingTriggerInfo",
-                            "eventLimitQuantity",
-                            "freeEventQuantity"
-                        ],
-                        "properties": {
-                            "code": {
-                                "$ref": "../../common/common-schema.json#/$defs/Code",
-                                "description": "Código que identifica o Serviço que compõe o Pacote de Serviços, podendo ser da lista de Serviços Prioritários ou Outros Serviços. p.ex. segundo Resolução 3.919 do Bacen: 'SAQUE_TERMINAL'."
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fatos geradores de cobrança que incidem sobre serviço que compõe o Pacote de Serviços."
-                            },
-                            "eventLimitQuantity": {
-                                "type": "string",
-                                "maxLength": 6,
-                                "pattern": "^(\\d{1,6}){1}$",
-                                "description": "Segundo Resolução 4196, BCB, de 2013: Quantidade de eventos previstos no Pacote de Serviços (Número de eventos incluídos no mês) p.ex.'2'. No caso de quantidade ilimitada, reportar 999999.",
-                                "examples": [
-                                    "2"
-                                ]
-                            },
-                            "freeEventQuantity": {
-                                "type": "string",
-                                "maxLength": 6,
-                                "pattern": "^(\\d{1,6}){1}$",
-                                "description": "Segundo Resolução 4196, BCB, de 2013: Quantidade de eventos previstos no Pacote de Serviços com isenção de Tarifa.p.ex.'1' No caso de quantidade ilimitada, reportar 999999.",
-                                "examples": [
-                                    "0"
-                                ]
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "code",
+                "chargingTriggerInfo",
+                "eventLimitQuantity",
+                "freeEventQuantity"
+            ],
+            "properties": {
+                "code": {
+                    "$ref": "../../common/common-schema.json#/$defs/Code",
+                    "description": "Código que identifica o Serviço que compõe o Pacote de Serviços, podendo ser da lista de Serviços Prioritários ou Outros Serviços. p.ex. segundo Resolução 3.919 do Bacen: 'SAQUE_TERMINAL'."
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatos geradores de cobrança que incidem sobre serviço que compõe o Pacote de Serviços."
+                },
+                "eventLimitQuantity": {
+                    "type": "string",
+                    "maxLength": 6,
+                    "pattern": "^(\\d{1,6}){1}$",
+                    "description": "Segundo Resolução 4196, BCB, de 2013: Quantidade de eventos previstos no Pacote de Serviços (Número de eventos incluídos no mês) p.ex.'2'. No caso de quantidade ilimitada, reportar 999999.",
+                    "examples": [
+                        "2"
+                    ]
+                },
+                "freeEventQuantity": {
+                    "type": "string",
+                    "maxLength": 6,
+                    "pattern": "^(\\d{1,6}){1}$",
+                    "description": "Segundo Resolução 4196, BCB, de 2013: Quantidade de eventos previstos no Pacote de Serviços com isenção de Tarifa.p.ex.'1' No caso de quantidade ilimitada, reportar 999999.",
+                    "examples": [
+                        "0"
+                    ]
+                }
+            },
+            "additionalProperties": false
         },
         "CreditCardIdentification": {
             "type": "object",
@@ -355,78 +315,70 @@
             "additionalProperties": false
         },
         "CreditCardService": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "maxItems": 9,
             "description": "Lista das Tarifas cobradas sobre Serviço relacionadas a Modalidade de Pagamento Pós-Pagas.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "code",
-                            "chargingTriggerInfo",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "Denominação de Serviços relacionados à Modalidade de Contas de Pagamento Pós-Pagas (Vide ENUM).",
-                                "Enum": [ 
-                                    "ANUIDADE_CARTAO_BASICO_NACIONAL", 
-                                    "ANUIDADE_CARTAO_BASICO_INTERNACIONAL", 
-                                    "ANUIDADE_DIFERENCIADA", 
-                                    "UTILIZACAO_CANAIS_ATENDIMENTO_RETIRADA_ESPECIE_BRASIL", 
-                                    "UTILIZACAO_CANAIS_ATENDIMENTO_RETIRADA_ESPECIE_EXTERIOR", 
-                                    "AVALIACAO_EMERGENCIAL_CREDITO", 
-                                    "FORNECIMENTO_SEGUNDA_VIA_FUNCAO_CREDITO", 
-                                    "PAGAMENTO_CONTAS_UTILIZANDO_FUNCAO_CREDITO", 
-                                    "SMS" 
-                                ],
-                                "example": [
-                                    "ANUIDADE_CARTAO_BASICO_NACIONAL"
-                                ]
-                            },
-                            "code": {
-                                "type": "string",
-                                "description": "Sigla de identificação do Serviço relacionado à Modalidade de Contas de Pagamento Pós-Pagas (Vide ENUM).",
-                                "Enum": [ 
-                                    "ANUIDADE_NACIONAL", 
-                                    "ANUIDADE_INTERNACIONAL", 
-                                    "ANUIDADE_DIFERENCIADA", 
-                                    "SAQUE_CARTAO_BRASIL", 
-                                    "SAQUE_CARTAO_EXTERIOR", 
-                                    "AVALIACAO_EMERGENCIAL_CREDITO", 
-                                    "EMISSAO_SEGUNDA_VIA", 
-                                    "TARIFA_PAGAMENTO_CONTAS", 
-                                    "SMS" 
-                                ],
-                                "example": [
-                                    "ANUIDADE_NACIONAL"
-                                ]
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fatos geradores de cobrança que incidem sobre as Modalidades de Contas de Pagamento Pós-Pagas informada, para pessoa jurídica. (Campo Livre)."
-                            },
-                            "prices": {
-                                "$ref": "../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "description": "Denominação de Serviços relacionados à Modalidade de Contas de Pagamento Pós-Pagas (Vide ENUM).",
+                    "Enum": [ 
+                        "ANUIDADE_CARTAO_BASICO_NACIONAL", 
+                        "ANUIDADE_CARTAO_BASICO_INTERNACIONAL", 
+                        "ANUIDADE_DIFERENCIADA", 
+                        "UTILIZACAO_CANAIS_ATENDIMENTO_RETIRADA_ESPECIE_BRASIL", 
+                        "UTILIZACAO_CANAIS_ATENDIMENTO_RETIRADA_ESPECIE_EXTERIOR", 
+                        "AVALIACAO_EMERGENCIAL_CREDITO", 
+                        "FORNECIMENTO_SEGUNDA_VIA_FUNCAO_CREDITO", 
+                        "PAGAMENTO_CONTAS_UTILIZANDO_FUNCAO_CREDITO", 
+                        "SMS" 
+                    ],
+                    "example": [
+                        "ANUIDADE_CARTAO_BASICO_NACIONAL"
+                    ]
+                },
+                "code": {
+                    "type": "string",
+                    "description": "Sigla de identificação do Serviço relacionado à Modalidade de Contas de Pagamento Pós-Pagas (Vide ENUM).",
+                    "Enum": [ 
+                        "ANUIDADE_NACIONAL", 
+                        "ANUIDADE_INTERNACIONAL", 
+                        "ANUIDADE_DIFERENCIADA", 
+                        "SAQUE_CARTAO_BRASIL", 
+                        "SAQUE_CARTAO_EXTERIOR", 
+                        "AVALIACAO_EMERGENCIAL_CREDITO", 
+                        "EMISSAO_SEGUNDA_VIA", 
+                        "TARIFA_PAGAMENTO_CONTAS", 
+                        "SMS" 
+                    ],
+                    "example": [
+                        "ANUIDADE_NACIONAL"
+                    ]
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatos geradores de cobrança que incidem sobre as Modalidades de Contas de Pagamento Pós-Pagas informada, para pessoa jurídica. (Campo Livre)."
+                },
+                "prices": {
+                    "$ref": "../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         },
         "CreditCardInterest": {
             "type": "object",
@@ -528,93 +480,77 @@
             "additionalProperties": false
         },
         "FinancingService": {
-            "type": "array",
+            "type": "object",
             "description": "Nomes das Tarifas cobradas sobre Serviços ofertados à Modalidade de Financiamento, para pessoa natural.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "code",
-                            "chargingTriggerInfo",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../common/common-schema.json#/$defs/ServiceName",
-                                "description": "Nomes das Tarifas cobradas sobre Serviços ofertados à Modalidade de Financiamento."
-                            },
-                            "code": {
-                                "$ref": "../../common/common-schema.json#/$defs/Code",
-                                "description": "Sigla de identificação do serviço relacionado à Modalidade de Financiamento informada, para pessoa natural. Campo aberto."
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fatores geradores de cobrança que incidem sobre as Modalidades de Financiamentos, para pessoa natural. Campo Livre."
-                            },
-                            "prices": {
-                                "$ref": "../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../common/common-schema.json#/$defs/ServiceName",
+                    "description": "Nomes das Tarifas cobradas sobre Serviços ofertados à Modalidade de Financiamento."
+                },
+                "code": {
+                    "$ref": "../../common/common-schema.json#/$defs/Code",
+                    "description": "Sigla de identificação do serviço relacionado à Modalidade de Financiamento informada, para pessoa natural. Campo aberto."
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatores geradores de cobrança que incidem sobre as Modalidades de Financiamentos, para pessoa natural. Campo Livre."
+                },
+                "prices": {
+                    "$ref": "../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         },
         "InvoiceFinancingsService": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "description": "Lista das Tarifas cobradas sobre Serviços.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "code",
-                            "chargingTriggerInfo",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../common/common-schema.json#/$defs/ServiceName",
-                                "description": "Nomes das Tarifas cobradas sobre Serviços ofertados à Modalidade de direitos creditórios descontados. (Campo Livre)."
-                            },
-                            "code": {
-                                "$ref": "../../common/common-schema.json#/$defs/Code",
-                                "description": "Sigla de identificação do serviço relacionado à Modalidade de Financiamento informada, para pessoa natural. Campo aberto."
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fatores geradores de cobrança que incidem sobre as Modalidades de Financiamentos, para pessoa natural. Campo Livre."
-                            },
-                            "prices": {
-                                "$ref": "../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../common/common-schema.json#/$defs/ServiceName",
+                    "description": "Nomes das Tarifas cobradas sobre Serviços ofertados à Modalidade de direitos creditórios descontados. (Campo Livre)."
+                },
+                "code": {
+                    "$ref": "../../common/common-schema.json#/$defs/Code",
+                    "description": "Sigla de identificação do serviço relacionado à Modalidade de Financiamento informada, para pessoa natural. Campo aberto."
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatores geradores de cobrança que incidem sobre as Modalidades de Financiamentos, para pessoa natural. Campo Livre."
+                },
+                "prices": {
+                    "$ref": "../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         },
         "LoanFees": {
             "type": "object",
@@ -629,143 +565,117 @@
             }
         },
         "LoanService": {
-            "type": "array",
+            "type": "object",
             "description": "Lista das Tarifas cobradas sobre Serviços.",
-            "additionalItems": true,
-            "items": { 
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "description": "An explanation about the purpose of this instance.",
-                        "required": [
-                            "name",
-                            "code",
-                            "chargingTriggerInfo",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../common/common-schema.json#/$defs/ServiceName",
-                                "description": "Nomes das Tarifas cobradas sobre Serviços relacionados à Modalidade informada do Empréstimo para pessoa natural/jurídica."
-                            },
-                            "code": {
-                                "$ref": "../../common/common-schema.json#/$defs/Code",
-                                "description": "Sigla de identificação do serviço relacionado à Modalidade informada de Empréstimo para pessoa natural/jurídica."
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fatores geradores de cobrança que incidem sobre as Modalidades informada de Empréstimos para pessoa natural/jurídica."
-                            },
-                            "prices": {
-                                "$ref": "../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../common/common-schema.json#/$defs/ServiceName",
+                    "description": "Nomes das Tarifas cobradas sobre Serviços relacionados à Modalidade informada do Empréstimo para pessoa natural/jurídica."
+                },
+                "code": {
+                    "$ref": "../../common/common-schema.json#/$defs/Code",
+                    "description": "Sigla de identificação do serviço relacionado à Modalidade informada de Empréstimo para pessoa natural/jurídica."
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatores geradores de cobrança que incidem sobre as Modalidades informada de Empréstimos para pessoa natural/jurídica."
+                },
+                "prices": {
+                    "$ref": "../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         },
         "LoanInterestRate": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
-            "description": "Lista que traz o conjunto de informações necessárias para demonstrar a distribuição de frequências das taxas de juros remuneratórios da Modalidade de crédito.",
-            "additionalItems": true,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "description": "An explanation about the purpose of this instance.",
-                        "required": [
-                            "referentialRateIndexer",
-                            "rate",
-                            "applications",
-                            "minimumRate",
-                            "maximumRate"
-                        ],
-                        "properties": {
-                            "referentialRateIndexer": {
-                                "$ref": "../../common/common-schema.json#/$defs/ReferentialRateIndexer"
-                            },
-                            "rate": {
-                                "$ref": "../../common/common-schema.json#/$defs/RateInterest"
-                            },
-                            "applications": {
-                                "$ref": "#/$defs/ApplicationRate"
-                            },
-                            "minimumRate": {
-                                "$ref": "../../common/common-schema.json#/$defs/Rate",
-                                "description": "Percentual mínimo cobrado (taxa efetiva) no mês de referência, para o Empréstimo contratado A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)."
-                            },
-                            "maximumRate": {
-                                "$ref": "../../common/common-schema.json#/$defs/Rate",
-                                "description": "Percentual máximo cobrado (taxa efetiva) no mês de referência, para o Empréstimo contratado A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)."
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "description": "Lista que traz o conjunto de informações necessárias para demonstrar a distribuição de frequências das taxas de juros remuneratórios da Modalidade de crédito.",            
+            "required": [
+                "referentialRateIndexer",
+                "rate",
+                "applications",
+                "minimumRate",
+                "maximumRate"
+            ],
+            "properties": {
+                "referentialRateIndexer": {
+                    "$ref": "../../common/common-schema.json#/$defs/ReferentialRateIndexer"
+                },
+                "rate": {
+                    "$ref": "../../common/common-schema.json#/$defs/RateInterest"
+                },
+                "applications": {
+                    "$ref": "#/$defs/ApplicationRate"
+                },
+                "minimumRate": {
+                    "$ref": "../../common/common-schema.json#/$defs/Rate",
+                    "description": "Percentual mínimo cobrado (taxa efetiva) no mês de referência, para o Empréstimo contratado A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)."
+                },
+                "maximumRate": {
+                    "$ref": "../../common/common-schema.json#/$defs/Rate",
+                    "description": "Percentual máximo cobrado (taxa efetiva) no mês de referência, para o Empréstimo contratado A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)."
+                }
+            },
+            "additionalProperties": false
         },
         "UnarrangedAccountOverdraftService": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "description": "Lista das Tarifas cobradas sobre Serviços.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "code",
-                            "chargingTriggerInfo",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "default": "CONCESSAO_ADIANTAMENTO_DEPOSITANTE",
-                                "description": "Nome da Tarifa cobrada sobre Serviço que incide sobre Adiantamento a depositante, para pessoa jurídica..",
-                                "Enum": [ 
-                                    "CONCESSAO_ADIANTAMENTO_DEPOSITANTE" 
-                                ]
-                            },
-                            "code": {
-                                "type": "string",
-                                "default": "ADIANT_DEPOSITANTE",
-                                "description": "Sigla de identificação do serviço relacionado à Modalidade de Adiantamento a depositante, para pessoa jurídica.",
-                                "Enum": [ 
-                                    "ADIANT_DEPOSITANTE" 
-                                ]
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fato gerador de cobrança que incide sobre a Modalidade de Adiantamento a depositante informada, para pessoa jurídica."
-                            },
-                            "prices": {
-                                "$ref": "../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "default": "CONCESSAO_ADIANTAMENTO_DEPOSITANTE",
+                    "description": "Nome da Tarifa cobrada sobre Serviço que incide sobre Adiantamento a depositante, para pessoa jurídica..",
+                    "Enum": [ 
+                        "CONCESSAO_ADIANTAMENTO_DEPOSITANTE" 
+                    ]
+                },
+                "code": {
+                    "type": "string",
+                    "default": "ADIANT_DEPOSITANTE",
+                    "description": "Sigla de identificação do serviço relacionado à Modalidade de Adiantamento a depositante, para pessoa jurídica.",
+                    "Enum": [ 
+                        "ADIANT_DEPOSITANTE" 
+                    ]
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fato gerador de cobrança que incide sobre a Modalidade de Adiantamento a depositante informada, para pessoa jurídica."
+                },
+                "prices": {
+                    "$ref": "../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         }
     }
 }

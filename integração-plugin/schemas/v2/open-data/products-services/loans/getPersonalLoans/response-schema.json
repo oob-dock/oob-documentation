@@ -42,75 +42,56 @@
             "additionalProperties": false
         },
         "PersonalLoanCompany": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "description": "Companies traz uma lista de todas as instituições da Marca.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "cnpjNumber",
-                            "PersonalLoans"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../../common/common-schema.json#/$defs/Name",
-                                "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
-                            },
-                            "cnpjNumber": {
-                                "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
-                            },
-                            "urlComplementaryList": {
-                                "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
-                            },
-                            "personalLoans": {
-                                "$ref": "#/$defs/PersonalLoans"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "cnpjNumber",
+                "PersonalLoans"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
+                },
+                "cnpjNumber": {
+                    "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                },
+                "urlComplementaryList": {
+                    "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                },
+                "personalLoans": {
+                    "$ref": "#/$defs/PersonalLoans"
+                }
+            },
+            "additionalProperties": false
         },
         "PersonalLoans": {
-            "type": "array",
+            "type": "object",
             "description": "Lista de modalidades de empréstimos.",
-            "additionalItems": true,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "type",
-                            "fees",
-                            "requiredWarranties",
-                            "termsConditions"
-                        ],
-                        "properties": {
-                            "type": {
-                                "$ref": "#/$defs/PersonalLoanType"
-                            },
-                            "fees": {
-                                "$ref": "../../common/common-schema.json#/$defs/LoanFees"
-                            },
-                            "interestRates": {
-                                "$ref": "../../common/common-schema.json#/$defs/LoanInterestRate"
-                            },
-                            "requiredWarranties": {
-                                "type": "array",
-                                "minItems": 1,
-                                "maxItems": 14,
-                                "$ref": "../../../common/common-schema.json#/$defs/RequiredWarranties"
-                            },
-                            "TermsConditions": {
-                                "$ref": "../../../common/common-schema.json#/$defs/TermsConditions"
-                            }
-                        }
-                    }
-                ]
+            "required": [
+                "type",
+                "fees",
+                "requiredWarranties",
+                "termsConditions"
+            ],
+            "properties": {
+                "type": {
+                    "$ref": "#/$defs/PersonalLoanType"
+                },
+                "fees": {
+                    "$ref": "../../common/common-schema.json#/$defs/LoanFees"
+                },
+                "interestRates": {
+                    "$ref": "../../common/common-schema.json#/$defs/LoanInterestRate"
+                },
+                "requiredWarranties": {
+                    "$ref": "../../../common/common-schema.json#/$defs/RequiredWarranties"
+                },
+                "TermsConditions": {
+                    "$ref": "../../../common/common-schema.json#/$defs/TermsConditions"
+                }
             }
         },
         "PersonalLoanType": {

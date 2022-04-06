@@ -13,16 +13,16 @@
     "additionalProperties": false,
     "$defs": {
         "ResponsePersonalAccounts": {
-        "type": "object",
-        "required": [
-            "brand"
-        ],
-        "properties": {
-            "brand": {
-                "$ref": "#/$defs/PersonalAccountBrand"
-            }
-        },
-        "additionalProperties": false
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/PersonalAccountBrand"
+                }
+            },
+            "additionalProperties": false
         },
         "PersonalAccountBrand": {
             "type": "object",
@@ -42,87 +42,71 @@
             "additionalProperties": false
         },
         "PersonalAccountCompany": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "description": "Companies traz uma lista de todas as instituições da Marca.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "cnpjNumber",
-                            "personalAccounts"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../../common/common-schema.json#/$defs/Name",
-                                "description": "Nome da Instituição, pertencente à marca, responsável pela modalidade de Empréstimos. p.ex.'Empresa da Organização A'"
-                            },
-                            "cnpjNumber": {
-                                "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
-                            },
-                            "urlComplementaryList": {
-                                "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
-                            },
-                            "personalAccounts": {
-                                "$ref": "#/$defs/PersonalAccounts"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "name",
+                "cnpjNumber",
+                "personalAccounts"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Instituição, pertencente à marca, responsável pela modalidade de Empréstimos. p.ex.'Empresa da Organização A'"
+                },
+                "cnpjNumber": {
+                    "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                },
+                "urlComplementaryList": {
+                    "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                },
+                "personalAccounts": {
+                    "$ref": "#/$defs/PersonalAccounts"
+                }
+            },
+            "additionalProperties": false
         },
         "PersonalAccounts": {
-            "type": "array",
+            "type": "object",
             "minItems": 1,
             "maxItems": 3,
             "description": "Lista de tipos de conta.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "type",
-                            "fees",
-                            "serviceBundles",
-                            "openingClosingChannels",
-                            "transactionMethods",
-                            "termsConditions"
-                        ],
-                        "properties": {
-                            "type": {
-                                "$ref": "../../common/common-schema.json#/$defs/AccountType"
-                            },
-                            "fees": {
-                                "$ref": "#/$defs/AccountFee"
-                            },
-                            "serviceBundles": {
-                                "$ref": "../../common/common-schema.json#/$defs/ServiceBundle"
-                            },
-                            "openingClosingChannels": {
-                                "$ref": "../../common/common-schema.json#/$defs/OpeningClosingChannels"
-                            },
-                            "additionalInfo": {
-                                "$ref": "../../common/common-schema.json#/$defs/AdditionalInfo"
-                            },
-                            "transactionMethods": {
-                                "$ref": "../../common/common-schema.json#/$defs/TransactionMethods"
-                            },
-                            "termsConditions": {
-                                "$ref": "../../common/common-schema.json#/$defs/AccountsTermsConditions"
-                            },
-                            "incomeRate": {
-                                "$ref": "../../common/common-schema.json#/$defs/AccountsIncomeRate"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "required": [
+                "type",
+                "fees",
+                "serviceBundles",
+                "openingClosingChannels",
+                "transactionMethods",
+                "termsConditions"
+            ],
+            "properties": {
+                "type": {
+                    "$ref": "../../common/common-schema.json#/$defs/AccountType"
+                },
+                "fees": {
+                    "$ref": "#/$defs/AccountFee"
+                },
+                "serviceBundles": {
+                    "$ref": "../../common/common-schema.json#/$defs/ServiceBundle"
+                },
+                "openingClosingChannels": {
+                    "$ref": "../../common/common-schema.json#/$defs/OpeningClosingChannels"
+                },
+                "additionalInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/AdditionalInfo"
+                },
+                "transactionMethods": {
+                    "$ref": "../../common/common-schema.json#/$defs/TransactionMethods"
+                },
+                "termsConditions": {
+                    "$ref": "../../common/common-schema.json#/$defs/AccountsTermsConditions"
+                },
+                "incomeRate": {
+                    "$ref": "../../common/common-schema.json#/$defs/AccountsIncomeRate"
+                }
+            },
+            "additionalProperties": false
         },
         "AccountFee": {
             "type": "object",
@@ -142,48 +126,40 @@
             "additionalProperties": false
         },
         "AccountPriorityService": {
-            "type": "array",
             "minItems": 1,
             "maxItems": 40,
             "description": "Lista das Tarifas cobradas sobre Serviços Prioritários.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "code",
-                            "chargingTriggerInfo",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "#/$defs/PriorityServiceName"
-                            },
-                            "code": {
-                                "$ref": "#/$defs/AccountPriorityServiceCode"
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fatos geradores de cobrança que incidem sobre os serviços prioritários, segundo Resolução 3.919 do Bacen, para pessoa natural."
-                            },
-                            "prices": {
-                                "$ref": "../../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "type": "object",
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "#/$defs/PriorityServiceName"
+                },
+                "code": {
+                    "$ref": "#/$defs/AccountPriorityServiceCode"
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatos geradores de cobrança que incidem sobre os serviços prioritários, segundo Resolução 3.919 do Bacen, para pessoa natural."
+                },
+                "prices": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         },
         "PriorityServiceName": {
             "type": "string",
@@ -286,49 +262,41 @@
             ]
         },
         "AccountOtherService": {
-            "type": "array",
             "minItems": 1,
             "description": "Lista das Tarifas cobradas sobre outros Serviços, que não prioritários.",
-            "additionalItems": false,
-            "items": {
-                "anyOf": [
-                    {
-                        "type": "object",
-                        "required": [
-                            "name",
-                            "code",
-                            "chargingTriggerInfo",
-                            "prices",
-                            "minimum",
-                            "maximum"
-                        ],
-                        "properties": {
-                            "name": {
-                                "$ref": "../../../common/common-schema.json#/$defs/ServiceName",
-                                "description": "An explanation about the purpose of this instance."
-                            },
-                            "code": {
-                                "$ref": "../../../common/common-schema.json#/$defs/Code",
-                                "description": "Siglas de identificação do Serviço (Campo Livre)."
-                            },
-                            "chargingTriggerInfo": {
-                                "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
-                                "description": "Fatos geradores de cobrança que incidem sobre outros serviços para pessoa natural. (Campo Livre)."
-                            },
-                            "prices": {
-                                "$ref": "../../../common/common-schema.json#/$defs/Price"
-                            },
-                            "minimum": {
-                                "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
-                            },
-                            "maximum": {
-                                "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
-                            }
-                        },
-                        "additionalProperties": false
-                    }
-                ]
-            }
+            "type": "object",
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/ServiceName",
+                    "description": "An explanation about the purpose of this instance."
+                },
+                "code": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Code",
+                    "description": "Siglas de identificação do Serviço (Campo Livre)."
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatos geradores de cobrança que incidem sobre outros serviços para pessoa natural. (Campo Livre)."
+                },
+                "prices": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
         }
-    }    
-}
+    }
+}    
