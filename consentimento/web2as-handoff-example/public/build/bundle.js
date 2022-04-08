@@ -1,5 +1,5 @@
 
-(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35730/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
+(function(l, r) { if (!l || l.getElementById('livereloadscript')) return; r = l.createElement('script'); r.async = 1; r.src = '//' + (self.location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1'; r.id = 'livereloadscript'; l.getElementsByTagName('head')[0].appendChild(r) })(self.document);
 var app = (function () {
     'use strict';
 
@@ -3578,11 +3578,15 @@ var app = (function () {
     	let t9;
     	let label5;
     	let t10;
-    	let textarea;
+    	let textarea0;
     	let t11;
+    	let label6;
+    	let t12;
+    	let textarea1;
+    	let t13;
     	let div0;
     	let button0;
-    	let t13;
+    	let t15;
     	let button1;
 
     	const block = {
@@ -3610,13 +3614,17 @@ var app = (function () {
     			input4 = element("input");
     			t9 = space();
     			label5 = element("label");
-    			t10 = text("Extra Data\r\n      ");
-    			textarea = element("textarea");
+    			t10 = text("Consent Owner\r\n      ");
+    			textarea0 = element("textarea");
     			t11 = space();
+    			label6 = element("label");
+    			t12 = text("Extra Data\r\n      ");
+    			textarea1 = element("textarea");
+    			t13 = space();
     			div0 = element("div");
     			button0 = element("button");
     			button0.textContent = "Entrar";
-    			t13 = space();
+    			t15 = space();
     			button1 = element("button");
     			button1.textContent = "Cancelar";
     			attr_dev(input0, "name", "login");
@@ -3639,17 +3647,21 @@ var app = (function () {
     			attr_dev(input4, "type", "text");
     			add_location(input4, file$4, 20, 6, 450);
     			add_location(label4, file$4, 18, 4, 423);
-    			attr_dev(textarea, "rows", "20");
-    			attr_dev(textarea, "name", "authExtraData");
-    			add_location(textarea, file$4, 24, 6, 536);
+    			attr_dev(textarea0, "rows", "20");
+    			attr_dev(textarea0, "name", "consentOwner");
+    			add_location(textarea0, file$4, 24, 6, 539);
     			add_location(label5, file$4, 22, 4, 503);
+    			attr_dev(textarea1, "rows", "20");
+    			attr_dev(textarea1, "name", "authExtraData");
+    			add_location(textarea1, file$4, 28, 6, 634);
+    			add_location(label6, file$4, 26, 4, 601);
     			attr_dev(button0, "class", "login-button svelte-fxtm6l");
-    			add_location(button0, file$4, 27, 6, 637);
+    			add_location(button0, file$4, 31, 6, 735);
     			attr_dev(button1, "formaction", "/api/login/cancel");
     			attr_dev(button1, "class", "login-button svelte-fxtm6l");
-    			add_location(button1, file$4, 28, 6, 689);
+    			add_location(button1, file$4, 32, 6, 787);
     			attr_dev(div0, "class", "button-container svelte-fxtm6l");
-    			add_location(div0, file$4, 26, 4, 599);
+    			add_location(div0, file$4, 30, 4, 697);
     			attr_dev(form, "action", "/api/login");
     			attr_dev(form, "method", "post");
     			attr_dev(form, "class", "form svelte-fxtm6l");
@@ -3685,11 +3697,15 @@ var app = (function () {
     			append_dev(form, t9);
     			append_dev(form, label5);
     			append_dev(label5, t10);
-    			append_dev(label5, textarea);
+    			append_dev(label5, textarea0);
     			append_dev(form, t11);
+    			append_dev(form, label6);
+    			append_dev(label6, t12);
+    			append_dev(label6, textarea1);
+    			append_dev(form, t13);
     			append_dev(form, div0);
     			append_dev(div0, button0);
-    			append_dev(div0, t13);
+    			append_dev(div0, t15);
     			append_dev(div0, button1);
     		},
     		p: noop,

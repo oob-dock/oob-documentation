@@ -198,14 +198,18 @@ components:
           description: informações adicionais sobre o login
           example: |-
             [ { "key": "agencia", "value": "1234" }, { "key": "conta", "value": "542345234" } ]
-
+        consentOwner:
+          type: string
+          description: identificador do dono do consentimento
+          example: |-
+            [ { "key": "conta", "value": "542345234" }, { "key": "cnpj", "value": "77202036000182" } ]
     Authenticate:
       type: object
       allOf:
         - $ref: "#/components/schemas/Refused"
       properties:
         jwt:
-          example: "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVVc01MRndYejV6TWhrSm9vMWxjbklNMnBBcExjM2tjXzJXVjhZS1lDM00ifQ.eyJpYXQiOjE2MzQyNTYwMDAsImp0aSI6ImU2Y2RlNTFmLTc5OWMtNDQxMC04YmRhLWQ2NTY3M2NiMDQzYyIsIm5hbWUiOiJKb8OjbyBNYXJpYSBKb3PDqSIsImNwZiI6IjMyMTgwNDkwMDg5IiwiY25waiI6Ijc3MjAyMDM2MDAwMTgyIiwiYXV0aEV4dHJhRGF0YSI6W3sia2V5IjoiYWdlbmNpYSIsInZhbHVlIjoiMTIzNCJ9LHsia2V5IjoiY29udGEiLCJ2YWx1ZSI6IjU0MjM0NTIzNCJ9XX0.gfwOaScdb5qs9nRMSxlBkWJ18b_rUiE4YLr2T6H_yTeK37qLCG26KGFbNDxJsPW-xer4i4Q7-zrW_Kbcb9LhZ4BODnsLMFZsJRrauvbRR7gdY42peL_MVwcYBXHEh7ooCwTp-MM9Vv4QcHP8mu1QieaNEYprAWpQfNbbl4Yee0XY7fy8EZ2I5d-7hv0Lv5vPU1F1qhY15rAZuhtWImTJjnmNS5SKZTDq5lod80DIx9k4Jw9SUAteYccIC1HkniwxQtGow_dbLUt-Kf9p9DRSI9HXeDApNIIBvNss1VlwqGRQrw67iQ6qdoxc4Q3frMDmdVFmw1cw0Bfb95aoNCKlbg"
+          example: "eyJhbGciOiJSUzI1NiIsImtpZCI6IkVVc01MRndYejV6TWhrSm9vMWxjbklNMnBBcExjM2tjXzJXVjhZS1lDM00ifQ.eyJpYXQiOjE2MzQyNTYwMDAsImp0aSI6ImU2Y2RlNTFmLTc5OWMtNDQxMC04YmRhLWQ2NTY3M2NiMDQzYyIsIm5hbWUiOiJKb8OjbyBNYXJpYSBKb3PDqSIsImNwZiI6IjMyMTgwNDkwMDg5IiwiY25waiI6Ijc3MjAyMDM2MDAwMTgyIiwiYXV0aEV4dHJhRGF0YSI6W3sia2V5IjoiYWdlbmNpYSIsInZhbHVlIjoiMTIzNCJ9LHsia2V5IjoiY29udGEiLCJ2YWx1ZSI6IjU0MjM0NTIzNCJ9XSwiY29uc2VudE93bmVyIjpbeyJrZXkiOiJjb250YSIsInZhbHVlIjoiNTQyMzQ1MjM0In0seyJrZXkiOiJjbnBqIiwidmFsdWUiOiI3NzIwMjAzNjAwMDE4MiJ9XX0.dN841nMHKgwumFRoNnYAogmIxzoL20tUSpdltEXTmWUIT0p1IxNWSelcS3FGjphKb-Q5vcfdnNNXgVwMvdUts_buveyda54zlLHWm9wkb71_C_IXHl6DLgsemM7JtnFjfhiBlIBvyB6p-7DRlJTLJc_9Q8R2CX7uOnMSEaST-4WxgQSSzBvAFKsGuGuZ3RvrZOXYFVQjG8idm0T9JoIC29evF7QEumgBXcOwdYmPO0oj9gMWUcOiVIWty2MfreRaDvlmUSLclSjsrae_laED9x2N19Y0uc5xCgH2LweSpAsUkJwSvsrr92dTKv2mDoKWNnXJhr9QABIJPKygWnR05g"
           type: object
           description: |-
             JWT assinado segundo a estrutura definida, envio obrigatório
