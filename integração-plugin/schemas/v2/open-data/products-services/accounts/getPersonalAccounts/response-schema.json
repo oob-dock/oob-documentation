@@ -276,7 +276,7 @@
             "properties": {
                 "name": {
                     "$ref": "../../../common/common-schema.json#/$defs/ServiceName",
-                    "description": "An explanation about the purpose of this instance."
+                    "description": "Nome do Serviço que incide sobre tipo de conta (Campo Livre)."
                 },
                 "code": {
                     "$ref": "../../../common/common-schema.json#/$defs/Code",

@@ -97,7 +97,7 @@
                 },
                 "fees": {
                     "type": "object",
-                    "description": "An explanation about the purpose of this instance.",
+                    "description": "Objeto que reúne informações de tarifas de serviços.",
                     "required": [
                         "services"
                     ],
