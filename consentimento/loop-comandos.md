@@ -75,7 +75,7 @@ O JWT deve possuir as claims abaixo, sendo obrigatórias aquelas marcadas com as
 
 - `authExtraData`: Cojunto de informações extras relacionadas ao usuário logado
 representadas por um array de dicionários *chave/valor* com dois campos obrigatórios,
-`key` e `value`. Deve ser utilizado usado para envio das credenciais do usuário caso
+`key` e `value`. Deve ser usado para envio das credenciais do usuário caso
 a instituição não utilize *cpf* ou *cnpj* para autenticação.
 
 - `consentOwner`: Conjunto de informações definidas pela instituição para
