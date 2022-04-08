@@ -85,22 +85,27 @@ Ex: `7a176f46-75e6-454f-8d04-408d6beaee37`
 
 Deve ser preenchido com a chave a ser utilizada para criptografar os dados sensíveis
 na base de dados. Deve ser utilizada uma chave segura, recomenda-se que possua
-256 bits.
+256 bits, e que o formato dos valores seja hexadecimal.
 
-**Atenção**: é necessário que a mesma seja armazenada de forma segura, pois caso
+> **Atenção**
+>
+> `É necessário que a mesma seja armazenada de forma segura, pois caso
 seja alterada para uma valor diferente do estabelecido inicialmente em produção
-os dados sensíveis dos consentimentos anteriores ficarão inacessíveis.
+os dados sensíveis dos consentimentos anteriores ficarão inacessíveis.`
 
 Ex: `DC28A6ED862722859DD78F4DBF664BBF447C7DC43085C151C7680A80BBF316D4`
 
 ### application/encryption/salt
 
 Deve ser preenchido com o salt a ser utilizado para gerar a chave de de criptografia
-em conjunto com a chave informada no item anterior; recomenda-se que possua 64 bits.
+em conjunto com a chave informada no item anterior; recomenda-se que possua 64 bits,
+e que o formato dos valores seja hexadecimal.
 
-**Atenção**: é necessário que a mesma seja armazenada de forma segura, pois caso
+> **Atenção**
+>
+> `É necessário que a mesma seja armazenada de forma segura, pois caso
 seja alterada para uma valor diferente do estabelecido inicialmente em produção
-os dados sensíveis dos consentimentos anteriores ficarão inacessíveis.
+os dados sensíveis dos consentimentos anteriores ficarão inacessíveis.`
 
 Ex: `6598C77E29BB822B`
 
