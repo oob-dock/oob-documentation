@@ -39,7 +39,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"standard-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"standard-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Standard Happy Flow",
@@ -91,7 +91,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Error - Invalid CPF Flow",
@@ -147,7 +147,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"handoff-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"handoff-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Handoff Happy  Flow",

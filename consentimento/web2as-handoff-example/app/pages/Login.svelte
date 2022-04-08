@@ -21,14 +21,18 @@
       <input name="cnpj" type="text" />
     </label>
     <label>
+      Consent Owner
+      <textarea rows="20" name="consentOwner" />
+    </label>
+    <label>
       Extra Data
       <textarea rows="20" name="authExtraData" />
     </label>
     <div class="button-container">
       <button class="login-button">Entrar</button>
-      <button formAction="/api/login/cancel" class="login-button"
-        >Cancelar</button
-      >
+      <button formAction="/api/login/cancel" class="login-button">
+        Cancelar
+      </button>
     </div>
   </form>
 </div>
