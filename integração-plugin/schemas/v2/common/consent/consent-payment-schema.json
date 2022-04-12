@@ -57,6 +57,9 @@
                 },
                 "authExtraData": {
                     "$ref": "./common-consent-schema.json#/$defs/AuthExtraData"
+                },
+                "consentOwner": {
+                    "$ref": "./common-consent-schema.json#/$defs/ConsentOwner"
                 }
             },
             "additionalProperties": false
