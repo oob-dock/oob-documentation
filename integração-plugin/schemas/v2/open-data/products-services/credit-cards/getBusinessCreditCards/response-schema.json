@@ -7,8 +7,114 @@
     ],
     "properties": {
         "data": {
-            "$ref": "../common/common-schema.json#/$defs/BusinessCreditCardResponse"
+            "$ref": "#/$defs/BusinessCreditCardResponse"
         }
     },
-    "additionalProperties": false
+    "additionalProperties": false,
+    "$defs": {
+        "BusinessCreditCardResponse": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/BusinessCreditCardBrand"
+                }
+            },
+            "additionalProperties": false
+        },
+        "BusinessCreditCardBrand": {
+            "type": "object",
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+                },
+                "companies": {
+                    "$ref": "#/$defs/BusinessCreditCardCompany"
+                }
+            },
+            "additionalProperties": false
+        },
+        "BusinessCreditCardCompany": {
+            "type": "object",
+            "minItems": 1,
+            "description": "Companies traz uma lista de todas as instituições da Marca.",
+            "required": [
+                "name",
+                "cnpjNumber",
+                "businessCreditCards"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
+                },
+                "cnpjNumber": {
+                    "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                },
+                "urlComplementaryList": {
+                    "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                },
+                "businessCreditCards": {
+                    "$ref": "#/$defs/BusinessCreditCard"
+                }
+            },
+            "additionalProperties": false
+        },
+        "BusinessCreditCard": {
+            "type": "object",
+            "minItems": 1,
+            "description": "Lista das contas de pagamento pós-paga",
+            "required": [
+                "name",
+                "identification",
+                "rewardsProgram",
+                "fees",
+                "interest",
+                "termsConditions"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "pattern": "\\w*\\W*",
+                    "maxLength": 50,
+                    "description": "Denominação/Identificação do nome da conta (cartão de crédito).",
+                    "example": [
+                        "Cartão Universitário"
+                    ]
+                },
+                "identification": {
+                    "$ref": "../../common/common-schema.json#/$defs/CreditCardIdentification"
+                },
+                "rewardsProgram": {
+                    "$ref": "../../common/common-schema.json#/$defs/CreditCardRewardsProgram"
+                },
+                "fees": {
+                    "type": "object",
+                    "description": "Objeto que reúne informações de tarifas de serviços.",
+                    "required": [
+                        "services"
+                    ],
+                    "properties": {
+                        "services": {
+                            "$ref": "../../common/common-schema.json#/$defs/CreditCardService"
+                        }
+                    },
+                    "additionalProperties": false
+                },
+                "interest": {
+                    "$ref": "../../common/common-schema.json#/$defs/CreditCardInterest"
+                },
+                "termsConditions": {
+                    "$ref": "../../common/common-schema.json#/$defs/CreditCardTermsConditions"
+                }
+            }
+        }
+    }
 }

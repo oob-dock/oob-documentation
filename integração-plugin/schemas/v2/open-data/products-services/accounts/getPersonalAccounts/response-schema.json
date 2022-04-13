@@ -7,8 +7,296 @@
     ],
     "properties": {
         "data": {
-            "$ref": "../common/common-schema.json#/$defs/ResponsePersonalAccounts"
+            "$ref": "#/$defs/ResponsePersonalAccounts"
         }
     },
-    "additionalProperties": false
-}
+    "additionalProperties": false,
+    "$defs": {
+        "ResponsePersonalAccounts": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/PersonalAccountBrand"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalAccountBrand": {
+            "type": "object",
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+                },
+                "companies": {
+                    "$ref": "#/$defs/PersonalAccountCompany"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalAccountCompany": {
+            "type": "object",
+            "minItems": 1,
+            "description": "Companies traz uma lista de todas as instituições da Marca.",
+            "required": [
+                "name",
+                "cnpjNumber",
+                "personalAccounts"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Instituição, pertencente à marca, responsável pela modalidade de Empréstimos. p.ex.'Empresa da Organização A'"
+                },
+                "cnpjNumber": {
+                    "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                },
+                "urlComplementaryList": {
+                    "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                },
+                "personalAccounts": {
+                    "$ref": "#/$defs/PersonalAccounts"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalAccounts": {
+            "type": "object",
+            "minItems": 1,
+            "maxItems": 3,
+            "description": "Lista de tipos de conta.",
+            "required": [
+                "type",
+                "fees",
+                "serviceBundles",
+                "openingClosingChannels",
+                "transactionMethods",
+                "termsConditions"
+            ],
+            "properties": {
+                "type": {
+                    "$ref": "../../common/common-schema.json#/$defs/AccountType"
+                },
+                "fees": {
+                    "$ref": "#/$defs/AccountFee"
+                },
+                "serviceBundles": {
+                    "$ref": "../../common/common-schema.json#/$defs/ServiceBundle"
+                },
+                "openingClosingChannels": {
+                    "$ref": "../../common/common-schema.json#/$defs/OpeningClosingChannels"
+                },
+                "additionalInfo": {
+                    "$ref": "../../common/common-schema.json#/$defs/AdditionalInfo"
+                },
+                "transactionMethods": {
+                    "$ref": "../../common/common-schema.json#/$defs/TransactionMethods"
+                },
+                "termsConditions": {
+                    "$ref": "../../common/common-schema.json#/$defs/AccountsTermsConditions"
+                },
+                "incomeRate": {
+                    "$ref": "../../common/common-schema.json#/$defs/AccountsIncomeRate"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AccountFee": {
+            "type": "object",
+            "description": "Objeto que reúne informações de tarifas de serviços.",
+            "required": [
+                "priorityServices",
+                "otherServices"
+            ],
+            "properties": {
+                "priorityServices": {
+                    "$ref": "#/$defs/AccountPriorityService"
+                },
+                "otherServices": {
+                    "$ref": "#/$defs/AccountOtherService"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AccountPriorityService": {
+            "minItems": 1,
+            "maxItems": 40,
+            "description": "Lista das Tarifas cobradas sobre Serviços Prioritários.",
+            "type": "object",
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "#/$defs/PriorityServiceName"
+                },
+                "code": {
+                    "$ref": "#/$defs/AccountPriorityServiceCode"
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatos geradores de cobrança que incidem sobre os serviços prioritários, segundo Resolução 3.919 do Bacen, para pessoa natural."
+                },
+                "prices": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PriorityServiceName": {
+            "type": "string",
+            "description": "Nome dos Serviços prioritários, segundo Resolução 3.919 do Bacen, para pessoa natural.",
+            "examples": [
+                "TRANSFERENCIA_TED_PESSOAL_OU_PRESENCIAL"
+            ],
+            "Enum": [ 
+                "CONFECCAO_CADASTRO_INICIO_RELACIONAMENTO", 
+                "FORNECIMENTO_2_VIA_CARTAO_FUNCAO_DEBITO", 
+                "FORNECIMENTO_2_VIA_CARTAO_FUNCAO_MOVIMENTACAO_CONTA_POUPANCA", 
+                "EXCLUSAO_CADASTRO_EMITENTES_CHEQUES_SEM_FUNDO_CCF", 
+                "CONTRA_ORDEM_REVOGACAO_E_OPOSICAO_OU_SUSTACAO_PAGAMENTO_CHEQUE", 
+                "FORNECIMENTO_FOLHAS_CHEQUE", 
+                "CHEQUE_ADMINISTRATIVO", 
+                "CHEQUE_VISADO", 
+                "SAQUE_CONTA_DEPOSITO_A_VISTA_POUPANCA_PRESENCIAL_OU_PESSOAL", 
+                "SAQUE_CONTA_DEPOSITO_A_VISTA_POUPANCA_TERMINAL_AUTOATENDIMENTO", 
+                "SAQUE_CONTA_DEPOSITO_A_VISTA_POUPANCA_CORRESPONDENTES_PAIS", 
+                "DEPOSITO_IDENTIFICADO", 
+                "FORNECIMENTO_EXTRATO_MENSAL_CONTA_DEPOSITOS_A_VISTA_E_POUPANCA_PRESENCIAL_OU_PESSOAL", 
+                "FORNECIMENTO_EXTRATO_MENSAL_CONTA_DEPOSITOS_A_VISTA_E_POUPANCA_TERMINAL_AUTOATENDIMENTO", 
+                "FORNECIMENTO_EXTRATO_MENSAL_CONTA_DEPOSITOS_A_VISTA_E_POUPANCA_CORRESPONDENTES_PAIS", 
+                "FORNECIMENTO_EXTRATO_DE_UM_PERIODO_CONTA_DEPOSITOS_A_VISTA_E_POUPANCA_PRESENCIAL_OU_PESSOAL", 
+                "FORNECIMENTO_EXTRATO_DE_UM_PERIODO_CONTA_DEPOSITOS_A_VISTA_E_POUPANCA_TERMINAL_AUTOATENDIMENTO", 
+                "FORNECIMENTO_EXTRATO_DE_UM_PERIODO_CONTA_DEPOSITOS_A_VISTA_E_POUPANCA_CORRESPONDENTES_PAIS", 
+                "FORNECIMENTO_COPIA_MICROFILME_MICROFICHA_ASSEMELHADO", 
+                "TRANSFERENCIA_DOC_PESSOAL_OU_PRESENCIAL", 
+                "TRANSFERENCIA_DOC_TERMINAL_AUTOATENDIMENTO_OUTROS_MEIOS_ELETRONICOS", 
+                "TRANSFERENCIA_DOC_INTERNET", 
+                "TRANSFERENCIA_TED_PESSOAL_OU_PRESENCIAL", 
+                "TRANSFERENCIA_TED_TERMINAL_AUTOATENDIMENTO_OUTROS_MEIOS_ELETRONICOS", 
+                "TRANSFERENCIA_TED_INTERNET", 
+                "TRANSFERENCIA_DOC_TED_PESSOAL_OU_PRESENCIAL", 
+                "TRANSFERENCIA_DOC_TED_TERMINAL_AUTOATENDIMENTO_OUTROS_MEIOS_ELETRONICOS", 
+                "TRANSFERENCIA_DOC_TED_INTERNET", 
+                "TRANSFERENCIA_ENTRE_CONTAS_PROPRIA_INSTITUICAO_PESSOAL_OU_PRESENCIAL", 
+                "TRANSFERENCIA_ENTRE_CONTAS_PROPRIA_INSTITUICAO_TERMINAL_AUTOATENDIMENTO_OUTROS_MEIOS_ELETRONICOS_INCLUSIVE_INTERNET", 
+                "ORDEM_PAGAMENTO", 
+                "ANUIDADE_CARTAO_BASICO_NACIONAL", 
+                "ANUIDADE_CARTAO_BASICO_INTERNACIONAL", 
+                "ANUIDADE_DIFERENCIADA", 
+                "UTILIZACAO_CANAIS_ATENDIMENTO_RETIRADA_ESPECIE_BRASIL", 
+                "UTILIZACAO_CANAIS_ATENDIMENTO_RETIRADA_ESPECIE_EXTERIOR", 
+                "AVALIACAO_EMERGENCIAL_CREDITO", 
+                "FORNECIMENTO_SEGUNDA_VIA_FUNCAO_CREDITO", 
+                "PAGAMENTO_CONTAS_UTILIZANDO_FUNCAO_CREDITO", 
+                "SMS" 
+            ]
+        },
+        "AccountPriorityServiceCode": {
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "\\w*\\W*",
+            "description": "Lista das Siglas de identificação do Serviço Prioritário, segundo Resolução 3.919 do Bacen.",
+            "Enum": [ 
+                "CADASTRO", 
+                "2_VIA_CARTAO_DEBITO", 
+                "2_VIA_CARTAO_POUPANCA", 
+                "EXCLUSAO_CCF", 
+                "SUSTACAO_REVOGACAO", 
+                "FOLHA_CHEQUE", 
+                "CHEQUE_ADMINISTRATIVO", 
+                "CHEQUE_VISADO", 
+                "SAQUE_PESSOAL", 
+                "SAQUE_TERMINAL", 
+                "SAQUE_CORRESPONDENTE", 
+                "DEPOSITO_IDENTIFICADO", 
+                "EXTRATO_MES_P", 
+                "EXTRATO_MES_E", 
+                "EXTRATO_MES_C", 
+                "EXTRATO_MOVIMENTO_P", 
+                "EXTRATO_MOVIMENTO_E", 
+                "EXTRATO_MOVIMENTO_C", 
+                "MICROFILME", 
+                "DOC_PESSOAL", 
+                "DOC_ELETRONICO", 
+                "DOC_INTERNET", 
+                "TED_PESSOAL", 
+                "TED_ELETRONICO", 
+                "TED_INTERNET", 
+                "DOC_TED_AGENDADO_P", 
+                "DOC_TED_AGENDADO_E", 
+                "DOC_TED_AGENDADO_I", 
+                "TRANSF_RECURSO_P", 
+                "TRANSF_RECURSO_E", 
+                "ORDEM_PAGAMENTO", 
+                "ANUIDADE_NACIONAL", 
+                "ANUIDADE_INTERNACIONAL", 
+                "ANUIDADE_DIFERENCIADA", 
+                "SAQUE_CARTAO_BRASIL", 
+                "SAQUE_CARTAO_EXTERIOR", 
+                "AVALIACAO_EMERGENCIAL_CREDITO", 
+                "EMISSAO_SEGUNDA_VIA", 
+                "TARIFA_PAGAMENTO_CONTAS", 
+                "SMS" 
+            ],
+            "examples": [
+                "TED_PESSOAL"
+            ]
+        },
+        "AccountOtherService": {
+            "minItems": 1,
+            "description": "Lista das Tarifas cobradas sobre outros Serviços, que não prioritários.",
+            "type": "object",
+            "required": [
+                "name",
+                "code",
+                "chargingTriggerInfo",
+                "prices",
+                "minimum",
+                "maximum"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/ServiceName",
+                    "description": "Nome do Serviço que incide sobre tipo de conta (Campo Livre)."
+                },
+                "code": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Code",
+                    "description": "Siglas de identificação do Serviço (Campo Livre)."
+                },
+                "chargingTriggerInfo": {
+                    "$ref": "../../../common/common-schema.json#/$defs/ChargingTriggerInfo",
+                    "description": "Fatos geradores de cobrança que incidem sobre outros serviços para pessoa natural. (Campo Livre)."
+                },
+                "prices": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Price"
+                },
+                "minimum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MinimumPrice"
+                },
+                "maximum": {
+                    "$ref": "../../../common/common-schema.json#/$defs/MaximumPrice"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}    
