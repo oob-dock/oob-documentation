@@ -49,6 +49,16 @@
                 "key": "agencia",
                 "value": "0011"
             }
+        ],
+        "consentOwner": [
+            {
+                "key": "agencia",
+                "value": "1234"
+            },
+            {
+                "key": "conta",
+                "value": "12345678"
+            }
         ]
     }
 }
