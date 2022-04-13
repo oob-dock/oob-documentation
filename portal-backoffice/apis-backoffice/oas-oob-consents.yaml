@@ -1,0 +1,777 @@
+---
+openapi: 3.0.3
+info:
+  title: Consent BackOffice Services
+  version: 0.0.1-SNAPSHOT
+security:
+- jwt: []
+tags:
+- name: Consents Opus Open Banking
+  description: Consents opus open banking services
+paths:
+  /open-banking/oob-consents/v1/consents:
+    get:
+      tags:
+      - Consents Opus Open Banking
+      description: Retrieve list of consents
+      parameters:
+      - name: consentOwner
+        in: query
+        schema:
+          type: string
+          example: '[{"key":"cpf","value":"99999999999"},{"key":"cnpj","value":"11199999999999"}]'
+      - name: cpf
+        in: query
+        schema:
+          type: string
+          example: '99999999999'
+      - name: createdOnBegin
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: '2022-01-30T17:31:28Z'
+      - name: createdOnEnd
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: '2022-01-30T17:31:28Z'
+      - name: modalityType
+        in: query
+        schema:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      - name: paymentType
+        in: query
+        schema:
+          $ref: '#/components/schemas/PaymentTypeEnum'
+      - name: status
+        in: query
+        schema:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+      - name: type
+        in: query
+        schema:
+          $ref: '#/components/schemas/ConsentTypesEnum'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentSummaryPaginationSchema'
+  /open-banking/oob-consents/v1/consents/{consentId}:
+    get:
+      tags:
+      - Consents Opus Open Banking
+      description: Retrieve consent data
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revoke consent
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: paymentStatus
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+components:
+  schemas:
+    AccountPaymentTypeEnum:
+      enum:
+      - CACC
+      - SLRY
+      - SVGS
+      - TRAN
+      type: string
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        detail:
+          type: string
+        title:
+          type: string
+    Authorization:
+      type: object
+      properties:
+        isRequirer:
+          type: boolean
+          example: true
+        personDocumentNumber:
+          type: string
+        personName:
+          type: string
+        status:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+    ConsentAuthorizationStatusEnum:
+      enum:
+      - AUTHORISED
+      - AWAITING_AUTHORISATION
+      - CONSUMED
+      - EXPIRED
+      - REJECTED
+      - REVOKED
+      - TIMEOUT_AUTHORISATION
+      - TIMEOUT_PAYMENT
+      type: string
+    ConsentDetail:
+      type: object
+      properties:
+        authorizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorization'
+        brandId:
+          type: string
+          example: cbanco
+        businessDocumentNumber:
+          type: string
+          example: "33273542000197"
+        businessDocumentType:
+          type: string
+          example: CNPJ
+        consentHistoryStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentHistoryStatus'
+        createdOn:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+        expiredOn:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:41:28Z
+        externalId:
+          type: string
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+        modalityPayment:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
+        paymentData:
+          $ref: '#/components/schemas/PaymentData'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        personDocumentNumber:
+          type: string
+          example: "77721813700"
+        personDocumentType:
+          type: string
+          example: CPF
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        revocation:
+          $ref: '#/components/schemas/Revocation'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+          - example: AUTHORISED
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ConsentTypesEnum'
+          - example: PAYMENT
+    ConsentHistoryStatus:
+      type: object
+      properties:
+        authorizationStatus:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+        authorizerName:
+          type: string
+        consentStatus:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+        operatorUsername:
+          type: string
+        updatedOn:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+    ConsentSummary:
+      type: object
+      properties:
+        brandId:
+          type: string
+          example: BANCO
+        createdOn:
+          format: date-time
+          type: string
+        id:
+          $ref: '#/components/schemas/UUID'
+        modalityPayment:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
+        paymentType:
+          $ref: '#/components/schemas/PaymentTypeEnum'
+        status:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+        type:
+          $ref: '#/components/schemas/ConsentTypesEnum'
+    ConsentTypesEnum:
+      enum:
+      - DATA_SHARING
+      - PAYMENT
+      type: string
+    Creditor:
+      required:
+      - cpfCnpj
+      - name
+      - personType
+      type: object
+      properties:
+        cpfCnpj:
+          type: string
+          example: "99999999999999"
+          nullable: false
+        name:
+          maxLength: 140
+          minLength: 1
+          type: string
+          example: Marco Antonio de Brito
+          nullable: false
+        personType:
+          allOf:
+          - $ref: '#/components/schemas/PaymentPersonTypeEnum'
+          - nullable: false
+    CreditorAccount:
+      required:
+      - accountType
+      - ispb
+      - number
+      type: object
+      properties:
+        accountType:
+          allOf:
+          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
+          - nullable: false
+        ispb:
+          type: string
+          example: "12345678"
+          nullable: false
+        issuer:
+          type: string
+          example: "1774"
+        number:
+          type: string
+          example: "1234567890"
+          nullable: false
+    DebtorAccount:
+      required:
+      - accountType
+      - ispb
+      - issuer
+      - number
+      type: object
+      properties:
+        accountType:
+          allOf:
+          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
+          - nullable: false
+        ispb:
+          type: string
+          example: "12345678"
+          nullable: false
+        issuer:
+          type: string
+          example: "1774"
+        number:
+          type: string
+          example: "1234567890"
+          nullable: false
+    EnumPurposeTed:
+      enum:
+      - _1
+      - _10
+      - _100
+      - _101
+      - _103
+      - _104
+      - _107
+      - _108
+      - _109
+      - _11
+      - _110
+      - _111
+      - _112
+      - _113
+      - _114
+      - _117
+      - _12
+      - _121
+      - _123
+      - _124
+      - _13
+      - _131
+      - _132
+      - _136
+      - _139
+      - _14
+      - _149
+      - _15
+      - _150
+      - _157
+      - _175
+      - _18
+      - _19
+      - _2
+      - _200
+      - _201
+      - _202
+      - _203
+      - _204
+      - _205
+      - _206
+      - _207
+      - _208
+      - _209
+      - _23
+      - _27
+      - _28
+      - _29
+      - _3
+      - _30
+      - _300
+      - _301
+      - _302
+      - _303
+      - _31
+      - _33
+      - _34
+      - _35
+      - _36
+      - _37
+      - _38
+      - _39
+      - _4
+      - _40
+      - _41
+      - _42
+      - _43
+      - _44
+      - _45
+      - _47
+      - _5
+      - _50
+      - _500
+      - _501
+      - _502
+      - _504
+      - _505
+      - _507
+      - _508
+      - _509
+      - _510
+      - _511
+      - _512
+      - _513
+      - _514
+      - _515
+      - _516
+      - _517
+      - _518
+      - _519
+      - _520
+      - _6
+      - _7
+      - _8
+      - _9
+      - _97
+      - _99999
+      type: string
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiError'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    HttpHeaders: {}
+    Links:
+      type: object
+      properties:
+        first:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        last:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        next:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        prev:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        self:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+    LocalInstrumentEnum:
+      enum:
+      - DICT
+      - INIC
+      - MANU
+      - QRDN
+      - QRES
+      type: string
+    LoggedUser:
+      required:
+      - document
+      type: object
+      properties:
+        document:
+          allOf:
+          - $ref: '#/components/schemas/LoggedUserDocument'
+          - nullable: false
+    LoggedUserDocument:
+      required:
+      - identification
+      - rel
+      type: object
+      properties:
+        identification:
+          type: string
+          example: "99999999999"
+          nullable: false
+        rel:
+          type: string
+          example: CPF
+          nullable: false
+    Meta:
+      type: object
+      properties:
+        requestDateTime:
+          format: date-time
+          type: string
+        totalPages:
+          format: int32
+          type: integer
+          example: 1
+        totalRecords:
+          format: int32
+          type: integer
+          example: 2
+    ModalityPaymentEnum:
+      enum:
+      - IMMEDIATE
+      - SCHEDULED
+      type: string
+    PaymentConsent:
+      required:
+      - amount
+      - currency
+      - type
+      type: object
+      properties:
+        amount:
+          type: string
+          example: "100000.12"
+          nullable: false
+        creditorAccount:
+          $ref: '#/components/schemas/CreditorAccount'
+        currency:
+          type: string
+          example: BRL
+          nullable: false
+        date:
+          type: string
+          example: 2021-12-01
+        details:
+          $ref: '#/components/schemas/PaymentDetails'
+        ibgeTownCode:
+          type: string
+          example: "5300108"
+        purpose:
+          allOf:
+          - $ref: '#/components/schemas/EnumPurposeTed'
+          - example: "1"
+        purposeAdditionalInfo:
+          maxLength: 100
+          type: string
+        schedule:
+          $ref: '#/components/schemas/SchedulePayment'
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTypeEnum'
+          - nullable: false
+    PaymentData:
+      type: object
+      properties:
+        creditor:
+          $ref: '#/components/schemas/Creditor'
+        debtorAccount:
+          $ref: '#/components/schemas/DebtorAccount'
+        payment:
+          $ref: '#/components/schemas/PaymentConsent'
+    PaymentDetails:
+      required:
+      - creditorAccount
+      - localInstrument
+      type: object
+      properties:
+        creditorAccount:
+          allOf:
+          - $ref: '#/components/schemas/CreditorAccount'
+          - nullable: false
+        localInstrument:
+          allOf:
+          - $ref: '#/components/schemas/LocalInstrumentEnum'
+          - nullable: false
+        proxy:
+          maxLength: 77
+          type: string
+          example: "12345678901"
+        qrCode:
+          maxLength: 512
+          type: string
+          example: "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012\
+            \  \nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\
+            \  \n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\
+            \  \nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\n"
+    PaymentPersonTypeEnum:
+      enum:
+      - PESSOA_JURIDICA
+      - PESSOA_NATURAL
+      type: string
+    PaymentTypeEnum:
+      enum:
+      - PIX
+      - TED
+      - TEF
+      type: string
+    Permission:
+      type: object
+      properties:
+        description:
+          type: string
+          example: Description for what this permission allows
+        name:
+          type: string
+          example: Permission's name
+        title:
+          type: string
+          example: Intelligible name for the permission
+    RequestRevokeOobConsent:
+      required:
+      - data
+      type: object
+      properties:
+        applicationName:
+          description: Client application name
+          type: string
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokeConsentData'
+          - nullable: false
+    Resource:
+      type: object
+      properties:
+        resourceId:
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusResourceEnum'
+        type:
+          $ref: '#/components/schemas/ResourceTypeEnum'
+    ResourceTypeEnum:
+      enum:
+      - ACCOUNT
+      - CREDIT_CARD_ACCOUNT
+      - CUSTOMER
+      - FINANCING
+      - INVOICE_FINANCING
+      - LOAN
+      - PAYMENT
+      - UNARRANGED_ACCOUNT_OVERDRAFT
+      type: string
+    ResponseConsentDetailSchema:
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/ConsentDetail'
+          - description: Service execution response
+    ResponseConsentSummaryPaginationSchema:
+      type: object
+      properties:
+        data:
+          description: Service execution response
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentSummary'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - description: Meta records information
+    Revocation:
+      required:
+      - reason
+      - revokedBy
+      type: object
+      properties:
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/RevocationReason'
+          - nullable: false
+        revokedBy:
+          allOf:
+          - $ref: '#/components/schemas/RevokedByEnum'
+          - example: TPP
+            nullable: false
+    RevocationReason:
+      required:
+      - code
+      type: object
+      properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Risco de fraude identificado
+        code:
+          allOf:
+          - $ref: '#/components/schemas/RevocationReasonCodeEnum'
+          - example: FRAUD
+            nullable: false
+    RevocationReasonCodeEnum:
+      enum:
+      - ACCOUNT_CLOSURE
+      - FRAUD
+      - OTHER
+      type: string
+    RevokeConsentData:
+      required:
+      - revocation
+      - status
+      type: object
+      properties:
+        revocation:
+          allOf:
+          - $ref: '#/components/schemas/Revocation'
+          - nullable: false
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          - example: REVOKED
+            nullable: false
+    RevokedByEnum:
+      enum:
+      - ASPSP
+      - TPP
+      - USER
+      type: string
+    SchedulePayment:
+      required:
+      - single
+      type: object
+      properties:
+        single:
+          allOf:
+          - $ref: '#/components/schemas/SinglePayment'
+          - nullable: false
+    SinglePayment:
+      required:
+      - date
+      type: object
+      properties:
+        date:
+          type: string
+          example: 2022-01-13
+          nullable: false
+    StatusEnum:
+      enum:
+      - AUTHORISED
+      - AWAITING_AUTHORISATION
+      - CONSUMED
+      - REJECTED
+      - REVOKED
+      type: string
+    StatusResourceEnum:
+      enum:
+      - AVAILABLE
+      - NON_SELECTED
+      - UNAVAILABLE
+      type: string
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
+  securitySchemes:
+    jwt:
+      type: http
+      description: Token JWT
+      scheme: bearer
+      bearerFormat: jwt
