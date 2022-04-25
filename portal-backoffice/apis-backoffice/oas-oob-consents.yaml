@@ -266,6 +266,9 @@ components:
         createdOn:
           format: date-time
           type: string
+        paymentId:
+          type: string
+          example: A8879C08FB772593CEDAB00B2F52F05E447DE52150CCEE6D87F8360F2573F080
         id:
           $ref: '#/components/schemas/UUID'
         modalityPayment:
