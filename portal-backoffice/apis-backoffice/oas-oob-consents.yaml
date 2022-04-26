@@ -266,9 +266,6 @@ components:
         createdOn:
           format: date-time
           type: string
-        paymentId:
-          type: string
-          example: A8879C08FB772593CEDAB00B2F52F05E447DE52150CCEE6D87F8360F2573F080
         id:
           $ref: '#/components/schemas/UUID'
         modalityPayment:
@@ -644,6 +641,20 @@ components:
           $ref: '#/components/schemas/StatusResourceEnum'
         type:
           $ref: '#/components/schemas/ResourceTypeEnum'
+        legacyId:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceLegacy'
+    ResourceLegacy:
+      type: object
+      description: Key/Value pair for the resource id found on the legacy system
+      properties:
+        key:
+          type: string
+          example: paymentId
+        value:
+          type: string
+          example: b5abdcde-7186-453a-a676-7f3955cef167
     ResourceTypeEnum:
       enum:
       - ACCOUNT
