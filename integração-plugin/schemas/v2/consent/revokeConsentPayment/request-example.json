@@ -4,6 +4,7 @@
         "brandId": "cbanco"
     },
     "requestBody": {
+        "externalId": "urn:amazingbank:da0ee306-56bc-481b-8846-015912a3de17",
         "paymentId": [
             {
                 "key": "internalPaymentId",
