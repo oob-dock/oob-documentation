@@ -8,7 +8,17 @@ router.post('/', async function (req, res) {
   const jti = req.session.jti;
   console.log(`Started login process for commandId ${commandId} with jti ${jti}`);
 
-  const genJwt = generateSignedJwt(buildJwtPayload(req.body, jti));
+  let genJwt;
+  try {
+    genJwt = generateSignedJwt(buildJwtPayload(req.body, jti));
+  } catch (error) {
+    return res.render('error', {
+      title: 'Erro!',
+      error: { error: error.stack ?? error.message },
+      redirectTo: 'https://www.opus-software.com.br/',
+    });
+  }
+
   console.log(`Generated signed JWT: ${genJwt}`);
 
   const putAuthenticationResponse = await asOobApi.putAuthentication(commandId, buildAuthenticationPayload(genJwt));
@@ -77,6 +87,10 @@ function buildJwtPayload(reqBody, jti) {
 
   if (reqBody.authExtraData) {
     jwt.authExtraData = JSON.parse(reqBody.authExtraData);
+  }
+
+  if (reqBody.consentOwner) {
+    jwt.consentOwner = JSON.parse(reqBody.consentOwner);
   }
 
   return jwt;

@@ -48,6 +48,13 @@ Onde:
 
 ## Changelog
 
+### 2022-04-12 - v2.6.2
+
+- Consent
+  - Inclusão do campo consentOwner no schema comum do consentimento
+  - Inclusão do campo consentOwner no schema consentimento de pagamento
+  - Inclusão do campo consentOwner no request de exemplo do discovery de pagamento
+
 ### 2022-03-16 - v2.6.1
 
 - Geral

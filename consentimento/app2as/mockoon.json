@@ -39,7 +39,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"standard-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"standard-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Standard Happy Flow",
@@ -65,10 +65,36 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"consent-expired\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"GENERIC_ERROR\",\n    \"message\": \"Isso é uma mensagem de erro\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"generic-error\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"GENERIC_ERROR\",\n    \"message\": \"Isso é uma mensagem de erro\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
-                                "label": "Error - Consent Expired",
+                                "label": "Error - Generic Error",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "query",
+                                        "modifier": "id",
+                                        "value": "generic",
+                                        "isRegex": false
+                                    }
+                                ],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"expired-consent\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"EXPIRED_CONSENT\",\n    \"message\": \"Expired consent\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "Error - Expired Consent",
                                 "headers": [
                                     {
                                         "key": "Content-Type",
@@ -91,7 +117,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Error - Invalid CPF Flow",
@@ -147,7 +173,7 @@
                             },
                             {
                                 "uuid": "",
-                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"handoff-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+                                "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"handoff-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
                                 "latency": 0,
                                 "statusCode": 200,
                                 "label": "Success - Handoff Happy  Flow",

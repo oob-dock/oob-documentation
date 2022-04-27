@@ -28,15 +28,10 @@ interno no Kubernetes
 
 **Ex:** `http://prometheus-server`
 
-* channels/baseAddress: Endereço base da API de canais (fase 1). Pode ser utilizado
-um apontamento interno no Kubernetes
-
-**Ex:** `http://oob-channels-catalog`
-
-* productsServices/baseAddress: Endereço base da API de produtos e serviços
+* openData/baseAddress: Endereço base da API de produtos e serviços e canais de atendimento
 (fase 1). Pode ser utilizado um apontamento interno no Kubernetes
 
-**Ex:** `http://oob-products-services-catalog`
+**Ex:** `http://oob-open-data`
 
 * financialData/baseAddress: Endereço base da API de dados financeiros
 (fase 2). Pode ser utilizado um apontamento interno no Kubernetes
