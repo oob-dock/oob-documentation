@@ -54,6 +54,12 @@ seus tipos:
 
 [^1]: O produto **PAYMENT** é uma forma de permitir que a seleção da origem de recursos para um pagamento seja independente do produto ACCOUNT, permitindo pagamentos através de cartão de crédito ou outra origem distinta que a instituição eventualmente possua.
 
+Caso a instituição forneça algum produto do tipo de compartilhamento de dados
+será preciso criar a rota camel como referenciada na tabela, respeitando o  [formato de
+request e response indicado pelo tipo de produto](#conectores-de-discovery). Se não
+houver a disponibilização desses produtos o retorno padrão do discovery é nulo
+e a instituição não precisa colocar tais rotas.
+
 ### Consentimento e os produtos
 
 Vimos no tópico anterior os momentos possíveis de discovery e a relação entre os
@@ -170,7 +176,7 @@ schemas:
 *[DRAFT: O schema do consentimento dentro do request
 está em revisão]*
 
-Exemplo de response para um produto selecionável:
+Exemplo de response para um produto não selecionável:
 
 ```json
 {
