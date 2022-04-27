@@ -57,8 +57,8 @@ seus tipos:
 Caso a instituição forneça algum produto do tipo de compartilhamento de dados
 será preciso criar a rota camel como referenciada na tabela, respeitando o  [formato de
 request e response indicado pelo tipo de produto](#conectores-de-discovery). Se não
-houver a disponibilização desses produtos o retorno padrão do discovery é nulo
-e a instituição não precisa colocar tais rotas.
+houver a disponibilização desses produtos (criação da rota camel) o retorno padrão
+do discovery é nulo e a instituição não precisa colocar tais rotas.
 
 ### Consentimento e os produtos
 
