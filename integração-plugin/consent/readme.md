@@ -55,10 +55,10 @@ seus tipos:
 [^1]: O produto **PAYMENT** é uma forma de permitir que a seleção da origem de recursos para um pagamento seja independente do produto ACCOUNT, permitindo pagamentos através de cartão de crédito ou outra origem distinta que a instituição eventualmente possua.
 
 Caso a instituição forneça algum produto do tipo de compartilhamento de dados
-será preciso criar a rota camel como referenciada na tabela, respeitando o  [formato de
-request e response indicado pelo tipo de produto](#conectores-de-discovery). Se não
-houver a disponibilização desses produtos (criação da rota camel) o retorno padrão
-do discovery é nulo e a instituição não precisa colocar tais rotas.
+será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
+de request e response indicado pelo tipo de produto](#conectores-de-discovery).
+Se não houver a disponibilização desses produtos (criação da rota camel) o retorno
+padrão do discovery é nulo e a instituição não precisa colocar tais rotas.
 
 ### Consentimento e os produtos
 
@@ -417,10 +417,11 @@ Dessa forma, caso o pagamento tenha sido cancelado fora do sistema do
 Opus Open Banking, as informações apresentadas ao usuário estarão desatualizadas.
 No entanto, na próxima vez em que ocorrer a pesquisa do mesmo consentimento, a
 verificação de seu respectivo pagamento no sistema legado ocorrerá novamente, e
-caso o retorno obtido atenda os padrões definidos, seus dados serão atualizados 
+caso o retorno obtido atenda os padrões definidos, seus dados serão atualizados
 e apresentados de forma correta ao usuário.
 
-A tabela abaixo possui mais alguns exemplos de respostas que a rota checkPaymentStatus pode retornar:
+A tabela abaixo possui mais alguns exemplos de respostas que a rota checkPaymentStatus
+pode retornar:
 
 | Caso | Exemplo de Resposta                         |
 | --------------------- | ------------------------------------------ |
