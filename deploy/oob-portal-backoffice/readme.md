@@ -23,7 +23,7 @@ Ex: `https://oob.authorization-server.com.br/auth-nonfapi/.well-known/openid-con
 
 ### authIssuer
 
-*Issuer* do Authorization Server do OOOB. Essa informação pode ser
+*Issuer* do Authorization Server do OOB. Essa informação pode ser
 encontrada dentro no retorno do endpoint de *discovery* cujo endereço é definido
 na variável `authDiscoveryDocumentUrl` descrita mais acima.
 
