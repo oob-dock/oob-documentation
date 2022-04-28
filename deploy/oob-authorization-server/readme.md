@@ -566,7 +566,7 @@ additionalVars:
 
 Define o identificador do *client* que será utilizado pelo Authorization Server
 do OOB para iniciar o processo de autenticação junto ao Servidor de Autorização
-externo os os usuários finais do Portal Back Office estão cadastrados.
+externo os usuários finais do Portal Back Office estão cadastrados.
 
 **Ex:**
 

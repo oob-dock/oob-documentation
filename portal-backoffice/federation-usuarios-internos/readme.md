@@ -63,6 +63,7 @@ Template de configuração do cliente estático do Portal Back Office:
       clientSecretKey: "TBD"
       clientId: "TBD"
       redirectUris: "https://instituicao-portal-backoffice.com.br/home"
+      postLogoutRedirectUris: "https://instituicao-portal-backoffice.com.br/"
       responseTypes: "code"
       grantTypes: "authorization_code,refresh_token"
       tokenEndpointAuthMethod: "client_secret_post"
@@ -70,9 +71,13 @@ Template de configuração do cliente estático do Portal Back Office:
       oob_opendata:read,oob_opendata:write,oob_outages:read,oob_outages:write"
 ```
 
-***Nota:*** A variável `redirectUris` deve ser ajustada para a URL base do
+***Notas:*** 
+
+- A variável `redirectUris` deve ser ajustada para a URL base do
 Portal Back Office da instalação em questão, adicionando a rota `/home` no
 final.
+- A variável `postLogoutRedirectUris` deve ser ajusta para a URL base do Portal
+Back Office da instalação em questão.
 
 ### Configuração do *client* do IDP externo
 
@@ -103,6 +108,14 @@ para que a comunicação com o Authorization Server ocorra.
 - O *token endpoint auth method* deve ser `client_secret_post`.
 - O *grant type* suportado deve ser `authorization_code`.
 - O *response type* suportado deve ser `code`.
+- A lista de URLs válidas de redirect para o cliente do IDP deve conter os
+  seguintes endereços:
+  - `https://oob-authorization-server.com.br/auth-nonfapi/interaction/callback`.
+   Endereço do Authorization Server da instituição no caminho *nonfapi*, na
+   rota `/interaction/callback`
+  - `https://external-idp.com.br/*`. Endereço do próprio IDP externo,
+   permitindo todas as rotas (`/*`). Essa configuração é necessária para os
+   *redirects* que ocorrem durante o fluxo de *logout*.
   
 Por fim, os usuários finais cadastrados no IDP externo devem ter os scopes
 definidos de acordo com os acessos desejados.
