@@ -17,7 +17,7 @@ com as APIs necessárias durante o processo de navegação no sistema.
 ![Visão geral - Federation](imagens/visao-geral-federation.png)
 
 Sendo assim, para o correto funcionamento do federation é necessário realizar
-algumas configurações e manter a atenção em relação a alguns pontos, sendo 
+algumas configurações e manter a atenção em relação a alguns pontos, sendo
 eles:
 
 1. Configuração da comunicação entre o Portal Back Office do OOB e o

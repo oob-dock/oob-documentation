@@ -15,19 +15,17 @@ Ex: `https://kong.bank.com.br`
 
 ### authDiscoveryDocumentUrl
 
-Endereço do endpoint de *discovery* do Servidor de Autorização no qual o Portal
-Back Office irá realizar a autenticação dos usuários durante o processo de
-login. Esse endereço deve ser a URL de *discovery* do Authorization Server da
-instalação do OOB, e nesse caso, no caminho correspondente à configuração
-*non-fapi*.
+Endereço do endpoint de *discovery **non-fapi*** do Authorization Server do
+OOB, no qual o Portal Back Office irá realizar a autenticação dos usuários
+durante o processo de login.
 
 Ex: `https://oob.authorization-server.com.br/auth-nonfapi/.well-known/openid-configuration`
 
 ### authIssuer
 
-Endereço do emissor do Servidor de Autorização. Essa informação pode ser
+*Issuer* do Authorization Server do OOOB. Essa informação pode ser
 encontrada dentro no retorno do endpoint de *discovery* cujo endereço é definido
-na variável acima.
+na variável `authDiscoveryDocumentUrl` descrita mais acima.
 
 Ex: `https://oob.authorization-server.com.br`
 

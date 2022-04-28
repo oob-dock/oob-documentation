@@ -566,7 +566,7 @@ additionalVars:
 
 Define o identificador do *client* que será utilizado pelo Authorization Server
 do OOB para iniciar o processo de autenticação junto ao Servidor de Autorização
-externo os usuários finais do Portal Back Office estão cadastrados.
+externo onde os usuários finais do Portal Back Office estão cadastrados.
 
 **Ex:**
 
@@ -578,8 +578,8 @@ additionalVars:
 
 ### INTERNAL_USERS_FEDERATION_SECRET
 
-Define o *secret* do *client* definido na variável anterior. Idealmente, esse
-valor deve estar definido dentro de um *secret* do kubernets.
+Contém o *secret* do *client* definido na variável anterior. Sugerimos que seja
+definido como uma referência a um [*secret* do kubernetes](https://kubernetes.io/pt-br/docs/concepts/configuration/secret/).
 
 **Ex:**
 
