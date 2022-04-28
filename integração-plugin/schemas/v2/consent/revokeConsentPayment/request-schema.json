@@ -13,6 +13,11 @@
             "type": "object",
             "description": "Payload para revogação de pagamento Pix agendado.",
             "properties": {
+                "externalId": {
+                    "type": "string",
+                    "description": "Identificação do consentimento",
+                    "example": "urn:amazingbank:da0ee306-56bc-481b-8846-015912a3de17"
+                },
                 "paymentId": {
                     "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
                 },
