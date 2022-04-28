@@ -189,3 +189,12 @@ npx http-server -p 3030 --cors -c-1
 | Sucesso      | <http://lvh.me:3030/sample.html#L3YxL21vY2svc3VjY2Vzcw==> |
 | CPF_MISMATCH | <http://lvh.me:3030/sample.html#L3YxL21vY2svY3BmLWVycm9y> |
 | Timeout      | <http://lvh.me:3030/sample.html#L3YxL21vY2svdGltZW91dA==> |
+
+## Página de handoff customizável
+
+Se a instituição preferir não implementar a própria página de handoff, é possível
+utilizar a solução fornecida pelo OpusOpenBanking, uma página que configura
+as principais características estéticas e de conteúdo para se adaptar ao estilo
+da instituição.
+
+Essas são as [configurações](./custom-handoff-config/readme.md) possíveis.
