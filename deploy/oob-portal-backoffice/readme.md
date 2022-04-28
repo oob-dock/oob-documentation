@@ -37,7 +37,7 @@ Identificação do *client* que será utilizado no processo de autenticação ju
 ao Servidor de Autorização. A identificação definida nessa variável deve ser a
 mesma identificação definida na configuração do *client* no [Authorization Server](../../deploy/oob-authorization-server/readme.md#clients).
 
-Ex: `portal_backoffice`
+Ex: `portal-backoffice`
 
 ### authClientSecretName
 
@@ -52,7 +52,7 @@ Contém a **chave** presente no *secret* definido acima que possui de fato o val
 do *secret* definido para o `authClientId` configurado. Recomendamos a geração
 de um *secret* forte para ser definido aqui (um UUID por exemplo).
 
-Ex: `portal_backoffice_client_secret`
+Ex: `portal-backoffice-client-secret`
 
 ## Exposição
 

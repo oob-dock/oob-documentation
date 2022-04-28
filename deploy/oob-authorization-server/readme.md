@@ -543,7 +543,7 @@ usuários finais do Portal Back Office estão cadastrados.
 ```yaml
 additionalVars:
   - name: INTERNAL_USERS_FEDERATION_DISCOVERY_ENDPOINT"
-    value: "https://external-authorization-server.com.br/auth/.well-known/openid-configuration"
+    value: "https://external-idp.com.br/auth/.well-known/openid-configuration"
 ```
 
 ### INTERNAL_USERS_FEDERATION_ALLOWED_CLIENT_IDS
@@ -588,7 +588,7 @@ additionalVars:
   - name: INTERNAL_USERS_FEDERATION_SECRET"
     valueFrom:
       secretKeyRef:
-        name: oob_users
+        name: oob-users
         key: internal-users-federation-secret
 ```
 
