@@ -1,7 +1,9 @@
 # Configurações da página de handoff customizável
 
-> A configuração é feita através de um arquivo config.json atualmente
-> na raiz do build do projeto. **TBD** como será injetado na instalação.
+> A configuração é feita através de um arquivo *config.json* atualmente
+> na raiz do projeto. A variável de ambiente **OOB_CUSTOM_HANDOFF_URL**_CONFIG
+> deve ser configurada de modo que aponte para uma url válida que retorne
+> um json no mesmo formato.
 
 Configuração usada como default:
 [config.json](#exemplo-de-configuração)
