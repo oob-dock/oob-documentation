@@ -76,7 +76,7 @@ Template de configuração do cliente estático do Portal Back Office:
 - A variável `redirectUris` deve ser ajustada para a URL base do
 Portal Back Office da instalação em questão, adicionando a rota `/home` no
 final.
-- A variável `postLogoutRedirectUris` deve ser ajusta para a URL base do Portal
+- A variável `postLogoutRedirectUris` deve ser ajustada para a URL base do Portal
 Back Office da instalação em questão.
 
 ### Configuração do *client* do IDP externo
