@@ -549,10 +549,10 @@ additionalVars:
 ### INTERNAL_USERS_FEDERATION_ALLOWED_CLIENT_IDS
 
 Define qual a lista de identificadores de *clients* que serão permitidos para
-iniciar o processo de autenticação da aplicação de Portal Backoffice junto do
+iniciar o processo de autenticação da aplicação de Portal Backoffice junto ao
 Authorization Server do OOB. Caso o processo de autenticação de usuários de
-Back Office seja iniciado por um *client* cujo identificador não estiver nessa
-lista um erro será retornado pelo Authorization Server.
+Back Office seja iniciado por um *client* cujo identificador não esteja nessa
+lista, um erro será retornado pelo Authorization Server.
 
 **Ex:**
 

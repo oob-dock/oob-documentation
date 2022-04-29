@@ -5,14 +5,14 @@ mecanismo de federation para autenticação dos usuários internos da instituiç
 para acesso ao Portal Back Office do OOB.
 
 O mecanismo de federation foi implementado para que as instituições possam
-utilizar seus próprios *Identity Providers* (IDP), integrando-os ao Authorization
-Server do OOB. Dessa maneira, o Portal Back Office inicia o processo de
-autenticação junto ao Authorization Server, e esse por sua vez realiza a
-comunicação junto ao IDP externo para obtenção da autenticação do usuário
-interno desejado. De posse da identificação desse usuário, o Authorization
-Server gera um token de acesso válido que é devolvido para o Portal Back
-Office, e a partir desse momento, o portal utiliza esse token para se comunicar
-com as APIs necessárias durante o processo de navegação no sistema.
+integrar seus próprios *Identity Providers* (IDP) ao Authorization Server do
+OOB.
+
+Dessa maneira, o Portal Back Office inicia o processo de autenticação junto
+ao Authorization Server, e esse por sua vez se autentica junto ao IDP externo.
+De posse da identificação desse usuário, o Authorization Server gera e retorna
+para o Portal Back Office um token de acesso válido que é usado na comunicação
+com as APIs relevantes.
 
 ![Visão geral - Federation](imagens/visao-geral-federation.png)
 
@@ -34,7 +34,7 @@ Back Office para que a comunicação com o Authorization Server ocorra
 corretamente. Essas variáveis são: `authDiscoveryDocumentUrl`, `authIssuer`,
 `authClientId`, `authClientSecretName` e `authClientSecretKey`.
 
-Detalhes e exemplo de configuração para essas variáveis pode ser conferido na
+Detalhes e exemplo de configuração para essas variáveis podem ser conferidos na
 [página de configuração do deploy do Portal Back Office](../../deploy/oob-portal-backoffice/readme.md).
 
 ## Configuração do Authorization Server
@@ -90,7 +90,7 @@ definição são: `INTERNAL_USERS_FEDERATION_DISCOVERY_ENDPOINT`,
 `INTERNAL_USERS_FEDERATION_CLIENT_ID`, `INTERNAL_USERS_FEDERATION_SECRET` e
 `PORTAL_BACKOFFICE_URL`.
 
-Detalhes e exemplo de configuração para essas variáveis pode ser conferido na
+Detalhes e exemplo de configuração para essas variáveis podem ser conferidos na
 [página de configuração do deploy do Authorization Server](../../deploy/oob-authorization-server/readme.md#additionalvars).
 
 ## Configuração esperada para o IDP externo
@@ -116,7 +116,9 @@ para que a comunicação com o Authorization Server ocorra.
   - `https://external-idp.com.br/*`. Endereço do próprio IDP externo,
    permitindo todas as rotas (`/*`). Essa configuração é necessária para os
    *redirects* que ocorrem durante o fluxo de *logout*.
-  
+
+### Scopes
+
 Por fim, os usuários finais cadastrados no IDP externo devem ter os scopes
 definidos de acordo com os acessos desejados.
 
