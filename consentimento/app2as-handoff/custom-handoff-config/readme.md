@@ -1,9 +1,9 @@
 # Configurações da página de handoff customizável
 
-> A configuração é feita através de um arquivo *config.json* atualmente
-> na raiz do projeto. A variável de ambiente **OOB_CUSTOM_HANDOFF_URL**_CONFIG
-> deve ser configurada de modo que aponte para uma url válida que retorne
-> um json no mesmo formato.
+> A configuração é feita através de um arquivo json. A variável de
+> ambiente **OOB_CUSTOM_HANDOFF_URL_CONFIG** deve ser configurada
+> de modo que aponte para uma url válida que retorne
+> um json com o formato do exemplo a seguir.
 
 Configuração usada como default:
 [config.json](#exemplo-de-configuração)
@@ -30,29 +30,29 @@ Configuração usada como default:
 
 ## Textos
 
-| Chave     |             | Descrição                                           |
-| --------- | ----------- | --------------------------------------------------- |
-| ready     |             | Tela Inicial com o QR Code                          |
-|           | title       | Texto em destaque na página                         |
-|           | codeText    | Texto mostrando o código de validação               |
-|           | timer       | Mensagem que aparece antes do timer                 |
+| Chave     |             | Descrição                                                                            |
+| --------- | ----------- | ------------------------------------------------------------------------------------ |
+| ready     |             | Tela Inicial com o QR Code                                                           |
+|           | title       | Texto em destaque na página                                                          |
+|           | codeText    | Texto mostrando o código de validação                                                |
+|           | timer       | Mensagem que aparece antes do timer                                                  |
 |           | keepOpened  | Aviso de que a janela do navegador deverá ficar aberta até ser completado o processo |
-| <br />    | <br />      | <br />                                              |
-| read      |             | Tela após o QR Code ser lido                        |
-|           | title       | Texto em destaque na tela                           |
-|           | description | Texto informando com mais detalhes o atual status   |
-| <br />    | <br />      | <br />                                              |
+| <br />    | <br />      | <br />                                                                               |
+| read      |             | Tela após o QR Code ser lido                                                         |
+|           | title       | Texto em destaque na tela                                                            |
+|           | description | Texto informando com mais detalhes o atual status                                    |
+| <br />    | <br />      | <br />                                                                               |
 | completed |             | Tela após tudo verificado. Esta tela fará o direcionamento automático para o TPP.    |
-|           | title       | Texto em destaque na tela                           |
-|           | description | Texto informando com mais detalhes o atual status   |
-| <br />    | <br />      | <br />                                              |
-| timeout   |             | Tela para quando é esgotado o tempo de autenticação |
-|           | title       | Texto em destaque na tela                           |
-|           | description | Texto informando com mais detalhes o atual status   |
-| <br />    | <br />      | <br />                                              |
-| error     |             | Tela para o evento de erro disparado pela lib       |
-|           | title       | Texto em destaque na tela                           |
-|           | description | Texto informando com mais detalhes o atual status   |
+|           | title       | Texto em destaque na tela                                                            |
+|           | description | Texto informando com mais detalhes o atual status                                    |
+| <br />    | <br />      | <br />                                                                               |
+| timeout   |             | Tela para quando é esgotado o tempo de autenticação                                  |
+|           | title       | Texto em destaque na tela                                                            |
+|           | description | Texto informando com mais detalhes o atual status                                    |
+| <br />    | <br />      | <br />                                                                               |
+| error     |             | Tela para o evento de erro disparado pela lib                                        |
+|           | title       | Texto em destaque na tela                                                            |
+|           | description | Texto informando com mais detalhes o atual status                                    |
 
 ## Exemplo de configuração
 

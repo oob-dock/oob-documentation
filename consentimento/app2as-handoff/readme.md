@@ -193,7 +193,7 @@ npx http-server -p 3030 --cors -c-1
 ## Página de handoff customizável
 
 Se a instituição preferir não implementar a própria página de handoff, é possível
-utilizar a solução fornecida pelo OpusOpenBanking, uma página que configura
+utilizar a solução fornecida pelo Opus Open Banking, uma página que configura
 as principais características estéticas e de conteúdo para se adaptar ao estilo
 da instituição.
 
