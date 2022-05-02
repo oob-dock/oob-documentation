@@ -1,0 +1,137 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Conjunto de informações referentes às parcelas / prestações da operação de crédito contratada",
+      "required": [
+        "dueInstalments",
+        "pastDueInstalments",
+        "balloonPayments",
+        "typeContractRemaining",
+        "contractRemainingNumber",
+        "typeNumberOfInstalments",
+        "totalNumberOfInstalments",
+        "paidInstalments"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "typeNumberOfInstalments": {
+          "type": "string",
+          "description": "Tipo de prazo total do contrato referente à modalidade de crédito informada.",
+          "maxLength": 15,
+          "enum": [
+            "DIA",
+            "SEMANA",
+            "MES",
+            "ANO",
+            "SEM_PRAZO_TOTAL"
+          ]
+        },
+        "totalNumberOfInstalments": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "maxLength": 6,
+          "description": "Prazo Total segundo o tipo (dia, semana, mês, ano) referente à Modalidade de Crédito informada."
+        },
+        "typeContractRemaining": {
+          "type": "string",
+          "enum": [
+            "DIA",
+            "SEMANA",
+            "MES",
+            "ANO",
+            "SEM_PRAZO_REMANESCENTE"
+          ],
+          "maxLength": 22,
+          "description": "Tipo de prazo remanescente do contrato referente à modalidade de crédito informada.\n"
+        },
+        "contractRemainingNumber": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "maxLength": 6,
+          "description": "Prazo Remanescente segundo o tipo (dia, semana, mês, ano) referente à Modalidade de Crédito informada."
+        },
+        "paidInstalments": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "Quantidade de prestações pagas. (No caso de modalidades que não possuam parcelas, o número de prestações é igual a zero)",
+          "maxLength": 3
+        },
+        "dueInstalments": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "maxLength": 3,
+          "description": "Quantidade de prestações a vencer.(No caso de modalidades que não possuam parcelas, o número de prestações é igual a zero)"
+        },
+        "pastDueInstalments": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "maxLength": 3,
+          "description": "Quantidade de prestações vencidas. (No caso de modalidades que não possuam parcelas, o número de prestações é igual a zero)"
+        },
+        "balloonPayments": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "minItems": 0,
+          "description": "Lista que traz as datas de vencimento e valor das parcelas não regulares do contrato da modalidade de crédito consultada",
+          "items": {
+            "type": "object",
+            "description": "Conjunto de informações relativas às parcelas não regulares do contrato da modalidade de crédito consultada",
+            "required": [
+              "dueDate",
+              "currency",
+              "amount"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "dueDate": {
+                "description": "Data de vencimento da parcela não regular  a vencer do contrato da modalidade de crédito consultada, conforme especificação RFC-3339. p.ex. 2014-03-19",
+                "type": "string",
+                "maxLength": 10,
+                "format": "date-time",
+                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$"
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário informado, segundo modelo ISO-4217. p.ex. 'BRL'\nTodos os valores monetários informados estão representados com a moeda vigente do Brasil\n",
+                "pattern": "^(\\w{3}){1}$",
+                "maxLength": 3
+              },
+              "amount": {
+                "description": "Valor monetário da parcela não regular a vencer.  Expresso em valor monetário com 4 casas decimais.",
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "format": "double",
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 20,
+                "minLength": 0,
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}
