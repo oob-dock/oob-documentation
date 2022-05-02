@@ -1,0 +1,91 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Conjunto de informações de contratos de empréstimo mantidos pelo cliente na instituição transmissora e para os quais ele tenha fornecido consentimento",
+      "items": {
+        "type": "object",
+        "description": "Conjunto de informações de contratos de empréstimo mantidos pelo cliente na instituição transmissora e para os quais ele tenha fornecido consentimento",
+        "required": [
+          "contractId",
+          "brandName",
+          "companyCnpj",
+          "productType",
+          "productSubType",
+          "ipocCode"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "contractId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            }
+          },
+          "brandName": {
+            "type": "string",
+            "pattern": "[\\w\\W\\s]*",
+            "maxLength": 80,
+            "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes"
+          },
+          "companyCnpj": {
+            "type": "string",
+            "pattern": "\\d{14}|^NA$",
+            "maxLength": 14,
+            "description": "Número completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara."
+          },
+          "productType": {
+            "type": "string",
+            "description": "Tipo da modalidade de crédito contratada, conforme  circular 4.015 e descrição do DOC3040 do SCR).",
+            "maxLength": 11,
+            "enum": [
+              "EMPRESTIMOS"
+            ]
+          },
+          "productSubType": {
+            "type": "string",
+            "description": "Sub tipo da modalidades de crédito Empréstimos contratadas, conforme  circular 4.015 e descrição do DOC3040 do SCR).",
+            "maxLength": 47,
+            "enum": [
+              "HOME_EQUITY",
+              "CHEQUE_ESPECIAL",
+              "CONTA_GARANTIDA",
+              "CAPITAL_GIRO_TETO_ROTATIVO",
+              "CREDITO_PESSOAL_SEM_CONSIGNACAO",
+              "CREDITO_PESSOAL_COM_CONSIGNACAO",
+              "MICROCREDITO_PRODUTIVO_ORIENTADO",
+              "CAPITAL_GIRO_PRAZO_VENCIMENTO_ATE_365_DIAS",
+              "CAPITAL_GIRO_PRAZO_VENCIMENTO_SUPERIOR_365_DIAS"
+            ]
+          },
+          "ipocCode": {
+            "type": "string",
+            "maxLength": 67,
+            "description": "Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\n"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}
