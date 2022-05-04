@@ -12,8 +12,6 @@ Configuração usada como default:
 | --------- |  --------------------------------------------------------------- |
 | logo      | Logo mostrado na parte superior de todo o aplicativo             |
 | favicon   | Icone mostrado na aba do navegador                               |
-| libUrl    | Endereço da biblioteca de handoff que será utilizada             |
-| publicUrl | Endereço do oob authorization server para verificar status       |
 | title     | Título da página mostrado na aba do navegador                    |
 | colors    | Cores a serem utilizadas no aplicativo                           |
 | texts     | Textos a serem utilizados no aplicativo                          |
@@ -60,8 +58,6 @@ Configuração usada como default:
 {
   "logo": "https://ev.instituicao.com.br/logo.png",
   "favicon": "https://ev.instituicao.com.br/icone.png",
-  "libUrl": "https://as.instituicao.com.br/auth/handoff/v1/oob-handoff.js",
-  "publicUrl": "https://as.instituicao.com.br",
   "title": "Instituição Nome Exemplo",
   "colors": {
     "primary": "#BA1D36",
