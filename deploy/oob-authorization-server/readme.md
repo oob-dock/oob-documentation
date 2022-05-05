@@ -144,7 +144,7 @@ As chaves devem ser geradas no diretório de participantes:
 
 ### clients
 
-Configura os clientes estáticos (não registrados dinâmicamente) no authorization
+Configura os clientes estáticos (não registrados dinamicamente) no authorization
 server. Deve ser utilizado para cadastrar sistemas internos do banco que irão
 gerar tokens para acessar à plataforma OOB.
 
@@ -154,6 +154,8 @@ do cliente
 * clientId: ClientId de acesso do cliente
 * redirectUris: URLs do cliente autorizadas para redirect em fluxos de
 autenticação web
+* postLogoutRedirectUris: URLs do cliente autorizadas para redirect em cenários
+* de logout de fluxos de autenticação web
 * responseTypes: ResponseType para o cliente
 * grantTypes: Grant types permitidos para o cliente
 * tokenEndpointAuthMethod: Tipo de autorização para o cliente
@@ -529,6 +531,79 @@ a mais caracteres para evitar repetição.
 additionalVars:
   - name: HANDOFF_TYPECODE_FORMAT"
     value: "********"
+```
+
+### INTERNAL_USERS_FEDERATION_DISCOVERY_ENDPOINT
+
+Endereço do endpoint de *discovery* do Servidor de Autorização externo onde os
+usuários finais do Portal Back Office estão cadastrados.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: INTERNAL_USERS_FEDERATION_DISCOVERY_ENDPOINT"
+    value: "https://external-idp.com.br/auth/.well-known/openid-configuration"
+```
+
+### INTERNAL_USERS_FEDERATION_ALLOWED_CLIENT_IDS
+
+Define qual a lista de identificadores de *clients* que serão permitidos para
+iniciar o processo de autenticação da aplicação de Portal Backoffice junto ao
+Authorization Server do OOB. Caso o processo de autenticação de usuários de
+Back Office seja iniciado por um *client* cujo identificador não esteja nessa
+lista, um erro será retornado pelo Authorization Server.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: INTERNAL_USERS_FEDERATION_ALLOWED_CLIENT_IDS"
+    value: "portal-backoffice"
+```
+
+### INTERNAL_USERS_FEDERATION_CLIENT_ID
+
+Define o identificador do *client* que será utilizado pelo Authorization Server
+do OOB para iniciar o processo de autenticação junto ao Servidor de Autorização
+externo onde os usuários finais do Portal Back Office estão cadastrados.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: INTERNAL_USERS_FEDERATION_CLIENT_ID"
+    value: "internal-users-federation"
+```
+
+### INTERNAL_USERS_FEDERATION_SECRET
+
+Contém o *secret* do *client* definido na variável anterior. Sugerimos que seja
+definido como uma referência a um [*secret* do kubernetes](https://kubernetes.io/pt-br/docs/concepts/configuration/secret/).
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: INTERNAL_USERS_FEDERATION_SECRET"
+    valueFrom:
+      secretKeyRef:
+        name: oob-users
+        key: internal-users-federation-secret
+```
+
+### PORTAL_BACKOFFICE_URL
+
+Endereço do Portal de Back Office. É necessário definir essa variável para
+evitar problemas de CORS na comunicação entre o Portal de Back Office e o
+Authorization Server do OOB.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: PORTAL_BACKOFFICE_URL"
+    value: "https://instituicao-portal-backoffice.com.br"
 ```
 
 ## Exposição
