@@ -276,6 +276,13 @@ components:
           $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
         type:
           $ref: '#/components/schemas/ConsentTypesEnum'
+        amount:
+          amount:
+          type: string
+          example: "100000.12"
+        creditorName:
+          type: string
+          example: Marco Antonio de Brito
     ConsentTypesEnum:
       enum:
       - DATA_SHARING
