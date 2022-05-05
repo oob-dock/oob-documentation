@@ -242,6 +242,11 @@ components:
           allOf:
           - $ref: '#/components/schemas/ConsentTypesEnum'
           - example: PAYMENT
+        paymentIds:
+          type: array
+          description: List with all paymentIds linked to the consent
+          items:
+            $ref: '#/components/schemas/PaymentId'
     ConsentHistoryStatus:
       type: object
       properties:
@@ -632,6 +637,25 @@ components:
           allOf:
           - $ref: '#/components/schemas/RevokeConsentData'
           - nullable: false
+    PaymentId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        legacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentIdLegacy'
+    PaymentIdLegacy:
+      type: object
+      description: Key/Value pair for the payment id found on the legacy system
+      properties:
+        key:
+          type: string
+          example: internalPaymentId
+        value:
+          type: string
+          example: b5abdcde-7186-453a-a676-7f3955cef167
     Resource:
       type: object
       properties:
