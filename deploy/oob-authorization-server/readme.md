@@ -235,27 +235,28 @@ Para caso de adição de `mtls-` nas URLs de endpoint do AS utilizar os valores
 `find`: "^(https://)(.*)$" e `replace`: "https://mtls-$2". Note que as URLs
 devem ser HTTPS.
 
-#### tablesEncryption  
+#### application/encryption/key  
 
-`applicationSecretName`: Nome dado à chave de encriptação.
-
-`applicationSecretKey`: Valor da chave de encriptação que será utilizada para  
+`encryptionKey`: Valor da chave de encriptação que será utilizada para  
 criptografar dados sensíveis antes de persistir-los nas tabelas do banco de dados
 do Authorization Server. Recomenda-se que a chave possua 256 bits e que o formato
-do valor seja em hexadecimal.
+do valor seja em hexadecimal.  
 
-`applicationSecretSalt`: Valor do salt a ser utilizado para geração de chave de
+Ex: `703273357538782F413F4428472B4B6250655368566D59713374367739792442`
+
+#### application/encryption/salt
+
+`encryptionSalt`: Valor do salt a ser utilizado para geração de chave de
 criptografia em conjunto com a chave informada na variável anterior. Recomenda-se
 que possua 64 bits e que o formato do valor seja em hexadecimal.
 
-Exemplo:
+Ex: `635166546A576E5A`
 
-```yaml
-  tablesEncryption:
-    applicationSecretName: "oob-as-table-encryption-key"
-    applicationSecretKey: "703273357538782F413F4428472B4B6250655368566D59713374367739792442"
-    applicationSecretSalt: "635166546A576E5A"
-```
+>**Atenção**
+>
+> `Tanto a chave quanto a salt devem estar dentro da secret  
+> oob-authorization-server de forma semelhante a como é configurado o acesso à
+> base de dados`
 
 #### consent.channels
 
