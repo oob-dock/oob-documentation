@@ -109,6 +109,13 @@ os dados sensíveis dos consentimentos anteriores ficarão inacessíveis.`
 
 Ex: `6598C77E29BB822B`
 
+### consent/external/id
+
+Deve ser preenchido com o URN (Uniform Resource Name) referente a instituição financeira,
+sendo que o valor deve obrigatoriamente seguir o padrão **urn:\<identificador\>**
+
+Ex: `urn:amazingbank`
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
