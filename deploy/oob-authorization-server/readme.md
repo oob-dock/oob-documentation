@@ -238,7 +238,7 @@ devem ser HTTPS.
 #### application.encryption.key  
 
 Valor da chave de encriptação que será utilizada para  
-criptografar dados sensíveis antes de persistir-los nas tabelas do banco de dados
+criptografar dados sensíveis antes de persisti-los nas tabelas do banco de dados
 do Authorization Server. Recomenda-se que a chave possua 256 bits e que o formato
 do valor seja em hexadecimal.  
 
