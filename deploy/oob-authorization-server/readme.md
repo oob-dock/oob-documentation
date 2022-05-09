@@ -235,7 +235,7 @@ Para caso de adição de `mtls-` nas URLs de endpoint do AS utilizar os valores
 `find`: "^(https://)(.*)$" e `replace`: "https://mtls-$2". Note que as URLs
 devem ser HTTPS.
 
-#### application.encryption.key  
+#### application/encryption/key
 
 Valor da chave de encriptação que será utilizada para  
 criptografar dados sensíveis antes de persisti-los nas tabelas do banco de dados
@@ -244,7 +244,7 @@ do valor seja em hexadecimal.
 
 Ex: `703273357538782F413F4428472B4B6250655368566D59713374367739792442`
 
-#### application.encryption.salt
+#### application/encryption/salt
 
 Valor do salt a ser utilizado para geração de chave de
 criptografia em conjunto com a chave informada na variável anterior. Recomenda-se
