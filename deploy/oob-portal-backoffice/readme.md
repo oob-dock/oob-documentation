@@ -40,7 +40,7 @@ mesma identificação definida na configuração do *client* no [Authorization S
 
 Ex: `portal-backoffice`
 
-### webAppConfig
+### webAppConfigUrl
 
 Endereço público do endpoint usado para *customização* do Portal Backoffice.
 O retorno dessa API deve ser um objeto JSON com as propriedades definidas na
