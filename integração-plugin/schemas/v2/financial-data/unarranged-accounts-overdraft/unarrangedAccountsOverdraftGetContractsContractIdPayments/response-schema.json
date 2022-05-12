@@ -21,6 +21,7 @@
             "null"
           ],
           "maxLength": 3,
+          "example": 73,
           "description": "Quantidade total de parcelas pagas do contrato referente à Modalidade de Crédito informada."
         },
         "contractOutstandingBalance": {
@@ -29,6 +30,7 @@
           "minLength": 0,
           "maxLength": 20,
           "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+          "example": 100000.04,
           "description": "Valor necessario para o cliente liquidar a dívida.",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
@@ -57,11 +59,28 @@
                   "properties": {
                     "key": {
                       "description": "Nome do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "pk_brown",
+                        "pk_green",
+                        "pk_yellow"
+                      ]
                     },
                     "value": {
                       "description": "Valor do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "value1",
+                        "value2",
+                        "value3",
+                        "20220511"
+                      ]
                     }
                   },
                   "required": [
@@ -72,6 +91,7 @@
               },
               "isOverParcelPayment": {
                 "type": "boolean",
+                "example": true,
                 "description": "Identifica se é um pagamento pactuado (false) ou avulso (true)."
               },
               "instalmentId": {
@@ -82,11 +102,28 @@
                   "properties": {
                     "key": {
                       "description": "Nome do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "pk_brown",
+                        "pk_green",
+                        "pk_yellow"
+                      ]
                     },
                     "value": {
                       "description": "Valor do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "value1",
+                        "value2",
+                        "value3",
+                        "20220511"
+                      ]
                     }
                   },
                   "required": [
@@ -97,15 +134,16 @@
               },
               "paidDate": {
                 "type": "string",
-                "format": "date-time",
                 "maxLength": 10,
                 "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                "example": "2021-05-21",
                 "description": "Data efetiva do pagamento referente ao contrato da modalidade de crédito consultada, conforme especificação RFC-3339. p.ex. 2014-03-19"
               },
               "currency": {
                 "type": "string",
                 "maxLength": 3,
                 "pattern": "^(\\w{3}){1}$",
+                "example": "BRL",
                 "description": "Moeda referente ao valor monetário informado, segundo modelo ISO-4217. p.ex. 'BRL'.\nTodos os valores monetários informados estão representados com a moeda vigente do Brasil.\n"
               },
               "paidAmount": {
@@ -114,6 +152,7 @@
                 "maxLength": 20,
                 "minLength": 0,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "example": 100000.04,
                 "description": "Valor do pagamento referente ao  contrato da modalidade de crédito consultada.\nExpresso em valor monetário com até 4 casas decimais.\n",
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
@@ -143,13 +182,15 @@
                           "type": "string",
                           "description": "Denominação da Tarifa pactuada",
                           "maxLength": 140,
-                          "pattern": "[\\w\\W\\s]*"
+                          "pattern": "[\\w\\W\\s]*",
+                          "example": "Saque a descoberto"
                         },
                         "feeCode": {
                           "type": "string",
                           "description": "Sigla identificadora da tarifa avulsa fora da parcela",
                           "maxLength": 140,
-                          "pattern": "[\\w\\W\\s]*"
+                          "pattern": "[\\w\\W\\s]*",
+                          "example": "Saque descoberto"
                         },
                         "feeAmount": {
                           "type": [
@@ -160,6 +201,7 @@
                           "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
                           "maxLength": 20,
                           "minLength": 0,
+                          "example": 100000.04,
                           "description": "Valor monetário da tarifa pactuada no contrato.\n[Restrição] Preenchimento obrigatório quando a forma de cobrança for: Mínimo, Máximo ou Fixo\n",
                           "minimum": -1.7976931348623157e+308,
                           "maximum": 1.7976931348623157e+308
@@ -192,12 +234,14 @@
                             "IOF_POR_ATRASO",
                             "SEM_ENCARGO",
                             "OUTROS"
-                          ]
+                          ],
+                          "example": "JUROS_REMUNERATORIOS_POR_ATRASO"
                         },
                         "chargeAdditionalInfo": {
                           "type": "string",
                           "pattern": "[\\w\\W\\s]*",
                           "maxLength": 140,
+                          "example": "Informações adicionais",
                           "description": "Campo livre para preenchimento das informações adicionais referente ao encargo.\n[Restrição] Obrigatório quando chargeType for igual OUTROS.\n"
                         },
                         "chargeAmount": {
@@ -210,6 +254,7 @@
                           "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
                           "maxLength": 20,
                           "minLength": 0,
+                          "example": 100000.04,
                           "minimum": -1.7976931348623157e+308,
                           "maximum": 1.7976931348623157e+308
                         }
@@ -220,6 +265,41 @@
               }
             }
           }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }

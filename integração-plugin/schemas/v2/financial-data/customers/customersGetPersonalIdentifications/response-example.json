@@ -1,0 +1,760 @@
+{
+  "data": [
+    {
+      "updateDateTime": "2021-05-21T08:30:00Z",
+      "personalId": [
+        {
+          "key": "pk_brown",
+          "value": "value3"
+        },
+        {
+          "key": "pk_green",
+          "value": "value1"
+        },
+        {
+          "key": "pk_green"
+        },
+        {
+          "key": "pk_yellow"
+        }
+      ],
+      "brandName": "Organização A",
+      "civilName": "Juan Kaique Cláudio Fernandes",
+      "socialName": "Jaqueline de Freitas",
+      "birthDate": "2021-05-21",
+      "maritalStatusCode": "SOLTEIRO",
+      "sex": "FEMININO",
+      "companyCnpj": [
+        "01773247000103",
+        "01773247000563"
+      ],
+      "documents": {
+        "cpfNumber": "25872252137",
+        "passportNumber": "75253468744594820620",
+        "passportCountry": "CAN",
+        "passportExpirationDate": "2021-05-21",
+        "passportIssueDate": "2021-05-21"
+      },
+      "otherDocuments": [
+        {
+          "type": "OUTROS",
+          "typeAdditionalInfo": "NA",
+          "number": "15291908",
+          "checkDigit": "P",
+          "expirationDate": "2021-05-21",
+          "additionalInfo": "SSP/SP"
+        },
+        {
+          "type": "NIF",
+          "typeAdditionalInfo": "NA",
+          "number": "15291908",
+          "checkDigit": "P",
+          "expirationDate": "2021-05-21",
+          "additionalInfo": "SSP/SP"
+        }
+      ],
+      "hasBrazilianNationality": null,
+      "nationality": [
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            }
+          ]
+        },
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            }
+          ]
+        },
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21"
+            }
+          ]
+        },
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21"
+            }
+          ]
+        }
+      ],
+      "filiation": [
+        {
+          "type": "PAI",
+          "civilName": "Marcelo Cláudio Fernandes",
+          "socialName": "NA"
+        },
+        {
+          "type": "PAI",
+          "civilName": "Marcelo Cláudio Fernandes",
+          "socialName": "NA"
+        },
+        {
+          "type": "PAI",
+          "civilName": "Marcelo Cláudio Fernandes",
+          "socialName": "NA"
+        },
+        {
+          "type": "PAI",
+          "civilName": "Marcelo Cláudio Fernandes"
+        }
+      ],
+      "contacts": {
+        "postalAddresses": [
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "countryCode": "BRA",
+            "ibgeTownCode": "3550308",
+            "geographicCoordinates": {
+              "latitude": "-90.8365180"
+            }
+          },
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "additionalInfo": "Fundos",
+            "countryCode": "BRA",
+            "geographicCoordinates": {
+              "latitude": "-90.8365180",
+              "longitude": "-180.836519"
+            },
+            "ibgeTownCode": "3550308"
+          },
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "geographicCoordinates": {
+              "longitude": "-180.836519"
+            },
+            "additionalInfo": "Fundos",
+            "ibgeTownCode": "3550308",
+            "countryCode": "BRA"
+          },
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "geographicCoordinates": {
+              "latitude": "-90.8365180",
+              "longitude": "-180.836519"
+            },
+            "additionalInfo": "Fundos",
+            "ibgeTownCode": "3550308",
+            "countryCode": "BRA"
+          }
+        ],
+        "phones": [
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932"
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          }
+        ],
+        "emails": [
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          }
+        ]
+      },
+      "maritalStatusAdditionalInfo": "Casado"
+    },
+    {
+      "updateDateTime": "2021-05-21T08:30:00Z",
+      "personalId": [
+        {
+          "key": "pk_green",
+          "value": "6"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "20220511"
+        }
+      ],
+      "brandName": "Organização A",
+      "civilName": "Juan Kaique Cláudio Fernandes",
+      "socialName": "Jaqueline de Freitas",
+      "birthDate": "2021-05-21",
+      "maritalStatusCode": "SOLTEIRO",
+      "sex": "FEMININO",
+      "companyCnpj": [
+        "01773247000103",
+        "01773247000563"
+      ],
+      "documents": {
+        "cpfNumber": "25872252137",
+        "passportNumber": "75253468744594820620",
+        "passportCountry": "CAN",
+        "passportExpirationDate": "2021-05-21",
+        "passportIssueDate": "2021-05-21"
+      },
+      "otherDocuments": [
+        {
+          "type": "RG",
+          "typeAdditionalInfo": "NA",
+          "number": "15291908",
+          "checkDigit": "P",
+          "expirationDate": "2021-05-21",
+          "additionalInfo": "SSP/SP"
+        },
+        {
+          "type": "SEM_OUTROS_DOCUMENTOS",
+          "typeAdditionalInfo": "NA",
+          "number": "15291908",
+          "checkDigit": "P",
+          "expirationDate": "2021-05-21",
+          "additionalInfo": "SSP/SP"
+        },
+        {
+          "type": "RG",
+          "typeAdditionalInfo": "NA",
+          "number": "15291908",
+          "checkDigit": "P",
+          "expirationDate": "2021-05-21",
+          "additionalInfo": "SSP/SP"
+        }
+      ],
+      "hasBrazilianNationality": null,
+      "nationality": [
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21"
+            }
+          ]
+        },
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais."
+            }
+          ]
+        },
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            }
+          ]
+        },
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21"
+            }
+          ]
+        },
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            }
+          ]
+        }
+      ],
+      "filiation": [
+        {
+          "type": "PAI",
+          "civilName": "Marcelo Cláudio Fernandes",
+          "socialName": "NA"
+        },
+        {
+          "type": "PAI",
+          "civilName": "Marcelo Cláudio Fernandes"
+        }
+      ],
+      "contacts": {
+        "postalAddresses": [
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "additionalInfo": "Fundos",
+            "countryCode": "BRA",
+            "geographicCoordinates": {
+              "latitude": "-90.8365180"
+            },
+            "ibgeTownCode": "3550308"
+          }
+        ],
+        "phones": [
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          }
+        ],
+        "emails": [
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          }
+        ]
+      },
+      "maritalStatusAdditionalInfo": "Casado"
+    },
+    {
+      "updateDateTime": "2021-05-21T08:30:00Z",
+      "personalId": [
+        {
+          "key": "pk_yellow",
+          "value": "6"
+        }
+      ],
+      "brandName": "Organização A",
+      "civilName": "Juan Kaique Cláudio Fernandes",
+      "socialName": "Jaqueline de Freitas",
+      "birthDate": "2021-05-21",
+      "maritalStatusCode": "SOLTEIRO",
+      "sex": "FEMININO",
+      "companyCnpj": [
+        "01773247000103",
+        "01773247000563"
+      ],
+      "documents": {
+        "cpfNumber": "25872252137",
+        "passportNumber": "75253468744594820620",
+        "passportCountry": "CAN",
+        "passportExpirationDate": "2021-05-21"
+      },
+      "otherDocuments": [
+        {
+          "type": "CNH",
+          "typeAdditionalInfo": "NA",
+          "number": "15291908",
+          "checkDigit": "P",
+          "expirationDate": "2021-05-21",
+          "additionalInfo": "SSP/SP"
+        }
+      ],
+      "hasBrazilianNationality": null,
+      "nationality": [
+        {
+          "otherNationalitiesInfo": "CAN",
+          "documents": [
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "country": "Brasil",
+              "typeAdditionalInfo": "Informações adicionais."
+            },
+            {
+              "type": "SOCIAL SEC",
+              "number": "423929299",
+              "expirationDate": "2021-05-21",
+              "issueDate": "2021-05-21",
+              "typeAdditionalInfo": "Informações adicionais.",
+              "country": "Brasil"
+            }
+          ]
+        }
+      ],
+      "filiation": [
+        {
+          "type": "PAI",
+          "civilName": "Marcelo Cláudio Fernandes",
+          "socialName": "NA"
+        }
+      ],
+      "contacts": {
+        "postalAddresses": [
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "additionalInfo": "Fundos",
+            "countryCode": "BRA"
+          },
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "ibgeTownCode": "3550308"
+          },
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "ibgeTownCode": "3550308",
+            "additionalInfo": "Fundos",
+            "countryCode": "BRA",
+            "geographicCoordinates": {
+              "latitude": "-90.8365180"
+            }
+          },
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "geographicCoordinates": {
+              "latitude": "-90.8365180",
+              "longitude": "-180.836519"
+            },
+            "countryCode": "BRA",
+            "additionalInfo": "Fundos",
+            "ibgeTownCode": "3550308"
+          },
+          {
+            "isMain": true,
+            "address": "Av Naburo Ykesaki, 1270",
+            "districtName": "Centro",
+            "townName": "Marília",
+            "countrySubDivision": "SP",
+            "postCode": "17500001",
+            "country": "Brasil",
+            "additionalInfo": "Fundos"
+          }
+        ],
+        "phones": [
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais."
+          }
+        ],
+        "emails": [
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          },
+          {
+            "isMain": true,
+            "email": "karinafernandes-81@br.inter.net"
+          }
+        ]
+      },
+      "maritalStatusAdditionalInfo": "Casado"
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1,
+    "requestDateTime": "2021-05-21T03:00:00.0Z"
+  }
+}

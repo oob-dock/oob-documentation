@@ -34,17 +34,20 @@
         "contractNumber": {
           "type": "string",
           "maxLength": 100,
+          "example": "1324926521496",
           "description": "Número do contrato dado pela instituição contratante."
         },
         "ipocCode": {
           "type": "string",
           "maxLength": 67,
-          "description": "\"Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\"\n"
+          "description": "\"Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\"\n",
+          "example": "92792126019929279212650822221989319252576"
         },
         "productName": {
           "type": "string",
           "maxLength": 140,
           "pattern": "[\\w\\W\\s]*",
+          "example": "Crédito Pessoal Consignado",
           "description": "Denominação/Identificação do nome da Modalidade da Operação de Crédito divulgado ao cliente\n"
         },
         "productType": {
@@ -55,7 +58,8 @@
             "FINANCIAMENTOS",
             "FINANCIAMENTOS_RURAIS",
             "FINANCIAMENTOS_IMOBILIARIOS"
-          ]
+          ],
+          "example": "FINANCIAMENTOS"
         },
         "productSubType": {
           "type": "string",
@@ -71,27 +75,28 @@
             "COMERCIALIZACAO",
             "FINANCIAMENTO_HABITACIONAL_SFH",
             "FINANCIAMENTO_HABITACIONAL_EXCETO_SFH"
-          ]
+          ],
+          "example": "AQUISICAO_BENS_VEICULOS_AUTOMOTORES"
         },
         "contractDate": {
           "type": "string",
-          "format": "date-time",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-01-05",
           "description": "Data de contratação da operação de crédito. Especificação RFC-3339"
         },
         "disbursementDate": {
           "type": "string",
-          "format": "date-time",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-01-15",
           "description": "Data do Desembolso do valor contratado. Especificação RFC-3339"
         },
         "settlementDate": {
           "type": "string",
-          "format": "date-time",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+          "example": "2018-01-15",
           "description": "Data de liquidação da operação.\n[Restrição] Deve aceitar NA caso não seja retornado pela instituição.\n"
         },
         "contractAmount": {
@@ -104,6 +109,7 @@
           "minLength": 0,
           "maxLength": 20,
           "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+          "example": 100000.04,
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
         },
@@ -111,13 +117,14 @@
           "type": "string",
           "pattern": "^(\\w{3}){1}$",
           "maxLength": 3,
-          "description": "Moeda referente ao valor da garantia, segundo modelo ISO-4217. p.ex. 'BRL'\nTodos os valores monetários informados estão representados com a moeda vigente do Brasil\n"
+          "description": "Moeda referente ao valor da garantia, segundo modelo ISO-4217. p.ex. 'BRL'\nTodos os valores monetários informados estão representados com a moeda vigente do Brasil\n",
+          "example": "BRL"
         },
         "dueDate": {
           "type": "string",
-          "format": "date-time",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2028-01-15",
           "description": "Data de vencimento Final da operação. Especificação RFC-3339"
         },
         "instalmentPeriodicity": {
@@ -134,19 +141,21 @@
             "SEMESTRAL",
             "ANUAL",
             "OUTROS"
-          ]
+          ],
+          "example": "SEMANAL"
         },
         "instalmentPeriodicityAdditionalInfo": {
           "type": "string",
           "pattern": "[\\w\\W\\s]*",
           "maxLength": 50,
+          "example": "Informações adicionais sobre periodicidade",
           "description": "Campo obrigatório para complementar a informação relativa à periodicidade de pagamento regular quando tiver a opção OUTROS.\n[Restrição] Obrigatório para complementar a informação relativa da periodicidade de pagamento regular, quando selecionada o tipo ou subtipo OUTRO.\n"
         },
         "firstInstalmentDueDate": {
           "type": "string",
-          "format": "date-time",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-02-15",
           "description": "Data de vencimento primeira parcela do principal"
         },
         "CET": {
@@ -155,6 +164,7 @@
             "null"
           ],
           "maxLength": 19,
+          "example": 0.29,
           "description": "CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e   incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas).\nO preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros\n(representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)\n"
         },
         "amortizationScheduled": {
@@ -167,12 +177,14 @@
             "SAM",
             "SEM_SISTEMA_AMORTIZACAO",
             "OUTROS"
-          ]
+          ],
+          "example": "SAC"
         },
         "amortizationScheduledAdditionalInfo": {
           "type": "string",
           "pattern": "[\\w\\W\\s]*",
           "maxLength": 50,
+          "example": "NA",
           "description": "Campo obrigatório para complementar a informação relativa à amortização quando selecionada a opção OUTROS.\n[Restrição] Obrigatório para complementar a informação relativa à amortização quando selecionada a opção OUTROS, para os demais casos informar \"NA\".\n"
         },
         "interestRates": {
@@ -199,7 +211,8 @@
                 "enum": [
                   "NOMINAL",
                   "EFETIVA"
-                ]
+                ],
+                "example": "EFETIVA"
               },
               "interestRateType": {
                 "type": "string",
@@ -208,7 +221,8 @@
                 "enum": [
                   "SIMPLES",
                   "COMPOSTO"
-                ]
+                ],
+                "example": "SIMPLES"
               },
               "taxPeriodicity": {
                 "type": "string",
@@ -217,7 +231,8 @@
                 "enum": [
                   "AM",
                   "AA"
-                ]
+                ],
+                "example": "AA"
               },
               "calculation": {
                 "type": "string",
@@ -227,7 +242,8 @@
                   "21/252",
                   "30/360",
                   "30/365"
-                ]
+                ],
+                "example": "21/252"
               },
               "referentialRateIndexerType": {
                 "type": "string",
@@ -241,7 +257,8 @@
                   "INDICES_PRECOS",
                   "CREDITO_RURAL",
                   "OUTROS_INDEXADORES"
-                ]
+                ],
+                "example": "PRE_FIXADO"
               },
               "referentialRateIndexerSubType": {
                 "type": "string",
@@ -267,12 +284,14 @@
                   "TRFC_PRE",
                   "TRFC_POS",
                   "OUTROS_INDEXADORES"
-                ]
+                ],
+                "example": "TJLP"
               },
               "referentialRateIndexerAdditionalInfo": {
                 "type": "string",
                 "maxLength": 140,
                 "pattern": "[\\w\\W\\s]*",
+                "example": "Informações adicionais",
                 "description": "Campo livre para complementar a informação relativa ao Tipo de taxa referencial ou indexador.\n[Restrição] Obrigatório para complementar a informação relativa ao Tipo de taxa referencial ou indexador, quando selecionada o tipo ou subtipo OUTRO.\n"
               },
               "preFixedRate": {
@@ -281,6 +300,7 @@
                   "null"
                 ],
                 "maxLength": 19,
+                "example": 0.6,
                 "description": "Taxa pré fixada aplicada sob o contrato da modalidade crédito.\np.ex. 0.0045. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros\n(representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)\n"
               },
               "postFixedRate": {
@@ -289,12 +309,14 @@
                   "null"
                 ],
                 "maxLength": 19,
+                "example": 0.55,
                 "description": "Taxa pós fixada aplicada sob o contrato da modalidade crédito.\np.ex. 0.0045 .O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros\n(representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)\n"
               },
               "additionalInfo": {
                 "type": "string",
                 "maxLength": 1200,
                 "pattern": "[\\w\\W\\s]*",
+                "example": "Informações adicionais",
                 "description": "Texto com informações adicionais sobre a composição das taxas de juros pactuadas.\n[Restrição] Caso a instituição não possua a informação para compartilhamento, informar \"NA\".\n"
               }
             }
@@ -320,13 +342,15 @@
                 "type": "string",
                 "maxLength": 140,
                 "pattern": "[\\w\\W\\s]*",
-                "description": "Denominação da Tarifa pactuada"
+                "description": "Denominação da Tarifa pactuada",
+                "example": "Excesso em Conta"
               },
               "feeCode": {
                 "type": "string",
                 "maxLength": 140,
                 "pattern": "[\\w\\W\\s]*",
-                "description": "Sigla identificadora da tarifa pactuada"
+                "description": "Sigla identificadora da tarifa pactuada",
+                "example": "EXCESSO_CONTA"
               },
               "feeChargeType": {
                 "type": "string",
@@ -335,7 +359,8 @@
                 "enum": [
                   "UNICA",
                   "POR_PARCELA"
-                ]
+                ],
+                "example": "UNICA"
               },
               "feeCharge": {
                 "type": "string",
@@ -346,7 +371,8 @@
                   "MAXIMO",
                   "FIXO",
                   "PERCENTUAL"
-                ]
+                ],
+                "example": "MINIMO"
               },
               "feeAmount": {
                 "description": "\"Valor monetário da tarifa pactuada no contrato. Preenchimento obrigatório quando a forma de cobrança for: Mínimo, Máximo ou Fixo\"\n",
@@ -358,6 +384,7 @@
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
                 "maxLength": 20,
                 "minLength": 0,
+                "example": 100000.04,
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
               },
@@ -369,6 +396,7 @@
                 "format": "double",
                 "description": "É o valor da tarifa em percentual pactuada no contrato. \n[Restrição] Preenchimento obrigatório quando a forma de cobrança for Percentual. Exemplo: 0.0150 = 1,5%.\n",
                 "maxLength": 19,
+                "example": 0.2,
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
               }
@@ -400,20 +428,58 @@
                   "IOF_POR_ATRASO",
                   "SEM_ENCARGO",
                   "OUTROS"
-                ]
+                ],
+                "example": "JUROS_REMUNERATORIOS_POR_ATRASO"
               },
               "chargeAdditionalInfo": {
                 "type": "string",
                 "description": "Campo de preenchimento obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.\n[Restrição] Obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.\n",
-                "pattern": "[\\w\\W\\s]*"
+                "pattern": "[\\w\\W\\s]*",
+                "example": "Informações adicionais sobre encargos."
               },
               "chargeRate": {
                 "type": "number",
                 "description": "Representa o valor do encargo em percentual pactuado no contrato. Exemplo: 0.0210 (=2.1%).\n",
-                "maxLength": 19
+                "maxLength": 19,
+                "example": 0.07
               }
             }
           }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
