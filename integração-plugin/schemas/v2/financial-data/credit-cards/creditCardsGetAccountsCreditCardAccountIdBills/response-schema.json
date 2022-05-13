@@ -31,11 +31,28 @@
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "pk_brown",
+                    "pk_green",
+                    "pk_yellow"
+                  ]
                 },
                 "value": {
                   "description": "Valor do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "value1",
+                    "value2",
+                    "value3",
+                    "20220511"
+                  ]
                 }
               },
               "required": [
@@ -47,9 +64,9 @@
           "dueDate": {
             "description": "Data de vencimento da Fatura, que aparece para pagamento pelo cliente",
             "type": "string",
-            "format": "date-time",
             "maxLength": 10,
-            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$"
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2021-05-21"
           },
           "billTotalAmount": {
             "type": "number",
@@ -58,6 +75,7 @@
             "maxLength": 20,
             "minLength": 0,
             "description": "Valor total da fatura",
+            "example": 100000.04,
             "minimum": -1.7976931348623157e+308,
             "maximum": 1.7976931348623157e+308
           },
@@ -65,7 +83,8 @@
             "type": "string",
             "maxLength": 3,
             "pattern": "^(\\w{3}){1}$",
-            "description": "Moeda referente ao valor de pagamento total da fatura, segundo modelo ISO-4217. p.ex. 'BRL' Todos os valores informados estão representados com a moeda vigente do Brasil"
+            "description": "Moeda referente ao valor de pagamento total da fatura, segundo modelo ISO-4217. p.ex. 'BRL' Todos os valores informados estão representados com a moeda vigente do Brasil",
+            "example": "BRL"
           },
           "billMinimumAmount": {
             "type": "number",
@@ -74,6 +93,7 @@
             "maxLength": 19,
             "minLength": 0,
             "description": "Valor do pagamento minimo da fatura",
+            "example": 1000.04,
             "minimum": -1.7976931348623157e+308,
             "maximum": 1.7976931348623157e+308
           },
@@ -81,11 +101,13 @@
             "type": "string",
             "maxLength": 3,
             "pattern": "^(\\w{3}){1}$",
-            "description": "Moeda referente ao valor de pagamento minimo da fatura, segundo modelo ISO-4217. p.ex. 'BRL' Todos os valores informados estão representados com a moeda vigente do Brasil"
+            "description": "Moeda referente ao valor de pagamento minimo da fatura, segundo modelo ISO-4217. p.ex. 'BRL' Todos os valores informados estão representados com a moeda vigente do Brasil",
+            "example": "BRL"
           },
           "isInstalment": {
             "type": "boolean",
-            "description": "Indica se a fatura permite parcelamento (true) ou não (false)."
+            "description": "Indica se a fatura permite parcelamento (true) ou não (false).",
+            "example": false
           },
           "financeCharges": {
             "type": "array",
@@ -117,6 +139,7 @@
                   "type": "string",
                   "maxLength": 140,
                   "pattern": "[\\w\\W\\s]*",
+                  "example": "Informações Adicionais",
                   "description": "Campo livre, de preenchimento obrigatório se selecionado tipo de encargo 'OUTROS'"
                 },
                 "amount": {
@@ -128,6 +151,7 @@
                   "minLength": 0,
                   "maxLength": 20,
                   "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                  "example": 100000.04,
                   "description": "Valor cobrado pelo encargo. Expresso em valor monetário com 4 casas decimais",
                   "minimum": -1.7976931348623157e+308,
                   "maximum": 1.7976931348623157e+308
@@ -136,6 +160,7 @@
                   "type": "string",
                   "maxLength": 3,
                   "pattern": "^(\\w{3}){1}$",
+                  "example": "BRL",
                   "description": "Moeda referente ao valor cobrado pelo encargo, segundo modelo ISO-4217. p.ex. 'BRL' \nTodos os saldos informados estão representados com a moeda vigente do Brasil.\n"
                 }
               }
@@ -169,9 +194,9 @@
                 "paymentDate": {
                   "description": "Data efetiva de quando o Pagamento da fatura foi realizado",
                   "type": "string",
-                  "format": "date-time",
                   "maxLength": 10,
-                  "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$"
+                  "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                  "example": "2021-05-21"
                 },
                 "paymentMode": {
                   "type": "string",
@@ -190,6 +215,7 @@
                   "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
                   "maxLength": 20,
                   "minLength": 0,
+                  "example": 100000.04,
                   "description": "Valor pagamento segundo o valueType.  Expresso em valor monetário com 4 casas decimais",
                   "minimum": -1.7976931348623157e+308,
                   "maximum": 1.7976931348623157e+308
@@ -198,11 +224,47 @@
                   "type": "string",
                   "pattern": "^(\\w{3}){1}$",
                   "maxLength": 3,
-                  "description": "Moeda referente ao valor de pagamento da fatura, segundo modelo ISO-4217. p.ex. 'BRL' Todos os valores informados estão representados com a moeda vigente do Brasil\n"
+                  "description": "Moeda referente ao valor de pagamento da fatura, segundo modelo ISO-4217. p.ex. 'BRL' Todos os valores informados estão representados com a moeda vigente do Brasil\n",
+                  "example": "BRL"
                 }
               }
             }
           }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }

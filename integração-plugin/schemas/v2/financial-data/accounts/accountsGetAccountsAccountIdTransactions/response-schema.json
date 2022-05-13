@@ -36,11 +36,28 @@
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "pk_brown",
+                    "pk_green",
+                    "pk_yellow"
+                  ]
                 },
                 "value": {
                   "description": "Valor do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "value1",
+                    "value2",
+                    "value3",
+                    "20220511"
+                  ]
                 }
               },
               "required": [
@@ -56,7 +73,8 @@
             "enum": [
               "TRANSACAO_EFETIVADA",
               "LANCAMENTO_FUTURO"
-            ]
+            ],
+            "example": "TRANSACAO_EFETIVADA"
           },
           "creditDebitType": {
             "type": "string",
@@ -65,13 +83,15 @@
             "enum": [
               "CREDITO",
               "DEBITO"
-            ]
+            ],
+            "example": "DEBITO"
           },
           "transactionName": {
             "type": "string",
             "maxLength": 60,
             "pattern": "[\\w\\W\\s]*",
-            "description": "Campo livre que corresponde ao identificador da transação na instituição financeira"
+            "description": "Campo livre que corresponde ao identificador da transação na instituição financeira",
+            "example": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8"
           },
           "type": {
             "type": "string",
@@ -96,7 +116,8 @@
               "RESGATE_APLIC_FINANCEIRA",
               "OPERACAO_CREDITO",
               "OUTROS"
-            ]
+            ],
+            "example": "PIX"
           },
           "amount": {
             "type": "number",
@@ -105,6 +126,7 @@
             "description": "Valor da transação. Expressa em valor monetário com 4 casas decimais.",
             "maxLength": 20,
             "minLength": 0,
+            "example": 500.54,
             "minimum": -1.7976931348623157e+308,
             "maximum": 1.7976931348623157e+308
           },
@@ -112,19 +134,22 @@
             "type": "string",
             "pattern": "^(\\w{3}){1}$",
             "maxLength": 3,
-            "description": "Moeda referente ao valor da transação, segundo modelo ISO-4217. p.ex. 'BRL'."
+            "description": "Moeda referente ao valor da transação, segundo modelo ISO-4217. p.ex. 'BRL'.",
+            "example": "BRL"
           },
           "transactionDate": {
             "type": "string",
             "maxLength": 10,
             "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
-            "description": "Se indicador de transação:\nTRANSACAO_EFETIVADA - corresponde a data de lançamento da transação\nLANCAMENTO_FUTURO - corresponde a data prevista de efetivação da transação\n"
+            "description": "Se indicador de transação:\nTRANSACAO_EFETIVADA - corresponde a data de lançamento da transação\nLANCAMENTO_FUTURO - corresponde a data prevista de efetivação da transação\n",
+            "example": "2021-01-07"
           },
           "partieCnpjCpf": {
             "type": "string",
             "maxLength": 14,
             "pattern": "^\\d{11}$|^\\d{14}$|^NA$",
-            "description": "Identificação da pessoa envolvida na transação: pagador ou recebedor (Preencher com o CPF ou CNPJ, sem formatação)\n"
+            "description": "Identificação da pessoa envolvida na transação: pagador ou recebedor (Preencher com o CPF ou CNPJ, sem formatação)\n",
+            "example": "43908445778"
           },
           "partiePersonType": {
             "type": "string",
@@ -133,32 +158,72 @@
               "PESSOA_NATURAL",
               "PESSOA_JURIDICA"
             ],
+            "example": "PESSOA_NATURAL",
             "description": "Identificação do Tipo de Pessoa da pessoa envolvida na transação.\nPessoa Natural - Informar CPF no campo “payerCnpjCpf”\nPessoa Jurídica - Informar CNPJ no campo “payerCnpjCpf”\n"
           },
           "partieCompeCode": {
             "type": "string",
             "maxLength": 3,
             "pattern": "\\d{3}|^NA$",
-            "description": "Código identificador atribuído pelo Banco Central do Brasil às instituições participantes do STR (Sistema de Transferência de reservas) referente à pessoa envolvida na transação. O número-código substituiu o antigo código COMPE. Todos os participantes do STR, exceto as Infraestruturas do Mercado Financeiro (IMF) e a Secretaria do Tesouro Nacional, possuem um número-código independentemente de participarem da Centralizadora da Compensação de Cheques (Compe). O campo tem a anotação “n/a” (“não se aplica”) para os participantes do STR aos quais não é atribuído um número-código"
+            "description": "Código identificador atribuído pelo Banco Central do Brasil às instituições participantes do STR (Sistema de Transferência de reservas) referente à pessoa envolvida na transação. O número-código substituiu o antigo código COMPE. Todos os participantes do STR, exceto as Infraestruturas do Mercado Financeiro (IMF) e a Secretaria do Tesouro Nacional, possuem um número-código independentemente de participarem da Centralizadora da Compensação de Cheques (Compe). O campo tem a anotação “n/a” (“não se aplica”) para os participantes do STR aos quais não é atribuído um número-código",
+            "example": "001"
           },
           "partieBranchCode": {
             "type": "string",
             "maxLength": 4,
             "pattern": "\\d{4}|^NA$",
-            "description": "Código da Agência detentora da conta da pessoa envolvida na transação. (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória)"
+            "description": "Código da Agência detentora da conta da pessoa envolvida na transação. (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, no exercício de atividades da instituição, não podendo ser móvel ou transitória)",
+            "example": "6272"
           },
           "partieNumber": {
             "type": "string",
             "maxLength": 20,
             "pattern": "^\\d{8,20}$|^NA$",
-            "description": "Número da conta da pessoa envolvida na transação"
+            "description": "Número da conta da pessoa envolvida na transação",
+            "example": "67890854360"
           },
           "partieCheckDigit": {
             "type": "string",
             "maxLength": 1,
             "pattern": "[\\w\\W\\s]*",
-            "description": "Dígito da conta da pessoa envolvida na transação"
+            "description": "Dígito da conta da pessoa envolvida na transação",
+            "example": "4"
           }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
