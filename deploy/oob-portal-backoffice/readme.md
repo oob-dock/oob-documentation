@@ -45,8 +45,13 @@ Ex: `portal-backoffice`
 Endereço público do endpoint usado para *customização* do Portal Backoffice.
 O retorno dessa API deve ser um objeto JSON com as propriedades definidas na
 documentação do [Portal Backoffice](../../portal-backoffice/customizacao/readme.md).
+<br>
+Importante que esse endpoint esteja configurado para ser acessado pelo
+portal, e assim evitando problema de CORS. Essa coniguração pode ser feita com
+o header `Access-Control-Allow-Origin`, podendo ser liberado para todos os
+acessos usando `*` ou passando a url de domínio do portal.
 
-Ex: `https://kong.bank.com.br/config`
+Ex: `https://kong.bank.com.br/backoffice-config`
 
 ### authClientSecretName
 
