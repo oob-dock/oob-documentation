@@ -40,11 +40,28 @@
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "pk_brown",
+                    "pk_green",
+                    "pk_yellow"
+                  ]
                 },
                 "value": {
                   "description": "Valor do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "value1",
+                    "value2",
+                    "value3",
+                    "20220511"
+                  ]
                 }
               },
               "required": [
@@ -57,6 +74,7 @@
             "type": "string",
             "maxLength": 100,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-]{0,99}$",
+            "example": "4453",
             "description": "Número de identificação do cartão: corresponde aos 4 últimos dígitos do cartão para PF, ou então, preencher com um identificador para PJ, com as caracteristicas definidas para os IDs no Open Banking.\n"
           },
           "lineName": {
@@ -69,12 +87,14 @@
               "SAQUE_CREDITO_EXTERIOR",
               "EMPRESTIMO_CARTAO_CONSIGNADO",
               "OUTROS"
-            ]
+            ],
+            "example": "CREDITO_A_VISTA"
           },
           "transactionName": {
             "type": "string",
             "maxLength": 100,
             "pattern": "[\\w\\W\\s]*",
+            "example": "PGTO",
             "description": "Campo de livre preenchimento. Literal usada na instituição financeira para identificar a transação"
           },
           "billId": {
@@ -85,11 +105,28 @@
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "pk_brown",
+                    "pk_green",
+                    "pk_yellow"
+                  ]
                 },
                 "value": {
                   "description": "Valor do campo do identificador no sistema de origem",
-                  "type": "string"
+                  "type": "string",
+                  "examples": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "value1",
+                    "value2",
+                    "value3",
+                    "20220511"
+                  ]
                 }
               },
               "required": [
@@ -105,7 +142,8 @@
             "enum": [
               "CREDITO",
               "DEBITO"
-            ]
+            ],
+            "example": "DEBITO"
           },
           "transactionType": {
             "type": "string",
@@ -118,7 +156,8 @@
               "ESTORNO",
               "CASHBACK",
               "OUTROS"
-            ]
+            ],
+            "example": "CASHBACK"
           },
           "transactionalAdditionalInfo": {
             "type": "string",
@@ -132,7 +171,8 @@
             "enum": [
               "A_VISTA",
               "A_PRAZO"
-            ]
+            ],
+            "example": "A_VISTA"
           },
           "feeType": {
             "type": "string",
@@ -147,7 +187,8 @@
               "TARIFA_PAGAMENTO_CONTAS",
               "SMS",
               "OUTRA"
-            ]
+            ],
+            "example": "ANUIDADE"
           },
           "feeTypeAdditionalInfo": {
             "type": "string",
@@ -163,7 +204,8 @@
               "PARCELAMENTO_FATURA",
               "EMPRESTIMO",
               "OUTROS"
-            ]
+            ],
+            "example": "CREDITO_ROTATIVO"
           },
           "otherCreditsAdditionalInfo": {
             "type": "string",
@@ -174,6 +216,7 @@
             "type": "string",
             "maxLength": 50,
             "pattern": "[\\w\\W\\s]*",
+            "example": "PARCELA_1",
             "description": "Identificador da parcela que está sendo informada. Campo de livre preenchimento"
           },
           "chargeNumber": {
@@ -183,6 +226,7 @@
             ],
             "format": "integer",
             "maxLength": 2,
+            "example": 3,
             "description": "Quantidade de parcelas"
           },
           "brazilianAmount": {
@@ -193,6 +237,7 @@
             "format": "double",
             "maxLength": 20,
             "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+            "example": 100000.04,
             "description": "Valor da transação expresso em valor monetário com 4 casas decimais, em moeda corrente do Brasil",
             "minimum": -1.7976931348623157e+308,
             "maximum": 1.7976931348623157e+308
@@ -205,6 +250,7 @@
             "format": "double",
             "maxLength": 20,
             "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+            "example": 100000.04,
             "description": "Valor da transação efetuada no exterior e convertida em moeda nacional com 4 casas decimais. Expresso em valor monetário com 4 casas decimais",
             "minimum": -1.7976931348623157e+308,
             "maximum": 1.7976931348623157e+308
@@ -213,20 +259,21 @@
             "type": "string",
             "maxLength": 3,
             "pattern": "^(\\w{3}){1}$|^NA$",
+            "example": "BRL",
             "description": "Moeda referente ao valor da transação, se a operação foi efetuada em moeda  estrangeira, segundo modelo ISO-4217.\nTodos os valores informados estão representados com a moeda vigente do Brasil\n"
           },
           "transactionDate": {
             "type": "string",
-            "format": "date-time",
             "maxLength": 20,
             "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+            "example": "2021-05-21",
             "description": "Data original da transação"
           },
           "billPostDate": {
             "type": "string",
-            "format": "date-time",
             "maxLength": 20,
             "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+            "example": "2021-05-21",
             "description": "Data em que a transação foi inserida na fatura"
           },
           "payeeMCC": {
@@ -236,8 +283,44 @@
             ],
             "format": "integer",
             "maxLength": 4,
+            "example": 5137,
             "description": "O MCC ou o código da categoria do estabelecimento comercial. Os MCCs são agrupados segundo suas similaridades. O MCC é usado para classificar o negócio pelo tipo fornecido de bens ou serviços. Os MCCs são atribuídos por tipo de comerciante (por exemplo, um para hotéis, um para lojas de materiais de escritório, etc.) ou por nome de comerciante (por exemplo, 3000 para a United Airlines).\n"
           }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
