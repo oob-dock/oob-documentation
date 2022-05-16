@@ -5,7 +5,7 @@
 A instalação do módulo é feita via Helm Chart
 
 > **Atenção**: O módulo OOB Handoff Web é oferecido como um complemento à solução
-> padrão do Opus Open Banking, devendo ser contratato separadamente.
+> padrão do Opus Open Banking, devendo ser adquirido separadamente.
 
 ## Configuração
 
