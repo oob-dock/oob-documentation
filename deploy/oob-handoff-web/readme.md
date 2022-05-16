@@ -4,6 +4,9 @@
 
 A instalação do módulo é feita via Helm Chart
 
+> **Atenção**: O módulo OOB Handoff Web não faz parte do pacote padrão do Opus
+> Open Banking, sendo comercializado separadamente.
+
 ## Configuração
 
 ### oobCustomHandoffUrlConfig
