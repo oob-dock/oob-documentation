@@ -111,8 +111,14 @@ Ex: `6598C77E29BB822B`
 
 ### consent/external/id
 
-Deve ser preenchido com o URN (Uniform Resource Name) referente a instituição financeira,
-sendo que o valor deve obrigatoriamente seguir o padrão **urn:\<identificador\>**
+Utilizado para definir o id referente ao consentId. O consentId é o identificador
+único do consentimento e deverá ser um URN - Uniform Resource Name.
+
+Considerando a string urn:amazingbank como exemplo para consentId temos:
+
+* o namespace(urn), conforme definido na [RFC8141](https://datatracker.ietf.org/doc/html/rfc8141)
+
+* o identificador associado ao namespace da instituição transnmissora (amazingbank)
 
 Ex: `urn:amazingbank`
 
@@ -210,27 +216,6 @@ Valor default: `false`
 additionalVars:
   - name: APPLICATION_TEDTEF_ENABLED
     value: "false"
-```
-
-### CONSENT_EXTERNAL_ID
-
-Utilizado para definir o id referente ao consentId. O consentId é o identificador
-único do consentimento e deverá ser um URN - Uniform Resource Name.
-
-Considerando a string urn:bancoex como exemplo para consentId temos:
-
-* o namespace(urn), conforme definido na [RFC8141](https://datatracker.ietf.org/doc/html/rfc8141)
-
-* o identificador associado ao namespace da instituição transnmissora (bancoex)
-
-Valor default: `urn:amazingbank`
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: CONSENT_EXTERNAL_ID
-    value: "urn:bancoex"
 ```
 
 Existem additionalVars para utilização do conector de aprovação de consentimento
