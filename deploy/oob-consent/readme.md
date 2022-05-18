@@ -118,7 +118,7 @@ Considerando a string urn:amazingbank como exemplo para consentId temos:
 
 * o namespace(urn), conforme definido na [RFC8141](https://datatracker.ietf.org/doc/html/rfc8141)
 
-* o identificador associado ao namespace da instituição transnmissora (amazingbank)
+* o identificador associado ao namespace da instituição transmissora (amazingbank)
 
 Ex: `urn:amazingbank`
 
