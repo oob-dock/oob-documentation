@@ -14,6 +14,11 @@ A instalação do módulo é feita via Helm Chart
 - Configuração da url da api que fornece o json que definirá
 o estilo da página (cores, ícones, etc...).
 
+Importante que esse endpoint esteja configurado para ser acessado pela
+página de handoff, assim evitando problema de CORS. Essa configuração pode ser
+feita pelo header `Access-Control-Allow-Origin`, configurando a url de domínio
+da página de handoff.
+
 ### oobCustomHandoffASPublicUrl
 
 - Configuração da url do endereço público do OOB Authorization Server
