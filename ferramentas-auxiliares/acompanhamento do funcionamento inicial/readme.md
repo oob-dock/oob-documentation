@@ -30,7 +30,8 @@ rodar os scripts e formatar as informações da forma e no período exigido pelo
 
 ## Scripts - Detentor de conta
 
-Os scripts SQL fornecidos nessa secção devem ser operados no banco de dados do OOB-Consents.
+Os scripts SQL fornecidos nessa secção devem ser operados no
+**banco de dados do OOB-Consents**.
 Antes de utilizá-los, deve-se alterar os campos '<data_inicial>' e '<data_final>'
 pelos valores desejados.
 
@@ -44,8 +45,8 @@ Exemplo de uso:
 
 ```sql
 and not (
-    history_status.updated_on > '2021-10-29 23:59:59'
-    or history_status.updated_on < '2022-04-27 00:00:00'
+    history_status.updated_on > '2022-04-29 23:59:59'
+    or history_status.updated_on < '2021-10-29 00:00:00'
 )
 ```
 
@@ -58,8 +59,8 @@ inner join consent on consent.id = history_status.id_consent
 where status_consent = 2
 and consent.tp_payment = 1
 and not (
-    history_status.updated_on > '<data_inicial> 23:59:59'
-    or history_status.updated_on < '<data_final> 00:00:00'
+    history_status.updated_on > '<data_final> 23:59:59'
+    or history_status.updated_on < '<data_inicial> 00:00:00'
 )
 ```
 
@@ -72,8 +73,8 @@ inner join consent on consent.id = history_status.id_consent
 where status_consent = 1
 and consent.tp_payment = 1
 and not (
-    history_status.updated_on > '<data_inicial> 23:59:59'
-    or history_status.updated_on < '<data_final> 00:00:00'
+    history_status.updated_on > '<data_final> 23:59:59'
+    or history_status.updated_on < '<data_inicial> 00:00:00'
 )
 ```
 
@@ -85,8 +86,8 @@ from consent_translation_id
 inner join consent on consent.id = consent_translation_id.id_consent
 inner join history_status on history_status.id_consent = consent.id
 where not (
-    history_status.updated_on > '<data_inicial> 23:59:59'
-    or history_status.updated_on < '<data_final> 00:00:00'
+    history_status.updated_on > '<data_final> 23:59:59'
+    or history_status.updated_on < '<data_inicial> 00:00:00'
 )
 and consent.tp_payment = 1
 and consent.status = 6
@@ -97,12 +98,12 @@ and consent_translation_id.tp_openbanking_id = 8
 ### Número de clientes atendidos desde 29/10/21 até as datas indicadas
 
 ```sql
-select count (consent.sha_person_document_number)
+select count (distinct consent.sha_person_document_number)
 from consent
 inner join history_status on history_status.id_consent = consent.id
 where not (
-    history_status.updated_on > '<data_inicial> 23:59:59'
-    or history_status.updated_on < '<data_final> 00:00:00'
+    history_status.updated_on > '<data_final> 23:59:59'
+    or history_status.updated_on < '<data_inicial> 00:00:00'
 )
 and consent.tp_payment = 1
 ```
@@ -115,8 +116,8 @@ from consent
 inner join history_status on history_status.id_consent = consent.id
 inner join consent_translation_id on consent_translation_id.id_consent = consent.id
 where not (
-    history_status.updated_on > '<data_inicial> 23:59:59'
-    or history_status.updated_on < '<data_final> 00:00:00'
+    history_status.updated_on > '<data_final> 23:59:59'
+    or history_status.updated_on < '<data_inicial> 00:00:00'
 )
 and consent.tp_payment = 1
 and history_status.status_consent = 6
