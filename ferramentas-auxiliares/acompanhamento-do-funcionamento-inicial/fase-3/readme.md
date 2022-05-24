@@ -2,11 +2,11 @@
 
 - [Introdução](#introdução)
 - [Scripts - Detentor de contas](#scripts---detentor-de-conta)
-    - [Redirecionamentos de solicitações de pagamento recebidos do Iniciador](#redirecionamentos-de-solicitações-de-pagamento-recebidos-do-iniciador)
-    - [Solicitações de Pagamentos confirmadas pelo cliente](#solicitações-de-pagamentos-confirmadas-pelo-cliente)
-    - [Redirecionamentos ao Iniciador com a confirmação do pagamento](#redirecionamentos-ao-iniciador-com-a-confirmação-do-pagamento)
-    - [Número de clientes atendidos desde 29/10/21 até as datas indicadas](#número-de-clientes-atendidos-desde-291021-até-as-datas-indicadas)
-    - [Valor acumulado desde 29/10/21 até as datas indicadas](#valor-acumulado-desde-291021-até-as-datas-indicadas)
+  - [Redirecionamentos de solicitações de pagamento recebidos do Iniciador](#redirecionamentos-de-solicitações-de-pagamento-recebidos-do-iniciador)
+  - [Solicitações de Pagamentos confirmadas pelo cliente](#solicitações-de-pagamentos-confirmadas-pelo-cliente)
+  - [Redirecionamentos ao Iniciador com a confirmação do pagamento](#redirecionamentos-ao-iniciador-com-a-confirmação-do-pagamento)
+  - [Número de clientes atendidos desde 29/10/21 até as datas indicadas](#número-de-clientes-atendidos-desde-291021-até-as-datas-indicadas)
+  - [Valor acumulado desde 29/10/21 até as datas indicadas](#valor-acumulado-desde-291021-até-as-datas-indicadas)
 
 ## Introdução
 
@@ -49,6 +49,25 @@ and not (
     or history_status.updated_on < '2021-10-29 00:00:00'
 )
 ```
+
+Vale a pena ressaltar que o script atual obtém os resultados
+de acordo com o fuso horário GMT-0. Caso deseje utilizar um
+fuso diferente, é necessário ajustar as datas de acordo com
+o horário desejado.
+
+Fórmula para obtenção da 'data-inicial' e 'data-final' para um GMT+x :
+    'data-desejada' - x (horas)
+
+Exemplo de cálculo para se obter 'data-inicial' e 'data-final' do dia 22/05/2022
+no fuso Brasil - Brasília (GMT-3):
+
+- 'data-inicial-desejada' = 22-05-2022 00:00:00
+- 'data-final-desejada' = 22-05-2022 23:59:59
+- x = -3 [horas]
+- 'data-inicial' = 'data-inicial-desejada' - x [horas] = 22-05-2022 00:00:00 -
+(- 3) [horas] = 22-05-2022 00:00:00 + 3 [horas] = 22-05-2022 03:00:00
+- 'data-final' = 'data-final-desejada' - x [horas] = 22-05-2022 23:59:59 -
+(- 3) [horas] = 22-05-2022 23:59:59 + 3 [horas] = 23-05-2022 02:59:59
 
 ### Redirecionamentos de solicitações de pagamento recebidos do Iniciador
 
