@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2022-04-27 - v2.7.0
+
+- Consent
+  - Inclusão do campo externalId no schema de revogação de consentimento
+
 ### 2022-04-12 - v2.6.2
 
 - Consent
