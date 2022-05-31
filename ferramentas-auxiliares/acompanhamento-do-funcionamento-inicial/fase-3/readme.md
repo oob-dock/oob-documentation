@@ -317,3 +317,10 @@ Legenda das colunas apresentadas na tabela
 | con_count        | Redirecionamentos ao Iniciador com a confirmação do pagamento                         |
 | num_client_count | Número de clientes atendidos desde a '<data-inicial>' definida até as datas indicadas |
 | accum_value      | Valor acumulado desde a '<data-inicial>' até as datas indicadas                       |
+
+**OBS**: As datas apresentadas na tabela resultante correspondem apenas aos dias
+em que teve algum registro de atividade - criação de consentimento, solicitação
+de pagamento ou confirmação da criação do pagamento. Para as datas sem registro,
+preencher para as colunas red_count, pag_count e con_count com o valor 0. Já para
+as colunas num_client_count e accum_value, utilizar o valor anterior mais próximo
+do dia sem registro.
