@@ -6,7 +6,7 @@
   - [Solicitações de Pagamentos confirmadas pelo cliente](#solicitações-de-pagamentos-confirmadas-pelo-cliente)
   - [Redirecionamentos ao Iniciador com a confirmação do pagamento](#redirecionamentos-ao-iniciador-com-a-confirmação-do-pagamento)
   - [Número de clientes atendidos desde 29/10/21 até as datas indicadas](#número-de-clientes-atendidos-desde-291021-até-as-datas-indicadas)
-  - [Valor acumulado desde 29/10/21 até AS datas indicadas](#valor-acumulado-desde-291021-até-as-datas-indicadas)
+  - [Valor acumulado desde 29/10/21 até as datas indicadas](#valor-acumulado-desde-291021-até-as-datas-indicadas)
 
 ## Introdução
 
