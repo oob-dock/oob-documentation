@@ -3,10 +3,10 @@
 - [Introdução](#introdução)
 - [Scripts - Detentor de contas](#scripts---detentor-de-conta)
   - [Redirecionamentos de solicitações de pagamento recebidos do Iniciador](#redirecionamentos-de-solicitações-de-pagamento-recebidos-do-iniciador)
-  - [Solicitações de Pagamentos confirmadAS pelo cliente](#solicitações-de-pagamentos-confirmadas-pelo-cliente)
+  - [Solicitações de Pagamentos confirmadas pelo cliente](#solicitações-de-pagamentos-confirmadas-pelo-cliente)
   - [Redirecionamentos ao Iniciador com a confirmação do pagamento](#redirecionamentos-ao-iniciador-com-a-confirmação-do-pagamento)
-  - [Número de clientes atendidos desde 29/10/21 até AS datAS indicadas](#número-de-clientes-atendidos-desde-291021-até-as-datas-indicadas)
-  - [Valor acumulado desde 29/10/21 até AS datAS indicadas](#valor-acumulado-desde-291021-até-as-datas-indicadas)
+  - [Número de clientes atendidos desde 29/10/21 até as datas indicadas](#número-de-clientes-atendidos-desde-291021-até-as-datas-indicadas)
+  - [Valor acumulado desde 29/10/21 até AS datas indicadas](#valor-acumulado-desde-291021-até-as-datas-indicadas)
 
 ## Introdução
 
@@ -14,11 +14,11 @@ A Opus está fornecendo alguns scripts SQL que ajudarão os clientes na hora da 
 de dados para o acompanhamento do funcionamento inicial da fase 3 exigido pelo
 Open Banking Brasil **OBB**.
 
-AS informações que poderão ser obtidAS com eles são os casos de **sucesso** para:
+As informações que poderão ser obtidas com eles são os casos de **sucesso** para:
 
 - a quantidade de redirecionamentos de solicitações de pagamento
 recebidos do Iniciador desde uma data inicial até a data desejada
-- a quantidade de solicitações de Pagamentos confirmadAS pelo cliente desde uma
+- a quantidade de solicitações de Pagamentos confirmadas pelo cliente desde uma
 data inicial até a data desejada
 - o total de redirecionamentos ao Iniciador com a confirmação do pagamento desde
 uma data inicial até a data desejada
@@ -26,7 +26,7 @@ uma data inicial até a data desejada
 - o valor acumulado desde uma data inicial até a data desejada
 
 **OBS:** fica a cargo de nossos clientes
-rodar os scripts e formatar AS informações da forma e no período exigido pelo OBB.
+rodar os scripts e formatar as informações da forma e no período exigido pelo OBB.
 
 ## Scripts - Detentor de conta
 
@@ -50,7 +50,7 @@ Exemplo de uso:
 
 Vale a pena ressaltar que o script atual obtém os resultados
 de acordo com o fuso horário GMT-0. Caso deseje utilizar um
-fuso diferente, é necessário ajustar AS datAS de acordo com
+fuso diferente, é necessário ajustar as datas de acordo com
 o horário desejado.
 
 Fórmula para obtenção da 'data-inicial' e 'data-final' para um GMT+x :
