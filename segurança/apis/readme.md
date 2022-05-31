@@ -1,4 +1,4 @@
-# Contoles de segurança por API
+# Controles de segurança por API
 
 - [Contoles de segurança por API](#contoles-de-segurança-por-api)
   - [Channels catalog](#channels-catalog)
