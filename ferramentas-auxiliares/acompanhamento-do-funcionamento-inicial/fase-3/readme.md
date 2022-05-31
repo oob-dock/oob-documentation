@@ -116,7 +116,7 @@ GROUP BY date
 ORDER BY date;
 ```
 
-### Número de clientes atendidos desde 29/10/21 até AS datAS indicadas
+### Número de clientes atendidos desde 29/10/21 até as datas indicadas
 
 ```sql
 @set initial_date = '<data_inicial> 00:00:00'
@@ -148,7 +148,7 @@ FROM base_table table_a
 ORDER BY table_a.date
 ```
 
-### Valor acumulado desde 29/10/21 até AS datAS indicadas
+### Valor acumulado desde 29/10/21 até as datas indicadas
 
 ```sql
 @set initial_date = '<data_inicial> 00:00:00'
