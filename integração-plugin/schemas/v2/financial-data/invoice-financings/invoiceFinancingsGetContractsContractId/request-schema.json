@@ -14,7 +14,7 @@
       "$ref": "../../../common/common-schema.json#/$defs/LegacyId"
     },
     "consent": {
-      "$ref": "../../../common/common-schema.json#/$defs/TBD"
+      "$ref": "../../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
     }
   },
   "additionalProperties": false
