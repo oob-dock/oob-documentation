@@ -11,7 +11,7 @@
       "$ref": "../../../common/common-schema.json#/$defs/RequestMeta"
     },
     "consent": {
-      "$ref": "../../../common/common-schema.json#/$defs/TBD"
+      "$ref": "../../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
     },
     "accountId": {
       "$ref": "../../../common/common-schema.json#/$defs/LegacyId"
