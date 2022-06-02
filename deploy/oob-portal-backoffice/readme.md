@@ -40,6 +40,18 @@ mesma identificação definida na configuração do *client* no [Authorization S
 
 Ex: `portal-backoffice`
 
+### webAppConfigUrl
+
+Endereço público do endpoint usado para *customização* do Portal Backoffice.
+O retorno dessa API deve ser um objeto JSON com as propriedades definidas na
+documentação do [Portal Backoffice](../../portal-backoffice/customizacao/readme.md).
+
+Importante que esse endpoint esteja configurado para ser acessado pelo
+portal, assim evitando problema de CORS. Essa configuração pode ser feita pelo
+header `Access-Control-Allow-Origin`, configurando a url de domínio do portal.
+
+Ex: `https://kong.bank.com.br/backoffice-config`
+
 ### authClientSecretName
 
 Contém o nome do *secret* do kubernetes onde será armazenado o *secret* do
