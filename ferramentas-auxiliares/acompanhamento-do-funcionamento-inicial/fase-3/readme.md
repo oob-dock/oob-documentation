@@ -319,8 +319,8 @@ WITH base_table AS (
     FROM table_a AS original
     ORDER BY date
 )
-SELECT date, red_count, pag_count, con_count, num_client_count,
-coalesce(base_table.accum_value, 0) AS accum_value
+SELECT date, red_count, 0 as red_error, pag_count, 0 as pag_error, con_count,
+0 as con_error, num_client_count, coalesce(base_table.accum_value, 0) AS accum_value
 FROM base_table
 ```
 
@@ -330,7 +330,10 @@ Legenda das colunas apresentadas na tabela
 | ---------------- | ------------------------------------------------------------------------------------- |
 | date             | Dia aos quais os demais valores pertencem                                             |
 | red_count        | Redirecionamentos de solicitações de pagamento recebidos do Iniciador                 |
+| red_error        | Falha de redirecionamentos de solicitações de pagamento recebidos do Iniciador        |
 | pag_count        | Solicitações de Pagamentos confirmadas pelo cliente                                   |
+| pag_error        | Falha de solicitações de Pagamentos confirmadas pelo cliente                          |
 | con_count        | Redirecionamentos ao Iniciador com a confirmação do pagamento                         |
+| con_error        | Falha de redirecionamentos ao Iniciador com a confirmação do pagamento                |
 | num_client_count | Número de clientes atendidos desde a '<data-inicial>' definida até as datas indicadas |
 | accum_value      | Valor acumulado desde a '<data-inicial>' até as datas indicadas                       |
