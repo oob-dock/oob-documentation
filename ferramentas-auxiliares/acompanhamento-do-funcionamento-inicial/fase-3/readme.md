@@ -103,7 +103,7 @@ ORDER BY date;
 @set initial_date = '<data_inicial> 00:00:00'
 @set final_date = '<data_final> 23:59:59'
 SELECT to_char(history_status.updated_on, 'YYYY-MM-DD') AS date,
-count (consent_translation_id)
+COUNT (DISTINCT consent_translation_id.id_consent)
 FROM consent_translation_id
 INNER JOIN consent ON consent.id = consent_translation_id.id_consent
 INNER JOIN history_status ON history_status.id_consent = consent.id
