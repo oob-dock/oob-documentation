@@ -210,7 +210,7 @@ WITH base_table AS (
             ),
             con_table AS (
                 SELECT to_char(history_status.updated_on, 'YYYY-MM-DD') AS date,
-                count (consent_translation_id) AS con_count
+                COUNT (DISTINCT consent_translation_id.id_consent) AS con_count
                 FROM consent_translation_id
                 INNER JOIN consent ON consent.id = consent_translation_id.id_consent
                 INNER JOIN history_status ON history_status.id_consent = consent.id
