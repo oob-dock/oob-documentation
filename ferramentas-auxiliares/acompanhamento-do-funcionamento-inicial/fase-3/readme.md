@@ -153,24 +153,31 @@ ORDER BY table_a.date
 ```sql
 @set initial_date = '<data_inicial> 00:00:00'
 @set final_date = '<data_final> 23:59:59'
-WITH base_table AS (
-    SELECT 
+WITH values_table as (
+    SELECT
+    DISTINCT ON (consent_translation_id.id_consent)
+    *
+    FROM consent_translation_id
+    WHERE consent_translation_id.tp_openbanking_id = 8
+),
+base_table AS (
+    SELECT
     to_char(history_status.updated_on, 'YYYY-MM-DD') AS date,
     sum (consent.vl_payment) AS daily_sum
     FROM consent
     INNER JOIN history_status ON history_status.id_consent = consent.id
-    INNER JOIN consent_translation_id ON consent_translation_id.id_consent = consent.id
+    INNER JOIN values_table ON
+    values_table.id_consent = consent.id
     WHERE dt_creation >= :initial_date AND dt_creation <= :final_date
     AND consent.tp_payment = 1
     AND history_status.status_consent = 6
-    AND consent_translation_id.tp_openbanking_id = 8
     GROUP BY DATE
-) 
+)
 SELECT table_a.date, table_a.daily_sum, (
     SELECT sum (table_b.daily_sum)
     FROM base_table table_b
     WHERE table_b.date <= table_a.date
-) AS total_sum
+) AS accum_value
 FROM base_table table_a 
 ORDER BY table_a.date
 ```
@@ -253,18 +260,24 @@ WITH base_table AS (
                     ORDER BY table_a.date
                 ),
                 accum_value_table AS (
-                    WITH base_table AS (
-                        SELECT 
+                    WITH values_table as (
+                        SELECT
+                        DISTINCT ON (consent_translation_id.id_consent)
+                        *
+                        FROM consent_translation_id
+                        WHERE consent_translation_id.tp_openbanking_id = 8
+                    ),
+                    base_table AS (
+                        SELECT
                         to_char(history_status.updated_on, 'YYYY-MM-DD') AS date,
                         sum (consent.vl_payment) AS daily_sum
                         FROM consent
                     INNER JOIN history_status ON history_status.id_consent = consent.id
-                        INNER JOIN consent_translation_id ON
-                        consent_translation_id.id_consent = consent.id
+                        INNER JOIN values_table ON
+                        values_table.id_consent = consent.id
                         WHERE dt_creation >= :initial_date AND dt_creation <= :final_date
                         AND consent.tp_payment = 1
                         AND history_status.status_consent = 6
-                        AND consent_translation_id.tp_openbanking_id = 8
                         GROUP BY DATE
                     )
                     SELECT table_a.date, table_a.daily_sum, (
@@ -319,8 +332,9 @@ WITH base_table AS (
     FROM table_a AS original
     ORDER BY date
 )
-SELECT date, red_count, 0 as red_error, pag_count, 0 as pag_error, con_count,
-0 as con_error, num_client_count, coalesce(base_table.accum_value, 0) AS accum_value
+SELECT date, red_count, pag_count, con_count,
+coalesce(base_table.num_client_count, 0) AS num_client_count,
+coalesce(base_table.accum_value, 0) AS accum_value
 FROM base_table
 ```
 
