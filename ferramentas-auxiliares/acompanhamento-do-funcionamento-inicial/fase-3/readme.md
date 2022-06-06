@@ -334,8 +334,8 @@ WITH base_table AS (
 )
 SELECT date, red_count, 0 as red_error, pag_count, 0 as pag_error, con_count,
 0 as con_error,
-coalesce(base_table.num_client_count, 0) AS num_client_count,
-coalesce(base_table.accum_value, 0) AS accum_value
+coalesce(base_table.accum_value, 0) AS accum_value,
+coalesce(base_table.num_client_count, 0) AS num_client_count
 FROM base_table
 ```
 
