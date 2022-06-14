@@ -18,7 +18,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response-discovery.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/payment/response-discovery.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>200</constant>
                 </setHeader>
@@ -50,7 +50,7 @@
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
-        <to uri="velocity:file://work/models/request-revoke.vm?allowContextMapAll=true"/>
+        <to uri="velocity:file://work/payment/request-revoke.vm?allowContextMapAll=true"/>
         <to uri="{{env:ROUTE_REVOKE}}?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=PATCH"/>
         <choice>
             <when>
@@ -58,7 +58,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response-revoke.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/payment/response-revoke.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>200</constant>
                 </setHeader>
@@ -84,7 +84,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response-check-payment.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/payment/response-check-payment.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>200</constant>
                 </setHeader>
@@ -100,7 +100,7 @@
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
-        <to uri="velocity:file://work/models/request-pix.vm?allowContextMapAll=true"/>
+        <to uri="velocity:file://work/payment/request-pix.vm?allowContextMapAll=true"/>
         <setHeader name="Content-Type">
             <constant>application/json</constant>
         </setHeader>
@@ -111,7 +111,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response-pix.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/payment/response-pix.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>201</constant>
                 </setHeader>
@@ -137,7 +137,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response-pix.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/payment/response-pix.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>200</constant>
                 </setHeader>
@@ -153,7 +153,7 @@
         <unmarshal>
             <json library="Gson"/>
         </unmarshal>
-        <to uri="velocity:file://work/models/request-ted-tef.vm?allowContextMapAll=true"/>
+        <to uri="velocity:file://work/payment/request-ted-tef.vm?allowContextMapAll=true"/>
         <setHeader name="Content-Type">
             <constant>application/json</constant>
         </setHeader>
@@ -164,7 +164,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response-ted-tef.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/payment/response-ted-tef.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>201</constant>
                 </setHeader>
@@ -191,7 +191,7 @@
                 <unmarshal>
                     <json library="Gson"/>
                 </unmarshal>
-                <to uri="velocity:file://work/models/response-ted-ted.vm?allowContextMapAll=true"/>
+                <to uri="velocity:file://work/payment/response-ted-ted.vm?allowContextMapAll=true"/>
                 <setHeader name="CamelHttpResponseCode">
                     <constant>200</constant>
                 </setHeader>
@@ -204,7 +204,7 @@
 
     <route id="getMockError">
         <from uri="direct:getMockError"/>
-        <to uri="velocity:file://work/error/response-error-example.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
+        <to uri="velocity:file://work/payment/response-error-example.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
         <setHeader name="CamelHttpResponseCode">
             <constant>500</constant>
         </setHeader>
@@ -212,7 +212,7 @@
 
     <route id="getMockErrorApprove">
         <from uri="direct:getMockErrorApprove"/>
-        <to uri="velocity:file://work/error/response-error-approvePaymentConsentCreation.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
+        <to uri="velocity:file://work/payment/response-error-approvePaymentConsentCreation.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
         <setHeader name="CamelHttpResponseCode">
             <constant>500</constant>
         </setHeader>
