@@ -1,4 +1,4 @@
-FROM 618430153747.dkr.ecr.sa-east-1.amazonaws.com/digital-banking-microservices/oob-connector-tester:ccc6fcc
+FROM 618430153747.dkr.ecr.sa-east-1.amazonaws.com/opus-open-banking-release/oob-connector-tester:latest
 
 COPY --chown=1001:root ./payments/payment-routes.xml /work/
 COPY --chown=1001:root ./payments/payment  /work/payment
