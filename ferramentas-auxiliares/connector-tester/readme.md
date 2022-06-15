@@ -7,6 +7,7 @@ e apresentar um exemplo de montagem de ambiente para execução da mesma.
 
 - [Documentação para uso do Connector Tester](#documentação-para-uso-do-connector-tester)
   - [Introdução](#introdução)
+  - [Estrutura de arquivos](#estrutura-de-arquivos)
   - [Como obter a imagem da ferramenta](#como-obter-a-imagem-da-ferramenta)
   - [Como executar a ferramenta](#como-executar-a-ferramenta)
   - [Como estender a imagem da ferramenta](#como-estender-a-imagem-da-ferramenta)
@@ -32,6 +33,30 @@ para o formato do conector. Dessa forma, toda informação de input do conector
 A ferramenta é disponibilizada como uma imagem docker, que deve ser estendida com
 os templates de mapeamento de request e response e o(s) arquivo(s) de rota(s) que
 são responsáveis por direcionar as chamadas aos sistemas de retaguarda da instituição.
+
+## Estrutura de arquivos
+
+Esta ferramenta contempla suporte para payments e financial-data. Como em financial-data
+existem muitas rotas, foram colocadas apenas rotas do subgrupo de Accounts como exemplo.
+
+A imagem abaixo mostra
+[accounts](attachments/connector_tester_environment/connectorCustom/accounts),
+onde estão as pastas de cada endpoint contendo os arquivos de request-example.json,
+request-schema.json, response-example.json e response-schema.json, que podem ser
+usados para testes.
+
+ ![Accounts folder structure](./images/accounts_folder_structure.png)
+
+ Em [payments](attachments/connector_tester_environment/connectorCustom/payments)
+ estão todos os arquivos que podem ser utilizados para realizar os testes dos endpoints
+ de pagamento, como mostra a imagem abaixo.
+
+ ![Payments folder structure](./images/payments_folder_structure.png)
+
+ Em [specs](attachments/connector_tester_environment/connectorCustom/specs) estão
+ os arquivos de rotas camel, como mostra a imagem abaixo.
+
+ ![Specs folder structure](./images/specs_folder_structure.png)
 
 ## Como obter a imagem da ferramenta
 
@@ -70,8 +95,8 @@ template e o arquivo de rotas a ser utilizado para direcionar as chamadas.
 
 ![Docker compose folder structure](./images/docker_compose_folder_structure.png)
 
-O arquivo dockerfile contém os comandos para copiar os arquivos necessários para
-execução da imagem
+O arquivo [dockerfile](attachments/connector_tester_environment/connectorCustom/Dockerfile)
+contém os comandos para copiar os arquivos necessários para execução da imagem
 
 ![Dockerfile](./images/dockerfile.png)
 
@@ -82,7 +107,7 @@ para importar a mesma.
 
 ![Mockoon api](./images/mockoon_api.png)
 
-Deve-se alterar também o valor dentro do [arquivo](./attachments/connector_tester_environment/env_variables.env)
+Deve-se alterar também o valor dentro do [arquivo](./attachments/connector_tester_environment/connectorCustom/env_variables.env)
 de variáveis de ambiente do docker compose, informando a url da API do mockoon
 conforme o IP do host do docker.
 
@@ -98,43 +123,106 @@ docker-compose up
 
 Acessar o seguinte endereço para carregar o swagger da ferramenta: <http://localhost:8080/swagger>
 
-Para este exemplo, iremos executar o endpoint de criar iniciação de pagamento:
+Para este exemplo, iremos executar o endpoint de listar contas:
 
-![Swagger post payment](./images/swagger_post_payment.png)
+![Swagger post payment](./images/swagger_post_accounts.png)
 
-Dentro do exemplo há um arquivo de nome [request_example.json](./attachments/connector_tester_environment/request_example.json)
+Vale ressaltar que os endpoints que contem path de identificador de operação na
+url estão com valor estático, como por exemplo o `accountId` para as rotas de accounts.
+
+Dentro da pasta `accountsGetAccounts` há um arquivo de nome [request-example.json](./attachments/connector_tester_environment/connectorCustom/accounts/accountsGetAccounts/request-example.json)
 com o request para esta chamada; o conteúdo do arquivo deve ser enviado no payload
 da chamada no swagger, sendo que a resposta para a chamada realizada será:
 
-![Swagger post payment response](./images/swagger_post_payment_response.png)
+![Swagger post payment response](./images/swagger_post_account_response.png)
 
 ```json
 {
-  "data": {
-    "paymentId": [
-      {
-        "key": "instPayId",
-        "value": "e33b469a-c121-41b4-87d1-b2c0947c108a"
-      }
-    ],
-    "endToEndId": "E9040088820210128000800123348752",
-    "creationDateTime": "2021-10-05T18:00:00Z",
-    "statusUpdateDateTime": "2021-10-05T18:00:00Z",
-    "localInstrument": "DICT",
-    "proxy": "12345678901",
-    "status": "PDNG",
-    "payment": {
-      "amount": "123.45",
-      "currency": "BRL"
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": [
+        {
+          "key": "pk_green",
+          "value": "20220511"
+        },
+        {
+          "key": "pk_green",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "value3"
+        },
+        {
+          "key": "pk_brown",
+          "value": "20220511"
+        }
+      ]
     },
-    "remittanceInformation": "Teste criar pagamento",
-    "creditorAccount": {
-      "ispb": "12345678",
-      "issuer": "1774",
-      "number": "6251965162",
-      "accountType": "CACC"
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": [
+        {
+          "key": "pk_yellow"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "4"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "5"
+        }
+      ]
     },
-    "cnpjInitiator": "00000000000191"
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": [
+        {
+          "key": "pk_green"
+        },
+        {
+          "key": "pk_brown",
+          "value": "value3"
+        },
+        {
+          "key": "pk_brown",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "2"
+        },
+        {
+          "key": "pk_brown",
+          "value": "2"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1,
+    "requestDateTime": "2021-05-21T03:00:00Z"
   }
 }
 ```
