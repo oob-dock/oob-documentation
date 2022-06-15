@@ -38,12 +38,14 @@ são responsáveis por direcionar as chamadas aos sistemas de retaguarda da inst
 
 Esta ferramenta contempla suporte para payments e financial-data. Como em financial-data
 existem muitas rotas, foram colocadas apenas rotas do subgrupo de Accounts como exemplo.
+A lista completa de rotas implementadas para o serviço de financial-data pode
+ser conferida [aqui](../../integra%C3%A7%C3%A3o-plugin/financial-data/readme.md)
 
 A imagem abaixo mostra
 [accounts](attachments/connector_tester_environment/connectorCustom/accounts),
-onde estão as pastas de cada endpoint contendo os arquivos de request-example.json,
-request-schema.json, response-example.json e response-schema.json, que podem ser
-usados para testes.
+onde estão as pastas de cada endpoint contendo os arquivos de `request-example.json`,
+`request-schema.json`, `response-example.json` e `response-schema.json`, que
+podem ser usados para testes.
 
  ![Accounts folder structure](./images/accounts_folder_structure.png)
 
@@ -127,7 +129,7 @@ Para este exemplo, iremos executar o endpoint de listar contas:
 
 ![Swagger post payment](./images/swagger_post_accounts.png)
 
-Vale ressaltar que os endpoints que contem path de identificador de operação na
+Vale ressaltar que os endpoints que contém path de identificador de operação na
 url estão com valor estático, como por exemplo o `accountId` para as rotas de accounts.
 
 Dentro da pasta `accountsGetAccounts` há um arquivo de nome [request-example.json](./attachments/connector_tester_environment/connectorCustom/accounts/accountsGetAccounts/request-example.json)
