@@ -229,6 +229,13 @@ da chamada no swagger, sendo que a resposta para a chamada realizada será:
 
 ## Changelog
 
+### 2022-06-15 - v1.4.0
+
+- Atualizado readme do connector-tester com as informações de accounts
+- Ajustado path para os arquivos de payment no connector-tester
+- Adicionado rota para accounts no connector-tester e alterado caminho de
+arquivos no Dockerfile do connector-tester
+
 ### 2022-03-16 - v1.3.0
 
 - Novas rotas referentes ao pagamento ted-tef adicionadas
