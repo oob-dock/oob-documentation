@@ -20,15 +20,14 @@ que devem fazer a integração com os sistemas de retaguarda, permitindo uma
 execução dos conectores desenvolvidos de forma isolada dos contextos de segurança
 que o Open Banking exige.
 
-A aplicação possui endpoints REST que representam todos os pontos de integração
+A aplicação possui endpoints REST que representam os pontos de integração
 de todos os módulos do OOB, e é possível incluir as rotas (os mesmos arquivos Camel
 XML que serão usados no ambiente de produção, vide o seguinte [link](../../integração-plugin/readme.md)),
 e testar via swagger. Os endpoints não têm lógica de negócio, eles apenas chamam
 os conectores exatamente como os módulos do OOB. Os endpoints recebem um json no
-formato esperado pelo conector, ou seja, de acordo com a sua especificação. Essa
-ferramenta não tem os endpoints no formato openbank que precisam ser transformados
-para o formato do conector. Dessa forma, toda informação de input do conector
-(consentimento, headers, etc) deve estar presente na chamada do swagger.
+formato esperado pelo conector, ou seja, de acordo com a sua especificação. Dessa
+forma, toda informação de input do conector (consentimento, headers, etc) deve
+estar presente na chamada do swagger.
 
 A ferramenta é disponibilizada como uma imagem docker, que deve ser estendida com
 os templates de mapeamento de request e response e o(s) arquivo(s) de rota(s) que
@@ -36,10 +35,11 @@ são responsáveis por direcionar as chamadas aos sistemas de retaguarda da inst
 
 ## Estrutura de arquivos
 
-Esta ferramenta contempla suporte para payments e financial-data. Como em financial-data
-existem muitas rotas, foram colocadas apenas rotas do subgrupo de Accounts como exemplo.
+Esta ferramenta contempla suporte para `payments` e `financial-data`. Os exemplos
+fornecidos para `financial-data` referem-se às rotas do subgrupo de *Accounts*,
+e os demais casos são análogos aos selecionados.
 A lista completa de rotas implementadas para o serviço de financial-data pode
-ser conferida [aqui](../../integra%C3%A7%C3%A3o-plugin/financial-data/readme.md)
+ser conferida [aqui](../../integra%C3%A7%C3%A3o-plugin/financial-data/readme.md).
 
 A imagem abaixo mostra a estrutura de
 [accounts](attachments/connector_tester_environment/connectorCustom/accounts),
@@ -127,8 +127,10 @@ Para este exemplo, iremos executar o endpoint de listar contas:
 
 ![Swagger post payment](./images/swagger_post_accounts.png)
 
-Vale ressaltar que os endpoints que contém path de identificador de operação na
-url estão com valor estático, como por exemplo o `accountId` para as rotas de accounts.
+**IMPORTANTE:** Em endpoints que contém identificadores na rota (ex.: o parâmetro
+`accountId` nas rotas de accounts), os valores incluídos no path da URL serão *ignorados*,
+e portanto podem ser utilizados com valores estáticos. Os valores que serão efetivamente
+enviados para os conectores são os presentes no payload das chamadas.
 
 Dentro da pasta `accountsGetAccounts` há um arquivo de nome [request-example.json](./attachments/connector_tester_environment/connectorCustom/accounts/accountsGetAccounts/request-example.json)
 com o request para esta chamada; o conteúdo do arquivo deve ser enviado no payload
