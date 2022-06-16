@@ -2,7 +2,7 @@
   "uuid": "667f08c5-efea-43d4-b199-3f9c98efc438",
   "lastMigration": 19,
   "name": "mock_api",
-  "endpointPrefix": "payments/v1",
+  "endpointPrefix": "",
   "latency": 70,
   "port": 5000,
   "hostname": "0.0.0.0",
@@ -11,7 +11,7 @@
       "uuid": "de91ad00-5640-4262-9247-09c96aa7cc0c",
       "documentation": "Método para criar a iniciação de pagamento",
       "method": "get",
-      "endpoint": "discovery/account/v1/:documentNumber",
+      "endpoint": "payments/v1/discovery/account/v1/:documentNumber",
       "responses": [
         {
           "uuid": "60c8f76d-7f86-4402-806b-9a135c12c337",
@@ -36,7 +36,7 @@
       "uuid": "917471fa-9ff9-46c8-951c-087abf4fa5b5",
       "documentation": "Método para criar a iniciação de pagamento",
       "method": "post",
-      "endpoint": "pix",
+      "endpoint": "payments/v1/pix",
       "responses": [
         {
           "uuid": "08049866-4197-4c69-bc70-4506590e70f5",
@@ -61,7 +61,7 @@
       "uuid": "8ceedc34-4ef5-488b-86fb-5b0b929626a5",
       "documentation": "Método para criar a iniciação de pagamento",
       "method": "get",
-      "endpoint": "pix/status/:paymentId",
+      "endpoint": "payments/v1/pix/status/:paymentId",
       "responses": [
         {
           "uuid": "51de821a-40db-41bd-be06-eed74addcc6c",
@@ -86,7 +86,7 @@
       "uuid": "3c1676cd-57cc-4fee-a05e-6d267400fbf8",
       "documentation": "",
       "method": "get",
-      "endpoint": "getCurrentCycle",
+      "endpoint": "payments/v1/getCurrentCycle",
       "responses": [
         {
           "uuid": "4366a687-4f04-426a-9f9c-58d0af91f9ed",
@@ -111,7 +111,7 @@
       "uuid": "be794ba5-21fa-4097-88c4-3fd1a57ecb8b",
       "documentation": "",
       "method": "patch",
-      "endpoint": "revokePayment",
+      "endpoint": "payments/v1/revokePayment",
       "responses": [
         {
           "uuid": "e2cec3f5-9320-4938-81ba-3508f9100cdb",
@@ -136,7 +136,7 @@
       "uuid": "cf01e8ea-d476-49b2-83fa-d233719b329a",
       "documentation": "",
       "method": "get",
-      "endpoint": "ted-tef/status/:paymentId",
+      "endpoint": "payments/v1/ted-tef/status/:paymentId",
       "responses": [
         {
           "uuid": "e166c82a-6b65-43f5-9a40-7e1cb0d02fdd",
@@ -161,13 +161,138 @@
       "uuid": "5678fa3b-ed22-42f8-b997-8d036778cca2",
       "documentation": "",
       "method": "post",
-      "endpoint": "ted-tef",
+      "endpoint": "payments/v1/ted-tef",
       "responses": [
         {
           "uuid": "09110732-9756-421d-90ff-a1ad9d584bb2",
           "body": "{\n  \"instPayId\": \"e33b469a-c121-41b4-87d1-b2c0947c108a\",\n  \"initiationTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"statusTimestampUTC\": \"2021-12-23T13:00:00Z\",\n  \"status\": {\n    \"code\": \"1\"\n  },\n \"transaction\": {\n   \"amount\": \"1.23\",\n   \"currency\": \"BRL\"\n },\n \"payee\": {\n   \"ispb\": \"12345678\",\n   \"issuer\": \"0001\",\n   \"number\": \"159753\",\n   \"accountType\": \"CACC\"\n },\n \"purpose\": 1,\n \"purposeAdditionalInfo\": \"Informações adicionais\"\n}",
           "latency": 0,
           "statusCode": 201,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "cf8c9461-58db-446f-ac44-4e662cbe7511",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "accounts/v1/accounts",
+      "responses": [
+        {
+          "uuid": "72aa876d-a594-4c1c-90ea-7acdf2293d46",
+          "body": "{\r\n  \"data\": [\r\n    {\r\n      \"brandName\": \"Organização A\",\r\n      \"companyCnpj\": \"21128159000166\",\r\n      \"type\": \"CONTA_DEPOSITO_A_VISTA\",\r\n      \"compeCode\": \"001\",\r\n      \"branchCode\": \"6272\",\r\n      \"number\": \"94088392\",\r\n      \"checkDigit\": \"4\",\r\n      \"accountId\": [\r\n        {\r\n          \"key\": \"pk_green\",\r\n          \"value\": \"20220511\"\r\n        },\r\n        {\r\n          \"key\": \"pk_green\",\r\n          \"value\": \"value2\"\r\n        },\r\n        {\r\n          \"key\": \"pk_yellow\",\r\n          \"value\": \"value3\"\r\n        },\r\n        {\r\n          \"key\": \"pk_brown\",\r\n          \"value\": \"20220511\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"brandName\": \"Organização A\",\r\n      \"companyCnpj\": \"21128159000166\",\r\n      \"type\": \"CONTA_DEPOSITO_A_VISTA\",\r\n      \"compeCode\": \"001\",\r\n      \"branchCode\": \"6272\",\r\n      \"number\": \"94088392\",\r\n      \"checkDigit\": \"4\",\r\n      \"accountId\": [\r\n        {\r\n          \"key\": \"pk_yellow\"\r\n        },\r\n        {\r\n          \"key\": \"pk_yellow\",\r\n          \"value\": \"4\"\r\n        },\r\n        {\r\n          \"key\": \"pk_yellow\",\r\n          \"value\": \"5\"\r\n        }\r\n      ]\r\n    },\r\n    {\r\n      \"brandName\": \"Organização A\",\r\n      \"companyCnpj\": \"21128159000166\",\r\n      \"type\": \"CONTA_DEPOSITO_A_VISTA\",\r\n      \"compeCode\": \"001\",\r\n      \"branchCode\": \"6272\",\r\n      \"number\": \"94088392\",\r\n      \"checkDigit\": \"4\",\r\n      \"accountId\": [\r\n        {\r\n          \"key\": \"pk_green\"\r\n        },\r\n        {\r\n          \"key\": \"pk_brown\",\r\n          \"value\": \"value3\"\r\n        },\r\n        {\r\n          \"key\": \"pk_brown\",\r\n          \"value\": \"value2\"\r\n        },\r\n        {\r\n          \"key\": \"pk_yellow\",\r\n          \"value\": \"2\"\r\n        },\r\n        {\r\n          \"key\": \"pk_brown\",\r\n          \"value\": \"2\"\r\n        }\r\n      ]\r\n    }\r\n  ],\r\n  \"meta\": {\r\n    \"totalRecords\": 1,\r\n    \"totalPages\": 1,\r\n    \"requestDateTime\": \"2021-05-21T03:00:00Z\"\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "5d33be3b-980d-435e-8aae-1a876d6c688c",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "accounts/v1/accounts/:accountId",
+      "responses": [
+        {
+          "uuid": "01d5d9b2-13d3-4bbb-afa1-3977abb4c9ec",
+          "body": "{\r\n    \"data\": {\r\n      \"compeCode\": \"001\",\r\n      \"branchCode\": \"6272\",\r\n      \"number\": \"24550245\",\r\n      \"checkDigit\": \"4\",\r\n      \"type\": \"CONTA_DEPOSITO_A_VISTA\",\r\n      \"subtype\": \"INDIVIDUAL\",\r\n      \"currency\": \"BRL\"\r\n    }\r\n  }",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "27297fb9-e4bc-4fac-97c6-49981f8a8e5b",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "accounts/v1/accounts/:accountId/balances",
+      "responses": [
+        {
+          "uuid": "c6b06933-0196-47c6-9247-cfb7c7d58f2b",
+          "body": "{\r\n  \"data\": {\r\n    \"availableAmount\": 100000.04,\r\n    \"availableAmountCurrency\": \"BRL\",\r\n    \"blockedAmount\": 99.9999,\r\n    \"blockedAmountCurrency\": \"BRL\",\r\n    \"automaticallyInvestedAmount\": 100000.04,\r\n    \"automaticallyInvestedAmountCurrency\": \"BRL\"\r\n  },\r\n  \"meta\": {\r\n    \"totalRecords\": 1,\r\n    \"totalPages\": 1,\r\n    \"requestDateTime\": \"2021-05-21T03:00:00Z\"\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "bb396a04-774e-4677-b11a-76bd11facb21",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "accounts/v1/accounts/:accountId/transactions",
+      "responses": [
+        {
+          "uuid": "ce9e32f8-c51e-4c40-9505-e3672b487471",
+          "body": "{\r\n  \"data\": [],\r\n  \"meta\": {\r\n    \"totalRecords\": 1,\r\n    \"totalPages\": 1,\r\n    \"requestDateTime\": \"2021-05-21T03:00:00Z\"\r\n  }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "24679ff1-7ed2-4696-92c2-486c98ddd3e2",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "accounts/v1/accounts/:accountId/overdraft-limits",
+      "responses": [
+        {
+          "uuid": "7da1e09e-e9c4-4744-bfda-b8d5751a10d8",
+          "body": "{\r\n    \"data\": {\r\n      \"overdraftContractedLimit\": 99.9999,\r\n      \"overdraftContractedLimitCurrency\": \"BRL\",\r\n      \"overdraftUsedLimit\": 10000.9999,\r\n      \"overdraftUsedLimitCurrency\": \"BRL\",\r\n      \"unarrangedOverdraftAmount\": 99.9999,\r\n      \"unarrangedOverdraftAmountCurrency\": \"BRL\"\r\n    },\r\n    \"meta\": {\r\n      \"totalRecords\": 1,\r\n      \"totalPages\": 1,\r\n      \"requestDateTime\": \"2021-05-21T03:00:00Z\"\r\n    }\r\n  }",
+          "latency": 0,
+          "statusCode": 200,
           "label": "",
           "headers": [],
           "filePath": "",

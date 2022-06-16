@@ -1,0 +1,114 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Conjunto de informações das Contas de: depósito à vista, poupança e de pagamento pré-paga\n",
+      "required": [
+        "availableAmount",
+        "availableAmountCurrency",
+        "blockedAmount",
+        "blockedAmountCurrency",
+        "automaticallyInvestedAmount",
+        "automaticallyInvestedAmountCurrency"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "availableAmount": {
+          "type": "number",
+          "format": "double",
+          "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+          "description": "Saldo disponível para utilização imediata. No caso de conta de depósito a vista, sem considerar cheque especial e investimentos atrelados a conta. Admite saldo negativo. Expresso em valor monetário com 4 casas decimais.",
+          "maxLength": 20,
+          "minLength": 0,
+          "example": 100000.04,
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308
+        },
+        "availableAmountCurrency": {
+          "type": "string",
+          "pattern": "^(\\w{3}){1}$",
+          "maxLength": 3,
+          "description": "Moeda referente ao valor do saldo disponível, segundo modelo ISO-4217. p.ex. 'BRL'. Pode ser preenchido com “NA” caso a instituição não possua a informação.",
+          "example": "BRL"
+        },
+        "blockedAmount": {
+          "type": "number",
+          "format": "double",
+          "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+          "description": "Saldo bloqueado, não disponível para utilização imediata, por motivo de bloqueio apresentado para o cliente nos canais eletrônicos Expresso em valor monetário com 4 casas decimais.",
+          "maxLength": 20,
+          "minLength": 0,
+          "example": 99.9999,
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308
+        },
+        "blockedAmountCurrency": {
+          "type": "string",
+          "pattern": "^(\\w{3}){1}$",
+          "maxLength": 3,
+          "description": "Moeda referente ao valor do saldo bloqueado, segundo modelo ISO-4217. p.ex. 'BRL'. Pode ser preenchido com “NA” caso a instituição não possua a informação.",
+          "example": "BRL"
+        },
+        "automaticallyInvestedAmount": {
+          "type": "number",
+          "format": "double",
+          "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+          "description": "Saldo disponível com aplicação automática - corresponde a soma do saldo disponível acrescido do valor obtido a partir da aplicação automática Expresso em valor monetário com 4 casas decimais.",
+          "maxLength": 20,
+          "minLength": 0,
+          "example": 100000.04,
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308
+        },
+        "automaticallyInvestedAmountCurrency": {
+          "type": "string",
+          "pattern": "^(\\w{3}){1}$",
+          "maxLength": 3,
+          "description": "Moeda referente ao valor do saldo disponível com aplicação automática, segundo modelo ISO-4217. p.ex. 'BRL'. Pode ser preenchido com “NA” caso a instituição não possua a informação.",
+          "example": "BRL"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}
