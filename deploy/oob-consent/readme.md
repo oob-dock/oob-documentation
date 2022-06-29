@@ -222,7 +222,7 @@ additionalVars:
 
 Utilizado para definir a lista de permissões suportadas pela instituição.
 
-**IMPORTANTE**: Caso seja utilizado os serviços de `DATA_SHARING`, essa
+**IMPORTANTE**: Caso sejam utilizados os serviços de `DATA_SHARING`, essa
 variável se torna obrigatória.
 
 **Observação**: Não é necessário adicionar a permissão `RESOURCES_READ` na lista
