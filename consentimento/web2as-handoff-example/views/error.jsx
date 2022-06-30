@@ -22,7 +22,7 @@ const Error = ({ title, error, redirectTo }) => {
       <div>
         <h1>Erro</h1>
         {errorMessage()}
-        <form action={redirectTo} method="post" style={style}>
+        <form action={redirectTo} method="get" style={style}>
           <button type="submit">Continuar</button>
         </form>
       </div>
