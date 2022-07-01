@@ -178,7 +178,7 @@ Utilizado para definir se o log deve ser no formato JSON.
 
 **Formato:** `true` ou `false`
 
-Valor default: `true`
+Valor default: `true
 
 **Ex:**
 
@@ -224,6 +224,10 @@ Utilizado para definir a lista de permissões suportadas pela instituição.
 
 **IMPORTANTE**: Caso sejam utilizados os serviços de `DATA_SHARING`, essa
 variável se torna obrigatória.
+
+**Observação**: A permissão `RESOURCES_READ` deve ser obrigatoriamente
+adicionada à lista de permissões, pois ela pertence a todos os grupos de
+permissões válidos.
 
 **Ex:**
 
