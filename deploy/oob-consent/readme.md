@@ -225,16 +225,15 @@ Utilizado para definir a lista de permissões suportadas pela instituição.
 **IMPORTANTE**: Caso sejam utilizados os serviços de `DATA_SHARING`, essa
 variável se torna obrigatória.
 
-**Observação**: Não é necessário adicionar a permissão `RESOURCES_READ` na lista
-de permissões. Por pertencer a todos os grupos de permissões, o próprio serviço adiciona
-`RESOURCES_READ` na lista de permissões.
-
 **Ex:**
+
+Exemplo de configuração para uma instalação que suporta apenas compartilhamento
+de dados cadastrais:
 
 ```yaml
 additionalVars:
   - name: CONSENT_PERMISSIONS
-    value: CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ,CUSTOMERS_PERSONAL_ADITTIONALINFO_READ,CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ,CUSTOMERS_BUSINESS_ADITTIONALINFO_READ
+    value: CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ,CUSTOMERS_PERSONAL_ADITTIONALINFO_READ,CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ,CUSTOMERS_BUSINESS_ADITTIONALINFO_READ,RESOURCES_READ
 ```
 
 Existem additionalVars para utilização do conector de aprovação de consentimento
