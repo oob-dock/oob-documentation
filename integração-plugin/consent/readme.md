@@ -215,14 +215,14 @@ conta pré-selecionada ou uma lista vazia caso essa não seja uma opção seleci
 para o cliente. Esse tratamento deve ser feito no conector ou serviço remoto de listagem
 de contas.
 
-## Permission groups na criação do consentimento
+## Grupos de permissões na criação do consentimento
 
-No momento da criação do consentimento todas as permissions dos agrupamentos
+No momento da criação do consentimento todas as permissões dos agrupamentos
 de dados aos quais se deseja consentimento devem ser enviadas. Esse conjunto
-de permissions necessários, chamado de permission group, são designados
+de permissões necessárias, chamado de grupos de permissões, são designados
 conforme tabela abaixo:
 
-| Categoria de Dados   | Agrupamento                   |  Permissions                                                                                                                                                                                             |
+| Categoria de Dados   | Agrupamento                   |  Permissões                                                                                                                                                                                              |
 | -------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Cadastro             | Dados cadastrais PF           | CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ, RESOURCES_READ                                                                                                                                                  |
 | Cadastro             | Informações complementares PF | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ, RESOURCES_READ                                                                                                                                                   |
@@ -239,6 +239,7 @@ conforme tabela abaixo:
 | Operações de Crédito | Financiamentos                | FINANCINGS_READ, FINANCINGS_WARRANTIES_READ, FINANCINGS_SCHEDULED_INSTALMENTS_READ, FINANCINGS_PAYMENTS_READ, RESOURCES_READ                                                                             |
 | Operações de Crédito | Empréstimos                   | LOANS_READ, LOANS_WARRANTIES_READ, LOANS_SCHEDULED_INSTALMENTS_READ, LOANS_PAYMENTS_READ, RESOURCES_READ                                                                                                 |
 | Operações de Crédito | Adiantamento a depositantes   | UNARRANGED_ACCOUNTS_OVERDRAFT_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ, RESOURCES_READ |
+
 ## Aprovação de criação de consentimento
 
 Quando a API de criação de um consentimento é chamada por um *TPP*, a plataforma
