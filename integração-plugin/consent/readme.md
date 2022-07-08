@@ -10,7 +10,7 @@
       - [Conector de produto não selecionável](#conector-de-produto-não-selecionável)
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
-  - [Permission groups na criação do consentimento](#permission-groups-na-criação-do-consentimento)
+  - [Grupos de permissões na criação do consentimento](#grupos-de-permissões-na-criação-do-consentimento)
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
       - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
   - [Serviços auxiliares](#serviços-auxiliares)
@@ -220,7 +220,8 @@ de contas.
 No momento da criação do consentimento todas as permissões dos agrupamentos
 de dados aos quais se deseja consentimento devem ser enviadas. Esse conjunto
 de permissões necessárias, chamado de grupos de permissões, são designados
-conforme tabela abaixo:
+conforme tabela abaixo ([link](https://openbanking-brasil.github.io/openapi/swagger-apis/consents/1.0.3.yml)
+para documentação oficial):
 
 | Categoria de Dados   | Agrupamento                   |  Permissões                                                                                                                                                                                              |
 | -------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
