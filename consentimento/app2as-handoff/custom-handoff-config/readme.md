@@ -96,7 +96,7 @@ Configuração usada como default:
 
 ## Custom HTML
 
-> Ao setar o campo `customHtml` na configuração, o valor será injetado no rodapé da página do aplicativo.
+> Ao setar o campo `customHtml` na configuração, o valor será injetado no rodapé da página.
 
 Exemplo de string de HTML:
 
