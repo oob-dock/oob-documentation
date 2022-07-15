@@ -15,6 +15,7 @@ Configuração usada como default:
 | title     | Título da página mostrado na aba do navegador                    |
 | colors    | Cores a serem utilizadas no aplicativo                           |
 | texts     | Textos a serem utilizados no aplicativo                          |
+| customHtml| Campo para receber uma string com um html a ser injetado         |
 
 ## Cores
 
@@ -92,3 +93,11 @@ Configuração usada como default:
   }
 }
 ```
+
+## Custom HTML
+
+> Ao setar o campo `customHtml` na configuração, o valor será injetado no rodapé da página.
+
+Exemplo de string de HTML:
+
+```<div style='padding: 2rem;background: pink'><a href='https://ev.instituicao.com.br' style='padding: 1rem'>Clique aqui!</a></div>```
