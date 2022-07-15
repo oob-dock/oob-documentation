@@ -157,6 +157,21 @@ Schema baseado no `errorCommand` da interface APP2AS:
 As informações `tpp.name`, `tpp.logoUrl`, `errorCommand.message` e
 `errorCommand.redirect.redirectTo` podem não estar presentes no retorno.
 
+## Cancelamento
+
+A tela de handoff trabalha de maneira passiva, reagindo aos eventos ocorridos no
+fluxo, porém é possível abortar o mesmo de maneira ativa através de um botão de
+cancelamento da solicitação.
+
+Este realiza uma requisição para a api `https://as.instituicao.com.br/auth/handoff/v1/<oobStartCode>/abort`,
+sendo o **oobStartCode** o mesmo código usado para iniciar a biblioteca [aqui](./readme.md#como-usar-a-biblioteca),
+cancelando assim o handoff. A tela deve direcionar o usuário de volta ao iniciador
+após o cancelamento.
+
+O app ao tentar seguir no fluxo cancelado pela tela
+de handoff, deve receber uma mensagem de erro indicando o ocorrido e não
+conseguirá seguir.
+
 ## Exemplo
 
 Uma aplicação funcional de exemplo está disponível no diretório [src](./src), a
