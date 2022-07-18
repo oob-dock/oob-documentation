@@ -159,18 +159,17 @@ As informações `tpp.name`, `tpp.logoUrl`, `errorCommand.message` e
 
 ## Cancelamento
 
-A tela de handoff trabalha de maneira passiva, reagindo aos eventos ocorridos no
-fluxo, porém é possível abortar o mesmo de maneira ativa através de um botão de
-cancelamento da solicitação.
+A tela de handoff reage passivamente aos eventos ocorridos no fluxo.
+Em qualquer momento, o usuário pode abortar ativamente o fluxo de handoff.
+Para isso, é necessário disponibilizar um botão de "Cancelar" na tela.
 
-Este realiza uma requisição para a api `https://as.instituicao.com.br/auth/handoff/v1/<oobStartCode>/abort`,
-sendo o **oobStartCode** o mesmo código usado para iniciar a biblioteca [aqui](./readme.md#como-usar-a-biblioteca),
-cancelando assim o handoff. A tela deve direcionar o usuário de volta ao iniciador
-após o cancelamento.
+Para efetuar o cancelamento do fluxo
+é necessário realizar uma requisição para a api `https://as.instituicao.com.br/auth/handoff/v1/<oobStartCode>/abort`,
+sendo o **oobStartCode** o mesmo código usado para iniciar a biblioteca [aqui](./readme.md#como-usar-a-biblioteca).
 
-O app ao tentar seguir no fluxo cancelado pela tela
-de handoff, deve receber uma mensagem de erro indicando o ocorrido e não
-conseguirá seguir.
+Após o cancelamento, a tela deve direcionar o usuário de volta ao iniciador
+e o app deve informar o usuário (ex.: com uma mensagem de erro),
+interrompendo o fluxo de handoff.
 
 ## Exemplo
 
