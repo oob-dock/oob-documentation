@@ -47,19 +47,19 @@ O retorno dessa API deve ser um objeto JSON com as propriedades definidas na
 documentação do [Portal Backoffice](../../portal-backoffice/customizacao/readme.md).
 
 Essa configuração pode ser feita pelo header `Access-Control-Allow-Origin`, configurando
-a url de domínio do portal.
+o domínio da URL do portal.
 
 Ex: `https://kong.bank.com.br/backoffice-config`
 
 ### webAppConfigJson
 
-Json usado para *customização* do Portal Backoffice.
+JSON usado para *customização* do Portal Backoffice.
 
 O valor dessa variável deve ser um objeto JSON no formato de String com as
 propriedades definidas na documentação do [Portal Backoffice](../../portal-backoffice/customizacao/readme.md).
 
-**Importante**: Essa variável tem prioridade em relação a `webAppConfigUrl`, ou seja, caso `webAppConfigJson`
-seja setada, `webAppConfigUrl` não será utilizada.
+**Importante**: Essa variável tem prioridade em relação a `webAppConfigUrl`, ou seja,
+caso `webAppConfigJson` seja definida, `webAppConfigUrl` não será utilizada.
 
 Ex: `"{\n  \"app\": {\n    \"title\": \"Open Banking | Backoffice\",\n    \"faviconPath\": \"./assets/favicon.ico\",\n    \"copyright\": \"2021 Copyright by Open Banking\"\n  },\n  \"brand\": {\n    \"name\": \"Open Banking\",\n    \"path\": \"./assets/logo.svg\"\n  },\n  \"sidebarStatus\": \"closed\",\n  \"selectedTheme\": \"default\",\n  \"themes\": [\n    {\n      \"name\": \"default\",\n      \"variables\": {}\n    }\n  ]\n}\n"`
 
