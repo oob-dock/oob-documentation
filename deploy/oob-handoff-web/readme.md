@@ -24,7 +24,7 @@ configurando o domínio da URL da página de handoff.
 
 - JSON que definirá o estilo da página (cores, ícones, etc...).
 
-Essa variável deve receber um json em formato de String com as propriedades definidas
+Essa variável deve receber um JSON em formato de String com as propriedades definidas
 em [Configuração do conteúdo da página de handoff](#referências).
 
 **Importante**: Essa variável tem prioridade em relação a `oobCustomHandoffUrlConfig`,
