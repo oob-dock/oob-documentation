@@ -61,7 +61,11 @@ propriedades definidas na documentação do [Portal Backoffice](../../portal-bac
 **Importante**: Essa variável tem prioridade em relação a `webAppConfigUrl`, ou seja,
 caso `webAppConfigJson` seja definida, `webAppConfigUrl` não será utilizada.
 
-Ex: `"{\n  \"app\": {\n    \"title\": \"Open Banking | Backoffice\",\n    \"faviconPath\": \"./assets/favicon.ico\",\n    \"copyright\": \"2021 Copyright by Open Banking\"\n  },\n  \"brand\": {\n    \"name\": \"Open Banking\",\n    \"path\": \"./assets/logo.svg\"\n  },\n  \"sidebarStatus\": \"closed\",\n  \"selectedTheme\": \"default\",\n  \"themes\": [\n    {\n      \"name\": \"default\",\n      \"variables\": {}\n    }\n  ]\n}\n"`
+Ex: `"{ \"app\": { \"title\": \"Open Banking | Backoffice\", \"faviconPath\":
+\"./assets/favicon.ico\", \"copyright\": \"2021 Copyright by Open Banking\" },
+\"brand\": { \"name\": \"Open Banking\", \"path\": \"./assets/logo.svg\"  },
+\"sidebarStatus\": \"closed\", \"selectedTheme\": \"default\", \"themes\":
+[ { \"name\": \"default\", \"variables\": {} } ]}"`
 
 ### authClientSecretName
 

@@ -31,7 +31,20 @@ em [Configuração do conteúdo da página de handoff](#referências).
 ou seja, caso `oobCustomHandoffJsonConfig` seja definida, `oobCustomHandoffUrlConfig`
 não será utilizada.
 
-Ex: `"{\n    \"logo\": \"https://ev.instituicao.com.br/logo.png\",\n    \"favicon\": \"https://ev.instituicao.com.br/icone.png\",    \n    \"title\": \"Open Banking\",\n    \"colors\": {\n        \"primary\": \"#BA1D36\",\n        \"background\": \"#EEEEEE\",\n        \"fontTitle\": \"#BA1D36\",\n        \"fontText\": \"#333333\",\n        \"error\": \"#B33A3A\"\n    },\n    \"texts\": {\n        \"ready\": {\n            \"title\": \"Escaneie o código QR\",\n            \"codeText\": \"Código para validação\",\n            \"timer\": \"Tempo restante - \",\n            \"keepOpened\": \"Atenção: mantenha esta página aberta até que você confirme sua solicitação.\"\n        },\n        \"read\": {\n            \"title\": \"Código escaneado\",\n            \"description\": \"O seu código foi escaneado com sucesso. Aguarde a validação.\"\n        },\n        \"completed\": {\n            \"title\": \"Sucesso!\",\n            \"description\": \"Sua autenticação foi realizada com sucesso. Agora você será redirecionado de volta.\"\n        },\n        \"timeout\": {\n            \"title\": \"Código expirado\",\n            \"description\": \"O tempo de validação do código QR expirou. Tente novamente.\"\n        },\n        \"error\": {\n            \"title\": \"Oops! Algo deu errado\",\n            \"description\": \"Você será redirecionado de volta.\"\n        }\n    }\n}"`
+Ex: `"{ \"logo\": \"https://ev.instituicao.com.br/logo.png\", \"favicon\":
+\"https://ev.instituicao.com.br/icone.png\", \"title\": \"Open Banking\",
+\"colors\": { \"primary\": \"#BA1D36\", \"background\": \"#EEEEEE\", \"fontTitle\":
+\"#BA1D36\", \"fontText\": \"#333333\", \"error\": \"#B33A3A\" }, \"texts\":
+{ \"ready\": { \"title\": \"Escaneie o código QR\", \"codeText\": \"Código para
+validação\", \"timer\": \"Tempo restante - \", \"keepOpened\": \"Atenção: mantenha
+esta página aberta até que você confirme sua solicitação.\" }, \"read\": { \"title\":
+\"Código escaneado\", \"description\": \"O seu código foi escaneado com sucesso.
+Aguarde a validação.\" }, \"completed\": { \"title\": \"Sucesso!\", \"description\":
+\"Sua autenticação foi realizada com sucesso. Agora você será redirecionado de volta.\"
+}, \"timeout\": { \"title\": \"Código expirado\", \"description\": \"O tempo de
+validação do código QR expirou. Tente novamente.\" }, \"error\": { \"title\":
+\"Oops! Algo deu errado\", \"description\": \"Você será redirecionado de volta.
+\" }}}"`
 
 ### oobCustomHandoffASPublicUrl
 
