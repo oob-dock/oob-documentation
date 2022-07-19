@@ -1,7 +1,7 @@
 ---
 openapi: 3.0.3
 info:
-  title: Consent Services
+  title: Consent BackOffice Services
   version: 1.0.0
 security:
 - jwt: []
@@ -19,13 +19,12 @@ paths:
         in: query
         schema:
           type: string
-          example: "[ { \"key\": \"conta\", \"value\": \"542345234\" }, { \"key\"\
-            : \"agencia\", \"value\": \"1234\" } ]"
+          example: '[{"key":"cpf","value":"99999999999"},{"key":"cnpj","value":"11199999999999"}]'
       - name: cpf
         in: query
         schema:
           type: string
-          example: "12312312333"
+          example: "99999999999"
       - name: createdOnBegin
         in: query
         schema:
