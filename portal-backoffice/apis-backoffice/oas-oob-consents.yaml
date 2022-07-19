@@ -1,8 +1,8 @@
 ---
 openapi: 3.0.3
 info:
-  title: Consent BackOffice Services
-  version: 0.0.1-SNAPSHOT
+  title: Consent Services
+  version: 1.0.0
 security:
 - jwt: []
 tags:
@@ -19,28 +19,33 @@ paths:
         in: query
         schema:
           type: string
-          example: '[{"key":"cpf","value":"99999999999"},{"key":"cnpj","value":"11199999999999"}]'
+          example: "[ { \"key\": \"conta\", \"value\": \"542345234\" }, { \"key\"\
+            : \"agencia\", \"value\": \"1234\" } ]"
       - name: cpf
         in: query
         schema:
           type: string
-          example: '99999999999'
+          example: "12312312333"
       - name: createdOnBegin
         in: query
         schema:
           format: date-time
           type: string
-          example: '2022-01-30T17:31:28Z'
+          example: 2022-01-30T17:31:28Z
       - name: createdOnEnd
         in: query
         schema:
           format: date-time
           type: string
-          example: '2022-01-30T17:31:28Z'
+          example: 2022-01-30T17:31:28Z
       - name: modalityType
         in: query
         schema:
           $ref: '#/components/schemas/ModalityPaymentEnum'
+      - name: orderType
+        in: query
+        schema:
+          $ref: '#/components/schemas/OrderTypeEnum'
       - name: page
         in: query
         schema:
@@ -156,53 +161,64 @@ components:
       properties:
         code:
           type: string
+        title:
+          type: string
         detail:
           type: string
-        title:
+        typeError:
           type: string
     Authorization:
       type: object
       properties:
-        isRequirer:
-          type: boolean
-          example: true
         personDocumentNumber:
           type: string
         personName:
           type: string
+        isRequirer:
+          type: boolean
+          example: true
         status:
           $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
     ConsentAuthorizationStatusEnum:
       enum:
       - AUTHORISED
       - AWAITING_AUTHORISATION
-      - CONSUMED
-      - EXPIRED
       - REJECTED
       - REVOKED
+      - EXPIRED
+      - CONSUMED
       - TIMEOUT_AUTHORISATION
       - TIMEOUT_PAYMENT
       type: string
     ConsentDetail:
       type: object
       properties:
-        authorizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Authorization'
         brandId:
           type: string
           example: cbanco
-        businessDocumentNumber:
+        externalId:
           type: string
-          example: "33273542000197"
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ConsentTypesEnum'
+          - example: PAYMENT
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+          - example: AUTHORISED
+        personDocumentType:
+          type: string
+          example: CPF
+        personDocumentNumber:
+          type: string
+          example: "77721813700"
         businessDocumentType:
           type: string
           example: CNPJ
-        consentHistoryStatus:
-          type: array
-          items:
-            $ref: '#/components/schemas/ConsentHistoryStatus'
+        businessDocumentNumber:
+          type: string
+          example: "33273542000197"
         createdOn:
           format: date-time
           type: string
@@ -211,51 +227,41 @@ components:
           format: date-time
           type: string
           example: 2022-01-30T17:41:28Z
-        externalId:
-          type: string
-          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
-        modalityPayment:
-          $ref: '#/components/schemas/ModalityPaymentEnum'
         paymentData:
           $ref: '#/components/schemas/PaymentData'
-        permissions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Permission'
-        personDocumentNumber:
-          type: string
-          example: "77721813700"
-        personDocumentType:
-          type: string
-          example: CPF
         resources:
           type: array
           items:
             $ref: '#/components/schemas/Resource'
+        authorizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorization'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        consentHistoryStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentHistoryStatus'
+        modalityPayment:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
         revocation:
           $ref: '#/components/schemas/Revocation'
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
-          - example: AUTHORISED
-        type:
-          allOf:
-          - $ref: '#/components/schemas/ConsentTypesEnum'
-          - example: PAYMENT
         paymentIds:
           type: array
-          description: List with all paymentIds linked to the consent
           items:
-            $ref: '#/components/schemas/PaymentId'
+            $ref: '#/components/schemas/ResourcePaymentId'
     ConsentHistoryStatus:
       type: object
       properties:
+        consentStatus:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
         authorizationStatus:
           $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
         authorizerName:
           type: string
-        consentStatus:
-          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
         operatorUsername:
           type: string
         updatedOn:
@@ -265,29 +271,31 @@ components:
     ConsentSummary:
       type: object
       properties:
-        brandId:
-          type: string
-          example: BANCO
-        createdOn:
-          format: date-time
-          type: string
         id:
           $ref: '#/components/schemas/UUID'
-        modalityPayment:
-          $ref: '#/components/schemas/ModalityPaymentEnum'
+        type:
+          $ref: '#/components/schemas/ConsentTypesEnum'
         paymentType:
           $ref: '#/components/schemas/PaymentTypeEnum'
         status:
           $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
-        type:
-          $ref: '#/components/schemas/ConsentTypesEnum'
-        amount:
-          amount:
+        createdOn:
+          format: date-time
           type: string
-          example: "100000.12"
+        brandId:
+          type: string
+          example: BANCO
+        modalityPayment:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
         creditorName:
           type: string
           example: Marco Antonio de Brito
+        amount:
+          type: string
+          example: "22.00"
+        scheduleDate:
+          type: string
+          example: 2022-07-06
     ConsentTypesEnum:
       enum:
       - DATA_SHARING
@@ -295,11 +303,15 @@ components:
       type: string
     Creditor:
       required:
+      - personType
       - cpfCnpj
       - name
-      - personType
       type: object
       properties:
+        personType:
+          allOf:
+          - $ref: '#/components/schemas/PaymentPersonTypeEnum'
+          - nullable: false
         cpfCnpj:
           type: string
           example: "99999999999999"
@@ -310,21 +322,13 @@ components:
           type: string
           example: Marco Antonio de Brito
           nullable: false
-        personType:
-          allOf:
-          - $ref: '#/components/schemas/PaymentPersonTypeEnum'
-          - nullable: false
     CreditorAccount:
       required:
-      - accountType
       - ispb
       - number
+      - accountType
       type: object
       properties:
-        accountType:
-          allOf:
-          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
-          - nullable: false
         ispb:
           type: string
           example: "12345678"
@@ -336,18 +340,18 @@ components:
           type: string
           example: "1234567890"
           nullable: false
+        accountType:
+          allOf:
+          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
+          - nullable: false
     DebtorAccount:
       required:
-      - accountType
       - ispb
       - issuer
       - number
+      - accountType
       type: object
       properties:
-        accountType:
-          allOf:
-          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
-          - nullable: false
         ispb:
           type: string
           example: "12345678"
@@ -359,6 +363,10 @@ components:
           type: string
           example: "1234567890"
           nullable: false
+        accountType:
+          allOf:
+          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
+          - nullable: false
     EnumPurposeTed:
       enum:
       - _1
@@ -469,31 +477,38 @@ components:
         meta:
           $ref: '#/components/schemas/Meta'
     HttpHeaders: {}
+    KeyValueObject:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
     Links:
       type: object
       properties:
+        self:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
         first:
-          type: string
-          example: https://api.banco.com.br/open-banking/api/v1/resource
-        last:
-          type: string
-          example: https://api.banco.com.br/open-banking/api/v1/resource
-        next:
           type: string
           example: https://api.banco.com.br/open-banking/api/v1/resource
         prev:
           type: string
           example: https://api.banco.com.br/open-banking/api/v1/resource
-        self:
+        next:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        last:
           type: string
           example: https://api.banco.com.br/open-banking/api/v1/resource
     LocalInstrumentEnum:
       enum:
-      - DICT
-      - INIC
       - MANU
+      - DICT
       - QRDN
       - QRES
+      - INIC
       type: string
     LoggedUser:
       required:
@@ -521,47 +536,58 @@ components:
     Meta:
       type: object
       properties:
-        requestDateTime:
-          format: date-time
-          type: string
-        totalPages:
-          format: int32
-          type: integer
-          example: 1
         totalRecords:
           format: int32
           type: integer
           example: 2
+        totalPages:
+          format: int32
+          type: integer
+          example: 1
+        requestDateTime:
+          format: date-time
+          type: string
     ModalityPaymentEnum:
       enum:
       - IMMEDIATE
       - SCHEDULED
       type: string
+    OrderTypeEnum:
+      enum:
+      - ASC
+      - DESC
+      type: string
     PaymentConsent:
       required:
-      - amount
-      - currency
       - type
+      - currency
+      - amount
       type: object
       properties:
-        amount:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTypeEnum'
+          - nullable: false
+        date:
           type: string
-          example: "100000.12"
-          nullable: false
-        creditorAccount:
-          $ref: '#/components/schemas/CreditorAccount'
+          example: 2021-12-01
         currency:
           type: string
           example: BRL
           nullable: false
-        date:
+        amount:
           type: string
-          example: 2021-12-01
-        details:
-          $ref: '#/components/schemas/PaymentDetails'
+          example: "100000.12"
+          nullable: false
         ibgeTownCode:
           type: string
           example: "5300108"
+        details:
+          $ref: '#/components/schemas/PaymentDetails'
+        creditorAccount:
+          $ref: '#/components/schemas/CreditorAccount'
+        schedule:
+          $ref: '#/components/schemas/SchedulePayment'
         purpose:
           allOf:
           - $ref: '#/components/schemas/EnumPurposeTed'
@@ -569,39 +595,25 @@ components:
         purposeAdditionalInfo:
           maxLength: 100
           type: string
-        schedule:
-          $ref: '#/components/schemas/SchedulePayment'
-        type:
-          allOf:
-          - $ref: '#/components/schemas/PaymentTypeEnum'
-          - nullable: false
     PaymentData:
       type: object
       properties:
         creditor:
           $ref: '#/components/schemas/Creditor'
-        debtorAccount:
-          $ref: '#/components/schemas/DebtorAccount'
         payment:
           $ref: '#/components/schemas/PaymentConsent'
+        debtorAccount:
+          $ref: '#/components/schemas/DebtorAccount'
     PaymentDetails:
       required:
-      - creditorAccount
       - localInstrument
+      - creditorAccount
       type: object
       properties:
-        creditorAccount:
-          allOf:
-          - $ref: '#/components/schemas/CreditorAccount'
-          - nullable: false
         localInstrument:
           allOf:
           - $ref: '#/components/schemas/LocalInstrumentEnum'
           - nullable: false
-        proxy:
-          maxLength: 77
-          type: string
-          example: "12345678901"
         qrCode:
           maxLength: 512
           type: string
@@ -609,10 +621,18 @@ components:
             \  \nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\
             \  \n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\
             \  \nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\n"
+        proxy:
+          maxLength: 77
+          type: string
+          example: "12345678901"
+        creditorAccount:
+          allOf:
+          - $ref: '#/components/schemas/CreditorAccount'
+          - nullable: false
     PaymentPersonTypeEnum:
       enum:
-      - PESSOA_JURIDICA
       - PESSOA_NATURAL
+      - PESSOA_JURIDICA
       type: string
     PaymentTypeEnum:
       enum:
@@ -623,79 +643,62 @@ components:
     Permission:
       type: object
       properties:
-        description:
-          type: string
-          example: Description for what this permission allows
         name:
           type: string
           example: Permission's name
         title:
           type: string
           example: Intelligible name for the permission
+        description:
+          type: string
+          example: Description for what this permission allows
     RequestRevokeOobConsent:
       required:
       - data
       type: object
       properties:
-        applicationName:
-          description: Client application name
-          type: string
         data:
           allOf:
           - $ref: '#/components/schemas/RevokeConsentData'
           - nullable: false
-    PaymentId:
-      type: object
-      properties:
-        externalId:
+        applicationName:
+          description: Client application name
           type: string
-        legacyIds:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentIdLegacy'
-    PaymentIdLegacy:
-      type: object
-      description: Key/Value pair for the payment id found on the legacy system
-      properties:
-        key:
-          type: string
-          example: internalPaymentId
-        value:
-          type: string
-          example: b5abdcde-7186-453a-a676-7f3955cef167
     Resource:
       type: object
       properties:
         resourceId:
           type: string
-        status:
-          $ref: '#/components/schemas/StatusResourceEnum'
         type:
           $ref: '#/components/schemas/ResourceTypeEnum'
+        status:
+          $ref: '#/components/schemas/StatusResourceEnum'
         legacyId:
           type: array
           items:
-            $ref: '#/components/schemas/ResourceLegacy'
-    ResourceLegacy:
+            $ref: '#/components/schemas/KeyValueObject'
+    ResourcePaymentId:
+      required:
+      - externalId
       type: object
-      description: Key/Value pair for the resource id found on the legacy system
       properties:
-        key:
+        externalId:
           type: string
-          example: paymentId
-        value:
-          type: string
-          example: b5abdcde-7186-453a-a676-7f3955cef167
+          nullable: false
+        legacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueObject'
     ResourceTypeEnum:
       enum:
-      - ACCOUNT
-      - CREDIT_CARD_ACCOUNT
       - CUSTOMER
-      - FINANCING
-      - INVOICE_FINANCING
+      - CREDIT_CARD_ACCOUNT
+      - ACCOUNT
       - LOAN
-      - PAYMENT
+      - FINANCING
       - UNARRANGED_ACCOUNT_OVERDRAFT
+      - INVOICE_FINANCING
+      - PAYMENT
       type: string
     ResponseConsentDetailSchema:
       type: object
@@ -722,61 +725,61 @@ components:
           - description: Meta records information
     Revocation:
       required:
-      - reason
       - revokedBy
+      - reason
       type: object
       properties:
         loggedUser:
           $ref: '#/components/schemas/LoggedUser'
-        reason:
-          allOf:
-          - $ref: '#/components/schemas/RevocationReason'
-          - nullable: false
         revokedBy:
           allOf:
           - $ref: '#/components/schemas/RevokedByEnum'
           - example: TPP
             nullable: false
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/RevocationReason'
+          - nullable: false
     RevocationReason:
       required:
       - code
       type: object
       properties:
-        additionalInformation:
-          maxLength: 140
-          type: string
-          example: Risco de fraude identificado
         code:
           allOf:
           - $ref: '#/components/schemas/RevocationReasonCodeEnum'
           - example: FRAUD
             nullable: false
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Risco de fraude identificado
     RevocationReasonCodeEnum:
       enum:
-      - ACCOUNT_CLOSURE
       - FRAUD
+      - ACCOUNT_CLOSURE
       - OTHER
       type: string
     RevokeConsentData:
       required:
-      - revocation
       - status
+      - revocation
       type: object
       properties:
-        revocation:
-          allOf:
-          - $ref: '#/components/schemas/Revocation'
-          - nullable: false
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           - example: REVOKED
             nullable: false
+        revocation:
+          allOf:
+          - $ref: '#/components/schemas/Revocation'
+          - nullable: false
     RevokedByEnum:
       enum:
+      - USER
       - ASPSP
       - TPP
-      - USER
       type: string
     SchedulePayment:
       required:
@@ -800,15 +803,15 @@ components:
       enum:
       - AUTHORISED
       - AWAITING_AUTHORISATION
-      - CONSUMED
       - REJECTED
+      - CONSUMED
       - REVOKED
       type: string
     StatusResourceEnum:
       enum:
       - AVAILABLE
-      - NON_SELECTED
       - UNAVAILABLE
+      - NON_SELECTED
       type: string
     UUID:
       format: uuid
