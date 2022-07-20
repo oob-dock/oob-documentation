@@ -52,6 +52,10 @@ Configuração usada como default:
 | error     |             | Tela para o evento de erro disparado pela lib                                        |
 |           | title       | Texto em destaque na tela                                                            |
 |           | description | Texto informando com mais detalhes o atual status                                    |
+| abort     |             | Mensagens para tela e botão de cancelamento                                          |
+|           | title       | Texto em destaque na tela                                                            |
+|           | description | Texto informando com mais detalhes sobre o cancelamento                              |
+|           | abortButton | Texto que irá aparecer no botão de cancelamento                                      |
 
 ## Exemplo de configuração
 
@@ -89,6 +93,11 @@ Configuração usada como default:
     "error": {
       "title": "Oops! Algo deu errado",
       "description": "Você será redirecionado de volta."
+    },
+    "abort": {
+      "abortButton": "Cancelar operação",
+      "title": "Operação cancelada!",
+      "description": "Você será redirecionado de volta!"
     }
   }
 }
