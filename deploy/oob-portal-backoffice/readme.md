@@ -58,14 +58,14 @@ JSON usado para *customização* do Portal Backoffice.
 O valor dessa variável deve ser um objeto JSON no formato de String com as
 propriedades definidas na documentação do [Portal Backoffice](../../portal-backoffice/customizacao/readme.md).
 
+**Observação**: O objeto JSON deve ter aspas simples ao invés de aspas duplas.
+
 **Importante**: Essa variável tem prioridade em relação a `webAppConfigUrl`, ou seja,
 caso `webAppConfigJson` seja definida, `webAppConfigUrl` não será utilizada.
 
-Ex: `"{ \"app\": { \"title\": \"Open Banking | Backoffice\", \"faviconPath\":
-\"./assets/favicon.ico\", \"copyright\": \"2021 Copyright by Open Banking\" },
-\"brand\": { \"name\": \"Open Banking\", \"path\": \"./assets/logo.svg\"  },
-\"sidebarStatus\": \"closed\", \"selectedTheme\": \"default\", \"themes\":
-[ { \"name\": \"default\", \"variables\": {} } ]}"`
+Ex: `"{'app':{'title':'Opus Open Banking | Backoffice','faviconPath':'./assets/favicon.ico',
+'copyright':'2021 Copyright by Opus Open Banking'},'brand':{'name':'Opus Open Banking','path':
+'./assets/logo.svg'},'sidebarStatus':'closed','selectedTheme':'default','themes':[{'name':'default','variables':{}}]}"`
 
 ### authClientSecretName
 
