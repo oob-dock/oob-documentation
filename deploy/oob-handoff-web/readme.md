@@ -29,7 +29,7 @@ em [Configuração do conteúdo da página de handoff](#referências).
 
 **Observação**: O objeto JSON deve ter aspas simples ao invés de aspas duplas,
 caso contrário haverá problema no momento da injeção do valor da variável
-durante a subida do módulo front-end.
+durante a inicialização do módulo front-end.
 
 **Importante**: Essa variável tem prioridade em relação a `oobCustomHandoffUrlConfig`,
 ou seja, caso `oobCustomHandoffJsonConfig` seja definida, `oobCustomHandoffUrlConfig`

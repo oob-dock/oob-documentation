@@ -60,7 +60,7 @@ propriedades definidas na documentação do [Portal Backoffice](../../portal-bac
 
 **Observação**: O objeto JSON deve ter aspas simples ao invés de aspas duplas,
 caso contrário haverá problema no momento da injeção do valor da variável
-durante a subida do módulo front-end.
+durante a inicialização do módulo front-end.
 
 **Importante**: Essa variável tem prioridade em relação a `webAppConfigUrl`, ou seja,
 caso `webAppConfigJson` seja definida, `webAppConfigUrl` não será utilizada.
