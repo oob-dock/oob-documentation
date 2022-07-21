@@ -46,8 +46,8 @@ Exemplo de uso:
 @set final_date = '<data_final> 23:59:59.999 -0300'
 
 SELECT
-    tab.metodo,
-    tab.url,
+    tab.metodo as "Método",
+    tab.url as "Url",
     coalesce(SUM(tab.qty) FILTER (WHERE date_part('month', tab."date") = '01'),0) AS "Janeiro",
     coalesce(SUM(tab.qty) FILTER (WHERE date_part('month', tab."date") = '02'),0) AS "Fevereiro",
     coalesce(SUM(tab.qty) FILTER (WHERE date_part('month', tab."date") = '03'),0) AS "Março",
@@ -74,8 +74,8 @@ order by tab.metodo,tab.url;
 @set final_date = '<data_final> 23:59:59.999 -0300'
 
 select
-    tab.metodo,
-    tab.url,
+    tab.metodo as "Método",
+    tab.url as "Url",
     coalesce(SUM(tab.qty) FILTER (WHERE date_part('month', tab."date") = '07'),0) AS "Julho",
     coalesce(SUM(tab.qty) FILTER (WHERE date_part('month', tab."date") = '08'),0) AS "Agosto",
     coalesce(SUM(tab.qty) FILTER (WHERE date_part('month', tab."date") = '09'),0) AS "Setembro",
