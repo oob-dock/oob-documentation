@@ -62,8 +62,7 @@ on (epm.id_endpoint = edp.id)
 where "date" between :initial_date and :final_date
 group by edp.endpoint_url, edp.endpoint_name, metodo, date_trunc('month',"date")) as tab
 group by tab.url, tab.metodo, tab.endpoint_name
-order by tab.url;
-order by tab.metodo,tab.url;
+order by tab.url, tab.metodo;
 
 ```
 
@@ -90,5 +89,5 @@ on (epm.id_endpoint = edp.id)
 where "date" between :initial_date and :final_date
 group by edp.endpoint_url, edp.endpoint_name, metodo, date_trunc('month',"date")) as tab
 group by tab.url, tab.metodo, tab.endpoint_name
-order by tab.url;
+order by tab.url, tab.metodo;
 ```
