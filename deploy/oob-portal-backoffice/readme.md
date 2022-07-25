@@ -89,10 +89,12 @@ Ex: `portal-backoffice-client-secret`
 Essa variável define o root path da aplicação do portal-backoffice.
 
 **Importante**: Ao adicionar essa variável alterações tem que ser feitas
-nas variáveis de postLogoutRedirectUris e redirectUris do authorization-server 
+nas variáveis de postLogoutRedirectUris e redirectUris do authorization-server
 [Mais detalhes aqui](../../portal-backoffice/federation-usuarios-internos/readme.md#configuração-do-client-do-portal-back-office)
 
-Ex: `portal` -> Acesso ao portal seria `<host>/portal`
+Ex: `portal`
+
+O acesso ao portal neste caso seria `<host>/portal`
 
 ## Exposição
 

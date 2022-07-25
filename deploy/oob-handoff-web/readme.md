@@ -71,7 +71,9 @@ biblioteca.
 
 - Essa variável define o root path da aplicação do handoff.
 
-Ex: `handoff` -> Acesso ao portal seria `<host>/handoff`
+Ex: `handoff`
+
+O acesso ao handoff neste caso seria `<host>/handoff`
 
 ## Referências
 
