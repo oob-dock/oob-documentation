@@ -67,6 +67,12 @@ biblioteca.
   oobCustomHandoffLibPath: "/auth/handoff/v1/oob-handoff.js"
 ```
 
+### oobCustomBasePath
+
+- Essa variável define o root path da aplicação do handoff.
+
+Ex: `handoff` -> Acesso ao portal seria `<host>/handoff`
+
 ## Referências
 
 **[Configuração do AS pro handoff](../oob-authorization-server/readme.md#HANDOFF\_RESOURCE\_URL)**
