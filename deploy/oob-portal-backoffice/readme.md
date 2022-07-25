@@ -46,11 +46,28 @@ Endereço público do endpoint usado para *customização* do Portal Backoffice.
 O retorno dessa API deve ser um objeto JSON com as propriedades definidas na
 documentação do [Portal Backoffice](../../portal-backoffice/customizacao/readme.md).
 
-Importante que esse endpoint esteja configurado para ser acessado pelo
-portal, assim evitando problema de CORS. Essa configuração pode ser feita pelo
-header `Access-Control-Allow-Origin`, configurando a url de domínio do portal.
+Essa configuração pode ser feita pelo header `Access-Control-Allow-Origin`, configurando
+o domínio da URL do portal.
 
 Ex: `https://kong.bank.com.br/backoffice-config`
+
+### webAppConfigJson
+
+JSON usado para *customização* do Portal Backoffice.
+
+O valor dessa variável deve ser um objeto JSON no formato de String com as
+propriedades definidas na documentação do [Portal Backoffice](../../portal-backoffice/customizacao/readme.md).
+
+**Observação**: O objeto JSON deve ter aspas simples ao invés de aspas duplas,
+caso contrário haverá problema no momento da injeção do valor da variável
+durante a inicialização do módulo front-end.
+
+**Importante**: Essa variável tem prioridade em relação a `webAppConfigUrl`, ou seja,
+caso `webAppConfigJson` seja definida, `webAppConfigUrl` não será utilizada.
+
+Ex: `"{'app':{'title':'Opus Open Banking | Backoffice','faviconPath':'./assets/favicon.ico',
+'copyright':'2021 Copyright by Opus Open Banking'},'brand':{'name':'Opus Open Banking','path':
+'./assets/logo.svg'},'sidebarStatus':'closed','selectedTheme':'default','themes':[{'name':'default','variables':{}}]}"`
 
 ### authClientSecretName
 
