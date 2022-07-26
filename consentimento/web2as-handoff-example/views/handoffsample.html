@@ -26,13 +26,13 @@
                 console.log('Handoff QR Read');
                 showQRRead();
             },
-            onHandoffTimedOut() {
+            onHandoffTimedOut(e) {
                 // Timeout do fluxo OIDC
                 console.log('Handoff timed-out');
-                showTimeout();
+                showTimeout(e);
             },
             onHandoffCompleted(e) {
-                // Timeout do fluxo OIDC
+                // Usuário aceitou o consentimento com sucesso
                 console.log('Handoff completedCommand', e);
                 showCompleted(e);
             },
@@ -64,12 +64,13 @@
             .append('<p>QR lido no seu celular</p><p>Mantenha essa janela aberta</p>');
     }
 
-    function showTimeout() {
+    function showTimeout(e) {
         $('#step')
             .empty()
             .append('<p>Tempo esgotado, tente novamente</p>');
-
         $('#abort').hide();
+
+        handleRedirect(e?.errorCommand?.redirect);
     }
 
     function showCompleted(e) {
