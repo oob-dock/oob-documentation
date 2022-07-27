@@ -84,6 +84,18 @@ de um *secret* forte para ser definido aqui (um UUID por exemplo).
 
 Ex: `portal-backoffice-client-secret`
 
+### basePath
+
+Essa variável define o root path da aplicação do portal-backoffice.
+
+**Importante**: Ao adicionar essa variável alterações tem que ser feitas
+nas variáveis de postLogoutRedirectUris e redirectUris do authorization-server
+[Mais detalhes aqui](../../portal-backoffice/federation-usuarios-internos/readme.md#configuração-do-client-do-portal-back-office)
+
+Ex: `portal`
+
+O acesso ao portal neste caso seria `<host>/portal`
+
 ## Exposição
 
 Como o acesso ao Portal Back Office não é feito através do Kong, um ingress
