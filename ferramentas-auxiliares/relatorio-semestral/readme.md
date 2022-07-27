@@ -81,15 +81,15 @@ a fim de facilitar a listagem das URLs dos serviços disponibilizados.
 
 Endpoints - Fase 3 Iniciação de Pagamento
 
-| Endpoint                              | Categoria     |
-| ------------------------------------- | ------------- |
-| /consents/v1/consents                 | CONSENTIMENTO |
-| /consents/v1/consents/{consentId}     | CONSENTIMENTO |
-| /payments/v1/consents                 | CONSENTIMENTO |
-| /payments/v1/consents/{consentId}     | CONSENTIMENTO |
-| /payments/v1/pix/payments             | PAGAMENTO PIX |
-| /payments/v1/pix/payments/{paymentId} | PAGAMENTO PIX |
-| /resources/v1/resources               | RECURSOS      |
+| Endpoint                              | Categoria                         |
+| ------------------------------------- | --------------------------------- |
+| /consents/v1/consents                 | CONSENTIMENTO DE COMPARTILHAMENTO |
+| /consents/v1/consents/{consentId}     | CONSENTIMENTO DE COMPARTILHAMENTO |
+| /payments/v1/consents                 | CONSENTIMENTO DE PAGAMENTO        |
+| /payments/v1/consents/{consentId}     | CONSENTIMENTO DE PAGAMENTO        |
+| /payments/v1/pix/payments             | PAGAMENTO PIX                     |
+| /payments/v1/pix/payments/{paymentId} | PAGAMENTO PIX                     |
+| /resources/v1/resources               | RECURSOS                          |
 
 Endpoints - Fase 2 Dados Financeiros
 
@@ -117,11 +117,11 @@ Endpoints - Fase 2 Dados Financeiros
 | /loans/v1/contracts/{contractId}/warranties                                          | EMPRÉSTIMOS          |
 | /loans/v1/contracts/{contractId}/payments                                            | EMPRÉSTIMOS          |
 | /loans/v1/contracts/{contractId}/scheduled-instalments                               | EMPRÉSTIMOS          |
-| /financings/v1/contracts                                                             | FINANCIMANETO        |
-| /financings/v1/contracts/{contractId}                                                | FINANCIMANETO        |
-| /financings/v1/contracts/{contractId}/warranties                                     | FINANCIMANETO        |
-| /financings/v1/contracts/{contractId}/payments                                       | FINANCIMANETO        |
-| /financings/v1/contracts/{contractId}/scheduled-instalments                          | FINANCIMANETO        |
+| /financings/v1/contracts                                                             | FINANCIAMENTO        |
+| /financings/v1/contracts/{contractId}                                                | FINANCIAMENTO        |
+| /financings/v1/contracts/{contractId}/warranties                                     | FINANCIAMENTO        |
+| /financings/v1/contracts/{contractId}/payments                                       | FINANCIAMENTO        |
+| /financings/v1/contracts/{contractId}/scheduled-instalments                          | FINANCIAMENTO        |
 | /unarranged-accounts-overdraft/v1/contracts                                          | ADIANTAMENTOS        |
 | /unarranged-accounts-overdraft/v1/contracts/{contractId}                             | ADIANTAMENTOS        |
 | /unarranged-accounts-overdraft/v1/contracts/{contractId}/warranties                  | ADIANTAMENTOS        |
@@ -187,8 +187,7 @@ on (epm.id_endpoint = edp.id)
 WHERE "date" BETWEEN :initial_date AND :final_date AND edp.endpoint_url = ANY(:endpoints_services)
 GROUP BY edp.endpoint_url, edp.endpoint_name, metodo, date_trunc('month',"date")) AS tab
 GROUP BY tab.url, tab.metodo, tab.endpoint_name
-ORDER BY tab.url;
-ORDER BY tab.metodo,tab.url;
+ORDER BY tab.url, tab.metodo;
 
 ```
 
@@ -216,7 +215,7 @@ on (epm.id_endpoint = edp.id)
 WHERE "date" BETWEEN :initial_date AND :final_date AND edp.endpoint_url = ANY(:endpoints_services)
 GROUP BY edp.endpoint_url, edp.endpoint_name, metodo, date_trunc('month',"date")) AS tab
 GROUP BY tab.url, tab.metodo, tab.endpoint_name
-ORDER BY tab.url;
+ORDER BY tab.url, tab.metodo;
 ```
 
 ### Disponibilidade média - Extração de dados do primeiro semestre
