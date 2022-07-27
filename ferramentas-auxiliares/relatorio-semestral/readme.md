@@ -1,6 +1,9 @@
-# Relatório semestral
+# Scripts SQL - Relatório semestral
 
 - [Introdução](#introdução)
+- [Parâmetros de entrada](#parâmetros-de-entrada)
+  - [Período dos dados](#período-dos-dados)
+  - [Serviços desejados](#lista-dos-serviços-desejados)
 - [Scripts - Chamadas de APIs](#scripts---chamadas-de-apis)
   - [Quantidade de chamadas de API - Primeiro semestre](#quantidade-de-chamadas-de-api---extração-de-dados-do-primeiro-semestre)
   - [Quantidade de chamadas de API - Segundo semestre](#quantidade-de-chamadas-de-api---extração-de-dados-do-segundo-semestre)
@@ -21,12 +24,19 @@ As informações que poderão ser obtidas com eles são:
 **OBS:** fica a cargo de nossos clientes
 rodar os scripts e formatar as informações da forma e no período exigido pelo OBB.
 
-## Scripts - Chamadas de APIs
+## Parâmetros de entrada
 
-Os scripts SQL fornecidos nessa secção devem ser operados no
-**banco de dados do OOB-Status**.
-Antes de utilizá-los, deve-se alterar os campos '<data_inicial>' e '<data_final>'
-pelos valores do período em que se deseja obter as informações.
+Antes de utilizar os scripts SQL fornecidos pela Opus, deve-se alterar os campos
+'<data_inicial>', '<data_final>' e '<service_1_url>'
+pelos valores do período e pelas urls dos serviços que se deseja obter as informações.
+
+Nesta seção, serão apresentados a formatação e os valores possíveis para cada um
+dos parâmetros.
+
+### Período dos dados
+
+Os campos '<data_inicial>' e '<data_final>' definem o período em que se deseja
+obter as informações.
 
 A formatação para ambos os campos é **YYYY-MM-DD**.
 
@@ -48,11 +58,117 @@ Exemplo de uso para disponibilidade média:
 @set final_date = '2022-06-30'
 ```
 
+### Lista dos serviços desejados
+
+O parâmetro 'endpoints_services' é um parâmetro do tipo array[string], sendo necessário
+alterar o campo '<service_1_url>' por todas as URLs dos serviços disponibilizados
+pela entidade parceira.
+
+Exemplo para obtenção dos serviços da fase 3 - Iniciação de Pagamento:
+
+```sql
+@set endpoints_services = array ['/consents/v1/consents','/consents/v1/consents/{consentId}', '/payments/v1/consents', '/payments/v1/consents/{consentId}', '/payments/v1/pix/payments', '/payments/v1/pix/payments/{paymentId}', '/resources/v1/resources']
+```
+
+Exemplo para obtenção dos serviços da fase 2 - Dados Cadastrais:
+
+```sql
+@set endpoints_services = array ['/customers/v1/personal/identifications','/customers/v1/business/identifications', '/customers/v1/personal/qualifications', '/customers/v1/business/qualifications', '/customers/v1/personal/financial-relations', '/customers/v1/business/financial-relations']
+```
+
+Logo abaixo são apresentadas tabelas com todos os endpoints divididos em subgrupos
+a fim de facilitar a listagem das URLs dos serviços disponibilizados.
+
+Endpoints - Fase 3 Iniciação de Pagamento
+
+| Endpoint                              | Categoria                         |
+| ------------------------------------- | --------------------------------- |
+| /consents/v1/consents                 | CONSENTIMENTO DE COMPARTILHAMENTO |
+| /consents/v1/consents/{consentId}     | CONSENTIMENTO DE COMPARTILHAMENTO |
+| /payments/v1/consents                 | CONSENTIMENTO DE PAGAMENTO        |
+| /payments/v1/consents/{consentId}     | CONSENTIMENTO DE PAGAMENTO        |
+| /payments/v1/pix/payments             | PAGAMENTO PIX                     |
+| /payments/v1/pix/payments/{paymentId} | PAGAMENTO PIX                     |
+| /resources/v1/resources               | RECURSOS                          |
+
+Endpoints - Fase 2 Dados Financeiros
+
+| Endpoint                                                                             | Categoria            |
+| ------------------------------------------------------------------------------------ | -------------------- |
+| /customers/v1/personal/identifications                                               | DADOS CADASTRAIS     |
+| /customers/v1/business/identifications                                               | DADOS CADASTRAIS     |
+| /customers/v1/personal/qualifications                                                | DADOS CADASTRAIS     |
+| /customers/v1/business/qualifications                                                | DADOS CADASTRAIS     |
+| /customers/v1/personal/financial-relations                                           | DADOS CADASTRAIS     |
+| /customers/v1/business/financial-relations                                           | DADOS CADASTRAIS     |
+| /credit-cards-accounts/v1/accounts                                                   | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}                             | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/limits                      | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/transactions                | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/bills                       | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/bills/{billId}/transactions | CARTÕES DE CRÉDITO   |
+| /accounts/v1/accounts                                                                | CONTAS               |
+| /accounts/v1/accounts/{accountId}                                                    | CONTAS               |
+| /accounts/v1/accounts/{accountId}/balances                                           | CONTAS               |
+| /accounts/v1/accounts/{accountId}/transactions                                       | CONTAS               |
+| /accounts/v1/accounts/{accountId}/overdraft-limits                                   | CONTAS               |
+| /loans/v1/contracts                                                                  | EMPRÉSTIMOS          |
+| /loans/v1/contracts/{contractId}                                                     | EMPRÉSTIMOS          |
+| /loans/v1/contracts/{contractId}/warranties                                          | EMPRÉSTIMOS          |
+| /loans/v1/contracts/{contractId}/payments                                            | EMPRÉSTIMOS          |
+| /loans/v1/contracts/{contractId}/scheduled-instalments                               | EMPRÉSTIMOS          |
+| /financings/v1/contracts                                                             | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}                                                | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}/warranties                                     | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}/payments                                       | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}/scheduled-instalments                          | FINANCIAMENTOS       |
+| /unarranged-accounts-overdraft/v1/contracts                                          | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v1/contracts/{contractId}                             | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v1/contracts/{contractId}/warranties                  | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v1/contracts/{contractId}/payments                    | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v1/contracts/{contractId}/scheduled-instalments       | ADIANTAMENTOS        |
+| /invoice-financings/v1/contracts                                                     | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v1/contracts/{contractId}                                        | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v1/contracts/{contractId}/warranties                             | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v1/contracts/{contractId}/payments                               | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v1/contracts/{contractId}/scheduled-instalments                  | DIREITOS CREDITÓRIOS |
+
+Endpoints - Fase 1 Dados Abertos
+
+| Endpoint                                                    | Categoria             |
+| ----------------------------------------------------------- | --------------------- |
+| /products-services/v1/personal-accounts                     | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/business-accounts                     | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/personal-loans                        | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/business-loans                        | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/personal-financings                   | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/business-financings                   | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/personal-invoice-financings           | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/business-invoice-financings           | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/personal-credit-cards                 | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/business-credit-cards                 | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/personal-unarranged-account-overdraft | PRODUTOS E SERVIÇOS   |
+| /products-services/v1/business-unarranged-account-overdraft | PRODUTOS E SERVIÇOS   |
+| /channels/v1/branches                                       | CANAIS DE ATENDIMENTO |
+| /channels/v1/electronic-channels                            | CANAIS DE ATENDIMENTO |
+| /channels/v1/phone-channels                                 | CANAIS DE ATENDIMENTO |
+| /channels/v1/banking-agents                                 | CANAIS DE ATENDIMENTO |
+| /channels/v1/shared-automated-teller-machines               | CANAIS DE ATENDIMENTO |
+
+## Scripts - Chamadas de APIs
+
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Status** e devem ser utilizados de acordo com o período
+(primeiro ou segundo semestre) e o tipo de informação desejada (quantidade de
+chamadas e disponibilidade média). Caso surja alguma dúvida da formatação dos
+parâmetros de entrada, verificar seção [Parâmetros de Entrada](#parâmetros-de-entrada).
+
 ### Quantidade de chamadas de API - Extração de dados do primeiro semestre
 
 ```sql
 @set initial_date = '<data_inicial> 00:00:00.000 -0300'
 @set final_date = '<data_final> 23:59:59.999 -0300'
+@set endpoints_services = array ['<service_1_url>']
 
 SELECT
     tab.metodo AS "Método",
@@ -68,11 +184,10 @@ FROM
 FROM public.endpoint_metric epm
 LEFT JOIN public.endpoint edp 
 on (epm.id_endpoint = edp.id)
-WHERE "date" BETWEEN :initial_date AND :final_date
+WHERE "date" BETWEEN :initial_date AND :final_date AND edp.endpoint_url = ANY(:endpoints_services)
 GROUP BY edp.endpoint_url, edp.endpoint_name, metodo, date_trunc('month',"date")) AS tab
 GROUP BY tab.url, tab.metodo, tab.endpoint_name
-ORDER BY tab.url;
-ORDER BY tab.metodo,tab.url;
+ORDER BY tab.url, tab.metodo;
 
 ```
 
@@ -81,6 +196,7 @@ ORDER BY tab.metodo,tab.url;
 ```sql
 @set initial_date = '<data_inicial> 00:00:00.000 -0300'
 @set final_date = '<data_final> 23:59:59.999 -0300'
+@set endpoints_services = array ['<service_1_url>']
 
 SELECT
     tab.metodo AS "Método",
@@ -96,10 +212,10 @@ FROM
 FROM public.endpoint_metric epm
 LEFT JOIN public.endpoint edp 
 on (epm.id_endpoint = edp.id)
-WHERE "date" BETWEEN :initial_date AND :final_date
+WHERE "date" BETWEEN :initial_date AND :final_date AND edp.endpoint_url = ANY(:endpoints_services)
 GROUP BY edp.endpoint_url, edp.endpoint_name, metodo, date_trunc('month',"date")) AS tab
 GROUP BY tab.url, tab.metodo, tab.endpoint_name
-ORDER BY tab.url;
+ORDER BY tab.url, tab.metodo;
 ```
 
 ### Disponibilidade média - Extração de dados do primeiro semestre
@@ -107,6 +223,7 @@ ORDER BY tab.url;
 ```sql
 @set initial_date = '<data_inicial>'
 @set final_date = '<data_final>'
+@set endpoints_services = array ['<service_1_url>']
 WITH
 result_tab AS (
   WITH
@@ -139,6 +256,7 @@ result_tab AS (
     )
     SELECT coalesce (year, to_char(to_date(:initial_date, 'YYYY'), 'YYYY')) AS year, coalesce(month, to_char(to_date(:initial_date, 'YYYY-MM-DD'), 'Mon')) AS month, endpoint.id AS id_endpoint, seconds_downtime FROM month_downtime_table
     FULL OUTER JOIN endpoint on month_downtime_table.id = endpoint.id
+    WHERE endpoint_url = ANY(:endpoints_services)
   )
   SELECT
   month_downtime_table.year,
@@ -175,6 +293,7 @@ having num_nulls(min(year) FILTER (WHERE year = to_char(to_date(:initial_date, '
 ```sql
 @set initial_date = '<data_inicial>'
 @set final_date = '<data_final>'
+@set endpoints_services = array ['<service_1_url>']
 with
 result_tab AS (
   with
@@ -207,6 +326,7 @@ month_totaltime_table AS (
     )
     SELECT coalesce (year, to_char(to_date(:initial_date, 'YYYY'), 'YYYY')) AS year, coalesce(month, to_char(to_date(:initial_date, 'YYYY-MM-DD'), 'Mon')) AS month, endpoint.id AS id_endpoint, seconds_downtime FROM month_downtime_table
     FULL OUTER JOIN endpoint on month_downtime_table.id = endpoint.id
+    WHERE endpoint_url = ANY(:endpoints_services)
   )
   SELECT
   month_downtime_table.year,
