@@ -101,12 +101,12 @@ Endpoints - Fase 2 Dados Financeiros
 | /customers/v1/business/qualifications                                                | DADOS CADASTRAIS     |
 | /customers/v1/personal/financial-relations                                           | DADOS CADASTRAIS     |
 | /customers/v1/business/financial-relations                                           | DADOS CADASTRAIS     |
-| /credit-cards-accounts/v1/accounts                                                   | CARTÃO DE CRÉDITO    |
-| /credit-cards-accounts/v1/accounts/{creditCardAccountId}                             | CARTÃO DE CRÉDITO    |
-| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/limits                      | CARTÃO DE CRÉDITO    |
-| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/transactions                | CARTÃO DE CRÉDITO    |
-| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/bills                       | CARTÃO DE CRÉDITO    |
-| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/bills/{billId}/transactions | CARTÃO DE CRÉDITO    |
+| /credit-cards-accounts/v1/accounts                                                   | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}                             | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/limits                      | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/transactions                | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/bills                       | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v1/accounts/{creditCardAccountId}/bills/{billId}/transactions | CARTÕES DE CRÉDITO   |
 | /accounts/v1/accounts                                                                | CONTAS               |
 | /accounts/v1/accounts/{accountId}                                                    | CONTAS               |
 | /accounts/v1/accounts/{accountId}/balances                                           | CONTAS               |
@@ -117,11 +117,11 @@ Endpoints - Fase 2 Dados Financeiros
 | /loans/v1/contracts/{contractId}/warranties                                          | EMPRÉSTIMOS          |
 | /loans/v1/contracts/{contractId}/payments                                            | EMPRÉSTIMOS          |
 | /loans/v1/contracts/{contractId}/scheduled-instalments                               | EMPRÉSTIMOS          |
-| /financings/v1/contracts                                                             | FINANCIAMENTO        |
-| /financings/v1/contracts/{contractId}                                                | FINANCIAMENTO        |
-| /financings/v1/contracts/{contractId}/warranties                                     | FINANCIAMENTO        |
-| /financings/v1/contracts/{contractId}/payments                                       | FINANCIAMENTO        |
-| /financings/v1/contracts/{contractId}/scheduled-instalments                          | FINANCIAMENTO        |
+| /financings/v1/contracts                                                             | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}                                                | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}/warranties                                     | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}/payments                                       | FINANCIAMENTOS       |
+| /financings/v1/contracts/{contractId}/scheduled-instalments                          | FINANCIAMENTOS       |
 | /unarranged-accounts-overdraft/v1/contracts                                          | ADIANTAMENTOS        |
 | /unarranged-accounts-overdraft/v1/contracts/{contractId}                             | ADIANTAMENTOS        |
 | /unarranged-accounts-overdraft/v1/contracts/{contractId}/warranties                  | ADIANTAMENTOS        |
