@@ -76,7 +76,7 @@ Exemplo para obtenção dos serviços da fase 2 - Dados Cadastrais:
 @set endpoints_services = array ['/customers/v1/personal/identifications','/customers/v1/business/identifications', '/customers/v1/personal/qualifications', '/customers/v1/business/qualifications', '/customers/v1/personal/financial-relations', '/customers/v1/business/financial-relations']
 ```
 
-Logo abaixo são apresentadas tabelas com todos os endpoints dividos em subgrupos
+Logo abaixo são apresentadas tabelas com todos os endpoints divididos em subgrupos
 a fim de facilitar a listagem das URLs dos serviços disponibilizados.
 
 Endpoints - Fase 3 Iniciação de Pagamento
@@ -157,7 +157,7 @@ Endpoints - Fase 1 Dados Abertos
 
 ## Scripts - Chamadas de APIs
 
-Os scripts SQL fornecidos nessa secção devem ser operados no
+Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Status** e devem ser utilizados de acordo com o período
 (primeiro ou segundo semestre) e o tipo de informação desejada (quantidade de
 chamadas e disponibilidade média). Caso surja alguma dúvida da formatação dos
