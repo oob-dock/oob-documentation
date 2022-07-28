@@ -6,8 +6,8 @@ Open Banking Brasil:
 
 &nbsp;
 
-- [Canais de atendimento](https://openbanking-brasil.github.io/areadesenvolvedor/#api-canais-de-atendimento-v1-0-2)
-- [Produtos e Serviços](https://openbanking-brasil.github.io/areadesenvolvedor/#api-produtos-e-servicos-v1-0-2)
+- [Canais de atendimento](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/33686119/Informa+es+T+cnicas+-+Canais+de+Atendimentos+-+v1.0.2)
+- [Produtos e Serviços](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1736880/Informa+es+T+cnicas+-+Produtos+e+Servi+os+-+v1.0.2)
 
 &nbsp;
 
@@ -57,7 +57,7 @@ definida no plugin como:
 
 &nbsp;
 
-### Channels
+### Canais de atendimento
 
 &nbsp;
 
@@ -69,23 +69,23 @@ definida no plugin como:
 | /banking-agents                   | ```direct:getBankingAgents```                 |
 | /shared-automated-teller-machines | ```direct:getSharedAutomatedTellerMachines``` |
 
-### Accounts
+### Produtos e Serviços
 
 &nbsp;
 
-| Endpoint                                     | Rota do Camel                                             |
-|----------------------------------------------|-----------------------------------------------------------|
-| /personal-accounts                           | ```direct:getPersonalAccounts```                          |
-| /business-accounts                           | ```direct:getBusinessAccounts```                          |
-| /personal-credit-cards                       | ```direct:getPersonalCreditCards```                       |
-| /business-credit-cards                       | ```direct:getBusinessCreditCards```                       |
-| /personal-financings                         | ```direct:getPersonalFinancings```                        |
-| /business-financings                         | ```direct:getBusinessFinancings```                        |
-| /personal-invoice-financings                 | ```direct:getPersonalInvoiceFinancings```                 |
-| /business-invoice-financings                 | ```direct:getBusinessInvoiceFinancings```                 |
-| /personal-loans                              | ```direct:getPersonalLoans```                             |
-| /business-loans                              | ```direct:getBusinessLoans```                             |
-| /personal-unarranged-account-overdraft       | ```direct:getPersonalUnarrangedAccountOverdraft```        |
-| /business-unarranged-account-overdraft       | ```direct:getBusinessUnarrangedAccountOverdraft```        |
+| Endpoint                                     | Rota do Camel                                      |
+|----------------------------------------------|----------------------------------------------------|
+| /personal-accounts                           | ```direct:getPersonalAccounts```                   |
+| /business-accounts                           | ```direct:getBusinessAccounts```                   |
+| /personal-credit-cards                       | ```direct:getPersonalCreditCards```                |
+| /business-credit-cards                       | ```direct:getBusinessCreditCards```                |
+| /personal-financings                         | ```direct:getPersonalFinancings```                 |
+| /business-financings                         | ```direct:getBusinessFinancings```                 |
+| /personal-invoice-financings                 | ```direct:getPersonalInvoiceFinancings```          |
+| /business-invoice-financings                 | ```direct:getBusinessInvoiceFinancings```          |
+| /personal-loans                              | ```direct:getPersonalLoans```                      |
+| /business-loans                              | ```direct:getBusinessLoans```                      |
+| /personal-unarranged-account-overdraft       | ```direct:getPersonalUnarrangedAccountOverdraft``` |
+| /business-unarranged-account-overdraft       | ```direct:getBusinessUnarrangedAccountOverdraft``` |
 
 &nbsp;
