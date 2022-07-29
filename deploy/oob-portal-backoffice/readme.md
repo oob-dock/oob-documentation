@@ -65,9 +65,13 @@ durante a inicialização do módulo front-end.
 **Importante**: Essa variável tem prioridade em relação a `webAppConfigUrl`, ou seja,
 caso `webAppConfigJson` seja definida, `webAppConfigUrl` não será utilizada.
 
-Ex: `"{'app':{'title':'Opus Open Banking | Backoffice','faviconPath':'./assets/favicon.ico',
+Ex: `"{'app':{'title':'Opus Open Banking | Backoffice','faviconPath':'./backoffice_base_path_placeholder/assets/favicon.ico',
 'copyright':'2021 Copyright by Opus Open Banking'},'brand':{'name':'Opus Open Banking','path':
-'./assets/logo.svg'},'sidebarStatus':'closed','selectedTheme':'default','themes':[{'name':'default','variables':{}}]}"`
+'./backoffice_base_path_placeholder/assets/logo.svg'},'sidebarStatus':'closed','selectedTheme':'default','themes':[{'name':'default','variables':{}}]}"`
+
+**Importante**: Lembrar que se os paths forem para arquivos do projeto será
+necessário adicionar o `/backoffice_base_path_placeholder/` como no exemplo acima
+para que o base path possa ser modificado via variável [basePath](#basePath).
 
 ### authClientSecretName
 
