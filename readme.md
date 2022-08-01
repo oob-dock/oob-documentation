@@ -6,6 +6,7 @@
   - [Geração de Consentimento com aplicativo da instituição](consentimento/app2as/readme.md)
   - [Hybrid-flow com handoff (biblioteca javascript)](consentimento/app2as-handoff/readme.md)
 - [Integração plugins Camel](integração-plugin/readme.md)
+  - [Open data (Fase 1)](integração-plugin/open-data/readme.md)
   - [Discovery de recursos](integração-plugin/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
   - [Financial data (Fase 2)](integração-plugin/financial-data/readme.md)
   - [Payments (Fase 3)](integração-plugin/payments/readme.md)
