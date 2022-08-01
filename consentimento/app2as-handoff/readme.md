@@ -65,7 +65,7 @@ oobHandoff.init({
     onHandoffQRRead: function() {
         // Usuário realizou a leitura do QR ou digitou o código alternativo
     },
-    onHandoffTimedOut: function() {
+    onHandoffTimedOut: function(handoffError) {
         // Tempo para conclusão do consentimento expirado
     },
     onHandoffCompleted: function(handoffCompleted) {
