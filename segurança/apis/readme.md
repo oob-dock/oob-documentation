@@ -354,6 +354,7 @@
 | DELETE   | /v1/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | POST     | /v2/consents        | Sim          | consents         | Não        | Não              | Sim  |                    |
 | DELETE   | /v2/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| GET      | /v2/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 
 ### Resources
 
