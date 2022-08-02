@@ -3,108 +3,12 @@
     {
       "contractId": [
         {
-          "key": "pk_yellow",
-          "value": "5"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "6"
-        },
-        {
-          "key": "pk_brown",
-          "value": "6"
-        },
-        {
-          "key": "pk_green",
-          "value": "value3"
-        }
-      ],
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "productType": "FINANCIAMENTOS",
-      "productSubType": "AQUISICAO_BENS_VEICULOS_AUTOMOTORES",
-      "ipocCode": "92792126019929279212650822221989319252576"
-    },
-    {
-      "contractId": [
-        {
-          "key": "pk_green",
-          "value": "20220511"
-        },
-        {
-          "key": "pk_green",
-          "value": "2"
-        },
-        {
-          "key": "pk_green",
-          "value": "2"
-        }
-      ],
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "productType": "FINANCIAMENTOS",
-      "productSubType": "AQUISICAO_BENS_VEICULOS_AUTOMOTORES",
-      "ipocCode": "92792126019929279212650822221989319252576"
-    },
-    {
-      "contractId": [
-        {
-          "key": "pk_green",
-          "value": "value1"
-        },
-        {
-          "key": "pk_green",
-          "value": "20220511"
-        },
-        {
-          "key": "pk_brown",
-          "value": "2"
-        }
-      ],
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "productType": "FINANCIAMENTOS",
-      "productSubType": "AQUISICAO_BENS_VEICULOS_AUTOMOTORES",
-      "ipocCode": "92792126019929279212650822221989319252576"
-    },
-    {
-      "contractId": [
-        {
-          "key": "pk_yellow",
-          "value": "6"
-        },
-        {
-          "key": "pk_brown",
-          "value": "3"
-        },
-        {
-          "key": "pk_green",
-          "value": "4"
-        },
-        {
-          "key": "pk_brown",
-          "value": "1"
-        }
-      ],
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "productType": "FINANCIAMENTOS",
-      "productSubType": "AQUISICAO_BENS_VEICULOS_AUTOMOTORES",
-      "ipocCode": "92792126019929279212650822221989319252576"
-    },
-    {
-      "contractId": [
-        {
-          "key": "pk_brown",
-          "value": "5"
-        },
-        {
-          "key": "pk_green",
-          "value": "4"
-        },
-        {
-          "key": "pk_brown",
-          "value": "6"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
       "brandName": "Organização A",
