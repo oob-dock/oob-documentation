@@ -1,0 +1,184 @@
+{
+  "data": [
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "transactionId": [
+        {
+          "key": "pk_yellow",
+          "value": "3"
+        },
+        {
+          "key": "pk_green",
+          "value": "2"
+        },
+        {
+          "key": "pk_brown",
+          "value": "20220511"
+        },
+        {
+          "key": "pk_green",
+          "value": "value1"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "20220511"
+        }
+      ],
+      "transactionalAdditionalInfo": "UC7\"+1H'}",
+      "feeTypeAdditionalInfo": ")nVk*p ",
+      "feeType": "ANUIDADE",
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "chargeNumber": 12,
+      "billId": [
+        {
+          "key": "pk_green",
+          "value": "value2"
+        }
+      ],
+      "paymentType": "A_VISTA",
+      "otherCreditsAdditionalInfo": "8Fn,MM",
+      "payeeMCC": 5137
+    },
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "feeType": "ANUIDADE",
+      "billId": [
+        {
+          "key": "pk_brown",
+          "value": "6"
+        },
+        {
+          "key": "pk_brown",
+          "value": "4"
+        }
+      ],
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "chargeNumber": 12,
+      "transactionId": [
+        {
+          "key": "pk_brown",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "value2"
+        },
+        {
+          "key": "pk_brown",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "value3"
+        }
+      ],
+      "feeTypeAdditionalInfo": "VRc",
+      "paymentType": "A_VISTA",
+      "otherCreditsAdditionalInfo": "M4oW]G'{{rl",
+      "transactionalAdditionalInfo": ";]",
+      "payeeMCC": 5137
+    },
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "transactionalAdditionalInfo": "X(h`Z",
+      "billId": [
+        {
+          "key": "pk_brown",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "3"
+        },
+        {
+          "key": "pk_green",
+          "value": "value2"
+        },
+        {
+          "key": "pk_green",
+          "value": "20220511"
+        }
+      ],
+      "feeType": "ANUIDADE",
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "payeeMCC": 5137,
+      "paymentType": "A_VISTA",
+      "chargeNumber": 12,
+      "feeTypeAdditionalInfo": ">d{?",
+      "otherCreditsAdditionalInfo": "DZ",
+      "transactionId": [
+        {
+          "key": "pk_yellow",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "4"
+        },
+        {
+          "key": "pk_brown",
+          "value": "value3"
+        },
+        {
+          "key": "pk_brown",
+          "value": "value1"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1,
+    "requestDateTime": "2021-05-21T08:30:00Z"
+  }
+}

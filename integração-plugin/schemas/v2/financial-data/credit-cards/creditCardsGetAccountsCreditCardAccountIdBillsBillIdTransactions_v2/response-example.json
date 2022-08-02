@@ -1,0 +1,50 @@
+{
+  "data": [
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "billId": [
+        {
+          "key": "pk_green",
+          "value": "5"
+        }
+      ],
+      "chargeNumber": 12,
+      "transactionalAdditionalInfo": "RPbIb7G",
+      "transactionId": [
+        {
+          "key": "pk_green",
+          "value": "value1"
+        },
+        {
+          "key": "pk_brown",
+          "value": "2"
+        }
+      ],
+      "feeType": "ANUIDADE",
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "otherCreditsAdditionalInfo": "5Ndp(Oc%",
+      "paymentType": "A_VISTA",
+      "feeTypeAdditionalInfo": "iI#X+<B",
+      "payeeMCC": 5137
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1,
+    "requestDateTime": "2021-05-21T08:30:00Z"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "data": [
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "partiePersonType": "PESSOA_NATURAL",
+      "partieCheckDigit": "4",
+      "partieCnpjCpf": "43908445778",
+      "partieBranchCode": "6272",
+      "transactionId": [
+        {
+          "key": "pk_green",
+          "value": "value2"
+        },
+        {
+          "key": "pk_yellow",
+          "value": "value2"
+        }
+      ],
+      "partieCompeCode": "001",
+      "partieNumber": "67890854360"
+    },
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "partieBranchCode": "6272",
+      "partiePersonType": "PESSOA_NATURAL",
+      "transactionId": [
+        {
+          "key": "pk_brown",
+          "value": "3"
+        },
+        {
+          "key": "pk_green",
+          "value": "5"
+        }
+      ],
+      "partieCompeCode": "001",
+      "partieCheckDigit": "4",
+      "partieCnpjCpf": "43908445778",
+      "partieNumber": "67890854360"
+    },
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "transactionId": [
+        {
+          "key": "pk_brown",
+          "value": "1"
+        },
+        {
+          "key": "pk_brown",
+          "value": "value3"
+        },
+        {
+          "key": "pk_brown",
+          "value": "1"
+        }
+      ],
+      "partieCheckDigit": "4",
+      "partieCompeCode": "001",
+      "partieBranchCode": "6272",
+      "partieCnpjCpf": "43908445778",
+      "partiePersonType": "PESSOA_NATURAL",
+      "partieNumber": "67890854360"
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1,
+    "requestDateTime": "2021-05-21T08:30:00Z"
+  }
+}
