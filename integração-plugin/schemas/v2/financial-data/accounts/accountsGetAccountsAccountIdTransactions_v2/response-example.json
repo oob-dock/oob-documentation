@@ -1,0 +1,143 @@
+{
+  "data": [
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "partiePersonType": "PESSOA_NATURAL",
+      "partieCheckDigit": "4",
+      "partieNumber": "67890854360",
+      "partieBranchCode": "6272",
+      "partieCompeCode": "001",
+      "partieCnpjCpf": "43908445778"
+    },
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "partieBranchCode": "6272",
+      "partieCompeCode": "001",
+      "partieNumber": "67890854360",
+      "partiePersonType": "PESSOA_NATURAL",
+      "partieCheckDigit": "4",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "partieCnpjCpf": "43908445778"
+    },
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "partieCheckDigit": "4",
+      "partieCompeCode": "001",
+      "partiePersonType": "PESSOA_NATURAL",
+      "partieBranchCode": "6272",
+      "partieNumber": "67890854360",
+      "partieCnpjCpf": "43908445778",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    },
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "partieBranchCode": "6272",
+      "partieNumber": "67890854360",
+      "partieCheckDigit": "4",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "partieCnpjCpf": "43908445778",
+      "partieCompeCode": "001",
+      "partiePersonType": "PESSOA_NATURAL"
+    },
+    {
+      "completedAuthorisedPaymentType": "TRANSACAO_EFETIVADA",
+      "creditDebitType": "DEBITO",
+      "transactionName": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8",
+      "type": "PIX",
+      "transactionAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-01-07",
+      "partieCompeCode": "001",
+      "partiePersonType": "PESSOA_NATURAL",
+      "partieCnpjCpf": "43908445778",
+      "partieCheckDigit": "4",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "partieNumber": "67890854360",
+      "partieBranchCode": "6272"
+    }
+  ],
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": "2021-05-21T08:30:00Z"
+  }
+}
