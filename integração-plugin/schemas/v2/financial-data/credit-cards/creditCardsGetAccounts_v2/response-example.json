@@ -8,27 +8,15 @@
       "creditCardNetwork": "VISA",
       "creditCardAccountId": [
         {
-          "key": "pk_yellow",
-          "value": "5"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "value2"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "6"
-        },
-        {
-          "key": "pk_brown",
-          "value": "value3"
-        },
-        {
-          "key": "pk_green",
-          "value": "3"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
-      "productAdditionalInfo": "x$o+$H",
+      "productAdditionalInfo": "RP@Nq-H\"3]",
       "networkAdditionalInfo": "AURA CARD"
     },
     {
@@ -39,28 +27,35 @@
       "creditCardNetwork": "VISA",
       "creditCardAccountId": [
         {
-          "key": "pk_brown",
-          "value": "4"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "1"
-        },
-        {
-          "key": "pk_green",
-          "value": "value3"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "value1"
-        },
-        {
-          "key": "pk_green",
-          "value": "3"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
       "networkAdditionalInfo": "AURA CARD",
-      "productAdditionalInfo": "a88"
+      "productAdditionalInfo": "[Rxa"
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "name": "Cartão Universitário",
+      "productType": "OUTROS",
+      "creditCardNetwork": "VISA",
+      "creditCardAccountId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "productAdditionalInfo": "\"/J5+p#S~s",
+      "networkAdditionalInfo": "AURA CARD"
     }
   ],
   "meta": {

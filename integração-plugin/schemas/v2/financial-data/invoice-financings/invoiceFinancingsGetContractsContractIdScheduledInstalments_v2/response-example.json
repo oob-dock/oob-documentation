@@ -2,11 +2,11 @@
   "data": {
     "dueInstalments": 57,
     "pastDueInstalments": 73,
-    "typeContractRemaining": "DIA",
+    "typeContractRemaining": "SEM_PRAZO_REMANESCENTE",
     "typeNumberOfInstalments": "MES",
     "paidInstalments": 73,
-    "contractRemainingNumber": 14600,
     "totalNumberOfInstalments": 130632,
+    "contractRemainingNumber": 14600,
     "balloonPayments": [
       {
         "dueDate": "2021-05-21",

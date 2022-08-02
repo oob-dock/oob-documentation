@@ -37,35 +37,30 @@
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
-                  "type": "string",
-                  "examples": [
-                    "pk_brown",
-                    "pk_green",
-                    "pk_yellow"
-                  ]
+                  "type": "string"
                 },
                 "value": {
                   "description": "Valor do campo do identificador no sistema de origem",
-                  "type": "string",
-                  "examples": [
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                    "6",
-                    "value1",
-                    "value2",
-                    "value3",
-                    "20220511"
-                  ]
+                  "type": "string"
                 }
               },
               "required": [
                 "key"
               ],
               "additionalItems": false
-            }
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
           },
           "brandName": {
             "type": "string",

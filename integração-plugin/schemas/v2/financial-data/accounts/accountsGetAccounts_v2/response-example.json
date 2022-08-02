@@ -9,24 +9,12 @@
       "checkDigit": "4",
       "accountId": [
         {
-          "key": "pk_brown",
-          "value": "6"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_green",
-          "value": "20220511"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "value1"
-        },
-        {
-          "key": "pk_brown",
-          "value": "6"
-        },
-        {
-          "key": "pk_green",
-          "value": "6"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
       "branchCode": "6272"
@@ -40,85 +28,12 @@
       "checkDigit": "4",
       "accountId": [
         {
-          "key": "pk_green",
-          "value": "value1"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_brown",
-          "value": "value2"
-        }
-      ],
-      "branchCode": "6272"
-    },
-    {
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "type": "CONTA_DEPOSITO_A_VISTA",
-      "compeCode": "001",
-      "number": "94088392",
-      "checkDigit": "4",
-      "accountId": [
-        {
-          "key": "pk_yellow",
-          "value": "value1"
-        },
-        {
-          "key": "pk_green",
-          "value": "value2"
-        },
-        {
-          "key": "pk_brown",
-          "value": "value2"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "value1"
-        },
-        {
-          "key": "pk_green",
-          "value": "1"
-        }
-      ],
-      "branchCode": "6272"
-    },
-    {
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "type": "CONTA_DEPOSITO_A_VISTA",
-      "compeCode": "001",
-      "number": "94088392",
-      "checkDigit": "4",
-      "accountId": [
-        {
-          "key": "pk_brown",
-          "value": "20220511"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "value2"
-        },
-        {
-          "key": "pk_brown",
-          "value": "5"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "3"
-        }
-      ],
-      "branchCode": "6272"
-    },
-    {
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "type": "CONTA_DEPOSITO_A_VISTA",
-      "compeCode": "001",
-      "number": "94088392",
-      "checkDigit": "4",
-      "accountId": [
-        {
-          "key": "pk_brown",
-          "value": "3"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
       "branchCode": "6272"

@@ -8,12 +8,12 @@
       "ipocCode": "92792126019929279212650822221989319252576",
       "contractId": [
         {
-          "key": "pk_brown",
-          "value": "20220511"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_green",
-          "value": "2"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ]
     },
@@ -25,12 +25,63 @@
       "ipocCode": "92792126019929279212650822221989319252576",
       "contractId": [
         {
-          "key": "pk_green",
-          "value": "20220511"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "20220511"
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "60500998000144",
+      "productType": "ADIANTAMENTO_A_DEPOSITANTES",
+      "productSubType": "ADIANTAMENTO_A_DEPOSITANTES",
+      "ipocCode": "92792126019929279212650822221989319252576",
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "60500998000144",
+      "productType": "ADIANTAMENTO_A_DEPOSITANTES",
+      "productSubType": "ADIANTAMENTO_A_DEPOSITANTES",
+      "ipocCode": "92792126019929279212650822221989319252576",
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "60500998000144",
+      "productType": "ADIANTAMENTO_A_DEPOSITANTES",
+      "productSubType": "ADIANTAMENTO_A_DEPOSITANTES",
+      "ipocCode": "92792126019929279212650822221989319252576",
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ]
     }

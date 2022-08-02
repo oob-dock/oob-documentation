@@ -11,14 +11,10 @@
       {
         "identificationNumber": "4453",
         "isMultipleCreditCard": true
-      },
-      {
-        "identificationNumber": "4453",
-        "isMultipleCreditCard": true
       }
     ],
-    "networkAdditionalInfo": "AURA CARD",
-    "productAdditionalInfo": "OURO_INTERNACIONAL"
+    "productAdditionalInfo": "OURO_INTERNACIONAL",
+    "networkAdditionalInfo": "AURA CARD"
   },
   "meta": {
     "totalRecords": 1,

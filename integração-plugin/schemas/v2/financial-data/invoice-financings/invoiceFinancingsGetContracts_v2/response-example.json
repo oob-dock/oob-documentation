@@ -1,5 +1,74 @@
 {
-  "data": [],
+  "data": [
+    {
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "productType": "DIREITOS_CREDITORIOS_DESCONTADOS",
+      "productSubType": "DESCONTO_CHEQUES",
+      "ipocCode": "92792126019929279212650822221989319252576"
+    },
+    {
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "productType": "DIREITOS_CREDITORIOS_DESCONTADOS",
+      "productSubType": "DESCONTO_CHEQUES",
+      "ipocCode": "92792126019929279212650822221989319252576"
+    },
+    {
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "productType": "DIREITOS_CREDITORIOS_DESCONTADOS",
+      "productSubType": "DESCONTO_CHEQUES",
+      "ipocCode": "92792126019929279212650822221989319252576"
+    },
+    {
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "productType": "DIREITOS_CREDITORIOS_DESCONTADOS",
+      "productSubType": "DESCONTO_CHEQUES",
+      "ipocCode": "92792126019929279212650822221989319252576"
+    }
+  ],
   "meta": {
     "totalRecords": 1,
     "totalPages": 1,

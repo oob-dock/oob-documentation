@@ -7,22 +7,138 @@
         "paidDate": "2021-05-21",
         "currency": "BRL",
         "paidAmount": "1000.0400",
+        "instalmentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ],
         "paymentId": [
           {
-            "key": "pk_brown",
-            "value": "6"
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_green",
-            "value": "value3"
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ],
+        "overParcel": {
+          "fees": [
+            {
+              "feeName": "Reavaliação periódica do bem",
+              "feeCode": "aval_bem",
+              "feeAmount": "1000.0400"
+            },
+            {
+              "feeName": "Reavaliação periódica do bem",
+              "feeCode": "aval_bem",
+              "feeAmount": "1000.0400"
+            }
+          ],
+          "charges": [
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            }
+          ]
+        }
+      },
+      {
+        "isOverParcelPayment": true,
+        "paidDate": "2021-05-21",
+        "currency": "BRL",
+        "paidAmount": "1000.0400",
+        "paymentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_yellow",
-            "value": "3"
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ],
+        "overParcel": {
+          "fees": [
+            {
+              "feeName": "Reavaliação periódica do bem",
+              "feeCode": "aval_bem",
+              "feeAmount": "1000.0400"
+            }
+          ],
+          "charges": [
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            }
+          ]
+        },
+        "instalmentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_green",
-            "value": "4"
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ]
+      },
+      {
+        "isOverParcelPayment": true,
+        "paidDate": "2021-05-21",
+        "currency": "BRL",
+        "paidAmount": "1000.0400",
+        "paymentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
           }
         ],
         "overParcel": {
@@ -43,12 +159,22 @@
               "feeAmount": "1000.0400"
             }
           ],
-          "charges": []
+          "charges": [
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            }
+          ]
         },
         "instalmentId": [
           {
-            "key": "pk_green",
-            "value": "4"
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
           }
         ]
       },
@@ -57,16 +183,6 @@
         "paidDate": "2021-05-21",
         "currency": "BRL",
         "paidAmount": "1000.0400",
-        "instalmentId": [
-          {
-            "key": "pk_green",
-            "value": "value3"
-          },
-          {
-            "key": "pk_green",
-            "value": "4"
-          }
-        ],
         "overParcel": {
           "fees": [
             {
@@ -115,18 +231,27 @@
               "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
               "chargeAmount": "1000.0400",
               "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
             }
           ]
         },
+        "instalmentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ],
         "paymentId": [
           {
-            "key": "pk_yellow",
-            "value": "value3"
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
           }
         ]
       },
@@ -136,122 +261,7 @@
         "currency": "BRL",
         "paidAmount": "1000.0400",
         "overParcel": {
-          "fees": [
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            }
-          ],
-          "charges": [
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            }
-          ]
-        },
-        "instalmentId": [
-          {
-            "key": "pk_yellow",
-            "value": "20220511"
-          },
-          {
-            "key": "pk_yellow",
-            "value": "value3"
-          },
-          {
-            "key": "pk_green",
-            "value": "value3"
-          }
-        ],
-        "paymentId": [
-          {
-            "key": "pk_yellow",
-            "value": "value1"
-          },
-          {
-            "key": "pk_brown",
-            "value": "value1"
-          },
-          {
-            "key": "pk_brown",
-            "value": "value1"
-          }
-        ]
-      },
-      {
-        "isOverParcelPayment": true,
-        "paidDate": "2021-05-21",
-        "currency": "BRL",
-        "paidAmount": "1000.0400",
-        "instalmentId": [
-          {
-            "key": "pk_green",
-            "value": "4"
-          },
-          {
-            "key": "pk_brown",
-            "value": "5"
-          },
-          {
-            "key": "pk_brown",
-            "value": "2"
-          }
-        ],
-        "overParcel": {
-          "fees": [
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "1000.0400"
-            }
-          ],
+          "fees": [],
           "charges": [
             {
               "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
@@ -267,20 +277,22 @@
         },
         "paymentId": [
           {
-            "key": "pk_green",
-            "value": "5"
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_yellow",
-            "value": "value1"
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ],
+        "instalmentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_green",
-            "value": "1"
-          },
-          {
-            "key": "pk_green",
-            "value": "value2"
+            "key": "pk_CampoDois",
+            "value": "123"
           }
         ]
       }

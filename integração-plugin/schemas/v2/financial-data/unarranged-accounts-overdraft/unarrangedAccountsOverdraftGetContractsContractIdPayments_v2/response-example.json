@@ -7,65 +7,102 @@
         "paidDate": "2021-05-21",
         "currency": "BRL",
         "paidAmount": "100000.0400",
-        "paymentId": [
-          {
-            "key": "pk_green",
-            "value": "5"
-          },
-          {
-            "key": "pk_brown",
-            "value": "4"
-          },
-          {
-            "key": "pk_yellow",
-            "value": "value2"
-          }
-        ],
         "overParcel": {
           "fees": [
             {
               "feeName": "Saque a descoberto",
               "feeCode": "Saque descoberto",
               "feeAmount": "100000.0400"
+            }
+          ],
+          "charges": [
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "100000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
             },
             {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "100000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
             },
             {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
-            },
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "100000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            }
+          ]
+        },
+        "instalmentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ],
+        "paymentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ]
+      },
+      {
+        "isOverParcelPayment": true,
+        "paidDate": "2021-05-21",
+        "currency": "BRL",
+        "paidAmount": "100000.0400",
+        "overParcel": {
+          "fees": [
             {
               "feeName": "Saque a descoberto",
               "feeCode": "Saque descoberto",
               "feeAmount": "100000.0400"
             }
           ],
-          "charges": []
+          "charges": [
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "100000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "100000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "100000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            }
+          ]
         },
         "instalmentId": [
           {
-            "key": "pk_yellow",
-            "value": "20220511"
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_green",
-            "value": "value1"
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ],
+        "paymentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_brown",
-            "value": "20220511"
-          },
-          {
-            "key": "pk_brown",
-            "value": "5"
-          },
-          {
-            "key": "pk_green",
-            "value": "1"
+            "key": "pk_CampoDois",
+            "value": "123"
           }
         ]
       },
@@ -76,158 +113,12 @@
         "paidAmount": "100000.0400",
         "paymentId": [
           {
-            "key": "pk_brown",
-            "value": "2"
+            "key": "pk_CampoUm",
+            "value": "ABC"
           },
           {
-            "key": "pk_green",
-            "value": "value2"
-          },
-          {
-            "key": "pk_yellow",
-            "value": "value3"
-          }
-        ],
-        "instalmentId": [
-          {
-            "key": "pk_yellow",
-            "value": "2"
-          }
-        ],
-        "overParcel": {
-          "fees": [
-            {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
-            }
-          ],
-          "charges": [
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "100000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "100000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            }
-          ]
-        }
-      },
-      {
-        "isOverParcelPayment": true,
-        "paidDate": "2021-05-21",
-        "currency": "BRL",
-        "paidAmount": "100000.0400",
-        "paymentId": [
-          {
-            "key": "pk_brown",
-            "value": "value3"
-          },
-          {
-            "key": "pk_green",
-            "value": "6"
-          },
-          {
-            "key": "pk_yellow",
-            "value": "1"
-          }
-        ],
-        "instalmentId": [
-          {
-            "key": "pk_green",
-            "value": "value3"
-          },
-          {
-            "key": "pk_brown",
-            "value": "4"
-          },
-          {
-            "key": "pk_green",
-            "value": "3"
-          }
-        ],
-        "overParcel": {
-          "fees": [
-            {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Saque a descoberto",
-              "feeCode": "Saque descoberto",
-              "feeAmount": "100000.0400"
-            }
-          ],
-          "charges": [
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "100000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "100000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "100000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "100000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            }
-          ]
-        }
-      },
-      {
-        "isOverParcelPayment": true,
-        "paidDate": "2021-05-21",
-        "currency": "BRL",
-        "paidAmount": "100000.0400",
-        "paymentId": [
-          {
-            "key": "pk_yellow",
-            "value": "5"
-          },
-          {
-            "key": "pk_yellow",
-            "value": "4"
-          }
-        ],
-        "instalmentId": [
-          {
-            "key": "pk_yellow",
-            "value": "value1"
-          },
-          {
-            "key": "pk_green",
-            "value": "3"
-          },
-          {
-            "key": "pk_green",
-            "value": "1"
+            "key": "pk_CampoDois",
+            "value": "123"
           }
         ],
         "overParcel": {
@@ -247,9 +138,24 @@
               "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
               "chargeAmount": "100000.0400",
               "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "100000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
             }
           ]
-        }
+        },
+        "instalmentId": [
+          {
+            "key": "pk_CampoUm",
+            "value": "ABC"
+          },
+          {
+            "key": "pk_CampoDois",
+            "value": "123"
+          }
+        ]
       }
     ],
     "paidInstalments": 73

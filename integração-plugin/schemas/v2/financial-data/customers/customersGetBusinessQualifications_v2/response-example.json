@@ -13,14 +13,6 @@
       {
         "code": "8599604",
         "isMain": true
-      },
-      {
-        "code": "8599604",
-        "isMain": true
-      },
-      {
-        "code": "8599604",
-        "isMain": true
       }
     ],
     "informedPatrimony": {
@@ -35,9 +27,9 @@
         "amount": "100000.0400",
         "currency": "BRL"
       },
-      "year": 2010,
+      "frequency": "DIARIA",
       "frequencyAdditionalInfo": "Informações adicionais",
-      "frequency": "DIARIA"
+      "year": 2010
     }
   },
   "meta": {

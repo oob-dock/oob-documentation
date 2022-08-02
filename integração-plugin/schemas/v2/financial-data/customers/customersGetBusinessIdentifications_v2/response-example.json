@@ -3,16 +3,12 @@
     {
       "businessId": [
         {
-          "key": "pk_brown",
-          "value": "6"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "20220511"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "value3"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
       "updateDateTime": "2021-05-21T08:30:00Z",
@@ -26,205 +22,35 @@
       "incorporationDate": "2021-05-21T08:30:00Z",
       "parties": [
         {
-          "type": "ADMINISTRADOR",
-          "personType": "PESSOA_NATURAL",
-          "documentType": "CNPJ",
-          "documentNumber": "73677831148",
-          "civilName": "Juan Kaique Cláudio Fernandes",
-          "socialName": "Karina",
-          "documentAdditionalInfo": "CNH",
-          "shareholding": "0.510000",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "startDate": "2021-05-21T08:30:00Z",
-          "documentCountry": "CAN",
-          "documentIssueDate": "2021-05-21",
-          "documentExpirationDate": "2021-05-21",
-          "tradeName": "Mundo da Eletronica"
-        },
-        {
-          "type": "ADMINISTRADOR",
-          "personType": "PESSOA_JURIDICA",
-          "documentType": "CPF",
-          "documentNumber": "73677831148",
-          "socialName": "Karina",
-          "civilName": "Juan Kaique Cláudio Fernandes",
-          "shareholding": "0.510000",
-          "documentIssueDate": "2021-05-21",
-          "documentAdditionalInfo": "CNH",
-          "documentExpirationDate": "2021-05-21",
-          "startDate": "2021-05-21T08:30:00Z",
-          "documentCountry": "CAN",
-          "tradeName": "Mundo da Eletronica",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda"
-        },
-        {
-          "type": "ADMINISTRADOR",
+          "type": "SOCIO",
           "personType": "PESSOA_NATURAL",
           "documentType": "CPF",
           "documentNumber": "73677831148",
-          "socialName": "Karina",
-          "startDate": "2021-05-21T08:30:00Z",
-          "tradeName": "Mundo da Eletronica",
           "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "documentExpirationDate": "2021-05-21",
-          "shareholding": "0.510000",
-          "documentAdditionalInfo": "CNH",
+          "socialName": "Karina",
           "civilName": "Juan Kaique Cláudio Fernandes",
           "documentIssueDate": "2021-05-21",
-          "documentCountry": "CAN"
-        }
-      ],
-      "contacts": {
-        "postalAddresses": [
-          {
-            "isMain": true,
-            "townName": "Marília",
-            "country": "Brasil",
-            "countryCode": "BRA",
-            "geographicCoordinates": {
-              "latitude": "-23.5475000",
-              "longitude": "-46.6361100"
-            },
-            "address": "Av Naburo Ykesaki, 1270",
-            "postCode": "17500001",
-            "ibgeTownCode": "3550308",
-            "countrySubDivision": "SP",
-            "districtName": "Centro",
-            "additionalInfo": "Fundos"
-          },
-          {
-            "isMain": true,
-            "townName": "Marília",
-            "country": "Brasil",
-            "countryCode": "BRA",
-            "countrySubDivision": "SP",
-            "ibgeTownCode": "3550308",
-            "geographicCoordinates": {
-              "latitude": "-23.5475000",
-              "longitude": "-46.6361100"
-            },
-            "address": "Av Naburo Ykesaki, 1270",
-            "postCode": "17500001",
-            "additionalInfo": "Fundos",
-            "districtName": "Centro"
-          }
-        ],
-        "phones": [
-          {
-            "isMain": true,
-            "type": "FIXO",
-            "areaCode": "19",
-            "number": "29875132",
-            "phoneExtension": "932",
-            "additionalInfo": "Informações adicionais.",
-            "countryCallingCode": "55"
-          },
-          {
-            "isMain": true,
-            "type": "FIXO",
-            "areaCode": "19",
-            "number": "29875132",
-            "additionalInfo": "Informações adicionais.",
-            "countryCallingCode": "55",
-            "phoneExtension": "932"
-          },
-          {
-            "isMain": true,
-            "type": "FIXO",
-            "areaCode": "19",
-            "number": "29875132",
-            "countryCallingCode": "55",
-            "additionalInfo": "Informações adicionais.",
-            "phoneExtension": "932"
-          },
-          {
-            "isMain": true,
-            "type": "FIXO",
-            "areaCode": "19",
-            "number": "29875132",
-            "additionalInfo": "Informações adicionais.",
-            "phoneExtension": "932",
-            "countryCallingCode": "55"
-          },
-          {
-            "isMain": true,
-            "type": "FIXO",
-            "areaCode": "19",
-            "number": "29875132",
-            "phoneExtension": "932",
-            "countryCallingCode": "55",
-            "additionalInfo": "Informações adicionais."
-          }
-        ],
-        "emails": []
-      },
-      "tradeName": "Mundo da Eletronica",
-      "otherDocuments": [
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
+          "documentAdditionalInfo": "CNH",
+          "documentCountry": "CAN",
+          "documentExpirationDate": "2021-05-21",
+          "startDate": "2021-05-21T08:30:00Z",
+          "tradeName": "Mundo da Eletronica",
+          "shareholding": "0.510000"
         },
         {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        },
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        },
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        }
-      ]
-    },
-    {
-      "businessId": [
-        {
-          "key": "pk_green",
-          "value": "value1"
-        },
-        {
-          "key": "pk_green",
-          "value": "6"
-        },
-        {
-          "key": "pk_green",
-          "value": "4"
-        }
-      ],
-      "updateDateTime": "2021-05-21T08:30:00Z",
-      "brandName": "Organização A",
-      "cnpjNumber": "50685362006773",
-      "companiesCnpj": [
-        "50685362000135",
-        "50685362006555"
-      ],
-      "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-      "incorporationDate": "2021-05-21T08:30:00Z",
-      "parties": [
-        {
-          "type": "ADMINISTRADOR",
+          "type": "SOCIO",
           "personType": "PESSOA_NATURAL",
           "documentType": "OUTRO_DOCUMENTO_VIAGEM",
           "documentNumber": "73677831148",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "shareholding": "0.510000",
-          "tradeName": "Mundo da Eletronica",
-          "documentExpirationDate": "2021-05-21",
-          "documentIssueDate": "2021-05-21",
           "civilName": "Juan Kaique Cláudio Fernandes",
+          "tradeName": "Mundo da Eletronica",
+          "shareholding": "0.510000",
           "startDate": "2021-05-21T08:30:00Z",
-          "socialName": "Karina",
+          "documentIssueDate": "2021-05-21",
+          "documentExpirationDate": "2021-05-21",
+          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
           "documentAdditionalInfo": "CNH",
+          "socialName": "Karina",
           "documentCountry": "CAN"
         },
         {
@@ -232,203 +58,48 @@
           "personType": "PESSOA_JURIDICA",
           "documentType": "CNPJ",
           "documentNumber": "73677831148",
-          "documentExpirationDate": "2021-05-21",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "documentCountry": "CAN",
-          "startDate": "2021-05-21T08:30:00Z",
-          "documentAdditionalInfo": "CNH",
           "documentIssueDate": "2021-05-21",
-          "socialName": "Karina",
-          "tradeName": "Mundo da Eletronica",
-          "shareholding": "0.510000",
-          "civilName": "Juan Kaique Cláudio Fernandes"
-        },
-        {
-          "type": "SOCIO",
-          "personType": "PESSOA_JURIDICA",
-          "documentType": "CPF",
-          "documentNumber": "73677831148",
-          "documentAdditionalInfo": "CNH",
-          "documentIssueDate": "2021-05-21",
-          "socialName": "Karina",
-          "tradeName": "Mundo da Eletronica",
-          "shareholding": "0.510000",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
           "civilName": "Juan Kaique Cláudio Fernandes",
-          "documentCountry": "CAN",
           "documentExpirationDate": "2021-05-21",
+          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
+          "shareholding": "0.510000",
+          "documentAdditionalInfo": "CNH",
+          "tradeName": "Mundo da Eletronica",
+          "documentCountry": "CAN",
+          "socialName": "Karina",
           "startDate": "2021-05-21T08:30:00Z"
         },
         {
-          "type": "ADMINISTRADOR",
-          "personType": "PESSOA_NATURAL",
-          "documentType": "CNPJ",
-          "documentNumber": "73677831148",
-          "socialName": "Karina",
-          "documentExpirationDate": "2021-05-21",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "civilName": "Juan Kaique Cláudio Fernandes",
-          "startDate": "2021-05-21T08:30:00Z",
-          "documentCountry": "CAN",
-          "shareholding": "0.510000",
-          "documentIssueDate": "2021-05-21",
-          "tradeName": "Mundo da Eletronica",
-          "documentAdditionalInfo": "CNH"
-        },
-        {
-          "type": "SOCIO",
-          "personType": "PESSOA_JURIDICA",
-          "documentType": "CNPJ",
-          "documentNumber": "73677831148",
-          "tradeName": "Mundo da Eletronica",
-          "startDate": "2021-05-21T08:30:00Z",
-          "documentCountry": "CAN",
-          "shareholding": "0.510000",
-          "civilName": "Juan Kaique Cláudio Fernandes",
-          "socialName": "Karina",
-          "documentAdditionalInfo": "CNH",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "documentExpirationDate": "2021-05-21",
-          "documentIssueDate": "2021-05-21"
-        }
-      ],
-      "contacts": {
-        "postalAddresses": [
-          {
-            "isMain": true,
-            "townName": "Marília",
-            "country": "Brasil",
-            "countryCode": "BRA",
-            "ibgeTownCode": "3550308",
-            "postCode": "17500001",
-            "countrySubDivision": "SP",
-            "geographicCoordinates": {
-              "latitude": "-23.5475000",
-              "longitude": "-46.6361100"
-            },
-            "additionalInfo": "Fundos",
-            "address": "Av Naburo Ykesaki, 1270",
-            "districtName": "Centro"
-          },
-          {
-            "isMain": true,
-            "townName": "Marília",
-            "country": "Brasil",
-            "countryCode": "BRA",
-            "districtName": "Centro",
-            "address": "Av Naburo Ykesaki, 1270",
-            "ibgeTownCode": "3550308",
-            "postCode": "17500001",
-            "countrySubDivision": "SP",
-            "geographicCoordinates": {
-              "latitude": "-23.5475000",
-              "longitude": "-46.6361100"
-            },
-            "additionalInfo": "Fundos"
-          },
-          {
-            "isMain": true,
-            "townName": "Marília",
-            "country": "Brasil",
-            "countryCode": "BRA",
-            "districtName": "Centro",
-            "address": "Av Naburo Ykesaki, 1270",
-            "countrySubDivision": "SP",
-            "geographicCoordinates": {
-              "latitude": "-23.5475000",
-              "longitude": "-46.6361100"
-            },
-            "postCode": "17500001",
-            "ibgeTownCode": "3550308",
-            "additionalInfo": "Fundos"
-          }
-        ],
-        "phones": [
-          {
-            "isMain": true,
-            "type": "FIXO",
-            "areaCode": "19",
-            "number": "29875132",
-            "phoneExtension": "932",
-            "countryCallingCode": "55",
-            "additionalInfo": "Informações adicionais."
-          }
-        ],
-        "emails": [
-          {
-            "isMain": true,
-            "email": "karinafernandes-81@br.inter.net"
-          },
-          {
-            "isMain": true,
-            "email": "karinafernandes-81@br.inter.net"
-          }
-        ]
-      },
-      "otherDocuments": [
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        },
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        }
-      ],
-      "tradeName": "Mundo da Eletronica"
-    },
-    {
-      "businessId": [
-        {
-          "key": "pk_yellow",
-          "value": "20220511"
-        }
-      ],
-      "updateDateTime": "2021-05-21T08:30:00Z",
-      "brandName": "Organização A",
-      "cnpjNumber": "50685362006773",
-      "companiesCnpj": [
-        "50685362000135",
-        "50685362006555"
-      ],
-      "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-      "incorporationDate": "2021-05-21T08:30:00Z",
-      "parties": [
-        {
           "type": "SOCIO",
           "personType": "PESSOA_NATURAL",
-          "documentType": "CNPJ",
+          "documentType": "OUTRO_DOCUMENTO_VIAGEM",
           "documentNumber": "73677831148",
-          "documentAdditionalInfo": "CNH",
           "documentIssueDate": "2021-05-21",
+          "documentAdditionalInfo": "CNH",
+          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
+          "tradeName": "Mundo da Eletronica",
+          "documentCountry": "CAN",
+          "socialName": "Karina",
+          "shareholding": "0.510000",
           "startDate": "2021-05-21T08:30:00Z",
           "documentExpirationDate": "2021-05-21",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "civilName": "Juan Kaique Cláudio Fernandes",
-          "shareholding": "0.510000",
-          "documentCountry": "CAN",
-          "tradeName": "Mundo da Eletronica",
-          "socialName": "Karina"
+          "civilName": "Juan Kaique Cláudio Fernandes"
         },
         {
           "type": "ADMINISTRADOR",
           "personType": "PESSOA_JURIDICA",
-          "documentType": "PASSAPORTE",
+          "documentType": "CPF",
           "documentNumber": "73677831148",
-          "documentExpirationDate": "2021-05-21",
+          "tradeName": "Mundo da Eletronica",
+          "socialName": "Karina",
+          "documentAdditionalInfo": "CNH",
           "documentCountry": "CAN",
           "civilName": "Juan Kaique Cláudio Fernandes",
-          "documentAdditionalInfo": "CNH",
-          "socialName": "Karina",
-          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
-          "shareholding": "0.510000",
+          "documentExpirationDate": "2021-05-21",
           "startDate": "2021-05-21T08:30:00Z",
-          "tradeName": "Mundo da Eletronica",
-          "documentIssueDate": "2021-05-21"
+          "documentIssueDate": "2021-05-21",
+          "companyName": "Luiza e Benjamin Assessoria Jurídica Ltda",
+          "shareholding": "0.510000"
         }
       ],
       "contacts": {
@@ -439,44 +110,12 @@
             "country": "Brasil",
             "countryCode": "BRA",
             "countrySubDivision": "SP",
-            "address": "Av Naburo Ykesaki, 1270",
-            "postCode": "17500001",
             "districtName": "Centro",
             "additionalInfo": "Fundos",
             "geographicCoordinates": {
               "latitude": "-23.5475000",
               "longitude": "-46.6361100"
             },
-            "ibgeTownCode": "3550308"
-          },
-          {
-            "isMain": true,
-            "townName": "Marília",
-            "country": "Brasil",
-            "countryCode": "BRA",
-            "postCode": "17500001",
-            "districtName": "Centro",
-            "ibgeTownCode": "3550308",
-            "additionalInfo": "Fundos",
-            "address": "Av Naburo Ykesaki, 1270",
-            "geographicCoordinates": {
-              "latitude": "-23.5475000",
-              "longitude": "-46.6361100"
-            },
-            "countrySubDivision": "SP"
-          },
-          {
-            "isMain": true,
-            "townName": "Marília",
-            "country": "Brasil",
-            "countryCode": "BRA",
-            "countrySubDivision": "SP",
-            "districtName": "Centro",
-            "geographicCoordinates": {
-              "latitude": "-23.5475000",
-              "longitude": "-46.6361100"
-            },
-            "additionalInfo": "Fundos",
             "ibgeTownCode": "3550308",
             "address": "Av Naburo Ykesaki, 1270",
             "postCode": "17500001"
@@ -486,7 +125,6 @@
             "townName": "Marília",
             "country": "Brasil",
             "countryCode": "BRA",
-            "postCode": "17500001",
             "ibgeTownCode": "3550308",
             "geographicCoordinates": {
               "latitude": "-23.5475000",
@@ -495,6 +133,7 @@
             "additionalInfo": "Fundos",
             "countrySubDivision": "SP",
             "districtName": "Centro",
+            "postCode": "17500001",
             "address": "Av Naburo Ykesaki, 1270"
           },
           {
@@ -502,15 +141,15 @@
             "townName": "Marília",
             "country": "Brasil",
             "countryCode": "BRA",
+            "ibgeTownCode": "3550308",
+            "postCode": "17500001",
+            "districtName": "Centro",
             "additionalInfo": "Fundos",
             "countrySubDivision": "SP",
             "geographicCoordinates": {
               "latitude": "-23.5475000",
               "longitude": "-46.6361100"
             },
-            "districtName": "Centro",
-            "ibgeTownCode": "3550308",
-            "postCode": "17500001",
             "address": "Av Naburo Ykesaki, 1270"
           }
         ],
@@ -521,58 +160,40 @@
             "areaCode": "19",
             "number": "29875132",
             "phoneExtension": "932",
+            "countryCallingCode": "55",
+            "additionalInfo": "Informações adicionais."
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
+            "additionalInfo": "Informações adicionais.",
+            "countryCallingCode": "55"
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "areaCode": "19",
+            "number": "29875132",
+            "additionalInfo": "Informações adicionais.",
+            "countryCallingCode": "55",
+            "phoneExtension": "932"
+          },
+          {
+            "isMain": true,
+            "type": "FIXO",
+            "areaCode": "19",
+            "number": "29875132",
+            "phoneExtension": "932",
             "additionalInfo": "Informações adicionais.",
             "countryCallingCode": "55"
           }
         ],
-        "emails": [
-          {
-            "isMain": true,
-            "email": "karinafernandes-81@br.inter.net"
-          },
-          {
-            "isMain": true,
-            "email": "karinafernandes-81@br.inter.net"
-          },
-          {
-            "isMain": true,
-            "email": "karinafernandes-81@br.inter.net"
-          },
-          {
-            "isMain": true,
-            "email": "karinafernandes-81@br.inter.net"
-          },
-          {
-            "isMain": true,
-            "email": "karinafernandes-81@br.inter.net"
-          }
-        ]
+        "emails": []
       },
       "otherDocuments": [
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        },
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        },
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        },
-        {
-          "type": "EIN",
-          "number": "128328453",
-          "country": "CAN",
-          "expirationDate": "2021-05-21"
-        },
         {
           "type": "EIN",
           "number": "128328453",

@@ -19,68 +19,12 @@
         "referentialRateIndexerType": "PRE_FIXADO",
         "preFixedRate": "0.600000",
         "postFixedRate": "0.550000",
-        "referentialRateIndexerAdditionalInfo": "Informações adicionais",
-        "referentialRateIndexerSubType": "TJLP",
-        "additionalInfo": "Informações adicionais"
-      },
-      {
-        "taxType": "EFETIVA",
-        "interestRateType": "SIMPLES",
-        "taxPeriodicity": "AA",
-        "calculation": "21/252",
-        "referentialRateIndexerType": "PRE_FIXADO",
-        "preFixedRate": "0.600000",
-        "postFixedRate": "0.550000",
-        "referentialRateIndexerSubType": "TJLP",
-        "additionalInfo": "Informações adicionais",
-        "referentialRateIndexerAdditionalInfo": "Informações adicionais"
-      },
-      {
-        "taxType": "EFETIVA",
-        "interestRateType": "SIMPLES",
-        "taxPeriodicity": "AA",
-        "calculation": "21/252",
-        "referentialRateIndexerType": "PRE_FIXADO",
-        "preFixedRate": "0.600000",
-        "postFixedRate": "0.550000",
         "additionalInfo": "Informações adicionais",
         "referentialRateIndexerAdditionalInfo": "Informações adicionais",
         "referentialRateIndexerSubType": "TJLP"
       }
     ],
     "contractedFees": [
-      {
-        "feeName": "Excesso em Conta",
-        "feeCode": "EXCESSO_CONTA",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
-        "feeAmount": "1000.0400",
-        "feeRate": "0.062000"
-      },
-      {
-        "feeName": "Excesso em Conta",
-        "feeCode": "EXCESSO_CONTA",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
-        "feeAmount": "1000.0400",
-        "feeRate": "0.062000"
-      },
-      {
-        "feeName": "Excesso em Conta",
-        "feeCode": "EXCESSO_CONTA",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
-        "feeRate": "0.062000",
-        "feeAmount": "1000.0400"
-      },
-      {
-        "feeName": "Excesso em Conta",
-        "feeCode": "EXCESSO_CONTA",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
-        "feeAmount": "1000.0400",
-        "feeRate": "0.062000"
-      },
       {
         "feeName": "Excesso em Conta",
         "feeCode": "EXCESSO_CONTA",
@@ -93,6 +37,11 @@
     "contractedFinanceCharges": [
       {
         "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
+        "chargeRate": "0.071200"
+      },
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
         "chargeRate": "0.071200",
         "chargeAdditionalInfo": "Informações adicionais sobre encargos."
       },
@@ -103,20 +52,20 @@
       },
       {
         "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
-        "chargeRate": "0.071200"
+        "chargeRate": "0.071200",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos."
       }
     ],
-    "contractAmount": "100000.0400",
     "disbursementDates": [
       "2018-01-15",
       "2018-01-15"
     ],
-    "CET": "0.290000",
-    "dueDate": "2028-01-15",
+    "contractAmount": "100000.0400",
     "firstInstalmentDueDate": "2018-02-15",
+    "currency": "BRL",
+    "CET": "0.290000",
     "settlementDate": "2018-01-15",
-    "currency": "BRL"
+    "dueDate": "2028-01-15"
   },
   "meta": {
     "totalRecords": 1,

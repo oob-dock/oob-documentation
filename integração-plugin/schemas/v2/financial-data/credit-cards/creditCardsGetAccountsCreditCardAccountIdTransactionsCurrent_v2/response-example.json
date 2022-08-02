@@ -18,39 +18,31 @@
       "billPostDate": "2021-05-21",
       "transactionId": [
         {
-          "key": "pk_yellow",
-          "value": "3"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_green",
-          "value": "2"
-        },
-        {
-          "key": "pk_brown",
-          "value": "20220511"
-        },
-        {
-          "key": "pk_green",
-          "value": "value1"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "20220511"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
-      "transactionalAdditionalInfo": "UC7\"+1H'}",
-      "feeTypeAdditionalInfo": ")nVk*p ",
-      "feeType": "ANUIDADE",
       "otherCreditsType": "CREDITO_ROTATIVO",
+      "otherCreditsAdditionalInfo": "Y:,",
+      "feeTypeAdditionalInfo": "9(H4| i8",
       "chargeNumber": 12,
+      "paymentType": "A_VISTA",
+      "feeType": "ANUIDADE",
+      "transactionalAdditionalInfo": "XW#6OF5z",
       "billId": [
         {
-          "key": "pk_green",
-          "value": "value2"
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
-      "paymentType": "A_VISTA",
-      "otherCreditsAdditionalInfo": "8Fn,MM",
       "payeeMCC": 5137
     },
     {
@@ -69,45 +61,33 @@
       },
       "transactionDate": "2021-05-21",
       "billPostDate": "2021-05-21",
-      "feeType": "ANUIDADE",
       "billId": [
         {
-          "key": "pk_brown",
-          "value": "6"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_brown",
-          "value": "4"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
-      "otherCreditsType": "CREDITO_ROTATIVO",
+      "transactionalAdditionalInfo": ">?;I5\"wgug",
+      "feeTypeAdditionalInfo": "MM_B)n}H0U",
+      "otherCreditsAdditionalInfo": ".fSgWo",
+      "paymentType": "A_VISTA",
       "chargeNumber": 12,
+      "otherCreditsType": "CREDITO_ROTATIVO",
       "transactionId": [
         {
-          "key": "pk_brown",
-          "value": "value2"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "value2"
-        },
-        {
-          "key": "pk_brown",
-          "value": "value2"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "2"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "value3"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
-      "feeTypeAdditionalInfo": "VRc",
-      "paymentType": "A_VISTA",
-      "otherCreditsAdditionalInfo": "M4oW]G'{{rl",
-      "transactionalAdditionalInfo": ";]",
+      "feeType": "ANUIDADE",
       "payeeMCC": 5137
     },
     {
@@ -126,59 +106,38 @@
       },
       "transactionDate": "2021-05-21",
       "billPostDate": "2021-05-21",
-      "transactionalAdditionalInfo": "X(h`Z",
-      "billId": [
+      "paymentType": "A_VISTA",
+      "otherCreditsAdditionalInfo": "S\\h.Nr",
+      "transactionId": [
         {
-          "key": "pk_brown",
-          "value": "value2"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "value2"
-        },
-        {
-          "key": "pk_yellow",
-          "value": "3"
-        },
-        {
-          "key": "pk_green",
-          "value": "value2"
-        },
-        {
-          "key": "pk_green",
-          "value": "20220511"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ],
-      "feeType": "ANUIDADE",
-      "otherCreditsType": "CREDITO_ROTATIVO",
+      "chargeNumber": 12,
       "payeeMCC": 5137,
-      "paymentType": "A_VISTA",
-      "chargeNumber": 12,
-      "feeTypeAdditionalInfo": ">d{?",
-      "otherCreditsAdditionalInfo": "DZ",
-      "transactionId": [
+      "transactionalAdditionalInfo": "+UW 0_bu$",
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "feeTypeAdditionalInfo": "b",
+      "feeType": "ANUIDADE",
+      "billId": [
         {
-          "key": "pk_yellow",
-          "value": "value2"
+          "key": "pk_CampoUm",
+          "value": "ABC"
         },
         {
-          "key": "pk_yellow",
-          "value": "4"
-        },
-        {
-          "key": "pk_brown",
-          "value": "value3"
-        },
-        {
-          "key": "pk_brown",
-          "value": "value1"
+          "key": "pk_CampoDois",
+          "value": "123"
         }
       ]
     }
   ],
   "meta": {
-    "totalRecords": 1,
-    "totalPages": 1,
+    "hasMoreRecords": true,
     "requestDateTime": "2021-05-21T08:30:00Z"
   }
 }

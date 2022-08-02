@@ -9,15 +9,15 @@
         "amount": "1000.0400",
         "currency": "BRL"
       },
-      "limitAmount": {
+      "lineName": "CREDITO_A_VISTA",
+      "availableAmount": {
         "amount": "1000.0400",
         "currency": "BRL"
       },
-      "lineName": "CREDITO_A_VISTA",
       "lineNameAdditionalInfo": "Informações adicionais e complementares.",
-      "availableAmount": {
-        "currency": "BRL",
-        "amount": "1000.0400"
+      "limitAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
       }
     },
     {
@@ -29,7 +29,26 @@
         "amount": "1000.0400",
         "currency": "BRL"
       },
-      "lineNameAdditionalInfo": "Informações adicionais e complementares.",
+      "availableAmount": {
+        "currency": "BRL",
+        "amount": "1000.0400"
+      },
+      "lineName": "CREDITO_A_VISTA",
+      "limitAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "lineNameAdditionalInfo": "Informações adicionais e complementares."
+    },
+    {
+      "creditLineLimitType": "LIMITE_CREDITO_TOTAL",
+      "consolidationType": "CONSOLIDADO",
+      "identificationNumber": "4453",
+      "isLimitFlexible": true,
+      "usedAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
       "limitAmount": {
         "amount": "1000.0400",
         "currency": "BRL"
@@ -38,6 +57,7 @@
         "amount": "1000.0400",
         "currency": "BRL"
       },
+      "lineNameAdditionalInfo": "Informações adicionais e complementares.",
       "lineName": "CREDITO_A_VISTA"
     }
   ],
