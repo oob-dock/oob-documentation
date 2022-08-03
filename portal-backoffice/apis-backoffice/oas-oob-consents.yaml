@@ -234,6 +234,8 @@ components:
             $ref: '#/components/schemas/Resource'
         revocation:
           $ref: '#/components/schemas/Revocation'
+        rejection:
+          $ref: '#/components/schemas/Rejection'
         status:
           allOf:
           - $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
@@ -737,6 +739,21 @@ components:
           - $ref: '#/components/schemas/RevokedByEnum'
           - example: TPP
             nullable: false
+    Rejection:
+      required:
+      - reason
+      - revokedBy
+      type: object
+      properties:
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/RejectedReason'
+          - nullable: false
+        rejectedBy:
+          allOf:
+          - $ref: '#/components/schemas/RejectedByEnum'
+          - example: TPP
+            nullable: false
     RevocationReason:
       required:
       - code
@@ -751,11 +768,34 @@ components:
           - $ref: '#/components/schemas/RevocationReasonCodeEnum'
           - example: FRAUD
             nullable: false
+    RejectedReason:
+      required:
+      - code
+      type: object
+      properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Risco de fraude identificado
+        code:
+          allOf:
+          - $ref: '#/components/schemas/RejectedReasonCodeEnum'
+          - example: CONSENT_EXPIRED
+            nullable: false
     RevocationReasonCodeEnum:
       enum:
       - ACCOUNT_CLOSURE
       - FRAUD
       - OTHER
+      type: string
+    RejectedReasonCodeEnum:
+      enum:
+      - CONSENT_EXPIRED
+      - CUSTOMER_MANUALLY_REJECTED
+      - CUSTOMER_MANUALLY_REVOKED
+      - CONSENT_MAX_DATE_REACHED
+      - CONSENT_TECHNICAL_ISSUE
+      - INTERNAL_SECURITY_REASON
       type: string
     RevokeConsentData:
       required:
@@ -773,6 +813,12 @@ components:
           - example: REVOKED
             nullable: false
     RevokedByEnum:
+      enum:
+      - ASPSP
+      - TPP
+      - USER
+      type: string
+    RejectedByEnum:
       enum:
       - ASPSP
       - TPP
