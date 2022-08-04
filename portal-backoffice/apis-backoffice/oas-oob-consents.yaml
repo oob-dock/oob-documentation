@@ -109,7 +109,81 @@ paths:
     patch:
       tags:
       - Consents Opus Open Banking
-      description: Revoke consent
+      description: Revoke consent deprecated
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: paymentStatus
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/payments/v1/consents/{consentId}:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revoke payment consent
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: paymentStatus
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revoke data sharing consent
       parameters:
       - name: consentId
         in: path
@@ -646,6 +720,18 @@ components:
           allOf:
           - $ref: '#/components/schemas/RevokeConsentData'
           - nullable: false
+    RequestRevokeOobDataSharingConsent:
+      required:
+      - data
+      type: object
+      properties:
+        applicationName:
+          description: Client application name
+          type: string
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokeConsentData'
+          - nullable: false
     PaymentId:
       type: object
       properties:
@@ -742,9 +828,11 @@ components:
     Rejection:
       required:
       - reason
-      - revokedBy
+      - rejectedBy
       type: object
       properties:
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
         reason:
           allOf:
           - $ref: '#/components/schemas/RejectedReason'
@@ -812,6 +900,15 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           - example: REVOKED
             nullable: false
+    RevokeDataSharingConsentData:
+      required:
+      - revocation
+      type: object
+      properties:
+        revocation:
+          allOf:
+          - $ref: '#/components/schemas/Rejection'
+          - nullable: false
     RevokedByEnum:
       enum:
       - ASPSP
