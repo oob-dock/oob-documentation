@@ -10,12 +10,14 @@
 
 <script>
     $(document).ready(function () {
+        var code = window.location.hash.substring(1);
         oobHandoff.init({
             // Obtém o oobStartCode do fragment vindo na URL (https://example.com/#oobStartCode)
-            oobStartCode: window.location.hash.substring(1),
+            oobStartCode: code,
             oobAsPublicUrl: 'AS_BASE_URL',
             onHandoffReady(e) {
                 console.log(`Handoff ready qrCode: ${e.qrCode}, timeoutSeconds: ${e.timeoutSeconds}, typeCode: ${e.typeCode}, tppName: ${e.tppName}, tppLogoUrl: ${e.tppLogoUrl}`);
+                setAbortCode(code);
                 showQR(e);
                 startCountdown(e.timeoutSeconds);
             },
@@ -24,10 +26,10 @@
                 console.log('Handoff QR Read');
                 showQRRead();
             },
-            onHandoffTimedOut() {
+            onHandoffTimedOut(e) {
                 // Timeout do fluxo OIDC
                 console.log('Handoff timed-out');
-                showTimeout();
+                showTimeout(e);
             },
             onHandoffCompleted(e) {
                 // Usuário aceitou o consentimento com sucesso
@@ -62,10 +64,13 @@
             .append('<p>QR lido no seu celular</p><p>Mantenha essa janela aberta</p>');
     }
 
-    function showTimeout() {
+    function showTimeout(e) {
         $('#step')
             .empty()
             .append('<p>Tempo esgotado, tente novamente</p>');
+        $('#abort').hide();
+
+        handleRedirect(e?.errorCommand?.redirect);
     }
 
     function showCompleted(e) {
@@ -80,8 +85,8 @@
     function showError(e) {
         $('#step')
             .empty()
-            .append('<p>Ops... ocorreu algo errado</p>')
-            .append(`<p>Tipo do erro: ${e.errorCommand.type}</p>`);
+            .append('<p>Solicita&ccedil;&atilde;o interrompida</p>')
+            .append(`<p>Categoria da interrup&ccedil;&atilde;o: ${e.errorCommand.type}</p>`);
 
         if (e.errorCommand?.message) {
             $('#step').append(`<p>Mensagem: ${e.errorCommand.message}</p>`);
@@ -112,8 +117,29 @@
 
     function handleRedirect(redirect) {
         if (!(redirect?.redirectTo)) return;
+        $('#abort').hide();
+        $('#countdown').hide();
         setTimeout(function () { window.location.href = redirect.redirectTo }, 5000);
     }
+
+    function abortHandoff(){
+        var code  = $('#codeabort').val();
+        $('#btabort').prop('disabled', true);
+        $('#btabort').text('Processando...');
+        $.ajax({
+            url: `AS_BASE_URL/auth/handoff/v1/${code}/abort`,
+            type: 'PUT',
+            success: function (result) {
+                console.log('Handoff aborted');
+            }
+        });
+    }
+
+    function setAbortCode(code){
+        console.log(oobHandoff.oobStartCode);
+        $('#codeabort').val(code);
+    }
+
 </script>
 
 <body>
@@ -121,6 +147,11 @@
     </div>
     <div id="step">
         Iniciando...
+    </div>
+    <div id="abort">
+        <button id="btabort" onclick="abortHandoff()">Cancelar Solicita&ccedil;&atilde;o</button>
+    </div>
+    <div id="codeabort" style="display:hidden">
     </div>
 </body>
 
