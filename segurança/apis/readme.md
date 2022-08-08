@@ -365,6 +365,7 @@
 | Operação | API           | Valida token | Escopo de acesso | Valida JWS | ConsentPermission | Valida consentId | mTLS | Obs |
 | -------- | ------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
 | GET      | /v1/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
+| GET      | /v2/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 
 ### OOB consents
 
