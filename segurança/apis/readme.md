@@ -240,6 +240,12 @@
 | GET      | /v1/personal/identifications     | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ | Sim              | Sim  |     |
 | GET      | /v1/personal/financial-relations | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              | Sim  |     |
 | GET      | /v1/personal/qualifications      | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              | Sim  |     |
+| GET      | /v2/business/identifications     | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ | Sim              | Sim  |     |
+| GET      | /v2/business/financial-relations | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              | Sim  |     |
+| GET      | /v2/business/qualifications      | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              | Sim  |     |
+| GET      | /v2/personal/identifications     | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ | Sim              | Sim  |     |
+| GET      | /v2/personal/financial-relations | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              | Sim  |     |
+| GET      | /v2/personal/qualifications      | Sim          | customers        | Não        | CUSTOMERS_PERSONAL_ADITTIONALINFO_READ  | Sim              | Sim  |     |
 
 ### Credit cards accounts
 
