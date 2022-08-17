@@ -256,13 +256,13 @@ ConsentCustomerAcceptance:
       discriminator:
         propertyName: type
         mapping:
-          PIX: "./PixPaymentConsent.yaml"
-          TED: "./TedPaymentConsent.yaml"
-          TEF: "./TefPaymentConsent.yaml"
+              PIX: './PixPaymentConsent.yaml'
+              TED: './TedPaymentConsent.yaml'
+              TEF: './TefPaymentConsent.yaml'
       oneOf:
-        - $ref: "./PixPaymentConsent.yaml"
-        - $ref: "./TedPaymentConsent.yaml"
-        - $ref: "./TefPaymentConsent.yaml"
+        - $ref: './PixPaymentConsent.yaml'
+        - $ref: './TedPaymentConsent.yaml'
+        - $ref: './TefPaymentConsent.yaml'
     debtorAccount:
       type: object
       description: |
