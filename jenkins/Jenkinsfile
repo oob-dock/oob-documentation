@@ -11,7 +11,7 @@ pipeline {
 			}
 		}
 		stage('Integration Schema Replication'){
-			when { branch 'master' }
+			when { branch 'develop' }
 			steps{	
 				build job: "/oob-schema-replication"
 			}

@@ -1,0 +1,16 @@
+{
+  "data": {
+    "compeCode": "001",
+    "number": "24550245",
+    "checkDigit": "4",
+    "type": "CONTA_DEPOSITO_A_VISTA",
+    "subtype": "INDIVIDUAL",
+    "currency": "BRL",
+    "branchCode": "6272"
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1,
+    "requestDateTime": "2021-05-21T08:30:00Z"
+  }
+}

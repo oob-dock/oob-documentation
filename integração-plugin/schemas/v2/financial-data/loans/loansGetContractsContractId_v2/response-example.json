@@ -1,0 +1,95 @@
+{
+  "data": {
+    "contractNumber": "1324926521496",
+    "ipocCode": "92792126019929279212650822221989319252576",
+    "productName": "Crédito Pessoal Consignado",
+    "productType": "EMPRESTIMOS",
+    "productSubType": "CREDITO_PESSOAL_COM_CONSIGNACAO",
+    "contractDate": "2018-01-05",
+    "instalmentPeriodicity": "SEMANAL",
+    "amortizationScheduled": "SAC",
+    "interestRates": [],
+    "contractedFees": [
+      {
+        "feeName": "Renovação de cadastro",
+        "feeCode": "CADASTRO",
+        "feeChargeType": "UNICA",
+        "feeCharge": "MINIMO",
+        "feeRate": "0.062000",
+        "feeAmount": "100000.0400"
+      },
+      {
+        "feeName": "Renovação de cadastro",
+        "feeCode": "CADASTRO",
+        "feeChargeType": "UNICA",
+        "feeCharge": "MINIMO",
+        "feeRate": "0.062000",
+        "feeAmount": "100000.0400"
+      },
+      {
+        "feeName": "Renovação de cadastro",
+        "feeCode": "CADASTRO",
+        "feeChargeType": "UNICA",
+        "feeCharge": "MINIMO",
+        "feeAmount": "100000.0400",
+        "feeRate": "0.062000"
+      },
+      {
+        "feeName": "Renovação de cadastro",
+        "feeCode": "CADASTRO",
+        "feeChargeType": "UNICA",
+        "feeCharge": "MINIMO",
+        "feeRate": "0.062000",
+        "feeAmount": "100000.0400"
+      }
+    ],
+    "contractedFinanceCharges": [
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
+        "chargeRate": "0.070000"
+      },
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeRate": "0.070000",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos."
+      },
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeRate": "0.070000",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos."
+      },
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
+        "chargeRate": "0.070000"
+      },
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
+        "chargeRate": "0.070000"
+      }
+    ],
+    "cnpjConsignee": "60500998000135",
+    "instalmentPeriodicityAdditionalInfo": "Informações adicionais sobre periodicidade",
+    "settlementDate": "2018-01-15",
+    "disbursementDates": [
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15"
+    ],
+    "firstInstalmentDueDate": "2018-02-15",
+    "currency": "BRL",
+    "CET": "0.290000",
+    "amortizationScheduledAdditionalInfo": "Informações complementares relativa à amortização do tipo 'OUTROS'",
+    "dueDate": "2028-01-15",
+    "contractAmount": "1000.0400"
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1,
+    "requestDateTime": "2021-05-21T08:30:00Z"
+  }
+}

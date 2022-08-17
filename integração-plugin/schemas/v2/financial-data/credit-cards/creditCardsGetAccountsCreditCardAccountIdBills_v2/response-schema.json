@@ -1,0 +1,274 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "description": "Conjunto das informações referentes a lista de faturas associadas à conta de pagamento pós-paga",
+        "required": [
+          "billId",
+          "dueDate",
+          "billTotalAmount",
+          "billMinimumAmount",
+          "isInstalment",
+          "payments"
+        ],
+        "properties": {
+          "billId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
+          },
+          "dueDate": {
+            "description": "Data de vencimento da Fatura, que aparece para pagamento pelo cliente",
+            "type": "string",
+            "maxLength": 10,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2021-05-21"
+          },
+          "billTotalAmount": {
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "description": "Valor total da faturas.\nO campo deve assumir valor positivo para saldo devedor e negativo para saldo credor.\n",
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 21,
+                "minLength": 4,
+                "example": "1000.0400",
+                "description": "Valor total da faturas. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "example": "BRL"
+              }
+            }
+          },
+          "billMinimumAmount": {
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "description": "Valor do pagamento minimo da fatura\n",
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 20,
+                "minLength": 4,
+                "example": "1000.0400",
+                "description": "Valor do pagamento minimo da fatura",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "example": "BRL"
+              }
+            }
+          },
+          "isInstalment": {
+            "type": "boolean",
+            "description": "Indica se a fatura permite parcelamento (true) ou não (false).",
+            "example": false
+          },
+          "financeCharges": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Lista dos encargos cobrados na fatura",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "amount",
+                "currency"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Traz a denominação dos Encargos que\nincidem na fatura da conta de pagamento pós-paga. (Vide Enum)\n- Juros remuneratórios por atraso no pagamento da fatura\n- Multa por atraso no pagamento da fatura\n- Juros de mora por atraso no pagamento da fatura\n- IOF\n- Sem Encargo\n- Outros\n",
+                  "enum": [
+                    "JUROS_REMUNERATORIOS_ATRASO_PAGAMENTO_FATURA",
+                    "MULTA_ATRASO_PAGAMENTO_FATURA",
+                    "JUROS_MORA_ATRASO_PAGAMENTO_FATURA",
+                    "IOF",
+                    "OUTROS"
+                  ]
+                },
+                "additionalInfo": {
+                  "type": "string",
+                  "maxLength": 140,
+                  "pattern": "[\\w\\W\\s]*",
+                  "example": "Informações Adicionais",
+                  "description": "Campo livre, de preenchimento obrigatório se selecionado tipo de encargo 'OUTROS'"
+                },
+                "amount": {
+                  "type": "string",
+                  "format": "double",
+                  "maxLength": 20,
+                  "minLength": 4,
+                  "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                  "example": "100000.0400",
+                  "description": "Valor cobrado pelo encargo. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+                  "minimum": -1.7976931348623157e+308,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "currency": {
+                  "type": "string",
+                  "maxLength": 3,
+                  "pattern": "^(\\w{3}){1}$",
+                  "example": "BRL",
+                  "description": "Moeda referente ao valor cobrado pelo encargo, segundo modelo ISO-4217. p.ex. 'BRL' \nTodos os saldos informados estão representados com a moeda vigente do Brasil.\n"
+                }
+              }
+            }
+          },
+          "payments": {
+            "type": "array",
+            "minItems": 0,
+            "description": "Lista que traz os valores relativos aos pagamentos da Fatura da conta de pagamento pós-paga",
+            "items": {
+              "type": "object",
+              "required": [
+                "valueType",
+                "paymentDate",
+                "paymentMode",
+                "amount",
+                "currency"
+              ],
+              "properties": {
+                "valueType": {
+                  "type": "string",
+                  "description": "Traz os tipos dos valores relativos aos pagamentos da fatura da conta de pagamento pós-paga: (Vide Enum)\n - Valor de pagamento da fatura com parcelamento\n - Valor pagamento da fatura realizado\n - Outro Valor pago na fatura\n\n VALOR_PAGAMENTO_FATURA_PARCELADO: Quando o pagamento corresponde ao fato gerador para abertura do plano de parcelamento da fatura\n\n VALOR_PAGAMENTO_FATURA_REALIZADO: Quando o pagamento corresponde ao valor total da fatura\n\n OUTRO_VALOR_PAGO_FATURA: Demais casos\n",
+                  "enum": [
+                    "VALOR_PAGAMENTO_FATURA_PARCELADO",
+                    "VALOR_PAGAMENTO_FATURA_REALIZADO",
+                    "OUTRO_VALOR_PAGO_FATURA"
+                  ]
+                },
+                "paymentDate": {
+                  "description": "Data efetiva de quando o Pagamento da fatura foi realizado",
+                  "type": "string",
+                  "maxLength": 10,
+                  "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                  "example": "2021-05-21"
+                },
+                "paymentMode": {
+                  "type": "string",
+                  "description": "Traz as formas de efetivação do pagamento realizado: (Vide Enum)\n- Débito em conta corrente\n- Boleto bancário\n- Averbação em folha\n- PIX\n",
+                  "enum": [
+                    "DEBITO_CONTA_CORRENTE",
+                    "BOLETO_BANCARIO",
+                    "AVERBACAO_FOLHA",
+                    "PIX"
+                  ]
+                },
+                "amount": {
+                  "type": "string",
+                  "format": "double",
+                  "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                  "maxLength": 20,
+                  "minLength": 4,
+                  "example": "1000.0400",
+                  "description": "Valor pagamento segundo o valueType.  \nExpresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.   \nO campo não pode assumir valor negativo por se tratar de um pagamento.\n",
+                  "minimum": -1.7976931348623157e+308,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "currency": {
+                  "type": "string",
+                  "pattern": "^(\\w{3}){1}$",
+                  "maxLength": 3,
+                  "description": "Moeda referente ao valor de pagamento da fatura, segundo modelo ISO-4217. p.ex. 'BRL' Todos os valores informados estão representados com a moeda vigente do Brasil\n",
+                  "example": "BRL"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}
