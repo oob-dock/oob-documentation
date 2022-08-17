@@ -184,8 +184,7 @@ ConsentCustomerAcceptance:
           id:
             type: string
             description: campo no formato GUID
-            example:
-              - 49fe29f1-95a9-4521-8f48-a9700e392b48
+            example: 49fe29f1-95a9-4521-8f48-a9700e392b48
             pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
             maxLength: 36
           modality:
@@ -196,15 +195,13 @@ ConsentCustomerAcceptance:
               - FINANCING
               - UNARRANGED_ACCOUNT_OVERDRAFT
               - INVOICE_FINANCING
-            example:
-              - LOAN
+            example: LOAN
           description:
             description: Tipo da submodalidade
             type: string
             maxLength: 200
             pattern: '[\w\W\s]*'
-            example:
-              - Capital de giro
+            example: Capital de giro
     expirationDateTime:
       description: Data e hora de expiração da permissão. De preenchimento obrigatório, reflete a data limite de validade do consentimento. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC (UTC time format).
       type: string
