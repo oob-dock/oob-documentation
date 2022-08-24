@@ -16,10 +16,10 @@ pipeline {
 			when { branch 'develop'; branch 'develop-mnt' }
 			steps{
 				script{
-					gitBranch = ${GIT_BRANCH}
+					branchName = "${BRANCH_NAME}"
 				}
 				build job: "/oob-schema-replication", parameters: [
-					string(name: 'gitBranch', value: gitBranch)
+					string(name: 'gitBranch', value: branchName)
 				]
 			}
 		}
