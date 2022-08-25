@@ -366,6 +366,58 @@
                                 "rulesOperator": "OR",
                                 "disableTemplating": false,
                                 "fallbackTo404": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"resource-must-contain-id\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"RESOURCE_MUST_CONTAIN_ID\",\n    \"message\": \"SelectedResources must contain id\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "Error - Resource must contain id",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "query",
+                                        "modifier": "id",
+                                        "value": "resource",
+                                        "isRegex": false
+                                    }
+                                ],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
+                            },
+                            {
+                                "uuid": "",
+                                "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"resource-must-contain-id\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"SUBMODALITY_MUST_CONTAIN_ID\",\n    \"message\": \"SelectedSubmodalities must contain id\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+                                "latency": 0,
+                                "statusCode": 200,
+                                "label": "Error - Submodality must contain id",
+                                "headers": [
+                                    {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                    }
+                                ],
+                                "filePath": "",
+                                "sendFileAsBody": false,
+                                "rules": [
+                                    {
+                                        "target": "query",
+                                        "modifier": "id",
+                                        "value": "submodality",
+                                        "isRegex": false
+                                    }
+                                ],
+                                "rulesOperator": "OR",
+                                "disableTemplating": false,
+                                "fallbackTo404": false
                             }
                         ],
                         "enabled": true,
