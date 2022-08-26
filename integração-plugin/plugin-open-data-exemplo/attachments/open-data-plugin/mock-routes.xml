@@ -1,0 +1,403 @@
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://camel.apache.org/schema/spring"
+        xsi:schemaLocation="
+            http://camel.apache.org/schema/spring
+            http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <route id="getPersonalAccountsRoute">
+        <from uri="direct:getPersonalAccounts"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getPersonalAccounts</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getPersonalAccounts</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/contas/pf"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBusinessAccountsRoute">
+        <from uri="direct:getBusinessAccounts"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBusinessAccounts</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBusinessAccounts</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/contas/pj"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getPersonalLoansRoute">
+        <from uri="direct:getPersonalLoans"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getPersonalLoans</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getPersonalLoans</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/emprestimos/pf"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBusinessLoansRoute">
+        <from uri="direct:getBusinessLoans"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBusinessLoans</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBusinessLoans</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/emprestimos/pj"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getPersonalFinancingsRoute">
+        <from uri="direct:getPersonalFinancings"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getPersonalFinancings</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getPersonalFinancings</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/financiamentos/pf"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBusinessFinancingsRoute">
+        <from uri="direct:getBusinessFinancings"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBusinessFinancings</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBusinessFinancings</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/financiamentos/pj"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getPersonalInvoiceFinancingsRoute">
+        <from uri="direct:getPersonalInvoiceFinancings"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getPersonalInvoiceFinancings</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getPersonalInvoiceFinancings</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-recebiveis/pf"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBusinessInvoiceFinancingsRoute">
+        <from uri="direct:getBusinessInvoiceFinancings"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBusinessInvoiceFinancings</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBusinessInvoiceFinancings</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-recebiveis/pj"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getPersonalCreditCardsRoute">
+        <from uri="direct:getPersonalCreditCards"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getPersonalCreditCards</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getPersonalCreditCards</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/cartoes/pf"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBusinessCreditCardsRoute">
+        <from uri="direct:getBusinessCreditCards"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBusinessCreditCards</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBusinessCreditCards</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/cartoes/pj"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getPersonalUnarrangedAccountOverdraftRoute">
+        <from uri="direct:getPersonalUnarrangedAccountOverdraft"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getPersonalUnarrangedAccountOverdraft</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getPersonalUnarrangedAccountOverdraft</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-depositantes/pf"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBusinessUnarrangedAccountOverdraftRoute">
+        <from uri="direct:getBusinessUnarrangedAccountOverdraft"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBusinessUnarrangedAccountOverdraft</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBusinessUnarrangedAccountOverdraft</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-depositantes/pj"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBankingAgentsRoute">
+        <from uri="direct:getBankingAgents"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBankingAgents</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBankingAgents</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/canais/v1/correspondentes"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getBranchesRoute">
+        <from uri="direct:getBranches"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getBranches</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getBranches</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/canais/v1/agencias"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getElectronicChannelsRoute">
+        <from uri="direct:getElectronicChannels"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getElectronicChannels</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getElectronicChannels</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/canais/v1/contatos-eletronicos"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getPhoneChannelsRoute">
+        <from uri="direct:getPhoneChannels"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getPhoneChannels</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getPhoneChannels</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/canais/v1/contatos-telefonicos"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <route id="getSharedAutomatedTellerMachinesRoute">
+        <from uri="direct:getSharedAutomatedTellerMachines"/>
+        <log loggingLevel="INFO" message="Payload received within the camel connector for request (logging full content only for evaluation purpose)"/>
+        <log loggingLevel="INFO" message="&quot;connectorPayload&quot;: &quot;${body}&quot;"/>
+        <setHeader name="RequestEndpoint">
+            <constant>getSharedAutomatedTellerMachines</constant>
+        </setHeader>
+         <setHeader name="CamelCaffeineKey">
+            <constant>getSharedAutomatedTellerMachines</constant>
+        </setHeader>
+        <setHeader name="CamelCaffeineAction">
+            <constant>GET</constant>
+        </setHeader>
+        <log loggingLevel="DEBUG" message="Initializing HTTP Request for {{env:ROUTES_OPEN_DATA}}/canais/v1/terminais-autoatendimento"/>
+        <to uri="direct:responseCache"/>
+    </route>
+    <!-- CACHE FOR RESPONSE -->
+    <route id="responseCacheRoute" streamCache="true">
+        <from uri="direct:responseCache"/>
+        <to uri="caffeine-cache://cache?evictionType=TIME_BASED&amp;expireAfterWriteTime={{env:CACHE_EXPIRATION}}"/>
+        <choice>
+            <when>
+                <!-- UPDATE RESPONSE IN CACHE -->
+                <simple>${header.CamelCaffeineActionHasResult} == false</simple>
+                <setHeader name="CamelCaffeineAction">
+                    <constant>PUT</constant>
+                </setHeader>
+                <choice>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getPersonalAccounts'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/contas/pf?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBusinessAccounts'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/contas/pj?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getPersonalLoans'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/emprestimos/pf?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBusinessLoans'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/emprestimos/pj?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getPersonalFinancings'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/financiamentos/pf?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBusinessFinancings'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/financiamentos/pj?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getPersonalInvoiceFinancings'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-recebiveis/pf?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBusinessInvoiceFinancings'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-recebiveis/pj?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getPersonalCreditCards'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/cartoes/pf?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBusinessCreditCards'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/cartoes/pj?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getPersonalUnarrangedAccountOverdraft'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-depositantes/pf?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBusinessUnarrangedAccountOverdraft'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/produtos-servicos/v1/adiantamento-depositantes/pj?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBankingAgents'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/canais/v1/correspondentes?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getBranches'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/canais/v1/agencias?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getElectronicChannels'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/canais/v1/contatos-eletronicos?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getPhoneChannels'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/canais/v1/contatos-telefonicos?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                    <when>
+                        <simple>${in.headers.RequestEndpoint} == 'getSharedAutomatedTellerMachines'</simple>
+                        <toD uri="{{env:ROUTES_OPEN_DATA}}/canais/v1/terminais-autoatendimento?bridgeEndpoint=true&amp;throwExceptionOnFailure=false&amp;httpMethod=GET&amp;encoding=UTF-8"/>
+                    </when>
+                </choice>
+                <choice>
+                    <when>
+                        <simple>${header.CamelHttpResponseCode} == '200'</simple>
+                        <to uri="caffeine-cache://cache?evictionType=TIME_BASED&amp;expireAfterWriteTime={{env:CACHE_EXPIRATION}}"/>
+                    </when>
+                    <otherwise>
+                        <to uri="direct:getErrorResponse"/>
+                    </otherwise>
+                </choice>
+            </when>
+            <otherwise>
+                <log loggingLevel="DEBUG" message="Hitting cache for ${in.headers.ChannelsEndpoint}"/>
+                <setHeader name="CamelHttpResponseCode">
+                    <constant>200</constant>
+                </setHeader>
+                <setHeader name="CamelHttpResponseText">
+                    <constant>OK</constant>
+                </setHeader>
+            </otherwise>
+        </choice>
+        <log loggingLevel="DEBUG" message="HTTP Request for channel called with success"/>
+        <log loggingLevel="DEBUG" message="Headers: ${headers}"/>
+        <log loggingLevel="DEBUG" message="Body: ${body}"/>
+        <removeHeaders pattern="CamelCaffeineAction|CamelCaffeineActionHasResult|CamelCaffeineActionSucceeded|ChannelsEndpoint"/>
+    </route>
+    <!-- GET ERROR -->
+    <route id="getErrorResponseRoute">
+        <from uri="direct:getErrorResponse"/>
+        <choice>
+            <when>
+                <simple>${header.CamelHttpResponseCode} == '404'</simple>
+                <to uri="velocity:specs/response-error/mocks/response-error-404.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
+                <setHeader name="CamelHttpResponseCode">
+                    <constant>404</constant>
+                </setHeader>
+            </when>
+            <otherwise>
+                <to uri="velocity:specs/response-error/mocks/response-error-500.json?allowContextMapAll=true&amp;encoding=UTF-8"/>
+                <setHeader name="CamelHttpResponseCode">
+                    <constant>500</constant>
+                </setHeader>
+            </otherwise>
+        </choice>
+    </route>
+</routes>
