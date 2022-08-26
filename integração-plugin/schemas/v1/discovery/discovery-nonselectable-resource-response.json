@@ -83,7 +83,8 @@
                     }
                 },
                 "required": [
-                    "resourceLegacyId"
+                    "resourceLegacyId",
+                    "submodality"
                 ],
                 "additionalItems": false
             }
