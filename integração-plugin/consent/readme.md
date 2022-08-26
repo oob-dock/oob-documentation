@@ -189,6 +189,11 @@ Exemplo de response para um produto não selecionável:
           "value":"ABC12010"
         }
       ],
+      "submodality": {
+        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
+        "modality":"LOAN",
+        "description":"Home equity"
+      },
       "validUntil":"2022-06-07"
     },
     {
@@ -197,11 +202,53 @@ Exemplo de response para um produto não selecionável:
           "key":"pkEmprestimo",
           "value":"DEF51242"
         }
-      ]
+      ],
+      "submodality": {
+        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
+        "modality":"LOAN",
+        "description":"Crédito pessoal - consignado"
+      },
+      "status":"RESOURCE_TEMPORARILY_UNAVAILABLE"
     }
   ]
 }
 ```
+
+Diferentemente dos produtos selecionáveis, os recursos listados no discovery do
+produtos não-selecionáveis possuem o parâmetro "status" que informa o estado em
+que se encontra o recurso. Essa informação é importante, uma vez que apenas os
+recursos cujo status é AVAILABLE podem ser consumidos nos endpoints do financial-data.
+
+Os status possíveis para um recurso de um produto não-selecionável são:
+
+| Status                           | Descrição                                   |
+| -------------------------------- | ------------------------------------------- |
+| AVAILABLE                        | Recurso disponível                          |
+| RESOURCE_PENDING_AUTHORISATION   | Aguardando autorização de múltiplas alçadas |
+| RESOURCE_UNAVAILABLE             | Recurso indisponível                        |
+| RESOURCE_TEMPORARILY_UNAVAILABLE | Recurso temporariamente indisponível        |
+
+Já o parâmetro "submodality" indica a qual submodalidade o recurso pertence.
+
+| TAG                                   | Submodalidade                                      |
+|-------------------------------------- | -------------------------------------------------- |
+| ADIANTAMENTOS_DEPOSITANTES            | Adiantamentos a depositantes                       |
+| CREDITO_PESSOAL_CONSIGNADO            | Crédito pessoal - consignado                       |
+| CREDITO_PESSOAL_SEM_CONSIGNACAO       | Crédito pessoal - sem consignação                  |
+| HOME_EQUITY                           | Home equity                                        |
+| MICROCREDITO                          | MicroCrédito                                       |
+| CHEQUE_ESPECIAL                       | Cheque especial                                    |
+| CONTA_GARANTIDA                       | Conta garantida                                    |
+| CAPITAL_GIRO                          | Capital de giro                                    |
+| DESCONTO_DUPLICATAS                   | Desconto de duplicatas                             |
+| DESCONTO_CHEQUES                      | Desconto de cheques                                |
+| ANTECIPACAO_RECEBIVEIS_CARTAO_CREDITO | Antecipação de recebí­veis de cartão de Crédito     |
+| DESCONTO_NOTA_PROVISORIA              | Desconto de nota promissória                       |
+| AQUISICAO_BENS_RENOVAVEIS             | Aquisições de bens móveis                          |
+| MICROCREDITO_PRODUTIVO_ORIENTADO      | MicroCrédito produtivo orientado                   |
+| RURAIS                                | Rurais                                             |
+| SFH                                   | Sistema Financeiro da Habilitação (SFH)            |
+| SFI                                   | Sistema Financeiro Imobiliário (SFI)               |
 
 ### Tratamentos adicionais
 
