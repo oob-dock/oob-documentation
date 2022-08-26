@@ -228,27 +228,8 @@ Os status possíveis para um recurso de um produto não-selecionável são:
 | RESOURCE_UNAVAILABLE             | Recurso indisponível                        |
 | RESOURCE_TEMPORARILY_UNAVAILABLE | Recurso temporariamente indisponível        |
 
-Já o parâmetro "submodality" indica a qual submodalidade o recurso pertence.
-
-| TAG                                   | Submodalidade                                      |
-|-------------------------------------- | -------------------------------------------------- |
-| ADIANTAMENTOS_DEPOSITANTES            | Adiantamentos a depositantes                       |
-| CREDITO_PESSOAL_CONSIGNADO            | Crédito pessoal - consignado                       |
-| CREDITO_PESSOAL_SEM_CONSIGNACAO       | Crédito pessoal - sem consignação                  |
-| HOME_EQUITY                           | Home equity                                        |
-| MICROCREDITO                          | MicroCrédito                                       |
-| CHEQUE_ESPECIAL                       | Cheque especial                                    |
-| CONTA_GARANTIDA                       | Conta garantida                                    |
-| CAPITAL_GIRO                          | Capital de giro                                    |
-| DESCONTO_DUPLICATAS                   | Desconto de duplicatas                             |
-| DESCONTO_CHEQUES                      | Desconto de cheques                                |
-| ANTECIPACAO_RECEBIVEIS_CARTAO_CREDITO | Antecipação de recebí­veis de cartão de Crédito     |
-| DESCONTO_NOTA_PROVISORIA              | Desconto de nota promissória                       |
-| AQUISICAO_BENS_RENOVAVEIS             | Aquisições de bens móveis                          |
-| MICROCREDITO_PRODUTIVO_ORIENTADO      | MicroCrédito produtivo orientado                   |
-| RURAIS                                | Rurais                                             |
-| SFH                                   | Sistema Financeiro da Habilitação (SFH)            |
-| SFI                                   | Sistema Financeiro Imobiliário (SFI)               |
+Já o parâmetro "submodality" indica a qual submodalidade o recurso pertence,
+apresentando seu id, sua descrição e a modalidade a qual pertence.
 
 ### Tratamentos adicionais
 
