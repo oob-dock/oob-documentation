@@ -214,7 +214,7 @@ Exemplo de response para um produto não selecionável:
 }
 ```
 
-Diferentemente dos produtos selecionáveis, os recursos listados no discovery do
+Diferentemente dos produtos selecionáveis, os recursos listados no discovery dos
 produtos não-selecionáveis possuem o parâmetro "status" que informa o estado em
 que se encontra o recurso. Essa informação é importante, uma vez que apenas os
 recursos cujo status é AVAILABLE podem ser consumidos nos endpoints do financial-data.
