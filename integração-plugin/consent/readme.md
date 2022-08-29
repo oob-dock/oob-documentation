@@ -208,7 +208,7 @@ Exemplo de response para um produto não selecionável:
         "modality":"LOAN",
         "description":"Crédito pessoal - consignado"
       },
-      "status":"RESOURCE_TEMPORARILY_UNAVAILABLE"
+      "status":"TEMPORARILY_UNAVAILABLE"
     }
   ]
 }
@@ -221,12 +221,12 @@ recursos cujo status é AVAILABLE podem ser consumidos nos endpoints do financia
 
 Os status possíveis para um recurso de um produto não-selecionável são:
 
-| Status                           | Descrição                                   |
-| -------------------------------- | ------------------------------------------- |
-| AVAILABLE                        | Recurso disponível                          |
-| RESOURCE_PENDING_AUTHORISATION   | Aguardando autorização de múltiplas alçadas |
-| RESOURCE_UNAVAILABLE             | Recurso indisponível                        |
-| RESOURCE_TEMPORARILY_UNAVAILABLE | Recurso temporariamente indisponível        |
+| Status                  | Descrição                                   |
+| ----------------------- | ------------------------------------------- |
+| AVAILABLE               | Recurso disponível                          |
+| PENDING_AUTHORISATION   | Aguardando autorização de múltiplas alçadas |
+| UNAVAILABLE             | Recurso indisponível                        |
+| TEMPORARILY_UNAVAILABLE | Recurso temporariamente indisponível        |
 
 Já o parâmetro "submodality" indica a qual submodalidade o recurso pertence,
 apresentando seu id, sua descrição e a modalidade a qual pertence.

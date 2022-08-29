@@ -41,9 +41,9 @@
                         "default": "AVAILABLE",
                         "enum": [
                             "AVAILABLE",
-                            "RESOURCE_PENDING_AUTHORISATION",
-                            "RESOURCE_UNAVAILABLE",
-                            "RESOURCE_TEMPORARILY_UNAVAILABLE"
+                            "PENDING_AUTHORISATION",
+                            "UNAVAILABLE",
+                            "TEMPORARILY_UNAVAILABLE"
                         ]
                     },
                     "submodality": {
