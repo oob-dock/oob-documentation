@@ -10,11 +10,13 @@
       - [Conector de produto não selecionável](#conector-de-produto-não-selecionável)
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
+    - [Submodalidades](#submodalidades)
   - [Grupos de permissões na criação do consentimento](#grupos-de-permissões-na-criação-do-consentimento)
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
       - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
   - [Serviços auxiliares](#serviços-auxiliares)
   - [Revogação do consentimento de pagamento](#revogação-do-consentimento-de-pagamento)
+  - [Status dos recursos](#status-dos-recursos)
 
 ## Discovery de recursos no Opus Open Banking
 
@@ -34,11 +36,12 @@ ativamente pelo cliente. Chamamos esses produtos de **produtos selecionáveis**.
 
 O segundo momento de discovery ocorre durante a utilização do consentimento de
 compartilhamento de dados, quando o *TPP* chama a API regulatória
-[```GET /resources/v1/resources```](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-2-apis-do-open-banking-brasil-api-resources).
+[```GET /resources/v1/resources```](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/33849604/Informa+es+T+cnicas+-+Resources+-+v1.0.2).
 Essa API precisa retornar todos os recursos acessíveis no consentimento, ou
 seja, os produtos selecionados ativamente pelo cliente durante a aceitação do
 consentimento e os demais produtos do consentimento. Chamamos esses últimos
-produtos de **produtos não selecionáveis**.
+produtos de **produtos não selecionáveis**. Os possíveis status dos recursos
+não selecionáveis podem ser conferidos [aqui](#status-dos-recursos).
 
 A tabela a seguir compila todos os produtos tratados pelo Opus Open Banking e
 seus tipos:
@@ -189,6 +192,11 @@ Exemplo de response para um produto não selecionável:
           "value":"ABC12010"
         }
       ],
+      "submodality": {
+        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
+        "modality":"LOAN",
+        "description":"Home equity"
+      },
       "validUntil":"2022-06-07"
     },
     {
@@ -197,11 +205,20 @@ Exemplo de response para um produto não selecionável:
           "key":"pkEmprestimo",
           "value":"DEF51242"
         }
-      ]
+      ],
+      "submodality": {
+        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
+        "modality":"LOAN",
+        "description":"Crédito pessoal - consignado"
+      },
+      "status": "RESOURCE_TEMPORARILY_UNAVAILABLE"
     }
   ]
 }
 ```
+
+**IMPORTANTE**: O sistema legado do banco deve ser responsável pelo controle do
+status do recurso e pela validade do recurso (validUntil).
 
 ### Tratamentos adicionais
 
@@ -214,6 +231,15 @@ consentimento e a lista retornada deve ser filtrada para retornar somente a
 conta pré-selecionada ou uma lista vazia caso essa não seja uma opção selecionável
 para o cliente. Esse tratamento deve ser feito no conector ou serviço remoto de listagem
 de contas.
+
+### Submodalidades
+
+As submodalidades são referentes aos produtos não selecionáveis contratados ou
+distribuídos pela instituição transmissora.
+
+A nomenclatura das submodalidades pode ser definida pela própria instituição. Dessa
+forma, o cadastro das submodalidades deve ser realizado via script na
+base de dados, sendo desta mesma maneira para atualização e remoção.
 
 ## Grupos de permissões na criação do consentimento
 
@@ -501,4 +527,13 @@ A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 Caso seja enviado um payload na requisição que não atenda ao objeto definido no
 JSON Schema ou não seja possível regovar o consentimento do pagamento por não atender
 os requisitos que possibilitem a revogação, será retornado um objeto de erro a
-exemplo deste [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
+exemplo deste [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json).
+
+## Status dos recursos
+
+| Status     | Descrição                      |Transição                        |
+| ------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------|
+| PENDING_AUTHORISATION     | Quando os recursos ainda exigem aprovação de múltipla alçada | Pode transacionar para todos os status |
+| TEMPORARILY_UNAVAILABLE | Recursos em bloqueios temporários e indisponíveis nos canais de atendimento eletrônico para os usuários finais | Pode transacionar para AVAILABLE ou UNAVAILABLE |
+| AVAILABLE | Recursos em plena utilização e disponíveis nos canais de atendimento eletrônico para os usuários finais | Pode transacionar para TEMPORARILY_UNAVAILABLE ou UNAVAILABLE |
+| UNAVAILABLE | Recursos encerrados, migrados, cancelados ou que foram para perdas e que estão indisponíveis nos canais de atendimento eletrônico para os usuários finais | Não pode transacionar para nenhum status |
