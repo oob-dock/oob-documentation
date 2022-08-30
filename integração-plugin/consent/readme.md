@@ -3,6 +3,9 @@
 - [API Consent](#api-consent)
   - [Discovery de recursos no Opus Open Banking](#discovery-de-recursos-no-opus-open-banking)
     - [Momentos de discovery](#momentos-de-discovery)
+      - [Produtos selecionáveis](#produtos-selecionáveis)
+      - [Produtos não selecionáveis](#produtos-não-selecionáveis)
+        - [Submodalidades](#submodalidades)
     - [Consentimento e os produtos](#consentimento-e-os-produtos)
     - [Tratamento dos identificadores](#tratamento-dos-identificadores)
     - [Conectores de discovery](#conectores-de-discovery)
@@ -25,41 +28,101 @@ discovery de recursos acontece em dois momentos distintos dentro do Open Banking
 
 ### Momentos de discovery
 
-O primeiro momento de discovery ocorre durante a fase de aceitação do
-consentimento pelo cliente da instituição. Consentimentos de compartilhamento de
-dados que envolvem os produtos **conta** e **cartão de crédito** e
-consentimentos de pagamento precisam exibir as instâncias dos produtos durante
-a etapa de autenticação e aceitação do consentimento para serem escolhidos
-ativamente pelo cliente. Chamamos esses produtos de **produtos selecionáveis**.
+#### Produtos selecionáveis
 
-O segundo momento de discovery ocorre durante a utilização do consentimento de
-compartilhamento de dados, quando o *TPP* chama a API regulatória
-[```GET /resources/v1/resources```](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-2-apis-do-open-banking-brasil-api-resources).
-Essa API precisa retornar todos os recursos acessíveis no consentimento, ou
-seja, os produtos selecionados ativamente pelo cliente durante a aceitação do
-consentimento e os demais produtos do consentimento. Chamamos esses últimos
-produtos de **produtos não selecionáveis**.
+O momento de discovery ocorre durante a fase de
+aceitação do consentimento pelo cliente da instituição. Consentimentos de
+compartilhamento de dados que envolvem os produtos **conta** e
+**cartão de crédito** e consentimentos de pagamento precisam exibir as instâncias
+ dos produtos durante a etapa de autenticação e aceitação do consentimento para
+ serem escolhidos ativamente pelo cliente. Chamamos esses produtos de
+ **produtos selecionáveis**.
 
-A tabela a seguir compila todos os produtos tratados pelo Opus Open Banking e
-seus tipos:
+A tabela a seguir compila todos os produtos selecionáveis tratados pelo Opus Open
+ Banking e seus tipos:
 
 | Tipo do consentimento     | Produto                      | Tipo do produto  | Nome da rota Camel                               |
 | ------------------------- | ---------------------------- | ---------------- | ------------------------------------------------ |
 | Compartilhamento de dados | ACCOUNT                      | Selecionável     | ```direct:discoverAccounts```                    |
 | Compartilhamento de dados | CREDIT_CARD_ACCOUNT          | Selecionável     | ```direct:discoverCreditCardAccounts```          |
-| Compartilhamento de dados | INVOICE_FINANCING            | Não selecionável | ```direct:discoverInvoiceFinancings```           |
-| Compartilhamento de dados | FINANCING                    | Não selecionável | ```direct:discoverFinancings```                  |
-| Compartilhamento de dados | LOAN                         | Não selecionável | ```direct:discoverLoans```                       |
-| Compartilhamento de dados | UNARRANGED_ACCOUNT_OVERDRAFT | Não selecionável | ```direct:discoverUnarrangedAccountOverdrafts``` |
 | Pagamento                 | PAYMENT[^1]                  | Selecionável     | ```direct:discoverPayments```                    |
 
 [^1]: O produto **PAYMENT** é uma forma de permitir que a seleção da origem de recursos para um pagamento seja independente do produto ACCOUNT, permitindo pagamentos através de cartão de crédito ou outra origem distinta que a instituição eventualmente possua.
 
-Caso a instituição forneça algum produto do tipo de compartilhamento de dados
+Caso a instituição forneça algum produto do tipo de compartilhamento de dados,
 será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
 de request e response indicado pelo tipo de produto](#conectores-de-discovery).
 Se não houver a disponibilização desses produtos (criação da rota camel), o retorno
 padrão do discovery é nulo e a instituição não precisa colocar tais rotas.
+
+#### Produtos não selecionáveis
+
+O momento de discovery ocorre durante a utilização do consentimento de
+compartilhamento de dados, quando o *TPP* chama a API regulatória
+[```GET /resources/v1/resources```](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/33849604/Informa+es+T+cnicas+-+Resources+-+v1.0.2).
+Essa API precisa retornar todos os recursos acessíveis no consentimento, ou
+seja, os produtos selecionados ativamente pelo cliente durante a aceitação do
+consentimento e os demais produtos do consentimento. Chamamos esses últimos
+produtos de **produtos não selecionáveis**.
+
+A tabela a seguir compila todos os produtos não selecionáveis tratados pelo Opus
+Open Banking e seus tipos:
+
+| Tipo do consentimento     | Produto                      | Tipo do produto  | Nome da rota Camel                               |
+| ------------------------- | ---------------------------- | ---------------- | ------------------------------------------------ |
+| Compartilhamento de dados | INVOICE_FINANCING            | Não selecionável | ```direct:discoverInvoiceFinancings```           |
+| Compartilhamento de dados | FINANCING                    | Não selecionável | ```direct:discoverFinancings```                  |
+| Compartilhamento de dados | LOAN                         | Não selecionável | ```direct:discoverLoans```                       |
+| Compartilhamento de dados | UNARRANGED_ACCOUNT_OVERDRAFT | Não selecionável | ```direct:discoverUnarrangedAccountOverdrafts``` |
+
+Caso a instituição forneça algum produto do tipo de compartilhamento de dados,
+será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
+de request e response indicado pelo tipo de produto](#conectores-de-discovery).
+Se não houver a disponibilização desses produtos (criação da rota camel), o retorno
+padrão do discovery é nulo e a instituição não precisa colocar tais rotas.
+
+Os possíveis status dos recursos não selecionáveis estão na tabela a seguir:
+
+| Status     | Descrição                      |Transição                        |
+| ------------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------------|
+| PENDING_AUTHORISATION     | Quando os recursos ainda exigem aprovação de múltipla alçada | Pode transacionar para todos os status |
+| TEMPORARILY_UNAVAILABLE | Recursos em bloqueios temporários e indisponíveis nos canais de atendimento eletrônico para os usuários finais | Pode transacionar para AVAILABLE ou UNAVAILABLE |
+| AVAILABLE | Recursos em plena utilização e disponíveis nos canais de atendimento eletrônico para os usuários finais | Pode transacionar para TEMPORARILY_UNAVAILABLE ou UNAVAILABLE |
+| UNAVAILABLE | Recursos encerrados, migrados, cancelados ou que foram para perdas e que estão indisponíveis nos canais de atendimento eletrônico para os usuários finais | Não pode transacionar para nenhum status |
+
+##### Submodalidades
+
+As submodalidades são referentes aos produtos não selecionáveis contratados ou
+distribuídos pela instituição transmissora.
+
+A nomenclatura das submodalidades pode ser definida pela própria instituição. Dessa
+forma, o cadastro das submodalidades deve ser realizado via script na
+base de dados, sendo desta mesma maneira para atualização e remoção.
+
+**Importante**: Não será possível remover uma submodalidade caso ela já esteja
+atrelada com algum consentimento.
+
+A tabela a seguir mostra as submodalidades disponíveis no produto:
+
+| Submodalidade                                  | Modalidade                   |
+| ---------------------------------------------- | ---------------------------- |
+| Descontos de duplicatas                        | INVOICE_FINANCING            |
+| Descontos de cheques                           | INVOICE_FINANCING            |
+| Antecipação de recebíveis de cartão de crédito | INVOICE_FINANCING            |
+| Desconto de nota promissória                   | INVOICE_FINANCING            |
+| Aquisições de bens móveis                      | FINANCING                    |
+| Microcrédito produtivo orientado               | FINANCING                    |
+| Rurais                                         | FINANCING                    |
+| Sistema Financeiro da Habilitação (SFH)        | FINANCING                    |
+| Sistema Financeiro da Imobiliário (SFI)        | FINANCING                    |
+| Crédito pessoal - consignado                   | LOAN                         |
+| Crédito pessoal - sem consignação              | LOAN                         |
+| Home equity                                    | LOAN                         |
+| Microcrédito                                   | LOAN                         |
+| Cheque especial                                | LOAN                         |
+| Conta garantida                                | LOAN                         |
+| Capital de giro                                | LOAN                         |
+| Adiantamento a depositantes                    | UNARRANGED_ACCOUNT_OVERDRAFT |
 
 ### Consentimento e os produtos
 
@@ -189,6 +252,11 @@ Exemplo de response para um produto não selecionável:
           "value":"ABC12010"
         }
       ],
+      "submodality": {
+        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
+        "modality":"LOAN",
+        "description":"Home equity"
+      },
       "validUntil":"2022-06-07"
     },
     {
@@ -197,11 +265,20 @@ Exemplo de response para um produto não selecionável:
           "key":"pkEmprestimo",
           "value":"DEF51242"
         }
-      ]
+      ],
+      "submodality": {
+        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
+        "modality":"LOAN",
+        "description":"Crédito pessoal - consignado"
+      },
+      "status": "TEMPORARILY_UNAVAILABLE"
     }
   ]
 }
 ```
+
+**IMPORTANTE**: O sistema legado do banco deve ser responsável pelo controle do
+status do recurso e pela validade do recurso (validUntil).
 
 ### Tratamentos adicionais
 
@@ -501,4 +578,4 @@ A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 Caso seja enviado um payload na requisição que não atenda ao objeto definido no
 JSON Schema ou não seja possível regovar o consentimento do pagamento por não atender
 os requisitos que possibilitem a revogação, será retornado um objeto de erro a
-exemplo deste [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json)
+exemplo deste [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json).
