@@ -153,14 +153,14 @@ https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/75661313/v1.2.0+-+S
 
 **Formato:** data formato iso 8601 (yyyy-MM-dd)
 
-**Default:** `2022/09/25`
+**Default:** `2022-09-25`
 
-**Ex:** 2022/09/13
+**Ex:** 2022-09-13
 
 ```yaml
 additionalVars:
   - name: APIS_VALIDATION_E2EID
-    value: "2022/09/25"
+    value: "2022-09-25"
 ```
 
 ### APIS_VALIDATION_OPENAPI_ENABLED-REQUEST
