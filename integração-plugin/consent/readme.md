@@ -189,11 +189,6 @@ Exemplo de response para um produto não selecionável:
           "value":"ABC12010"
         }
       ],
-      "submodality": {
-        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
-        "modality":"LOAN",
-        "description":"Home equity"
-      },
       "validUntil":"2022-06-07"
     },
     {
@@ -202,34 +197,11 @@ Exemplo de response para um produto não selecionável:
           "key":"pkEmprestimo",
           "value":"DEF51242"
         }
-      ],
-      "submodality": {
-        "id":"87d4796d-4e9f-46be-8079-8976271cba92",
-        "modality":"LOAN",
-        "description":"Crédito pessoal - consignado"
-      },
-      "status":"TEMPORARILY_UNAVAILABLE"
+      ]
     }
   ]
 }
 ```
-
-Diferentemente dos produtos selecionáveis, os recursos listados no discovery dos
-produtos não-selecionáveis possuem o parâmetro "status" que informa o estado em
-que se encontra o recurso. Essa informação é importante, uma vez que apenas os
-recursos cujo status é AVAILABLE podem ser consumidos nos endpoints do financial-data.
-
-Os status possíveis para um recurso de um produto não-selecionável são:
-
-| Status                  | Descrição                                   |
-| ----------------------- | ------------------------------------------- |
-| AVAILABLE               | Recurso disponível                          |
-| PENDING_AUTHORISATION   | Aguardando autorização de múltiplas alçadas |
-| UNAVAILABLE             | Recurso indisponível                        |
-| TEMPORARILY_UNAVAILABLE | Recurso temporariamente indisponível        |
-
-Já o parâmetro "submodality" indica a qual submodalidade o recurso pertence,
-apresentando seu id, sua descrição e a modalidade a qual pertence.
 
 ### Tratamentos adicionais
 
