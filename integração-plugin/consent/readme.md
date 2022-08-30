@@ -5,6 +5,7 @@
     - [Momentos de discovery](#momentos-de-discovery)
       - [Produtos selecionáveis](#produtos-selecionáveis)
       - [Produtos não selecionáveis](#produtos-não-selecionáveis)
+        - [Submodalidades](#submodalidades)
     - [Consentimento e os produtos](#consentimento-e-os-produtos)
     - [Tratamento dos identificadores](#tratamento-dos-identificadores)
     - [Conectores de discovery](#conectores-de-discovery)
@@ -12,7 +13,6 @@
       - [Conector de produto não selecionável](#conector-de-produto-não-selecionável)
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
-    - [Submodalidades](#submodalidades)
   - [Grupos de permissões na criação do consentimento](#grupos-de-permissões-na-criação-do-consentimento)
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
       - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
@@ -89,6 +89,40 @@ Os possíveis status dos recursos não selecionáveis estão na tabela a seguir:
 | TEMPORARILY_UNAVAILABLE | Recursos em bloqueios temporários e indisponíveis nos canais de atendimento eletrônico para os usuários finais | Pode transacionar para AVAILABLE ou UNAVAILABLE |
 | AVAILABLE | Recursos em plena utilização e disponíveis nos canais de atendimento eletrônico para os usuários finais | Pode transacionar para TEMPORARILY_UNAVAILABLE ou UNAVAILABLE |
 | UNAVAILABLE | Recursos encerrados, migrados, cancelados ou que foram para perdas e que estão indisponíveis nos canais de atendimento eletrônico para os usuários finais | Não pode transacionar para nenhum status |
+
+##### Submodalidades
+
+As submodalidades são referentes aos produtos não selecionáveis contratados ou
+distribuídos pela instituição transmissora.
+
+A nomenclatura das submodalidades pode ser definida pela própria instituição. Dessa
+forma, o cadastro das submodalidades deve ser realizado via script na
+base de dados, sendo desta mesma maneira para atualização e remoção.
+
+**Importante**: Não será possível remover uma submodalidade caso ela já esteja
+atrelada com algum consentimento.
+
+A tabela a seguir mostra as submodalidades disponíveis no produto:
+
+| Submodalidade                                  | Modalidade                   |
+| ---------------------------------------------- | ---------------------------- |
+| Descontos de duplicatas                        | INVOICE_FINANCING            |
+| Descontos de cheques                           | INVOICE_FINANCING            |
+| Antecipação de recebíveis de cartão de crédito | INVOICE_FINANCING            |
+| Desconto de nota promissória                   | INVOICE_FINANCING            |
+| Aquisições de bens móveis                      | FINANCING                    |
+| Microcrédito produtivo orientado               | FINANCING                    |
+| Rurais                                         | FINANCING                    |
+| Sistema Financeiro da Habilitação (SFH)        | FINANCING                    |
+| Sistema Financeiro da Imobiliário (SFI)        | FINANCING                    |
+| Crédito pessoal - consignado                   | LOAN                         |
+| Crédito pessoal - sem consignação              | LOAN                         |
+| Home equity                                    | LOAN                         |
+| Microcrédito                                   | LOAN                         |
+| Cheque especial                                | LOAN                         |
+| Conta garantida                                | LOAN                         |
+| Capital de giro                                | LOAN                         |
+| Adiantamento a depositantes                    | UNARRANGED_ACCOUNT_OVERDRAFT |
 
 ### Consentimento e os produtos
 
@@ -257,15 +291,6 @@ consentimento e a lista retornada deve ser filtrada para retornar somente a
 conta pré-selecionada ou uma lista vazia caso essa não seja uma opção selecionável
 para o cliente. Esse tratamento deve ser feito no conector ou serviço remoto de listagem
 de contas.
-
-### Submodalidades
-
-As submodalidades são referentes aos produtos não selecionáveis contratados ou
-distribuídos pela instituição transmissora.
-
-A nomenclatura das submodalidades pode ser definida pela própria instituição. Dessa
-forma, o cadastro das submodalidades deve ser realizado via script na
-base de dados, sendo desta mesma maneira para atualização e remoção.
 
 ## Grupos de permissões na criação do consentimento
 
