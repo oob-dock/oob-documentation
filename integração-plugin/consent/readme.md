@@ -49,7 +49,7 @@ A tabela a seguir compila todos os produtos selecionáveis tratados pelo Opus Op
 
 [^1]: O produto **PAYMENT** é uma forma de permitir que a seleção da origem de recursos para um pagamento seja independente do produto ACCOUNT, permitindo pagamentos através de cartão de crédito ou outra origem distinta que a instituição eventualmente possua.
 
-Caso a instituição forneça algum produto do tipo de compartilhamento de dados
+Caso a instituição forneça algum produto do tipo de compartilhamento de dados,
 será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
 de request e response indicado pelo tipo de produto](#conectores-de-discovery).
 Se não houver a disponibilização desses produtos (criação da rota camel), o retorno
@@ -75,7 +75,7 @@ Open Banking e seus tipos:
 | Compartilhamento de dados | LOAN                         | Não selecionável | ```direct:discoverLoans```                       |
 | Compartilhamento de dados | UNARRANGED_ACCOUNT_OVERDRAFT | Não selecionável | ```direct:discoverUnarrangedAccountOverdrafts``` |
 
-Caso a instituição forneça algum produto do tipo de compartilhamento de dados
+Caso a instituição forneça algum produto do tipo de compartilhamento de dados,
 será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
 de request e response indicado pelo tipo de produto](#conectores-de-discovery).
 Se não houver a disponibilização desses produtos (criação da rota camel), o retorno
@@ -237,7 +237,7 @@ Exemplo de response para um produto não selecionável:
         "modality":"LOAN",
         "description":"Crédito pessoal - consignado"
       },
-      "status": "RESOURCE_TEMPORARILY_UNAVAILABLE"
+      "status": "TEMPORARILY_UNAVAILABLE"
     }
   ]
 }
