@@ -146,6 +146,23 @@ additionalVars:
     value: "true"
 ```
 
+### APIS_VALIDATION_E2EID
+
+Data em que se torna obrigatório o campo "endToEndId" nos pagamentos.
+https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/75661313/v1.2.0+-+Servi+os
+
+**Formato:** data formato iso 8601 (yyyy-MM-dd)
+
+**Default:** `2022-09-25`
+
+**Ex:** 2022-09-13
+
+```yaml
+additionalVars:
+  - name: APIS_VALIDATION_E2EID
+    value: "2022-09-25"
+```
+
 ### APIS_VALIDATION_OPENAPI_ENABLED-REQUEST
 
 Habilita a validação dos objetos de request recebidos pela API com a especificação
