@@ -64,6 +64,9 @@
                 },
                 "permissions": {
                     "$ref": "./common-consent-schema.json#/$defs/Permissions"
+                },
+                "failingResources": {
+                    "$ref": "./common-consent-schema.json#/$defs/FailingResources"
                 }
             },
             "additionalProperties": false
