@@ -84,6 +84,10 @@ servidor do _environment_ "OOB Authroization Server Apps API".
 
 ## Changelog
 
+### 2022-09-05 - v2.1.6
+
+- Adiciona definição do erro DISCOVERY_ERROR.
+
 ### 2022-01-11 - v2.1.5
 
 - Isolando a definição do loop de comandos em uma outra página.
