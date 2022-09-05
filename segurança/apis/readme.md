@@ -283,6 +283,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | loans            | Não        | LOANS_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | loans            | Não        | LOANS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | loans            | Não        | LOANS_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | loans            | Não        | LOANS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | loans            | Não        | LOANS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | loans            | Não        | LOANS_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | loans            | Não        | LOANS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | loans            | Não        | LOANS_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ### Financings
 
