@@ -338,6 +338,7 @@ components:
             - CPF_MISMATCH
             - CNPJ_MISMATCH
             - EXPIRED_CONSENT
+            - DISCOVERY_ERROR
             - GENERIC_ERROR
         message:
           type: string
