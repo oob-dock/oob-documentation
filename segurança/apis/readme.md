@@ -269,6 +269,12 @@
 | GET      | /v1/accounts/\{ID\}/overdraft-limits | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
 | GET      | /v1/accounts/\{ID\}/balances         | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
 | GET      | /v1/accounts/\{ID\}/transactions     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| GET      | /v2/accounts                         | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}                  | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/overdraft-limits | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/balances         | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions-current     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
 
 ### Loans
 
