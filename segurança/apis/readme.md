@@ -325,6 +325,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ## Payments
 
