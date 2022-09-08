@@ -297,6 +297,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | financings       | Não        | FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | financings       | Não        | FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | financings       | Não        | FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | financings       | Não        | FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | financings       | Não        | FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | financings       | Não        | FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ### Unarranged accounts overdraft
 
