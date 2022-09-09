@@ -614,6 +614,24 @@ additionalVars:
     value: "https://instituicao-portal-backoffice.com.br"
 ```
 
+### BOT_VERIFICATION_ENABLED
+
+Esta variável determina se a verificação de utilização de bots/crawlers está ou
+não habilitada. Quando seu valor for definido como `0` a verificação é desativada,
+quando definido como `1` é ativada.
+
+**Formato:** `0` ou `1`
+
+**Valor default:** `1`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: BOT_VERIFICATION_ENABLED
+    value: "1"
+```
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress

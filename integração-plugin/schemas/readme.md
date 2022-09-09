@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2022-09-02 - v2.8.0
+
+- Payment
+  - Inclusão do campo endToEndId no schema de criação de pagamento
+
 ### 2022-04-27 - v2.7.0
 
 - Consent
