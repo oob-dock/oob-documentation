@@ -8,32 +8,33 @@
     "contractDate": "2018-01-05",
     "instalmentPeriodicity": "SEMANAL",
     "amortizationScheduled": "SAC",
-    "interestRates": [],
+    "interestRates": [
+      {
+        "taxType": "EFETIVA",
+        "interestRateType": "SIMPLES",
+        "taxPeriodicity": "AA",
+        "calculation": "21/252",
+        "referentialRateIndexerType": "PRE_FIXADO",
+        "preFixedRate": "0.600000",
+        "postFixedRate": "0.550000",
+        "referentialRateIndexerSubType": "TJLP",
+        "referentialRateIndexerAdditionalInfo": "Informações adicionais",
+        "additionalInfo": "Informações adicionais"
+      },
+      {
+        "taxType": "EFETIVA",
+        "interestRateType": "SIMPLES",
+        "taxPeriodicity": "AA",
+        "calculation": "21/252",
+        "referentialRateIndexerType": "PRE_FIXADO",
+        "preFixedRate": "0.600000",
+        "postFixedRate": "0.550000",
+        "referentialRateIndexerSubType": "TJLP",
+        "additionalInfo": "Informações adicionais",
+        "referentialRateIndexerAdditionalInfo": "Informações adicionais"
+      }
+    ],
     "contractedFees": [
-      {
-        "feeName": "Renovação de cadastro",
-        "feeCode": "CADASTRO",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
-        "feeRate": "0.062000",
-        "feeAmount": "100000.0400"
-      },
-      {
-        "feeName": "Renovação de cadastro",
-        "feeCode": "CADASTRO",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
-        "feeRate": "0.062000",
-        "feeAmount": "100000.0400"
-      },
-      {
-        "feeName": "Renovação de cadastro",
-        "feeCode": "CADASTRO",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
-        "feeAmount": "100000.0400",
-        "feeRate": "0.062000"
-      },
       {
         "feeName": "Renovação de cadastro",
         "feeCode": "CADASTRO",
@@ -53,43 +54,23 @@
         "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
         "chargeRate": "0.070000",
         "chargeAdditionalInfo": "Informações adicionais sobre encargos."
-      },
-      {
-        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-        "chargeRate": "0.070000",
-        "chargeAdditionalInfo": "Informações adicionais sobre encargos."
-      },
-      {
-        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
-        "chargeRate": "0.070000"
-      },
-      {
-        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
-        "chargeRate": "0.070000"
       }
     ],
-    "cnpjConsignee": "60500998000135",
+    "CET": "0.290000",
+    "dueDate": "2028-01-15",
     "instalmentPeriodicityAdditionalInfo": "Informações adicionais sobre periodicidade",
-    "settlementDate": "2018-01-15",
     "disbursementDates": [
-      "2018-01-15",
-      "2018-01-15",
-      "2018-01-15",
-      "2018-01-15",
       "2018-01-15"
     ],
+    "contractAmount": "1000.0400",
+    "cnpjConsignee": "60500998000135",
+    "amortizationScheduledAdditionalInfo": "Informações complementares relativa à amortização do tipo 'OUTROS'",
     "firstInstalmentDueDate": "2018-02-15",
     "currency": "BRL",
-    "CET": "0.290000",
-    "amortizationScheduledAdditionalInfo": "Informações complementares relativa à amortização do tipo 'OUTROS'",
-    "dueDate": "2028-01-15",
-    "contractAmount": "1000.0400"
+    "settlementDate": "2018-01-15"
   },
   "meta": {
     "totalRecords": 1,
-    "totalPages": 1,
-    "requestDateTime": "2021-05-21T08:30:00Z"
+    "totalPages": 1
   }
 }
