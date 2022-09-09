@@ -256,6 +256,14 @@
 | GET      | /v1/accounts/\{ID\}/limits                          | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_LIMITS_READ             | Sim              | Sim  |     |
 | GET      | /v1/accounts/\{ID\}/transactions                    | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              | Sim  |     |
 
+| GET      | /v2/accounts                                        | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}                                 | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/bills                           | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_READ              | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/bills/\{ID\}/bills/transactions | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/limits                          | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_LIMITS_READ             | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions                    | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions-current            | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              | Sim  |     |
+
 ### Accounts
 
 **Base path:** /open-banking/accounts
