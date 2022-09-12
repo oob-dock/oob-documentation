@@ -141,6 +141,718 @@
             "minItems": 1,
             "maxItems": 10
         },
+        "DebtorAccount": {
+            "required": [
+                "ispb",
+                "issuer",
+                "number",
+                "accountType"
+            ],
+            "type": "object",
+            "properties": {
+                "ispb": {
+                    "type": "string",
+                    "example": "12345678",
+                    "nullable": false
+                },
+                "issuer": {
+                    "type": "string",
+                    "example": "1774"
+                },
+                "number": {
+                    "type": "string",
+                    "example": "1234567890",
+                    "nullable": false
+                },
+                "accountType": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/AccountPaymentTypeEnum"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                }
+            }
+        },
+        "ConsentDetail": {
+            "type": "object",
+            "properties": {
+                "brandId": {
+                    "type": "string",
+                    "example": "cbanco"
+                },
+                "externalId": {
+                    "type": "string",
+                    "example": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf"
+                },
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/ConsentTypesEnum"
+                        },
+                        {
+                            "example": "PAYMENT"
+                        }
+                    ]
+                },
+                "status": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/ConsentAuthorizationStatusEnum"
+                        },
+                        {
+                            "example": "AUTHORISED"
+                        }
+                    ]
+                },
+                "personDocumentType": {
+                    "type": "string",
+                    "example": "CPF"
+                },
+                "personDocumentNumber": {
+                    "type": "string",
+                    "example": "77721813700"
+                },
+                "businessDocumentType": {
+                    "type": "string",
+                    "example": "CNPJ"
+                },
+                "businessDocumentNumber": {
+                    "type": "string",
+                    "example": "33273542000197"
+                },
+                "createdOn": {
+                    "format": "date-time",
+                    "type": "string",
+                    "example": "2022-01-30T17:31:28.000Z"
+                },
+                "expiredOn": {
+                    "format": "date-time",
+                    "type": "string",
+                    "example": "2022-01-30T17:41:28.000Z"
+                },
+                "paymentData": {
+                    "$ref": "#/$defs/PaymentData"
+                },
+                "resources": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Resource"
+                    }
+                },
+                "authorizations": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Authorization"
+                    }
+                },
+                "permissions": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/Permission"
+                    }
+                },
+                "consentHistoryStatus": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ConsentHistoryStatus"
+                    }
+                },
+                "modalityPayment": {
+                    "$ref": "#/$defs/ModalityPaymentEnum"
+                },
+                "revocation": {
+                    "$ref": "#/$defs/Revocation"
+                },
+                "paymentIds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/ResourcePaymentId"
+                    }
+                }
+            }
+        },
+        "LoggedUser": {
+            "required": [
+                "document"
+            ],
+            "type": "object",
+            "properties": {
+                "document": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/LoggedUserDocument"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                }
+            }
+        },
+        "LoggedUserDocument": {
+            "required": [
+                "identification",
+                "rel"
+            ],
+            "type": "object",
+            "properties": {
+                "identification": {
+                    "type": "string",
+                    "example": "99999999999",
+                    "nullable": false
+                },
+                "rel": {
+                    "type": "string",
+                    "example": "CPF",
+                    "nullable": false
+                }
+            }
+        },
+        "ConsentHistoryStatus": {
+            "type": "object",
+            "properties": {
+                "consentStatus": {
+                    "$ref": "#/$defs/ConsentAuthorizationStatusEnum"
+                },
+                "authorizationStatus": {
+                    "$ref": "#/$defs/ConsentAuthorizationStatusEnum"
+                },
+                "authorizerName": {
+                    "type": "string"
+                },
+                "operatorUsername": {
+                    "type": "string"
+                },
+                "updatedOn": {
+                    "format": "date-time",
+                    "type": "string",
+                    "example": "2022-01-30T17:31:28.000Z"
+                }
+            }
+        },
+        "Revocation": {
+            "required": [
+                "revokedBy",
+                "reason"
+            ],
+            "type": "object",
+            "properties": {
+                "loggedUser": {
+                    "$ref": "#/$defs/LoggedUser"
+                },
+                "revokedBy": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/RevokedByEnum"
+                        },
+                        {
+                            "example": "TPP",
+                            "nullable": false
+                        }
+                    ]
+                },
+                "reason": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/RevocationReason"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                }
+            }
+        },
+        "ResourcePaymentId": {
+            "required": [
+                "externalId"
+            ],
+            "type": "object",
+            "properties": {
+                "externalId": {
+                    "type": "string",
+                    "nullable": false
+                },
+                "legacyIds": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/KeyValueObject"
+                    }
+                }
+            }
+        },
+        "KeyValueObject": {
+            "type": "object",
+            "properties": {
+                "key": {
+                    "type": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        "SchedulePayment": {
+            "required": [
+                "single"
+            ],
+            "type": "object",
+            "properties": {
+                "single": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/SinglePayment"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                }
+            }
+        },
+        "SinglePayment": {
+            "required": [
+                "date"
+            ],
+            "type": "object",
+            "properties": {
+                "date": {
+                    "type": "string",
+                    "example": "2022-01-13T00:00:00.000Z",
+                    "nullable": false
+                }
+            }
+        },
+        "PaymentConsent": {
+            "required": [
+                "type",
+                "currency",
+                "amount"
+            ],
+            "type": "object",
+            "properties": {
+                "type": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/PaymentTypeEnum"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                },
+                "date": {
+                    "type": "string",
+                    "example": "2021-12-01T00:00:00.000Z"
+                },
+                "currency": {
+                    "type": "string",
+                    "example": "BRL",
+                    "nullable": false
+                },
+                "amount": {
+                    "type": "string",
+                    "example": "100000.12",
+                    "nullable": false
+                },
+                "ibgeTownCode": {
+                    "type": "string",
+                    "example": "5300108"
+                },
+                "details": {
+                    "$ref": "#/$defs/PaymentDetails"
+                },
+                "creditorAccount": {
+                    "$ref": "#/$defs/CreditorAccount"
+                },
+                "schedule": {
+                    "$ref": "#/$defs/SchedulePayment"
+                },
+                "purpose": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/EnumPurposeTed"
+                        },
+                        {
+                            "example": "1"
+                        }
+                    ]
+                },
+                "purposeAdditionalInfo": {
+                    "maxLength": 100,
+                    "type": "string"
+                }
+            }
+        },
+        "PaymentData": {
+            "type": "object",
+            "properties": {
+                "creditor": {
+                    "$ref": "#/$defs/Creditor"
+                },
+                "payment": {
+                    "$ref": "#/$defs/PaymentConsent"
+                },
+                "debtorAccount": {
+                    "$ref": "#/$defs/DebtorAccount"
+                }
+            }
+        },
+        "PaymentDetails": {
+            "required": [
+                "localInstrument",
+                "creditorAccount"
+            ],
+            "type": "object",
+            "properties": {
+                "localInstrument": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/LocalInstrumentEnum"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                },
+                "qrCode": {
+                    "maxLength": 512,
+                    "type": "string",
+                    "example": "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012  \nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062  \n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB  \nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\n"
+                },
+                "proxy": {
+                    "maxLength": 77,
+                    "type": "string",
+                    "example": "12345678901"
+                },
+                "creditorAccount": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/CreditorAccount"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                }
+            }
+        },
+        "PaymentPersonTypeEnum": {
+            "enum": [
+                "PESSOA_NATURAL",
+                "PESSOA_JURIDICA"
+            ],
+            "type": "string"
+        },
+        "PaymentTypeEnum": {
+            "enum": [
+                "PIX",
+                "TED",
+                "TEF"
+            ],
+            "type": "string"
+        },
+        "Permission": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "example": "Permission's name"
+                },
+                "title": {
+                    "type": "string",
+                    "example": "Intelligible name for the permission"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Description for what this permission allows"
+                }
+            }
+        },
+        "Creditor": {
+            "required": [
+                "personType",
+                "cpfCnpj",
+                "name"
+            ],
+            "type": "object",
+            "properties": {
+                "personType": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/PaymentPersonTypeEnum"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                },
+                "cpfCnpj": {
+                    "type": "string",
+                    "example": "99999999999999",
+                    "nullable": false
+                },
+                "name": {
+                    "maxLength": 140,
+                    "minLength": 1,
+                    "type": "string",
+                    "example": "Marco Antonio de Brito",
+                    "nullable": false
+                }
+            }
+        },
+        "CreditorAccount": {
+            "required": [
+                "ispb",
+                "number",
+                "accountType"
+            ],
+            "type": "object",
+            "properties": {
+                "ispb": {
+                    "type": "string",
+                    "example": "12345678",
+                    "nullable": false
+                },
+                "issuer": {
+                    "type": "string",
+                    "example": "1774"
+                },
+                "number": {
+                    "type": "string",
+                    "example": "1234567890",
+                    "nullable": false
+                },
+                "accountType": {
+                    "allOf": [
+                        {
+                            "$ref": "#/$defs/AccountPaymentTypeEnum"
+                        },
+                        {
+                            "nullable": false
+                        }
+                    ]
+                }
+            }
+        },
+        "Authorization": {
+            "type": "object",
+            "properties": {
+                "personDocumentNumber": {
+                    "type": "string"
+                },
+                "personName": {
+                    "type": "string"
+                },
+                "isRequirer": {
+                    "type": "boolean",
+                    "example": true
+                },
+                "status": {
+                    "$ref": "#/$defs/ConsentAuthorizationStatusEnum"
+                }
+            }
+        },
+        "Resource": {
+            "type": "object",
+            "properties": {
+                "resourceId": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/$defs/ResourceTypeEnum"
+                },
+                "status": {
+                    "$ref": "#/$defs/StatusResourceEnum"
+                },
+                "legacyId": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/$defs/KeyValueObject"
+                    }
+                }
+            }
+        },
+        "AccountPaymentTypeEnum": {
+            "enum": [
+                "CACC",
+                "SLRY",
+                "SVGS",
+                "TRAN"
+            ],
+            "type": "string"
+        },
+        "ConsentTypesEnum": {
+            "enum": [
+                "DATA_SHARING",
+                "PAYMENT"
+            ],
+            "type": "string"
+        },
+        "ConsentAuthorizationStatusEnum": {
+            "enum": [
+                "AUTHORISED",
+                "AWAITING_AUTHORISATION",
+                "REJECTED",
+                "REVOKED",
+                "EXPIRED",
+                "CONSUMED",
+                "TIMEOUT_AUTHORISATION",
+                "TIMEOUT_PAYMENT"
+            ],
+            "type": "string"
+        },
+        "ResourceTypeEnum": {
+            "enum": [
+                "CUSTOMER",
+                "CREDIT_CARD_ACCOUNT",
+                "ACCOUNT",
+                "LOAN",
+                "FINANCING",
+                "UNARRANGED_ACCOUNT_OVERDRAFT",
+                "INVOICE_FINANCING",
+                "PAYMENT"
+            ],
+            "type": "string"
+        },
+        "RevokedByEnum": {
+            "enum": [
+                "USER",
+                "ASPSP",
+                "TPP"
+            ],
+            "type": "string"
+        },
+        "ModalityPaymentEnum": {
+            "enum": [
+                "IMMEDIATE",
+                "SCHEDULED"
+            ],
+            "type": "string"
+        },
+        "StatusResourceEnum": {
+            "enum": [
+                "AVAILABLE",
+                "UNAVAILABLE",
+                "NON_SELECTED"
+            ],
+            "type": "string"
+        },
+        "EnumPurposeTed": {
+            "enum": [
+                "_1",
+                "_10",
+                "_100",
+                "_101",
+                "_103",
+                "_104",
+                "_107",
+                "_108",
+                "_109",
+                "_11",
+                "_110",
+                "_111",
+                "_112",
+                "_113",
+                "_114",
+                "_117",
+                "_12",
+                "_121",
+                "_123",
+                "_124",
+                "_13",
+                "_131",
+                "_132",
+                "_136",
+                "_139",
+                "_14",
+                "_149",
+                "_15",
+                "_150",
+                "_157",
+                "_175",
+                "_18",
+                "_19",
+                "_2",
+                "_200",
+                "_201",
+                "_202",
+                "_203",
+                "_204",
+                "_205",
+                "_206",
+                "_207",
+                "_208",
+                "_209",
+                "_23",
+                "_27",
+                "_28",
+                "_29",
+                "_3",
+                "_30",
+                "_300",
+                "_301",
+                "_302",
+                "_303",
+                "_31",
+                "_33",
+                "_34",
+                "_35",
+                "_36",
+                "_37",
+                "_38",
+                "_39",
+                "_4",
+                "_40",
+                "_41",
+                "_42",
+                "_43",
+                "_44",
+                "_45",
+                "_47",
+                "_5",
+                "_50",
+                "_500",
+                "_501",
+                "_502",
+                "_504",
+                "_505",
+                "_507",
+                "_508",
+                "_509",
+                "_510",
+                "_511",
+                "_512",
+                "_513",
+                "_514",
+                "_515",
+                "_516",
+                "_517",
+                "_518",
+                "_519",
+                "_520",
+                "_6",
+                "_7",
+                "_8",
+                "_9",
+                "_97",
+                "_99999"
+            ],
+            "type": "string"
+        },
+        "LocalInstrumentEnum": {
+            "enum": [
+                "MANU",
+                "DICT",
+                "QRDN",
+                "QRES",
+                "INIC"
+            ],
+            "type": "string"
+        },
         "fromBookingDate": {
             "type": "string",
             "maxLength": 10,
