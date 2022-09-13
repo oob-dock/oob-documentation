@@ -321,6 +321,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ### Invoice financings
 
