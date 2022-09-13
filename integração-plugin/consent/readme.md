@@ -180,8 +180,8 @@ Os produtos selecionáveis devem ter seus conectores respeitando os seguintes sc
 
 | Tipo     | JSON Schema                                                                                                         |
 | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| Request  | [discovery-resource-request.json](../schemas/v1/discovery/discovery-resource-request.json)                          |
-| Response | [discovery-selectable-resource-response.json](../schemas/v1/discovery//discovery-selectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/v2/consent/discoveryDataSharing/discovery-resource-request.json)                          |
+| Response | [discovery-selectable-resource-response.json](../schemas/v2/consent/discoveryDataSharing/discovery-selectable-resource-response.json) |
 
 Exemplo de response para um produto selecionável:
 
@@ -234,8 +234,8 @@ schemas:
 
 | Tipo     | JSON Schema                                                                                                              |
 | -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Request  | [discovery-resource-request.json](../schemas/v1/discovery/discovery-resource-request.json)                               |
-| Response | [discovery-nonselectable-resource-response.json](../schemas/v1/discovery/discovery-nonselectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/v2/consent/discoveryDataSharing/discovery-resource-request.json)                               |
+| Response | [discovery-nonselectable-resource-response.json](../schemas/v2/consent/discoveryDataSharing/discovery-nonselectable-resource-response.json) |
 
 *[DRAFT: O schema do consentimento dentro do request
 está em revisão]*
