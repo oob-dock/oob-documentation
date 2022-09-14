@@ -7,11 +7,6 @@
     "data": {
       "type": "object",
       "description": "Conjunto de informações da Conta de: depósito à vista\n",
-      "required": [
-        "overdraftContractedLimit",
-        "overdraftUsedLimit",
-        "unarrangedOverdraftAmount"
-      ],
       "properties": {
         "overdraftContractedLimit": {
           "type": "object",
