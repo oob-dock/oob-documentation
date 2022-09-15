@@ -188,6 +188,25 @@ additionalVars:
     value: "true"
 ```
 
+### APPLICATION_CERTIFICATION_MOCK_RESOURCES_API_TEST_UNAVAILABLE_V2
+
+Utilizado para habilitar os recursos mockados com status UNAVAILABLE, necessários
+para o teste de certificação de fase 2 v2 de nome *resources-api-test-unavailable-v2*.
+
+**IMPORTANTE**: Essa funcionalidade deve ser habilitada apenas em ambientes de desenvolvimento/homologação.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_CERTIFICATION_MOCK_RESOURCES_API_TEST_UNAVAILABLE_V2
+    value: "true"
+```
+
 ### APPLICATION_VALIDATION_CURRENCY
 
 Utilizado para definir o código da moeda nacional segundo modelo ISO-4217.
