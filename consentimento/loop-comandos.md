@@ -160,6 +160,7 @@ Banking ou erros inesperados conforme vemos na tabela a seguir.
 | CPF_MISMATCH    | CPF do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento               |
 | CNPJ_MISMATCH   | CNPJ do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento              |
 | EXPIRED_CONSENT | Consentimento expirado                                                                            |
+| INVALID_SESSION | Sessão não existe ou expirou devido ao tempo limite de 10 minutos                                 |
 | GENERIC_ERROR   | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário |
 
 O comando `error` conclui a geração do consentimento. Nos casos
