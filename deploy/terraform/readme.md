@@ -15,6 +15,18 @@
       - [oob_products_services_catalog_api_port](#oob_products_services_catalog_api_port)
       - [oob_channels_catalog_api_host](#oob_channels_catalog_api_host)
       - [oob_channels_catalog_api_port](#oob_channels_catalog_api_port)
+      - [oob_capitalization_bonds_catalog_api_host](#oob_capitalization_bonds_catalog_api_host)
+      - [oob_capitalization_bonds_catalog_api_port](#oob_capitalization_bonds_catalog_api_port)
+      - [oob_investments_catalog_api_host](#oob_investments_catalog_api_host)
+      - [oob_investments_catalog_api_port](#oob_investments_catalog_api_port)
+      - [oob_exchange_catalog_api_host](#oob_exchange_catalog_api_host)
+      - [oob_exchange_catalog_api_port](#oob_exchange_catalog_api_port)
+      - [oob_acquiring_services_catalog_api_host](#oob_acquiring_services_catalog_api_host)
+      - [oob_acquiring_services_catalog_api_port](#oob_acquiring_services_catalog_api_port)
+      - [oob_pension_catalog_api_host](#oob_pension_catalog_api_host)
+      - [oob_pension_catalog_api_port](#oob_pension_catalog_api_port)
+      - [oob_insurance_catalog_api_host](#oob_insurance_catalog_api_host)
+      - [oob_insurance_catalog_api_port](#oob_insurance_catalog_api_port)
       - [oob_consent_api_host](#oob_consent_api_host)
       - [oob_consent_api_port](#oob_consent_api_port)
       - [cors_origins](#cors_origins)
@@ -134,6 +146,84 @@ Host da API de canais. Deve ser preenchido somente se a feature open-data
 #### oob_channels_catalog_api_port
 
 Porta da API de canais
+
+**Ex:** "80"
+
+#### oob_capitalization_bonds_catalog_api_host
+
+Host da API de títulos de capitalização. Deve ser preenchido somente se a feature
+open-data (Fase 4 do Open Banking Brasil) estiver habilitada.
+
+**Ex:** "oob-capitalization-bonds-catalog"
+
+#### oob_capitalization_bonds_catalog_api_port
+
+Porta da API de títulos de capitalização
+
+**Ex:** "80"
+
+#### oob_investments_catalog_api_host
+
+Host da API de investimentos. Deve ser preenchido somente se a feature
+open-data (Fase 4 do Open Banking Brasil) estiver habilitada.
+
+**Ex:** "oob-investments-catalog"
+
+#### oob_investments_catalog_api_port
+
+Porta da API de investimentos
+
+**Ex:** "80"
+
+#### oob_exchange_catalog_api_host
+
+Host da API de câmbio. Deve ser preenchido somente se a feature
+open-data (Fase 4 do Open Banking Brasil) estiver habilitada.
+
+**Ex:** "oob-exchange-catalog"
+
+#### oob_exchange_catalog_api_port
+
+Porta da API de câmbio
+
+**Ex:** "80"
+
+#### oob_acquiring_services_catalog_api_host
+
+Host da API de credenciamento. Deve ser preenchido somente se a feature
+open-data (Fase 4 do Open Banking Brasil) estiver habilitada.
+
+**Ex:** "oob-acquiring-services-catalog"
+
+#### oob_acquiring_services_catalog_api_port
+
+Porta da API de credenciamento
+
+**Ex:** "80"
+
+#### oob_pension_catalog_api_host
+
+Host da API de previdência. Deve ser preenchido somente se a feature
+open-data (Fase 4 do Open Banking Brasil) estiver habilitada.
+
+**Ex:** "oob-pension-catalog"
+
+#### oob_pension_catalog_api_port
+
+Porta da API de previdência
+
+**Ex:** "80"
+
+#### oob_insurance_catalog_api_host
+
+Host da API de seguros. Deve ser preenchido somente se a feature
+open-data (Fase 4 do Open Banking Brasil) estiver habilitada.
+
+**Ex:** "oob-insurance-catalog"
+
+#### oob_insurance_catalog_api_port
+
+Porta da API de seguros
 
 **Ex:** "80"
 
