@@ -13,8 +13,8 @@
         "paymentId": {
             "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
         },
-        "consentDetail": {
-            "$ref": "../../common/common-schema.json#/$defs/ConsentDetail"
+        "paymentUserInfo": {
+            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentUserInfo"
         }
     },
     "additionalProperties": false,

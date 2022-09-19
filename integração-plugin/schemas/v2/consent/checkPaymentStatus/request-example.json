@@ -9,124 +9,20 @@
             "value": "1409390B569CB4ADB3A34BEA7D4C1CA763BF26E0FE37CBAE1ABE4E115EC73318"
         }
     ],
-    "consentDetail": {
-        "data": {
-            "brandId": "cbanco",
-            "externalId": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf",
-            "type": "PAYMENT",
-            "status": "AUTHORISED",
-            "personDocumentType": "CPF",
-            "personDocumentNumber": "77721813700",
-            "businessDocumentType": "CNPJ",
-            "businessDocumentNumber": "33273542000197",
-            "createdOn": "2022-01-30T17:31:28Z",
-            "expiredOn": "2022-01-30T17:41:28Z",
-            "paymentData": {
-            "creditor": {
-                "personType": "PESSOA_NATURAL",
-                "cpfCnpj": "99999999999999",
-                "name": "Marco Antonio de Brito"
-            },
-            "payment": {
-                "type": "PIX",
-                "date": "2021-12-01",
-                "currency": "BRL",
-                "amount": "100000.12",
-                "ibgeTownCode": "5300108",
-                "details": {
-                "localInstrument": "MANU",
-                "qrCode": "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012  \nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062  \n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB  \nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\n",
-                "proxy": "12345678901",
-                "creditorAccount": {
-                    "ispb": "12345678",
-                    "issuer": "1774",
-                    "number": "1234567890",
-                    "accountType": "CACC"
-                }
-                },
-                "creditorAccount": {
-                "ispb": "12345678",
-                "issuer": "1774",
-                "number": "1234567890",
-                "accountType": "CACC"
-                },
-                "schedule": {
-                "single": {
-                    "date": "2022-01-13"
-                }
-                },
-                "purpose": "1",
-                "purposeAdditionalInfo": "string"
-            },
-            "debtorAccount": {
-                "ispb": "12345678",
-                "issuer": "1774",
-                "number": "1234567890",
-                "accountType": "CACC"
-            }
-            },
-            "resources": [
-            {
-                "resourceId": "string",
-                "type": "CUSTOMER",
-                "status": "AVAILABLE",
-                "legacyId": [
-                {
-                    "key": "string",
-                    "value": "string"
-                }
-                ]
-            }
-            ],
-            "authorizations": [
-            {
-                "personDocumentNumber": "string",
-                "personName": "string",
-                "isRequirer": true,
-                "status": "AUTHORISED"
-            }
-            ],
-            "permissions": [
-            {
-                "name": "Permission's name",
-                "title": "Intelligible name for the permission",
-                "description": "Description for what this permission allows"
-            }
-            ],
-            "consentHistoryStatus": [
-            {
-                "consentStatus": "AUTHORISED",
-                "authorizationStatus": "AUTHORISED",
-                "authorizerName": "string",
-                "operatorUsername": "string",
-                "updatedOn": "2022-01-30T17:31:28Z"
-            }
-            ],
-            "modalityPayment": "IMMEDIATE",
-            "revocation": {
-            "loggedUser": {
-                "document": {
-                "identification": "99999999999",
+    "paymentUserInfo": {
+        "loggedUser": {
+            "document": {
+                "identification": "11111111111",
                 "rel": "CPF"
-                }
-            },
-            "revokedBy": "TPP",
-            "reason": {
-                "code": "FRAUD",
-                "additionalInformation": "Risco de fraude identificado"
             }
-            },
-            "paymentIds": [
-            {
-                "externalId": "string",
-                "legacyIds": [
-                {
-                    "key": "string",
-                    "value": "string"
+        },
+        "businessEntity": {
+            "businessEntity": {
+                "document": {
+                    "identification": "11199999999999",
+                    "rel": "CNPJ"
                 }
-                ]
             }
-            ]
         }
     }
 }
