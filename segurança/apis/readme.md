@@ -358,6 +358,9 @@
 | POST     | /v1/consents        | Sim          | consents         | Não        | Não              | Sim  |                    |
 | GET      | /v1/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | DELETE   | /v1/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| POST     | /v2/consents        | Sim          | consents         | Não        | Não              | Sim  |                    |
+| DELETE   | /v2/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| GET      | /v2/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 
 ### Resources
 
@@ -368,6 +371,7 @@
 | Operação | API           | Valida token | Escopo de acesso | Valida JWS | ConsentPermission | Valida consentId | mTLS | Obs |
 | -------- | ------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
 | GET      | /v1/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
+| GET      | /v2/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 
 ### OOB consents
 
@@ -389,6 +393,8 @@
 | *GET     | /v1/consents                     | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
 | *GET     | /v1/consents/\{ID\}              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /v1/consents/\{ID\}              | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /payments/v1/consents/\{ID\}     | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /consents/v1/consents/\{ID\}     | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 
 ## Observações
 
