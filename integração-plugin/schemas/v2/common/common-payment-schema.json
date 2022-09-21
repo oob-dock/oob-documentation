@@ -275,8 +275,7 @@
             "type": "object",
             "description": "Objeto contendo dados do usuário realizando o pagamento",
             "required": [
-                "loggedUser",
-                "businessEntity"
+                "loggedUser"
             ],
             "properties": {
                 "loggedUser": {
