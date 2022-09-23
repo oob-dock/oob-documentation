@@ -1,0 +1,702 @@
+{
+	"info": {
+		"_postman_id": "fc4fe607-1c35-4cd4-9c19-bb3ce6d6d222",
+		"name": "OOB-Open-Data",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14959678"
+	},
+	"item": [
+		{
+			"name": "channels",
+			"item": [
+				{
+					"name": "getBankingAgents",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "x-brand-id",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/channels/v1/banking-agents",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"channels",
+								"v1",
+								"banking-agents"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getBranches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/channels/v1/branches",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"channels",
+								"v1",
+								"branches"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "page-size",
+									"value": "25",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Método para obter a lista de contas de pagamento pós-paga mantidas pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento"
+					},
+					"response": []
+				},
+				{
+					"name": "getElectronicChannels",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/channels/v1/electronic-channels",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"channels",
+								"v1",
+								"electronic-channels"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "page-size",
+									"value": "25",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Método para obter a lista de faturas da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getPhoneChannels",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/channels/v1/phone-channels",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"channels",
+								"v1",
+								"phone-channels"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1",
+									"disabled": true
+								},
+								{
+									"key": "page-size",
+									"value": "25",
+									"disabled": true
+								}
+							]
+						},
+						"description": "Método para obter a lista de transações da conta de pagamento pós-paga identificada por creditCardAccountId e billId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getSharedAutomatedTellerMachines",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/channels/v1/shared-automated-teller-machines",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"channels",
+								"v1",
+								"shared-automated-teller-machines"
+							]
+						},
+						"description": "Método para obter os limites da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				}
+			],
+			"description": "API de contas de pagamento pós-pagas do Open Banking Brasil – Fase 2. API que retorna informações de contas de pagamento pós-paga mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, produto, bandeira, limites de crédito, informações sobre transações de pagamento efetuadas e faturas."
+		},
+		{
+			"name": "products-services",
+			"item": [
+				{
+					"name": "getPersonalAccounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/personal-accounts",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"personal-accounts"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getBusinessAccounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/business-accounts",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"business-accounts"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonalLoans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/personal-loans",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"personal-loans"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getBusinessLoans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/business-loans",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"business-loans"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonalFinancings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/personal-financings",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"personal-financings"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getBusinessFinancings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/business-financings",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"business-financings"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonalInvoiceFinancings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/personal-invoice-financings",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"personal-invoice-financings"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getBusinessInvoiceFinancings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/business-invoice-financings",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"business-invoice-financings"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonalCreditCards",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/personal-credit-cards",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"personal-credit-cards"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getBusinessCreditCards",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/business-credit-cards",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"business-credit-cards"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getPersonalUnarrangedAccountOverdraft",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/personal-unarranged-account-overdraft",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"personal-unarranged-account-overdraft"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				},
+				{
+					"name": "getBusinessUnarrangedAccountOverdraft",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "errorcode",
+								"value": "{{errorCode}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/products-services/v1/business-unarranged-account-overdraft",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"products-services",
+								"v1",
+								"business-unarranged-account-overdraft"
+							]
+						},
+						"description": "Método para obter os dados de identificação da conta de pagamento pós-paga identificada por creditCardAccountId mantida pelo cliente na instituição transmissora"
+					},
+					"response": []
+				}
+			],
+			"description": "API de contas de pagamento pós-pagas do Open Banking Brasil – Fase 2. API que retorna informações de contas de pagamento pós-paga mantidas nas instituições transmissoras por seus clientes, incluindo dados como denominação, produto, bandeira, limites de crédito, informações sobre transações de pagamento efetuadas e faturas."
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HostBase",
+			"value": "http://localhost:8080/open-banking",
+			"type": "string"
+		},
+		{
+			"key": "errorCode",
+			"value": "200",
+			"type": "string"
+		}
+	]
+}

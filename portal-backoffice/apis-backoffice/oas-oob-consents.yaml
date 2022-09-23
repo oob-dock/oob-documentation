@@ -113,7 +113,7 @@ paths:
     patch:
       tags:
       - Consents Opus Open Banking
-      description: Revoke consent
+      description: Revoke consent deprecated
       parameters:
       - name: consentId
         in: path
@@ -133,6 +133,80 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RequestRevokeOobConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/payments/v1/consents/{consentId}:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revoke payment consent
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: paymentStatus
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revoke data sharing consent
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: paymentStatus
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeDataSharingConsentData'
       responses:
         default:
           description: Default error response
@@ -198,14 +272,6 @@ components:
         externalId:
           type: string
           example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
-        type:
-          allOf:
-          - $ref: '#/components/schemas/ConsentTypesEnum'
-          - example: PAYMENT
-        status:
-          allOf:
-          - $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
-          - example: AUTHORISED
         personDocumentType:
           type: string
           example: CPF
@@ -248,6 +314,16 @@ components:
           $ref: '#/components/schemas/ModalityPaymentEnum'
         revocation:
           $ref: '#/components/schemas/Revocation'
+        rejection:
+          $ref: '#/components/schemas/Rejection'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+          - example: AUTHORISED
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ConsentTypesEnum'
+          - example: PAYMENT
         paymentIds:
           type: array
           items:
@@ -667,6 +743,37 @@ components:
         applicationName:
           description: Client application name
           type: string
+    RequestRevokeOobDataSharingConsent:
+      required:
+      - data
+      type: object
+      properties:
+        applicationName:
+          description: Client application name
+          type: string
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokeConsentData'
+          - nullable: false
+    PaymentId:
+      type: object
+      properties:
+        externalId:
+          type: string
+        legacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentIdLegacy'
+    PaymentIdLegacy:
+      type: object
+      description: Key/Value pair for the payment id found on the legacy system
+      properties:
+        key:
+          type: string
+          example: internalPaymentId
+        value:
+          type: string
+          example: b5abdcde-7186-453a-a676-7f3955cef167
     Resource:
       type: object
       properties:
@@ -755,25 +862,65 @@ components:
           allOf:
           - $ref: '#/components/schemas/RevocationReason'
           - nullable: false
+    Rejection:
+      required:
+      - reason
+      - rejectedBy
+      type: object
+      properties:
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/RejectedReason'
+          - nullable: false
+        rejectedBy:
+          allOf:
+          - $ref: '#/components/schemas/RejectedByEnum'
+          - example: TPP
+            nullable: false
     RevocationReason:
       required:
       - code
       type: object
       properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Risco de fraude identificado
         code:
           allOf:
           - $ref: '#/components/schemas/RevocationReasonCodeEnum'
           - example: FRAUD
             nullable: false
+    RejectedReason:
+      required:
+      - code
+      type: object
+      properties:
         additionalInformation:
           maxLength: 140
           type: string
           example: Risco de fraude identificado
+        code:
+          allOf:
+          - $ref: '#/components/schemas/RejectedReasonCodeEnum'
+          - example: CONSENT_EXPIRED
+            nullable: false
     RevocationReasonCodeEnum:
       enum:
       - FRAUD
       - ACCOUNT_CLOSURE
       - OTHER
+      type: string
+    RejectedReasonCodeEnum:
+      enum:
+      - CONSENT_EXPIRED
+      - CUSTOMER_MANUALLY_REJECTED
+      - CUSTOMER_MANUALLY_REVOKED
+      - CONSENT_MAX_DATE_REACHED
+      - CONSENT_TECHNICAL_ISSUE
+      - INTERNAL_SECURITY_REASON
       type: string
     RevokeConsentData:
       required:
@@ -781,20 +928,35 @@ components:
       - revocation
       type: object
       properties:
+        revocation:
+          allOf:
+          - $ref: '#/components/schemas/Revocation'
+          - nullable: false
         status:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           - example: REVOKED
             nullable: false
+    RevokeDataSharingConsentData:
+      required:
+      - revocation
+      type: object
+      properties:
         revocation:
           allOf:
-          - $ref: '#/components/schemas/Revocation'
+          - $ref: '#/components/schemas/Rejection'
           - nullable: false
     RevokedByEnum:
       enum:
       - USER
       - ASPSP
       - TPP
+      type: string
+    RejectedByEnum:
+      enum:
+      - ASPSP
+      - TPP
+      - USER
       type: string
     SchedulePayment:
       required:

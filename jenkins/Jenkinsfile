@@ -1,3 +1,5 @@
+@Library('opus-lib') import br.com.opussoftware.*
+
 pipeline {
 	agent any
 	options {
@@ -10,10 +12,15 @@ pipeline {
 				build job: "/oob-git-sync"
 			}
 		}
-		stage('Integration Schema Replication'){
-			when { branch 'develop' }
-			steps{	
-				build job: "/oob-schema-replication"
+		stage('Integration Schema Replication') {
+			when { branch 'develop'; branch 'develop-mnt' }
+			steps{
+				script{
+					branchName = "${BRANCH_NAME}"
+				}
+				build job: "/oob-schema-replication", parameters: [
+					string(name: 'gitBranch', value: branchName)
+				]
 			}
 		}
 	}
