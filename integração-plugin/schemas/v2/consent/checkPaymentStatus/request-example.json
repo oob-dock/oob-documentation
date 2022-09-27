@@ -12,14 +12,14 @@
     "paymentUserInfo": {
         "loggedUser": {
             "document": {
-                "identification": "11111111111",
+                "identification": "10745445527",
                 "rel": "CPF"
             }
         },
         "businessEntity": {
             "businessEntity": {
                 "document": {
-                    "identification": "11199999999999",
+                    "identification": "33328541000100",
                     "rel": "CNPJ"
                 }
             }
