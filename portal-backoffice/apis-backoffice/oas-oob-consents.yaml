@@ -328,6 +328,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResourcePaymentId'
+        submodalities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Submodality'
     ConsentHistoryStatus:
       type: object
       properties:
@@ -795,6 +799,18 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/KeyValueObject'
+    Submodality:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 112db214-09da-48bf-957c-2aeb1c68a569
+        modality:
+          type: string
+          example: FINANCING
+        description:
+          type: string
+          example: Rurais
     ResourceTypeEnum:
       enum:
       - CUSTOMER
