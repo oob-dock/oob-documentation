@@ -22,6 +22,12 @@
     - [Consents](#consents)
     - [Resources](#resources)
     - [OOB consents](#oob-consents)
+  - [Capitalization bonds catalog](#capitalization-bonds-catalog)
+  - [Investments catalog](#investments-catalog)
+  - [Exchange catalog](#exchange-catalog)
+  - [Acquiring services catalog](#acquiring-services-catalog)
+  - [Pension catalog](#pension-catalog)
+  - [Insurance catalog](#insurance-catalog)
   - [Observações](#observações)
 
 ## Channels catalog
@@ -389,6 +395,75 @@
 | *GET     | /v1/consents                     | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
 | *GET     | /v1/consents/\{ID\}              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /v1/consents/\{ID\}              | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+
+## Capitalization bonds catalog
+
+**Base path:** /open-banking/opendata-capitalization
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | --------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/bonds | Não          |                  | Não        | Não              | Não  |     |
+
+## Investments catalog
+
+**Base path:** /open-banking/opendata-investments
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                      | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | -----------------------  | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/funds                | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/bank-fixed-incomes   | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/credit-fixed-incomes | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/variable-incomes     | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/treasure-titles      | Não          |                  | Não        | Não              | Não  |     |
+
+## Exchange catalog
+
+**Base path:** /open-banking/opendata-exchange
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API               | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/online-rates  | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/vet-values    | Não          |                  | Não        | Não              | Não  |     |
+
+## Acquiring services catalog
+
+**Base path:** /open-banking/opendata-acquiring-services
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API            | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | -------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personals  | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/businesses | Não          |                  | Não        | Não              | Não  |     |
+
+## Pension catalog
+
+**Base path:** /open-banking/opendata-pension
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                    | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ---------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/risk-coverages     | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/survival-coverages | Não          |                  | Não        | Não              | Não  |     |
+
+## Insurance catalog
+
+**Base path:** /open-banking/opendata-insurance
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API             | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | --------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/automotives | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/homes       | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/personals   | Não          |                  | Não        | Não              | Não  |     |
 
 ## Observações
 

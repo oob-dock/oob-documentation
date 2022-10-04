@@ -8,6 +8,12 @@ Open Banking Brasil:
 
 - [Canais de atendimento](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/33686119/Informa+es+T+cnicas+-+Canais+de+Atendimentos+-+v1.0.2)
 - [Produtos e Serviços](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1736880/Informa+es+T+cnicas+-+Produtos+e+Servi+os+-+v1.0.2)
+- [Títulos de Capitalização](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/46432740/Informa+es+T+cnicas+-+T+tulos+de+Capitaliza+o+-+v1.0.0-rc1.0)
+- [Investimentos](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/47546407/Informa+es+T+cnicas+-+Investimentos+-+v1.0.0-rc1.0)
+- [Câmbio](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/48005281/Informa+es+T+cnicas+-+C+mbio+-+v1.0.0-rc1.0)
+- [Credenciamento](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/48005288/Informa+es+T+cnicas+-+Credenciamento+-+v1.0.0-rc1.0)
+- [Previdência](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/47906992/Informa+es+T+cnicas+-+Previd+ncia+-+v1.0.0-rc1.0)
+- [Seguros](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/48038088/Informa+es+T+cnicas+-+Seguros+-+v1.0.0-rc1.0)
 
 &nbsp;
 
@@ -87,5 +93,74 @@ definida no plugin como:
 | /business-loans                              | ```direct:getBusinessLoans```                      |
 | /personal-unarranged-account-overdraft       | ```direct:getPersonalUnarrangedAccountOverdraft``` |
 | /business-unarranged-account-overdraft       | ```direct:getBusinessUnarrangedAccountOverdraft``` |
+
+&nbsp;
+
+### Títulos de Capitalização
+
+&nbsp;
+
+| Endpoint | Rota do Camel         |
+|----------|-----------------------|
+| /bonds   | ```direct:getBonds``` |
+
+&nbsp;
+
+### Investimentos
+
+&nbsp;
+
+| Endpoint              | Rota do Camel                      |
+|-----------------------|------------------------------------|
+| /funds                | ```direct:getFunds```              |
+| /bank-fixed-incomes   | ```direct:getBankFixedIncomes```   |
+| /credit-fixed-incomes | ```direct:getCreditFixedIncomes``` |
+| /variable-incomes     | ```direct:getVariableIncomes```    |
+| /treasure-titles      | ```direct:getTreasureTitles```     |
+
+&nbsp;
+
+### Câmbio
+
+&nbsp;
+
+| Endpoint      | Rota do Camel               |
+|---------------|-----------------------------|
+| /online-rates | ```direct:getOnlineRates``` |
+| /vet-values   | ```direct:getVetValues```   |
+
+&nbsp;
+
+### Credenciamento
+
+&nbsp;
+
+| Endpoint    | Rota do Camel              |
+|-------------|----------------------------|
+| /personals  | ```direct:getPersonals```  |
+| /businesses | ```direct:getBusinesses``` |
+
+&nbsp;
+
+### Previdência
+
+&nbsp;
+
+| Endpoint            | Rota do Camel                     |
+|---------------------|-----------------------------------|
+| /risk-coverages     | ```direct:getRiskCoverages```     |
+| /survival-coverages | ```direct:getSurvivalCoverages``` |
+
+&nbsp;
+
+### Seguros
+
+&nbsp;
+
+| Endpoint     | Rota do Camel                      |
+|--------------|------------------------------------|
+| /automotives | ```direct:getAutomitives```        |
+| /homes       | ```direct:getHomes```              |
+| /personals   | ```direct:getInsurancePersonals``` |
 
 &nbsp;
