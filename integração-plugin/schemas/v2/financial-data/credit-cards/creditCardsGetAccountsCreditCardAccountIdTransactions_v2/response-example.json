@@ -16,8 +16,7 @@
       },
       "transactionDate": "2021-05-21",
       "billPostDate": "2021-05-21",
-      "chargeNumber": 12,
-      "otherCreditsType": "CREDITO_ROTATIVO",
+      "transactionalAdditionalInfo": "1",
       "transactionId": [
         {
           "key": "pk_CampoUm",
@@ -28,8 +27,8 @@
           "value": "123"
         }
       ],
-      "otherCreditsAdditionalInfo": "7Z@\"",
-      "transactionalAdditionalInfo": ">hb.!f1DNp>",
+      "feeType": "ANUIDADE",
+      "otherCreditsType": "CREDITO_ROTATIVO",
       "billId": [
         {
           "key": "pk_CampoUm",
@@ -40,9 +39,10 @@
           "value": "123"
         }
       ],
-      "feeType": "ANUIDADE",
+      "feeTypeAdditionalInfo": "c;Qn1s5",
       "payeeMCC": 5137,
-      "feeTypeAdditionalInfo": "7Q]@WA\\",
+      "chargeNumber": 12,
+      "otherCreditsAdditionalInfo": "A_]>q(ZUS^",
       "paymentType": "A_VISTA"
     },
     {
@@ -61,11 +61,7 @@
       },
       "transactionDate": "2021-05-21",
       "billPostDate": "2021-05-21",
-      "feeType": "ANUIDADE",
-      "otherCreditsAdditionalInfo": "_!cF\\d+;v",
-      "paymentType": "A_VISTA",
-      "transactionalAdditionalInfo": "NXH =t(",
-      "chargeNumber": 12,
+      "transactionalAdditionalInfo": ">\"U@",
       "billId": [
         {
           "key": "pk_CampoUm",
@@ -76,9 +72,12 @@
           "value": "123"
         }
       ],
+      "chargeNumber": 12,
+      "feeType": "ANUIDADE",
+      "paymentType": "A_VISTA",
       "otherCreditsType": "CREDITO_ROTATIVO",
+      "feeTypeAdditionalInfo": "w9HrnUDZH",
       "payeeMCC": 5137,
-      "feeTypeAdditionalInfo": "C[,",
       "transactionId": [
         {
           "key": "pk_CampoUm",
@@ -88,11 +87,12 @@
           "key": "pk_CampoDois",
           "value": "123"
         }
-      ]
+      ],
+      "otherCreditsAdditionalInfo": ">lOZ"
     }
   ],
   "meta": {
     "hasMoreRecords": true,
-    "requestDateTime": "2021-05-21T08:30:00Z"
+    "requestDateTime": "Duis consectetur"
   }
 }

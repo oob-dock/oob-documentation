@@ -71,14 +71,27 @@ Esta API é responsável por recuperar todas as informações de um consentiment
 incluindo um histórico das mudanças de status realizadas. A consulta é feita através
 do identificador interno em formato UUID.
 
-## Revogação de consentimento
+## Revogação de consentimento (Deprecated)
 
         PATCH /open-banking/oob-consents/v1/consents/{consentId}
+
+A utilização é equivalente a da revogação de consentimento de pagamento abaixo
+mas esse endpoint será descontinuado.
+
+## Revogação de consentimento de pagamento
+
+        PATCH /open-banking/oob-consents/payments/v1/consents/{consentId}
 
 Responsável pela revogação do consentimento relacionado ao *consentId* informado.
 
 **Importante**: é permitida revogação de consentimentos de pagamento agendado APENAS
 até o dia anterior a data de efetivação dele.
+
+## Revogação de consentimento de compartilhamento de dados
+
+        PATCH /open-banking/oob-consents/consents/v1/consents/{consentId}
+
+Responsável pela revogação do consentimento relacionado ao *consentId* informado.
 
 ## Autenticação
 

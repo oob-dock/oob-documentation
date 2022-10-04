@@ -227,6 +227,12 @@ components:
           items:
             type: string
           maxItems: 100
+        selectedSubmodalities:
+          type: array
+          description: Array com os IDs das submodalidades do consentimento selecionadas pelo usuário
+          items:
+            type: string
+          maxItems: 100
     AuthenticateCommand:
       type: object
       properties:
@@ -338,6 +344,8 @@ components:
             - CPF_MISMATCH
             - CNPJ_MISMATCH
             - EXPIRED_CONSENT
+            - RESOURCE_MUST_CONTAIN_ID
+            - SUBMODALITY_MUST_CONTAIN_ID
             - GENERIC_ERROR
         message:
           type: string

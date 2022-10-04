@@ -197,6 +197,8 @@ Banking ou erros inesperados conforme vemos na tabela a seguir.
 | CPF_MISMATCH    | CPF do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento               |
 | CNPJ_MISMATCH   | CNPJ do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento              |
 | EXPIRED_CONSENT | Consentimento expirado                                                                            |
+| RESOURCE_MUST_CONTAIN_ID   | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID           |
+| SUBMODALITY_MUST_CONTAIN_ID   | Lista de submodalidades na aprovação do consentimento deve conter pelo menos um ID  |
 | GENERIC_ERROR   | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário |
 
 O comando `error` conclui a geração do consentimento. Nos casos
@@ -227,6 +229,10 @@ usuário é do sucesso do consentimento. O tratamento de retorno ao TPP deve
 ser seguido como descrito no `error`.
 
 ## Changelog
+
+### 2022-08-25 - v1.1.1
+
+- Adição de novos códigos de erro.
 
 ### 2022-04-06 - v1.1.0
 
