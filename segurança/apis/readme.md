@@ -426,10 +426,10 @@
 
 **Cliente API:** Qualquer um (Aberto na internet)
 
-| Operação | API            | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | -------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/vet-values | Não          |                  | Não        | Não              | Não  |     |
-| GET      | /v1/personals  | Não          |                  | Não        | Não              | Não  |     |
+| Operação | API               | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/online-rates  | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/vet-values    | Não          |                  | Não        | Não              | Não  |     |
 
 ## Acquiring services catalog
 
