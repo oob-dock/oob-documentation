@@ -1,0 +1,689 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "ACMEcap",
+      "code": "01234589_cap",
+      "modality": "TRADICIONAL",
+      "costType": "PAGAMENTO_UNICO",
+      "termsAndConditions": {
+        "susepProcessNumber": "15414.622222/2222-22",
+        "detail": "https://openinsurance.com.br/aaa"
+      },
+      "quotas": [
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        }
+      ],
+      "capitalizationPeriod": {
+        "interestRate": "0.251231",
+        "updateIndex": "IPCA",
+        "contributionAmount": [
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "dolor nulla pariatur minim"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "ea occaecat sint "
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "eiusmod anim"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "aute aliquip ipsum esse in"
+          }
+        ],
+        "earlyRedemptions": [
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          }
+        ],
+        "redemptionPercentageEndTerm": "1.00002",
+        "gracePeriodRedemption": 48,
+        "updateIndexAdditionalInfo": "sunt aliquip"
+      },
+      "latePayment": {
+        "suspensionMonths": 10,
+        "periodExtensionOption": true
+      },
+      "contributionPayment": {
+        "paymentMethod": "CARTAO_CREDITO",
+        "updateIndex": "IPCA",
+        "paymentMethodAdditionalInfo": "minim dolore laborum",
+        "updateIndexAdditionalInfo": "consectetur dolore in"
+      },
+      "finalRedemptionRate": "1.51",
+      "redemptionPercentageEndTerm": "1.00002",
+      "draws": [
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "timeIntervalAdditionalInfo": "5",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal."
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "timeIntervalAdditionalInfo": "5",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal."
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        }
+      ],
+      "additionalInfo": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais",
+      "targetAudience": "PESSOA_NATURAL",
+      "serieSize": 5000000,
+      "minimumRequirementDetails": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais",
+      "validity": 48
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "ACMEcap",
+      "code": "01234589_cap",
+      "modality": "TRADICIONAL",
+      "costType": "PAGAMENTO_UNICO",
+      "termsAndConditions": {
+        "susepProcessNumber": "15414.622222/2222-22",
+        "detail": "https://openinsurance.com.br/aaa"
+      },
+      "quotas": [
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        }
+      ],
+      "capitalizationPeriod": {
+        "interestRate": "0.251231",
+        "updateIndex": "IPCA",
+        "contributionAmount": [
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "eu commodo nisi magna"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "proident sunt cillum pariatur fugiat"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "dolore pariatur et"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "reprehenderit Duis"
+          }
+        ],
+        "earlyRedemptions": [
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          }
+        ],
+        "redemptionPercentageEndTerm": "1.00002",
+        "gracePeriodRedemption": 48,
+        "updateIndexAdditionalInfo": "commodo ea"
+      },
+      "latePayment": {
+        "suspensionMonths": 10,
+        "periodExtensionOption": true
+      },
+      "contributionPayment": {
+        "paymentMethod": "CARTAO_CREDITO",
+        "updateIndex": "IPCA",
+        "paymentMethodAdditionalInfo": "voluptate velit in Duis cupidatat",
+        "updateIndexAdditionalInfo": "quis qui veniam pariatur et"
+      },
+      "finalRedemptionRate": "1.51",
+      "redemptionPercentageEndTerm": "1.00002",
+      "draws": [
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        }
+      ],
+      "additionalInfo": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais",
+      "targetAudience": "PESSOA_NATURAL",
+      "serieSize": 5000000,
+      "validity": 48,
+      "minimumRequirementDetails": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais"
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "ACMEcap",
+      "code": "01234589_cap",
+      "modality": "TRADICIONAL",
+      "costType": "PAGAMENTO_UNICO",
+      "termsAndConditions": {
+        "susepProcessNumber": "15414.622222/2222-22",
+        "detail": "https://openinsurance.com.br/aaa"
+      },
+      "quotas": [
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        }
+      ],
+      "capitalizationPeriod": {
+        "interestRate": "0.251231",
+        "updateIndex": "IPCA",
+        "contributionAmount": [
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "commodo f"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "deserunt laborum"
+          }
+        ],
+        "earlyRedemptions": [
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          }
+        ],
+        "redemptionPercentageEndTerm": "1.00002",
+        "gracePeriodRedemption": 48,
+        "updateIndexAdditionalInfo": "est Ut"
+      },
+      "latePayment": {
+        "suspensionMonths": 10,
+        "periodExtensionOption": true
+      },
+      "contributionPayment": {
+        "paymentMethod": "CARTAO_CREDITO",
+        "updateIndex": "IPCA",
+        "paymentMethodAdditionalInfo": "consectetur aliquip",
+        "updateIndexAdditionalInfo": "aute aliqua dolor"
+      },
+      "finalRedemptionRate": "1.51",
+      "redemptionPercentageEndTerm": "1.00002",
+      "draws": [
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "timeIntervalAdditionalInfo": "5",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal."
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "timeIntervalAdditionalInfo": "5",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal."
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "timeIntervalAdditionalInfo": "5",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal."
+        }
+      ],
+      "additionalInfo": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais",
+      "targetAudience": "PESSOA_NATURAL",
+      "serieSize": 5000000,
+      "validity": 48,
+      "minimumRequirementDetails": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais"
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "ACMEcap",
+      "code": "01234589_cap",
+      "modality": "TRADICIONAL",
+      "costType": "PAGAMENTO_UNICO",
+      "termsAndConditions": {
+        "susepProcessNumber": "15414.622222/2222-22",
+        "detail": "https://openinsurance.com.br/aaa"
+      },
+      "quotas": [
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        },
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        }
+      ],
+      "capitalizationPeriod": {
+        "interestRate": "0.251231",
+        "updateIndex": "IPCA",
+        "contributionAmount": [
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "Excepteur velit nulla"
+          }
+        ],
+        "earlyRedemptions": [
+          {
+            "quota": 10,
+            "rate": 10.000001
+          },
+          {
+            "quota": 10,
+            "rate": 10.000001
+          }
+        ],
+        "redemptionPercentageEndTerm": "1.00002",
+        "gracePeriodRedemption": 48,
+        "updateIndexAdditionalInfo": "labore aliqua"
+      },
+      "latePayment": {
+        "suspensionMonths": 10,
+        "periodExtensionOption": true
+      },
+      "contributionPayment": {
+        "paymentMethod": "CARTAO_CREDITO",
+        "updateIndex": "IPCA",
+        "paymentMethodAdditionalInfo": "non id",
+        "updateIndexAdditionalInfo": "velit consequat in aliqua"
+      },
+      "finalRedemptionRate": "1.51",
+      "redemptionPercentageEndTerm": "1.00002",
+      "draws": [
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "timeIntervalAdditionalInfo": "5",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal."
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        }
+      ],
+      "additionalInfo": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais",
+      "targetAudience": "PESSOA_NATURAL",
+      "validity": 48,
+      "serieSize": 5000000,
+      "minimumRequirementDetails": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais"
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "ACMEcap",
+      "code": "01234589_cap",
+      "modality": "TRADICIONAL",
+      "costType": "PAGAMENTO_UNICO",
+      "termsAndConditions": {
+        "susepProcessNumber": "15414.622222/2222-22",
+        "detail": "https://openinsurance.com.br/aaa"
+      },
+      "quotas": [
+        {
+          "quota": 10,
+          "capitalizationQuota": "0.000010",
+          "raffleQuota": "0.000010",
+          "chargingQuota": "0.000010"
+        }
+      ],
+      "capitalizationPeriod": {
+        "interestRate": "0.251231",
+        "updateIndex": "IPCA",
+        "contributionAmount": [
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "dolor ullamco elit eu"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "Ut et"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "in Lorem pariatur ut in"
+          },
+          {
+            "periodicity": "UNICO",
+            "minimum": "1.2222",
+            "maximum": "1.2222",
+            "allowedValue": 5000,
+            "periodicityAdditionalInfo": "deserunt est"
+          }
+        ],
+        "earlyRedemptions": [
+          {
+            "quota": 10,
+            "rate": 10.000001
+          }
+        ],
+        "redemptionPercentageEndTerm": "1.00002",
+        "gracePeriodRedemption": 48,
+        "updateIndexAdditionalInfo": "ex"
+      },
+      "latePayment": {
+        "suspensionMonths": 10,
+        "periodExtensionOption": true
+      },
+      "contributionPayment": {
+        "paymentMethod": "CARTAO_CREDITO",
+        "updateIndex": "IPCA",
+        "updateIndexAdditionalInfo": "adipisicing dolor",
+        "paymentMethodAdditionalInfo": "proident cupidatat reprehenderit deserunt occaecat"
+      },
+      "finalRedemptionRate": "1.51",
+      "redemptionPercentageEndTerm": "1.00002",
+      "draws": [
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "timeIntervalAdditionalInfo": "5",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal."
+        },
+        {
+          "timeInterval": "UNICO",
+          "quantity": 10000,
+          "prizeMultiplier": 5,
+          "earlySettlementRaffle": true,
+          "mandatoryContemplation": true,
+          "minimumContemplationProbability": "0.000002",
+          "ruleDescription": "Sorteios próprios às terças-feiras Toda quarta-feira sorteios através da loteria federal.",
+          "timeIntervalAdditionalInfo": "5"
+        }
+      ],
+      "additionalInfo": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais",
+      "targetAudience": "PESSOA_NATURAL",
+      "minimumRequirementDetails": "https://ACME.exemplo/capitalizacao/tradicional/pdf/condicoes_gerais",
+      "serieSize": 5000000,
+      "validity": 48
+    }
+  ]
+}
