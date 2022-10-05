@@ -13,7 +13,8 @@
                 "localInstrument",
                 "payment",
                 "creditorAccount",
-                "cnpjInitiator"
+                "cnpjInitiator",
+                "endToEndId"
             ],
             "properties": {
                 "endToEndId": {
