@@ -72,44 +72,10 @@
                             "additionalItems": false
                         },
                         "minItems": 1
-                    },
-                    "submodality": {
-                        "description": "Indica a submodalidade ao qual o recurso pertence",
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "$ref": "../../common/common-schema.json#/$defs/Guid"
-                            },
-                            "modality": {
-                                "description": "Tipo da modalidade ao qual a submodalidade pertence",
-                                "type": "string",
-                                "enum": [
-                                    "LOAN",
-                                    "FINANCING",
-                                    "UNARRANGED_ACCOUNT_OVERDRAFT",
-                                    "INVOICE_FINANCING"
-                                ],
-                                "examples": [
-                                    "LOAN"
-                                ]
-                            },
-                            "description": {
-                                "description": "Descrição da submodalidade selecionada",
-                                "type": "string",
-                                "examples": [
-                                    "Crédito pessoal - consignado"
-                                ]
-                            }
-                        },
-                        "required": [
-                            "id"
-                        ],
-                        "additionalItems": false
                     }
                 },
                 "required": [
                     "resourceLegacyId",
-                    "submodality",
                     "validUntil"
                 ],
                 "additionalItems": false
