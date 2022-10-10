@@ -189,46 +189,6 @@
             },
             "maxItems": 1000
         },
-        "AcceptedSubmodalities": {
-            "description": "Lista de submodalidades selecionadas pelo cliente para serem usadas no consentimento. Objeto de uso interno, em conectores",
-            "type": "array",
-            "items": {
-                "type": "object",
-                "description": "Submodalidade escolhida pelo cliente",
-                "required": [
-                    "id",
-                    "modality",
-                    "description"
-                ],
-                "properties": {
-                    "id": {
-                        "$ref": "../common-schema.json#/$defs/Guid"
-                    },
-                    "modality": {
-                        "description": "Tipo da modalidade ao qual a submodalidade pertence",
-                        "type": "string",
-                        "enum": [
-                            "LOAN",
-                            "FINANCING",
-                            "UNARRANGED_ACCOUNT_OVERDRAFT",
-                            "INVOICE_FINANCING"
-                        ],
-                        "examples": [
-                            "LOAN"
-                        ]
-                    },
-                    "description": {
-                        "description": "Descrição da submodalidade selecionada",
-                        "type": "string",
-                        "examples": [
-                            "Crédito pessoal - consignado"
-                        ]
-                    }
-                },
-                "additionalProperties": false
-            },
-            "maxItems": 1000
-        },
         "LoggedUser": {
             "type": "object",
             "description": "Usuário (pessoa natural) que encontra-se logado na instituição Iniciadora de Pagamento.  [Restrição] Quando se tratar do loggedUser da revogação, deve obrigatoriamente ser enviado quando a revogação for feita pelo usuário final, ou seja, se o campo revokedBy estiver com o valor 'USER'",
