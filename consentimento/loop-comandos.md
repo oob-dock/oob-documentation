@@ -149,6 +149,13 @@ do Usuário do Open Banking Brasil nessa etapa.
 Os recursos selecionados e por consequência o aceite do consentimento devem ser
 enviados ao AS através da API `PUT /app/command/{id}/consent`.
 
+### Produtos não selecionáveis
+
+Diferentemente dos demais produtos, os produtos não selecionáveis são
+compartilhados com base nas permissões fornecidas no consentimento
+de compartilhamento de dados. Portanto durante a aprovação do consentimento
+não é feita a seleção deles.
+
 ## Comando *error*
 
 Indica a ocorrência de algum erro durante o fluxo de autenticação OIDC.

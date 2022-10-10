@@ -58,7 +58,7 @@ padrão do discovery é nulo e a instituição não precisa colocar tais rotas.
 
 O momento de discovery ocorre durante a utilização do consentimento de
 compartilhamento de dados, quando o *TPP* chama a API regulatória
-[```GET /resources/v1/resources```](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/33849604/Informa+es+T+cnicas+-+Resources+-+v1.0.2).
+[```GET /resources/v1/resources```](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/33849604/Informa+es+T+cnicas+-+Resources+-+v1.0.2) ou [```GET /resources/v2/resources```](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/57409630/Informa+es+T+cnicas+-+Resources+-+v2.0.0).
 Essa API precisa retornar todos os recursos acessíveis no consentimento, ou
 seja, os produtos selecionados ativamente pelo cliente durante a aceitação do
 consentimento e os demais produtos do consentimento. Chamamos esses últimos
@@ -226,7 +226,8 @@ Exemplo de response para um produto não selecionável:
           "value":"DEF51242"
         }
       ],
-      "status": "TEMPORARILY_UNAVAILABLE"
+      "status": "TEMPORARILY_UNAVAILABLE",
+      "validUntil":"2022-06-07"
     }
   ]
 }
