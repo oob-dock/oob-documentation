@@ -11,10 +11,6 @@
       - [kong_api_key](#kong_api_key)
       - [oob_status_api_host](#oob_status_api_host)
       - [oob_status_api_port](#oob_status_api_port)
-      - [oob_products_services_catalog_api_host](#oob_products_services_catalog_api_host)
-      - [oob_products_services_catalog_api_port](#oob_products_services_catalog_api_port)
-      - [oob_channels_catalog_api_host](#oob_channels_catalog_api_host)
-      - [oob_channels_catalog_api_port](#oob_channels_catalog_api_port)
       - [oob_consent_api_host](#oob_consent_api_host)
       - [oob_consent_api_port](#oob_consent_api_port)
       - [cors_origins](#cors_origins)
@@ -108,32 +104,6 @@ Host da API de status
 #### oob_status_api_port
 
 Porta da API de status
-
-**Ex:** "80"
-
-#### oob_products_services_catalog_api_host
-
-Host da API de produtos e serviços. Deve ser preenchido somente se a feature open-data
-(Fase 1 do Open Banking Brasil) estiver habilitada.
-
-**Ex:** "oob-products-services-catalog"
-
-#### oob_products_services_catalog_api_port
-
-Porta da API de produtos e serviços
-
-**Ex:** "80"
-
-#### oob_channels_catalog_api_host
-
-Host da API de canais. Deve ser preenchido somente se a feature open-data
-(Fase 1 do Open Banking Brasil) estiver habilitada.
-
-**Ex:** "oob-channels-catalog"
-
-#### oob_channels_catalog_api_port
-
-Porta da API de canais
 
 **Ex:** "80"
 
