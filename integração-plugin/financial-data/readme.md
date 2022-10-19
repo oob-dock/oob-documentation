@@ -6,13 +6,13 @@ Open Banking Brasil:
 
 &nbsp;
 
-- [Dados Cadastrais](https://openbanking-brasil.github.io/areadesenvolvedor/#fase-2-apis-do-open-banking-brasil-api-dados-cadastrais)
-- [Cartão de Crédito](https://openbanking-brasil.github.io/areadesenvolvedor/#lista-de-cartoes-de-credito)
-- [Contas](https://openbanking-brasil.github.io/areadesenvolvedor/#lista-de-contas)
-- [Operações de Crédito - Empréstimos](https://openbanking-brasil.github.io/areadesenvolvedor/#emprestimos)
-- [Operações de Crédito - Financiamentos](https://openbanking-brasil.github.io/areadesenvolvedor/#financiamentos-contrato)
-- [Operações de Crédito - Adiantamento a Depositantes](https://openbanking-brasil.github.io/areadesenvolvedor/#adiantamento-a-depositantes-contrato)
-- [Operações de Crédito - Direitos Creditórios Descontados](https://openbanking-brasil.github.io/areadesenvolvedor/#direitos-creditorios-descontados-contrato)
+- [Dados Cadastrais](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/6127799/API+-+Dados+Cadastrais)
+- [Cartão de Crédito](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/9634015/API+-+Cart+o+de+Cr+dito)
+- [Contas](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1671640/API+-+Contas)
+- [Operações de Crédito - Empréstimos](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1638863/API+-+Opera+es+de+Cr+dito+-+Empr+stimos)
+- [Operações de Crédito - Financiamentos](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1638904/API+-+Opera+es+de+Cr+dito+-+Financiamento)
+- [Operações de Crédito - Adiantamento a Depositantes](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/6128078/API+-+Opera+es+de+Cr+dito+-+Adiantamento+a+Depositantes)
+- [Operações de Crédito - Direitos Creditórios Descontados](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1737642/API+-+Opera+es+de+Cr+dito+-+Direitos+Credit+rios+Descontados)
 
 &nbsp;
 
