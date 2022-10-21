@@ -2,7 +2,8 @@
 
 - [Scripts SQL - informações dos consentimentos](#scripts-sql---informações-dos-consentimentos)
   - [Introdução](#introdução)
-  - [Parâmetros de entrada](#parâmetros-de-entrada)
+  - [Scripts - Consentimento Transmissor](#scripts---consentimento-transmissor)
+    - [Consentimento Transmissor - Autorização do Cliente](#consentimento-transmissor---autorização-do-cliente)
   - [Scripts - Estoque de consentimentos](#scripts---estoque-de-consentimentos)
     - [Estoque de consentimentos - informação consolidada](#estoque-de-consentimentos---informação-consolidada)
     - [Estoque de consentimentos - informação por receptor](#estoque-de-consentimentos---informação-por-receptor)
@@ -15,27 +16,29 @@ de dados relacionados aos consentimentos gerados e guardados no ecossistema Opus
 As informações que poderão ser obtidas com eles são:
 
 - Estoque de consentimentos
+- Consentimento Transmissor
 
 **OBS:** fica a cargo de nossos clientes
 rodar os scripts e formatar as informações da forma e no período exigido pelo Open Banking Brasil **OBB**.
 
-## Parâmetros de entrada
 
-Antes de utilizar os scripts SQL fornecidos pela Opus, deve-se alterar os campos
-'<data_inicial>', '<data_final>'
-pelos valores do período dos serviços que se deseja obter as informações.
+## Scripts - Consentimento Transmissor
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Consent**
 
-A formatação para dos campos é **YYYY-MM-DD**.
+### Consentimento Transmissor - Autorização do Cliente
 
-- YYYY: ano da data desejada
-- MM: mês da data desejada
-- DD: dia da data desejada
+Primeiramente é necessário criar a função consentimento_authorizacao_cliente executando o
+seguinte [script](attachments/consentimento_authorizacao_cliente.sql).
 
-Exemplo de uso:
-
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
 ```sql
-@set initial_date = '2022-01-01'
-@set final_date = '2022-06-30'
+SELECT * FROM extract_report_data('<data_inicio>','<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+```sql
+SELECT * FROM extract_report_data('2022-01-02','2022-10-08');
 ```
 
 ## Scripts - Estoque de consentimentos
