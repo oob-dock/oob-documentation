@@ -4,6 +4,7 @@
   - [Introdução](#introdução)
   - [Scripts - Consentimento Transmissor](#scripts---consentimento-transmissor)
     - [Consentimento Transmissor - Autorização do Cliente](#consentimento-transmissor---autorização-do-cliente)
+    - [Consentimento transmissor - informações do authorization server](#consentimento-transmissor---informações-do-authorization-server)
   - [Scripts - Estoque de consentimentos](#scripts---estoque-de-consentimentos)
     - [Estoque de consentimentos - informação consolidada](#estoque-de-consentimentos---informação-consolidada)
     - [Estoque de consentimentos - informação por receptor](#estoque-de-consentimentos---informação-por-receptor)
@@ -11,7 +12,8 @@
 ## Introdução
 
 A Opus está fornecendo alguns scripts SQL que ajudarão os clientes na coleta
-de dados relacionados aos consentimentos gerados e guardados no ecossistema Opus Open Banking **OOB**.
+de dados relacionados aos consentimentos gerados e guardados no ecossistema Opus
+Open Banking **OOB**.
 
 As informações que poderão ser obtidas com eles são:
 
@@ -19,26 +21,53 @@ As informações que poderão ser obtidas com eles são:
 - Consentimento Transmissor
 
 **OBS:** fica a cargo de nossos clientes
-rodar os scripts e formatar as informações da forma e no período exigido pelo Open Banking Brasil **OBB**.
-
+rodar os scripts e formatar as informações da forma e no período exigido pelo Open
+Banking Brasil **OBB**.
 
 ## Scripts - Consentimento Transmissor
+
 Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Consent**
 
 ### Consentimento Transmissor - Autorização do Cliente
 
-Primeiramente é necessário criar a função consentimento_authorizacao_cliente executando o
-seguinte [script](attachments/consentimento_authorizacao_cliente.sql).
+Primeiramente é necessário criar a função consentimento_authorizacao_cliente
+executando o seguinte [script](attachments/consentimento_authorizacao_cliente.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
 ```sql
 SELECT * FROM extract_report_data('<data_inicio>','<data_fim>');
 ```
 
 Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
 ```sql
 SELECT * FROM extract_report_data('2022-01-02','2022-10-08');
+```
+
+## Scripts - Consentimento transmissor
+
+### Consentimento transmissor - informações do authorization server
+
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Authorization-Serve**
+
+Primeiramente é necessário criar a function decode_base64url executando o
+seguinte [script](attachments/as_function_decode_base64url.sql).
+
+Depois, deve ser criada a function extract_report_data executando o seguinte [script](attachments/as_function_extract_report_data.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM extract_report_data('<data_inicio>','<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM extract_report_data('2022-10-02','2022-10-08');
 ```
 
 ## Scripts - Estoque de consentimentos
@@ -66,6 +95,7 @@ AND   tp_consent = 1$$;
 ```
 
 Depois ele pode ser chamado usando:
+
 ```sql
 SELECT * FROM estoque_consentimento_consolidado();
 ```
@@ -94,6 +124,7 @@ GROUP BY t.org_name$$;
 ```
 
 Depois ele pode ser chamado usando:
+
 ```sql
 SELECT * FROM estoque_consentimento_receptor();
 ```
