@@ -32,8 +32,8 @@ Os scripts SQL fornecidos nessa seção devem ser operados no
 
 ### Consentimento transmissor - Autorização do Cliente
 
-Primeiramente é necessário criar consent_authorization_client
-executando o seguinte [script](attachments/consent_authorization_client.sql).
+Primeiramente é necessário criar a function consent_authorization_client
+executando o seguinte [script](attachments/consent_function_authorization_client.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
