@@ -52,7 +52,19 @@ Os scripts SQL fornecidos nessa seção devem ser operados no
 Primeiramente é necessário criar a function decode_base64url executando o
 seguinte [script](attachments/as_function_decode_base64url.sql).
 
-Depois, deve ser criada a function xxx executando o seguinte [script](attachments/as_function_extract_report_data.sql).
+Depois, deve ser criada a function extract_report_data executando o seguinte [script](attachments/as_function_extract_report_data.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM extract_report_data('<data_inicio>','<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM extract_report_data('2022-10-02','2022-10-08');
+```
 
 ## Scripts - Estoque de consentimentos
 
@@ -79,6 +91,7 @@ AND   tp_consent = 1$$;
 ```
 
 Depois ele pode ser chamado usando:
+
 ```sql
 SELECT * FROM estoque_consentimento_consolidado();
 ```
@@ -107,6 +120,7 @@ GROUP BY t.org_name$$;
 ```
 
 Depois ele pode ser chamado usando:
+
 ```sql
 SELECT * FROM estoque_consentimento_receptor();
 ```
