@@ -27,7 +27,6 @@ BEGIN
                           INNER JOIN tpp t ON c.id_tpp = t.id
                  WHERE c.dt_creation BETWEEN start_date AND end_date
                    AND c.dt_expiration >= start_date
-                   AND c.status IN (1, 4, 5)
                    AND c.tp_consent IN (1)
                  GROUP BY receptor, cpf_hash, cnpj_hash
                  ORDER BY receptor ASC, quantity DESC
