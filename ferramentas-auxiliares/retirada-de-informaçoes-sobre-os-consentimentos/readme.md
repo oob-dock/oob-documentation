@@ -3,6 +3,8 @@
 - [Scripts SQL - informações dos consentimentos](#scripts-sql---informações-dos-consentimentos)
   - [Introdução](#introdução)
   - [Parâmetros de entrada](#parâmetros-de-entrada)
+  - [Scripts - Consentimento transmissor](#scripts---consentimento-transmissor)
+    - [Consentimento transmissor - informações do authorization server](#consentimento-transmissor---informações-do-authorization-server)
   - [Scripts - Estoque de consentimentos](#scripts---estoque-de-consentimentos)
     - [Estoque de consentimentos - informação consolidada](#estoque-de-consentimentos---informação-consolidada)
     - [Estoque de consentimentos - informação por receptor](#estoque-de-consentimentos---informação-por-receptor)
@@ -10,14 +12,16 @@
 ## Introdução
 
 A Opus está fornecendo alguns scripts SQL que ajudarão os clientes na coleta
-de dados relacionados aos consentimentos gerados e guardados no ecossistema Opus Open Banking **OOB**.
+de dados relacionados aos consentimentos gerados e guardados no ecossistema Opus
+Open Banking **OOB**.
 
 As informações que poderão ser obtidas com eles são:
 
 - Estoque de consentimentos
 
 **OBS:** fica a cargo de nossos clientes
-rodar os scripts e formatar as informações da forma e no período exigido pelo Open Banking Brasil **OBB**.
+rodar os scripts e formatar as informações da forma e no período exigido pelo Open
+Banking Brasil **OBB**.
 
 ## Parâmetros de entrada
 
@@ -37,6 +41,18 @@ Exemplo de uso:
 @set initial_date = '2022-01-01'
 @set final_date = '2022-06-30'
 ```
+
+## Scripts - Consentimento transmissor
+
+### Consentimento transmissor - informações do authorization server
+
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Authorization-Serve**
+
+Primeiramente é necessário criar a function decode_base64url executando o
+seguinte [script](attachments/as_function_decode_base64url.sql).
+
+Depois, deve ser criada a function xxx executando o seguinte [script](attachments/as_function_extract_report_data.sql).
 
 ## Scripts - Estoque de consentimentos
 
