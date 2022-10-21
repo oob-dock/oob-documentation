@@ -5,6 +5,7 @@
   - [Scripts - Consentimento Transmissor](#scripts---consentimento-transmissor)
     - [Consentimento transmissor - Autorização do Cliente](#consentimento-transmissor---autorização-do-cliente)
     - [Consentimento transmissor - informações do authorization server](#consentimento-transmissor---informações-do-authorization-server)
+    - [Consentimento transmissor - informações do consent](#consentimento-transmissor---informações-do-consent)
   - [Scripts - Estoque de consentimentos](#scripts---estoque-de-consentimentos)
     - [Estoque de consentimentos - informação consolidada](#estoque-de-consentimentos---informação-consolidada)
     - [Estoque de consentimentos - informação por receptor](#estoque-de-consentimentos---informação-por-receptor)
@@ -114,5 +115,5 @@ seguinte [script](attachments/consent_function_receptor_stock.sql).
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM estoque_consentimento_receptor();
+SELECT * FROM consent_receptor_stock();
 ```
