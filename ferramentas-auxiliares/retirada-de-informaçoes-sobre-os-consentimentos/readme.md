@@ -109,7 +109,7 @@ SELECT * FROM consent_consolidated_stock();
 
 ### Estoque de consentimentos - informação por receptor
 
-Primeiramente é necessário criar a function consent_consolidated_stock executando o
+Primeiramente é necessário criar a function consent_receptor_stock executando o
 seguinte [script](attachments/consent_function_receptor_stock.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
