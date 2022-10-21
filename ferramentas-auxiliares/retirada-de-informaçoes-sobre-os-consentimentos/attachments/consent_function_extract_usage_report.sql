@@ -4,7 +4,7 @@ CREATE OR REPLACE FUNCTION CONSENT_USAGE_REPORT(start_date DATE, end_date DATE, 
             (
                 receptor           TEXT,
                 quantity           BIGINT,
-                consent_id_example TEXT,
+                consent_id         TEXT,
                 cpf_hash           TEXT,
                 cnpj_hash          TEXT
             )
@@ -20,7 +20,7 @@ BEGIN
 
     RETURN QUERY SELECT t.org_name::TEXT                     receptor,
                         count(c.id)                          quantity,
-                        max(c.id_consent_external)           consent_id_example,
+                        max(c.id_consent_external)           consent_id,
                         c.sha_person_document_number::TEXT   cpf_hash,
                         c.sha_business_document_number::TEXT cnpj_hash
                  FROM consent c
