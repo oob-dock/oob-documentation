@@ -3,8 +3,9 @@
 - [Scripts SQL - informações dos consentimentos](#scripts-sql---informações-dos-consentimentos)
   - [Introdução](#introdução)
   - [Scripts - Consentimento Transmissor](#scripts---consentimento-transmissor)
-    - [Consentimento Transmissor - Autorização do Cliente](#consentimento-transmissor---autorização-do-cliente)
+    - [Consentimento transmissor - Autorização do Cliente](#consentimento-transmissor---autorização-do-cliente)
     - [Consentimento transmissor - informações do authorization server](#consentimento-transmissor---informações-do-authorization-server)
+    - [Consentimento transmissor - informações do consent](#consentimento-transmissor---informações-do-consent)
   - [Scripts - Estoque de consentimentos](#scripts---estoque-de-consentimentos)
     - [Estoque de consentimentos - informação consolidada](#estoque-de-consentimentos---informação-consolidada)
     - [Estoque de consentimentos - informação por receptor](#estoque-de-consentimentos---informação-por-receptor)
@@ -29,10 +30,10 @@ Banking Brasil **OBB**.
 Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Consent**
 
-### Consentimento Transmissor - Autorização do Cliente
+### Consentimento transmissor - Autorização do Cliente
 
-Primeiramente é necessário criar a função consentimento_authorizacao_cliente
-executando o seguinte [script](attachments/consentimento_authorizacao_cliente.sql).
+Primeiramente é necessário criar a function consent_authorization_client
+executando o seguinte [script](attachments/consent_function_authorization_client.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
@@ -45,8 +46,6 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 ```sql
 SELECT * FROM extract_report_data('2022-01-02','2022-10-08');
 ```
-
-## Scripts - Consentimento transmissor
 
 ### Consentimento transmissor - informações do authorization server
 
@@ -99,54 +98,22 @@ Os scripts SQL fornecidos nessa seção devem ser operados no
 
 ### Estoque de consentimentos - informação consolidada
 
-Primeiramente é necessário criar a função executando:
+Primeiramente é necessário criar a function consent_consolidated_stock executando o
+seguinte [script](attachments/consent_function_consolidated_stock.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-CREATE OR REPLACE FUNCTION estoque_consentimento_consolidado()
-    RETURNS TABLE (
-        Clientes_Unicos_PF_Total INT,
-        Clientes_Unicos_PJ_Total INT
-)
-LANGUAGE SQL
-AS $$
-SELECT  SUM(CASE WHEN c.sha_business_document_number IS NULL THEN 1 ELSE 0 END) AS Clientes_Unicos_PF_Total,
-        SUM(CASE WHEN c.sha_business_document_number IS NOT NULL THEN 1 ELSE 0 END) AS Clientes_Unicos_PJ_Total
-FROM   consent c
-WHERE status = 1 
-AND   tp_consent = 1$$;
-```
-
-Depois ele pode ser chamado usando:
-
-```sql
-SELECT * FROM estoque_consentimento_consolidado();
+SELECT * FROM consent_consolidated_stock();
 ```
 
 ### Estoque de consentimentos - informação por receptor
 
-Primeiramente é necessário criar a função executando:
+Primeiramente é necessário criar a function consent_receptor_stock executando o
+seguinte [script](attachments/consent_function_receptor_stock.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-CREATE OR REPLACE FUNCTION estoque_consentimento_receptor()
-    RETURNS TABLE (
-        org_name VARCHAR,
-        qtd_Estoque_Consentimentos_Ativos INT
-) 
-LANGUAGE SQL
-AS $$
-SELECT  t.org_name,
-        COUNT(c.*) qtd_Estoque_Consentimentos_Ativos
-FROM  consent c, 
-      tpp t
-WHERE c.id_tpp  = t.id
-AND   c.status = 1
-AND   c.tp_consent = 1
-AND   c.dt_expiration > CURRENT_TIMESTAMP
-GROUP BY t.org_name$$;
-```
-
-Depois ele pode ser chamado usando:
-
-```sql
-SELECT * FROM estoque_consentimento_receptor();
+SELECT * FROM consent_receptor_stock();
 ```
