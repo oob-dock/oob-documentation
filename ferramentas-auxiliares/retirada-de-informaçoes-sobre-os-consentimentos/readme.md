@@ -51,7 +51,7 @@ SELECT * FROM extract_report_data('2022-01-02','2022-10-08');
 ### Consentimento transmissor - informações do authorization server
 
 Os scripts SQL fornecidos nessa seção devem ser operados no
-**banco de dados do OOB-Authorization-Serve**
+**banco de dados do OOB-Authorization-Server**
 
 Primeiramente é necessário criar a function decode_base64url executando o
 seguinte [script](attachments/as_function_decode_base64url.sql).
@@ -69,6 +69,28 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 ```sql
 SELECT * FROM extract_report_data('2022-10-02','2022-10-08');
 ```
+
+### Consentimento transmissor - informações do consent
+
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Consent**
+
+Primeiramente, deve ser criada a function extract_report_data executando o seguinte [script](attachments/consent_function_extract_usage_report.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM CONSENT_USAGE_REPORT('<data_inicio>','<data_fim>', <offset?>, <size?>);
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM CONSENT_USAGE_REPORT('2022-10-02','2022-10-08');
+```
+
+Os parâmetros `<offset?>` e `<size?>` são opcionais, servem para paginação e indicam quantas linhas devem
+ser puladas e capturadas, respectivamente.
 
 ## Scripts - Estoque de consentimentos
 
