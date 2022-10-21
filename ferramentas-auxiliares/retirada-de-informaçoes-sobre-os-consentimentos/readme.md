@@ -61,10 +61,14 @@ Os scripts SQL fornecidos nessa seção devem ser operados no
 
 ### Estoque de consentimentos - informação consolidada
 
-Primeiramente é necessário criar o procedure executando:
+Primeiramente é necessário criar a função executando:
 
 ```sql
-CREATE OR REPLACE PROCEDURE estoque_consentimento_consolidado()
+CREATE OR REPLACE FUNCTION estoque_consentimento_consolidado()
+    RETURNS TABLE (
+        Clientes_Unicos_PF_Total INT,
+        Clientes_Unicos_PJ_Total INT
+)
 LANGUAGE SQL
 AS $$
 SELECT  SUM(CASE WHEN c.sha_business_document_number IS NULL THEN 1 ELSE 0 END) AS Clientes_Unicos_PF_Total,
@@ -76,15 +80,19 @@ AND   tp_consent = 1$$;
 
 Depois ele pode ser chamado usando:
 ```sql
-CALL estoque_consentimento_consolidado();
+SELECT * FROM estoque_consentimento_consolidado();
 ```
 
 ### Estoque de consentimentos - informação por receptor
 
-Primeiramente é necessário criar o procedure executando:
+Primeiramente é necessário criar a função executando:
 
 ```sql
-CREATE OR REPLACE PROCEDURE estoque_consentimento_receptor()
+CREATE OR REPLACE FUNCTION estoque_consentimento_receptor()
+    RETURNS TABLE (
+        org_name VARCHAR,
+        qtd_Estoque_Consentimentos_Ativos INT
+) 
 LANGUAGE SQL
 AS $$
 SELECT  t.org_name,
@@ -100,5 +108,5 @@ GROUP BY t.org_name$$;
 
 Depois ele pode ser chamado usando:
 ```sql
-CALL estoque_consentimento_receptor();
+SELECT * FROM estoque_consentimento_receptor();
 ```
