@@ -149,42 +149,12 @@ do Usuário do Open Banking Brasil nessa etapa.
 Os recursos selecionados e por consequência o aceite do consentimento devem ser
 enviados ao AS através da API `PUT /app/command/{id}/consent`.
 
-### Tabela auxiliar - Modalidades de crédito (produtos não selecionáveis)
+### Produtos não selecionáveis
 
-Diferentemente dos demais produtos, os produtos não selecionáveis devem ser
-escolhidos através das submodalidades de crédito definidas pelo OBB durante
-a aprovação de um consentimento de compartilhamento de dados. Uma tabela com
-as submodalidades pode ser encontrada logo abaixo.
-
-| Modalidade                        | Submodalidade                                      | Descrição                                                   |
-|---------------------------------- | -------------------------------------------------- | ----------------------------------------------------------- |
-| Adiantamento a depositantes       | Adiantamentos a depositantes                       | Adiantamentos a depositantes                                |
-| Empréstimos                       | Crédito pessoal - consignado                       | Crédito pessoal - com consignação em folha de pagam.        |
-| Empréstimos                       | Crédito pessoal - sem consignação                  | Crédito pessoal - sem consignação em folha de pagam.        |
-| Empréstimos                       | Home equity                                        | Home equity                                                 |
-| Empréstimos                       | MicroCrédito                                       | MicroCrédito produtivo orientado                            |
-| Empréstimos                       | Cheque especial                                    | Cheque especial                                             |
-| Empréstimos                       | Conta garantida                                    | Conta garantida                                             |
-| Empréstimos                       | Capital de giro                                    | Capital de giro com prazo de vencimento de até 365 dias     |
-| Empréstimos                       | Capital de giro                                    | Capital de giro com prazo de vencimento superior a 365 dias |
-| Empréstimos                       | Capital de giro                                    | Capital de giro com teto rotativo                           |
-| Direitos creditórios descontados  | Desconto de duplicatas                             | Desconto de duplicatas                                      |
-| Direitos creditórios descontados  | Desconto de cheques                                | Desconto de cheques                                         |
-| Direitos creditórios descontados  | Antecipação de recebí­veis de cartão de Crédito     | Antecipação de faturas de cartão de Crédito                 |
-| Direitos creditórios descontados  | Desconto de nota promissória                       | Outros direitos creditórios descontados                     |
-| Direitos creditórios descontados  | Desconto de nota promissória                       | Outros tí­tulos descontados                                  |
-| Financiamentos                    | Aquisições de bens móveis                          | Aquisição de bens - veículos automotores                    |
-| Financiamentos                    | Aquisições de bens móveis                          | Aquisição de bens - outros bens                             |
-| Financiamentos                    | MicroCrédito produtivo orientado                   | MicroCréditos                                               |
-| Financiamentos                    | Rurais                                             | Custeiro                                                    |
-| Financiamentos                    | Rurais                                             | Investimento                                                |
-| Financiamentos                    | Rurais                                             | Comercializaçãoo                                            |
-| Financiamentos                    | Rurais                                             | Industrialização                                            |
-| Financiamentos                    | Sistema Financeiro da Habilitação (SFH)            | Financiamento habitacional - SFH                            |
-| Financiamentos                    | Sistema Financeiro Imobiliário (SFI)               | Financiamento habitacional - exceto SFH                     |
-
-Mais informações sobre as submodalidades de créditos podem ser encontradas no
-[Guia de experiência](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/6128557/Guia+de+Experi+ncia+do+Usu+rio).
+Diferentemente dos demais produtos, os produtos não selecionáveis são
+compartilhados com base nas permissões fornecidas no consentimento
+de compartilhamento de dados. Portanto durante a aprovação do consentimento
+não é feita a seleção deles.
 
 ## Comando *error*
 
@@ -198,7 +168,6 @@ Banking ou erros inesperados conforme vemos na tabela a seguir.
 | CNPJ_MISMATCH   | CNPJ do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento              |
 | EXPIRED_CONSENT | Consentimento expirado                                                                            |
 | RESOURCE_MUST_CONTAIN_ID   | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID           |
-| SUBMODALITY_MUST_CONTAIN_ID   | Lista de submodalidades na aprovação do consentimento deve conter pelo menos um ID  |
 | GENERIC_ERROR   | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário |
 
 O comando `error` conclui a geração do consentimento. Nos casos

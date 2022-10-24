@@ -77,7 +77,6 @@ Vários cenários estão mockados e são acionados através das respectivas URLs
 | Hybrid-flow / CPF_MISMATCH na autenticação                | <http://localhost:3301/auth/auth?id=cpf>          |
 | Hybrid-flow / EXPIRED_CONSENT no link inicial             | <http://localhost:3301/auth/auth?id=expired>      |
 | Hybrid-flow / RESOURCE_MUST_CONTAIN_ID na confirmação     | <http://localhost:3301/auth/auth?id=resource>     |
-| Hybrid-flow / SUBMODALITY_MUST_CONTAIN_ID na confirmação  | <http://localhost:3301/auth/auth?id=submodality>  |
 | Hybrid-flow / GENERIC_ERROR no link inicial               | <http://localhost:3301/auth/auth?id=generic>      |
 
 Para executar o mock basta importar o JSON na ferramenta Mockoon e iniciar o
