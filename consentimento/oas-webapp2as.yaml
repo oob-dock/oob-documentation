@@ -338,6 +338,7 @@ components:
             - CPF_MISMATCH
             - CNPJ_MISMATCH
             - EXPIRED_CONSENT
+            - INVALID_SESSION
             - RESOURCE_MUST_CONTAIN_ID
             - GENERIC_ERROR
         message:
