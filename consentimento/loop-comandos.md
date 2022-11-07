@@ -162,14 +162,15 @@ Indica a ocorrência de algum erro durante o fluxo de autenticação OIDC.
 O erro é descrito no comando, podendo ser erros conhecidos do processo do Open
 Banking ou erros inesperados conforme vemos na tabela a seguir.
 
-| Código do Erro  | Descrição                                                                                         |
-| --------------- | ------------------------------------------------------------------------------------------------- |
-| CPF_MISMATCH    | CPF do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento               |
-| CNPJ_MISMATCH   | CNPJ do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento              |
-| EXPIRED_CONSENT | Consentimento expirado                                                                            |
-| INVALID_SESSION | Sessão não existe ou expirou devido ao tempo limite de 10 minutos                                 |
-| RESOURCE_MUST_CONTAIN_ID   | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID           |
-| GENERIC_ERROR   | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário |
+| Código do Erro             | Descrição                                                                                         |
+| -------------------------- | ------------------------------------------------------------------------------------------------- |
+| CPF_MISMATCH               | CPF do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento               |
+| CNPJ_MISMATCH              | CNPJ do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento              |
+| EXPIRED_CONSENT            | Consentimento expirado                                                                            |
+| INVALID_SESSION            | Sessão não existe ou expirou devido ao tempo limite de 10 minutos                                 |
+| RESOURCE_MUST_CONTAIN_ID   | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID                      |
+| DISCOVERY_ERROR            | Falha no processo de discovery                                                                    |
+| GENERIC_ERROR              | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário |
 
 O comando `error` conclui a geração do consentimento. Nos casos
 de handoff o aplicativo deve apenas exibir a mensagem de erro ao usuário e

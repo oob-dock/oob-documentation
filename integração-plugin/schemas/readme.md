@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2022-10-06 - v2.9.0
+
+- Payment
+  - Torna obrigatório o campo endToEndId no schema de criação de pagamento
+
 ### 2022-09-02 - v2.8.0
 
 - Payment

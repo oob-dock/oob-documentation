@@ -1,5 +1,5 @@
 {
-  "uuid": "4626cd35-0b77-4fe1-a7b8-addc6afbe72e",
+  "uuid": "8f2856cd-d05e-4352-afe3-9eaf5208a2a5",
   "lastMigration": 24,
   "name": "OOB Authorization Server Apps API",
   "endpointPrefix": "auth",
@@ -8,13 +8,13 @@
   "hostname": "0.0.0.0",
   "routes": [
     {
-      "uuid": "29170995-f212-45f7-b46e-9629559c1e44",
+      "uuid": "9ed9c462-b145-4c8f-a659-22dde7bc9fb3",
       "documentation": "Início do fluxo de autenticação por TPPs",
       "method": "get",
       "endpoint": "auth",
       "responses": [
         {
-          "uuid": "1cb9913b-e60f-4dad-9eab-1e62f23a392e",
+          "uuid": "90ddd4e1-95bb-4ca2-b40b-cf16f91c62ee",
           "body": "{\n  \"code\": 404,\n  \"message\": \"Command not found\"\n}",
           "latency": 0,
           "statusCode": 404,
@@ -36,7 +36,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "e3ad02fa-8b49-4909-a025-86932570ec60",
+          "uuid": "01e4db5b-5fae-4bb8-8bf8-cec55c11cd7e",
           "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"standard-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -66,7 +66,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "075870e9-5c0c-47b6-9a72-d0e5e5cd365a",
+          "uuid": "e86d1f3f-5b48-4941-907e-537638b0283f",
           "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"generic-error\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"GENERIC_ERROR\",\n    \"message\": \"Isso é uma mensagem de erro\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -96,7 +96,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "9b2229a8-73dc-41d1-98a1-ee51498de95a",
+          "uuid": "2484cb88-95d6-4ab0-a21a-e1a7ed9613c7",
           "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"expired-consent\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"EXPIRED_CONSENT\",\n    \"message\": \"Expired consent\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -126,7 +126,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "ecbb8a68-f559-4228-8073-403fe40ea83c",
+          "uuid": "1d603a0f-07e9-41a0-bae1-6e2a4a015b03",
           "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -154,19 +154,49 @@
           "default": false,
           "databucketID": "",
           "bodyType": "INLINE"
+        },
+        {
+          "uuid": "e18fa892-0849-4cd4-b756-5e0bf922e313",
+          "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"discovery_error\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Error - Discovery error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "discovery",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
       "responseMode": null
     },
     {
-      "uuid": "2f0a2f39-10fc-4149-80e3-0b87bbadf6cc",
+      "uuid": "7043ad22-922a-4727-9c5b-f4de72b0c267",
       "documentation": "Início do fluxo de autenticação por QR",
       "method": "get",
       "endpoint": "app/commands/:id",
       "responses": [
         {
-          "uuid": "00b391c4-d5c0-45dd-b887-663ad9247570",
+          "uuid": "aba4e2d7-4a66-4107-848a-7d6e1592fd87",
           "body": "{\n  \"code\": 404,\n  \"message\": \"Command not found\"\n}",
           "latency": 0,
           "statusCode": 404,
@@ -188,7 +218,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "4b8460c5-2670-4d54-9e4e-d93577f58195",
+          "uuid": "c3622ead-f6ea-45cb-b9e8-5bf60e68df54",
           "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"handoff-happy-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -239,13 +269,13 @@
       "responseMode": null
     },
     {
-      "uuid": "644a2a28-8e01-4af5-8618-b3fec97e7580",
+      "uuid": "528ceb1c-d6f2-4929-9dd6-dcb3c2989940",
       "documentation": "Envia o resultado de um comando de autenticação para o OOB AS",
       "method": "put",
       "endpoint": "app/commands/:id/authentication",
       "responses": [
         {
-          "uuid": "762533b1-290b-4c88-8809-3d83b4da2065",
+          "uuid": "b2145ec6-55b8-48a3-806a-25f5fd02c06d",
           "body": "{\n  \"code\": 404,\n  \"message\": \"Command not found\"\n}",
           "latency": 0,
           "statusCode": 404,
@@ -267,7 +297,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "0423fc19-040d-4c12-b99a-b8d562dff342",
+          "uuid": "08ccb49f-1dc8-4ef0-9876-cea377105489",
           "body": "{\r\n    \"command\": \"consent\",\r\n    \"commandId\": \"{{urlParam 'id'}}-C\",\r\n    \"tpp\": {\r\n        \"name\": \"Opus GuiaBolsa\",\r\n        \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\r\n    },\r\n    \"consentCommand\": {\r\n        \"customerName\": \"João Maria José\",\r\n        \"brand\": {\r\n            \"name\": \"CBanco\",\r\n            \"logoUrl\": \"https://www.opus-software.com.br/wp-content/uploads/2019/01/opus_logo.png\"\r\n        },\r\n        \"consent\": {\r\n            \"type\": \"PAYMENT\",\r\n            \"brandId\": \"cbanco\",\r\n            \"creationDateTime\": \"{{now}}\",\r\n            \"tpp\": {\r\n                \"name\": \"GuiaBolsa\"\r\n            },\r\n            \"externalId\": \"urn:cbanco:de5f0e8a-9201-43a4-8497-673b58ce0a1c\",\r\n            \"loggedUser\": {\r\n                \"document\": {\r\n                    \"identification\": \"12312312333\",\r\n                    \"rel\": \"CPF\"\r\n                }\r\n            },\r\n            \"resources\": [\r\n                {\r\n                    \"id\": \"2994b3b7-fa7c-43d6-a7e1-ca2d30349938\",\r\n                    \"type\": \"PAYMENT\",\r\n                    \"name\": [\r\n                        {\r\n                            \"key\": \"Agencia\",\r\n                            \"value\": \"1234\"\r\n                        },\r\n                        {\r\n                            \"key\": \"Conta Corrente\",\r\n                            \"value\": \"12345-6\"\r\n                        }\r\n                    ],\r\n                    \"balanceCurrency\": \"BRL\",\r\n                    \"balanceAmount\": 5239.12,\r\n                    \"hasMultipleAuthorisers\": false\r\n                }\r\n            ],\r\n            \"expirationDateTime\": \"{{dateTimeShift date=(now) minutes=5}}\",\r\n            \"creditor\": {\r\n                \"personType\": \"PESSOA_NATURAL\",\r\n                \"cpfCnpj\": \"00000000191\",\r\n                \"name\": \"Marco Antonio de Brito\"\r\n            },\r\n            \"payment\": {\r\n                \"type\": \"PIX\",\r\n                \"date\": \"{{now 'yyyy-MM-dd'}}\",\r\n                \"currency\": \"BRL\",\r\n                \"amount\": \"218.12\",\r\n                \"ibgeTownCode\": \"5300108\",\r\n                \"details\": {\r\n                    \"localInstrument\": \"DICT\",\r\n                    \"qrCode\": \"00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012\\nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\\n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\\nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\\n\",\r\n                    \"proxy\": \"12345678901\",\r\n                    \"creditorAccount\": {\r\n                        \"ispb\": \"12345678\",\r\n                        \"issuer\": \"1774\",\r\n                        \"number\": \"1234567890\",\r\n                        \"accountType\": \"CACC\"\r\n                    }\r\n                }\r\n            },\r\n            \"debtorAccount\": {\r\n                \"ispb\": \"12345678\",\r\n                \"issuer\": \"1774\",\r\n                \"number\": \"1234567890\",\r\n                \"accountType\": \"CACC\"\r\n            }\r\n        }\r\n    }\r\n}",
           "latency": 0,
           "statusCode": 200,
@@ -304,7 +334,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "74b9e41d-cb22-4a80-a453-983e2096c511",
+          "uuid": "32478a1a-4b5b-4749-8c52-fbb14b03d1c1",
           "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"cpf-mismatch\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"CPF_MISMATCH\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -355,13 +385,13 @@
       "responseMode": null
     },
     {
-      "uuid": "ffde21a2-4d0c-4e5c-be45-fa27759f2f3b",
+      "uuid": "c066dc6f-823c-462c-9225-bb6857bf4f52",
       "documentation": "Envia o resultado de um comando de consentimento para o OOB AS",
       "method": "put",
       "endpoint": "app/commands/:id/consent",
       "responses": [
         {
-          "uuid": "43c6ec18-721d-4903-84da-cca668a85624",
+          "uuid": "74ef4e2e-7c0f-4632-9df1-ca27f4c2ebf0",
           "body": "{\n  \"code\": 404,\n  \"message\": \"Command not found\"\n}",
           "latency": 0,
           "statusCode": 404,
@@ -383,7 +413,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "3fdc73ef-927a-4449-881c-4bda3f66daf8",
+          "uuid": "4c0c4200-b9d8-4b37-9388-cbe3517af0a8",
           "body": "{\n  \"command\": \"completed\",\n  \"commandId\": \"f217c8c0-fe89-45eb-8067-aff63842f9c3\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"completedCommand\": {\n    \"redirect\": {\n      \"isHandOff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,
@@ -413,7 +443,7 @@
           "bodyType": "INLINE"
         },
         {
-          "uuid": "077aea62-5d49-486e-9584-38ed43437ab1",
+          "uuid": "ba7d0de0-81e5-4b75-8881-055978f0a969",
           "body": "{\n  \"command\": \"completed\",\n  \"commandId\": \"f217c8c0-fe89-45eb-8067-aff63842f9c3\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"completedCommand\": {\n    \"redirect\": {\n      \"isHandOff\": true\n    }\n  }\n}",
           "latency": 0,
           "statusCode": 200,

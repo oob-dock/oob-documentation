@@ -352,3 +352,52 @@ Legenda das colunas apresentadas na tabela
 | con_error        | Falha de redirecionamentos ao Iniciador com a confirmação do pagamento                |
 | num_client_count | Número de clientes atendidos desde a '<data-inicial>' definida até as datas indicadas |
 | accum_value      | Valor acumulado desde a '<data-inicial>' até as datas indicadas                       |
+
+### (NOVA ADEQUADAÇÃO) Quantidade de clientes PF/PJ, valor total e quantidade de operações em um dado período.
+
+- Quantidade de clientes únicos pessoas físicas que tiveram ao menos uma operação, de qualquer tipo/modalidade, com sucesso.
+- Valor, em R$, acumulado, de todas as operações com sucesso.
+Quantidade de operações realizadas com sucesso.
+
+```sql
+-- Consulta avulsa
+SELECT count(distinct sha_person_document_number)   "Clientes únicos PF total",
+       count(distinct sha_business_document_number) "Clientes únicos PJ",
+       sum(c.vl_payment) AS                         "Valor das operações",
+       count(c.id)                                  "Qtde de operações"
+FROM consent c
+WHERE dt_creation >= :initial_date
+  AND dt_creation <= :final_date
+  AND c.tp_payment = 1
+  AND EXISTS(SELECT 1 FROM history_status hs WHERE c.id = hs.id_consent and hs.status_consent = 6);
+```
+
+```sql
+-- Função
+CREATE OR REPLACE FUNCTION RELATORIO_SEMANAL_DETENTOR_FASE3_2(start_date DATE, end_date DATE)
+    RETURNS TABLE
+            (
+                "Clientes únicos PF total" BIGINT,
+                "Clientes únicos PJ"       BIGINT,
+                "Valor das operações"      DECIMAL,
+                "Qtde de operações"        BIGINT
+            )
+as
+$$
+BEGIN
+    RETURN QUERY SELECT count(distinct sha_person_document_number)   "Clientes únicos PF total",
+                        count(distinct sha_business_document_number) "Clientes únicos PJ",
+                        sum(c.vl_payment) AS                         "Valor das operações",
+                        count(c.id)                                  "Qtde de operações"
+                 FROM consent c
+                 WHERE dt_creation >= start_date
+                   AND dt_creation <= end_date
+                   AND c.tp_payment = 1
+                   AND EXISTS(SELECT 1 FROM history_status hs WHERE c.id = hs.id_consent and hs.status_consent = 6);
+END
+$$ LANGUAGE plpgsql;
+
+SELECT *
+FROM RELATORIO_SEMANAL_DETENTOR_FASE3_2(:initial_date, :final_date);
+```
+
