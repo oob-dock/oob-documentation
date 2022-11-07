@@ -6,13 +6,13 @@ Open Banking Brasil:
 
 &nbsp;
 
-- [Dados Cadastrais](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/6127799/API+-+Dados+Cadastrais)
-- [Cartão de Crédito](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/9634015/API+-+Cart+o+de+Cr+dito)
-- [Contas](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1671640/API+-+Contas)
-- [Operações de Crédito - Empréstimos](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1638863/API+-+Opera+es+de+Cr+dito+-+Empr+stimos)
-- [Operações de Crédito - Financiamentos](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1638904/API+-+Opera+es+de+Cr+dito+-+Financiamento)
-- [Operações de Crédito - Adiantamento a Depositantes](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/6128078/API+-+Opera+es+de+Cr+dito+-+Adiantamento+a+Depositantes)
-- [Operações de Crédito - Direitos Creditórios Descontados](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1737642/API+-+Opera+es+de+Cr+dito+-+Direitos+Credit+rios+Descontados)
+- [Dados Cadastrais](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17370003/API+-+Dados+Cadastrais)
+- [Cartão de Crédito](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17370864/API+-+Cart+o+de+Cr+dito)
+- [Contas](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17371726/API+-+Contas)
+- [Operações de Crédito - Empréstimos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17372520/API+-+Opera+es+de+Cr+dito+-+Empr+stimos)
+- [Operações de Crédito - Financiamentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17373362/API+-+Opera+es+de+Cr+dito+-+Financiamento)
+- [Operações de Crédito - Adiantamento a Depositantes](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17374226/API+-+Opera+es+de+Cr+dito+-+Adiantamento+a+Depositantes)
+- [Operações de Crédito - Direitos Creditórios Descontados](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17375055/API+-+Opera+es+de+Cr+dito+-+Direitos+Credit+rios+Descontados)
 
 &nbsp;
 
