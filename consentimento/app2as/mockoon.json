@@ -1,6 +1,6 @@
 {
   "uuid": "4626cd35-0b77-4fe1-a7b8-addc6afbe72e",
-  "lastMigration": 20,
+  "lastMigration": 24,
   "name": "OOB Authorization Server Apps API",
   "endpointPrefix": "auth",
   "latency": 0,
@@ -31,7 +31,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "e3ad02fa-8b49-4909-a025-86932570ec60",
@@ -52,13 +54,16 @@
               "target": "query",
               "modifier": "id",
               "value": "standard",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "075870e9-5c0c-47b6-9a72-d0e5e5cd365a",
@@ -79,13 +84,16 @@
               "target": "query",
               "modifier": "id",
               "value": "generic",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "9b2229a8-73dc-41d1-98a1-ee51498de95a",
@@ -106,13 +114,16 @@
               "target": "query",
               "modifier": "id",
               "value": "expired",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "ecbb8a68-f559-4228-8073-403fe40ea83c",
@@ -133,18 +144,20 @@
               "target": "query",
               "modifier": "id",
               "value": "cpf",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "2f0a2f39-10fc-4149-80e3-0b87bbadf6cc",
@@ -170,7 +183,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "4b8460c5-2670-4d54-9e4e-d93577f58195",
@@ -191,13 +206,16 @@
               "target": "params",
               "modifier": "id",
               "value": "handoff",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "4e6d0a12-3f8a-42d8-af8e-83e2eb990fce",
@@ -212,12 +230,13 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "644a2a28-8e01-4af5-8618-b3fec97e7580",
@@ -243,7 +262,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "0423fc19-040d-4c12-b99a-b8d562dff342",
@@ -264,19 +285,23 @@
               "target": "params",
               "modifier": "id",
               "value": "standard-happy-flow",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             },
             {
               "target": "params",
               "modifier": "id",
               "value": "handoff-happy-flow",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "74b9e41d-cb22-4a80-a453-983e2096c511",
@@ -297,13 +322,16 @@
               "target": "params",
               "modifier": "id",
               "value": "cpf-error-flow",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "95bf0210-4060-488a-b12c-daad3f0c3dc1",
@@ -318,12 +346,13 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     },
     {
       "uuid": "ffde21a2-4d0c-4e5c-be45-fa27759f2f3b",
@@ -349,7 +378,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "3fdc73ef-927a-4449-881c-4bda3f66daf8",
@@ -370,13 +401,16 @@
               "target": "params",
               "modifier": "id",
               "value": "standard-happy-flow-C",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "077aea62-5d49-486e-9584-38ed43437ab1",
@@ -397,13 +431,16 @@
               "target": "params",
               "modifier": "id",
               "value": "handoff-happy-flow-C",
-              "operator": "equals"
+              "operator": "equals",
+              "invert": false
             }
           ],
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "0d0a24ac-d76e-4303-b604-c061f2e36226",
@@ -418,12 +455,13 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
-      "randomResponse": false,
-      "sequentialResponse": false
+      "responseMode": null
     }
   ],
   "proxyMode": false,
@@ -451,5 +489,6 @@
     "keyPath": "",
     "caPath": "",
     "passphrase": ""
-  }
+  },
+  "data": []
 }

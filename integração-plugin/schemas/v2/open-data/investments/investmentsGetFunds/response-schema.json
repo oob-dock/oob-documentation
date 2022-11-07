@@ -1,0 +1,383 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "participant",
+          "name",
+          "cnpjNumber",
+          "admin",
+          "fundManager",
+          "anbimaCategory",
+          "generalConditions",
+          "taxation",
+          "fees"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "participant": {
+            "type": "object",
+            "description": "Conjunto de informações relativas ao participante do produto de open banking",
+            "required": [
+              "brand",
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "brand": {
+                "type": "string",
+                "description": "Nome da marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.",
+                "maxLength": 80,
+                "example": "Organização"
+              },
+              "name": {
+                "type": "string",
+                "description": "Nome do participante do Open Banking.",
+                "maxLength": 80,
+                "example": "Organização A1"
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                "pattern": "^\\d{14}$",
+                "example": "13456789000112"
+              },
+              "urlComplementaryList": {
+                "type": "string",
+                "maxLength": 1024,
+                "pattern": "^(https?:\\/\\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)$",
+                "example": "https://empresaa1.com/companies"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "description": "Nome oficial do fundo de investimento.",
+            "maxLength": 250,
+            "example": "FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO"
+          },
+          "cnpjNumber": {
+            "type": "string",
+            "description": "CNPJ do fundo de investimento.",
+            "maxLength": 14,
+            "pattern": "^\\d{14}$",
+            "example": "64108803000191"
+          },
+          "isinCode": {
+            "type": "string",
+            "description": "Código universal que identifica cada valor mobiliário ou instrumento financeiro, conforme Norma ISO 6166.<br><br>DEFINIÇÃO&#58;O ISIN (International Securities Identification Number) é um código que identifica um valor mobiliário, conforme a norma ISO 6166.<br>ESTRUTURA<br>O ISIN é um código alfanumérico que possui 12 caracteres com a seguinte estrutura&#58;<ul><li>um prefixo, composto de 2 caracteres alfa, que identifica o código do país (Norma ISO 3166);</li><li>o número básico, composto de 9 caracteres alfabéticos ou numéricos em sua extensão;</li><li>um dígito numérico de controle.</li></ul>",
+            "maxLength": 12,
+            "pattern": "^[A-Z]{2}([A-Z0-9]){9}\\d{1}$",
+            "example": "BRAAAAAAA000"
+          },
+          "admin": {
+            "type": "object",
+            "required": [
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Razão social da pessoa jurídica autorizada pela CVM para o exercício de administrador de carteiras de valores mobiliários e responsável pela administração do fundo.",
+                "maxLength": 100,
+                "example": "ADM OPEN BANKING DTVM S.A."
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "CNPJ do administrador.",
+                "maxLength": 14,
+                "pattern": "^\\d{14}$",
+                "example": "14511732000150"
+              }
+            }
+          },
+          "fundManager": {
+            "type": "object",
+            "required": [
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Pessoa natural ou jurídica responsável pela gestão profissional dos ativos da carteira de valores mobiliários autorizado pela CVM.",
+                "maxLength": 100,
+                "example": "GESTOR OPEN BANKING DTVM S.A."
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "CNPJ do gestor do fundo de investimento.",
+                "maxLength": 14,
+                "pattern": "^\\d{14}$",
+                "example": "16332711000101"
+              }
+            }
+          },
+          "anbimaCategory": {
+            "type": "string",
+            "description": "Conforme classificação ANBIMA, que segue a deliberação 77 da ANBIMA.<br><ol><li>Renda Fixa</li><li>Ações</li><li>Multimercado</li><li>Cambial</li></ol><br><br> [https://www.anbima.com.br/data/files/5A/44/2C/B7/8411B510CD3B4DA568A80AC2/DeliberacaoN77-Diretriz-de-Classificacao-de-Fundos.pdf](https://www.anbima.com.br/data/files/5A/44/2C/B7/8411B510CD3B4DA568A80AC2/DeliberacaoN77-Diretriz-de-Classificacao-de-Fundos.pdf)",
+            "maxLength": 12,
+            "enum": [
+              "RENDA_FIXA",
+              "ACOES",
+              "MULTIMERCADO",
+              "CAMBIAL"
+            ],
+            "example": "MULTIMERCADO"
+          },
+          "fees": {
+            "type": "object",
+            "required": [
+              "maxAdminFee"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "maxAdminFee": {
+                "type": "string",
+                "description": "Taxa máxima cobrada para remunerar o administrador e os demais prestadores de serviços do fundo. Caso não haja a difererença de Máximo e Mínimo, considerar a taxa de administração do fundo.",
+                "minLength": 3,
+                "maxLength": 8,
+                "pattern": "^\\d{1}\\.\\d{1,6}$",
+                "example": "0.020000"
+              },
+              "entryFee": {
+                "type": "string",
+                "description": "Taxa cobrada no momento da aplicação, que incide sobre o valor investido no fundo.",
+                "minLength": 3,
+                "maxLength": 8,
+                "pattern": "^\\d{1}\\.\\d{1,6}$",
+                "example": "0.010000"
+              },
+              "performanceFee": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "method": {
+                    "type": "string",
+                    "description": "Metodologia do campo para taxa de performance.<br><ol><li>Passivo</li><li>Ativo</li><li>Ajuste</li></ol>",
+                    "maxLength": 7,
+                    "enum": [
+                      "PASSIVO",
+                      "ATIVO",
+                      "AJUSTE"
+                    ],
+                    "example": "PASSIVO"
+                  },
+                  "benchmark": {
+                    "type": "string",
+                    "description": "Índice utilizado como referência para avaliação de desempenho do fundo de investimento.<br><br>Em linha com padronização na listagem de fundos da ANBIMA, com opção “outros”, permitindo campo livre caso a opção não seja previamente fornecida. Listagem de benchmark disponível no link https://data.anbima.com.br/fundos , opção Características > Benchmark",
+                    "enum": [
+                      "CDI",
+                      "IBOVESPA_FECHAMENTO",
+                      "IBOVESPA",
+                      "IMA_B",
+                      "IBRX",
+                      "IPCA",
+                      "IMA_B_5",
+                      "DOLAR_PTAX",
+                      "IBRX_100",
+                      "TAXA_SELIC",
+                      "IMA_B_5_PLUS",
+                      "IBOVESPA_MEDIO",
+                      "IRF_M",
+                      "IMA_GERAL",
+                      "INPC",
+                      "IGP_M",
+                      "SMLL_SMALL_CAP",
+                      "IDA_IPCA",
+                      "ISE",
+                      "IRF_M_1",
+                      "IBRX_50",
+                      "IDIV_DIVIDENDOS",
+                      "IFIX",
+                      "GLOBAL_BDRX",
+                      "IMA_S",
+                      "IDKA_IPCA_2A",
+                      "IRF_M_1_PLUS",
+                      "OUTROS"
+                    ],
+                    "example": "CDI"
+                  },
+                  "benchmarkAdditionalInfo": {
+                    "type": "string",
+                    "description": "Campo a ser preenchido pelas participantes quando houver ‘Outros’ no campo ‘Taxa de Performance - Benchmark’."
+                  },
+                  "amount": {
+                    "type": "string",
+                    "description": "Taxa cobrada do fundo em função de resultado conforme regras dispostas no regulamento do fundo.",
+                    "minLength": 3,
+                    "maxLength": 8,
+                    "pattern": "^\\d{1}\\.\\d{1,6}$",
+                    "example": "0.050000"
+                  }
+                }
+              },
+              "exitFee": {
+                "type": "string",
+                "description": "Taxa paga pelo cotista ao resgatar recursos de um fundo.",
+                "minLength": 3,
+                "maxLength": 8,
+                "pattern": "^\\d{1}\\.\\d{1,6}$",
+                "example": "0.030000"
+              }
+            }
+          },
+          "generalConditions": {
+            "type": "object",
+            "required": [
+              "minimumAmount",
+              "redemption",
+              "application",
+              "fundQuotaType"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "minimumAmount": {
+                "type": "object",
+                "required": [
+                  "value",
+                  "currency"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "value": {
+                    "type": "string",
+                    "description": "Valor mínimo do primeiro aporte.",
+                    "minLength": 4,
+                    "maxLength": 19,
+                    "pattern": "^\\d{1,16}\\.\\d{2}$",
+                    "example": "100000.12"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "pattern": "^[A-Z]{3}$",
+                    "maxLength": 3,
+                    "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                    "example": "BRL"
+                  }
+                }
+              },
+              "redemption": {
+                "type": "object",
+                "required": [
+                  "quotationDays",
+                  "quotationTerm",
+                  "paymentDays",
+                  "paymentTerm"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "quotationDays": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Prazo em dias indicada no regulamento do fundo para a conversão das cotas em dinheiro.",
+                    "minimum": -2147483648,
+                    "example": 3,
+                    "maximum": 2147483647
+                  },
+                  "quotationTerm": {
+                    "type": "string",
+                    "description": "Período em dias corridos ou dias úteis do prazo de cotização.<br><br><ol><li>Dias corridos</li><li>Dias úteis</li></ol>",
+                    "maxLength": 13,
+                    "enum": [
+                      "DIAS_CORRIDOS",
+                      "DIAS_UTEIS"
+                    ],
+                    "example": "DIAS_CORRIDOS"
+                  },
+                  "paymentDays": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Prazo em dias do efetivo pagamento, pelo fundo, do valor líquido devido ao cotista que efetuou pedido de resgate.",
+                    "example": 3,
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  },
+                  "paymentTerm": {
+                    "type": "string",
+                    "description": "Período em dias corridos ou dias úteis do prazo de cotização.<br><br><ol><li>Dias corridos</li><li>Dias úteis</li></ol>",
+                    "maxLength": 13,
+                    "enum": [
+                      "DIAS_CORRIDOS",
+                      "DIAS_UTEIS"
+                    ],
+                    "example": "DIAS_CORRIDOS"
+                  },
+                  "graceDays": {
+                    "description": "Estabelece um período em quantidade de dias corridos em que o investidor não pode resgatar os recursos aplicados no fundo. Caso ocorra resgate antes do período, o investidor perderá a rentabilidade do período. Caso não exista, não informe o campo.",
+                    "example": 365,
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": -2147483648,
+                    "maximum": 2147483647
+                  }
+                }
+              },
+              "application": {
+                "type": "object",
+                "required": [
+                  "quotationDays",
+                  "quotationTerm"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "quotationDays": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Prazo em dias indicado no regulamento do fundo para a conversão do dinheiro em cotas do fundo.",
+                    "minimum": -2147483648,
+                    "example": 60,
+                    "maximum": 2147483647
+                  },
+                  "quotationTerm": {
+                    "type": "string",
+                    "description": "Período em dias corridos ou dias úteis do prazo de cotização.<br><br><ol><li>Dias corridos</li><li>Dias úteis</li></ol>",
+                    "maxLength": 13,
+                    "enum": [
+                      "DIAS_CORRIDOS",
+                      "DIAS_UTEIS"
+                    ],
+                    "example": "DIAS_CORRIDOS"
+                  }
+                }
+              },
+              "fundQuotaType": {
+                "type": "string",
+                "description": "Referente a incidência de tributos sobre o produto de investimento&#58;<br><br><ol><li>Cota de abertura</li><li>Cota de fechamento</li></ol>",
+                "maxLength": 18,
+                "enum": [
+                  "COTA_ABERTURA",
+                  "COTA_FECHAMENTO"
+                ],
+                "example": "COTA_ABERTURA"
+              }
+            }
+          },
+          "taxation": {
+            "type": "string",
+            "description": "Indica o tipo de tributação, podendo ser&#58;<br><ol><li>Curto prazo</li><li>Longo prazo</li><li>Variável</li></ol>",
+            "maxLength": 11,
+            "enum": [
+              "CURTO_PRAZO",
+              "LONGO_PRAZO",
+              "VARIAVEL"
+            ],
+            "example": "CURTO_PRAZO"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

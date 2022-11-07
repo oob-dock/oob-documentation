@@ -150,7 +150,7 @@ Schema baseado no `errorCommand` da interface APP2AS:
 | ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `tpp.name`                         | Nome do TPP para exibição na tela de retorno.                                                                           |
 | `tpp.logoUrl`                      | URL com o logotipo do TPP para exibição na tela de retorno                                                              |
-| `errorCommand.type`                | Tipo do erro. Mesmo `enum` do APP2AS: `CPF_MISMATCH`, `CNPJ_MISMATCH`, `EXPIRED_CONSENT`, `GENERIC_ERROR`, `OIDC_ERROR` |
+| `errorCommand.type`                | Tipo do erro. Mesmo `enum` do APP2AS: `CPF_MISMATCH`, `CNPJ_MISMATCH`, `EXPIRED_CONSENT`, `RESOURCE_MUST_CONTAIN_ID`, `GENERIC_ERROR`, `OIDC_ERROR` |
 | `errorCommand.message`             | Mensagem de erro para exibir ao usuário na tela de retorno                                                              |
 | `errorCommand.redirect.redirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário                                                   |
 

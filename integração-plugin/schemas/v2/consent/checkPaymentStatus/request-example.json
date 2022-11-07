@@ -8,5 +8,21 @@
             "key": "internalPaymentId",
             "value": "1409390B569CB4ADB3A34BEA7D4C1CA763BF26E0FE37CBAE1ABE4E115EC73318"
         }
-    ]
+    ],
+    "paymentUserInfo": {
+        "loggedUser": {
+            "document": {
+                "identification": "10745445527",
+                "rel": "CPF"
+            }
+        },
+        "businessEntity": {
+            "businessEntity": {
+                "document": {
+                    "identification": "33328541000100",
+                    "rel": "CNPJ"
+                }
+            }
+        }
+    }
 }
