@@ -1,6 +1,6 @@
 {
   "uuid": "8f2856cd-d05e-4352-afe3-9eaf5208a2a5",
-  "lastMigration": 22,
+  "lastMigration": 24,
   "name": "OOB Authorization Server Apps API",
   "endpointPrefix": "auth",
   "latency": 0,
@@ -31,7 +31,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "01e4db5b-5fae-4bb8-8bf8-cec55c11cd7e",
@@ -59,7 +61,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "e86d1f3f-5b48-4941-907e-537638b0283f",
@@ -87,7 +91,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "2484cb88-95d6-4ab0-a21a-e1a7ed9613c7",
@@ -115,7 +121,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "1d603a0f-07e9-41a0-bae1-6e2a4a015b03",
@@ -143,7 +151,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "e18fa892-0849-4cd4-b756-5e0bf922e313",
@@ -171,7 +181,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
@@ -201,7 +213,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "c3622ead-f6ea-45cb-b9e8-5bf60e68df54",
@@ -229,7 +243,26 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "4e6d0a12-3f8a-42d8-af8e-83e2eb990fce",
+          "body": "{\r\n    \"command\": \"error\",\r\n    \"commandId\": \"invalid-session\",\r\n    \"tpp\": {\r\n        \"name\": \"Opus GuiaBolsa\",\r\n        \"logoUrl\": \"https://opus-open-banking.s3.sa-east-1.amazonaws.com/opus-redondo.svg\"\r\n    },\r\n    \"errorCommand\": {\r\n        \"redirect\": {},\r\n        \"type\": \"INVALID_SESSION\",\r\n        \"message\": \"Session does not exist or expired\"\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Session not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
@@ -259,7 +292,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "08ccb49f-1dc8-4ef0-9876-cea377105489",
@@ -294,7 +329,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "32478a1a-4b5b-4749-8c52-fbb14b03d1c1",
@@ -322,7 +359,26 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "95bf0210-4060-488a-b12c-daad3f0c3dc1",
+          "body": "{\r\n    \"command\": \"error\",\r\n    \"commandId\": \"invalid-session\",\r\n    \"tpp\": {\r\n        \"name\": \"Opus GuiaBolsa\",\r\n        \"logoUrl\": \"https://opus-open-banking.s3.sa-east-1.amazonaws.com/opus-redondo.svg\"\r\n    },\r\n    \"errorCommand\": {\r\n        \"redirect\": {},\r\n        \"type\": \"INVALID_SESSION\",\r\n        \"message\": \"Session does not exist or expired\"\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Session not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
@@ -352,7 +408,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": true
+          "default": true,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "4c0c4200-b9d8-4b37-9388-cbe3517af0a8",
@@ -380,7 +438,9 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         },
         {
           "uuid": "ba7d0de0-81e5-4b75-8881-055978f0a969",
@@ -408,7 +468,26 @@
           "rulesOperator": "OR",
           "disableTemplating": false,
           "fallbackTo404": false,
-          "default": false
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
+          "uuid": "0d0a24ac-d76e-4303-b604-c061f2e36226",
+          "body": "{\r\n    \"command\": \"error\",\r\n    \"commandId\": \"invalid-session\",\r\n    \"tpp\": {\r\n        \"name\": \"Opus GuiaBolsa\",\r\n        \"logoUrl\": \"https://opus-open-banking.s3.sa-east-1.amazonaws.com/opus-redondo.svg\"\r\n    },\r\n    \"errorCommand\": {\r\n        \"redirect\": {},\r\n        \"type\": \"INVALID_SESSION\",\r\n        \"message\": \"Session does not exist or expired\"\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Session not found",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
@@ -440,5 +519,6 @@
     "keyPath": "",
     "caPath": "",
     "passphrase": ""
-  }
+  },
+  "data": []
 }
