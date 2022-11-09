@@ -146,6 +146,49 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/consents/v2/active:
+    get:
+      tags:
+      - Consents Opus Open Banking
+      description: Get active consents for a given time frame
+      parameters:
+      - name: endDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T18:31:28Z
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 0
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      - name: startDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentListSchema'
   /open-banking/oob-consents/payments/v1/consents/{consentId}:
     patch:
       tags:
@@ -921,6 +964,56 @@ components:
           - $ref: '#/components/schemas/StatusEnum'
           - example: REVOKED
             nullable: false
+    ResponseConsentListSchema:
+      type: object
+      properties:
+        data:
+          description: Service execution response
+          type: array
+          items:
+            $ref: '#/components/schemas/Consent'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - description: Meta records information
+    Consent:
+      type: object
+      properties:
+        consentId:
+          description: The consentId is the consent's unique identifier and must be
+            a URN - Uniform Resource Name
+          type: string
+          example: urn:amazingbank:899dd8b2-34d1-4c75-b8de-f0ffa51ca720
+        creationDateTime:
+          format: date-time
+          type: string
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        statusUpdateDateTime:
+          format: date-time
+          type: string
+        permissions:
+          type: array
+          items:
+            type: string
+          example:
+          - ACCOUNTS_READ
+          - CREDIT_CARDS_ACCOUNTS_READ
+        expirationDateTime:
+          format: date-time
+          type: string
+        personDocumentType:
+          type: string
+        personDocumentNumber:
+          type: string
+        businessEntityDocumentNumber:
+          type: string
+        businessEntityDocumentType:
+          type: string
     RevokeDataSharingConsentData:
       required:
       - revocation
