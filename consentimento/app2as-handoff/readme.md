@@ -146,13 +146,13 @@ Schema baseado no `errorCommand` da interface APP2AS:
 }
 ```
 
-| Propriedade                        | Descrição                                                                                                                                                              |
-| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tpp.name`                         | Nome do TPP para exibição na tela de retorno.                                                                                                                          |
-| `tpp.logoUrl`                      | URL com o logotipo do TPP para exibição na tela de retorno                                                                                                             |
+| Propriedade                        | Descrição                                                                                                                                                                                                              |
+| ---------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tpp.name`                         | Nome do TPP para exibição na tela de retorno.                                                                                                                                                                          |
+| `tpp.logoUrl`                      | URL com o logotipo do TPP para exibição na tela de retorno                                                                                                                                                             |
 | `errorCommand.type`                | Tipo do erro. Mesmo `enum` do APP2AS: `CPF_MISMATCH`, `CNPJ_MISMATCH`, `EXPIRED_CONSENT`, `RESOURCE_MUST_CONTAIN_ID`, `GENERIC_ERROR`, `OIDC_ERROR`, `DISCOVERY_ERROR`, `RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS` |
-| `errorCommand.message`             | Mensagem de erro para exibir ao usuário na tela de retorno                                                                                                             |
-| `errorCommand.redirect.redirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário                                                                                                  |
+| `errorCommand.message`             | Mensagem de erro para exibir ao usuário na tela de retorno                                                                                                                                                             |
+| `errorCommand.redirect.redirectTo` | URL para redirecionamento após exibição da tela de retorno ao usuário                                                                                                                                                  |
 
 As informações `tpp.name`, `tpp.logoUrl`, `errorCommand.message` e
 `errorCommand.redirect.redirectTo` podem não estar presentes no retorno.
