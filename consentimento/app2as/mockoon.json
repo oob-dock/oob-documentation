@@ -126,6 +126,36 @@
           "bodyType": "INLINE"
         },
         {
+          "uuid": "38043b44-c34e-4e1c-989f-26a626237cb0",
+          "body": "{\n  \"command\": \"error\",\n  \"commandId\": \"resource-must-contain-id-selectable-products\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"errorCommand\": {\n    \"type\": \"RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS\",\n    \"message\": \"SelectedResources must contain at least one id for each selectable product\",\n    \"redirect\": {\n      \"isHandoff\": false,\n      \"redirectTo\": \"https://www.opus-software.com.br/\"\n    }\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Error - Resource must contain id selectable products",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "resource",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
+        },
+        {
           "uuid": "1d603a0f-07e9-41a0-bae1-6e2a4a015b03",
           "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"cpf-error-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
           "latency": 0,
