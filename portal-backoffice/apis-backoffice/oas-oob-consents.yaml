@@ -162,7 +162,7 @@ paths:
         in: query
         schema:
           format: int32
-          default: 0
+          default: 1
           type: integer
       - name: page-size
         in: query
@@ -971,7 +971,7 @@ components:
           description: Service execution response
           type: array
           items:
-            $ref: '#/components/schemas/Consent'
+            $ref: '#/components/schemas/ActiveConsent'
         links:
           allOf:
           - $ref: '#/components/schemas/Links'
@@ -979,8 +979,7 @@ components:
         meta:
           allOf:
           - $ref: '#/components/schemas/Meta'
-          - description: Meta records information
-    Consent:
+    ActiveConsent:
       type: object
       properties:
         consentId:
@@ -988,31 +987,26 @@ components:
             a URN - Uniform Resource Name
           type: string
           example: urn:amazingbank:899dd8b2-34d1-4c75-b8de-f0ffa51ca720
-        creationDateTime:
-          format: date-time
-          type: string
-        status:
-          $ref: '#/components/schemas/StatusEnum'
-        statusUpdateDateTime:
-          format: date-time
-          type: string
-        permissions:
-          type: array
-          items:
-            type: string
-          example:
-          - ACCOUNTS_READ
-          - CREDIT_CARDS_ACCOUNTS_READ
-        expirationDateTime:
-          format: date-time
-          type: string
         personDocumentType:
           type: string
+          example: CPF
         personDocumentNumber:
           type: string
-        businessEntityDocumentNumber:
+          example: "77721813700"
+        businessDocumentType:
           type: string
-        businessEntityDocumentType:
+          example: CNPJ
+        businessDocumentNumber:
+          type: string
+          example: "33273542000197"
+        createdOn:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        expirationDateTime:
+          format: date-time
           type: string
     RevokeDataSharingConsentData:
       required:
