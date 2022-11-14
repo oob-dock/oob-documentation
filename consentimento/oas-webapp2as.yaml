@@ -340,6 +340,7 @@ components:
             - EXPIRED_CONSENT
             - INVALID_SESSION
             - RESOURCE_MUST_CONTAIN_ID
+            - RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS
             - DISCOVERY_ERROR
             - GENERIC_ERROR
         message:
