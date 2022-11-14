@@ -338,6 +338,10 @@ components:
             - CPF_MISMATCH
             - CNPJ_MISMATCH
             - EXPIRED_CONSENT
+            - INVALID_SESSION
+            - RESOURCE_MUST_CONTAIN_ID
+            - RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS
+            - DISCOVERY_ERROR
             - GENERIC_ERROR
         message:
           type: string
@@ -530,10 +534,6 @@ components:
                 enum:
                   - ACCOUNT
                   - CREDIT_CARD_ACCOUNT
-                  - LOAN
-                  - FINANCING
-                  - UNARRANGED_ACCOUNT_OVERDRAFT
-                  - INVOICE_FINANCING
                   - PAYMENT
                 example:
                   - PAYMENT
@@ -740,10 +740,6 @@ components:
               - CUSTOMER
               - CREDIT_CARD_ACCOUNT
               - ACCOUNT
-              - LOAN
-              - FINANCING
-              - UNARRANGED_ACCOUNT_OVERDRAFT
-              - INVOICE_FINANCING
               - PAYMENT
           maxItems: 1000
           example:

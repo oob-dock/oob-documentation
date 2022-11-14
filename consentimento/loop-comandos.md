@@ -146,8 +146,15 @@ origem financeira para o pagamento em questão.
 É importante seguir o [Guia de Experiência](https://openbanking-brasil.github.io/areadesenvolvedor/#guia-de-experiencia-de-compartilhamento-de-dados-e-iniciacao-de-pagamento)
 do Usuário do Open Banking Brasil nessa etapa.
 
-Os recursos selecionados e por consequencia o aceite do consentimento devem ser
+Os recursos selecionados e por consequência o aceite do consentimento devem ser
 enviados ao AS através da API `PUT /app/command/{id}/consent`.
+
+### Produtos não selecionáveis
+
+Diferentemente dos demais produtos, os produtos não selecionáveis são
+compartilhados com base nas permissões fornecidas no consentimento
+de compartilhamento de dados. Portanto durante a aprovação do consentimento
+não é feita a seleção deles.
 
 ## Comando *error*
 
@@ -155,12 +162,16 @@ Indica a ocorrência de algum erro durante o fluxo de autenticação OIDC.
 O erro é descrito no comando, podendo ser erros conhecidos do processo do Open
 Banking ou erros inesperados conforme vemos na tabela a seguir.
 
-| Código do Erro  | Descrição                                                                                         |
-| --------------- | ------------------------------------------------------------------------------------------------- |
-| CPF_MISMATCH    | CPF do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento               |
-| CNPJ_MISMATCH   | CNPJ do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento              |
-| EXPIRED_CONSENT | Consentimento expirado                                                                            |
-| GENERIC_ERROR   | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário |
+| Código do Erro                               | Descrição                                                                                                   |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| CPF_MISMATCH                                 | CPF do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento                         |
+| CNPJ_MISMATCH                                | CNPJ do usuário autenticado diverge do enviado pelo TPP na intenção do consentimento                        |
+| EXPIRED_CONSENT                              | Consentimento expirado                                                                                      |
+| INVALID_SESSION                              | Sessão não existe ou expirou devido ao tempo limite de 10 minutos                                           |
+| RESOURCE_MUST_CONTAIN_ID                     | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID                                |
+| RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID para cada produto selecionável |
+| DISCOVERY_ERROR                              | Falha no processo de discovery                                                                              |
+| GENERIC_ERROR                                | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário           |
 
 O comando `error` conclui a geração do consentimento. Nos casos
 de handoff o aplicativo deve apenas exibir a mensagem de erro ao usuário e
@@ -190,6 +201,14 @@ usuário é do sucesso do consentimento. O tratamento de retorno ao TPP deve
 ser seguido como descrito no `error`.
 
 ## Changelog
+
+### 2022-11-09 - v1.1.2
+
+- Adição do novo códigos de erro RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS.
+
+### 2022-08-25 - v1.1.1
+
+- Adição de novos códigos de erro.
 
 ### 2022-04-06 - v1.1.0
 

@@ -1,0 +1,172 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Conjunto de informações referentes às informações de câmbio",
+        "required": [
+          "participant",
+          "values",
+          "timestamp",
+          "disclaimer"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "participant": {
+            "type": "object",
+            "description": "Conjunto de informações relativas ao participante do produto de open banking",
+            "required": [
+              "brand",
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "brand": {
+                "type": "string",
+                "description": "Nome da marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.",
+                "maxLength": 80,
+                "example": "Organização"
+              },
+              "name": {
+                "type": "string",
+                "description": "Nome do participante do Open Banking.",
+                "maxLength": 80,
+                "example": "Organização A1"
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                "pattern": "^\\d{14}$",
+                "example": "13456789000112"
+              },
+              "urlComplementaryList": {
+                "type": "string",
+                "maxLength": 1024,
+                "pattern": "^(https?:\\/\\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)$",
+                "example": "https://empresaa1.com/companies"
+              }
+            }
+          },
+          "values": {
+            "type": "array",
+            "example": [
+              {
+                "foreignCurrency": "USD",
+                "deliveryForeignCurrency": "ESPECIE",
+                "transactionType": "COMPRA",
+                "transactionCategory": "COMERCIO_EXTERIOR",
+                "targetAudience": "PESSOA_NATURAL",
+                "value": "5.5023"
+              },
+              {
+                "foreignCurrency": "EUR",
+                "deliveryForeignCurrency": "CARTAO_PRE_PAGO",
+                "transactionType": "VENDA",
+                "transactionCategory": "TRANSPORTE",
+                "targetAudience": "PESSOA_JURIDICA",
+                "value": "2.7045"
+              }
+            ],
+            "items": {
+              "type": "object",
+              "description": "Taxa disponibilizada (taxa online) pelas instituições no formato D+0/D+2 (valor U$500 operações câmbio pronto) separado por moeda dólar e euro compra e venda PF/PJ.",
+              "required": [
+                "foreignCurrency",
+                "deliveryForeignCurrency",
+                "transactionType",
+                "transactionCategory",
+                "value",
+                "targetAudience"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "foreignCurrency": {
+                  "type": "string",
+                  "pattern": "^[A-Z]{3}$",
+                  "maxLength": 3,
+                  "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                  "example": "BRL"
+                },
+                "deliveryForeignCurrency": {
+                  "type": "string",
+                  "description": "A classificação da forma de operação, conforme a circular BCB nº 3690 de 16/12/2013. (Vide Enum)<br><ul><li>ESPECIE</li><li>CARTAO_PRE_PAGO</li><li>TELETRANSMISSAO_SWIFT</li></ul>",
+                  "maxLength": 21,
+                  "enum": [
+                    "ESPECIE",
+                    "CARTAO_PRE_PAGO",
+                    "TELETRANSMISSAO_SWIFT"
+                  ],
+                  "example": "CARTAO_PRE_PAGO"
+                },
+                "transactionType": {
+                  "type": "string",
+                  "description": "Determina se o Banco está comprando ou vendendo a moeda estrangeira nas operações\nspot,  que se liquidam em até dois dias (não aplica-se a operações futuras. (Vide Enum)\n- Compra\n- Venda\n",
+                  "maxLength": 6,
+                  "enum": [
+                    "COMPRA",
+                    "VENDA"
+                  ],
+                  "example": "COMPRA"
+                },
+                "transactionCategory": {
+                  "type": "string",
+                  "description": "A classificação do tipo de operação, conforme a circular BCB nº 3690 de 16/12/2013.",
+                  "maxLength": 68,
+                  "enum": [
+                    "COMERCIO_EXTERIOR",
+                    "TRANSPORTE",
+                    "SEGUROS",
+                    "VIAGENS_INTERNACIONAIS",
+                    "TRANSFERENCIAS_UNILATERAIS",
+                    "SERVICOS_DIVERSOS",
+                    "RENDAS_CAPITAIS",
+                    "CAPITAIS_BRASILEIROS",
+                    "CAPITAIS_ESTRANGEIROS",
+                    "PRESTACAO_SERVICO_PAGAMENTO_OU_TRANSFERENCIA_INTERNACIONAL_EFX"
+                  ],
+                  "example": "COMERCIO_EXTERIOR"
+                },
+                "targetAudience": {
+                  "type": "string",
+                  "description": "Público alvo (PESSOA_NATURAL ou PESSOA_JURIDICA).",
+                  "maxLength": 15,
+                  "enum": [
+                    "PESSOA_NATURAL",
+                    "PESSOA_JURIDICA"
+                  ],
+                  "example": "PESSOA_JURIDICA"
+                },
+                "value": {
+                  "type": "string",
+                  "maxLength": 7,
+                  "pattern": "^\\d{1}\\.\\d{1,5}$",
+                  "example": "5.5023",
+                  "description": "Valor da operação."
+                }
+              }
+            }
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp do momento da consulta",
+            "example": "2017-07-21T17:32:28Z"
+          },
+          "disclaimer": {
+            "type": "string",
+            "description": "Disclaimer informando que a taxa apresentada é somente informativa, para a contratação de uma operação, deverá ser consultado o canal correspondente de cada instituição.",
+            "example": "Informamos que esta taxa é estimada e exclusiva para fins de Open Finance,  não sendo válida para a contratação de operações de câmbio. Para obter a taxa para fechamento do câmbio, pedimos consultar os canais disponíveis para contratação."
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

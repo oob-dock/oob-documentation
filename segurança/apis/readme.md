@@ -22,6 +22,12 @@
     - [Consents](#consents)
     - [Resources](#resources)
     - [OOB consents](#oob-consents)
+  - [Capitalization bonds catalog](#capitalization-bonds-catalog)
+  - [Investments catalog](#investments-catalog)
+  - [Exchange catalog](#exchange-catalog)
+  - [Acquiring services catalog](#acquiring-services-catalog)
+  - [Pension catalog](#pension-catalog)
+  - [Insurance catalog](#insurance-catalog)
   - [Observações](#observações)
 
 ## Channels catalog
@@ -261,6 +267,13 @@
 | GET      | /v1/accounts/\{ID\}/bills/\{ID\}/bills/transactions | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ | Sim              | Sim  |     |
 | GET      | /v1/accounts/\{ID\}/limits                          | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_LIMITS_READ             | Sim              | Sim  |     |
 | GET      | /v1/accounts/\{ID\}/transactions                    | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              | Sim  |     |
+| GET      | /v2/accounts                                        | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}                                 | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/bills                           | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_READ              | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/bills/\{ID\}/bills/transactions | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/limits                          | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_LIMITS_READ             | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions                    | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions-current            | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ       | Sim              | Sim  |     |
 
 ### Accounts
 
@@ -268,13 +281,19 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                  | Valida token | Escopo de acesso | Valida JWS | ConsentPermission              | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------------ | ------------ | ---------------- | ---------- | ------------------------------ | ---------------- | ---- | --- |
-| GET      | /v1/accounts                         | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}                  | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}/overdraft-limits | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}/balances         | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}/transactions     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| Operação | API                                          | Valida token | Escopo de acesso | Valida JWS | ConsentPermission              | Valida consentId | mTLS | Obs |
+| -------- | -------------------------------------------- | ------------ | ---------------- | ---------- | ------------------------------ | ---------------- | ---- | --- |
+| GET      | /v1/accounts                                 | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}                          | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}/overdraft-limits         | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}/balances                 | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}/transactions             | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| GET      | /v2/accounts                                 | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}                          | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/overdraft-limits         | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/balances                 | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions             | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions-current     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
 
 ### Loans
 
@@ -289,6 +308,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | loans            | Não        | LOANS_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | loans            | Não        | LOANS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | loans            | Não        | LOANS_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | loans            | Não        | LOANS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | loans            | Não        | LOANS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | loans            | Não        | LOANS_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | loans            | Não        | LOANS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | loans            | Não        | LOANS_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ### Financings
 
@@ -303,6 +327,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | financings       | Não        | FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | financings       | Não        | FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | financings       | Não        | FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | financings       | Não        | FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | financings       | Não        | FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | financings       | Não        | FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ### Unarranged accounts overdraft
 
@@ -317,6 +346,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ### Invoice financings
 
@@ -331,6 +365,11 @@
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/scheduled-instalments | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/warranties            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
+| GET      | /v2/contracts                              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}                       | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
+| GET      | /v2/contracts/\{ID\}/warranties            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
 
 ## Payments
 
@@ -395,6 +434,75 @@
 | *PATCH   | /v1/consents/\{ID\}              | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /payments/v1/consents/\{ID\}     | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /consents/v1/consents/\{ID\}     | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+
+## Capitalization bonds catalog
+
+**Base path:** /open-banking/opendata-capitalization
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | --------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/bonds | Não          |                  | Não        | Não              | Não  |     |
+
+## Investments catalog
+
+**Base path:** /open-banking/opendata-investments
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                      | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | -----------------------  | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/funds                | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/bank-fixed-incomes   | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/credit-fixed-incomes | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/variable-incomes     | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/treasure-titles      | Não          |                  | Não        | Não              | Não  |     |
+
+## Exchange catalog
+
+**Base path:** /open-banking/opendata-exchange
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API               | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/online-rates  | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/vet-values    | Não          |                  | Não        | Não              | Não  |     |
+
+## Acquiring services catalog
+
+**Base path:** /open-banking/opendata-acquiring-services
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API            | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | -------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personals  | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/businesses | Não          |                  | Não        | Não              | Não  |     |
+
+## Pension catalog
+
+**Base path:** /open-banking/opendata-pension
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                    | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ---------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/risk-coverages     | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/survival-coverages | Não          |                  | Não        | Não              | Não  |     |
+
+## Insurance catalog
+
+**Base path:** /open-banking/opendata-insurance
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API             | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | --------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/automotives | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/homes       | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/personals   | Não          |                  | Não        | Não              | Não  |     |
 
 ## Observações
 

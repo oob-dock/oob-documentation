@@ -1,0 +1,244 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "issuerInstitutionCnpjNumber": "45086338000178",
+      "issuerInstitutionName": "Organização A1",
+      "investmentType": "CDB",
+      "index": {
+        "indexer": "CDI",
+        "issueRemunerationRate": {
+          "prices": [
+            {
+              "interval": "1_FAIXA",
+              "value": "0.020300",
+              "customerRate": "0.500000"
+            },
+            {
+              "interval": "2_FAIXA",
+              "value": "0.030600",
+              "customerRate": "0.100000"
+            },
+            {
+              "interval": "3_FAIXA",
+              "value": "0.034300",
+              "customerRate": "0.300000"
+            },
+            {
+              "interval": "4_FAIXA",
+              "value": "0.246800",
+              "customerRate": "0.100000"
+            }
+          ],
+          "minimum": "0.010000",
+          "maximum": "0.300000"
+        },
+        "indexerAdditionalInfo": "Dólar"
+      },
+      "investmentConditions": {
+        "minimumAmount": "100.00",
+        "redemptionTerm": "DIARIA",
+        "expirationPeriod": "1081+",
+        "gracePeriod": "1081+"
+      },
+      "targetAudience": "PESSOA_JURIDICA"
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "issuerInstitutionCnpjNumber": "45086338000178",
+      "issuerInstitutionName": "Organização A1",
+      "investmentType": "CDB",
+      "index": {
+        "indexer": "CDI",
+        "issueRemunerationRate": {
+          "prices": [
+            {
+              "interval": "1_FAIXA",
+              "value": "0.020300",
+              "customerRate": "0.500000"
+            },
+            {
+              "interval": "2_FAIXA",
+              "value": "0.030600",
+              "customerRate": "0.100000"
+            },
+            {
+              "interval": "3_FAIXA",
+              "value": "0.034300",
+              "customerRate": "0.300000"
+            },
+            {
+              "interval": "4_FAIXA",
+              "value": "0.246800",
+              "customerRate": "0.100000"
+            }
+          ],
+          "minimum": "0.010000",
+          "maximum": "0.300000"
+        },
+        "indexerAdditionalInfo": "Dólar"
+      },
+      "investmentConditions": {
+        "minimumAmount": "100.00",
+        "redemptionTerm": "DIARIA",
+        "expirationPeriod": "1081+",
+        "gracePeriod": "1081+"
+      },
+      "targetAudience": "PESSOA_JURIDICA"
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "issuerInstitutionCnpjNumber": "45086338000178",
+      "issuerInstitutionName": "Organização A1",
+      "investmentType": "CDB",
+      "index": {
+        "indexer": "CDI",
+        "issueRemunerationRate": {
+          "prices": [
+            {
+              "interval": "1_FAIXA",
+              "value": "0.020300",
+              "customerRate": "0.500000"
+            },
+            {
+              "interval": "2_FAIXA",
+              "value": "0.030600",
+              "customerRate": "0.100000"
+            },
+            {
+              "interval": "3_FAIXA",
+              "value": "0.034300",
+              "customerRate": "0.300000"
+            },
+            {
+              "interval": "4_FAIXA",
+              "value": "0.246800",
+              "customerRate": "0.100000"
+            }
+          ],
+          "minimum": "0.010000",
+          "maximum": "0.300000"
+        },
+        "indexerAdditionalInfo": "Dólar"
+      },
+      "investmentConditions": {
+        "minimumAmount": "100.00",
+        "redemptionTerm": "DIARIA",
+        "expirationPeriod": "1081+",
+        "gracePeriod": "1081+"
+      },
+      "targetAudience": "PESSOA_JURIDICA"
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "issuerInstitutionCnpjNumber": "45086338000178",
+      "issuerInstitutionName": "Organização A1",
+      "investmentType": "CDB",
+      "index": {
+        "indexer": "CDI",
+        "issueRemunerationRate": {
+          "prices": [
+            {
+              "interval": "1_FAIXA",
+              "value": "0.020300",
+              "customerRate": "0.500000"
+            },
+            {
+              "interval": "2_FAIXA",
+              "value": "0.030600",
+              "customerRate": "0.100000"
+            },
+            {
+              "interval": "3_FAIXA",
+              "value": "0.034300",
+              "customerRate": "0.300000"
+            },
+            {
+              "interval": "4_FAIXA",
+              "value": "0.246800",
+              "customerRate": "0.100000"
+            }
+          ],
+          "minimum": "0.010000",
+          "maximum": "0.300000"
+        },
+        "indexerAdditionalInfo": "Dólar"
+      },
+      "investmentConditions": {
+        "minimumAmount": "100.00",
+        "redemptionTerm": "DIARIA",
+        "expirationPeriod": "1081+",
+        "gracePeriod": "1081+"
+      },
+      "targetAudience": "PESSOA_JURIDICA"
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "issuerInstitutionCnpjNumber": "45086338000178",
+      "issuerInstitutionName": "Organização A1",
+      "investmentType": "CDB",
+      "index": {
+        "indexer": "CDI",
+        "issueRemunerationRate": {
+          "prices": [
+            {
+              "interval": "1_FAIXA",
+              "value": "0.020300",
+              "customerRate": "0.500000"
+            },
+            {
+              "interval": "2_FAIXA",
+              "value": "0.030600",
+              "customerRate": "0.100000"
+            },
+            {
+              "interval": "3_FAIXA",
+              "value": "0.034300",
+              "customerRate": "0.300000"
+            },
+            {
+              "interval": "4_FAIXA",
+              "value": "0.246800",
+              "customerRate": "0.100000"
+            }
+          ],
+          "minimum": "0.010000",
+          "maximum": "0.300000"
+        },
+        "indexerAdditionalInfo": "Dólar"
+      },
+      "investmentConditions": {
+        "minimumAmount": "100.00",
+        "redemptionTerm": "DIARIA",
+        "expirationPeriod": "1081+",
+        "gracePeriod": "1081+"
+      },
+      "targetAudience": "PESSOA_JURIDICA"
+    }
+  ]
+}

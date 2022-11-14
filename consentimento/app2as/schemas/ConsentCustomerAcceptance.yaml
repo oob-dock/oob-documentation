@@ -133,10 +133,6 @@ ConsentCustomerAcceptance:
             enum:
               - ACCOUNT
               - CREDIT_CARD_ACCOUNT
-              - LOAN
-              - FINANCING
-              - UNARRANGED_ACCOUNT_OVERDRAFT
-              - INVOICE_FINANCING
               - PAYMENT
             example:
               - PAYMENT
@@ -343,10 +339,6 @@ ConsentCustomerAcceptance:
           - CUSTOMER
           - CREDIT_CARD_ACCOUNT
           - ACCOUNT
-          - LOAN
-          - FINANCING
-          - UNARRANGED_ACCOUNT_OVERDRAFT
-          - INVOICE_FINANCING
           - PAYMENT
       maxItems: 1000
       example:
