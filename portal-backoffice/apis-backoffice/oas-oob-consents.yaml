@@ -982,7 +982,7 @@ components:
     ActiveConsent:
       type: object
       properties:
-        consentId:
+        externalId:
           description: The consentId is the consent's unique identifier and must be
             a URN - Uniform Resource Name
           type: string
