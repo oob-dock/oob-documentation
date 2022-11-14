@@ -93,6 +93,12 @@ até o dia anterior a data de efetivação dele.
 
 Responsável pela revogação do consentimento relacionado ao *consentId* informado.
 
+## Listagem de consentimentos ativos de compartilhamento de dados
+
+        GET /open-banking/oob-consents/consents/v2/active
+
+Responsável pela listagem de consentimentos autorizados.
+
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir
