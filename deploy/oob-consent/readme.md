@@ -259,3 +259,9 @@ Existem additionalVars para utilização do conector de aprovação de consentim
 desenvolvido pela Opus, que estão listadas em
 [consent](../../integração-plugin/consent/readme.md) na seção
 `Arquivo de rota implementado pela OPUS`
+
+### APPLICATION_ENCRYPTION_CHARSET
+
+Utilizado para definir o charset usado na chave de criptografia
+
+Valor default: `UTF-8`
