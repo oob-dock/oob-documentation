@@ -262,6 +262,6 @@ desenvolvido pela Opus, que estão listadas em
 
 ### APPLICATION_ENCRYPTION_CHARSET
 
-Utilizado para definir o charset usado na chave de criptografia
+Utilizado para definir o charset usado na criptografia dos campos na base de dados.
 
 Valor default: `UTF-8`
