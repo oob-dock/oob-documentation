@@ -13,4 +13,5 @@ from (
 	FROM   consent c
 	WHERE status = 1 
 	AND   tp_consent = 1
+	AND   c.dt_expiration > CURRENT_TIMESTAMP
 ) tb$$;
