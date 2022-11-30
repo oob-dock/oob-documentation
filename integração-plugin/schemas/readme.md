@@ -48,6 +48,19 @@ Onde:
 
 ## Changelog
 
+### 2022-11-30 - v2.10.0
+
+- Consent
+  - Criação da rota paymentsGetPixPaymentsPaymentId_v2 com os novos objetos de
+   erro da versão 2 das apis de pagamento
+  - Remoção da rota revokeConsentPayment
+- Payment
+  - Atualização do pattern dos campos de requisição e resposta
+  - Incluisão das rotas para a versão 2 da fase 3:
+    - paymentsGetPixPaymentsPaymentId_v2: Consulta de pagamento
+    - paymentsPatchPixPayments_v2: Cancelamento do pagamento
+    - paymentsPostPixPayments_v2: Criação da iniciação do pagamento
+
 ### 2022-10-06 - v2.9.0
 
 - Payment

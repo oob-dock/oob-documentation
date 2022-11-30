@@ -191,7 +191,7 @@
         },
         "LoggedUser": {
             "type": "object",
-            "description": "Usuário (pessoa natural) que encontra-se logado na instituição Iniciadora de Pagamento.  [Restrição] Quando se tratar do loggedUser da revogação, deve obrigatoriamente ser enviado quando a revogação for feita pelo usuário final, ou seja, se o campo revokedBy estiver com o valor 'USER'",
+            "description": "Usuário (pessoa natural) que encontra-se logado na instituição Iniciadora de Pagamento.",
             "additionalProperties": false,
             "required": [
                 "document"
@@ -380,7 +380,7 @@
                     "examples": [
                         "2021-01-01"
                     ],
-                    "description": "Data do pagamento, conforme especificação RFC-3339."
+                    "description": "[Restrição] Mutuamente excludente com o objeto schedule. \n\nEste campo é obrigatório no caso de pagamento único. \n\nNeste caso, o objeto schedule não deve ser informado.\n"
                 },
                 "currency": {
                     "type": "string",
@@ -399,35 +399,40 @@
                     "examples": [
                         "100000.12"
                     ],
-                    "description": "Valor da transação com 2 casas decimais.\n"
+                    "description": "Valor da transação com 2 casas decimais. O valor deve ser o mesmo enviado no consentimento. \n\nPara QR Code estático com valor pré-determinado no QR Code ou para QR Code dinâmico com indicação de que o valor não pode ser alterado: O campo amount deve ser preenchido com o valor estabelecido no QR Code. \nCaso seja preenchido com valor divergente do QR Code, deve ser retornado um erro HTTP Status 422.\n"
                 },
                 "schedule": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/Schedule"
+                        }
+                    ]
+                }
+            }
+        },
+        "Schedule": {
+            "type": "object",
+            "description": "[Restrição] Mutuamente excludente com o campo date. \n\nEste campo é obrigatório no caso de agendamento. \n\nNeste caso, o campo date não deve ser informado.\n",
+            "required": [
+                "single"
+            ],
+            "properties": {
+                "single": {
                     "type": "object",
+                    "description": "Define a política de agendamento único.",
                     "required": [
-                        "single"
+                        "date"
                     ],
                     "properties": {
-                        "single": {
-                            "type": "object",
-                            "required": [
-                                "date"
-                            ],
-                            "properties": {
-                                "date": {
-                                    "type": "string",
-                                    "format": "date",
-                                    "maxLength": 10,
-                                    "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
-                                    "examples": [
-                                        "2023-01-01"
-                                    ],
-                                    "description": "Define a data alvo da liquidação do pagamento.O fuso horário de Brasilia deve ser utilizado para criação e racionalização sobre os dados deste campo."
-                                }
-                            }
-                        },
-                        "additionalProperties": false
-                    },
-                    "additionalProperties": false
+                        "date": {
+                            "type": "string",
+                            "format": "date",
+                            "maxLength": 10,
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "example": "2021-01-01",
+                            "description": "Define a data alvo da liquidação do pagamento. \n\nO fuso horário de Brasília deve ser utilizado para criação e racionalização sobre os dados deste campo.\n\nObservação: Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo D+365 corridos a partir da data do consentimento considerando o fuso horário de Brasília\n"
+                        }
+                    }
                 }
             }
         },
@@ -552,6 +557,9 @@
                 "details"
             ],
             "properties": {
+                "cancellation": {
+                    "$ref": "#/$defs/PixPaymentCancellation"
+                },
                 "ibgeTownCode": {
                     "$ref": "../common-payment-schema.json#/$defs/IbgeTownCode"
                 },
@@ -559,6 +567,84 @@
                     "$ref": "#/$defs/Details"
                 }
             }
+        },
+        "PixPaymentCancellation": {
+            "type": "object",
+            "description": "Objeto que contém os dados referentes ao usuário pagador que solicitou o cancelamento, o canal utilizado por ele e o motivo.  \n\n[Restrição] O objeto cancellation será obrigatório apenas quando o valor do campo status for igual a CANC. \n",
+            "required": [
+                "cancelledAt",
+                "cancelledBy",
+                "reason",
+                "cancelledFrom"
+            ],
+            "properties": {
+                "reason": {
+                    "$ref": "#/$defs/EnumPaymentCancellationReasonType"
+                },
+                "cancelledFrom": {
+                    "$ref": "#/$defs/EnumPaymentCancellationFromType"
+                },
+                "cancelledAt": {
+                    "type": "string",
+                    "description": "Data e hora que foi realizado o cancelamento, conforme especificação RFC-3339, formato UTC.",
+                    "format": "date-time",
+                    "maxLength": 20,
+                    "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+                    "example": "2021-05-21T08:30:00Z"
+                },
+                "cancelledBy": {
+                    "type": "object",
+                    "description": "Informação relacionada ao usuário pagador que solicitou o cancelamento do pagamento.",
+                    "required": [
+                        "document"
+                    ],
+                    "properties": {
+                        "document": {
+                            "type": "object",
+                            "description": "Objeto que consolida os dados do documento do usuário que solicitou o cancelamento.",
+                            "required": [
+                                "identification",
+                                "rel"
+                            ],
+                            "properties": {
+                                "identification": {
+                                    "type": "string",
+                                    "maxLength": 11,
+                                    "description": "Número do documento do usuário pagador responsável pelo cancelamento do pagamento.",
+                                    "example": "11111111111",
+                                    "pattern": "^\\d{11}$"
+                                },
+                                "rel": {
+                                    "type": "string",
+                                    "maxLength": 3,
+                                    "description": "Tipo do documento do usuário pagador responsável pelo cancelamento do pagamento.",
+                                    "example": "CPF",
+                                    "pattern": "^[A-Z]{3}$"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "EnumPaymentCancellationReasonType": {
+            "type": "string",
+            "enum": [
+                "CANCELADO_PENDENCIA",
+                "CANCELADO_AGENDAMENTO",
+                "CANCELADO_MULTIPLAS_ALCADAS"
+            ],
+            "example": "CANCELADO_PENDENCIA",
+            "description": "O preenchimento desse campo para retorno, deve ocorrer pela detentora de contas a partir do status em que o pagamento estiver no momento da solicitação do cancelamento (ex. Status de pagamento = PDNG, campo deve ser preenchido com enum CANCELADO_PENDENCIA)\n\nValores possíveis:\n\nCANCELADO_PENDENCIA - Pagamento cancelado enquanto estava na situação PDNG\n\nCANCELADO_AGENDAMENTO - Pagamento cancelado enquanto estava na situação SCHD\n\nCANCELADO_MULTIPLAS_ALCADAS - Pagamento cancelado enquanto estava na situação PATC\n"
+        },
+        "EnumPaymentCancellationFromType": {
+            "type": "string",
+            "enum": [
+                "INICIADORA",
+                "DETENTORA"
+            ],
+            "example": "INICIADORA",
+            "description": "Campo utilizado para informar o meio pelo qual foi realizado o cancelamento.\n\nValores possíveis:\n\nINICIADORA - Pagamento cancelado pelo usuário pagador nos canais da iniciadora\n\nDETENTORA - Pagamento cancelado pelo usuário pagador nos canais da detentora\n"
         },
         "TedTefPaymentConsent": {
             "allOf": [
