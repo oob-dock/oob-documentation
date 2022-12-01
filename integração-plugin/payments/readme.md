@@ -78,11 +78,11 @@ na versão 2 do serviço de iniciação de pagamentos, incluindo uma
 [nova máquina de estados](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/24182882/M+quina+de+Estados+-+v2.0.0+-+Pagamentos#Pagamento%3A-Arranjo-Pix)
 para o recurso.
 
-Entre as principais alterações, estão a renomeação dos estados e
+Entre as principais alterações estão a renomeação dos estados e
 a inclusão do estado **CANC** para indicar o cancelamento do pagamento
 por parte do usuário, mantendo o estado **RJCT** para transações rejeitadas
-pela detentora ou SPI. Ambos devem ser informados pela detentora
-através das novas [rotas de v2](#pix).
+pela detentora ou SPI. Ambos devem ser informados pela detentora através
+das novas [rotas de v2](#pix).
 
 Além disso, a detentora deverá informar em todas as rotas da versão 2 a
 conta do usuário utilizada para o pagamento através do campo *debtorAccount*.

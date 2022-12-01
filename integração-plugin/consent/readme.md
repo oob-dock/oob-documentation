@@ -297,9 +297,9 @@ feriado, horário, valor máximo de transferência, etc..
 A tabela a seguir lista os pontos de integração para a aceitação da criação de
 um consentimento:
 
-| Versão do consentimento | Nome da rota Camel                               |
-| ---------------------   | ------------------------------------------------ |
-| Pagamento               | ```direct:approvePaymentConsentCreation_v2```    |
+| Tipo do consentimento | Nome da rota Camel                            |
+| --------------------- | --------------------------------------------- |
+| Pagamento             | ```direct:approvePaymentConsentCreation_v2``` |
 
 O retorno desses pontos de integração devem ser:
 
