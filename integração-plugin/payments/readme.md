@@ -56,9 +56,33 @@ como:
 
 &nbsp;
 
-| Endpoint                        | Rota do Camel                                   |
-| ------------------------------- | ----------------------------------------------- |
-| /pix/payments                   | ```direct:paymentsPostPixPayments```            |
-| /pix/payments/\{paymentId\}     | ```direct:paymentsGetPixPaymentsPaymentId```    |
-| /ted-tef/payments               | ```direct:paymentsPostTedTefPayments```         |
-| /ted-tef/payments/\{paymentId\} | ```direct:paymentsGetTedTefPaymentsPaymentId``` |
+| Método   | Versão | Endpoint                        | Rota do Camel                                     |
+| -------- | ------ | ------------------------------- | ------------------------------------------------- |
+| POST     | v1     | /pix/payments                   | ```direct:paymentsPostPixPayments```              |
+| GET      | v1     | /pix/payments/\{paymentId\}     | ```direct:paymentsGetPixPaymentsPaymentId```      |
+| POST     | v2     | /pix/payments                   | ```direct:paymentsPostPixPayments_v2```           |
+| GET      | v2     | /pix/payments/\{paymentId\}     | ```direct:paymentsGetPixPaymentsPaymentId_v2```   |
+| PATCH    | v2     | /pix/payments/\{paymentId\}     | ```direct:paymentsPatchPixPaymentsPaymentId_v2``` |
+
+### TED/TEF
+
+| Método   | Versão | Endpoint                        | Rota do Camel                                   |
+| -------- | ------ | ------------------------------- | ----------------------------------------------- |
+| POST     | v1     | /ted-tef/payments               | ```direct:paymentsPostTedTefPayments```         |
+| GET      | v1     | /ted-tef/payments/\{paymentId\} | ```direct:paymentsGetTedTefPaymentsPaymentId``` |
+
+## O que muda na versão 2 da API de Iniciação de Pagamentos?
+
+O Open Finance Brasil definiu oficialmente suporte a pagamentos agendados via PIX
+na versão 2 do serviço de iniciação de pagamentos, incluindo uma
+[nova máquina de estados](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/24182882/M+quina+de+Estados+-+v2.0.0+-+Pagamentos#Pagamento%3A-Arranjo-Pix)
+para o recurso.
+
+Entre as principais alterações, estão a renomeação dos estados e
+a inclusão do estado **CANC** para indicar o cancelamento do pagamento
+por parte do usuário, mantendo o estado **RJCT** para transações rejeitadas
+pela detentora ou SPI. Ambos devem ser informados pela detentora
+através das novas [rotas de v2](#pix).
+
+Além disso, a detentora deverá informar em todas as rotas da versão 2 a
+conta do usuário utilizada para o pagamento através do campo *debtorAccount*.
