@@ -17,6 +17,7 @@
       - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
   - [Serviços auxiliares](#serviços-auxiliares)
   - [Revogação do consentimento de pagamento](#revogação-do-consentimento-de-pagamento)
+  - [Momento do processamento da iniciação do pagamento](#momento-do-processamento-da-iniciação-do-pagamento)
 
 ## Discovery de recursos no Opus Open Banking
 
@@ -535,3 +536,15 @@ Caso seja enviado um payload na requisição que não atenda ao objeto definido 
 JSON Schema ou não seja possível regovar o consentimento do pagamento por não atender
 os requisitos que possibilitem a revogação, será retornado um objeto de erro a
 exemplo deste [revokeConsentPayment-response-error-schema.json](../schemas/v2/revokeConsentPayment/response-error-schema.json).
+
+## Momento do processamento da iniciação do pagamento
+
+Dado a aprovação do consentimento com status AUTHORISED, o consentimento assume
+o status CONSUMED após ocorrer o processamento da iniciação do pagamento.
+
+É importante ressaltar que para ocorrer o processamento de iniciação de pagamento
+com sucesso as versões das APIs devem ser compatíveis, ou seja, caso a intenção
+de consentimento seja criada com a versão 2, a iniciação do pagamento também deve
+ser com a versão 2. O mesmo vale para a versão 1, que caso seja realizado a
+intenção de consentimento com versão 1, a iniciação de pagamento também deve
+ser realizada com a versão 1.
