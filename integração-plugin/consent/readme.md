@@ -16,7 +16,6 @@
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
       - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
   - [Serviços auxiliares](#serviços-auxiliares)
-  - [Revogação do consentimento de pagamento](#revogação-do-consentimento-de-pagamento)
 
 ## Discovery de recursos no Opus Open Banking
 
