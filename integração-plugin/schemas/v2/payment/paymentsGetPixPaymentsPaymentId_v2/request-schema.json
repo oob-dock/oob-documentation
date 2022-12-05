@@ -3,18 +3,18 @@
     "type": "object",
     "required": [
         "requestMeta",
-        "paymentId",
-        "paymentUserInfo"
+        "consent",
+        "paymentId"
     ],
     "properties": {
         "requestMeta": {
             "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
         },
+        "consent": {
+            "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+        },
         "paymentId": {
             "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
-        },
-        "paymentUserInfo": {
-            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentUserInfo"
         }
     },
     "additionalProperties": false,

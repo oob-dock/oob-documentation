@@ -19,14 +19,14 @@
                     "maxLength": 14,
                     "pattern": "^\\d{11}$|^\\d{14}$",
                     "examples": [
-                        "11111111111"
+                        "58764789000137"
                     ],
                     "description": "Identificação da pessoa envolvida na transação.  \nPreencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.  \nO CPF será utilizado com 11 números e deverá ser informado sem pontos ou traços.  \nO CNPJ será utilizado com 14 números e deverá ser informado sem pontos ou traços.\n"
                 },
                 "name": {
                     "type": "string",
                     "maxLength": 140,
-                    "pattern": "[\\w\\W\\s]*",
+                    "pattern": "^([A-Za-zÀ-ÖØ-öø-ÿ' -]+)$",
                     "examples": [
                         "Marco Antonio de Brito"
                     ],
@@ -83,8 +83,9 @@
                 },
                 "issuer": {
                     "type": "string",
+                    "minLength": 1,
                     "maxLength": 4,
-                    "pattern": "^\\d{4}$",
+                    "pattern": "^[0-9]{1,4}$",
                     "examples": [
                         "1774"
                     ],
@@ -92,9 +93,9 @@
                 },
                 "number": {
                     "type": "string",
-                    "minLength": 3,
+                    "minLength": 1,
                     "maxLength": 20,
-                    "pattern": "^\\d{3,20}$",
+                    "pattern": "^[0-9]{1,20}$",
                     "examples": [
                         "1234567890"
                     ],
@@ -122,7 +123,7 @@
         },
         "DebtorAccount": {
             "type": "object",
-            "description": "Somente para consentimentos de pagamento. Objeto que contém a identificação da conta de origem do pagador.  \nAs informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do pagamento.\n",
+            "description": "Objeto que contém a identificação da conta de origem do pagador.  \nAs informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do pagamento.\n",
             "required": [
                 "ispb",
                 "number",
@@ -141,8 +142,9 @@
                 },
                 "issuer": {
                     "type": "string",
+                    "minLength": 1,
                     "maxLength": 4,
-                    "pattern": "^\\d{4}$",
+                    "pattern": "^[0-9]{1,4}$",
                     "examples": [
                         "1774"
                     ],
@@ -150,9 +152,9 @@
                 },
                 "number": {
                     "type": "string",
-                    "minLength": 3,
+                    "minLength": 1,
                     "maxLength": 20,
-                    "pattern": "^\\d{3,20}$",
+                    "pattern": "^[0-9]{1,20}$",
                     "examples": [
                         "1234567890"
                     ],
@@ -282,7 +284,7 @@
                     "$ref": "./consent/common-consent-schema.json#/$defs/LoggedUser"
                 },
                 "businessEntity": {
-                    "$ref": "./common-consent-schema.json#/$defs/BusinessEntity"
+                    "$ref": "./consent/common-consent-schema.json#/$defs/BusinessEntity"
                 }
             },
             "additionalProperties": false
@@ -314,7 +316,7 @@
             ],
             "properties": {
                 "amount": {
-                    "description": "Valor da transação com 2 casas decimais.",
+                    "description": "Valor da transação com 2 casas decimais. O valor deve ser o mesmo enviado no consentimento. \n\nPara QR Code estático com valor pré-determinado no QR Code ou para QR Code dinâmico com indicação de que o valor não pode ser alterado: O campo amount deve ser preenchido com o valor estabelecido no QR Code. \nCaso seja preenchido com valor divergente do QR Code, deve ser retornado um erro HTTP Status 422.\n",
                     "type": "string",
                     "pattern": "^((\\d{1,16}\\.\\d{2}))$",
                     "minLength": 4,
@@ -325,7 +327,6 @@
                 },
                 "currency": {
                     "type": "string",
-                    "minLength": 3,
                     "maxLength": 3,
                     "description": "Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'. Todos os valores monetários informados estão representados com a moeda vigente do Brasil.",
                     "pattern": "^([A-Z]{3})$",
@@ -383,6 +384,42 @@
             },
             "minItems": 1,
             "maxItems": 10
+        },
+        "PixRejectionReasonV2": {
+            "type": "object",
+            "description": "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status\n[Restrição] Esse motivo deverá ser enviado quando o campo /data/status for igual a RJCT (REJECTED).",
+            "required": [
+                "code",
+                "detail"
+            ],
+            "properties": {
+                "code": {
+                    "$ref": "#/$defs/EnumRejectionReasonType"
+                },
+                "detail": {
+                    "type": "string",
+                    "pattern": "[\\w\\W\\s]*",
+                    "maxLength": 2048,
+                    "description": "Contém informações adicionais ao pagamento rejeitado"
+                }
+            }
+        },
+        "EnumRejectionReasonType": {
+            "type": "string",
+            "enum": [
+                "SALDO_INSUFICIENTE",
+                "VALOR_ACIMA_LIMITE",
+                "VALOR_INVALIDO",
+                "COBRANCA_INVALIDA",
+                "NAO_INFORMADO",
+                "PAGAMENTO_DIVERGENTE_CONSENTIMENTO",
+                "DETALHE_PAGAMENTO_INVALIDO",
+                "PAGAMENTO_RECUSADO_DETENTORA",
+                "PAGAMENTO_RECUSADO_SPI",
+                "FALHA_INFRAESTRUTURA"
+            ],
+            "example": "SALDO_INSUFICIENTE",
+            "description": "Define o código da razão pela qual o pagamento foi rejeitado\n\nSALDO_INSUFICIENTE\n\nVALOR_ACIMA_LIMITE\n\nVALOR_INVALIDO\n\nCOBRANCA_INVALIDA\n\nNAO_INFORMADO\n\nPAGAMENTO_DIVERGENTE_CONSENTIMENTO\n\nDETALHE_PAGAMENTO_INVALIDO\n\nPAGAMENTO_RECUSADO_DETENTORA\n\nPAGAMENTO_RECUSADO_SPI\n\nFALHA_INFRAESTRUTURA\n"
         },
         "PixRejectionReason": {
             "type": "string",
