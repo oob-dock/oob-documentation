@@ -30,6 +30,8 @@
       - [internal_fqdn](#internal_fqdn)
       - [supported_features](#supported_features)
       - [brand_id](#brand_id)
+      - [transmitter_org_id](#transmitter_org_id)
+      - [pubsub_id](#pubsub_id)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure_kong_grafana_dashboard](#configure_kong_grafana_dashboard)
@@ -200,7 +202,8 @@ FQDN público onde as APIs do open banking podem ser acessadas com mTLS
 
 #### internal_fqdn
 
-Parâmetro opcional para inclusão de um FQDN interno onde as APIs de Backoffice do open banking podem ser acessadas
+Parâmetro opcional para inclusão de um FQDN interno onde as APIs de Backoffice
+do open banking podem ser acessadas
 
 **Ex:** "internal.endereco.com.br"
 
@@ -213,6 +216,18 @@ Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-ba
 #### brand_id
 
 Vide a [definição](../shared-definitions.md#brand-id)
+
+#### transmitter_org_id
+
+Identificador da organização transmissora de dados. Esse identificador deve ser
+único por instalção. Seu formato é um UUID. O conteúdo desta variável é o ID
+do diretório de participantes
+
+#### pubsub_id
+
+Identificador do componente de publish/subscribe do [Dapr](../shared-definitions.md#dapr).
+
+**Ex:** `event-publisher`
 
 ## Configuração do Grafana
 
