@@ -13,7 +13,7 @@ pipeline {
 			}
 		}
 		stage('Integration Schema Replication') {
-			when { branch 'develop'; branch 'develop-mnt' }
+			when { anyOf { branch 'develop'; branch 'develop-mnt' } }
 			steps{
 				script{
 					branchName = "${BRANCH_NAME}"
