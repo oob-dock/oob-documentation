@@ -16,7 +16,8 @@
   - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
       - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
   - [Serviços auxiliares](#serviços-auxiliares)
-
+  - [Momento do processamento da iniciação do pagamento](#momento-do-processamento-da-iniciação-do-pagamento)
+  
 ## Discovery de recursos no Opus Open Banking
 
 O discovery de recursos no Opus Open Banking é um dos pontos de integração entre
@@ -419,3 +420,15 @@ Exemplo de chamada do serviço getDayOfTheWeek:
   <simple>${bean:camelUtils.getDayOfTheWeek}</simple>
 </setProperty>
 ```
+
+## Momento do processamento da iniciação do pagamento
+
+Dado a aprovação do consentimento com status AUTHORISED, o consentimento assume
+o status CONSUMED após ocorrer o processamento da iniciação do pagamento.
+
+É importante ressaltar que para ocorrer o processamento de iniciação de pagamento
+com sucesso as versões das APIs devem ser compatíveis, ou seja, caso a intenção
+de consentimento seja criada com a versão 2, a iniciação do pagamento também deve
+ser com a versão 2. O mesmo vale para a versão 1, que caso seja realizado a
+intenção de consentimento com versão 1, a iniciação de pagamento também deve
+ser realizada com a versão 1.
