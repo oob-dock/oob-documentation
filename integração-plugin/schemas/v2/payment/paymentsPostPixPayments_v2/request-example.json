@@ -76,7 +76,8 @@
             },
             "cnpjInitiator": "50685362000135",
             "remittanceInformation": "Pagamento da nota XPTO035-002.",
-            "transactionIdentification": "E00038166201907261559y6j6"
+            "transactionIdentification": "E00038166201907261559y6j6",
+            "endToEndId": "E9040088820210128000800123873170"
         }
     },
     "requestMeta": {
