@@ -59,6 +59,12 @@
             }
         ]
     },
+    "paymentId": [
+        {
+            "key": "internalPaymentId",
+            "value": "1234"
+        }
+    ],
     "requestBody": {
         "data": {
             "status": "CANC",

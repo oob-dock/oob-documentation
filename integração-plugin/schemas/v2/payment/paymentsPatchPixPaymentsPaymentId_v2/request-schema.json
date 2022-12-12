@@ -13,6 +13,9 @@
         "consent": {
             "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
         },
+        "paymentId": {
+            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
+        },
         "requestBody": {
             "type": "object",
             "description": "Payload para cancelamento do pagamento.",
