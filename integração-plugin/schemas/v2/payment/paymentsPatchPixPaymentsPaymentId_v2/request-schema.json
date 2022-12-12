@@ -4,6 +4,7 @@
     "required": [
         "requestMeta",
         "consent",
+        "paymentId",
         "requestBody"
     ],
     "properties": {
