@@ -387,6 +387,7 @@
 | POST     | /v2/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
 | GET      | /v1/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
 | PATCH    | /v2/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
+| GET      | /v2/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
 
 ## Consent
 
