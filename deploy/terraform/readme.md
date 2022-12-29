@@ -3,40 +3,42 @@
 - [Configurações via Terraform](#configurações-via-terraform)
   - [Configuração das rotas do Kong](#configuração-das-rotas-do-kong)
     - [Configuração](#configuração)
-      - [kong_admin_uri](#kong_admin_uri)
-      - [kong_admin_tls_skip_verify](#kong_admin_tls_skip_verify)
-      - [kong_admin_token](#kong_admin_token)
-      - [kong_admin_username](#kong_admin_username)
-      - [kong_admin_password](#kong_admin_password)
-      - [kong_api_key](#kong_api_key)
-      - [oob_status_api_host](#oob_status_api_host)
-      - [oob_status_api_port](#oob_status_api_port)
-      - [oob_consent_api_host](#oob_consent_api_host)
-      - [oob_consent_api_port](#oob_consent_api_port)
-      - [cors_origins](#cors_origins)
-      - [transaction_limit_global_per_second](#transaction_limit_global_per_second)
-      - [transaction_limit_per_ip_per_minute](#transaction_limit_per_ip_per_minute)
-      - [api_docs_enabled](#api_docs_enabled)
-      - [oob_financial_data_api_host](#oob_financial_data_api_host)
-      - [oob_financial_data_api_port](#oob_financial_data_api_port)
-      - [oob_payment_api_host](#oob_payment_api_host)
-      - [oob_payment_api_port](#oob_payment_api_port)
-      - [introspection_client_id](#introspection_client_id)
-      - [introspection_client_secret](#introspection_client_secret)
-      - [auth_server_url](#auth_server_url)
-      - [auth_server_base_path](#auth_server_base_path)
-      - [public_fqdn](#public_fqdn)
-      - [public_fqdn_mtls](#public_fqdn_mtls)
-      - [internal_fqdn](#internal_fqdn)
-      - [supported_features](#supported_features)
-      - [brand_id](#brand_id)
+      - [kong\_admin\_uri](#kong_admin_uri)
+      - [kong\_admin\_tls\_skip\_verify](#kong_admin_tls_skip_verify)
+      - [kong\_admin\_token](#kong_admin_token)
+      - [kong\_admin\_username](#kong_admin_username)
+      - [kong\_admin\_password](#kong_admin_password)
+      - [kong\_api\_key](#kong_api_key)
+      - [oob\_status\_api\_host](#oob_status_api_host)
+      - [oob\_status\_api\_port](#oob_status_api_port)
+      - [oob\_consent\_api\_host](#oob_consent_api_host)
+      - [oob\_consent\_api\_port](#oob_consent_api_port)
+      - [cors\_origins](#cors_origins)
+      - [transaction\_limit\_global\_per\_second](#transaction_limit_global_per_second)
+      - [transaction\_limit\_per\_ip\_per\_minute](#transaction_limit_per_ip_per_minute)
+      - [api\_docs\_enabled](#api_docs_enabled)
+      - [oob\_financial\_data\_api\_host](#oob_financial_data_api_host)
+      - [oob\_financial\_data\_api\_port](#oob_financial_data_api_port)
+      - [oob\_payment\_api\_host](#oob_payment_api_host)
+      - [oob\_payment\_api\_port](#oob_payment_api_port)
+      - [introspection\_client\_id](#introspection_client_id)
+      - [introspection\_client\_secret](#introspection_client_secret)
+      - [auth\_server\_url](#auth_server_url)
+      - [auth\_server\_base\_path](#auth_server_base_path)
+      - [public\_fqdn](#public_fqdn)
+      - [public\_fqdn\_mtls](#public_fqdn_mtls)
+      - [internal\_fqdn](#internal_fqdn)
+      - [supported\_features](#supported_features)
+      - [brand\_id](#brand_id)
+      - [server\_org\_id](#server_org_id)
+      - [pubsub\_id](#pubsub_id)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
-      - [configure_kong_grafana_dashboard](#configure_kong_grafana_dashboard)
-      - [grafana_uri](#grafana_uri)
-      - [grafana_username](#grafana_username)
-      - [grafana_password](#grafana_password)
-      - [prometheus_uri](#prometheus_uri)
+      - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
+      - [grafana\_uri](#grafana_uri)
+      - [grafana\_username](#grafana_username)
+      - [grafana\_password](#grafana_password)
+      - [prometheus\_uri](#prometheus_uri)
   - [Executando os scripts Terraform](#executando-os-scripts-terraform)
     - [main.tf](#maintf)
     - [variables.tf](#variablestf)
@@ -200,7 +202,8 @@ FQDN público onde as APIs do open banking podem ser acessadas com mTLS
 
 #### internal_fqdn
 
-Parâmetro opcional para inclusão de um FQDN interno onde as APIs de Backoffice do open banking podem ser acessadas
+Parâmetro opcional para inclusão de um FQDN interno onde as APIs de Backoffice
+do open banking podem ser acessadas
 
 **Ex:** "internal.endereco.com.br"
 
@@ -213,6 +216,18 @@ Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-ba
 #### brand_id
 
 Vide a [definição](../shared-definitions.md#brand-id)
+
+#### server_org_id
+
+Identificador da organização transmissora de dados. Esse identificador deve ser
+único por instalção. Seu formato é um UUID. O conteúdo desta variável é o ID
+do diretório de participantes
+
+#### pubsub_id
+
+Identificador do componente de publish/subscribe do [Dapr](../shared-definitions.md#dapr).
+
+**Ex:** `event-publisher`
 
 ## Configuração do Grafana
 
