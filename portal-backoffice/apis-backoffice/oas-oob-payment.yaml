@@ -106,15 +106,6 @@ paths:
             pattern: '[\w\W\s]*'
             minLength: 1
             maxLength: 100
-        - name: X-Brand-ID
-          in: header
-          required: true
-          description: Nome simplificado da marca
-          schema:
-            type: string
-            example: cbanco
-            maxLength: 36
-            pattern: '[a-z\-]+'
       requestBody:
         content:
           application/json:
@@ -1896,16 +1887,6 @@ components:
           \d{2}:\d{2}:\d{2} (GMT|UTC)$
         minLength: 29
         maxLength: 29
-    xBrandId:
-      name: X-Brand-ID
-      in: header
-      required: true
-      description: Nome simplificado da marca
-      schema:
-        type: string
-        example: cbanco
-        maxLength: 36
-        pattern: '[a-z\-]+'
     xFapiCustomerIpAddress:
       name: x-fapi-customer-ip-address
       in: header
