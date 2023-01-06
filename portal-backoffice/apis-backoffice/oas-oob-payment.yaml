@@ -58,54 +58,6 @@ paths:
             type: string
             pattern: '[\w\W\s]*'
             maxLength: 2048
-        - name: x-fapi-auth-date
-          in: header
-          description: >-
-            Data em que o usuário logou pela última vez com o receptor.
-            Representada de acordo com a
-            [RFC7231](https://tools.ietf.org/html/rfc7231).Exemplo: Sun, 10 Sep
-            2017 19:43:31 UTC
-          required: false
-          schema:
-            type: string
-            pattern: >-
-              ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2}
-              (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}
-              \d{2}:\d{2}:\d{2} (GMT|UTC)$
-            minLength: 29
-            maxLength: 29
-        - name: x-fapi-customer-ip-address
-          in: header
-          description: >-
-            O endereço IP do usuário se estiver atualmente logado com o
-            receptor.
-          required: false
-          schema:
-            type: string
-            pattern: '[\w\W\s]*'
-            minLength: 1
-            maxLength: 100
-        - name: x-fapi-interaction-id
-          in: header
-          description: >-
-            Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado como um
-            ID de correlação. Se fornecido, o transmissor deve "reproduzir" esse
-            valor no cabeçalho de resposta.
-          required: false
-          schema:
-            type: string
-            pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-            minLength: 1
-            maxLength: 100
-        - name: x-customer-user-agent
-          in: header
-          description: Indica o user-agent que o usuário utiliza.
-          required: false
-          schema:
-            type: string
-            pattern: '[\w\W\s]*'
-            minLength: 1
-            maxLength: 100
       requestBody:
         content:
           application/json:
@@ -181,21 +133,6 @@ paths:
       responses:
         '200':
           description: Iniciação de pagamento Pix cancelada com sucesso.
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
           content:
             application/json:
               schema:
@@ -1836,9 +1773,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-      security:
-        - OAuth2ClientCredentials:
-            - payments
 components:
   parameters:
     paymentId:
@@ -1861,112 +1795,9 @@ components:
         type: string
         pattern: '[\w\W\s]*'
         maxLength: 2048
-    xCustomerUserAgent:
-      name: x-customer-user-agent
-      in: header
-      description: Indica o user-agent que o usuário utiliza.
-      required: false
-      schema:
-        type: string
-        pattern: '[\w\W\s]*'
-        minLength: 1
-        maxLength: 100
-    xFapiAuthDate:
-      name: x-fapi-auth-date
-      in: header
-      description: >-
-        Data em que o usuário logou pela última vez com o receptor. Representada
-        de acordo com a [RFC7231](https://tools.ietf.org/html/rfc7231).Exemplo:
-        Sun, 10 Sep 2017 19:43:31 UTC
-      required: false
-      schema:
-        type: string
-        pattern: >-
-          ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2}
-          (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4}
-          \d{2}:\d{2}:\d{2} (GMT|UTC)$
-        minLength: 29
-        maxLength: 29
-    xFapiCustomerIpAddress:
-      name: x-fapi-customer-ip-address
-      in: header
-      description: O endereço IP do usuário se estiver atualmente logado com o receptor.
-      required: false
-      schema:
-        type: string
-        pattern: '[\w\W\s]*'
-        minLength: 1
-        maxLength: 100
-    xFapiInteractionId:
-      name: x-fapi-interaction-id
-      in: header
-      description: >-
-        Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado como um ID
-        de correlação. Se fornecido, o transmissor deve "reproduzir" esse valor
-        no cabeçalho de resposta.
-      required: false
-      schema:
-        type: string
-        pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-        minLength: 1
-        maxLength: 100
-    XIdempotencyKey:
-      name: x-idempotency-key
-      in: header
-      description: >-
-        Cabeçalho HTTP personalizado. Identificador de solicitação exclusivo
-        para suportar a idempotência.
-      required: true
-      schema:
-        type: string
-        maxLength: 40
-        pattern: ^(?!\s)(.*)(\S)$
-  securitySchemes:
-    OpenId:
-      type: openIdConnect
-      openIdConnectUrl: https://auth.mockbank.poc.raidiam.io/.well-known/openid-configuration
-    OAuth2ClientCredentials:
-      type: oauth2
-      description: >
-        Fluxo OAuth necessário para que a iniciadora possa iniciar pagamentos.
-        Requer o processo de redirecionamento e autenticação do usuário.  
-
-        Apenas pagamentos iniciados pela mesma iniciadora de pagamentos podem
-        ser consultados ou cancelados através de modelo client credentials.
-      flows:
-        clientCredentials:
-          tokenUrl: https://authserver.example/token
-          scopes:
-            payments: Escopo necessário para acesso à API Payment Initiation.
-    OAuth2AuthorizationCode:
-      type: oauth2
-      description: >-
-        Fluxo OAuth necessário para que a iniciadora possa iniciar pagamentos.
-        Requer o processo de redirecionamento e autenticação do usuário.
-      flows:
-        authorizationCode:
-          authorizationUrl: https://authserver.example/token
-          tokenUrl: https://authserver.example/token
-          scopes:
-            payments: Escopo necessário para acesso à API Payment Initiation.
   responses:
     200PatchPixPayments:
       description: Iniciação de pagamento Pix cancelada com sucesso.
-      headers:
-        x-fapi-interaction-id:
-          description: >
-            Um UUID RFC4122 usado como um ID de correlação. O transmissor deve
-            usar o mesmo valor recebido na requisição para o cabeçalho de
-            resposta recebido na requisição, caso não tenha sido fornecido, deve
-            se usar um UUID RFC4122.
-          schema:
-            type: string
-            pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-            maxLength: 100
-            description: >-
-              Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado como
-              um ID de correlação. Se fornecido, o transmissor deve "reproduzir"
-              esse valor no cabeçalho de resposta.
       content:
         application/json:
           schema:
