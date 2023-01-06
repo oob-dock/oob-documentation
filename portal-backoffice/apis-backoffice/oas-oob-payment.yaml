@@ -58,6 +58,15 @@ paths:
             type: string
             pattern: '[\w\W\s]*'
             maxLength: 2048
+        - name: X-Brand-ID
+          in: header
+          required: true
+          description: Nome simplificado da marca
+          schema:
+            type: string
+            example: cbanco
+            maxLength: 36
+            pattern: '[a-z\-]+'
       requestBody:
         content:
           application/json:
@@ -898,21 +907,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '401':
           description: Cabeçalho de autenticação ausente/inválido ou token inválido
           content:
@@ -962,21 +956,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '403':
           description: >-
             O token tem escopo incorreto ou uma política de segurança foi
@@ -1028,21 +1007,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '404':
           description: O recurso solicitado não existe ou não foi implementado
           content:
@@ -1092,21 +1056,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '405':
           description: O consumidor tentou acessar o recurso com um método não suportado
           content:
@@ -1156,21 +1105,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '406':
           description: >-
             A solicitação continha um cabeçalho Accept diferente dos tipos de
@@ -1222,27 +1156,12 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '422':
           description: >-
             A solicitação foi bem formada, mas não pôde ser processada devido à
             lógica de negócios específica da solicitação.
           content:
-            application/jwt:
+            application/json:
               schema:
                 type: object
                 required:
@@ -1514,21 +1433,6 @@ paths:
                           realizar o pagamento.
                     meta:
                       requestDateTime: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '429':
           description: >-
             A operação foi recusada, pois muitas solicitações foram feitas
@@ -1581,21 +1485,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
             Retry-After:
               description: >
                 Cabeçalho que indica o tempo (em segundos) que o cliente deverá
@@ -1658,21 +1547,6 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
-          headers:
-            x-fapi-interaction-id:
-              description: >
-                Um UUID RFC4122 usado como um ID de correlação. O transmissor
-                deve usar o mesmo valor recebido na requisição para o cabeçalho
-                de resposta recebido na requisição, caso não tenha sido
-                fornecido, deve se usar um UUID RFC4122.
-              schema:
-                type: string
-                pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
-                maxLength: 100
-                description: >-
-                  Um UID [RFC4122](https://tools.ietf.org/html/rfc4122) usado
-                  como um ID de correlação. Se fornecido, o transmissor deve
-                  "reproduzir" esse valor no cabeçalho de resposta.
         '529':
           description: >-
             O site está sobrecarregado e a operação foi recusada, pois foi
@@ -1795,6 +1669,16 @@ components:
         type: string
         pattern: '[\w\W\s]*'
         maxLength: 2048
+    xBrandId:
+      name: X-Brand-ID
+      in: header
+      required: true
+      description: Nome simplificado da marca
+      schema:
+        type: string
+        example: cbanco
+        maxLength: 36
+        pattern: '[a-z\-]+'
   responses:
     200PatchPixPayments:
       description: Iniciação de pagamento Pix cancelada com sucesso.
@@ -2486,6 +2370,870 @@ components:
               meta:
                 type: object
                 description: Meta informação referente a API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    BadRequest:
+      description: >-
+        A requisição foi malformada, omitindo atributos obrigatórios, seja no
+        payload ou através de atributos na URL.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    Forbidden:
+      description: O token tem escopo incorreto ou uma política de segurança foi violada
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    InternalServerError:
+      description: Ocorreu um erro no gateway da API ou no microsserviço
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    MethodNotAllowed:
+      description: O consumidor tentou acessar o recurso com um método não suportado
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    NotAcceptable:
+      description: >-
+        A solicitação continha um cabeçalho Accept diferente dos tipos de mídia
+        permitidos ou um conjunto de caracteres diferente de UTF-8
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    NotFound:
+      description: O recurso solicitado não existe ou não foi implementado
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    SiteIsOverloaded:
+      description: >-
+        O site está sobrecarregado e a operação foi recusada, pois foi atingido
+        o limite máximo de TPS global, neste momento.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    TooManyRequests:
+      description: >-
+        A operação foi recusada, pois muitas solicitações foram feitas dentro de
+        um determinado período ou o limite global de requisições concorrentes
+        foi atingido
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+        Retry-After:
+          description: >
+            Cabeçalho que indica o tempo (em segundos) que o cliente deverá
+            aguardar para realizar uma nova tentativa de chamada. Este cabeçalho
+            deverá estar presente quando o código HTTP de retorno for 429 Too
+            many requests.
+          schema:
+            description: >
+              Cabeçalho que indica o tempo (em segundos) que o cliente deverá
+              aguardar para realizar uma nova tentativa de chamada. Este
+              cabeçalho deverá estar presente quando o código HTTP de retorno
+              for 429 Too many requests.
+            type: integer
+    UnprocessableEntityConsents:
+      description: >-
+        A solicitação foi bem formada, mas não pôde ser processada devido à
+        lógica de negócios específica da solicitação.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 3
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      type: string
+                      enum:
+                        - FORMA_PAGAMENTO_INVALIDA
+                        - DATA_PAGAMENTO_INVALIDA
+                        - DETALHE_PGTO_INVALIDO
+                        - PARAMETRO_NAO_INFORMADO
+                        - PARAMETRO_INVALIDO
+                        - ERRO_IDEMPOTENCIA
+                        - NAO_INFORMADO
+                      example: FORMA_PAGAMENTO_INVALIDA
+                      description: >
+                        Códigos de erros previstos na criação de consentimento
+                        para a iniciação de pagamentos:  
+
+                        • FORMA_PAGAMENTO_INVALIDA: Forma de pagamento
+                        inválida.  
+
+                        • DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida.  
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento
+                        inválido.  
+
+                        • PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  
+
+                        • PARAMETRO_INVALIDO: Parâmetro inválido.  
+
+                        • ERRO_IDEMPOTENCIA: Erro idempotência.  
+
+                        • NAO_INFORMADO: Não informado.
+                    title:
+                      type: string
+                      maxLength: 255
+                      pattern: '[\w\W\s]*'
+                      example: Forma de pagamento inválida.
+                      description: >
+                        Título específico do erro reportado, de acordo com o
+                        código enviado:  
+
+                        • FORMA_PAGAMENTO_INVALIDA: Forma de pagamento
+                        inválida.  
+
+                        • DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida.  
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento
+                        inválido.  
+
+                        • PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  
+
+                        • PARAMETRO_INVALIDO: Parâmetro inválido.  
+
+                        • ERRO_IDEMPOTENCIA: Erro idempotência.  
+
+                        • NAO_INFORMADO: Não informado.
+                    detail:
+                      type: string
+                      maxLength: 2048
+                      pattern: '[\w\W\s]*'
+                      example: Forma de pagamento [Modalidade] não suportada.
+                      description: >
+                        Descrição específica do erro de acordo com o código
+                        reportado:  
+
+                        • FORMA_PAGAMENTO_INVALIDA: Forma de pagamento
+                        [Modalidade] não suportada.  
+
+                        • DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida
+                        para a forma de pagamento selecionada.  
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Parâmetro [nome_campo] não
+                        obedece às regras de negócio.  
+
+                        • PARAMETRO_NAO_INFORMADO: Parâmetro [nome_campo]
+                        obrigatório não informado.  
+
+                        • PARAMETRO_INVALIDO: Parâmetro [nome_campo] não obedece
+                        as regras de formatação esperadas.  
+
+                        • ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data)
+                        diverge do conteúdo associado a esta chave de
+                        idempotência (x-idempotency-key).  
+
+                        • NAO_INFORMADO: Não reportado/identificado pela
+                        instituição detentora de conta.
+              meta:
+                type: object
+                description: Meta informação referente a API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+          examples:
+            Forma de pagamento inválida:
+              summary: Forma de pagamento inválida
+              value:
+                errors:
+                  - code: FORMA_PAGAMENTO_INVALIDA
+                    title: Forma de pagamento inválida.
+                    detail: Forma de pagamento [Modalidade] não suportada.
+                meta:
+                  requestDateTime: '2021-05-21T08:30:00Z'
+    UnprocessableEntityPixPayments:
+      description: >-
+        A solicitação foi bem formada, mas não pôde ser processada devido à
+        lógica de negócios específica da solicitação.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 9
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      type: string
+                      enum:
+                        - SALDO_INSUFICIENTE
+                        - BENEFICIARIO_INCOMPATIVEL
+                        - VALOR_INCOMPATIVEL
+                        - VALOR_ACIMA_LIMITE
+                        - VALOR_INVALIDO
+                        - COBRANCA_INVALIDA
+                        - CONSENTIMENTO_INVALIDO
+                        - JANELA_OPER_INVALIDA
+                        - PARAMETRO_NAO_INFORMADO
+                        - PARAMETRO_INVALIDO
+                        - NAO_INFORMADO
+                        - PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+                        - DETALHE_PAGAMENTO_INVALIDO
+                        - PAGAMENTO_RECUSADO_DETENTORA
+                        - PAGAMENTO_RECUSADO_SPI
+                        - ERRO_IDEMPOTENCIA
+                      example: SALDO_INSUFICIENTE
+                      description: >
+                        Códigos de erros previstos na criação da iniciação de
+                        pagamento:
+
+
+                        • SALDO_INSUFICIENTE: Esta conta não possui saldo
+                        suficiente para realizar o pagamento.
+
+
+                        • BENEFICIARIO_INCOMPATIVEL: O beneficiário informado no
+                        consentimento não é o mesmo do esperado pelo DICT.
+
+
+                        • VALOR_INCOMPATIVEL: O valor informado no consentimento
+                        não é o mesmo valor do informado no payload de
+                        pagamento.
+
+
+                        • VALOR_ACIMA_LIMITE: O valor (ou quantidade de
+                        transações) ultrapassa a faixa de limite parametrizada
+                        na detentora para permitir a realização de transações
+                        pelo cliente.
+
+
+                        • VALOR_INVALIDO: O valor enviado não é válido para o QR
+                        Code informado.
+
+
+                        • COBRANCA_INVALIDA: Validação de expiração, validação
+                        de vencimento, Status Válido.
+
+
+                        • CONSENTIMENTO_INVALIDO: Consentimento inválido (status
+                        não é "authorised" ou está expirado).
+
+
+                        • JANELA_OPER_INVALIDA: Requisição está fora da janela
+                        de funcionamento.
+
+
+                        • PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  
+
+
+                        • PARAMETRO_INVALIDO: Parâmetro inválido.
+
+
+                        • NAO_INFORMADO: Não informada pela detentora de conta.
+
+
+                        • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Dados do pagamento
+                        divergentes dos dados do consentimento.
+
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento
+                        inválido.
+
+
+                        • PAGAMENTO_RECUSADO_DETENTORA: Pagamento recusado pela
+                        detentora de conta.
+
+
+                        • PAGAMENTO_RECUSADO_SPI: Pagamento recusado no Sistema
+                        de Pagamentos Instantâneos (SPI).
+
+
+                        • ERRO_IDEMPOTENCIA: Erro idempotência.
+                    title:
+                      type: string
+                      maxLength: 255
+                      pattern: '[\w\W\s]*'
+                      example: Saldo insuficiente.
+                      description: >
+                        Título específico do erro reportado, de acordo com o
+                        código enviado:
+
+
+                        • SALDO_INSUFICIENTE: Saldo insuficiente.
+
+
+                        • BENEFICIARIO_INCOMPATIVEL: Beneficiário incompatível.
+
+
+                        • VALOR_INCOMPATIVEL: Valor da transação incompatível.
+
+
+                        • VALOR_ACIMA_LIMITE: Acima do limite estabelecido.
+
+
+                        • VALOR_INVALIDO: Valor inválido.
+
+
+                        • COBRANCA_INVALIDA: Cobrança inválida.
+
+
+                        • CONSENTIMENTO_INVALIDO: Consentimento inválido.
+
+
+                        • JANELA_OPER_INVALIDA: Janela de operação inválida.
+
+
+                        • PARAMETRO_NAO_INFORMADO: Parâmetro obrigatório não
+                        informado.
+
+
+                        • PARAMETRO_INVALIDO: Parâmetro com valor inválido.
+
+
+                        • NAO_INFORMADO: Não informado.
+
+
+                        • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Divergência entre
+                        pagamento e consentimento.
+
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento
+                        inválido.
+
+
+                        • PAGAMENTO_RECUSADO_DETENTORA: Pagamento recusado pela
+                        detentora de conta.
+
+
+                        • PAGAMENTO_RECUSADO_SPI: Pagamento recusado no Sistema
+                        de Pagamentos Instantâneos (SPI).
+
+
+                        • ERRO_IDEMPOTENCIA: Erro idempotência.
+                    detail:
+                      type: string
+                      maxLength: 2048
+                      pattern: '[\w\W\s]*'
+                      example: >-
+                        A conta selecionada não possui saldo suficiente para
+                        realizar o pagamento.
+                      description: >
+                        Descrição específica do erro de acordo com o código
+                        reportado:
+
+
+                        • SALDO_INSUFICIENTE: A conta selecionada não possui
+                        saldo suficiente para realizar o pagamento.
+
+
+                        • BENEFICIARIO_INCOMPATIVEL: O beneficiário informado no
+                        consentimento não é o mesmo do esperado pelo DICT.
+
+
+                        • VALOR_INCOMPATIVEL: O valor informado no consentimento
+                        não é o mesmo valor do informado no payload de
+                        pagamento.
+
+
+                        • VALOR_ACIMA_LIMITE: O valor (ou quantidade de
+                        transações) ultrapassa a faixa de limite parametrizada
+                        na detentora para permitir a realização de transações
+                        pelo cliente.
+
+
+                        • VALOR_INVALIDO: O valor enviado não é válido para o QR
+                        Code informado.
+
+
+                        • COBRANCA_INVALIDA: Validação de expiração, validação
+                        de vencimento ou Status Válido.
+
+
+                        • CONSENTIMENTO_INVALIDO: Consentimento inválido (status
+                        diferente de "AUTHORISED" ou está expirado).
+
+
+                        • JANELA_OPER_INVALIDA: Requisição está fora da janela
+                        de funcionamento.
+
+
+                        • PARAMETRO_NAO_INFORMADO: endToEndId
+
+
+                        • PARAMETRO_INVALIDO: endToEndId
+
+
+                        • NAO_INFORMADO: Não reportado/identificado pela
+                        instituição detentora de conta.
+
+
+                        • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Dados do pagamento
+                        divergentes dos dados do consentimento.
+
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Parâmetro [nome_campo] não
+                        obedece às regras de negócio.
+
+
+                        • PAGAMENTO_RECUSADO_DETENTORA: [descrição do motivo de
+                        recusa].
+
+
+                        • PAGAMENTO_RECUSADO_SPI: [código de erro conforme
+                        tabela de domínios reason PACS.002].
+
+
+                        • ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data)
+                        diverge do conteúdo associado a esta chave de
+                        idempotência (x-idempotency-key).
+              meta:
+                type: object
+                description: Meta informação referente a API requisitada.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Data e hora da consulta, conforme especificação RFC-3339,
+                      formato UTC.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+          examples:
+            Saldo insuficiente:
+              summary: Saldo insuficiente
+              value:
+                errors:
+                  - code: SALDO_INSUFICIENTE
+                    title: Saldo insuficiente.
+                    detail: >-
+                      A conta selecionada não possui saldo suficiente para
+                      realizar o pagamento.
+                meta:
+                  requestDateTime: '2021-05-21T08:30:00Z'
+    Unauthorized:
+      description: Cabeçalho de autenticação ausente/inválido ou token inválido
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Código de erro específico do endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Título legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Descrição legível por humanos deste erro específico
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta informações referente à API requisitada.
                 required:
                   - requestDateTime
                 properties:
