@@ -103,7 +103,7 @@ Responsável pela listagem de consentimentos autorizados.
 
         PATCH /open-banking/oob-payments/v2/pix/payments/{paymentId}
 
-Responsável pela revogação do pagamento relacionado identificador do open-banking *paymentId* informado.
+Responsável pela revogação do pagamento relacionado ao identificador do open-banking *paymentId* informado.
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir
