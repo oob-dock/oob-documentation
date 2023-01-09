@@ -101,7 +101,7 @@ Responsável pela listagem de consentimentos autorizados.
 
 ## Revogação de pagamento
 
-        PATCH /open-banking/oob-payment/v2/pix/payments/{paymentId}
+        PATCH /open-banking/oob-payments/v2/pix/payments/{paymentId}
 
 Responsável pela revogação do pagamento relacionado identificador do open-banking *paymentId* informado.
 ## Autenticação
