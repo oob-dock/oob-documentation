@@ -8,7 +8,7 @@ info:
 servers:
   - url: https://api.banco.com.br/open-banking/oob-payments/v2
     description: Servidor de Produção
-  - url: https://apih.banco.com.br/open-banking/oob-payments/v2
+  - url: https://apih.banco.com.br/open-banking/oob-payment/v2
     description: Servidor de Homologação
 tags:
   - name: Pagamentos
@@ -58,6 +58,15 @@ paths:
             type: string
             pattern: '[\w\W\s]*'
             maxLength: 2048
+        - name: X-Brand-ID
+          in: header
+          required: true
+          description: Nome simplificado da marca
+          schema:
+            type: string
+            example: cbanco
+            maxLength: 36
+            pattern: '[a-z\-]+'
       requestBody:
         content:
           application/json:
@@ -1476,6 +1485,7 @@ paths:
                         maxLength: 20
                         format: date-time
                         example: '2021-05-21T08:30:00Z'
+          headers:
             Retry-After:
               description: >
                 Cabeçalho que indica o tempo (em segundos) que o cliente deverá
@@ -1660,6 +1670,16 @@ components:
         type: string
         pattern: '[\w\W\s]*'
         maxLength: 2048
+    xBrandId:
+      name: X-Brand-ID
+      in: header
+      required: true
+      description: Nome simplificado da marca
+      schema:
+        type: string
+        example: cbanco
+        maxLength: 36
+        pattern: '[a-z\-]+'
   responses:
     200PatchPixPayments:
       description: Iniciação de pagamento Pix cancelada com sucesso.
@@ -2763,6 +2783,7 @@ components:
                     maxLength: 20
                     format: date-time
                     example: '2021-05-21T08:30:00Z'
+      headers:
         Retry-After:
           description: >
             Cabeçalho que indica o tempo (em segundos) que o cliente deverá
