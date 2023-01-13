@@ -1188,6 +1188,7 @@ paths:
                             - PAGAMENTO_RECUSADO_DETENTORA
                             - PAGAMENTO_RECUSADO_SPI
                             - ERRO_IDEMPOTENCIA
+                            - PAGAMENTO_NAO_PERMITE_CANCELAMENTO
                           example: SALDO_INSUFICIENTE
                           description: >
                             Códigos de erros previstos na criação da iniciação
@@ -1258,6 +1259,9 @@ paths:
 
 
                             • ERRO_IDEMPOTENCIA: Erro idempotência.
+
+
+                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Pagamento não permite cancelamento.
                         title:
                           type: string
                           maxLength: 255
@@ -1321,6 +1325,9 @@ paths:
 
 
                             • ERRO_IDEMPOTENCIA: Erro idempotência.
+
+
+                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Pagamento não permite cancelamento.
                         detail:
                           type: string
                           maxLength: 2048
@@ -1398,6 +1405,9 @@ paths:
                             • ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim
                             data) diverge do conteúdo associado a esta chave de
                             idempotência (x-idempotency-key).
+                            
+
+                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Status do pagamento não permite cancelamento.
                   meta:
                     type: object
                     description: Meta informação referente a API requisitada.
