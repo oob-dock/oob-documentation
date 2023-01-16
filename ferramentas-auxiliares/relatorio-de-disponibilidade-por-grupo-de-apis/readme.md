@@ -16,8 +16,8 @@ Open Finance Brasil **OFB**.
 
 As informações que poderão ser obtidas com eles são:
 
-- a quantidade de chamadas de API em cada mês, para um agrupamento de endpoints
-- a disponibilidade média no período
+- a quantidade de chamadas recebidas no período;
+- a disponibilidade média no período.
 
 **OBS:** fica a cargo de nossos clientes
 rodar os scripts e formatar as informações da forma e no período exigido pelo OFB.
