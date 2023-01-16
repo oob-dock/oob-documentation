@@ -11,7 +11,7 @@
 ## Introdução
 
 A Opus está fornecendo alguns scripts SQL que ajudarão os clientes na hora da coleta
-de dados para a elaboração do relatório semanal exigido pelo
+de dados para a elaboração do relatório semanal de disponibilidade exigido pelo
 Open Finance Brasil **OFB**.
 
 As informações que poderão ser obtidas com eles são:
