@@ -119,7 +119,7 @@ uso de chaves, dificultando o uso da mesma por partes não autorizadas.
 ## Dapr
 
 O [Dapr](https://dapr.io/) é um *Runtime* de Aplicações Distribuídas que visa
-simplificar a conectividade entre microsserviços atráveis de vários 
+simplificar a conectividade entre microsserviços atráves de vários 
 [blocos de construção](https://docs.dapr.io/concepts/building-blocks-concept/).
 
 O Opus Open Finance faz uso do seguinte bloco de construção do Dapr:
