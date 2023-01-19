@@ -117,8 +117,8 @@ SELECT
   :final_date as final_date,
   SUM(qty_requests) as qty_requests
 FROM
-  endpoint_metric epm on (edp.id = epm.id_endpoint)
-LEFT JOIN "endpoint" edp
+  endpoint_metric epm
+LEFT JOIN "endpoint" edp on edp.id = epm.id_endpoint
 WHERE "date" BETWEEN :initial_date AND :final_date AND edp.endpoint_url = ANY(:endpoints_services);
 ```
 
