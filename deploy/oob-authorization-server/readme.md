@@ -100,8 +100,8 @@ Ex: `https://idp.bank.com.br/jwks.jwks`
 ### privateKeys
 
 Lista de chaves privadas utilizadas para encriptar ou assinar mensagens. A lista
-deve conter pelo menos uma chave com use = sig (assinatura) e uma com use = enc (encriptação).
-Vide a [definição](../shared-definitions.md#formatos-de-chave-privada-suportados)
+deve conter pelo menos uma chave com use = sig (assinatura) e uma com use = enc
+(encriptação). Vide a [definição](../shared-definitions.md#formatos-de-chave-privada-suportados)
 para detalhes sobre os formatos de chaves suportados.
 
 * certSecretName: Nome do secret que contém a chave privada
@@ -116,8 +116,10 @@ possíveis são `sig` (assinatura) ou `enc` (encriptação)
   chave privada (opcional)
 
 As propriedades `passphraseSecretName` e `passphraseSecretKey` só devem ser
-definidas para chaves criptografadas. Se elas não forem informadas assume-se que
-as chaves são abertas.
+definidas para chaves criptografadas. Se elas não forem informadas assume-se
+que as chaves são abertas (**Atenção:** Par de propriedades **obsoleta**
+(***deprecated***). O Opus Open Banking pode parar de oferecer suporte à chaves
+criptografadas em versões futuras).
 
 Exemplo:
 
