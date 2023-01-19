@@ -111,9 +111,9 @@ para detalhes sobre os formatos de chaves suportados.
 * use: Finalidade de uso da chave pelo authorization server. Os valores
 possíveis são `sig` (assinatura) ou `enc` (encriptação)
 * passphraseSecretName: Nome do secret que contém a senha para a chave privada
-  (opcional)
+  (opcional) - ***deprecated***
 * passphraseSecretKey: Nome da propriedade do secret que contém a senha para a
-  chave privada (opcional)
+  chave privada (opcional) - ***deprecated***
 
 As propriedades `passphraseSecretName` e `passphraseSecretKey` só devem ser
 definidas para chaves criptografadas. Se elas não forem informadas assume-se

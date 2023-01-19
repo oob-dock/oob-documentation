@@ -220,7 +220,7 @@ Vide a [definição](../shared-definitions.md#brand-id)
 
 #### report_pcm_enabled
 
-Define se as rotas do Kong devem ou não permitir a instalção do plugin que
+Define se as rotas do Kong devem ou não permitir a instalação do plugin que
 gera eventos de chamadas de API a serem reportadas à Plataforma de Coleta de
 Métricas (PCM).
 

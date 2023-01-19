@@ -12,16 +12,15 @@ ele oferece suporte à bases Postgres.
 Este módulo consome e processa eventos publicados em uma fila de mensagens.
 Portanto, é necessário que exsita um *message broker* instalado e configurado
 corretamente que possa ser utilizado pelo OOF PCM Service e que seja compatível
-com o [Dapr](/deploy/shared-definitions.md#dapr). A lista de *brokers*
-compatíveis pode ser conferida [aqui](https://docs.dapr.io/reference/components-reference/supported-pubsub/).
+com o [Dapr](/deploy/shared-definitions.md#dapr).
 
 ### Dapr
 
-O módulo OOF PCM Service faz uso do [Dapr](/deploy/shared-definitions.md#dapr)
-para realizar a subscrição à eventos de chamadas de API que devem ser
-reportadas à Plataforma de Coleta de Métricas (PCM). Este módulo também
-aplica (via Helm) um componente do tipo [cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
-utilizado para sensibilizar o envio dos reportes para a PCM periodicamente.
+O módulo OOF PCM Service faz uso do Dapr para realizar a subscrição à eventos
+de chamadas de API que devem ser reportadas à Plataforma de Coleta de Métricas
+(PCM). Este módulo também aplica (via Helm) um componente do tipo
+[cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
+utilizado para fazer o envio dos reportes para a PCM periodicamente.
 
 Dado este cenário, a instalação do Dapr bem como aplicação do componente
 de *binding* são requisitos necessários para o correto funcionamento deste
@@ -83,7 +82,7 @@ A instalação do módulo é feita via Helm Chart.
 Configuração de acesso ao banco.
 
 * `host`: Host do banco.
-* `port`: Porta do banco. **Default:** 5432.
+* `port`: Porta do banco (opcional). **Default:** 5432.
 * `name`: Nome da base.
 * `username`: Nome do usuário de acesso ao banco.
 * `password`: Senha do usuário de acesso ao banco.
@@ -103,13 +102,11 @@ Configuração de acesso ao banco.
 
 Configurações relacionadas ao Dapr.
 
-* `dapr.enabled`: Quando "true", durante a subida do serviço, informa ao Dapr
-que esta aplicação deverá ser monitorada por ele e fará uso de seus
-componentes. Neste cenário o Dapr sobe um *sidecar* atrelado à aplicação.
-Quando "false" não ocorre a subida do *sidecar* e a aplicação não consegue
-estabelecer comunicação e fazer uso dos componentes do Dapr. **Default:** "true".
-* `dapr.pubSubId`: Nome do componente de pub/sub do Dapr no qual a aplicação
-deverá se conectar para receber os eventos desejados.
+* `dapr.enabled`: Habilita o Dapr na aplicação para realizar o consumo de
+eventos.
+Possíveis valores: `true` ou `false`. **Default:** `true`.
+* `dapr.pubSubId`: Identificador do componente de pub/sub do Dapr a ser
+utilizado.
 
 **Exemplo:**
 
@@ -121,11 +118,16 @@ deverá se conectar para receber os eventos desejados.
 
 ### brand.ids
 
-Identificadores das marcas para as quais o serviço irá realizar a subscrição
-para recebimento dos eventos. Uma lista com mais de um elemento deve utilizar
-vírgula (,) como delimitador.
+Identificador(es) da(s) marca(s) da instalação, separados por vírgulas.
 
-**Exemplo:**
+**Exemplo 1:**
+
+```yaml
+  brand:
+    ids: "marca-unica"
+```
+
+**Exemplo 2:**
 
 ```yaml
   brand:
@@ -138,13 +140,13 @@ Lista de *software statements* composta por: certificado BRCAC, chave privada e
 identificador do cliente. Essas informações são necessárias para que o serviço
 consiga obter o token de acesso que possibilita o envio de reportes para a PCM.
 
-* `certSecretName`: Nome do secret que contém o certificado BRCAC.
+* `certSecretName`: Nome do secret que contém o(s) certificado(s) BRCAC.
 * `certSecretKey`: Nome da propriedade do secret que contém o certificado
 BRCAC.
-* `privateKeySecretName`: Nome do secret que contém a chave privada.
+* `privateKeySecretName`: Nome do secret que contém a(s) chave(s) privada(s).
 * `privateKeySecretKey`: Nome da propriedade do secret que contém a chave
 privada.
-* `clientId`: Identificador do cliente no diretório de participantes.
+* `clientId`: Identificador(es) do(s) cliente(s) no diretório de participantes.
 
 **Exemplo:**
 
@@ -155,6 +157,11 @@ privada.
       privateKeySecretName: "pcm-organization-tls"
       privateKeySecretKey: "tls.key"
       clientId: "0b4841d2-773f-4286-92a0-611f6d066545"
+    - certSecretName: "pcm-organization-tls"
+      certSecretKey: "tls2.crt"
+      privateKeySecretName: "pcm-organization-tls"
+      privateKeySecretKey: "tls2.key"
+      clientId: "1dfbae86-ce9b-41d9-bf29-832317f26b31"
 ```
 
 ### pcm
@@ -208,17 +215,4 @@ valores desta configuração são: `debug`, `info`, `warn`, `erro` e `fatal`.
 additionalVars:
   - name: LOG_LEVEL
     value: "debug"
-```
-
-### PCM_REPORT_BATCH_SIZE
-
-Define quantos eventos serão enviados a cada iteração para cada
-*software statement* configurado no serviço. Default: 1000.
-
-**Exemplo:**
-
-```yaml
-additionalVars:
-  - name: PCM_REPORT_BATCH_SIZE
-    value: "500"
 ```
