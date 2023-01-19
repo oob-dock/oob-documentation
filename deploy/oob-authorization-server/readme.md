@@ -117,9 +117,9 @@ possíveis são `sig` (assinatura) ou `enc` (encriptação)
 
 As propriedades `passphraseSecretName` e `passphraseSecretKey` só devem ser
 definidas para chaves criptografadas. Se elas não forem informadas assume-se
-que as chaves são abertas (**Atenção:** Par de propriedades **obsoleta**
+que as chaves são abertas. **Atenção:** Par de propriedades **obsoleta**
 (***deprecated***). O Opus Open Banking pode parar de oferecer suporte à chaves
-criptografadas em versões futuras).
+criptografadas em versões futuras.
 
 Exemplo:
 
