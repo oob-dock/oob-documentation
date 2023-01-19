@@ -220,5 +220,5 @@ Define quantos eventos serão enviados a cada iteração para cada
 ```yaml
 additionalVars:
   - name: PCM_REPORT_BATCH_SIZE
-    value: "5000"
+    value: "500"
 ```
