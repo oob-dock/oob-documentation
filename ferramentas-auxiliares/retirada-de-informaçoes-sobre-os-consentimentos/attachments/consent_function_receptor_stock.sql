@@ -1,7 +1,7 @@
 CREATE OR REPLACE FUNCTION consent_receptor_stock()
     RETURNS TABLE (
         org_name VARCHAR,
-        qtd_Estoque_Consentimentos_Ativos INT
+        qtd_Estoque_Consentimentos_Ativos BIGINT
 ) 
 LANGUAGE SQL
 AS $$
