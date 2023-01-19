@@ -30,6 +30,7 @@
       - [internal\_fqdn](#internal_fqdn)
       - [supported\_features](#supported_features)
       - [brand\_id](#brand_id)
+      - [report\_pcm\_enabled](#report_pcm_enabled)
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
   - [Configuração do Grafana](#configuração-do-grafana)
@@ -217,11 +218,18 @@ Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-ba
 
 Vide a [definição](../shared-definitions.md#brand-id)
 
+#### report_pcm_enabled
+
+Define se as rotas do Kong devem ou não permitir a instalação do plugin que
+gera eventos de chamadas de API a serem reportadas à Plataforma de Coleta de
+Métricas (PCM).
+
+**Default:** `false`
+**Valores possíveis:** `true` ou `false`
+
 #### server_org_id
 
-Identificador da organização transmissora de dados. Esse identificador deve ser
-único por instalção. Seu formato é um UUID. O conteúdo desta variável é o ID
-do diretório de participantes
+Identificador da organização no diretório de participantes.
 
 #### pubsub_id
 
