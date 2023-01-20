@@ -38,13 +38,13 @@ executando o seguinte [script](attachments/consent_function_authorization_client
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM extract_report_data('<data_inicio>','<data_fim>');
+SELECT * FROM consent_authorization_client('<data_inicio>','<data_fim>');
 ```
 
 Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
 
 ```sql
-SELECT * FROM extract_report_data('2022-01-02','2022-10-08');
+SELECT * FROM consent_authorization_client('2022-01-02','2022-10-08');
 ```
 
 ### Consentimento transmissor - informações do authorization server
@@ -74,7 +74,7 @@ SELECT * FROM extract_report_data('2022-10-02','2022-10-08');
 Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Consent**
 
-Primeiramente, deve ser criada a function extract_report_data executando o seguinte [script](attachments/consent_function_extract_usage_report.sql).
+Primeiramente, deve ser criada a function CONSENT_USAGE_REPORT executando o seguinte [script](attachments/consent_function_extract_usage_report.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
