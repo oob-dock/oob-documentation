@@ -115,3 +115,14 @@ privadas para todos os algoritmos, não apenas para o RSA.
 
 Para ambos formatos há suporte de uso de senha, a fim de aumentar a segurança no
 uso de chaves, dificultando o uso da mesma por partes não autorizadas.
+
+## Dapr
+
+O [Dapr](https://dapr.io/) é um *Runtime* de Aplicações Distribuídas que visa
+simplificar a conectividade entre microsserviços atráves de vários
+[blocos de construção](https://docs.dapr.io/concepts/building-blocks-concept/).
+
+O Opus Open Finance faz uso do seguinte bloco de construção do Dapr:
+
+* Publish and Subscribe: Utilizado para publicar e consumir eventos de chamadas
+de APIs que devem ser reportados para a PCM (Plataform de Coleta de Métricas)

@@ -1407,7 +1407,7 @@ paths:
                             idempotência (x-idempotency-key).
                             
 
-                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Status do pagamento não permite cancelamento.
+                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Pagamento não permite cancelamento.
                   meta:
                     type: object
                     description: Meta informação referente a API requisitada.
