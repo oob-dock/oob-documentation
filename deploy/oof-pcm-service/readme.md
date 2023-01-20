@@ -10,7 +10,7 @@ ele oferece suporte à bases Postgres.
 ### Fila de mensagens
 
 Este módulo consome e processa eventos publicados em uma fila de mensagens.
-Portanto, é necessário que exsita um *message broker* instalado e configurado
+Portanto, é necessário que exista um *message broker* instalado e configurado
 corretamente que possa ser utilizado pelo OOF PCM Service e que seja compatível
 com o [Dapr](/deploy/shared-definitions.md#dapr).
 
