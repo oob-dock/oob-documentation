@@ -224,7 +224,7 @@ Define se as rotas do Kong devem ou não permitir a instalação do plugin que
 gera eventos de chamadas de API a serem reportadas à Plataforma de Coleta de
 Métricas (PCM).
 
-**Default:** `false`
+**Default:** `true`
 **Valores possíveis:** `true` ou `false`
 
 #### server_org_id
