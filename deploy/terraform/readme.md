@@ -31,6 +31,7 @@
       - [supported\_features](#supported_features)
       - [brand\_id](#brand_id)
       - [report\_pcm\_enabled](#report_pcm_enabled)
+      - [x\_forwarded\_for\_header\_name](#x_forwarded_for_header_name)
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
   - [Configuração do Grafana](#configuração-do-grafana)
@@ -226,6 +227,15 @@ Métricas (PCM).
 
 **Default:** `true`
 **Valores possíveis:** `true` ou `false`
+
+#### x_forwarded_for_header_name
+
+Define qual será o nome do header utilizado para identificar o endereço IP
+originário do request. No contexto de PCM este header é utilizado para
+preencher o campo `additionalInfo.clientIp` no evento gerado pelo plugin
+`oob-api-event` do Kong.
+
+**Default:** `X-Forwarded-For`
 
 #### server_org_id
 
