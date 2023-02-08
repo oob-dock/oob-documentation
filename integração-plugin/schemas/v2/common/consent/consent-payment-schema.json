@@ -36,6 +36,9 @@
                 "resources": {
                     "$ref": "./common-consent-schema.json#/$defs/AcceptedResources"
                 },
+                "version": {
+                    "$ref": "./common-consent-schema.json#/$defs/Version"
+                },
                 "expirationDateTime": {
                     "$ref": "./common-consent-schema.json#/$defs/ExpirationDateTime"
                 },

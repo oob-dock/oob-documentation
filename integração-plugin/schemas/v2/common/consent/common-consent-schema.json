@@ -303,6 +303,17 @@
             ],
             "maxLength": 100
         },
+        "Version": {
+            "type": "string",
+            "description": "Versão do consentimento relacionado ao pagamento.",
+            "enum": [
+                "V1",
+                "V2"
+            ],
+            "examples": [
+                "V1"
+            ]
+        },
         "ExpirationDateTime": {
             "description": "Data e hora de expiração da permissão. De preenchimento obrigatório, reflete a data limite de validade do consentimento. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC (UTC time format).",
             "type": "string",
