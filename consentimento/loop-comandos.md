@@ -38,6 +38,7 @@ definido pelo AS através do campo `acr` do comando, conforme exemplo abaixo:
         "name": "Nome TPP",
         "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg"
     },
+    "type": "PAYMENT",
     "authenticateCommand": {
         "acr": "urn:brasil:openbanking:loa3",
         "jti": "94a328c2-c72a-4cab-84a2-2df2b106b2af"
@@ -201,6 +202,10 @@ usuário é do sucesso do consentimento. O tratamento de retorno ao TPP deve
 ser seguido como descrito no `error`.
 
 ## Changelog
+
+### 2023-02-15 - v1.2.0
+
+- Adição do campo *type* (tipo do consentimento) no retorno do command authenticate.
 
 ### 2022-11-09 - v1.1.2
 
