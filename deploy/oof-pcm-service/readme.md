@@ -83,8 +83,8 @@ Configuração de acesso ao banco.
 
 * `host`: Host do banco.
 * `port`: Porta do banco (opcional). **Default:** `5432`.
-* `name`: Nome da base.
-* `schema`: Schema da base (opcional). **Default:** `public`.
+* `name`: Nome da banco.
+* `schema`: Schema do banco (opcional). **Default:** `public`.
 * `username`: Nome do usuário de acesso ao banco.
 * `password`: Senha do usuário de acesso ao banco.
 
