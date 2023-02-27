@@ -82,8 +82,9 @@ A instalação do módulo é feita via Helm Chart.
 Configuração de acesso ao banco.
 
 * `host`: Host do banco.
-* `port`: Porta do banco (opcional). **Default:** 5432.
+* `port`: Porta do banco (opcional). **Default:** `5432`.
 * `name`: Nome da base.
+* `schema`: Schema da base (opcional). **Default:** `public`.
 * `username`: Nome do usuário de acesso ao banco.
 * `password`: Senha do usuário de acesso ao banco.
 
@@ -94,6 +95,7 @@ Configuração de acesso ao banco.
     host: "oof_pcm_service"
     port: 5432
     name: "oof_pcm_service"
+    schema: "public"
     username: "oof_pcm_service"
     password: "oof_pcm_service"
 ```
