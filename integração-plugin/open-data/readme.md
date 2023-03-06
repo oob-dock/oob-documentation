@@ -71,7 +71,7 @@ Para que a rota padrão seja acionada, a configuração `OOB_CONNECTOR_SERVICEUR
 deve ser incluída, assim como descrito nas [instruções de configuração do produto](../../deploy/oob-open-data/readme.md#oob_connector_serviceuri).
 
 A rota padrão armazenará o resultado da consulta em cache, realizando uma nova
-consulta após **180 segudons**.
+consulta após **180 segundos**.
 
 **Importante**: A rota padrão será ativada apenas se nenhum conector for incluído
 para a rota original. Caso o conector não exista e essa configuração não seja incluída,
