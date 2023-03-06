@@ -19,7 +19,7 @@
         "properties": {
           "participant": {
             "type": "object",
-            "description": "Conjunto de informações relativas ao participante do produto de open banking",
+            "description": "Conjunto de informações relativas ao participante do produto de Open Finance",
             "required": [
               "brand",
               "name",
@@ -29,24 +29,28 @@
             "properties": {
               "brand": {
                 "type": "string",
-                "description": "Nome da marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.",
+                "description": "Nome da marca reportada pelo participante do Open Finance. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.",
                 "maxLength": 80,
+                "pattern": "[\\w\\W\\s]*",
                 "example": "Organização"
               },
               "name": {
                 "type": "string",
-                "description": "Nome do participante do Open Banking.",
+                "description": "Nome do participante do Open Finance.",
                 "maxLength": 80,
+                "pattern": "[\\w\\W\\s]*",
                 "example": "Organização A1"
               },
               "cnpjNumber": {
                 "type": "string",
                 "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                "maxLength": 14,
                 "pattern": "^\\d{14}$",
                 "example": "13456789000112"
               },
               "urlComplementaryList": {
                 "type": "string",
+                "description": "Array de objeto com a estrutura abaixo:\n\n- 'name' com o valor contido no campo ‘LegalEntityName’ conforme cadastro no diretório;\n\n- 'cnpjNumber' com o valor contido no campo CNPJ (‘RegistrationNumber’) correspondente a esta instituição;\n\n\\- Ambos do tipo string;\n\n\\- Ambos obrigatórios. \n",
                 "maxLength": 1024,
                 "pattern": "^(https?:\\/\\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)$",
                 "example": "https://empresaa1.com/companies"
@@ -56,7 +60,6 @@
           "investmentType": {
             "type": "string",
             "description": "Especifica o tipo de ativo negociado&#58;<br><br><ol><li>Tesouro direto</li></ol>",
-            "maxLength": 14,
             "enum": [
               "TESOURO_DIRETO"
             ],
@@ -81,22 +84,22 @@
                   {
                     "interval": "1_FAIXA",
                     "value": "0.020300",
-                    "customerRate": "0.500000"
+                    "operationRate": "0.500000"
                   },
                   {
                     "interval": "2_FAIXA",
                     "value": "0.030600",
-                    "customerRate": "0.100000"
+                    "operationRate": "0.100000"
                   },
                   {
                     "interval": "3_FAIXA",
                     "value": "0.034300",
-                    "customerRate": "0.300000"
+                    "operationRate": "0.300000"
                   },
                   {
                     "interval": "4_FAIXA",
                     "value": "0.246800",
-                    "customerRate": "0.100000"
+                    "operationRate": "0.100000"
                   }
                 ],
                 "items": {
@@ -111,7 +114,6 @@
                     "interval": {
                       "type": "string",
                       "description": "Faixas de frequência",
-                      "maxLength": 7,
                       "enum": [
                         "1_FAIXA",
                         "2_FAIXA",
@@ -123,16 +125,18 @@
                     "value": {
                       "type": "string",
                       "description": "Mediana.",
-                      "example": "0.020300",
+                      "example": "0.019800",
+                      "minLength": 8,
                       "maxLength": 8,
-                      "pattern": "^\\d{1}\\.\\d{1,6}$"
+                      "pattern": "^\\d{1}\\.\\d{6}$"
                     },
                     "operationRate": {
                       "type": "string",
                       "description": "Percentual de operação.",
-                      "example": "0.500000",
+                      "example": "0.019800",
+                      "minLength": 8,
                       "maxLength": 8,
-                      "pattern": "^\\d{1}\\.\\d{1,6}$"
+                      "pattern": "^\\d{1}\\.\\d{6}$"
                     }
                   }
                 }
@@ -140,16 +144,18 @@
               "minimum": {
                 "type": "string",
                 "description": "Valor mínimo.",
+                "minLength": 8,
                 "maxLength": 8,
-                "pattern": "^\\d{1}\\.\\d{1,6}$",
-                "example": "0.010000"
+                "pattern": "^\\d{1}\\.\\d{6}$",
+                "example": "0.019800"
               },
               "maximum": {
                 "type": "string",
                 "description": "Valor máximo.",
                 "maxLength": 8,
-                "pattern": "^\\d{1}\\.\\d{1,6}$",
-                "example": "0.300000"
+                "minLength": 8,
+                "pattern": "^\\d{1}\\.\\d{6}$",
+                "example": "0.019800"
               }
             }
           },
@@ -172,22 +178,22 @@
                   {
                     "interval": "1_FAIXA",
                     "value": "0.020300",
-                    "customerRate": "0.500000"
+                    "operationRate": "0.500000"
                   },
                   {
                     "interval": "2_FAIXA",
                     "value": "0.030600",
-                    "customerRate": "0.100000"
+                    "operationRate": "0.100000"
                   },
                   {
                     "interval": "3_FAIXA",
                     "value": "0.034300",
-                    "customerRate": "0.300000"
+                    "operationRate": "0.300000"
                   },
                   {
                     "interval": "4_FAIXA",
                     "value": "0.246800",
-                    "customerRate": "0.100000"
+                    "operationRate": "0.100000"
                   }
                 ],
                 "items": {
@@ -202,7 +208,6 @@
                     "interval": {
                       "type": "string",
                       "description": "Faixas de frequência",
-                      "maxLength": 7,
                       "enum": [
                         "1_FAIXA",
                         "2_FAIXA",
@@ -214,16 +219,18 @@
                     "value": {
                       "type": "string",
                       "description": "Mediana.",
-                      "example": "0.020300",
+                      "example": "0.019800",
+                      "minLength": 8,
                       "maxLength": 8,
-                      "pattern": "^\\d{1}\\.\\d{1,6}$"
+                      "pattern": "^\\d{1}\\.\\d{6}$"
                     },
                     "operationRate": {
                       "type": "string",
                       "description": "Percentual de operação.",
-                      "example": "0.500000",
+                      "example": "0.019800",
+                      "minLength": 8,
                       "maxLength": 8,
-                      "pattern": "^\\d{1}\\.\\d{1,6}$"
+                      "pattern": "^\\d{1}\\.\\d{6}$"
                     }
                   }
                 }
@@ -231,16 +238,18 @@
               "minimum": {
                 "type": "string",
                 "description": "Valor mínimo.",
+                "minLength": 8,
                 "maxLength": 8,
-                "pattern": "^\\d{1}\\.\\d{1,6}$",
-                "example": "0.010000"
+                "pattern": "^\\d{1}\\.\\d{6}$",
+                "example": "0.019800"
               },
               "maximum": {
                 "type": "string",
                 "description": "Valor máximo.",
                 "maxLength": 8,
-                "pattern": "^\\d{1}\\.\\d{1,6}$",
-                "example": "0.300000"
+                "minLength": 8,
+                "pattern": "^\\d{1}\\.\\d{6}$",
+                "example": "0.019800"
               }
             }
           }
