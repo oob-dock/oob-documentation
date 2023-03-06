@@ -61,6 +61,22 @@ definida no plugin como:
 <from uri="direct:getPersonalAccounts"/>
 ```
 
+## Rotas Padrão
+
+Para casos em que o conector é formado apenas de uma chamada
+GET a um serviço, o produto Opus Open Finance fornece rotas padrões para cada
+um dos `endpoints` de dados abertos aqui listados.
+
+Para que a rota padrão seja acionada, a configuração `OOB_CONNECTOR_SERVICEURI_<ROUTE>`
+deve ser incluída, assim como descrito nas [instruções de configuração do produto](../../deploy/oob-open-data/readme.md#oob_connector_serviceuri).
+
+A rota padrão armazenará o resultado da consulta em cache, realizando uma nova
+consulta após **180 segudons**.
+
+**Importante**: A rota padrão será ativada apenas se nenhum conector for incluído
+para a rota original. Caso o conector não exista e essa configuração não seja incluída,
+a execução do `endpoint` resultará em `HTTP 404 - Not Found`.
+
 &nbsp;
 
 ### Canais de atendimento
@@ -110,13 +126,13 @@ definida no plugin como:
 
 &nbsp;
 
-| Endpoint              | Rota do Camel                      |
-|-----------------------|------------------------------------|
-| /funds                | ```direct:getFunds```              |
-| /bank-fixed-incomes   | ```direct:getBankFixedIncomes```   |
-| /credit-fixed-incomes | ```direct:getCreditFixedIncomes``` |
-| /variable-incomes     | ```direct:getVariableIncomes```    |
-| /treasure-titles      | ```direct:getTreasureTitles```     |
+| Endpoint              | Rota do Camel                                 |
+|-----------------------|-----------------------------------------------|
+| /funds                | ```direct:getFundsInvestments```              |
+| /bank-fixed-incomes   | ```direct:getFixedIncomeBankInvestments```    |
+| /credit-fixed-incomes | ```direct:getFixedIncomeCreditInvestments```  |
+| /variable-incomes     | ```direct:getVariableIncomeInvestments```     |
+| /treasure-titles      | ```direct:getTreasureInvestments```           |
 
 &nbsp;
 
@@ -124,10 +140,10 @@ definida no plugin como:
 
 &nbsp;
 
-| Endpoint      | Rota do Camel               |
-|---------------|-----------------------------|
-| /online-rates | ```direct:getOnlineRates``` |
-| /vet-values   | ```direct:getVetValues```   |
+| Endpoint      | Rota do Camel                      |
+|---------------|------------------------------------|
+| /online-rates | ```direct:getExchangeOnlineRate``` |
+| /vet-values   | ```direct:getExchangeVetValue```   |
 
 &nbsp;
 
@@ -135,10 +151,10 @@ definida no plugin como:
 
 &nbsp;
 
-| Endpoint    | Rota do Camel              |
-|-------------|----------------------------|
-| /personals  | ```direct:getPersonals```  |
-| /businesses | ```direct:getBusinesses``` |
+| Endpoint    | Rota do Camel                             |
+|-------------|-------------------------------------------|
+| /personals  | ```direct:getPersonalAcquiringServices``` |
+| /businesses | ```direct:getBusinessAcquiringServices``` |
 
 &nbsp;
 
@@ -146,10 +162,10 @@ definida no plugin como:
 
 &nbsp;
 
-| Endpoint            | Rota do Camel                     |
-|---------------------|-----------------------------------|
-| /risk-coverages     | ```direct:getRiskCoverages```     |
-| /survival-coverages | ```direct:getSurvivalCoverages``` |
+| Endpoint            | Rota do Camel                            |
+|---------------------|------------------------------------------|
+| /risk-coverages     | ```direct:getPensionRiskCoverages```     |
+| /survival-coverages | ```direct:getPensionSurvivalCoverages``` |
 
 &nbsp;
 
@@ -157,10 +173,10 @@ definida no plugin como:
 
 &nbsp;
 
-| Endpoint     | Rota do Camel                      |
-|--------------|------------------------------------|
-| /automotives | ```direct:getAutomitives```        |
-| /homes       | ```direct:getHomes```              |
-| /personals   | ```direct:getInsurancePersonals``` |
+| Endpoint     | Rota do Camel                              |
+|--------------|--------------------------------------------|
+| /automotives | ```direct:getAutomotiveInsurance```        |
+| /homes       | ```direct:getHomeInsurance```              |
+| /personals   | ```direct:getPersonalInsurance```          |
 
 &nbsp;

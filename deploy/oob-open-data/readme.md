@@ -87,3 +87,24 @@ additionalVars:
   - name: APIS_VALIDATION_OPENAPI_ENABLED-RESPONSE
     value: "true"
 ```
+
+### OOB_CONNECTOR_SERVICEURI
+
+Define o endereço do serviço de obtenção dos dados abertos a ser acionado via
+método http GET pela rota padrão quando o conector não for implementado.
+
+Deve ser informado a URI do serviço sem `query parameters`.
+
+Ao final da variável deve-se concatenar o nome da [rota](../../integração-plugin/open-data/readme.md)
+a qual se deseja relacionar o serviço. O exemplo a seguir define uma uri para
+as rotas `getFundsInvestments` e `getExchangeOnlineRate`:
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: OOB_CONNECTOR_SERVICEURI_GETFUNDSINVESTMENTS
+    value: "https://service.bank.com.br/open-data/investiments-funds"
+  - name: OOB_CONNECTOR_SERVICEURI_GETEXCHANGEONLINERATE
+    value: "https://service.bank.com.br/open-data/exchange-online-rate"
+```
