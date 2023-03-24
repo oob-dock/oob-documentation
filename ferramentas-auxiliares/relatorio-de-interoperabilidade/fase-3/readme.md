@@ -67,3 +67,37 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 ```sql
 SELECT * FROM payment_consent_client_authorization('2022-01-02','2022-10-08');
 ```
+
+### Funil Detentor - Conclusão da autenticação e autorização do cliente
+
+Na primeira execução é necessário criar a função *payment_consent_client_authorization*
+executando o seguinte [script](attachments/payment_consent_client_authorization.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM payment_consent_client_authorization('<data_inicio>','<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM payment_consent_client_authorization('2022-01-02','2022-10-08');
+```
+
+### Funil Detentor - Pagamentos recebidos e ids gerados
+
+Na primeira execução é necessário criar a função *payment_consent_payment_id*
+executando o seguinte [script](attachments/payment_consent_payment_id.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM payment_consent_payment_id('<data_inicio>','<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM payment_consent_payment_id('2022-01-02','2022-10-08');
+```
