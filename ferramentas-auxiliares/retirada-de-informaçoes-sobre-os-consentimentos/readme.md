@@ -93,21 +93,53 @@ ser puladas e capturadas, respectivamente.
 
 ## Scripts - Estoque de consentimentos
 
+### Estoque de consentimentos - Consentimentos com access token gerado
+
 Os scripts SQL fornecidos nessa seção devem ser operados no
-**banco de dados do OOB-Consent**
+**banco de dados do OOB-Authorization-Server**
 
-### Estoque de consentimentos - informação consolidada
-
-Primeiramente é necessário criar a function consent_consolidated_stock executando o
-seguinte [script](attachments/consent_function_consolidated_stock.sql).
+Primeiramente é necessário criar a function as_function_access_token_generated
+executando o seguinte [script](attachments/as_function_access_token_generated.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM consent_consolidated_stock();
+SELECT * FROM as_function_access_token_generated('<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM as_function_access_token_generated('2022-10-08');
+```
+
+O retorno dessa consulta deverá ser usado nas funções a seguir.
+
+### Estoque de consentimentos - informação consolidada
+
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Consent**
+
+Primeiramente é necessário criar a function consent_consolidated_stock executando
+o seguinte [script](attachments/consent_function_consolidated_stock.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM consent_consolidated_stock('<data_fim>', '<resultado_as_function>');
+```
+
+Sendo que o parâmetro *data_fim* ser preenchido no formato yyyy-MM-dd e o *resultado_as_function*
+com o resultado da execução da function anterior. Por exemplo:
+
+```sql
+SELECT * FROM consent_consolidated_stock('2022-10-08', array ['f769dfb4-e537-4458-9408-42b24ef1edc8','c33da603-f7a6-42af-9eba-d10ca59c463b']);
 ```
 
 ### Estoque de consentimentos - informação por receptor
+
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Consent**
 
 Primeiramente é necessário criar a function consent_receptor_stock executando o
 seguinte [script](attachments/consent_function_receptor_stock.sql).
@@ -115,5 +147,12 @@ seguinte [script](attachments/consent_function_receptor_stock.sql).
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM consent_receptor_stock();
+SELECT * FROM consent_receptor_stock('<data_fim>', '<resultado_as_function>');
+```
+
+Sendo que o parâmetro *data_fim* ser preenchido no formato yyyy-MM-dd e o *resultado_as_function*
+com o resultado da execução da function as_function_access_token_generated. Por exemplo:
+
+```sql
+SELECT * FROM consent_receptor_stock('2022-10-08',  array ['f769dfb4-e537-4458-9408-42b24ef1edc8','c33da603-f7a6-42af-9eba-d10ca59c463b']);
 ```
