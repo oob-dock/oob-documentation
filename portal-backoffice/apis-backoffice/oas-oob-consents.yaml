@@ -263,6 +263,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/v1/tpps/payment-legacy-ids:
+    get:
+      tags:
+      - Consents Opus Open Banking
+      description: Get legacy payments generated in a period
+      parameters:
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          example: 2022-02-30
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          example: 2022-01-30
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMapItpLegacyIds'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -1065,6 +1094,29 @@ components:
       format: uuid
       pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
       type: string
+    ResponseMapItpLegacyIds:
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLegacyIdsByItp'
+          - description: Service execution response
+    PaymentLegacyIdsByItp:
+      type: object
+      properties:
+        itpLegacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItpLegacyIds'
+    ItpLegacyIds:
+      type: object
+      properties:
+        orgName:
+          type: string
+        legacyIds:
+          type: array
+          items:
+            type: string
   securitySchemes:
     jwt:
       type: http
