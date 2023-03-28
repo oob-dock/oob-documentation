@@ -53,6 +53,9 @@ SELECT * FROM payment_consent_extract_authorization_data('2022-10-02','2022-10-0
 
 ### Funil Detentor - Conclusão da autenticação e autorização do cliente
 
+**Importante:** Os scripts SQL fornecidos nessa seção devem ser
+operados no **banco de dados do OOB-Consent**.
+
 Na primeira execução é necessário criar a função *payment_consent_client_authorization*
 executando o seguinte [script](attachments/payment_consent_client_authorization.sql).
 
@@ -69,6 +72,9 @@ SELECT * FROM payment_consent_client_authorization('2022-01-02','2022-10-08');
 ```
 
 ### Funil Detentor - Pagamentos recebidos e ids gerados
+
+**Importante:** Os scripts SQL fornecidos nessa seção devem ser
+operados no **banco de dados do OOB-Consent**.
 
 Na primeira execução é necessário criar a função *payment_consent_payment_id*
 executando o seguinte [script](attachments/payment_consent_payment_id.sql).
