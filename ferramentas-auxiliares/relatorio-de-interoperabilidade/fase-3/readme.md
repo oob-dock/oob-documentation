@@ -68,23 +68,6 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 SELECT * FROM payment_consent_client_authorization('2022-01-02','2022-10-08');
 ```
 
-### Funil Detentor - Conclusão da autenticação e autorização do cliente
-
-Na primeira execução é necessário criar a função *payment_consent_client_authorization*
-executando o seguinte [script](attachments/payment_consent_client_authorization.sql).
-
-Para obter os dados, deve-se chamar a função usando o seguinte comando:
-
-```sql
-SELECT * FROM payment_consent_client_authorization('<data_inicio>','<data_fim>');
-```
-
-Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
-
-```sql
-SELECT * FROM payment_consent_client_authorization('2022-01-02','2022-10-08');
-```
-
 ### Funil Detentor - Pagamentos recebidos e ids gerados
 
 Na primeira execução é necessário criar a função *payment_consent_payment_id*
@@ -101,3 +84,22 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 ```sql
 SELECT * FROM payment_consent_payment_id('2022-01-02','2022-10-08');
 ```
+
+## API - Funil Detentor
+
+### Funil Detentor - Pagamento Concluído
+
+Como a solução Opus Open Finance não armazena o status do pagamento, fornecemos uma
+API de listagem de *Payment IDs* gerados dentro de um intervalo de data:
+
+```GET /open-banking/oob-consents/v1/tpps/payment-legacy-ids```
+
+A API recebe dois query parameters como entrada para definição do intervalo:
+
+- *startDate*: Data inicial do intervalo no formato *yyyy-MM-dd*;
+- *endDate*: Data final (inclusa) do intervalo no formato *yyyy-MM-dd*;
+
+A detentora de conta deverá consultar o status de cada um dos pagamentos
+retornados a fim de determinar quantos deles foram concluídos.
+
+Mais informações sobre a API podem ser encontradas em [apis-backoffice](../../../portal-backoffice/apis-backoffice/readme.md).

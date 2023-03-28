@@ -438,6 +438,7 @@
 | *GET     | /v1/consents/\{ID\}              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /v1/consents/\{ID\}              | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /consents/v1/consents/\{ID\}     | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *GET     | /v1/tpps/payment-legacy-ids      | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 
 ## Capitalization bonds catalog
 
