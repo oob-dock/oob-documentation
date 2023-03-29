@@ -104,6 +104,24 @@ Responsável pela listagem de consentimentos autorizados.
         PATCH /open-banking/oob-payments/v2/pix/payments/{paymentId}
 
 Responsável pela revogação do pagamento relacionado ao identificador do open-banking *paymentId* informado.
+
+## Listagem de Payment Ids gerados por ITP
+
+        GET /open-banking/oob-consents/v1/tpps/payment-legacy-ids
+
+Lista os payment ids gerados por ITPs dentro de um intervalo de tempo definido pelos
+parâmetros:
+
+`startDate`: Indica a data de criação mínima (inclusa) do payment id. Deve ser informada
+apenas com data.
+
+**Exemplo**: 2022-12-19.
+
+`endDate`: Indica a data de criação máxima (inclusa) do payment id. Deve ser informada
+apenas com data.
+
+**Exemplo**: 2022-12-25.
+
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir
