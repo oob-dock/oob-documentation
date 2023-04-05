@@ -21,6 +21,7 @@ BEGIN
         FROM consent c
         INNER JOIN tpp t ON c.id_tpp = t.id 
         WHERE c.dt_creation BETWEEN dt_start_utc AND dt_end_utc
-            and exists (select 1 from history_status hs where hs.id_consent = c.id and hs.status_consent = 1 and hs.updated_on between dt_start_utc and dt_end_utc)
+            AND c.tp_consent = 2
+            AND exists (select 1 from history_status hs where hs.id_consent = c.id and hs.status_consent = 1 and hs.updated_on between dt_start_utc and dt_end_utc)
         GROUP BY t.org_name;
 END;$function$;
