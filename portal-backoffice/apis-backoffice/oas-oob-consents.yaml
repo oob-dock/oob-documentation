@@ -429,6 +429,9 @@ components:
         createdOn:
           format: date-time
           type: string
+        expiresOn:
+          format: date-time
+          type: string
         brandId:
           type: string
           example: BANCO
@@ -443,6 +446,12 @@ components:
         scheduleDate:
           type: string
           example: 2022-07-06
+        tppName:
+          type: string
+          example: "Guia Seguros"
+        tppLogo:
+          type: string
+          example: "http://www.exemplo.com/logo.png"
     ConsentTypesEnum:
       enum:
       - DATA_SHARING
