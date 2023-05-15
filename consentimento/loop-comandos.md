@@ -172,6 +172,7 @@ Banking ou erros inesperados conforme vemos na tabela a seguir.
 | RESOURCE_MUST_CONTAIN_ID                     | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID                                |
 | RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS | Lista de recursos na aprovação do consentimento deve conter pelo menos um ID para cada produto selecionável |
 | DISCOVERY_ERROR                              | Falha no processo de discovery                                                                              |
+| DISCOVERY_TIMEOUT                            | Processo de discovery passou do tempo limite                                                                |
 | GENERIC_ERROR                                | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário           |
 
 O comando `error` conclui a geração do consentimento. Nos casos
@@ -202,6 +203,10 @@ usuário é do sucesso do consentimento. O tratamento de retorno ao TPP deve
 ser seguido como descrito no `error`.
 
 ## Changelog
+
+### 2023-05-15 - v1.2.1
+
+- Adição do novo command error DISCOVERY_TIMEOUT.
 
 ### 2023-02-15 - v1.2.0
 

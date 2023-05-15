@@ -1,11 +1,11 @@
 {
   "uuid": "8f2856cd-d05e-4352-afe3-9eaf5208a2a5",
-  "lastMigration": 24,
+  "lastMigration": 27,
   "name": "OOB Authorization Server Apps API",
   "endpointPrefix": "auth",
   "latency": 0,
   "port": 3301,
-  "hostname": "0.0.0.0",
+  "hostname": "",
   "routes": [
     {
       "uuid": "9ed9c462-b145-4c8f-a659-22dde7bc9fb3",
@@ -214,10 +214,41 @@
           "default": false,
           "databucketID": "",
           "bodyType": "INLINE"
+        },
+        {
+          "uuid": "8a4e6e67-115f-4987-a11c-0972c309587e",
+          "body": "{\n  \"command\": \"authenticate\",\n  \"commandId\": \"discovery-timeout-flow\",\n  \"tpp\": {\n      \"name\": \"Opus GuiaBolsa\",\n      \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\n  },\n  \"authenticateCommand\": {\n    \"acr\": \"urn:brasil:openbanking:loa3\",\n    \"jti\": \"94a328c2-c72a-4cab-84a2-2df2b106b2af\"\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Error - Discovery timeout",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "query",
+              "modifier": "id",
+              "value": "discovery-timeout",
+              "operator": "equals",
+              "invert": false
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "databucketID": "",
+          "bodyType": "INLINE"
         }
       ],
       "enabled": true,
-      "responseMode": null
+      "responseMode": null,
+      "type": "http"
     },
     {
       "uuid": "7043ad22-922a-4727-9c5b-f4de72b0c267",
@@ -296,7 +327,8 @@
         }
       ],
       "enabled": true,
-      "responseMode": null
+      "responseMode": null,
+      "type": "http"
     },
     {
       "uuid": "528ceb1c-d6f2-4929-9dd6-dcb3c2989940",
@@ -409,10 +441,36 @@
           "default": false,
           "databucketID": "",
           "bodyType": "INLINE"
+        },
+        {
+          "uuid": "7945b56a-5147-44a2-8f86-6ade66d0aae9",
+          "body": "{\r\n    \"command\": \"error\",\r\n    \"commandId\": \"discovery-timeout\",\r\n    \"tpp\": {\r\n        \"name\": \"Opus GuiaBolsa\",\r\n        \"logoUrl\": \"https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg\"\r\n    },\r\n    \"errorCommand\": {\r\n        \"redirect\": {},\r\n        \"type\": \"DISCOVERY_TIMEOUT\",\r\n        \"message\": \"Discovery process call timed out\"\r\n    }\r\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Discovery timeout",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "params",
+              "modifier": "id",
+              "value": "discovery-timeout-flow",
+              "invert": false,
+              "operator": "equals"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false
         }
       ],
       "enabled": true,
-      "responseMode": null
+      "responseMode": null,
+      "type": "http"
     },
     {
       "uuid": "c066dc6f-823c-462c-9225-bb6857bf4f52",
@@ -521,7 +579,8 @@
         }
       ],
       "enabled": true,
-      "responseMode": null
+      "responseMode": null,
+      "type": "http"
     }
   ],
   "proxyMode": false,
@@ -550,5 +609,24 @@
     "caPath": "",
     "passphrase": ""
   },
-  "data": []
+  "data": [],
+  "folders": [],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "9ed9c462-b145-4c8f-a659-22dde7bc9fb3"
+    },
+    {
+      "type": "route",
+      "uuid": "7043ad22-922a-4727-9c5b-f4de72b0c267"
+    },
+    {
+      "type": "route",
+      "uuid": "528ceb1c-d6f2-4929-9dd6-dcb3c2989940"
+    },
+    {
+      "type": "route",
+      "uuid": "c066dc6f-823c-462c-9225-bb6857bf4f52"
+    }
+  ]
 }
