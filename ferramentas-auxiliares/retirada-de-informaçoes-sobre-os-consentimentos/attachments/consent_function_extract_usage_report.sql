@@ -4,9 +4,7 @@ CREATE OR REPLACE FUNCTION CONSENT_USAGE_REPORT(start_date DATE, end_date DATE, 
             (
                 receptor           TEXT,
                 quantity           BIGINT,
-                consent_id         TEXT,
-                cpf_hash           TEXT,
-                cnpj_hash          TEXT
+                receptor_org_id	   TEXT	
             )
 AS
 $function$
@@ -20,15 +18,13 @@ BEGIN
 
     RETURN QUERY SELECT t.org_name::TEXT                     receptor,
                         count(c.id)                          quantity,
-                        max(c.id_consent_external)           consent_id,
-                        c.sha_person_document_number::TEXT   cpf_hash,
-                        c.sha_business_document_number::TEXT cnpj_hash
+                        t.org_id::TEXT						           receptor_org_id
                  FROM consent c
                           INNER JOIN tpp t ON c.id_tpp = t.id
                  WHERE c.dt_creation BETWEEN start_date AND end_date
                    AND c.dt_expiration >= start_date
                    AND c.tp_consent IN (1)
-                 GROUP BY receptor, cpf_hash, cnpj_hash
+                 GROUP BY receptor, receptor_org_id
                  ORDER BY receptor ASC, quantity DESC
                  LIMIT take OFFSET skip;
 END;

@@ -156,3 +156,37 @@ com o resultado da execução da function as_function_access_token_generated. Po
 ```sql
 SELECT * FROM consent_receptor_stock('2022-10-08',  array ['f769dfb4-e537-4458-9408-42b24ef1edc8','c33da603-f7a6-42af-9eba-d10ca59c463b']);
 ```
+
+### ParentOrg Iniciador
+
+Para obter o identificador da organização principal, deve-se executar o script [getParentOrganization](../../parent-org-reference-script/getParentOrganization.js)
+informando os IDs das organizações retornados pelas consultas
+*consent_function_extract_usage_report* e *consent_function_receptor_stock*.
+
+Será necessário instalar a versão do [Node.js](https://nodejs.org/en/download)
+correspondente ao seu Sistema Operacional.
+
+Com o Node.js instalado, execute o seguinte comando da raiz desse projeto:
+
+```bash
+node ferramentas-auxiliares/parent-org-reference-script/getParentOrganization.js [IDs das Orgs Iniciadoras]
+```
+
+Os IDs das organizações receptoras devem ser separados por espaço,
+conforme exemplo abaixo:
+
+```bash
+$ node ferramentas-auxiliares/parent-org-reference-script/getParentOrganization.js f83bee4f-26df-53d7-8335-a8a6edd7e340 fd0ea3e7-aeca-55f9-a0a2-ec56980059fb fd0ea3e7-aeca-55f9-a0a2-ec56980059fc
+----------------------------------------------
+Org ID: f83bee4f-26df-53d7-8335-a8a6edd7e340
+Parent Organization: 90400888000142
+----------------------------------------------
+Org ID: fd0ea3e7-aeca-55f9-a0a2-ec56980059fb
+Parent Organization: N/A
+----------------------------------------------
+Org ID fd0ea3e7-aeca-55f9-a0a2-ec56980059fc Not found
+----------------------------------------------
+```
+
+Caso a receptora não possua uma Parent Organization, o retorno do script para
+ela será *N/A*. Caso ela não exista, o retorno será *Not found*.
