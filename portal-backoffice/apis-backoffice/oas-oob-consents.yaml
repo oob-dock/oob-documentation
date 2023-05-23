@@ -292,7 +292,7 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMapItpLegacyIds'
-  /open-banking/oob-consents/v1/tpps/payment-status-notification:
+  /open-banking/oob-consents/v1/payment-status-notification:
     post:
       tags:
       - Consents Opus Open Banking
