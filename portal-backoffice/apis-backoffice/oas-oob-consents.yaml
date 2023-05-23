@@ -292,6 +292,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseMapItpLegacyIds'
+  /open-banking/oob-consents/v1/tpps/payment-status-notification:
+    post:
+      tags:
+      - Consents Opus Open Banking
+      description: Post information about payments status change
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPaymentStatusChangeNotification'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -820,6 +839,15 @@ components:
         applicationName:
           description: Client application name
           type: string
+    RequestPaymentStatusChangeNotification:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/PaymentStatusChangeData'
+          - nullable: false
     RequestRevokeOobDataSharingConsent:
       required:
       - data
@@ -987,6 +1015,29 @@ components:
       - CONSENT_TECHNICAL_ISSUE
       - INTERNAL_SECURITY_REASON
       type: string
+    PaymentStatusEnum:
+      enum:
+      - RCVD
+      - ACCP
+      - ACPD
+      - ACSC
+      - PATC
+      - SCHD
+      - CANC
+      - PDNG
+      - RJCT
+      type: string
+    StatusUpdateDateTime:
+      type: string
+      format: date-time
+      pattern: >-
+        ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+      example: '2020-07-21T08:30:00Z'
+      description: >
+        Data e hora da última atualização da iniciação de
+        pagamento.
+        Uma string com data e hora conforme especificação
+        RFC-3339,sempre com a utilização de timezone UTC(UTC time format).
     RevokeConsentData:
       required:
       - status
@@ -1001,6 +1052,26 @@ components:
           allOf:
           - $ref: '#/components/schemas/StatusEnum'
           - example: REVOKED
+            nullable: false
+    PaymentStatusChangeData:
+      required:
+      - legacyId
+      - paymentStatus
+      - paymentStatusUpdateDateTime
+      type: object
+      properties:
+        legacyId:
+          allOf:
+          - $ref: '#/components/schemas/PaymentIdLegacy'
+          - nullable: false
+        paymentStatus:
+          allOf:
+          - $ref: '#/components/schemas/PaymentStatusEnum'
+          - example: CANC
+          - nullable: false
+        paymentStatusUpdateDateTime:
+          allOf:
+          - $ref: '#/components/schemas/StatusUpdateDateTime'
             nullable: false
     ResponseConsentListSchema:
       type: object
