@@ -122,6 +122,12 @@ apenas com data.
 
 **Exemplo**: 2022-12-25.
 
+## Notificação de mudança de status de pagamento
+
+        POST /open-banking/oob-consents/v1/payment-status-notification
+
+Responsável por notificar ao OOB a alteração de status de um pagamento.
+
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir
