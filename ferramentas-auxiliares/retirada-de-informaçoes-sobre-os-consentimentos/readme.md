@@ -159,7 +159,7 @@ SELECT * FROM consent_receptor_stock('2022-10-08',  array ['f769dfb4-e537-4458-9
 
 ### ParentOrg Iniciador
 
-Para obter o identificador da organização principal, deve-se executar o script [getParentOrganization](../../parent-org-reference-script/getParentOrganization.js)
+Para obter o identificador da organização principal, deve-se executar o script [getParentOrganization](../parent-org-reference-script/getParentOrganization.js)
 informando os IDs das organizações retornados pelas consultas
 *consent_function_extract_usage_report* e *consent_function_receptor_stock*.
 
