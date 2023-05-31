@@ -309,7 +309,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         "204":
-          description: OK
+          description: Notification received successfully
 components:
   schemas:
     AccountPaymentTypeEnum:
