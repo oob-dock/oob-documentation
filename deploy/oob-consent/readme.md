@@ -2,6 +2,13 @@
 
 ## Pré-requisitos
 
+### Fila de mensagens
+
+Este módulo produz eventos a serem publicados em uma fila de mensagens.
+Portanto, é necessário que exista um *message broker* instalado e configurado
+corretamente que possa ser utilizado pelo OOB Consents e que seja compatível
+com o [Dapr](/deploy/shared-definitions.md#dapr).
+
 ## Instalação
 
 A instalação do módulo é feita via Helm Chart
@@ -128,6 +135,20 @@ Utilizado para definir a uri base do serviço de pagamentos.
 Deve ser formado pelo protocolo e host seguido do path `/open-banking`.
 
 Valor default: `http://oob-payment/open-banking`
+
+### dapr/enabled
+
+Habilita o Dapr na aplicação para realizar o envio de eventos.
+
+**Formato:** : `true` ou `false`.
+
+Valor default: `true`
+
+### dapr/pubSubId
+
+Identificador do componente de pub/sub do Dapr a ser utilizado.
+
+Ex: `oob-consent-pub-sub`
 
 ## additionalVars
 
@@ -291,6 +312,8 @@ Utilizado para definir o charset usado na criptografia dos campos na base de dad
 Valor default: `UTF-8`
 
 ## additionalVarsDaemon
+
+Utilizado para definir configurações opcionais da instância de daemons
 
 ### DAEMON_WEBHOOK_PAYMENT_INSTANT_INTERVAL
 
