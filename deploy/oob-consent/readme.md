@@ -122,6 +122,13 @@ Considerando a string urn:amazingbank como exemplo para consentId temos:
 
 Ex: `urn:amazingbank`
 
+### payments/basePath
+
+Utilizado para definir a uri base do serviço de pagamentos.
+Deve ser formado pelo protocolo e host seguido do path `/open-banking`.
+
+Valor default: `http://oob-payment/open-banking`
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
@@ -237,6 +244,23 @@ additionalVars:
     value: "false"
 ```
 
+### APPLICATION_WEBHOOK_PAYMENT_ENABLED
+
+Utilizado para habilitar ou desabilitar as funcionalidades relacionadas ao webhook
+de pagamentos.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_WEBHOOK_PAYMENT_ENABLED
+    value: "true"
+```
+
 ### CONSENT_PERMISSIONS
 
 Utilizado para definir a lista de permissões suportadas pela instituição.
@@ -265,3 +289,82 @@ desenvolvido pela Opus, que estão listadas em
 Utilizado para definir o charset usado na criptografia dos campos na base de dados.
 
 Valor default: `UTF-8`
+
+## additionalVarsDaemon
+
+### DAEMON_WEBHOOK_PAYMENT_INSTANT_INTERVAL
+
+Utilizado para definir o intervalo de execução do daemon de consulta de status
+para envio do webhook de pagamentos instântaneos.
+
+O valor dessa configuração deve ser formado por um valor inteiro seguido unidade
+de tempo expressa em `m` para minutos ou `s` para segundos.
+
+Para ativar o daemon também é necessário ativar a funcionalidade de webhook
+na instância.
+
+**Ex:**
+
+O exemplo a seguir mostra configuração para execução do daemon em interavalos de 5 segundos:
+
+```yaml
+additionalVarsDaemon:
+  - name: DAEMON_WEBHOOK_PAYMENT_INSTANT_INTERVAL
+    value: "5s"
+  - name: APPLICATION_WEBHOOK_PAYMENT_ENABLED
+    value: "true"
+```
+
+**IMPORTANTE**: A ativação do daemon faz parte da solução paliativa do webhook e
+deve ser ativado apenas se a detentora NÃO implementar a
+[API de notificação de mudança de status de pagamento](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento).
+
+O daemon é desabilitado por padrão, mas caso a detentora opte por utilizá-lo,
+o valor recomendado para o interavalo é `1s`, a fim de atender o tempo esperado
+pelo regulatório.
+
+Valor default: `disabled`
+
+### DAEMON_WEBHOOK_PAYMENT_SCHEDULED_INTERVAL
+
+Utilizado para definir o intervalo de execução do daemon de consulta de status
+para envio do webhook de pagamentos em agendamento (SCHD).
+
+A configuração do daemon segue o mesmo padrão do anterior, sendo considerado também
+uma solução paliativa caso a dententora não implemente a notificação da alteração
+do status do pagamento via API. Assim como o anterior, a ativação deste daemon
+depende da ativação da funcionalidade de webhook na instância.
+
+O daemon é desabilitado por padrão, mas caso a detentora opte por utilizá-lo,
+o valor recomendado para o interavalo é `1s`, a fim de atender o tempo esperado
+pelo regulatório.
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: DAEMON_WEBHOOK_PAYMENT_SCHEDULED_INTERVAL
+    value: "5s"
+  - name: APPLICATION_WEBHOOK_PAYMENT_ENABLED
+    value: "true"
+```
+
+Valor default: `disabled`
+
+### DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
+
+Para melhorar o desempenho dos daemons de consulta de status para envio do webhook,
+a detentora pode habilitar o paralelismo de execução permitindo multiplas consultas
+de status a seu core bancário por vez.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
+    value: "true"
+```
