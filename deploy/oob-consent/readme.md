@@ -339,7 +339,7 @@ additionalVarsDaemon:
 ```
 
 **IMPORTANTE**: A ativação do daemon faz parte da solução paliativa do webhook e
-deve ser ativado apenas se a detentora NÃO implementar a
+deve ser ativado apenas enquanto a detentora não implementar a
 [API de notificação de mudança de status de pagamento](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento).
 
 O daemon é desabilitado por padrão, mas caso a detentora opte por utilizá-lo,
@@ -354,7 +354,7 @@ Utilizado para definir o intervalo de execução do daemon de consulta de status
 para envio do webhook de pagamentos em agendamento (SCHD).
 
 A configuração do daemon segue o mesmo padrão do anterior, sendo considerado também
-uma solução paliativa caso a dententora não implemente a notificação da alteração
+uma solução paliativa a ser usado enquanto a detentora não implementar a notificação
 do status do pagamento via API. Assim como o anterior, a ativação deste daemon
 depende da ativação da funcionalidade de webhook na instância.
 
@@ -377,7 +377,7 @@ Valor default: `disabled`
 ### DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
 
 Para melhorar o desempenho dos daemons de consulta de status para envio do webhook,
-a detentora pode habilitar o paralelismo de execução permitindo multiplas consultas
+a detentora pode habilitar o paralelismo de execução permitindo múltiplas consultas
 de status a seu core bancário por vez.
 
 **Formato:** `true` ou `false`
