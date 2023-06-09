@@ -369,7 +369,12 @@ FROM consent c
 WHERE dt_creation >= :initial_date
   AND dt_creation <= :final_date
   AND c.tp_payment = 1
-  AND EXISTS(SELECT 1 FROM history_status hs WHERE c.id = hs.id_consent and hs.status_consent = 6);
+  AND EXISTS (SELECT 1 
+              FROM history_status hs
+              WHERE c.id = hs.id_consent and hs.status_consent = 6)
+              and exists (select 1
+                          from consent_translation_id cti
+                          where c.id = cti.id_consent and cti.tp_openbanking_id = 8);
 ```
 
 ```sql
@@ -393,7 +398,12 @@ BEGIN
                  WHERE dt_creation >= start_date
                    AND dt_creation <= end_date
                    AND c.tp_payment = 1
-                   AND EXISTS(SELECT 1 FROM history_status hs WHERE c.id = hs.id_consent and hs.status_consent = 6);
+                   AND EXISTS (SELECT 1 
+                               FROM history_status hs
+                               WHERE c.id = hs.id_consent and hs.status_consent = 6)
+                               and exists (select 1 
+                                           from consent_translation_id cti
+                                           where c.id = cti.id_consent and cti.tp_openbanking_id = 8);
 END
 $$ LANGUAGE plpgsql;
 
