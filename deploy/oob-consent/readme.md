@@ -267,8 +267,7 @@ additionalVars:
 
 ### APPLICATION_WEBHOOK_PAYMENT_ENABLED
 
-Utilizado para habilitar ou desabilitar as funcionalidades relacionadas ao webhook
-de pagamentos.
+Utilizado para habilitar ou desabilitar o envio de webhook de pagamentos.
 
 **Formato:** `true` ou `false`
 
@@ -328,7 +327,8 @@ na instância.
 
 **Ex:**
 
-O exemplo a seguir mostra configuração para execução do daemon em interavalos de 5 segundos:
+O exemplo a seguir mostra configuração para execução do daemon em intervalos de
+5 segundos:
 
 ```yaml
 additionalVarsDaemon:
