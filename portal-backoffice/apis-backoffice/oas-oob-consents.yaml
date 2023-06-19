@@ -1,4 +1,3 @@
----
 openapi: 3.0.3
 info:
   title: Consent BackOffice Services
@@ -309,8 +308,8 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
-        "200":
-          description: OK
+        "204":
+          description: Notification received successfully
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -847,7 +846,8 @@ components:
         data:
           allOf:
           - $ref: '#/components/schemas/PaymentStatusChangeData'
-          - nullable: false
+          - description: Payment status change notification data
+            nullable: false
     RequestRevokeOobDataSharingConsent:
       required:
       - data
@@ -870,12 +870,15 @@ components:
           items:
             $ref: '#/components/schemas/PaymentIdLegacy'
     PaymentIdLegacy:
+      required:
+      - key
       type: object
       description: Key/Value pair for the payment id found on the legacy system
       properties:
         key:
           type: string
           example: internalPaymentId
+          nullable: false
         value:
           type: string
           example: b5abdcde-7186-453a-a676-7f3955cef167
@@ -1061,9 +1064,11 @@ components:
       type: object
       properties:
         legacyId:
-          allOf:
-          - $ref: '#/components/schemas/PaymentIdLegacy'
-          - nullable: false
+          description: Payment legacy id
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentIdLegacy'
+          nullable: false
         paymentStatus:
           allOf:
           - $ref: '#/components/schemas/PaymentStatusEnum'
