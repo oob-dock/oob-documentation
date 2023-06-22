@@ -157,13 +157,13 @@ que contém a chave privada do certificado.
 ```yaml
   privateKeys:
     orgId: "03f9155a-c230-4c87-a051-c63272092030"
-    softwareStatements:
+    - softwareStatements:
         - brandId: "cbanco"
           brcacSecretName: "webhook-certificates"
           brcacSecretKey: "tls.crt"
           brcacKeySecretName: "webhook-certificates"
           brcacKeySecretKey: "tls.key"
-    softwareStatements:
+    - softwareStatements:
         - brandId: "dbanco"
           brcacSecretName: "webhook-certificates2"
           brcacSecretKey: "tls.crt"
