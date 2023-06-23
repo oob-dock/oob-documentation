@@ -28,6 +28,9 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 SELECT * FROM payment_consent_count('2023-01-02','2023-01-08');
 ```
 
+Após execução, consulte o ParentOrganization Reference através dos passos
+descritos em [ParentOrg Iniciador](#parentorg-iniciador).
+
 ### Funil Detentor - Autenticação e redirecionamento
 
 **Importante:** Os scripts SQL fornecidos nessa seção devem ser operados no
@@ -91,10 +94,53 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 SELECT * FROM payment_consent_payment_id('2022-01-02','2022-10-08');
 ```
 
-### Funil Detentor - ParentOrg Iniciador
+## API - Funil Detentor
+
+### Funil Detentor - Pagamento Concluído
+
+Como a solução Opus Open Finance não armazena o status do pagamento, fornecemos uma
+API de listagem de *Payment IDs* gerados dentro de um intervalo de data:
+
+```GET /open-banking/oob-consents/v1/tpps/payment-legacy-ids```
+
+A API recebe dois query parameters como entrada para definição do intervalo:
+
+- *startDate*: Data inicial do intervalo no formato *yyyy-MM-dd*;
+- *endDate*: Data final (inclusa) do intervalo no formato *yyyy-MM-dd*;
+
+A detentora de conta deverá consultar o status de cada um dos pagamentos
+retornados a fim de determinar quantos deles foram concluídos.
+
+Mais informações sobre a API podem ser encontradas em [apis-backoffice](../../../portal-backoffice/apis-backoffice/readme.md).
+
+## Scripts - Status de Pagamento
+
+**Importante:** Os scripts SQL fornecidos nessa seção devem ser
+operados no **banco de dados do OOB-Consent**.
+
+Na primeira execução é necessário criar a função *payment_consent_error_reason*
+executando o seguinte [script](attachments/payment_consent_error_reason.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM payment_consent_error_reason('<data_inicio>','<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM payment_consent_error_reason('2022-01-02','2022-10-08');
+```
+
+Após execução, consulte o ParentOrganization Reference através dos passos
+descritos em [ParentOrg Iniciador](#parentorg-iniciador).
+
+## ParentOrg Iniciador
 
 Para obter a organização principal, deve-se executar o script [getParentOrganization](../../parent-org-reference-script/getParentOrganization.js)
-informando os IDs das organizações retornados pela consulta *payment_consent_count*.
+informando os IDs das organizações retornados pelas consultas *payment_consent_count*
+e *payment_consent_error_reason*.
 
 Será necessário instalar a versão do [Node.js](https://nodejs.org/en/download)
 correspondente ao seu Sistema Operacional.
@@ -123,22 +169,3 @@ Org ID fd0ea3e7-aeca-55f9-a0a2-ec56980059fc Not found
 
 Caso a iniciadora não possua uma Parent Organization, o retorno do script para
 ela será *N/A*. Caso ela não exista, o retorno será *Not found*.
-
-## API - Funil Detentor
-
-### Funil Detentor - Pagamento Concluído
-
-Como a solução Opus Open Finance não armazena o status do pagamento, fornecemos uma
-API de listagem de *Payment IDs* gerados dentro de um intervalo de data:
-
-```GET /open-banking/oob-consents/v1/tpps/payment-legacy-ids```
-
-A API recebe dois query parameters como entrada para definição do intervalo:
-
-- *startDate*: Data inicial do intervalo no formato *yyyy-MM-dd*;
-- *endDate*: Data final (inclusa) do intervalo no formato *yyyy-MM-dd*;
-
-A detentora de conta deverá consultar o status de cada um dos pagamentos
-retornados a fim de determinar quantos deles foram concluídos.
-
-Mais informações sobre a API podem ser encontradas em [apis-backoffice](../../../portal-backoffice/apis-backoffice/readme.md).
