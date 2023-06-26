@@ -27,7 +27,7 @@ O módulo OOF Event Service faz uso do Dapr para realizar a subscrição à even
 de webhook que devem ser enviados durante a transição de estado do pagamento e consentimento.
 Este módulo também aplica (via Helm) um componente do tipo
 [cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
-utilizado para reprocessamento dos wehbooks.
+utilizado para reprocessamento dos webhooks.
 
 Dado este cenário, a instalação do Dapr bem como aplicação do componente
 de *binding* são requisitos necessários para o correto funcionamento deste
@@ -138,7 +138,7 @@ Configurações básicas do serviço.
 
 ### privateKeys
 
-Identificadorers das organizações e suas marcas, contendo seus certificados
+Identificadores das organizações e suas marcas, contendo seus certificados
 para realização de chamadas mtls.
 
 * `privateKeys.orgId`: Identificador da organização no diretório central.
