@@ -125,4 +125,9 @@ simplificar a conectividade entre microsserviços atráves de vários
 O Opus Open Finance faz uso do seguinte bloco de construção do Dapr:
 
 * Publish and Subscribe: Utilizado para publicar e consumir eventos de chamadas
-de APIs que devem ser reportados para a PCM (Plataform de Coleta de Métricas)
+de APIs que devem ser reportados para a PCM (Plataform de Coleta de Métricas) e
+para o envio de webhooks de pagamento.
+
+* Virtual Actors: Utilizado para reprocessamento dos webhooks de pagamento que
+falharam na primeira tentativa de envio.
+
