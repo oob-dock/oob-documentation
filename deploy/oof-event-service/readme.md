@@ -213,7 +213,7 @@ additionalVars:
     value: "true"
 ```
 
-### OOF_PAYMENT_WEBHOOK_PAYMENT_DELAY_SECONDS
+### OOF_WEBHOOK_PAYMENT_DELAY_SECONDS
 
 Configuração de delay do envio de eventos de webhook de pagamento em segundos.
 
@@ -221,11 +221,11 @@ Configuração de delay do envio de eventos de webhook de pagamento em segundos.
 
 ```yaml
 additionalVars:
-  - name: OOF_PAYMENT_WEBHOOK_PAYMENT_DELAY_SECONDS
+  - name: OOF_WEBHOOK_PAYMENT_DELAY_SECONDS
     value: "10"
 ```
 
-### OOF_PAYMENT_WEBHOOK_CONSENT_DELAY_SECONDS
+### OOF_WEBHOOK_PAYMENT_CONSENT_DELAY_SECONDS
 
 Configuração de delay do envio de eventos de webhook de consentimento de pagamento
 em segundos.
@@ -234,6 +234,6 @@ em segundos.
 
 ```yaml
 additionalVars:
-  - name: OOF_PAYMENT_WEBHOOK_CONSENT_DELAY_SECONDS
+  - name: OOF_WEBHOOK_PAYMENT_CONSENT_DELAY_SECONDS
     value: "5"
 ```
