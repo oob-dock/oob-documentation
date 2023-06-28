@@ -215,9 +215,7 @@ additionalVars:
 
 ### OOF_PAYMENT_WEBHOOK_PAYMENT_DELAY_SECONDS
 
-Configuração de delay do envio de eventos de webhook de pagamento.
-
-**Default**: "false"
+Configuração de delay do envio de eventos de webhook de pagamento em segundos.
 
 **Exemplo:**
 
@@ -229,9 +227,8 @@ additionalVars:
 
 ### OOF_PAYMENT_WEBHOOK_CONSENT_DELAY_SECONDS
 
-Configuração de delay do envio de eventos de webhook de consentimento de pagamento.
-
-**Default**: "false"
+Configuração de delay do envio de eventos de webhook de consentimento de pagamento
+em segundos.
 
 **Exemplo:**
 
