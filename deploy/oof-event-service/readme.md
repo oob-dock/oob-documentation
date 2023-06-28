@@ -212,3 +212,31 @@ additionalVars:
   - name: VALIDATE_CERTIFICATE
     value: "true"
 ```
+
+### OOF_PAYMENT_WEBHOOK_PAYMENT_DELAY_SECONDS
+
+Configuração de delay do envio de eventos de webhook de pagamento.
+
+**Default**: "false"
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_PAYMENT_WEBHOOK_PAYMENT_DELAY_SECONDS
+    value: "10"
+```
+
+### OOF_PAYMENT_WEBHOOK_CONSENT_DELAY_SECONDS
+
+Configuração de delay do envio de eventos de webhook de consentimento de pagamento.
+
+**Default**: "false"
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_PAYMENT_WEBHOOK_CONSENT_DELAY_SECONDS
+    value: "5"
+```
