@@ -184,7 +184,7 @@ additionalVars:
     value: "SECOND_VALUE"
 ```
 
-### OOF_PAYMENT_WEBHOOK_ENABLED
+### OOF_WEBHOOK_PAYMENT_ENABLED
 
 Define se o envio de webhooks de pagamento deve estar habilitado.
 
@@ -194,7 +194,7 @@ Define se o envio de webhooks de pagamento deve estar habilitado.
 
 ```yaml
 additionalVars:
-  - name: OOF_PAYMENT_WEBHOOK_ENABLED
+  - name: OOF_WEBHOOK_PAYMENT_ENABLED
     value: "true"
 ```
 
@@ -211,4 +211,29 @@ no envio de webhooks.
 additionalVars:
   - name: VALIDATE_CERTIFICATE
     value: "true"
+```
+
+### OOF_WEBHOOK_PAYMENT_DELAY_SECONDS
+
+Configuração de delay do envio de eventos de webhook de pagamento em segundos.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_WEBHOOK_PAYMENT_DELAY_SECONDS
+    value: "10"
+```
+
+### OOF_WEBHOOK_PAYMENT_CONSENT_DELAY_SECONDS
+
+Configuração de delay do envio de eventos de webhook de consentimento de pagamento
+em segundos.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_WEBHOOK_PAYMENT_CONSENT_DELAY_SECONDS
+    value: "5"
 ```
