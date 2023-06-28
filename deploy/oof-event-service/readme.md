@@ -184,7 +184,7 @@ additionalVars:
     value: "SECOND_VALUE"
 ```
 
-### OOF_PAYMENT_WEBHOOK_ENABLED
+### OOF_WEBHOOK_PAYMENT_ENABLED
 
 Define se o envio de webhooks de pagamento deve estar habilitado.
 
@@ -194,7 +194,7 @@ Define se o envio de webhooks de pagamento deve estar habilitado.
 
 ```yaml
 additionalVars:
-  - name: OOF_PAYMENT_WEBHOOK_ENABLED
+  - name: OOF_WEBHOOK_PAYMENT_ENABLED
     value: "true"
 ```
 
