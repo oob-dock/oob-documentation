@@ -144,7 +144,7 @@ Habilita o Dapr na aplicação para realizar o envio de eventos.
 
 Valor default: `true`
 
-### dapr/pubSubId
+### dapr/daprPubsubId
 
 Identificador do componente de pub/sub do Dapr a ser utilizado.
 
