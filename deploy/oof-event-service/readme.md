@@ -238,21 +238,34 @@ additionalVars:
     value: "5"
 ```
 
-### OOF_WEBHOOK_CERTIFICATION_MODE
+### OOF_WEBHOOK_PAYMENT_STATUS
 
-Define mudanças no padrão de envio de webhook com intuito cumprir demandas do
-certificador. Segundo a documentação do open finance era esperado que o webhook
-de pagamento suportasse o envio de webhook para os status PATC, CANC, PDNG, SCHD
-, RJCT e ACSC contudo os cenários de teste do certificador não suportam todos
-esses status no momento e, portanto, ao ativar essa flag os status suportados
-passam a ser apenas CANC, SCHD, RJCT e ACSC.
+Define quais status de pagamentos estão configurados para envio
+de webhook. O valor default são os estados indicados na documentação
+do open finance.
 
-**Default**: "false"
+**Default**: "CANC,PATC,PDNG,SCHD,RJCT,ACSC"
 
 **Exemplo:**
 
 ```yaml
 additionalVars:
-  - name: OOF_WEBHOOK_CERTIFICATION_MODE
-    value: "true"
+  - name: OOF_WEBHOOK_PAYMENT_STATUS
+    value: "CANC,SCHD,RJCT,ACSC"
+```
+
+### OOF_WEBHOOK_PAYMENT_CONSENT_STATUS
+
+Define quais status de consentimento de pagamento estão configurados
+para envio de webhook. O valor default são os estados indicados na
+documentação do open finance.
+
+**Default**: "CONSUMED,REJECTED,REVOKED,TIMEOUT_AUTHORISATION,TIMEOUT_PAYMENT,EXPIRED"
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_WEBHOOK_PAYMENT_CONSENT_STATUS
+    value: "CONSUMED,REJECTED,REVOKED,TIMEOUT_AUTHORISATION,TIMEOUT_PAYMENT,EXPIRED"
 ```
