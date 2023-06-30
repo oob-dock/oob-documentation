@@ -237,3 +237,35 @@ additionalVars:
   - name: OOF_WEBHOOK_PAYMENT_CONSENT_DELAY_SECONDS
     value: "5"
 ```
+
+### OOF_WEBHOOK_PAYMENT_STATUS
+
+Define quais status de pagamento estão configurados para envio
+de webhook. O valor default são os estados indicados na documentação
+do open finance.
+
+**Default**: "CANC,PATC,PDNG,SCHD,RJCT,ACSC"
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_WEBHOOK_PAYMENT_STATUS
+    value: "CANC,SCHD,RJCT,ACSC"
+```
+
+### OOF_WEBHOOK_PAYMENT_CONSENT_STATUS
+
+Define quais status de consentimento de pagamento estão configurados
+para envio de webhook. O valor default são os estados indicados na
+documentação do open finance.
+
+**Default**: "CONSUMED,REJECTED,REVOKED,TIMEOUT_AUTHORISATION,TIMEOUT_PAYMENT,EXPIRED"
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_WEBHOOK_PAYMENT_CONSENT_STATUS
+    value: "CONSUMED,REJECTED,REVOKED,TIMEOUT_AUTHORISATION,TIMEOUT_PAYMENT,EXPIRED"
+```
