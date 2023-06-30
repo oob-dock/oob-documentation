@@ -237,3 +237,22 @@ additionalVars:
   - name: OOF_WEBHOOK_PAYMENT_CONSENT_DELAY_SECONDS
     value: "5"
 ```
+
+### OOF_WEBHOOK_CERTIFICATION_MODE
+
+Define mudanças no padrão de envio de webhook com intuito cumprir demandas do
+certificador. Segundo a documentação do open finance era esperado que o webhook
+de pagamento suportasse o envio de webhook para os status PATC, CANC, PDNG, SCHD
+, RJCT e ACSC contudo os cenários de teste do certificador não suportam todos
+esses status no momento e, portanto, ao ativar essa flag os status suportados
+passam a ser apenas CANC, SCHD, RJCT e ACSC.
+
+**Default**: "false"
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: OOF_WEBHOOK_CERTIFICATION_MODE
+    value: "true"
+```
