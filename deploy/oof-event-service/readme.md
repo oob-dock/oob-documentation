@@ -240,7 +240,7 @@ additionalVars:
 
 ### OOF_WEBHOOK_PAYMENT_STATUS
 
-Define quais status de pagamentos estão configurados para envio
+Define quais status de pagamento estão configurados para envio
 de webhook. O valor default são os estados indicados na documentação
 do open finance.
 
