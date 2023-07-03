@@ -644,6 +644,24 @@ additionalVars:
     value: "1"
 ```
 
+### OOB_ALLOWAUTHCODETOKEN_LIMITDATE
+
+Habilita o bloqueio de refresh tokens de tokens do fluxo authorization code após
+o consentimento de pagamento ser consumido. Essa variável deve receber uma data
+em que deve começar a realizar esse bloqueio.
+
+O valor padrão é '2023-07-18' conforme especificação.
+
+**Formato:** `yyyy-MM-dd`
+
+**Default:** `2023-07-18`
+
+```yaml
+additionalVars:
+  - name: OOB_ALLOWAUTHCODETOKEN_LIMITDATE
+    value: "2023-07-18"
+```
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress

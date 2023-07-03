@@ -179,3 +179,21 @@ additionalVars:
   - name: APIS_VALIDATION_OPENAPI_ENABLED-RESPONSE
     value: "true"
 ```
+
+### OOB_ALLOWAUTHCODETOKEN_LIMITDATE
+
+Habilita o bloqueio de chamadas GET e PATCH de pagamento utilizando o token
+do fluxo authorization code. Essa variável deve receber uma data em que deve
+começar a realizar esse bloqueio.
+
+O valor padrão é '2023-07-18' conforme especificação.
+
+**Formato:** `yyyy-MM-dd`
+
+**Default:** `2023-07-18`
+
+```yaml
+additionalVars:
+  - name: OOB_ALLOWAUTHCODETOKEN_LIMITDATE
+    value: "2023-07-18"
+```
