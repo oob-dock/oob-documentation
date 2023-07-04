@@ -133,7 +133,7 @@ Configurações básicas do serviço.
 
 ```yaml
   config:
-    logLevel: "INFO"
+    logLevel: "info"
 ```
 
 ### privateKeys
