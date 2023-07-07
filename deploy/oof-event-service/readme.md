@@ -272,8 +272,8 @@ additionalVars:
 
 ### DAPR_ACTOR_TYPE
 
-Define o sufixo que será usado no tipos do actors instanciados no ambiente,
-tipicamente será a o nome do próprio ambiente; se vazio nada é acrescentado,
+Define o sufixo que será usado nos tipos do actors instanciados no ambiente,
+tipicamente o nome do próprio ambiente; se vazio nada é acrescentado,
 ou seja, usa-se o tipo do actor ex: WebhookActor. Isso é usado para que o dapr
 instancie um actor por ambiente.
 
