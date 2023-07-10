@@ -70,21 +70,26 @@ ferramenta [Mockoon](https://mockoon.com/) e definido nesse [arquivo JSON](./moc
 
 Vários cenários estão mockados e são acionados através das respectivas URLs iniciais:
 
-| Cenário                                                                   | URL para iniciar processo                         |
-| ------------------------------------------------------------------------- | ------------------------------------------------- |
-| Hybrid-flow / Pagamento                                                   | <http://localhost:3301/auth/auth?id=standard>     |
-| Hybrid-flow hand-off / Pagamento                                          | <http://localhost:3301/auth/app/commands/handoff> |
-| Hybrid-flow / CPF_MISMATCH na autenticação                                | <http://localhost:3301/auth/auth?id=cpf>          |
-| Hybrid-flow / EXPIRED_CONSENT no link inicial                             | <http://localhost:3301/auth/auth?id=expired>      |
-| Hybrid-flow / RESOURCE_MUST_CONTAIN_ID na confirmação                     | <http://localhost:3301/auth/auth?id=resource>     |
-| Hybrid-flow / RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS na confirmação | <http://localhost:3301/auth/auth?id=resource>     |
-| Hybrid-flow / DISCOVERY_ERROR na autenticação                             | <http://localhost:3301/auth/auth?id=DISCOVER>     |
-| Hybrid-flow / GENERIC_ERROR no link inicial                               | <http://localhost:3301/auth/auth?id=generic>      |
+| Cenário                                                                   | URL para iniciar processo                              |
+| ------------------------------------------------------------------------- | ------------------------------------------------------ |
+| Hybrid-flow / Pagamento                                                   | <http://localhost:3301/auth/auth?id=standard>          |
+| Hybrid-flow hand-off / Pagamento                                          | <http://localhost:3301/auth/app/commands/handoff>      |
+| Hybrid-flow / CPF_MISMATCH na autenticação                                | <http://localhost:3301/auth/auth?id=cpf>               |
+| Hybrid-flow / EXPIRED_CONSENT no link inicial                             | <http://localhost:3301/auth/auth?id=expired>           |
+| Hybrid-flow / RESOURCE_MUST_CONTAIN_ID na confirmação                     | <http://localhost:3301/auth/auth?id=resource>          |
+| Hybrid-flow / RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS na confirmação | <http://localhost:3301/auth/auth?id=resource>          |
+| Hybrid-flow / DISCOVERY_ERROR na autenticação                             | <http://localhost:3301/auth/auth?id=discovery>         |
+| Hybrid-flow / DISCOVERY_TIMEOUT na autenticação                           | <http://localhost:3301/auth/auth?id=discovery-timeout> |
+| Hybrid-flow / GENERIC_ERROR no link inicial                               | <http://localhost:3301/auth/auth?id=generic>           |
 
 Para executar o mock basta importar o JSON na ferramenta Mockoon e iniciar o
 servidor do _environment_ "OOB Authroization Server Apps API".
 
 ## Changelog
+
+### 2023-05-15 - v2.1.9
+
+- Adiciona definição do erro DISCOVERY_TIMEOUT.
 
 ### 2022-11-09 - v2.1.8
 

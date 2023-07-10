@@ -342,6 +342,7 @@ components:
             - RESOURCE_MUST_CONTAIN_ID
             - RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS
             - DISCOVERY_ERROR
+            - DISCOVERY_TIMEOUT
             - GENERIC_ERROR
         message:
           type: string
