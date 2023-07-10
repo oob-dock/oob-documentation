@@ -418,6 +418,12 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/ResourcePaymentId'
+        orgName:
+          type: string
+          example: "Guia Seguros S.A."
+        tppName:
+          type: string
+          example: "Guia Seguros"
     ConsentHistoryStatus:
       type: object
       properties:
@@ -464,6 +470,9 @@ components:
         scheduleDate:
           type: string
           example: 2022-07-06
+        orgName:
+          type: string
+          example: "Guia Seguros S.A."
         tppName:
           type: string
           example: "Guia Seguros"
