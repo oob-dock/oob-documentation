@@ -13,10 +13,10 @@
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
   - [Grupos de permissões na criação do consentimento](#grupos-de-permissões-na-criação-do-consentimento)
-  - [Aprovação de criação de consentimento](#aprovação-de-criação-de-consentimento)
-      - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
+  - [Aprovação de criação de consentimento de pagamento](#aprovação-de-criação-de-consentimento-de-pagamento)
+    - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
   - [Serviços auxiliares](#serviços-auxiliares)
-  
+
 ## Discovery de recursos no Opus Open Banking
 
 O discovery de recursos no Opus Open Banking é um dos pontos de integração entre
@@ -72,6 +72,11 @@ Open Banking e seus tipos:
 | Compartilhamento de dados | FINANCING                    | Não selecionável | ```direct:discoverFinancings```                  |
 | Compartilhamento de dados | LOAN                         | Não selecionável | ```direct:discoverLoans```                       |
 | Compartilhamento de dados | UNARRANGED_ACCOUNT_OVERDRAFT | Não selecionável | ```direct:discoverUnarrangedAccountOverdrafts``` |
+| Compartilhamento de dados | BANK_FIXED_INCOMES_READ      | Não selecionável | ```direct:discoverBankFixedIncomes```        |
+| Compartilhamento de dados | CREDIT_FIXED_INCOMES_READ    | Não selecionável | ```direct:discoverCreditFixedIncomes```      |
+| Compartilhamento de dados | FUNDS_READ                   | Não selecionável | ```direct:discoverFunds```                   |
+| Compartilhamento de dados | VARIABLE_INCOMES_READ        | Não selecionável | ```direct:discoverVariableIncomes```         |
+| Compartilhamento de dados | TREASURE_TITLES_READ         | Não selecionável | ```direct:discoverTreasureTitles```          |
 
 Caso a instituição forneça algum produto do tipo de compartilhamento de dados,
 será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
@@ -272,6 +277,7 @@ para documentação oficial):
 | Operações de Crédito | Financiamentos                | FINANCINGS_READ, FINANCINGS_WARRANTIES_READ, FINANCINGS_SCHEDULED_INSTALMENTS_READ, FINANCINGS_PAYMENTS_READ, RESOURCES_READ                                                                             |
 | Operações de Crédito | Empréstimos                   | LOANS_READ, LOANS_WARRANTIES_READ, LOANS_SCHEDULED_INSTALMENTS_READ, LOANS_PAYMENTS_READ, RESOURCES_READ                                                                                                 |
 | Operações de Crédito | Adiantamento a depositantes   | UNARRANGED_ACCOUNTS_OVERDRAFT_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ, RESOURCES_READ |
+| Operações de Crédito | Investimentos                 | BANK_FIXED_INCOMES_READ,CREDIT_FIXED_INCOMES_READ,FUNDS_READ,VARIABLE_INCOMES_READ,TREASURE_TITLES_READ                  |
 
 ## Aprovação de criação de consentimento de pagamento
 
