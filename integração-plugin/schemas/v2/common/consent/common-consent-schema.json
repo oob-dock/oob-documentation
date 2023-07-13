@@ -22,7 +22,13 @@
                             "FINANCING",
                             "UNARRANGED_ACCOUNT_OVERDRAFT",
                             "INVOICE_FINANCING",
-                            "PAYMENT"
+                            "PAYMENT",
+                            "INVOICE_FINANCING",
+                            "BANK_FIXED_INCOME",
+                            "CREDIT_FIXED_INCOME",
+                            "VARIABLE_INCOME",
+                            "TREASURE_TITLE",
+                            "FUND"
                         ],
                         "examples": [
                             "PAYMENT"
@@ -125,7 +131,12 @@
                             "FINANCING",
                             "UNARRANGED_ACCOUNT_OVERDRAFT",
                             "INVOICE_FINANCING",
-                            "PAYMENT"
+                            "PAYMENT",
+                            "BANK_FIXED_INCOME",
+                            "CREDIT_FIXED_INCOME",
+                            "VARIABLE_INCOME",
+                            "TREASURE_TITLE",
+                            "FUND"
                         ],
                         "examples": [
                             "PAYMENT"
@@ -358,6 +369,11 @@
                     "UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ",
                     "UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ",
                     "UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ",
+                    "BANK_FIXED_INCOMES_READ",
+                    "CREDIT_FIXED_INCOMES_READ",
+                    "FUNDS_READ",
+                    "VARIABLE_INCOMES_READ",
+                    "TREASURE_TITLES_READ",
                     "RESOURCES_READ"
                 ]
             },
@@ -496,7 +512,12 @@
                     "FINANCING",
                     "UNARRANGED_ACCOUNT_OVERDRAFT",
                     "INVOICE_FINANCING",
-                    "PAYMENT"
+                    "PAYMENT",
+                    "BANK_FIXED_INCOME",
+                    "CREDIT_FIXED_INCOME",
+                    "VARIABLE_INCOME",
+                    "TREASURE_TITLE",
+                    "FUND"
                 ]
             },
             "maxItems": 1000,
