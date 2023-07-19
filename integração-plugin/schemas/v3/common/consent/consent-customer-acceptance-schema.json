@@ -1,0 +1,68 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$defs": {
+        "ConsentCustomerAcceptance": {
+            "description": "Detalhes do consentimento",
+            "type": "object",
+            "required": [
+                "type",
+                "brandId",
+                "creationDateTime",
+                "tpp",
+                "externalId",
+                "loggedUser",
+                "expirationDateTime"
+            ],
+            "properties": {
+                "type": {
+                    "description": "Tipo do consentimento",
+                    "type": "string",
+                    "enum": [
+                        "DATA_SHARING",
+                        "PAYMENT"
+                    ]
+                },
+                "brandId": {
+                    "$ref": "../common-schema.json#/$defs/BrandId"
+                },
+                "creationDateTime": {
+                    "$ref": "./common-consent-schema.json#/$defs/CreationDateTime"
+                },
+                "tpp": {
+                    "$ref": "./common-consent-schema.json#/$defs/TPP"
+                },
+                "externalId": {
+                    "$ref": "./common-consent-schema.json#/$defs/ExternalId"
+                },
+                "loggedUser": {
+                    "$ref": "../common-payment-schema.json#/components/schemas/LoggedUser"
+                },
+                "businessEntity": {
+                    "$ref": "../common-payment-schema.json#/components/schemas/BusinessEntity"
+                },
+                "resources": {
+                    "$ref": "./common-consent-schema.json#/$defs/AvailableResources"
+                },
+                "expirationDateTime": {
+                    "$ref": "./common-consent-schema.json#/$defs/ExpirationDateTime"
+                },
+                "creditor": {
+                    "$ref": "../common-payment-schema.json#/components/schemas/Identification"
+                },
+                "payment": {
+                    "$ref": "../common-payment-schema.json#/components/schemas/PaymentConsent"
+                },
+                "debtorAccount": {
+                    "$ref": ".../common-payment-schema.json#/components/schemas/DebtorAccount"
+                },
+                "permissions": {
+                    "$ref": "./common-consent-schema.json#/$defs/Permissions"
+                },
+                "failingResources": {
+                    "$ref": "./common-consent-schema.json#/$defs/FailingResources"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

@@ -1,0 +1,61 @@
+{
+  "data": {
+    "paymentId": [
+      {
+        "key": "pk_CampoUm",
+        "value": "ABC"
+      },
+      {
+        "key": "pk_CampoDois",
+        "value": "123"
+      }
+    ],
+    "endToEndId": "E9040088820210128000800123873170",
+    "consentId": "urn:bancoex:C1DD33123",
+    "creationDateTime": "2020-07-21T08:30:00Z",
+    "statusUpdateDateTime": "2020-07-21T08:30:00Z",
+    "status": "PDNG",
+    "localInstrument": "DICT",
+    "payment": {
+      "amount": "100000.12",
+      "currency": "BRL"
+    },
+    "creditorAccount": {
+      "ispb": "12345678",
+      "number": "1234567890",
+      "accountType": "CACC",
+      "issuer": "1774"
+    },
+    "cnpjInitiator": "50685362000135",
+    "debtorAccount": {
+      "ispb": "12345678",
+      "number": "1234567890",
+      "accountType": "CACC",
+      "issuer": "1774"
+    },
+    "authorisationFlow": "HYBRID_FLOW",
+    "proxy": "12345678901",
+    "cancellation": {
+      "cancelledAt": "2021-05-21T08:30:00Z",
+      "cancelledBy": {
+        "document": {
+          "identification": "11111111111",
+          "rel": "CPF"
+        }
+      },
+      "reason": "CANCELADO_PENDENCIA",
+      "cancelledFrom": "INICIADORA"
+    },
+    "transactionIdentification": "E00038166201907261559y6j6",
+    "ibgeTownCode": "5300108",
+    "rejectionReason": {
+      "code": "SALDO_INSUFICIENTE",
+      "detail": "$=$sn65"
+    },
+    "remittanceInformation": "Pagamento da nota RSTO035-002."
+  },
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": 33457390
+  }
+}
