@@ -1,0 +1,91 @@
+{
+  "data": [
+    {
+      "billId": [
+        {
+          "key": "pk_yellow",
+          "value": "value2"
+        },
+        {
+          "key": "pk_green",
+          "value": "value2"
+        },
+        {
+          "key": "pk_green",
+          "value": "4"
+        }
+      ],
+      "dueDate": "2021-05-21",
+      "billTotalAmount": 100000.04,
+      "billTotalAmountCurrency": "BRL",
+      "billMinimumAmount": 1000.04,
+      "billMinimumAmountCurrency": "BRL",
+      "isInstalment": true,
+      "financeCharges": [
+        {
+          "type": "JUROS_MORA_ATRASO_PAGAMENTO_FATURA",
+          "amount": 100000.04,
+          "currency": "BRL",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "type": "IOF",
+          "amount": 100000.04,
+          "currency": "BRL",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "payments": []
+    },
+    {
+      "billId": [
+        {
+          "key": "pk_green",
+          "value": "value3"
+        },
+        {
+          "key": "pk_brown",
+          "value": "5"
+        },
+        {
+          "key": "pk_green",
+          "value": "5"
+        },
+        {
+          "key": "pk_green",
+          "value": "3"
+        }
+      ],
+      "dueDate": "2021-05-21",
+      "billTotalAmount": 100000.04,
+      "billTotalAmountCurrency": "BRL",
+      "billMinimumAmount": 1000.04,
+      "billMinimumAmountCurrency": "BRL",
+      "isInstalment": false,
+      "financeCharges": [
+        {
+          "type": "MULTA_ATRASO_PAGAMENTO_FATURA",
+          "amount": 100000.04,
+          "currency": "BRL",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "payments": [
+        {
+          "valueType": "VALOR_PAGAMENTO_FATURA_PARCELADO",
+          "paymentDate": "2021-05-21",
+          "paymentMode": "PIX",
+          "amount": 100000.04,
+          "currency": "BRL"
+        },
+        {
+          "valueType": "VALOR_PAGAMENTO_FATURA_REALIZADO",
+          "paymentDate": "2021-05-21",
+          "paymentMode": "AVERBACAO_FOLHA",
+          "amount": 100000.04,
+          "currency": "BRL"
+        }
+      ]
+    }
+  ]
+}

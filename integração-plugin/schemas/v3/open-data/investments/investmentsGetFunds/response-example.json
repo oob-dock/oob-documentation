@@ -1,0 +1,54 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "name": "FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO",
+      "cnpjNumber": "64108803000191",
+      "admin": {
+        "name": "ADM OPEN FINANCE DTVM S.A.",
+        "cnpjNumber": "14511732000150"
+      },
+      "fundManager": {
+        "name": "GESTOR OPEN FINANCE DTVM S.A.",
+        "cnpjNumber": "16332711000101"
+      },
+      "anbimaCategory": "MULTIMERCADO",
+      "generalConditions": {
+        "minimumAmount": {
+          "value": "100000.12",
+          "currency": "BRL"
+        },
+        "redemption": {
+          "quotationDays": 3,
+          "quotationTerm": "DIAS_CORRIDOS",
+          "paymentDays": 3,
+          "paymentTerm": "DIAS_CORRIDOS",
+          "graceDays": 365
+        },
+        "application": {
+          "quotationDays": 60,
+          "quotationTerm": "DIAS_CORRIDOS"
+        },
+        "fundQuotaType": "COTA_ABERTURA"
+      },
+      "taxation": "CURTO_PRAZO",
+      "fees": {
+        "maxAdminFee": "0.020000",
+        "entryFee": "0.010000",
+        "exitFee": "0.030000",
+        "performanceFee": {
+          "benchmarkAdditionalInfo": "dolor consectetur in cillum",
+          "amount": "0.050000",
+          "method": "PASSIVO",
+          "benchmark": "CDI"
+        }
+      },
+      "isinCode": "BRAAAAAAA000"
+    }
+  ]
+}

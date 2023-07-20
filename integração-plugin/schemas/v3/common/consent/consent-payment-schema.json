@@ -28,10 +28,10 @@
                     "$ref": "./common-consent-schema.json#/$defs/ExternalId"
                 },
                 "loggedUser": {
-                    "$ref": "../common-payment-schema.json#/components/schemas/LoggedUser"
+                    "$ref": "./common-consent-schema.json#/$defs/LoggedUser"
                 },
-                "businessEntity": {
-                    "$ref": "../common-payment-schema.json#/components/schemas/BusinessEntity"
+                "businessDocumentType": {
+                    "$ref": "./common-consent-schema.json#/$defs/BusinessEntity"
                 },
                 "resources": {
                     "$ref": "./common-consent-schema.json#/$defs/AcceptedResources"
@@ -43,13 +43,20 @@
                     "$ref": "./common-consent-schema.json#/$defs/ExpirationDateTime"
                 },
                 "creditor": {
-                    "$ref": "../common-payment-schema.json#/components/schemas/Identification"
+                    "$ref": "../common-payment-schema.json#/$defs/Identification"
                 },
                 "payment": {
-                    "$ref": "../common-payment-schema.json#/components/schemas/PaymentConsent"
+                    "oneOf": [
+                        {
+                            "$ref": "./common-consent-schema.json#/$defs/PixPaymentConsent"
+                        },
+                        {
+                            "$ref": "./common-consent-schema.json#/$defs/TedTefPaymentConsent"
+                        }
+                    ]
                 },
                 "debtorAccount": {
-                    "$ref": "../common-payment-schema.json#/components/schemas/DebtorAccount"
+                    "$ref": "../common-payment-schema.json#/$defs/DebtorAccount"
                 },
                 "authExtraData": {
                     "$ref": "./common-consent-schema.json#/$defs/AuthExtraData"

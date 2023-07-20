@@ -22,7 +22,7 @@
       ],
       "properties": {
         "data": {
-          "$ref": "../../common/common-payment-schema.json#/$defs/PatchPixPaymentData"
+          "$ref": "../common/common-schema.json#/$defs/PatchPixPaymentData"
         }
       }
     }
