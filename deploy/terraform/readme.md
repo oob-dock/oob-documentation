@@ -34,6 +34,7 @@
       - [x\_forwarded\_for\_header\_name](#x_forwarded_for_header_name)
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
+      - [route\_block\_enabled](#route_block_enabled)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -246,6 +247,15 @@ Identificador da organização no diretório de participantes.
 Identificador do componente de publish/subscribe do [Dapr](../shared-definitions.md#dapr).
 
 **Ex:** `event-publisher`
+
+#### route_block_enabled
+
+Define se as rotas do Kong devem ou não ser bloqueadas de acordo com as datas regulatórias.
+Essa variável deve ser mantida como `true` nos ambientes produtivos, mas configurada
+como `false` nos ambientes de homologação para execução da certificação.
+
+**Default:** `true`
+**Valores possíveis:** `true` ou `false`
 
 ## Configuração do Grafana
 
