@@ -5,6 +5,5 @@
         {
             "$ref": "../../common/response-error-schema.json"
         }
-    ],
-    "additionalProperties": false
+    ]
 }
