@@ -1,0 +1,15 @@
+{
+  "data": {
+    "name": "Cartão Universitário",
+    "productType": "OUTROS",
+    "creditCardNetwork": "VISA",
+    "paymentMethod": [
+      {
+        "identificationNumber": "4453",
+        "isMultipleCreditCard": true
+      }
+    ],
+    "networkAdditionalInfo": "NA",
+    "productAdditionalInfo": "OURO_INTERNACIONAL"
+  }
+}

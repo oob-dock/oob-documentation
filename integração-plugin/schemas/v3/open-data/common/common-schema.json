@@ -1,0 +1,320 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$defs": {
+        "Name": {
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "\\w*\\W*",
+            "examples": [
+                "Organização A",
+                "Empresa A1"
+            ],
+            "description": "Nome de marca ou empresa."
+        },
+        "urlComplementaryList": {
+            "type": "string",
+            "pattern": "\\w*\\W*",
+            "maxLength": 1024,
+            "description": "URL do link que conterá a lista complementar com os nomes e CNPJs agrupados sob o mesmo cnpjNumber. Os contidos nessa lista possuem as mesmas características para produtos e serviços. Endereço eletrônico de acesso ao canal. Restrição: Será obrigatorimente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada.",
+            "examples": [
+                "https://empresaa1.com/branches-banking"
+            ]
+        },
+        "CnpjNumber": {
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^(\\d{14})$|^NA$",
+            "example": [
+                "45086338000178"
+            ],
+            "description": "CNPJ"
+        },
+        "Value": {
+            "type": "string",
+            "maxLength": 12,
+            "pattern": "^((\\d{1,9}\\.\\d{2}){1}|NA)$",
+            "examples": [
+                "19.00"
+            ]
+        },
+        "Currency": {
+            "type": "string",
+            "pattern": "^(\\w{3}){1}$",
+            "maxLength": 3,
+            "description": "Moeda referente ao valor mínimo da Tarifa, segundo modelo ISO-4217.",
+            "examples": [
+                "BRL"
+            ]
+        },
+        "ChargingTriggerInfo": {
+            "type": "string",
+            "maxLength": 2000,
+            "pattern": "\\w*\\W*",
+            "examples": [
+                "Realização de pesquisa em serviços de proteção ao crédito, base de dados e informações cadastrais, e tratamento de dados e informações necessários ao início relacionamento decorrente da abertura de conta de depósitos à vista ou de poupança ou contratação de operação de crédito ou de arrendamento mercantil, não podendo ser cobrada cumulativamente"
+            ]
+        },
+        "ServiceName": {
+            "type": "string",
+            "maxLength": 250,
+            "examples": [
+                "Entrega de talão de cheque em domícilio"
+            ],
+            "description": "Nomes das cobranças sobre Serviços relacionados à Modalidade informada."
+        },
+        "Code": {
+            "type": "string",
+            "maxLength": 100,
+            "description": "Siglas de identificação do Serviço (Campo Livre).",
+            "examples": [
+                "'TALAO_DOMICILIO"
+            ]
+        },
+        "Price": {
+            "type": "object",
+            "minItems": 4,
+            "maxItems": 4,
+            "description": "Lista distribuição preços tarifas de serviços.",
+            "required": [
+                "interval",
+                "value",
+                "currency",
+                "customers"
+            ],
+            "properties": {
+                "interval": {
+                    "$ref": "#/$defs/Interval"
+                },
+                "value": {
+                    "$ref": "#/$defs/Value",
+                    "description": "Valor da mediana de cada faixa relativa ao serviço ofertado, informado no período, conforme Res nº 32 BCB, 2020. p.ex. '45.00' (representa um valor monetário. p.ex: 1547368.92. Este valor, considerando que a moeda seja BRL, significa R$ 1.547.368,92. O único separador presente deve ser o '.' (ponto) para indicar a casa decimal. Não deve haver separador de milhar)."
+                },
+                "currency": {
+                    "$ref": "#/$defs/Currency"
+                },
+                "customers": {
+                    "$ref": "#/$defs/Customer"
+                }
+            }
+        },
+        "Interval": {
+            "type": "string",
+            "minItems": 1,
+            "maxItems": 1,
+            "description": "Segundo Normativa nº 32, BCB, de 2020: Distribuição de frequência relativa dos valores de tarifas cobradas dos clientes, de que trata o § 2º do art. 3º da Circular nº 4.015, de 2020, deve dar-se com base em quatro faixas de igual tamanho, com explicitação dos valores sobre a mediana em cada uma dessas faixas. Informando: 1ª faixa, 2ª faixa, 3ª faixa e 4ª faixa.",
+            "Enum": [
+                "1_FAIXA",
+                "2_FAIXA",
+                "3_FAIXA",
+                "4_FAIXA" ],
+            "examples": [
+                "1_FAIXA"
+            ]
+        },
+        "Rate": {
+            "type": "string",
+            "maxLength": 6,
+            "pattern": "(^[0-9](\\.[0-9]{4})$|^NA$)",
+            "description": "Percentual de clientes em cada faixa.",
+            "examples": [
+                "0.1500"
+            ]
+        },
+        "Customer": {
+            "type": "object",
+            "required": [
+                "rate"
+            ],
+            "properties": {
+                "rate": {
+                    "type": "string",
+                    "maxLength": 6,
+                    "pattern": "(^[0-9](\\.[0-9]{4})$|^NA$)",
+                    "description": "Percentual de clientes em cada faixa.",
+                    "examples": [
+                        "0.1500"
+                    ]
+                }
+            }
+        },
+        "MinimumPrice": {
+            "type": "object",
+            "required": [
+                "value",
+                "currency"
+            ],
+            "properties": {
+                "value": {
+                    "$ref": "#/$defs/Value",
+                    "description": "Valor mínimo apurado para a tarifa de serviços sobre a base de clientes no mês de referência."
+                },
+                "currency": {
+                    "$ref": "#/$defs/Currency"
+                }
+            },
+            "additionalProperties": false
+        },
+        "MaximumPrice": {
+            "type": "object",
+            "required": [
+                "value",
+                "currency"
+            ],
+            "properties": {
+                "value": {
+                    "$ref": "#/$defs/Value",
+                    "description": "Valor máximo apurado para a tarifa de serviços sobre a base de clientes no mês de referência."
+                },
+                "currency": {
+                    "$ref": "#/$defs/Currency"
+                }
+            },
+            "additionalProperties": false
+        },
+        "AdditionalInfo": {
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "\\w*\\W*",
+            "example": [
+                "NA"
+            ]
+        },
+        "ReferentialRateIndexer": {
+            "type": "string",
+            "description": "Tipos de taxas referenciais ou indexadores, conforme Anexo 5: Taxa referencial ou Indexador (Indx), do Documento 3040.",
+            "Enum": [
+                "SEM_INDEXADOR_TAXA",
+                "PRE_FIXADO",
+                "POS_FIXADO_TR_TBF",
+                "POS_FIXADO_TJLP",
+                "POS_FIXADO_LIBOR",
+                "POS_FIXADO_TLP",
+                "OUTRAS_TAXAS_POS_FIXADAS",
+                "FLUTUANTES_CDI",
+                "FLUTUANTES_SELIC",
+                "OUTRAS_TAXAS_FLUTUANTES",
+                "INDICES_PRECOS_IGPM",
+                "INDICES_PRECOS_IPCA",
+                "INDICES_PRECOS_IPCC",
+                "OUTROS_INDICES_PRECO",
+                "CREDITO_RURAL_TCR_PRE",
+                "CREDITO_RURAL_TCR_POS",
+                "CREDITO_RURAL_TRFC_PRE",
+                "CREDITO_RURAL_TRFC_POS",
+                "OUTROS_INDEXADORES"
+            ],
+            "example": [
+                "PRE_FIXADO"
+            ]
+        },
+        "RateInterest": {
+            "type": "string",
+            "pattern": "(^[0-1](\\.[0-9]{2})$|^NA$)",
+            "maxLength": 4,
+            "description": "Percentual que incide sobre a composição das taxas de juros remuneratórios. (representa uma porcentagem Ex: 0.15 (O valor ao lado representa 15%. O valor '1 'representa 100%) A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%).",
+            "example": "0.15"
+        },
+        "InterestRate": {
+            "type": "object",
+            "minItems": 1,
+            "description": "Lista que traz o conjunto de informações necessárias para demonstrar a distribuição de frequências das taxas de juros remuneratórios da Modalidade de crédito.",
+            "required": [
+                "referentialRateIndexer",
+                "rate",
+                "applications",
+                "minimumRate",
+                "maximumRate"
+            ],
+            "properties": {
+                "referentialRateIndexer": {
+                    "$ref": "#/$defs/ReferentialRateIndexer"
+                },
+                "rate": {
+                    "$ref": "#/$defs/RateInterest"
+                },
+                "applications": {
+                    "$ref": "#/$defs/ApplicationRate"
+                },
+                "minimumRate": {
+                    "$ref": "#/$defs/Rate",
+                    "description": "Percentual mínimo cobrado (taxa efetiva) no mês de referência, para o Empréstimo contratado A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)."
+                },
+                "maximumRate": {
+                    "$ref": "#/$defs/Rate",
+                    "description": "Percentual máximo cobrado (taxa efetiva) no mês de referência, para o Empréstimo contratado A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)."
+                }
+            },
+            "additionalProperties": false
+        },
+        "ApplicationRate": {
+            "type": "object",
+            "minItems": 4,
+            "maxItems": 4,
+            "description": "Loan: Lista das faixas de cobrança da taxa efetiva aplicada pela contratação de crédito.\n Credit-card: Lista distribuição percentuais relativos à taxa de juros remuneratórios.",
+            "required": [
+                "interval",
+                "indexer",
+                "customers"
+            ],
+            "properties": {
+                "interval": {
+                    "$ref": "#/$defs/Interval"
+                },
+                "indexer": {
+                    "$ref": "#/$defs/Indexer"
+                },
+                "customers": {
+                    "$ref": "#/$defs/Customer"
+                }
+            },
+            "additionalProperties": false
+        },
+        "Indexer": {
+            "type": "object",
+            "required": [
+                "rate"
+            ],
+            "properties": {
+                "rate": {
+                    "$ref": "#/$defs/Rate",
+                    "description": "Percentual que corresponde a mediana da taxa efetiva cobrada do cliente pela contratação do crédito, no intervalo informado. p.ex. '0,8700%'. A apuração pode acontecer com até 4 casas decimais. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)."
+                }
+            },
+            "additionalProperties": false
+        },
+        "RequiredWarranties": {
+            "type": "string",
+            "minItems": 1,
+            "maxItems": 14,
+            "description": "Relação de garantias exigidas, segundo documento 3040 do Bacen:\n cessão de direitos creditórios: o cedente transfere ao credor/cessionário a titularidade de direitos creditórios, até a liquidação da dívida. O credor/cessionário passa a recebê-los diretamente dos devedores e credita o produto da operação para o cedente na operação que originou a cessão, até a sua liquidação\n caução: garantia instituída sobre créditos do garantidor\n penhor: direito real que consiste na tradição de uma coisa móvel ou mobilizável, suscetível de alienação, realizada pelo devedor ou por terceiro ao credor, a fim de garantir o pagamento do débito\n alienação fiduciária: transferência ao credor, ou fiduciário, da propriedade do bem\n hipoteca: direito real de garantia que afeta um bem imóvel para o cumprimento da obrigação\n operações garantidas pelo governo: nas instâncias federal, estadual ou municipal\n outras garantias não fidejussórias: as garantias reais não descritas como: cessão de direitos creditórios, caução, penhor, alienação fiduciária, hipoteca ou operação garantida pelo governo\n seguros e assemelhados: os seguros (e assemelhados) contratados para garantir o pagamento da operação em circunstâncias adversas\n garantia fidejussória: baseada na fidelidade do garantidor em cumprir as obrigações, caso o devedor não o faça\n bens arrendados: bem objeto do arrendamento financeiro\n garantias internacionais: declarar se a garantia é mitigadora ou não, observados os critérios definidos pela Circular 3.644, de 4 de março de 2013\n operações garantidas por outras entidade: declarar as garantias prestadas pelas entidades descritas no item 3. Informações de Garantias (i) do documento 3040 - Bacen\n acordos de compensação: operações que sejam abrangidas por acordos para a compensação e liquidação de obrigações no âmbito do SFN, nos termos da Resolução 3.263, de 24 de fevereiro de 2005\n não aplicável.",
+            "Enum": [
+                "CESSAO_DIREITOS_CREDITORIOS",
+                "CAUCAO",
+                "PENHOR",
+                "ALIENACAO_FIDUCIARIA",
+                "HIPOTECA",
+                "OPERACOES_GARANTIDAS_PELO_GOVERNO",
+                "OUTRAS_GARANTIAS_NAO_FIDEJUSSORIAS",
+                "SEGUROS_ASSEMELHADOS",
+                "GARANTIA_FIDEJUSSORIA",
+                "BENS_ARRENDADOS",
+                "GARANTIAS_INTERNACIONAIS",
+                "OPERACOES_GARANTIDAS_OUTRAS_ENTIDADES",
+                "ACORDOS_COMPENSACAO",
+                "NAO_APLICAVEL"
+            ],
+            "example": [
+                "CESSAO_DIREITOS_CREDITORIOS"
+            ]
+        },
+        "TermsConditions": {
+            "type": "string",
+            "pattern": "\\w*\\W*",
+            "maxLength": 2000,
+            "description": "Campo aberto para informar as condições contratuais relativas ao produto ou serviço informado. Pode ser informada a URL referente ao endereço onde constam as condições informadas.",
+            "example": [
+                "https://empresaa1.com/personal_loans"
+            ]
+        }
+    }
+}

@@ -1,6 +1,6 @@
 # Controles de segurança por API
 
-- [Contoles de segurança por API](#contoles-de-segurança-por-api)
+- [Controles de segurança por API](#controles-de-segurança-por-api)
   - [Channels catalog](#channels-catalog)
   - [Channels catalog maintance](#channels-catalog-maintance)
   - [Products and services catalog](#products-and-services-catalog)
@@ -383,11 +383,16 @@
 | GET      | /v1/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
 | POST     | /v2/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
 | GET      | /v2/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
+| POST     | /v3/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
+| GET      | /v3/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
 | POST     | /v1/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
-| POST     | /v2/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
 | GET      | /v1/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
-| PATCH    | /v2/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
+| POST     | /v2/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
 | GET      | /v2/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
+| PATCH    | /v2/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
+| POST     | /v3/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
+| GET      | /v3/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
+| PATCH    | /v3/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
 
 ## Consent
 
