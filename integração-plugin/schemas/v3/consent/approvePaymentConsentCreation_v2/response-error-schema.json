@@ -50,14 +50,14 @@
                                 "maxLength": 255,
                                 "pattern": "[\\w\\W\\s]*",
                                 "example": "Forma de pagamento inválida.",
-                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida.  \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  \n• PARAMETRO_INVALIDO: Parâmetro inválido.  \n• ERRO_IDEMPOTENCIA: Erro idempotência.  \n• NAO_INFORMADO: Não informado.    \n"
+                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida.  \n• DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento inválido.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  \n• PARAMETRO_INVALIDO: Parâmetro inválido.  \n• ERRO_IDEMPOTENCIA: Erro idempotência.  \n• NAO_INFORMADO: Não informado.    \n"
                             },
                             "detail": {
                                 "type": "string",
                                 "maxLength": 2048,
                                 "pattern": "[\\w\\W\\s]*",
                                 "example": "Forma de pagamento [Modalidade] não suportada.",
-                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento [Modalidade] não suportada.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida para a forma de pagamento selecionada.  \n• DETALHE_PGTO_INVALIDO: Parâmetro [nome_campo] não obedece às regras de negócio.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro [nome_campo] obrigatório não informado.  \n• PARAMETRO_INVALIDO: Parâmetro [nome_campo] não obedece as regras de formatação esperadas.  \n• ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data) diverge do conteúdo associado a esta chave de idempotência (x-idempotency-key).  \n• NAO_INFORMADO: Não reportado/identificado pela instituição detentora de conta.  \n"
+                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento [Modalidade] não suportada.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida para a forma de pagamento selecionada.  \n• DETALHE_PAGAMENTO_INVALIDO: Parâmetro [nome_campo] não obedece às regras de negócio.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro [nome_campo] obrigatório não informado.  \n• PARAMETRO_INVALIDO: Parâmetro [nome_campo] não obedece as regras de formatação esperadas.  \n• ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data) diverge do conteúdo associado a esta chave de idempotência (x-idempotency-key).  \n• NAO_INFORMADO: Não reportado/identificado pela instituição detentora de conta.  \n"
                             }
                         },
                         "additionalProperties": false

@@ -304,7 +304,7 @@ um consentimento:
 
 | Tipo do consentimento | Nome da rota Camel                            |
 | --------------------- | --------------------------------------------- |
-| Pagamento             | ```direct:approvePaymentConsentCreation_v2``` |
+| Pagamento             | ```direct:approvePaymentConsentCreation_v3``` |
 
 O retorno desses pontos de integração devem ser:
 
@@ -323,8 +323,8 @@ A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 
 | Tipo     | JSON Schema                                                                                                        |
 | -------- | ------------------------------------------------------------------------------------------------------------------ |
-| Request  | [approvePaymentConsent-request.json](../schemas/v2/consent/approvePaymentConsentCreation_v2/request-schema.json)   |
-| Response | [approvePaymentConsent-response.json](../schemas/v2/consent/approvePaymentConsentCreation_v2/response-schema.json) |
+| Request  | [approvePaymentConsent-request.json](../schemas/v3/consent/approvePaymentConsentCreation_v3/request-schema.json)   |
+| Response | [approvePaymentConsent-response.json](../schemas/v3/consent/approvePaymentConsentCreation_v3/response-schema.json) |
 
 Exemplo de Request:
 
@@ -379,10 +379,10 @@ Exemplo de Request:
 ```
 
 Mais exemplos de request e de response para a rota "approvePaymentConsentCreation"
-podem ser encontradas [aqui](../schemas/v2/consent/approvePaymentConsentCreation_v2).
+podem ser encontradas [aqui](../schemas/v3/consent/approvePaymentConsentCreation_v3).
 
 Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo das rotas
-`approvePaymentConsentCreation` e `approvePaymentConsentCreation_v2`:
+`approvePaymentConsentCreation`, `approvePaymentConsentCreation_v2` e `approvePaymentConsentCreation_v3`:
 
 ```dockerfile
 ARG approvePaymentRoute=file:/specs/custom-approvePaymentConsentCreation-routes.xml
@@ -400,7 +400,8 @@ aprovação dos consentimentos de pagamentos do sistema legado não estiverem
 adaptados para os pagamentos do tipo TED e TEF.
 
 Exemplo de comando utilizado no `Dockerfile` para utilizar a solução temporária
-para a rota `approvePaymentConsentCreation` e `approvePaymentConsentCreation_v2`:
+para a rota `approvePaymentConsentCreation`, `approvePaymentConsentCreation_v2`e
+`approvePaymentConsentCreation_v3`:
 
 ```dockerfile
 ARG approvePaymentRoute=file:/specs/approvePaymentConsentCreation-routes.xml

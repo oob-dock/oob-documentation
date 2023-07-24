@@ -1,0 +1,64 @@
+{
+  "requestMeta": {
+    "correlationId": "0196bc96-4d88-0a4b-1abf-66441b74d703",
+    "brandId": "ut commodo Ut"
+  },
+  "consent": {
+    "brandId": "irure magna",
+    "creationDateTime": "1172-10-30T06:41:13Z",
+    "tpp": {
+      "name": "Excepteur"
+    },
+    "externalId": "labore tempor enim elit proiden",
+    "loggedUser": {
+      "document": {
+        "identification": "95083096732",
+        "rel": "YAH"
+      }
+    },
+    "expirationDateTime": "6079-01-6T03:12:47Z",
+    "creditor": {
+      "personType": "PESSOA_NATURAL",
+      "cpfCnpj": "36594666340066",
+      "name": "zFM*V"
+    },
+    "payment": {
+      "details": {
+        "localInstrument": "QRES",
+        "creditorAccount": {
+          "ispb": "61075936",
+          "number": "734105",
+          "accountType": "SVGS"
+        },
+        "proxy": "o",
+        "qrCode": ".d7{vz11K4"
+      },
+      "type": "PIX",
+      "currency": "PQO",
+      "amount": "1159734758455.37",
+      "schedule": {
+        "single": {
+          "date": "1944-06-11"
+        }
+      },
+      "cancellation": {
+        "cancelledAt": "1969-06-25T03:27:37.0Z",
+        "cancelledBy": {
+          "document": {
+            "identification": "79951940671",
+            "rel": "FXH"
+          }
+        },
+        "reason": "CANCELADO_MULTIPLAS_ALCADAS",
+        "cancelledFrom": "DETENTORA"
+      },
+      "date": "1967-07-05",
+      "ibgeTownCode": "8333438"
+    }
+  },
+  "paymentId": [
+    {
+      "key": "aute voluptate adipisicing deserunt veniam"
+    }
+  ]
+}

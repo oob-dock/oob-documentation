@@ -125,7 +125,70 @@
                     "$ref": "../../common/common-payment-schema.json#/$defs/IbgeTownCode"
                 },
                 "status": {
-                    "$ref": "#/$defs/PaymentStatusV3"
+                    "$ref": "#/$defs/PaymentStatusV2"
+                },
+                "rejectionReason": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/PixRejectionReasonV2"
+                },
+                "localInstrument": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/EnumLocalInstrument"
+                },
+                "cnpjInitiator": {
+                    "$ref": "#/$defs/CnpjInitiator"
+                },
+                "payment": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/PaymentData"
+                },
+                "transactionIdentification": {
+                    "$ref": "#/$defs/TransactionIdentification"
+                },
+                "remittanceInformation": {
+                    "$ref": "#/$defs/RemittanceInformation"
+                },
+                "creditorAccount": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/CreditorAccount"
+                },
+                "debtorAccount": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ResponsePixPaymentDataV3": {
+            "type": "object",
+            "description": "Objeto contendo dados do pagamento e da conta do recebedor (creditor).",
+            "required": [
+                "paymentId",
+                "creationDateTime",
+                "statusUpdateDateTime",
+                "status",
+                "localInstrument",
+                "payment",
+                "creditorAccount",
+                "cnpjInitiator",
+                "debtorAccount"
+            ],
+            "properties": {
+                "paymentId": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
+                },
+                "endToEndId": {
+                    "$ref": "#/$defs/EndToEndId"
+                },
+                "creationDateTime": {
+                    "$ref": "#/$defs/CreationDateTime"
+                },
+                "statusUpdateDateTime": {
+                    "$ref": "#/$defs/StatusUpdateDateTime"
+                },
+                "proxy": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/Proxy"
+                },
+                "ibgeTownCode": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/IbgeTownCode"
+                },
+                "status": {
+                    "$ref": "#/$defs/PaymentStatusV2"
                 },
                 "rejectionReason": {
                     "$ref": "../../common/common-payment-schema.json#/$defs/PixRejectionReasonV3"
@@ -382,24 +445,6 @@
             ]
         },
         "PaymentStatusV2": {
-            "type": "string",
-            "enum": [
-                "RCVD",
-                "PATC",
-                "CANC",
-                "ACCP",
-                "ACPD",
-                "RJCT",
-                "ACSC",
-                "PDNG",
-                "SCHD"
-            ],
-            "examples": [
-                "PDNG"
-            ],
-            "description": "Estado atual da iniciação de pagamento. O estado evolui na seguinte ordem:  \n\n1.  RCVD (Received) - Indica que a requisição de pagamento foi recebida com sucesso pela detentora, mas ainda há validações a serem feitas antes de ser submetida para liquidação.\n\n2.  PATC (Partially Accepted Technical Correct) - Indica que a transação precisa da confirmação de mais autorizadores para que o processamento do pagamento possa prosseguir.  \n\n3.  CANC (Cancelled) - Indica que a transação Pix pendente foi cancelada com sucesso pelo usuário antes que fosse confirmada (ACCP) ou rejeitada (RJCT) pela detentora.\n\n4.  ACCP( Accepted Customer Profile) - Indica que todas as verificações necessárias já foram realizadas pela detentora e que a transação está pronta para ser enviada para liquidação (no SPI se for Pix para outra instituição ou internamente se for para outra conta na mesma instituição).\n\n5.  ACPD (Accepted Clearing Processed) - Indica que a detentora já submeteu a transação para liquidação, mas ainda não tem a confirmação se foi liquidada ou rejeitada.\n\n6.  RJCT (Rejected) Indica que a transação foi rejeitada pela detentora ou pelo SPI.\n\n7.  ACSC (Accepted Settlement Completed Debitor Account) - Indica que a transação foi efetivada pela detentora ou pelo SPI.\n\n8.  PDNG (Pending) - Indica que a detentora reteve temporariamente a transação Pix para análise.\n\n9.  SCHD (Scheduled) - Indica que a transação Pix foi agendada com sucesso na detentora.\n\nEm caso insucesso: \n \nRJCT (REJECTED) - Instrução de pagamento rejeitada.\n"
-        },
-        "PaymentStatusV3": {
             "type": "string",
             "enum": [
                 "RCVD",
