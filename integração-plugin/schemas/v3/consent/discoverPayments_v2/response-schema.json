@@ -26,7 +26,8 @@
                         "required": [
                             "resourceName",
                             "resourceLegacyId",
-                            "authorizers"
+                            "authorizers",
+                            "debtorAccount"
                         ],
                         "properties": {
                             "resourceName": {
