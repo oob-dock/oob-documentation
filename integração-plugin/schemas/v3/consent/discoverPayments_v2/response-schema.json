@@ -1,0 +1,201 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "$ref": "#/$defs/DiscoveryPaymentsResponse"
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "DiscoveryPaymentsResponse": {
+            "description": "Retorno do discovery de recursos",
+            "type": "object",
+            "required": [
+                "resources"
+            ],
+            "properties": {
+                "resources": {
+                    "description": "Lista de recursos relacionados ao discovery",
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "resourceName",
+                            "resourceLegacyId",
+                            "authorizers"
+                        ],
+                        "properties": {
+                            "resourceName": {
+                                "description": "Array de chave e valor com o nome do recurso, esses dados serão apresentados nos frontends no formato: 'Key1: Value1 Key2: Value2 ...'",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "key"
+                                    ],
+                                    "properties": {
+                                        "key": {
+                                            "description": "Chave do caption do nome do recurso",
+                                            "type": "string",
+                                            "examples": [
+                                                "Numero da conta"
+                                            ]
+                                        },
+                                        "value": {
+                                            "description": "Valor do caption do nome do recurso",
+                                            "type": "string",
+                                            "examples": [
+                                                "1234-5"
+                                            ]
+                                        }
+                                    },
+                                    "additionalItems": false
+                                },
+                                "minItems": 1,
+                                "maxItems": 10
+                            },
+                            "resourceLegacyId": {
+                                "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "key"
+                                    ],
+                                    "properties": {
+                                        "key": {
+                                            "description": "Nome do campo do identificador no sistema de origem",
+                                            "type": "string",
+                                            "examples": [
+                                                "internalAccountId"
+                                            ]
+                                        },
+                                        "value": {
+                                            "description": "Valor do campo do identificador no sistema de origem",
+                                            "type": "string",
+                                            "examples": [
+                                                "1234"
+                                            ]
+                                        }
+                                    },
+                                    "additionalItems": false
+                                },
+                                "minItems": 1,
+                                "maxItems": 10
+                            },
+                            "resourceBalanceCurrency": {
+                                "description": "Moeda do saldo do recurso. Opcional para apresentação na seleção do recurso no consentimento de pagamento.",
+                                "type": "string",
+                                "maxLength": 3,
+                                "pattern": "^([A-Z]{3})$",
+                                "examples": [
+                                    "BRL"
+                                ]
+                            },
+                            "resourceBalanceAmount": {
+                                "description": "Valor do saldo do recurso. Opcional para apresentação na seleção do recurso no consentimento de pagamento.",
+                                "type": "string",
+                                "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+                                "minLength": 4,
+                                "maxLength": 19,
+                                "examples": [
+                                    "100000.04"
+                                ]
+                            },
+                            "authorizers": {
+                                "description": "Lista dos autorizadores para o recurso para casos de multipla alçada. Caso o recurso seja selecionado, todos os autorizadores deverão aceitar o consentimento que o recurso faz parte",
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "required": [
+                                        "cpf",
+                                        "name"
+                                    ],
+                                    "properties": {
+                                        "cpf": {
+                                            "description": "CPF do autorizador",
+                                            "type": "string",
+                                            "minLength": 11,
+                                            "maxLength": 11,
+                                            "pattern": "^\\d{11}$",
+                                            "examples": [
+                                                "11111111111"
+                                            ]
+                                        },
+                                        "name": {
+                                            "description": "Nome do autorizador",
+                                            "type": "string",
+                                            "examples": [
+                                                "Marco Antonio de Brito"
+                                            ]
+                                        }
+                                    },
+                                    "additionalItems": false
+                                },
+                                "minItems": 1
+                            },
+                            "defaultSelected": {
+                                "description": "Indica se o recurso deve estar selecionado por padrão na tela de consentimento. Valor padrão: false",
+                                "type": "boolean",
+                                "examples": [
+                                    "false"
+                                ]
+                            },
+                            "debtorAccount": {
+                                "type": "object",
+                                "description": "Objeto que contém a identificação da conta de origem do pagador.  \nAs informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do pagamento.\n",
+                                "required": [
+                                  "ispb",
+                                  "number",
+                                  "accountType"
+                                ],
+                                "properties": {
+                                  "ispb": {
+                                    "type": "string",
+                                    "minLength": 8,
+                                    "maxLength": 8,
+                                    "pattern": "^[0-9]{8}$",
+                                    "example": "12345678",
+                                    "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.\n"
+                                  },
+                                  "issuer": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 4,
+                                    "pattern": "^[0-9]{1,4}$",
+                                    "example": "1774",
+                                    "description": "Código da Agência emissora da conta sem dígito. \n(Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, \nno exercício de atividades da instituição, não podendo ser móvel ou transitória).\n\n[Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA) e SVGS (CONTA_POUPANCA).\n"
+                                  },
+                                  "number": {
+                                    "type": "string",
+                                    "minLength": 1,
+                                    "maxLength": 20,
+                                    "pattern": "^[0-9]{1,20}$",
+                                    "example": "1234567890",
+                                    "description": "Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir),  \nse houver valor alfanumérico, este deve ser convertido para 0.\n"
+                                  },
+                                  "accountType": {
+                                    "type": "string",
+                                    "enum": [
+                                      "CACC",
+                                      "SVGS",
+                                      "TRAN"
+                                    ],
+                                    "example": "CACC",
+                                    "description": "Tipos de contas usadas para pagamento.\nModalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, \nconta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.\nSegue descrição de cada valor do ENUM.\n\n- CACC - Current - Conta Corrente.\n- SVGS - Savings - Conta de Poupança.\n- TRAN - TransactingAccount - Conta de Pagamento pré-paga.\n"
+                                  }
+                                }
+                            }
+                        },
+                        "additionalItems": false
+                    }
+                }
+            },
+            "additionalItems": false
+        }
+    }
+}

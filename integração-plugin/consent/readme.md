@@ -43,7 +43,7 @@ A tabela a seguir compila todos os produtos selecionáveis tratados pelo Opus Op
 | ------------------------- | ---------------------------- | ---------------- | ------------------------------------------------ |
 | Compartilhamento de dados | ACCOUNT                      | Selecionável     | ```direct:discoverAccounts```                    |
 | Compartilhamento de dados | CREDIT_CARD_ACCOUNT          | Selecionável     | ```direct:discoverCreditCardAccounts```          |
-| Pagamento                 | PAYMENT[^1]                  | Selecionável     | ```direct:discoverPayments```                    |
+| Pagamento                 | PAYMENT[^1]                  | Selecionável     | ```direct:discoverPayments_v2```                 |
 
 [^1]: O produto **PAYMENT** é uma forma de permitir que a seleção da origem de recursos para um pagamento seja independente do produto ACCOUNT, permitindo pagamentos através de cartão de crédito ou outra origem distinta que a instituição eventualmente possua.
 

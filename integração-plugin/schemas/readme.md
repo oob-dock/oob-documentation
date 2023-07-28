@@ -48,6 +48,12 @@ Onde:
 
 ## Changelog
 
+### 2023-07-28 - v3.1.0
+
+- Consent
+  - Incluisão das rotas para a versão 2 de discovery da fase 3
+    - discoverPayments_v2: Discovery de pagamento
+
 ### 2023-07-20 - v3.0.0
 
 - Adição de schemas de iniciação de pagamentos versão 3
