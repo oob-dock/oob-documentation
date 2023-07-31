@@ -1,0 +1,143 @@
+{
+  "data": [
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "feeTypeAdditionalInfo": "rX",
+      "payeeMCC": 5137,
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "transactionalAdditionalInfo": "JKe<kPI^",
+      "paymentType": "A_VISTA",
+      "feeType": "ANUIDADE",
+      "chargeNumber": 12,
+      "billId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "otherCreditsAdditionalInfo": "XK_[T",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    },
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "payeeMCC": 5137,
+      "otherCreditsAdditionalInfo": "f%'ugl!\"(ws",
+      "transactionalAdditionalInfo": "4L",
+      "chargeNumber": 12,
+      "feeTypeAdditionalInfo": "=4..KElX^s.",
+      "paymentType": "A_VISTA",
+      "billId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "feeType": "ANUIDADE",
+      "otherCreditsType": "CREDITO_ROTATIVO"
+    },
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "payeeMCC": 5137,
+      "billId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "feeTypeAdditionalInfo": "j4",
+      "paymentType": "A_VISTA",
+      "feeType": "ANUIDADE",
+      "otherCreditsAdditionalInfo": "'jW!/",
+      "transactionalAdditionalInfo": "c{m",
+      "chargeNumber": 12,
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": "do"
+  }
+}

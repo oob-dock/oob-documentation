@@ -1,0 +1,403 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Objeto contendo dados do pagamento e da conta do recebedor (creditor).",
+      "required": [
+        "paymentId",
+        "endToEndId",
+        "consentId",
+        "creationDateTime",
+        "statusUpdateDateTime",
+        "status",
+        "localInstrument",
+        "payment",
+        "creditorAccount",
+        "cnpjInitiator",
+        "debtorAccount",
+        "cancellation"
+      ],
+      "properties": {
+        "paymentId": {
+          "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "key": {
+                "description": "Nome do campo do identificador no sistema de origem",
+                "type": "string"
+              },
+              "value": {
+                "description": "Valor do campo do identificador no sistema de origem",
+                "type": "string"
+              }
+            },
+            "required": [
+              "key"
+            ],
+            "additionalItems": false
+          },
+          "examples": [
+            [
+              {
+                "key": "pk_CampoUm",
+                "value": "ABC"
+              },
+              {
+                "key": "pk_CampoDois",
+                "value": "123"
+              }
+            ]
+          ]
+        },
+        "endToEndId": {
+          "type": "string",
+          "minLength": 32,
+          "maxLength": 32,
+          "pattern": "^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$",
+          "example": "E9040088820210128000800123873170",
+          "description": "Trata-se de um identificador único, gerado na instituição iniciadora de pagamento e recebido na instituição detentora de conta, permeando toda a jornada do pagamento Pix.\n\n[Restrição] A detentora deve obrigatoriamente retornar o campo Com o mesmo valor recebido da iniciadora.\n"
+        },
+        "consentId": {
+          "type": "string",
+          "maxLength": 256,
+          "pattern": "^urn:[a-zA-Z0-9][a-zA-Z0-9\\-]{0,31}:[a-zA-Z0-9()+,\\-.:=@;$_!*'%\\/?#]+$",
+          "example": "urn:bancoex:C1DD33123",
+          "description": "Identificador único do consentimento criado para a iniciação de pagamento solicitada. Deverá ser um URN - Uniform Resource Name.\nUm URN, conforme definido na [RFC8141](https://tools.ietf.org/html/rfc8141) é um Uniform Resource\nIdentifier - URI - que é atribuído sob o URI scheme \"urn\" e um namespace URN específico, com a intenção de que o URN\nseja um identificador de recurso persistente e independente da localização.\nConsiderando a string urn:bancoex:C1DD33123 como exemplo para consentId temos:\n- o namespace(urn)\n- o identificador associado ao namespace da instituição transnmissora (bancoex)\n- o identificador específico dentro do namespace (C1DD33123).\nInformações mais detalhadas sobre a construção de namespaces devem ser consultadas na [RFC8141](https://tools.ietf.org/html/rfc8141).\n"
+        },
+        "creationDateTime": {
+          "type": "string",
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+          "example": "2020-07-21T08:30:00Z",
+          "description": "Data e hora em que o recurso foi criado.\nUma string com data e hora conforme especificação RFC-3339,\nsempre com a utilização de timezone UTC(UTC time format).\n"
+        },
+        "statusUpdateDateTime": {
+          "type": "string",
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+          "example": "2020-07-21T08:30:00Z",
+          "description": "Data e hora da última atualização da iniciação de pagamento.\nUma string com data e hora conforme especificação RFC-3339,\nsempre com a utilização de timezone UTC(UTC time format).\n"
+        },
+        "proxy": {
+          "type": "string",
+          "maxLength": 77,
+          "pattern": "[\\w\\W\\s]*",
+          "example": "12345678901",
+          "description": "Chave cadastrada no DICT pertencente ao recebedor. Os tipos de chaves podem ser: telefone, e-mail, cpf/cnpj ou chave aleatória.\nNo caso de telefone celular deve ser informado no padrão E.1641.\nPara e-mail deve ter o formato xxxxxxxx@xxxxxxx.xxx(.xx) e no máximo 77 caracteres.\nNo caso de CPF deverá ser informado com 11 números, sem pontos ou traços.\nPara o caso de CNPJ deverá ser informado com 14 números, sem pontos ou traços.\nNo caso de chave aleatória deve ser informado o UUID gerado pelo DICT, conforme formato especificado na RFC41223.\nSe informado, a detentora da conta deve validar o proxy no DICT quando localInstrument for igual a DICT, QRDN ou QRES e validar o campo creditorAccount.\nEsta validação é opcional caso o localInstrument for igual a INIC.\n[Restrição] Se localInstrument for igual a MANU, o campo proxy não deve ser preenchido. Se localInstrument for igual INIC, DICT, QRDN ou QRES, o campo proxy deve ser sempre preenchido com a chave Pix.\n"
+        },
+        "ibgeTownCode": {
+          "type": "string",
+          "minLength": 7,
+          "maxLength": 7,
+          "pattern": "^\\d{7}$",
+          "example": "5300108",
+          "description": "O campo ibgetowncode no arranjo PIX, tem o mesmo comportamento que o campo codMun descrito no item 1.6.6 do manual do PIX, conforme segue:\n\n1. Caso a informação referente ao município não seja enviada; o PSP do recebedor assumirá que não existem feriados estaduais e municipais no período em questão;\n"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "RCVD",
+            "PATC",
+            "CANC",
+            "ACCP",
+            "ACPD",
+            "RJCT",
+            "ACSC",
+            "PDNG",
+            "SCHD"
+          ],
+          "example": "PDNG",
+          "description": "Estado atual da iniciação de pagamento. O estado evolui na seguinte ordem:  \n\n1.  RCVD (Received) - Indica que a requisição de pagamento foi recebida com sucesso pela detentora, mas ainda há validações a serem feitas antes de ser submetida para liquidação.\n\n2.  PATC (Partially Accepted Technical Correct) - Indica que a transação precisa da confirmação de mais autorizadores para que o processamento do pagamento possa prosseguir.  \n\n3.  CANC (Cancelled) - Indica que a transação Pix pendente foi cancelada com sucesso pelo usuário antes que fosse confirmada (ACCP) ou rejeitada (RJCT) pela detentora.\n\n4.  ACCP( Accepted Customer Profile) - Indica que todas as verificações necessárias já foram realizadas pela detentora e que a transação está pronta para ser enviada para liquidação (no SPI se for Pix para outra instituição ou internamente se for para outra conta na mesma instituição).\n\n5.  ACPD (Accepted Clearing Processed) - Indica que a detentora já submeteu a transação para liquidação, mas ainda não tem a confirmação se foi liquidada ou rejeitada.\n\n6.  RJCT (Rejected) Indica que a transação foi rejeitada pela detentora ou pelo SPI.\n\n7.  ACSC (Accepted Settlement Completed Debitor Account) - Indica que a transação foi efetivada pela detentora ou pelo SPI.\n\n8.  PDNG (Pending) - Indica que a detentora reteve temporariamente a transação Pix para análise.\n\n9.  SCHD (Scheduled) - Indica que a transação Pix foi agendada com sucesso na detentora.\n\nEm caso insucesso: \n \nRJCT (REJECTED) - Instrução de pagamento rejeitada.\n"
+        },
+        "rejectionReason": {
+          "type": "object",
+          "description": "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status\n[Restrição] Esse motivo deverá ser enviado quando o campo /data/status for igual a RJCT (REJECTED).",
+          "required": [
+            "code",
+            "detail"
+          ],
+          "properties": {
+            "code": {
+              "type": "string",
+              "enum": [
+                "SALDO_INSUFICIENTE",
+                "VALOR_ACIMA_LIMITE",
+                "VALOR_INVALIDO",
+                "COBRANCA_INVALIDA",
+                "NAO_INFORMADO",
+                "PAGAMENTO_DIVERGENTE_CONSENTIMENTO",
+                "DETALHE_PAGAMENTO_INVALIDO",
+                "PAGAMENTO_RECUSADO_DETENTORA",
+                "PAGAMENTO_RECUSADO_SPI",
+                "FALHA_INFRAESTRUTURA",
+                "FALHA_INFRAESTRUTURA_SPI",
+                "FALHA_INFRAESTRUTURA_DICT",
+                "FALHA_INFRAESTRUTURA_ICP",
+                "FALHA_INFRAESTRUTURA_PSP_RECEBEDOR",
+                "FALHA_INFRAESTRUTURA_DETENTORA",
+                "CONTAS_ORIGEM_DESTINO_IGUAIS"
+              ],
+              "example": "SALDO_INSUFICIENTE",
+              "description": "Define o código da razão pela qual o pagamento foi rejeitado\n\n- SALDO_INSUFICIENTE - A conta selecionada não possui saldo suficiente para realizar o pagamento.\n\n- VALOR_ACIMA_LIMITE - O valor ultrapassa o limite estabelecido [na instituição/no arranjo/outro] para permitir a realização de transações pelo cliente.\n\n- VALOR_INVALIDO - O valor enviado não é válido para o QR Code informado.\n\n- COBRANCA_INVALIDA - Validação de expiração, validação de vencimento ou Status Válido.\n\n- NAO_INFORMADO - Não reportado/identificado pela instituição detentora de conta.\n\n- PAGAMENTO_DIVERGENTE_CONSENTIMENTO - Dados do pagamento divergentes dos dados do consentimento.\n\n- DETALHE_PAGAMENTO_INVALIDO - Parâmetro [nome_campo] não obedecer às regras de negócio.\n\n- PAGAMENTO_RECUSADO_DETENTORA - [Descrição do motivo de recusa].\n\n- PAGAMENTO_RECUSADO_SPI - [Código de erro conforme tabela de domínios reason PACS.002].\n\n- FALHA_INFRAESTRUTURA - [Descrição de qual falha na infraestrutura inviabilizou o processamento].\n\n- FALHA_INFRAESTRUTURA_SPI - Indica uma falha no Sistema de Pagamentos Instantâneos (SPI).\n\n- FALHA_INFRAESTRUTURA_DICT - Indica uma falha no Diretório de Identificadores de Contas Transacionais (DICT).\n\n- FALHA_INFRAESTRUTURA_ICP - Indica uma falha na Infraestrutura de Chaves Públicas (ICP).\n\n- FALHA_INFRAESTRUTURA_PSP_RECEBEDOR - Indica uma falha na infraestrutura do Prestador de Serviço de Pagamento (PSP) que recebe o pagamento.\n\n- FALHA_INFRAESTRUTURA_DETENTORA - indica uma falha na infraestrutura da instituição detentora das informações ou recursos.\n\n- CONTAS_ORIGEM_DESTINO_IGUAIS - Indica uma tentativa de pagamento onde a conta origem e a conta de destino são iguais.\n\nO rejectionReason FALHA_INFRAESTRUTURA não será excluído, apenas deixará de ser utilizado, permitindo assim, retrocompatibilidade e integridade entre os participantes.\n"
+            },
+            "detail": {
+              "type": "string",
+              "pattern": "[\\w\\W\\s]*",
+              "maxLength": 2048,
+              "description": "Contém informações adicionais ao pagamento rejeitado"
+            }
+          }
+        },
+        "localInstrument": {
+          "type": "string",
+          "enum": [
+            "MANU",
+            "DICT",
+            "QRDN",
+            "QRES",
+            "INIC"
+          ],
+          "example": "DICT",
+          "description": "Especifica a forma de iniciação do pagamento:\n- MANU - Inserção manual de dados da conta transacional\n- DICT - Inserção manual de chave Pix\n- QRDN - QR code dinâmico\n- QRES - QR code estático\n- INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.\n"
+        },
+        "cnpjInitiator": {
+          "type": "string",
+          "pattern": "^\\d{14}$",
+          "maxLength": 14,
+          "example": "50685362000135",
+          "description": "CNPJ do Iniciador de Pagamento devidamente habilitado para a prestação de Serviço de Iniciação no Pix."
+        },
+        "payment": {
+          "type": "object",
+          "description": "Objeto contendo dados do pagameto como moeda e valor.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "minLength": 4,
+              "maxLength": 19,
+              "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+              "example": "100000.12",
+              "description": "Valor da transação com 2 casas decimais. O valor deve ser o mesmo enviado no consentimento. \n\nPara QR Code estático com valor pré-determinado no QR Code ou para QR Code dinâmico com indicação de que o valor não pode ser alterado: O campo amount deve ser preenchido com o valor estabelecido no QR Code. \nCaso seja preenchido com valor divergente do QR Code, deve ser retornado um erro HTTP Status 422.\n"
+            },
+            "currency": {
+              "type": "string",
+              "maxLength": 3,
+              "pattern": "^([A-Z]{3})$",
+              "example": "BRL",
+              "description": "Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'.  \nTodos os valores monetários informados estão representados com a moeda vigente do Brasil.\n"
+            }
+          }
+        },
+        "transactionIdentification": {
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]{1,35}$",
+          "maxLength": 35,
+          "example": "E00038166201907261559y6j6",
+          "description": "Trata-se de um identificador de transação que deve ser retransmitido intacto pelo PSP do pagador ao gerar a ordem de pagamento.\n\n[Restrição] A detentora deve obrigatoriamente retornar o campo com o mesmo valor recebido da iniciadora, caso ele tenha sido enviado na requisição da iniciação do pagamento.\n"
+        },
+        "remittanceInformation": {
+          "type": "string",
+          "maxLength": 140,
+          "pattern": "[\\w\\W\\s]*",
+          "example": "Pagamento da nota RSTO035-002.",
+          "description": "Deve ser preenchido sempre que o usuário pagador inserir alguma informação adicional em um pagamento, a ser enviada ao recebedor.\n"
+        },
+        "creditorAccount": {
+          "type": "object",
+          "description": "Objeto que contém a identificação da conta de destino do beneficiário/recebedor.  \n",
+          "required": [
+            "ispb",
+            "number",
+            "accountType"
+          ],
+          "properties": {
+            "ispb": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 8,
+              "pattern": "^[0-9]{8}$",
+              "example": "12345678",
+              "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.\n"
+            },
+            "issuer": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4,
+              "pattern": "^[0-9]{1,4}$",
+              "example": "1774",
+              "description": "Código da Agência emissora da conta sem dígito. \n(Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, \nno exercício de atividades da instituição, não podendo ser móvel ou transitória).\n\n[Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA) e SVGS (CONTA_POUPANCA).\n"
+            },
+            "number": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20,
+              "pattern": "^[0-9]{1,20}$",
+              "example": "1234567890",
+              "description": "Deve ser preenchido com o número da conta do usuário recebedor, com dígito verificador (se este existir),  \nse houver valor alfanumérico, este deve ser convertido para 0.\n"
+            },
+            "accountType": {
+              "type": "string",
+              "enum": [
+                "CACC",
+                "SVGS",
+                "TRAN"
+              ],
+              "example": "CACC",
+              "description": "Tipos de contas usadas para pagamento.\nModalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, \nconta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.\nSegue descrição de cada valor do ENUM.\n\n- CACC - Current - Conta Corrente.\n- SVGS - Savings - Conta de Poupança.\n- TRAN - TransactingAccount - Conta de Pagamento pré-paga.\n"
+            }
+          }
+        },
+        "cancellation": {
+          "type": "object",
+          "description": "Objeto que contém os dados referentes ao usuário pagador que solicitou o cancelamento, o canal utilizado por ele e o motivo.\n",
+          "required": [
+            "cancelledAt",
+            "cancelledBy",
+            "reason",
+            "cancelledFrom"
+          ],
+          "properties": {
+            "reason": {
+              "type": "string",
+              "enum": [
+                "CANCELADO_PENDENCIA",
+                "CANCELADO_AGENDAMENTO",
+                "CANCELADO_MULTIPLAS_ALCADAS"
+              ],
+              "example": "CANCELADO_PENDENCIA",
+              "description": "O preenchimento desse campo para retorno, deve ocorrer pela detentora de contas a partir do status em que o pagamento estiver no momento da solicitação do cancelamento (ex. Status de pagamento = PDNG, campo deve ser preenchido com enum CANCELADO_PENDENCIA)\n\nValores possíveis:\n\nCANCELADO_PENDENCIA - Pagamento cancelado enquanto estava na situação PDNG\n\nCANCELADO_AGENDAMENTO - Pagamento cancelado enquanto estava na situação SCHD\n\nCANCELADO_MULTIPLAS_ALCADAS - Pagamento cancelado enquanto estava na situação PATC\n"
+            },
+            "cancelledFrom": {
+              "type": "string",
+              "enum": [
+                "INICIADORA",
+                "DETENTORA"
+              ],
+              "example": "INICIADORA",
+              "description": "Campo utilizado para informar o meio pelo qual foi realizado o cancelamento.\n\nValores possíveis:\n\nINICIADORA - Pagamento cancelado pelo usuário pagador nos canais da iniciadora\n\nDETENTORA - Pagamento cancelado pelo usuário pagador nos canais da detentora\n"
+            },
+            "cancelledAt": {
+              "type": "string",
+              "description": "Data e hora que foi realizado o cancelamento, conforme especificação RFC-3339, formato UTC.",
+              "maxLength": 20,
+              "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+              "example": "2021-05-21T08:30:00Z"
+            },
+            "cancelledBy": {
+              "type": "object",
+              "description": "Informação relacionada ao usuário pagador que solicitou o cancelamento do pagamento.",
+              "required": [
+                "document"
+              ],
+              "properties": {
+                "document": {
+                  "type": "object",
+                  "description": "Objeto que consolida os dados do documento do usuário que solicitou o cancelamento.",
+                  "required": [
+                    "identification",
+                    "rel"
+                  ],
+                  "properties": {
+                    "identification": {
+                      "type": "string",
+                      "maxLength": 11,
+                      "description": "Número do documento do usuário pagador responsável pelo cancelamento do pagamento.",
+                      "example": "11111111111",
+                      "pattern": "^\\d{11}$"
+                    },
+                    "rel": {
+                      "type": "string",
+                      "maxLength": 3,
+                      "description": "Tipo do documento do usuário pagador responsável pelo cancelamento do pagamento.",
+                      "example": "CPF",
+                      "pattern": "^[A-Z]{3}$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "debtorAccount": {
+          "type": "object",
+          "description": "Objeto que contém a identificação da conta de origem do pagador.  \nAs informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do pagamento.\n",
+          "required": [
+            "ispb",
+            "number",
+            "accountType"
+          ],
+          "properties": {
+            "ispb": {
+              "type": "string",
+              "minLength": 8,
+              "maxLength": 8,
+              "pattern": "^[0-9]{8}$",
+              "example": "12345678",
+              "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.\n"
+            },
+            "issuer": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 4,
+              "pattern": "^[0-9]{1,4}$",
+              "example": "1774",
+              "description": "Código da Agência emissora da conta sem dígito. \n(Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, \nno exercício de atividades da instituição, não podendo ser móvel ou transitória).\n\n[Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA) e SVGS (CONTA_POUPANCA).\n"
+            },
+            "number": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 20,
+              "pattern": "^[0-9]{1,20}$",
+              "example": "1234567890",
+              "description": "Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir),  \nse houver valor alfanumérico, este deve ser convertido para 0.\n"
+            },
+            "accountType": {
+              "type": "string",
+              "enum": [
+                "CACC",
+                "SVGS",
+                "TRAN"
+              ],
+              "example": "CACC",
+              "description": "Tipos de contas usadas para pagamento.\nModalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, \nconta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.\nSegue descrição de cada valor do ENUM.\n\n- CACC - Current - Conta Corrente.\n- SVGS - Savings - Conta de Poupança.\n- TRAN - TransactingAccount - Conta de Pagamento pré-paga.\n"
+            }
+          }
+        },
+        "authorisationFlow": {
+          "type": "string",
+          "enum": [
+            "HYBRID_FLOW",
+            "CIBA_FLOW",
+            "FIDO_FLOW"
+          ],
+          "example": "HYBRID_FLOW",
+          "description": "Campo condicional utilizado para identificar o fluxo de autorização em que o pagamento foi solicitado.\n\n[Restrição] Se CIBA ou FIDO, preenchimento obrigatório. Caso o campo não esteja presente no payload, subentende-se que o fluxo de autorização utilizado é o HYBRID_FLOW.\n"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "hasMoreRecords",
+        "requestDateTime"
+      ],
+      "properties": {
+        "hasMoreRecords": {
+          "type": "boolean",
+          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
+          "example": true
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

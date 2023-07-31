@@ -1,0 +1,666 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "participant",
+          "name",
+          "code",
+          "segment",
+          "type",
+          "targetAudience"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "participant": {
+            "type": "object",
+            "description": "Conjunto de informações relativas ao participante do produto de open banking",
+            "required": [
+              "brand",
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "brand": {
+                "type": "string",
+                "description": "Nome da marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.",
+                "maxLength": 80,
+                "example": "Organização"
+              },
+              "name": {
+                "type": "string",
+                "description": "Nome do participante do Open Banking.",
+                "maxLength": 80,
+                "example": "Organização A1"
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                "pattern": "^\\d{14}$",
+                "example": "13456789000112"
+              },
+              "urlComplementaryList": {
+                "type": "string",
+                "maxLength": 1024,
+                "pattern": "^(https?:\\/\\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)$",
+                "example": "https://empresaa1.com/companies"
+              }
+            }
+          },
+          "society": {
+            "type": "object",
+            "description": "Conjunto de informações relativas à seguradora do produto de open insurance",
+            "required": [
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nome da Sociedade Seguradora.",
+                "maxLength": 80,
+                "example": "Society A1"
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                "pattern": "^\\d{14}$",
+                "example": "13456789000112"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "Nome comercial do produto, pelo qual é identificado nos canais de distribuição e atendimento da sociedade.\n",
+            "example": "Produto A"
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "Código único a ser definido pela sociedade.\n",
+            "example": "0001"
+          },
+          "segment": {
+            "type": "string",
+            "description": "Segmento do qual se trata o produto contratado\n1. Seguro de Pessoas\n2. Previdência\n",
+            "maxLength": 20,
+            "enum": [
+              "SEGURO_PESSOAS",
+              "PREVIDENCIA"
+            ],
+            "example": "PREVIDENCIA"
+          },
+          "modality": {
+            "type": "string",
+            "description": "1. Contribuição Variável;\n2. Benefício Definido.\n",
+            "maxLength": 21,
+            "enum": [
+              "CONTRIBUICAO_VARIAVEL",
+              "BENEFICIO_DEFINIDO"
+            ],
+            "example": "BENEFICIO_DEFINIDO"
+          },
+          "additionalInfo": {
+            "type": "string",
+            "description": "Campo aberto (possibilidade de incluir URL)",
+            "example": "https://openinsurance.com.br/aaa",
+            "maxLength": 1024
+          },
+          "termsAndConditions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "susepProcessNumber",
+                "detail"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "susepProcessNumber": {
+                  "type": "string",
+                  "description": "Sequência numérica utilizada para consulta dos processos eletrônicos na SUSEP, com caracteres especiais, conforme campo de consulta no site da SUSEP (XXXXX.XXXXXX/XXXX-XX)<br>Observação&#58; Mascaras da SUSEP – Serão permitidos todas as máscaras de Produtos. Limitar pelos códigos das Máscaras.",
+                  "maxLength": 20,
+                  "pattern": "^\\d{5}\\.\\d{6}/\\d{4}-\\d{2}$",
+                  "example": "15414.622222/2222-22"
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "Representam as Condições Gerais, Condições Especiais e Condições ou Cláusulas Particulares de um mesmo produto. (Circular SUSEP 321/06). Campo aberto (possibilidade de incluir URL)",
+                  "maxLength": 1024,
+                  "example": "https://openinsurance.com.br/aaa"
+                }
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "description": "1.  PGBL\n2.  PRGP\n3.  PAGP\n4.  PRSA\n5.  PRI\n6.  PDR\n7.  VGBL\n8.  VRGP\n9.  VAGP\n10. VRSA\n11. VRI\n12. VDR\n13. Demais produtos de Previdência.\n",
+            "maxLength": 27,
+            "enum": [
+              "PGBL",
+              "PRGP",
+              "PAGP",
+              "PRSA",
+              "PRI",
+              "PDR",
+              "VGBL",
+              "VRGP",
+              "VAGP",
+              "VRSA",
+              "VRI",
+              "VDR",
+              "DEMAIS_PRODUTOS_PREVIDENCIA"
+            ]
+          },
+          "defferalPeriod": {
+            "type": "object",
+            "description": "Período de Diferimento",
+            "required": [
+              "premiumPaymentMethods"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "interestRate": {
+                "type": "string",
+                "maxLength": 8,
+                "pattern": "^[0-1]\\.\\d{6}$",
+                "description": "Taxa de juros mensal garantida que remunera o plano durante a fase de diferimento/acumulação.",
+                "example": "0.251231"
+              },
+              "updateIndex": {
+                "type": "string",
+                "maxLength": 5,
+                "description": "Índice utilizado na atualização do prêmio e do capital segurado, caso critério de atualização por meio de índice:\n1. IPCA (IBGE);\n2. IGP-M (FGV);\n3. INPC (IBGE).\n",
+                "enum": [
+                  "IPCA",
+                  "IGP_M",
+                  "INPC"
+                ],
+                "example": "IPCA"
+              },
+              "otherMinimumPerformanceGarantees": {
+                "type": "string",
+                "description": "Para produtos do tipo PDR e VDR, indicação do índice de ampla divulgação utilizados como garantia mínima de desempenho.",
+                "example": "SELIC",
+                "maxLength": 12
+              },
+              "reversalFinancialResults": {
+                "type": "string",
+                "maxLength": 8,
+                "pattern": "^[0-1]\\.\\d{6}$",
+                "description": "Percentual de reversão de excedente financeiro na concessão. Em %.",
+                "example": "0.051230"
+              },
+              "minimumPremiums": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Valor mínimo de prêmio/contribuição",
+                  "additionalProperties": false,
+                  "properties": {
+                    "currency": {
+                      "type": "string",
+                      "pattern": "^[A-Z]{3}$",
+                      "maxLength": 3,
+                      "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                      "example": "BRL"
+                    },
+                    "periodicity": {
+                      "type": "string",
+                      "maxLength": 10,
+                      "example": "MENSAL",
+                      "enum": [
+                        "DIARIO",
+                        "SEMANAL",
+                        "QUINZENAL",
+                        "MENSAL",
+                        "BIMESTRAL",
+                        "TRIMESTRAL",
+                        "SEMESTRAL",
+                        "ANUAL",
+                        "UNICO"
+                      ]
+                    },
+                    "amount": {
+                      "type": "string",
+                      "maxLength": 21,
+                      "pattern": "^\\d{1,16}\\.\\d{2,4}$",
+                      "description": "Valor mínimo em R$ de prêmio/ contribuição aceita pela sociedade ao plano (identificar valor mensal e/ou aporte único).",
+                      "example": "250.00"
+                    }
+                  }
+                }
+              },
+              "premiumPaymentMethods": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 27,
+                  "enum": [
+                    "CARTAO_CREDITO",
+                    "DEBITO_CONTA",
+                    "DEBITO_CONTA_POUPANCA",
+                    "BOLETO_BANCARIO",
+                    "PIX",
+                    "CARTAO_DEBITO",
+                    "REGRA_PARCEIRO",
+                    "CONSIGNACAO_FOLHA_PAGAMENTO",
+                    "PONTOS_PROGRAMA_BENEFICIO",
+                    "TED_DOC",
+                    "OUTROS"
+                  ],
+                  "example": "CARTAO_CREDITO"
+                }
+              },
+              "permissionExtraordinaryContributions": {
+                "description": "Se ficam permitidos aportes extraordinários. A considerar os seguintes domínios:\n1. true\n2. false\n",
+                "type": "boolean",
+                "example": true
+              },
+              "permissionScheduledFinancialPayments": {
+                "description": "Se ficam permitidos pagamentos financeiros programados. A considerar os seguintes domínios:\n1. true\n2. false\n",
+                "type": "boolean",
+                "example": true
+              },
+              "gracePeriod": {
+                "type": "object",
+                "description": "Prazo de carência",
+                "required": [
+                  "redemption",
+                  "betweenRedemptionRequests",
+                  "portability",
+                  "betweenPortabilityRequests"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "redemption": {
+                    "type": "number",
+                    "description": "Prazo em dias de carência para resgate Para Coletivos: Valor máximo da carência.\n",
+                    "example": 100,
+                    "maximum": 9999
+                  },
+                  "betweenRedemptionRequests": {
+                    "type": "number",
+                    "description": "Prazo em dias de carência entre pedidos de resgate Para Coletivos: Valor máximo da carência\n",
+                    "example": 30,
+                    "maximum": 9999
+                  },
+                  "portability": {
+                    "type": "number",
+                    "description": "Prazo em dias de carência para portabilidade (entre empresas diferentes).",
+                    "example": 12,
+                    "maximum": 9999
+                  },
+                  "betweenPortabilityRequests": {
+                    "type": "number",
+                    "description": "Prazo em dias de carência entre pedidos de portabilidade (entre empresas diferentes).",
+                    "example": 15,
+                    "maximum": 9999
+                  }
+                }
+              },
+              "redemptionPaymentTerm": {
+                "type": "integer",
+                "description": "Prazo em dias para pagamento do resgate",
+                "maximum": 9999,
+                "example": 10
+              },
+              "portabilityPaymentTerm": {
+                "type": "number",
+                "description": "Prazo em dias para pagamento da portabilidade (entre empresas diferentes).",
+                "example": 20,
+                "maximum": 9999
+              },
+              "investmentFunds": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Fundos de Investimento (por fundo).",
+                  "additionalProperties": false,
+                  "properties": {
+                    "cnpjNumber": {
+                      "type": "string",
+                      "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                      "pattern": "^\\d{14}$",
+                      "example": "13456789000112"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n- Nome Fantasia\n",
+                      "maxLength": 80,
+                      "example": "EMPRESAAPREV"
+                    },
+                    "maximumAdministrationFee": {
+                      "type": "string",
+                      "pattern": "^[0-1]\\.\\d{6}$",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n  - Taxa Máxima de Administração - em %\n",
+                      "example": "0.201000",
+                      "maxLength": 8
+                    },
+                    "typePerformanceFee": {
+                      "type": "string",
+                      "enum": [
+                        "DIRETAMENTE",
+                        "INDIRETAMENTE",
+                        "NAO_APLICA"
+                      ],
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n   - Tipo de taxa de performance\n",
+                      "example": "DIRETAMENTE",
+                      "maxLength": 13
+                    },
+                    "maximumPerformanceFee": {
+                      "type": "string",
+                      "pattern": "^[0-1]\\.\\d{6}$",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando: \n  - Taxa Máxima de Performance - em %\n",
+                      "maxLength": 8,
+                      "example": "0.201000"
+                    },
+                    "eligibilityRule": {
+                      "type": "boolean",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n  - Regra de Elegibilidade\n",
+                      "example": true
+                    },
+                    "minimumContributionAmount": {
+                      "type": "string",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando: \n  - Valor Mínimo de Contribuição\n",
+                      "pattern": "^\\d{1,16}\\.\\d{2,4}$",
+                      "example": "1000.00",
+                      "maxLength": 21
+                    },
+                    "minimumMathematicalProvisionAmount": {
+                      "type": "string",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando: \n  - Valor Mínimo do Saldo Provisão matemática\n",
+                      "pattern": "^\\d{1,16}\\.\\d{2,4}$",
+                      "example": "1000.00",
+                      "maxLength": 21
+                    },
+                    "currency": {
+                      "type": "string",
+                      "pattern": "^[A-Z]{3}$",
+                      "maxLength": 3,
+                      "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                      "example": "BRL"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "grantPeriodBenefit": {
+            "type": "object",
+            "description": "Período de concessão do benefício",
+            "required": [
+              "incomeModalities"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "incomeModalities": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string",
+                  "description": "Modalidades de renda disponíveis para contratação.\n  A considerar os seguintes domínios:\n  1. Pagamento Único\n  2. Renda por Prazo Certo;\n  3. Renda Temporária;\n  4. Renda Temporária Reversível;\n  5. Renda Temporária com mínimo garantido;\n  6. Renda Temporária Reversível com Mínimo Garantido;\n  7. Renda Vitalícia;\n  8. Renda Vitalícia Reversível ao Beneficiário Indicado\n  9. Renda Vitalícia Reversível ao Cônjuge com Continuidade de Menores\n  10. Renda Vitalícia com o Mínimo Garantido;\n  11. Renda Vitalícia com Prazo mínimo garantido.\n",
+                  "enum": [
+                    "PAGAMENTO_UNICO",
+                    "RENDA_PRAZO_CERTO",
+                    "RENDA_TEMPORARIA",
+                    "RENDA_TEMPORARIA_REVERSIVEL",
+                    "RENDA_TEMPORARIA_MINMO_GARANTIDO",
+                    "RENDA_TEMPORARIA_REVERSIVEL_MININO_GARANTIDO",
+                    "RENDA_VITALICIA",
+                    "RENDA_VITALICIA_REVERSIVEL_BENEFICIARIO_INDICADO",
+                    "RENDA_VITALICIA_CONJUGE_CONTINUIDADE_MENORES",
+                    "RENDA_VITALICIA_MINIMO_GARANTIDO",
+                    "RENDA_VITALICIA_PRAZO_MINIMO_GRANTIDO"
+                  ],
+                  "example": "PAGAMENTO_UNICO"
+                }
+              },
+              "biometricTable": {
+                "type": "array",
+                "minItems": 0,
+                "items": {
+                  "type": "string",
+                  "maxLength": 32,
+                  "description": "Tábua biométrica utilizada como parâmetro para conversão em renda atuarial que deve observar a relação discriminada de coberturas, conforme Tabela II.2 do Anexo II.\nDeverá ser informada a tábua biométrica aplicável à modalidade de renda padrão do plano.\n",
+                  "enum": [
+                    "AT_2000_MALE",
+                    "AT_2000_FEMALE",
+                    "AT_2000_MALE_FEMALE",
+                    "AT_2000_MALE_SUAVIZADA_10",
+                    "AT_2000_FEMALE_SUAVIZADA_10",
+                    "AT_2000_MALE_FEMALE_SUAVIZADA_10",
+                    "AT_2000_MALE_SUAVIZADA_15",
+                    "AT_2000_FEMALE_SUAVIZADA_15",
+                    "AT_2000_MALE_FEMALE_SUAVIZADA_15",
+                    "AT_83_MALE",
+                    "AT_83_FEMALE",
+                    "AT_83_MALE_FEMALE",
+                    "BR_EMSSB_MALE",
+                    "BR_EMSSB_FEMALE",
+                    "BR_EMSSB_MALE_FEMALE"
+                  ],
+                  "example": "AT_2000_MALE"
+                }
+              },
+              "interestRate": {
+                "type": "string",
+                "maxLength": 8,
+                "pattern": "^[0-1]\\.\\d{6}$",
+                "description": "Taxa de juros garantida utilizada para conversão em renda. Em %",
+                "example": "0.225222"
+              },
+              "updateIndex": {
+                "type": "string",
+                "maxLength": 5,
+                "description": "Índice utilizado na atualização do prêmio e do capital segurado, caso critério de atualização por meio de índice:\n1. IPCA (IBGE);\n2. IGP-M (FGV);\n3. INPC (IBGE).\n",
+                "enum": [
+                  "IPCA",
+                  "IGP_M",
+                  "INPC"
+                ],
+                "example": "IPCA"
+              },
+              "reversalFinancialResults": {
+                "type": "string",
+                "maxLength": 8,
+                "pattern": "^[0-1]\\.\\d{6}$",
+                "description": "Percentual de reversão de excedente financeiro na concessão. Em %.",
+                "example": "1.252111"
+              },
+              "investmentFunds": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "description": "Fundos de Investimento (por fundo).",
+                  "additionalProperties": false,
+                  "properties": {
+                    "cnpjNumber": {
+                      "type": "string",
+                      "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                      "pattern": "^\\d{14}$",
+                      "example": "13456789000112"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n- Nome Fantasia\n",
+                      "maxLength": 80,
+                      "example": "EMPRESAAPREV"
+                    },
+                    "maximumAdministrationFee": {
+                      "type": "string",
+                      "pattern": "^[0-1]\\.\\d{6}$",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n  - Taxa Máxima de Administração - em %\n",
+                      "example": "0.201000",
+                      "maxLength": 8
+                    },
+                    "typePerformanceFee": {
+                      "type": "string",
+                      "enum": [
+                        "DIRETAMENTE",
+                        "INDIRETAMENTE",
+                        "NAO_APLICA"
+                      ],
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n   - Tipo de taxa de performance\n",
+                      "example": "DIRETAMENTE",
+                      "maxLength": 13
+                    },
+                    "maximumPerformanceFee": {
+                      "type": "string",
+                      "pattern": "^[0-1]\\.\\d{6}$",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando: \n  - Taxa Máxima de Performance - em %\n",
+                      "maxLength": 8,
+                      "example": "0.201000"
+                    },
+                    "eligibilityRule": {
+                      "type": "boolean",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando:\n  - Regra de Elegibilidade\n",
+                      "example": true
+                    },
+                    "minimumContributionAmount": {
+                      "type": "string",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando: \n  - Valor Mínimo de Contribuição\n",
+                      "pattern": "^\\d{1,16}\\.\\d{2,4}$",
+                      "example": "1000.00",
+                      "maxLength": 21
+                    },
+                    "minimumMathematicalProvisionAmount": {
+                      "type": "string",
+                      "description": "Lista com as informações do(s) Fundo(s) de Investimento(s) disponíveis para o período de diferimento/acumulação, contemplando: \n  - Valor Mínimo do Saldo Provisão matemática\n",
+                      "pattern": "^\\d{1,16}\\.\\d{2,4}$",
+                      "example": "1000.00",
+                      "maxLength": 21
+                    },
+                    "currency": {
+                      "type": "string",
+                      "pattern": "^[A-Z]{3}$",
+                      "maxLength": 3,
+                      "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                      "example": "BRL"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "costs": {
+            "type": "object",
+            "description": "Custos",
+            "required": [
+              "loadingAntecipated",
+              "loadingLate"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "loadingAntecipated": {
+                "type": "object",
+                "description": "Carregamento antecipado.",
+                "required": [
+                  "minValue",
+                  "maxValue"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "minValue": {
+                    "type": "string",
+                    "pattern": "^[0-1]\\.\\d{6}$",
+                    "maxLength": 8,
+                    "description": "Percentual mínimo de carregamento cobrada quando do pagamento do prêmio/ contribuição. Em %.",
+                    "example": "0.000000"
+                  },
+                  "maxValue": {
+                    "type": "string",
+                    "pattern": "^[0-1]\\.\\d{6}$",
+                    "maxLength": 8,
+                    "description": "Percentual máximo de carregamento cobrada quando do pagamento do prêmio/ contribuição. Em %.",
+                    "example": "0.100000"
+                  }
+                }
+              },
+              "loadingLate": {
+                "type": "object",
+                "description": "Carregamento postecipado.",
+                "required": [
+                  "minValue",
+                  "maxValue"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "minValue": {
+                    "type": "string",
+                    "pattern": "^[0-1]\\.\\d{6}$",
+                    "maxLength": 8,
+                    "description": "Percentual mínimo de taxa de carregamento cobrado quando da efetivação de resgate ou portabilidade.",
+                    "example": "0.000000"
+                  },
+                  "maxValue": {
+                    "type": "string",
+                    "pattern": "^[0-1]\\.\\d{6}$",
+                    "maxLength": 8,
+                    "description": "Percentual máximo de taxa de carregamento cobrado quando da efetivação de resgate ou portabilidade.",
+                    "example": "0.100000"
+                  }
+                }
+              }
+            }
+          },
+          "minimumRequirement": {
+            "type": "object",
+            "required": [
+              "contractType",
+              "participantQualified"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "contractType": {
+                "type": "string",
+                "maxLength": 27,
+                "enum": [
+                  "COLETIVO",
+                  "INDIVIDUAL",
+                  "AMBAS"
+                ],
+                "description": "O tipo de serviço contratado. A considerar os domínios abaixo:\n1. Coletivo Averbado;\n2. Individual.\n3. Ambas\n",
+                "example": "COLETIVO"
+              },
+              "participantQualified": {
+                "type": "boolean",
+                "description": "Indicação se o plano é destinado para participante qualificado. A considerar os domínios abaixo:\n1. true\n2. false\n",
+                "example": true
+              },
+              "contractingMinRequirement": {
+                "type": "string",
+                "maxLength": 1024,
+                "description": "Campo aberto (possibilidade de incluir URL)",
+                "example": "https://openinsurance.com.br/aaa"
+              }
+            }
+          },
+          "targetAudience": {
+            "type": "string",
+            "description": "A considerar os domínios abaixo:\n\n  1. Pessoa Natural\n  2. Pessoa Jurídica\n  3. Ambas (Pessoa Natural e Jurídica)\n",
+            "maxLength": 23,
+            "enum": [
+              "PESSOA_NATURAL",
+              "PESSOA_JURIDICA",
+              "PESSOA_NATURAL_JURIDICA"
+            ],
+            "example": "PESSOA_NATURAL"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

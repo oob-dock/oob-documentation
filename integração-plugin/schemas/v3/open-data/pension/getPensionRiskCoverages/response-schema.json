@@ -1,0 +1,590 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "participant",
+          "society",
+          "name",
+          "code",
+          "coverages",
+          "assistanceTypes",
+          "additionals",
+          "termsAndConditions",
+          "benefitRecalculation",
+          "targetAudience"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "participant": {
+            "type": "object",
+            "description": "Conjunto de informações relativas ao participante do produto de open banking",
+            "required": [
+              "brand",
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "brand": {
+                "type": "string",
+                "description": "Nome da marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes.",
+                "maxLength": 80,
+                "example": "Organização"
+              },
+              "name": {
+                "type": "string",
+                "description": "Nome do participante do Open Banking.",
+                "maxLength": 80,
+                "example": "Organização A1"
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                "pattern": "^\\d{14}$",
+                "example": "13456789000112"
+              },
+              "urlComplementaryList": {
+                "type": "string",
+                "maxLength": 1024,
+                "pattern": "^(https?:\\/\\/)?(www\\.)?[-a-zA-Z0-9@:%._\\+~#=]{2,256}\\.[a-z]{2,6}\\b([-a-zA-Z0-9@:%_\\+.~#?&\\/\\/=]*)$",
+                "example": "https://empresaa1.com/companies"
+              }
+            }
+          },
+          "society": {
+            "type": "object",
+            "description": "Conjunto de informações relativas à seguradora do produto de open insurance",
+            "required": [
+              "name",
+              "cnpjNumber"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Nome da Sociedade Seguradora.",
+                "maxLength": 80,
+                "example": "Society A1"
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "description": "O CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara.",
+                "pattern": "^\\d{14}$",
+                "example": "13456789000112"
+              }
+            }
+          },
+          "name": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "Nome comercial do produto, pelo qual é identificado nos canais de distribuição e atendimento da sociedade.",
+            "example": "Produto A"
+          },
+          "code": {
+            "type": "string",
+            "maxLength": 80,
+            "description": "Código único a ser definido pela sociedade.",
+            "example": "0001"
+          },
+          "modality": {
+            "type": "string",
+            "description": "<ol><li>Funeral</li><li>Prestamista (exceto Habitacional e Rural)</li><li>Viagem</li><li>Educacional</li><li>Dotal (Misto e Puro)</li><li>Acidentes Pessoais</li><li>Vida</li><li>Perda do Certificado de Habilitação de Voo – PCHV</li><li>Doenças Graves ou Doença Terminal</li><li>Desemprego/ Perda de Renda</li><li>Eventos Aleatórios</li><li>Pecúlio</li><li>Pensão prazo certo</li><li>Pensão menores 21 anos</li><li>Pensão menores 24 anos</li><li>Pensão cônjuge vitalícia</li><li>Pensão cônjuge temporária</li></ol>",
+            "maxLength": 33,
+            "enum": [
+              "FUNERAL",
+              "PRESTAMISTA",
+              "VIAGEM",
+              "EDUCACIONAL",
+              "DOTAL",
+              "ACIDENTES_PESSOAIS",
+              "VIDA",
+              "PERDA_CERTIFICADO_HABILITACAO_VOO",
+              "DOENCAS_GRAVES_DOENCA_TERMINAL",
+              "DESEMPREGO_PERDA_RENDA",
+              "EVENTOS_ALEATORIOS",
+              "PECULIO",
+              "PENSAO_PRAZO_CERTO",
+              "PENSAO_MENORES_21",
+              "PENSAO_MENORES_24",
+              "PENSAO_CONJUGE_VITALICIA",
+              "PENSAO_CONJUGE_TEMPORARIA"
+            ],
+            "example": "FUNERAL"
+          },
+          "coverages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "attributes"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "É o conjunto dos riscos cobertos elencados na apólice. (RESOLUÇÃO CNSP Nº 341/2016). Listagem de coberturas incluídas no produto que deve observar a relação discriminada de coberturas, conforme Tabela Tipo de Cobertura.",
+                  "maxLength": 9,
+                  "enum": [
+                    "MORTE",
+                    "INVALIDEZ",
+                    "OUTROS"
+                  ],
+                  "example": "MORTE"
+                },
+                "typeAdditionalInfos": {
+                  "type": "array",
+                  "description": "Lista de textos para complementar informação relativa ao campo type, quando for selecionada a opção 'OUTROS'.\nRestrição: Campo de preenchimento obrigatório se 'type' estiver preenchida a opção 'OUTROS'\n",
+                  "example": [
+                    "Detalhar os serviços",
+                    "benefícios",
+                    "outros"
+                  ],
+                  "items": {
+                    "type": "string",
+                    "maxLength": 100
+                  }
+                },
+                "attributes": {
+                  "type": "object",
+                  "description": "Atributos da cobertura",
+                  "required": [
+                    "minValue",
+                    "maxValue"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "minValue": {
+                      "type": "object",
+                      "required": [
+                        "amount",
+                        "currency"
+                      ],
+                      "description": "Listagem do valor mínimo de cobertura (Capital Segurado), diária ou parcela aceito pela sociedade para cada combinação de modalidade/cobertura do produto.<br>Conforme moeda.",
+                      "additionalProperties": false,
+                      "properties": {
+                        "amount": {
+                          "type": "string",
+                          "maxLength": 21,
+                          "pattern": "^\\d{1,16}\\.\\d{2,4}$",
+                          "example": "0.01"
+                        },
+                        "currency": {
+                          "type": "string",
+                          "pattern": "^[A-Z]{3}$",
+                          "maxLength": 3,
+                          "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                          "example": "BRL"
+                        }
+                      }
+                    },
+                    "maxValue": {
+                      "type": "object",
+                      "required": [
+                        "amount",
+                        "currency"
+                      ],
+                      "description": "Listagem do valor máximo de cobertura (Capital Segurado), diária ou parcela aceito pela sociedade para cada combinação de modalidade/cobertura do produto.<br>Conforme moeda.",
+                      "additionalProperties": false,
+                      "properties": {
+                        "amount": {
+                          "type": "string",
+                          "maxLength": 21,
+                          "pattern": "^\\d{1,16}\\.\\d{2,4}$",
+                          "example": "0.01"
+                        },
+                        "currency": {
+                          "type": "string",
+                          "pattern": "^[A-Z]{3}$",
+                          "maxLength": 3,
+                          "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                          "example": "BRL"
+                        }
+                      }
+                    },
+                    "indemnifiablePeriods": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Listagem do pagamento para cada benefício:\n  1. Quantidade determinada de parcelas;\n  2. Até o fim de ciclo determinado.\nSe for pagamento único, esse campo não se aplica (retorna vazio).\n",
+                        "maxLength": 31,
+                        "enum": [
+                          "QUANTIDADE_DETERMINADA_PARCELAS",
+                          "FIM_CICLO_DETERMINADO"
+                        ],
+                        "example": "QUANTIDADE_DETERMINADA_PARCELAS"
+                      }
+                    },
+                    "excludedRisks": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "Listagem para indicar quais serão o(s) risco(s) excluído(s) aplicável(is) à(s) cobertura(s).",
+                        "maxLength": 40,
+                        "enum": [
+                          "ATO_RECONHECIMENTO_PERIGOSO",
+                          "ATO_ILICITO_DOLOSO_PRATICADO_SEGURADO",
+                          "OPERACOES_GUERRA",
+                          "FURACOES_CICLONES_TERREMOTOS",
+                          "MATERIAL_NUCLEAR",
+                          "DOENCAS_LESOES_PREEXISTENTES",
+                          "EPIDEMIAS_PANDEMIAS",
+                          "SUICIDIO",
+                          "ATO_ILICITO_DOLOSO_PRATICADO_CONTROLADOR",
+                          "OUTROS"
+                        ],
+                        "example": "ATO_RECONHECIMENTO_PERIGOSO"
+                      }
+                    },
+                    "excludedRisksURL": {
+                      "type": "string",
+                      "maxLength": 1024,
+                      "description": "Campo aberto (possibilidade de incluir URL).",
+                      "example": "https://openinsurance.com.br/aaa"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "assistanceTypes": {
+            "type": "array",
+            "example": [
+              "PET",
+              "FUNERAL"
+            ],
+            "items": {
+              "type": "string",
+              "description": "Lista padronizada de tipo de assistências ofertadas vinculadas ao produto. Por exemplo, Funeral, Bicicleta, Assistência PET – Tabela padrão a ser consolidada com retorno das empresas com a relação de assistências, permitindo um campo ‘Outros’ para assistências não contempladas na tabela padronizada.",
+              "maxLength": 43,
+              "enum": [
+                "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+                "ARQUITETO_VIRTUAL",
+                "ASSESSORIA_FINANCEIRA",
+                "AUTOMOVEL",
+                "AUXILIO_NATALIDADE",
+                "AVALIACAO_CLINICA_PREVENTIVA",
+                "BOLSA_PROTEGIDA",
+                "CESTA_BASICA",
+                "CHECKUP_ODONTOLOGICO",
+                "CLUBE_VANTAGENS_BENEFICIOS",
+                "CONVALESCENCIA",
+                "DECESSO",
+                "DESCONTO_FARMACIAS_MEDICAMENTOS",
+                "DESPESAS_FARMACEUTICAS_VIAGEM",
+                "DIGITAL",
+                "EDUCACIONAL",
+                "EMPRESARIAL",
+                "ENCANADOR",
+                "ENTRETENIMENTO",
+                "EQUIPAMENTOS_MEDICOS",
+                "FIANCAS_DESPESAS_LEGAIS",
+                "FISIOTERAPIA",
+                "FUNERAL",
+                "HELP_LINE",
+                "HOSPEDAGEM_ACOMPANHANTE",
+                "INTERRUPCAO_VIAGEM",
+                "INVENTARIO",
+                "MAIS_VIDA",
+                "MAMAE_BEBE",
+                "MEDICA_ACIDENTE_DOENCA",
+                "MOTOCICLETA",
+                "MULHER",
+                "NUTRICIONISTA",
+                "ODONTOLOGICA",
+                "ORIENTACAO_FITNESS",
+                "ORIENTACAO_JURIDICA",
+                "ORIENTACAO_NUTRICIONAL",
+                "PERSONAL_FITNESS",
+                "ORIENTACAO_PSICOSSOCIAL_FAMILIAR",
+                "PERDA_ROUBO_CARTAO",
+                "PET",
+                "PRORROGACAO_ESTADIA",
+                "PROTECAO_DADOS",
+                "RECOLOCACAO_PROFISSIONAL",
+                "REDE_DESCONTO_NUTRICIONAL",
+                "RESIDENCIAL",
+                "RETORNO_MENORES_SEGURADO",
+                "SAQUE_COACAO",
+                "SAUDE_BEM_ESTAR",
+                "SEGUNDA_OPINIAO_MEDICA",
+                "SENIOR",
+                "SUSTENTAVEL_DESCARTE_ECOLOGICO",
+                "TELEMEDICINA",
+                "VIAGEM",
+                "VITIMA",
+                "OUTROS"
+              ],
+              "example": "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA"
+            }
+          },
+          "assistanceTypesAdditionalInfos": {
+            "type": "array",
+            "description": "Lista a ser preenchida pelas participantes quando houver 'Outros' no campo 'Tipo de Assistência'.",
+            "example": [
+              "Assistance additional info."
+            ],
+            "items": {
+              "type": "string"
+            }
+          },
+          "additionals": {
+            "type": "array",
+            "example": [
+              "SORTEIO",
+              "OUTROS"
+            ],
+            "items": {
+              "type": "string",
+              "maxLength": 44,
+              "enum": [
+                "SORTEIO",
+                "SERVICOS_ASSISTENCIAS_COMPLEMENTARES_PAGO",
+                "SERVICOS_ASSISTENCIA_COMPLEMENTARES_GRATUITO",
+                "OUTROS",
+                "NAO_HA"
+              ],
+              "example": "SORTEIO"
+            }
+          },
+          "termsAndConditions": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "susepProcessNumber",
+                "detail"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "susepProcessNumber": {
+                  "type": "string",
+                  "description": "Sequência numérica utilizada para consulta dos processos eletrônicos na SUSEP, com caracteres especiais, conforme campo de consulta no site da SUSEP (XXXXX.XXXXXX/XXXX-XX)<br>Observação&#58; Mascaras da SUSEP – Serão permitidos todas as máscaras de Produtos. Limitar pelos códigos das Máscaras.",
+                  "maxLength": 20,
+                  "pattern": "^\\d{5}\\.\\d{6}/\\d{4}-\\d{2}$",
+                  "example": "15414.622222/2222-22"
+                },
+                "detail": {
+                  "type": "string",
+                  "description": "Representam as Condições Gerais, Condições Especiais e Condições ou Cláusulas Particulares de um mesmo produto. (Circular SUSEP 321/06). Campo aberto (possibilidade de incluir URL)",
+                  "maxLength": 1024,
+                  "example": "https://openinsurance.com.br/aaa"
+                }
+              }
+            }
+          },
+          "pmbacRemuneration": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "interestRate": {
+                "type": "string",
+                "pattern": "^\\d{1,16}\\.\\d{4}$",
+                "description": "Taxa de juros para capitalização da PMBaC",
+                "example": "14.2521"
+              },
+              "updateIndexes": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Índice utilizado na atualização da PMBaC:\n  1. IPCA (IBGE)\n  2. IGP-M (FGV)\n  3. INPC (IBGE)\n",
+                  "enum": [
+                    "IPCA",
+                    "IGP_M",
+                    "INPC"
+                  ],
+                  "example": "IPCA"
+                }
+              }
+            }
+          },
+          "ageAdjustment": {
+            "type": "object",
+            "required": [
+              "criterias",
+              "frequency"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "criterias": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "description": "Critério escolhido para reenquadramento etário\n  1. Após período em anos\n  2. A cada período em anos\n  3. Por mudança de faixa etária\n  4. Não aplicável\n",
+                  "maxLength": 27,
+                  "example": "APOS_PERIODO_ANOS",
+                  "enum": [
+                    "APOS_PERIODO_ANOS",
+                    "CADA_PERIODO_ANOS",
+                    "MUDANCA_FAIXA_ETARIA",
+                    "NAO_APLICAVEL"
+                  ]
+                }
+              },
+              "frequency": {
+                "type": "integer",
+                "description": "Período em anos, caso critério de reenquadramento após ou a cada período em anos.",
+                "maxLength": 3,
+                "example": 10
+              }
+            }
+          },
+          "financialRegimeContractTypes": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Listagem de regime financeiro para cada combinação de modalidade/cobertura do produto indicando:\n  1. Repartição simples\n  2. Repartição Capitais Cobertura\n  3. Capitalização\n",
+              "maxLength": 19,
+              "example": "REPARTICAO_SIMPLES",
+              "enum": [
+                "REPARTICAO_SIMPLES",
+                "REPARTICAO_CAPITAIS",
+                "CAPITALIZACAO"
+              ]
+            }
+          },
+          "reclaim": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "table": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "properties": {
+                    "initialMonthRange": {
+                      "type": "integer",
+                      "maxLength": 2,
+                      "example": 1
+                    },
+                    "finalMonthRange": {
+                      "type": "integer",
+                      "maxLength": 2,
+                      "example": 12
+                    },
+                    "percentage": {
+                      "type": "string",
+                      "pattern": "^\\d\\.\\d{4}$",
+                      "description": "Percentual de faixa de resgate.",
+                      "maxLength": 6,
+                      "example": "0.5000"
+                    }
+                  }
+                }
+              },
+              "gracePeriod": {
+                "type": "object",
+                "required": [
+                  "amount",
+                  "unit"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "Informar o prazo de carência",
+                    "example": 90,
+                    "maximum": 9223372036854776000,
+                    "minimum": -9223372036854776000
+                  },
+                  "unit": {
+                    "type": "string",
+                    "description": "Informar o critério de carência para a cobertura&#58;<br><ol><li>Dias</li><li>Meses</li><li>Não se aplica</li></ol>",
+                    "maxLength": 10,
+                    "enum": [
+                      "DIAS",
+                      "MESES",
+                      "NAO_APLICA"
+                    ],
+                    "example": "MESES"
+                  }
+                }
+              },
+              "differenciatedPercentage": {
+                "description": "Campo aberto (possibilidade de incluir URL)",
+                "example": "https://openinsurance.com.br/aaa’\nObs.: Exceção de cobertura ou critério definido acima será descrito aqui na URL\nExemplo: Cobertura X: a partir de 25 meses = 100%\n",
+                "maxLength": 1024
+              }
+            }
+          },
+          "otherGuaranteedValues": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "1. Saldamento\n2. Benefício Prolongado\n3. Não se aplica\n",
+              "maxLength": 20,
+              "enum": [
+                "SALDAMENTO",
+                "BENEFICIO_PROLONGADO",
+                "NAO_APLICA"
+              ],
+              "example": "SALDAMENTO"
+            }
+          },
+          "indemnityPaymentMethods": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "Modalidade de pagamento da indenização, a considerar os domínios abaixo:\n  1. Único\n  2. Sob a forma de renda\n",
+              "maxLength": 18,
+              "enum": [
+                "UNICO",
+                "SOB_FORMA_RENDA"
+              ],
+              "example": "UNICO"
+            }
+          },
+          "minimumRequirement": {
+            "type": "object",
+            "required": [
+              "contractType"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "contractType": {
+                "type": "string",
+                "description": "O tipo de serviço contratado. A considerar os domínios abaixo&#58;<br><ol><li>Coletivo Averbado</li><li>Coletivo Instituído</li><li>Individual</li></ol>",
+                "enum": [
+                  "COLETIVO_AVERBADO",
+                  "COLETIVO_INSTITUIDO",
+                  "INDIVIDUAL"
+                ],
+                "example": "COLETIVO_AVERBADO"
+              },
+              "contractingMinRequirement": {
+                "type": "string",
+                "description": "Campo aberto contendo todos os requisitos mínimos para contratação (possibilidade de incluir URL).",
+                "maxLength": 1024,
+                "example": "https://openinsurance.com.br/aaa"
+              }
+            }
+          },
+          "targetAudience": {
+            "type": "string",
+            "description": "A considerar os domínios abaixo:\n\n  1. Pessoa Natural\n  2. Pessoa Jurídica\n  3. Ambas (Pessoa Natural e Jurídica)\n",
+            "maxLength": 23,
+            "enum": [
+              "PESSOA_NATURAL",
+              "PESSOA_JURIDICA",
+              "PESSOA_NATURAL_JURIDICA"
+            ],
+            "example": "PESSOA_NATURAL"
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

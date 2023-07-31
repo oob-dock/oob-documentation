@@ -63,6 +63,9 @@ como:
 | POST     | v2     | /pix/payments                   | ```direct:paymentsPostPixPayments_v2```           |
 | GET      | v2     | /pix/payments/\{paymentId\}     | ```direct:paymentsGetPixPaymentsPaymentId_v2```   |
 | PATCH    | v2     | /pix/payments/\{paymentId\}     | ```direct:paymentsPatchPixPaymentsPaymentId_v2``` |
+| POST     | v3     | /pix/payments                   | ```direct:paymentsPostPixPayments_v3```           |
+| GET      | v3     | /pix/payments/\{paymentId\}     | ```direct:paymentsGetPixPaymentsPaymentId_v3```   |
+| PATCH    | v3     | /pix/payments/\{paymentId\}     | ```direct:paymentsPatchPixPaymentsPaymentId_v3``` |
 
 ### TED/TEF
 
@@ -86,3 +89,9 @@ das novas [rotas de v2](#pix).
 
 Além disso, a detentora deverá informar em todas as rotas da versão 2 a
 conta do usuário utilizada para o pagamento através do campo *debtorAccount*.
+
+## O que muda na versão 3 da API de Iniciação de Pagamentos?
+
+A principal mudança para pagamento v3 são as validações executadas durante
+o processamento assíncrono do consentimento pela detentora que devem obedecer um
+domínio especificado aqui: [paymentv3](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/142672139/Informa+es+T+cnicas+-+Pagamentos+-+v3.0.0-beta.2)

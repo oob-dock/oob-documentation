@@ -1,0 +1,9 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreatePixPayment em caso de erro de negócio ao tentar realizar o pagamento. Deve ser um responseError padrão se for um erro de sistema",
+    "oneOf": [
+        {
+            "$ref": "../../common/response-error-schema.json"
+        }
+    ]
+}

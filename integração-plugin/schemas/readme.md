@@ -48,6 +48,23 @@ Onde:
 
 ## Changelog
 
+### 2023-07-28 - v3.1.0
+
+- Consent
+  - Incluisão das rotas para a versão 2 de discovery da fase 3
+    - discoverPayments_v2: Discovery de pagamento
+
+### 2023-07-20 - v3.0.0
+
+- Adição de schemas de iniciação de pagamentos versão 3
+  - Payment
+    - Alteração de enum de erros
+    - Alteração de enum de rejectionReason
+  - Consent
+    - Alteração de enum de erros
+    - Alteração de pattern em creditor.name
+    - Adição de enum rejectionReason
+
 ### 2022-11-30 - v2.10.0
 
 - Consent
