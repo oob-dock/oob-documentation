@@ -80,12 +80,17 @@ Vários cenários estão mockados e são acionados através das respectivas URLs
 | Hybrid-flow / RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS na confirmação | <http://localhost:3301/auth/auth?id=resource>          |
 | Hybrid-flow / DISCOVERY_ERROR na autenticação                             | <http://localhost:3301/auth/auth?id=discovery>         |
 | Hybrid-flow / DISCOVERY_TIMEOUT na autenticação                           | <http://localhost:3301/auth/auth?id=discovery-timeout> |
+| Hybrid-flow / INVALID_STATUS_CONFIRMATION na confirmação                  | <http://localhost:3301/auth/auth?id=resource>          |
 | Hybrid-flow / GENERIC_ERROR no link inicial                               | <http://localhost:3301/auth/auth?id=generic>           |
 
 Para executar o mock basta importar o JSON na ferramenta Mockoon e iniciar o
 servidor do _environment_ "OOB Authroization Server Apps API".
 
 ## Changelog
+
+### 2023-07-27 - v2.1.10
+
+- Adiciona definição do erro INVALID_STATUS_CONFIRMATION.
 
 ### 2023-05-15 - v2.1.9
 
