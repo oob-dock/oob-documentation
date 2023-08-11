@@ -982,7 +982,7 @@ components:
         rejectedBy:
           allOf:
           - $ref: '#/components/schemas/RejectedByEnum'
-          - example: TPP
+          - example: USER
             nullable: false
     RevocationReason:
       required:
@@ -1133,13 +1133,21 @@ components:
           type: string
     RevokeDataSharingConsentData:
       required:
-      - revocation
+      - data
       type: object
       properties:
-        revocation:
-          allOf:
-          - $ref: '#/components/schemas/Rejection'
-          - nullable: false
+        data:
+          required:
+          - rejection
+          type: object
+          properties:
+            rejection:
+              allOf:
+              - $ref: '#/components/schemas/Rejection'
+              - nullable: false
+        applicationName:
+          description: Client application name
+          type: string
     RevokedByEnum:
       enum:
       - USER
@@ -1149,7 +1157,6 @@ components:
     RejectedByEnum:
       enum:
       - ASPSP
-      - TPP
       - USER
       type: string
     SchedulePayment:
