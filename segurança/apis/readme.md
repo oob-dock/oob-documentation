@@ -17,6 +17,11 @@
     - [Financings](#financings)
     - [Unarranged accounts overdraft](#unarranged-accounts-overdraft)
     - [Invoice financings](#invoice-financings)
+    - [Bank fixed incomes](#bank-fixed-incomes)
+    - [Credit fixed incomes](#credit-fixed-incomes)
+    - [Variable incomes](#variable-incomes)
+    - [Treasure titles](#treasure-titles)
+    - [Funds](#funds)
   - [Payments](#payments)
   - [Consent](#consent)
     - [Consents](#consents)
@@ -370,6 +375,77 @@
 | GET      | /v2/contracts/\{ID\}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
 | GET      | /v2/contracts/\{ID\}/scheduled-instalments | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ | Sim              | Sim  |     |
 | GET      | /v2/contracts/\{ID\}/warranties            | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_WARRANTIES_READ            | Sim              | Sim  |     |
+
+### Bank fixed incomes
+
+**Base path:** /open-banking/bank-fixed-incomes
+
+**Cliente API:** TPP
+
+| Operação | API                                                 | Valida token | Escopo de acesso   | Valida JWS | ConsentPermission       | Valida consentId | mTLS | Obs |
+| -------- | --------------------------------------------------- | ------------ | ------------------ | ---------- | ----------------------- | ---------------- | ---- | --- |
+| GET      | /v1/investments                                     | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}                      | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/balances             | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions         | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions-current | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
+
+### Credit fixed incomes
+
+**Base path:** /open-banking/credit-fixed-incomes
+
+**Cliente API:** TPP
+
+| Operação | API                                                 | Valida token | Escopo de acesso     | Valida JWS | ConsentPermission         | Valida consentId | mTLS | Obs |
+| -------- | --------------------------------------------------- | ------------ | -------------------- | ---------- | ------------------------- | ---------------- | ---- | --- |
+| GET      | /v1/investments                                     | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}                      | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/balances             | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions         | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions-current | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
+
+### Variable incomes
+
+**Base path:** /open-banking/variable-incomes
+
+**Cliente API:** TPP
+
+| Operação | API                                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission     | Valida consentId | mTLS | Obs |
+| -------- | --------------------------------------------------- | ------------ | ---------------- | ---------- | --------------------- | ---------------- | ---- | --- |
+| GET      | /v1/investments                                     | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}                      | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/balances             | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions         | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions-current | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/broker-notes/{brokerNoteId}         | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
+
+### Treasure titles
+
+**Base path:** /open-banking/treasure-titles
+
+**Cliente API:** TPP
+
+| Operação | API                                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission    | Valida consentId | mTLS | Obs |
+| -------- | --------------------------------------------------- | ------------ | ---------------- | ---------- | -------------------- | ---------------- | ---- | --- |
+| GET      | /v1/investments                                     | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}                      | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/balances             | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions         | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions-current | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
+
+### Funds
+
+**Base path:** /open-banking/funds
+
+**Cliente API:** TPP
+
+| Operação | API                                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission | Valida consentId | mTLS | Obs |
+| -------- | --------------------------------------------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
+| GET      | /v1/investments                                     | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}                      | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/balances             | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions         | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
+| GET      | /v1/investments/{investmentId}/transactions-current | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
 
 ## Payments
 

@@ -98,3 +98,54 @@
 | /contracts/\{contractId\}/warranties              | ```direct:unarrangedAccountsOverdraftGetContractsContractIdWarranties```              |
 | /contracts/\{contractId\}/scheduled-instalments   | ```direct:unarrangedAccountsOverdraftGetContractsContractIdScheduledInstalments```    |
 | /contracts/\{contractId\}/payments                | ```direct:unarrangedAccountsOverdraftGetContractsContractIdPayments```                |
+
+## Bank Fixed Incomes
+
+| Endpoint                                         | Rota do Camel                                                              |
+| ------------------------------------------------ | -------------------------------------------------------------------------- |
+| /investments                                     | ```direct:bankFixedIncomesGetInvestments```                                |
+| /investments/{investmentId}                      | ```direct:bankFixedIncomesGetInvestmentsInvestmentid```                    |
+| /investments/{investmentId}/balances             | ```direct:bankFixedIncomesGetInvestmentsInvestmentidBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:bankFixedIncomesGetInvestmentsInvestmentidTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:bankFixedIncomesGetInvestmentsInvestmentidTransactionsCurrent``` |
+
+## Credit Fixed Incomes
+
+| Endpoint                                         | Rota do Camel                                                                |
+| ------------------------------------------------ | ---------------------------------------------------------------------------- |
+| /investments                                     | ```direct:creditFixedIncomesGetInvestments```                                |
+| /investments/{investmentId}                      | ```direct:creditFixedIncomesGetInvestmentsInvestmentid```                    |
+| /investments/{investmentId}/balances             | ```direct:creditFixedIncomesGetInvestmentsInvestmentidBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:creditFixedIncomesGetInvestmentsInvestmentidTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:creditFixedIncomesGetInvestmentsInvestmentidTransactionsCurrent``` |
+
+## Variable Incomes
+
+| Endpoint                                         | Rota do Camel                                                             |
+| ------------------------------------------------ | ------------------------------------------------------------------------- |
+| /investments                                     | ```direct:variableIncomesGetInvestments```                                |
+| /investments/{investmentId}                      | ```direct:variableIncomesGetInvestmentsInvestmentid```                    |
+| /investments/{investmentId}/balances             | ```direct:variableIncomesGetInvestmentsInvestmentidBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:variableIncomesGetInvestmentsInvestmentidTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:variableIncomesGetInvestmentsInvestmentidTransactionsCurrent``` |
+| /investments/broker-notes/{brokerNoteId}         | ```direct:variableIncomesGetInvestmentsBrokerNotesBrokernoteid```         |
+
+## Treasure Titles
+
+| Endpoint                                         | Rota do Camel                                                            |
+| ------------------------------------------------ | ------------------------------------------------------------------------ |
+| /investments                                     | ```direct:treasureTitlesGetInvestments```                                |
+| /investments/{investmentId}                      | ```direct:treasureTitlesGetInvestmentsInvestmentid```                    |
+| /investments/{investmentId}/balances             | ```direct:treasureTitlesGetInvestmentsInvestmentidBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:treasureTitlesGetInvestmentsInvestmentidTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:treasureTitlesGetInvestmentsInvestmentidTransactionsCurrent``` |
+
+## Funds
+
+| Endpoint                                         | Rota do Camel                                                   |
+| ------------------------------------------------ | --------------------------------------------------------------- |
+| /investments                                     | ```direct:fundsGetInvestments```                                |
+| /investments/{investmentId}                      | ```direct:fundsGetInvestmentsInvestmentid```                    |
+| /investments/{investmentId}/balances             | ```direct:fundsGetInvestmentsInvestmentidBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:fundsGetInvestmentsInvestmentidTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:fundsGetInvestmentsInvestmentidTransactionsCurrent``` |

@@ -1,0 +1,98 @@
+{
+  "data": [
+    {
+      "type": "ENTRADA",
+      "transactionType": "COMPRA",
+      "transactionDate": "2018-02-15",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "indexerPercentage": "1.100000",
+      "transactionTypeAdditionalInfo": "TI=`{J7",
+      "transactionQuantity": "42.25",
+      "remunerationTransactionRate": "0.300000",
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionUnitPrice": {
+        "amount": "1000.000004",
+        "currency": "BRL"
+      },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      }
+    },
+    {
+      "type": "ENTRADA",
+      "transactionType": "COMPRA",
+      "transactionDate": "2018-02-15",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "remunerationTransactionRate": "0.300000",
+      "transactionTypeAdditionalInfo": "3(",
+      "indexerPercentage": "1.100000",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionUnitPrice": {
+        "amount": "1000.000004",
+        "currency": "BRL"
+      },
+      "transactionQuantity": "42.25"
+    },
+    {
+      "type": "ENTRADA",
+      "transactionType": "COMPRA",
+      "transactionDate": "2018-02-15",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "indexerPercentage": "1.100000",
+      "transactionQuantity": "42.25",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": "UOy-~dgl",
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "remunerationTransactionRate": "0.300000",
+      "transactionUnitPrice": {
+        "amount": "1000.000004",
+        "currency": "BRL"
+      }
+    }
+  ],
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": "Ut tempor"
+  }
+}

@@ -13,6 +13,11 @@ Open Banking Brasil:
 - [Operações de Crédito - Financiamentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17373362/API+-+Opera+es+de+Cr+dito+-+Financiamento)
 - [Operações de Crédito - Adiantamento a Depositantes](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17374226/API+-+Opera+es+de+Cr+dito+-+Adiantamento+a+Depositantes)
 - [Operações de Crédito - Direitos Creditórios Descontados](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17375055/API+-+Opera+es+de+Cr+dito+-+Direitos+Credit+rios+Descontados)
+- [Investimentos - Renda Fixa Bancária](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/75006394/API+-+Investimentos+-+Renda+Fixa+Banc+ria)
+- [Investimentos - Renda Fixa Crédito](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/75005953/API+-+Investimentos+-+Renda+Fixa+Cr+dito)
+- [Investimentos - Renda Variável](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/82378753/API+-+Investimentos+-+Renda+Vari+vel)
+- [Investimentos - Títulos do Tesouro Direto](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/86605826/API+-+Investimentos+-+T+tulos+do+Tesouro+Direto)
+- [Investimentos - Fundos de Investimento](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/89784321/API+-+Investimentos+-+Fundos+de+Investimento)
 
 &nbsp;
 

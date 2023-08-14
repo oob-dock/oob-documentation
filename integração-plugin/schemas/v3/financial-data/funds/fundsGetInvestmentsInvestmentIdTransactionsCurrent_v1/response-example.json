@@ -1,0 +1,152 @@
+{
+  "data": [
+    {
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "type": "ENTRADA",
+      "transactionType": "AMORTIZACAO",
+      "transactionConversionDate": "2023-01-07",
+      "transactionQuotaPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuotaQuantity": "42.25",
+      "transactionValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": "kBU8<O:U",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionExitFee": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      }
+    },
+    {
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "type": "ENTRADA",
+      "transactionType": "AMORTIZACAO",
+      "transactionConversionDate": "2023-01-07",
+      "transactionQuotaPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuotaQuantity": "42.25",
+      "transactionValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionExitFee": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": "s3",
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      }
+    },
+    {
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "type": "ENTRADA",
+      "transactionType": "AMORTIZACAO",
+      "transactionConversionDate": "2023-01-07",
+      "transactionQuotaPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuotaQuantity": "42.25",
+      "transactionValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionExitFee": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": "teI)o"
+    },
+    {
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "type": "ENTRADA",
+      "transactionType": "AMORTIZACAO",
+      "transactionConversionDate": "2023-01-07",
+      "transactionQuotaPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuotaQuantity": "42.25",
+      "transactionValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionExitFee": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": "g"
+    }
+  ],
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": true
+  }
+}

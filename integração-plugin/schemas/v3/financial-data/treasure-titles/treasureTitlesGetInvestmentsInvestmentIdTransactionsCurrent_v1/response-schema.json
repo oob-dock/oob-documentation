@@ -1,0 +1,245 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "transactionType",
+          "transactionDate",
+          "transactionUnitPrice",
+          "transactionQuantity",
+          "transactionGrossValue",
+          "transactionNetValue",
+          "transactionId"
+        ],
+        "properties": {
+          "type": {
+            "description": "Tipo de movimentação na visão de investimento (Nos casos de\npagamento de juros e amortização) fica convencionado que será considerado que\no tipo de movimento será saída.\n",
+            "example": "ENTRADA",
+            "enum": [
+              "ENTRADA",
+              "SAIDA"
+            ],
+            "type": "string"
+          },
+          "transactionType": {
+            "description": "Compra, venda, cancelamento, vencimento, pagamento de juros, amortização, transferência de titularidade, transferência de custódia e outros.",
+            "example": "AMORTIZACAO",
+            "enum": [
+              "COMPRA",
+              "VENDA",
+              "CANCELAMENTO",
+              "VENCIMENTO",
+              "PAGAMENTO_JUROS",
+              "AMORTIZACAO",
+              "TRANSFERENCIA_TITULARIDADE",
+              "TRANSFERENCIA_CUSTODIA",
+              "OUTROS"
+            ],
+            "type": "string"
+          },
+          "transactionTypeAdditionalInfo": {
+            "description": "Informação adicional do tipo de movimentação, para preenchimento no caso de movimentações não de limitadas no domínio.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com o valor 'OUTROS'.\n",
+            "maxLength": 100,
+            "pattern": "[\\w\\W\\s]*",
+            "example": "",
+            "type": "string"
+          },
+          "transactionDate": {
+            "description": "Data da movimentação.",
+            "maxLength": 10,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2018-02-15",
+            "type": "string"
+          },
+          "transactionUnitPrice": {
+            "description": "Preço unitário bruto negociado na transação.",
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "description": "Valor relacionado ao objeto",
+                "maxLength": 24,
+                "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+                "example": "1000.04",
+                "type": "string",
+                "format": "double",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217",
+                "maxLength": 3,
+                "pattern": "^[A-Z]{3}$",
+                "example": "BRL",
+                "type": "string"
+              }
+            }
+          },
+          "transactionQuantity": {
+            "description": "Quantidade de títulos envolvidos na movimentação.",
+            "maxLength": 24,
+            "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+            "example": "42.25",
+            "type": "string",
+            "format": "double",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308
+          },
+          "transactionGrossValue": {
+            "description": "Valor bruto da movimentação\n\nNos casos em que se tratar de movimento de saída e a instituição não tiver a informação de IR recolhido na fonte, o valor bruto e o valor líquido expostos deverão ser iguais.\n",
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "description": "Valor bruto da transação (Preço unitário da movimentação x Quantidade) ",
+                "maxLength": 20,
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "type": "string",
+                "format": "double",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217",
+                "maxLength": 3,
+                "pattern": "^[A-Z]{3}$",
+                "example": "BRL",
+                "type": "string"
+              }
+            }
+          },
+          "incomeTax": {
+            "description": "Valor do imposto de renda recolhido na transação\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.\n",
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 20,
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "type": "string",
+                "format": "double",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "maxLength": 3,
+                "pattern": "^[A-Z]{3}$",
+                "example": "BRL",
+                "type": "string"
+              }
+            }
+          },
+          "financialTransactionTax": {
+            "description": "Valor do IOF recolhido na transação\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.\n",
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 20,
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "type": "string",
+                "format": "double",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "maxLength": 3,
+                "pattern": "^[A-Z]{3}$",
+                "example": "BRL",
+                "type": "string"
+              }
+            }
+          },
+          "transactionNetValue": {
+            "description": "Valor líquido da transação\n\nNos casos em que se tratar de movimento de saída e a instituição não tiver a informação de IR recolhido na fonte, o valor bruto e o valor líquido expostos deverão ser iguais.\n",
+            "type": "object",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "description": "Valor relacionado ao objeto",
+                "maxLength": 20,
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "type": "string",
+                "format": "double",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217",
+                "maxLength": 3,
+                "pattern": "^[A-Z]{3}$",
+                "example": "BRL",
+                "type": "string"
+              }
+            }
+          },
+          "remunerationTransactionRate": {
+            "description": "Taxa de remuneração da movimentação.  \n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'ENTRADA'.\n",
+            "maxLength": 8,
+            "pattern": "^\\d{1}\\.\\d{6}$",
+            "example": "0.300000",
+            "type": "string",
+            "format": "double",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308
+          },
+          "transactionId": {
+            "description": "Código ou identificador único prestado pela instituição para individualizar o movimento.",
+            "maxLength": 100,
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$",
+            "example": "ABCD2126019929279212650822221989319253344",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "hasMoreRecords",
+        "requestDateTime"
+      ],
+      "properties": {
+        "hasMoreRecords": {
+          "type": "boolean",
+          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
+          "example": true
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

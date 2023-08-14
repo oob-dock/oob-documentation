@@ -1,0 +1,158 @@
+{
+  "data": [
+    {
+      "type": "ENTRADA",
+      "transactionType": "APLICACAO",
+      "transactionDate": "2018-02-15",
+      "transactionUnitPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuantity": "42.25",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": ")CA@x9q",
+      "indexerPercentage": "1.100000",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "remunerationTransactionRate": "0.300000"
+    },
+    {
+      "type": "ENTRADA",
+      "transactionType": "APLICACAO",
+      "transactionDate": "2018-02-15",
+      "transactionUnitPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuantity": "42.25",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionTypeAdditionalInfo": "(9)T2%r",
+      "remunerationTransactionRate": "0.300000",
+      "indexerPercentage": "1.100000",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      }
+    },
+    {
+      "type": "ENTRADA",
+      "transactionType": "APLICACAO",
+      "transactionDate": "2018-02-15",
+      "transactionUnitPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuantity": "42.25",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "remunerationTransactionRate": "0.300000",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "indexerPercentage": "1.100000",
+      "transactionTypeAdditionalInfo": "0j$`P"
+    },
+    {
+      "type": "ENTRADA",
+      "transactionType": "APLICACAO",
+      "transactionDate": "2018-02-15",
+      "transactionUnitPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuantity": "42.25",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "remunerationTransactionRate": "0.300000",
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "indexerPercentage": "1.100000",
+      "transactionTypeAdditionalInfo": ":^<{g\\b2"
+    },
+    {
+      "type": "ENTRADA",
+      "transactionType": "APLICACAO",
+      "transactionDate": "2018-02-15",
+      "transactionUnitPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuantity": "42.25",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "remunerationTransactionRate": "0.300000",
+      "transactionTypeAdditionalInfo": "M[<4m!A",
+      "indexerPercentage": "1.100000"
+    }
+  ],
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": false
+  }
+}
