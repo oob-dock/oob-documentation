@@ -3,15 +3,14 @@
   "type": "object",
   "required": [
     "requestMeta",
-    "contractId",
-    "contractId",
+    "brokerNoteId",
     "consent"
   ],
   "properties": {
     "requestMeta": {
       "$ref": "../../../common/common-schema.json#/$defs/RequestMeta"
     },
-    "contractId": {
+    "brokerNoteId": {
       "$ref": "../../../common/common-schema.json#/$defs/LegacyId"
     },
     "consent": {

@@ -17,18 +17,27 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "transactionTypeAdditionalInfo": "]YCxj_L",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "remunerationTransactionRate": "0.300000",
+      "indexerPercentage": "1.100000",
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "remunerationTransactionRate": "0.300000",
       "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "indexerPercentage": "1.100000"
+      "transactionTypeAdditionalInfo": "aWF5<e"
     },
     {
       "type": "ENTRADA",
@@ -47,17 +56,65 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "financialTransactionTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionTypeAdditionalInfo": "i$]",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "indexerPercentage": "1.100000",
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "remunerationTransactionRate": "0.300000",
+      "transactionTypeAdditionalInfo": "zoP/5oK"
+    },
+    {
+      "type": "ENTRADA",
+      "transactionType": "APLICACAO",
+      "transactionDate": "2018-02-15",
+      "transactionUnitPrice": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionQuantity": "42.25",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "transactionTypeAdditionalInfo": "MZpI",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "indexerPercentage": "1.100000",
       "remunerationTransactionRate": "0.300000"
     },
     {
@@ -77,52 +134,31 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "remunerationTransactionRate": "0.300000",
       "indexerPercentage": "1.100000",
-      "transactionTypeAdditionalInfo": ">'or3NA>D-",
-      "incomeTax": {
+      "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "remunerationTransactionRate": "0.300000",
-      "financialTransactionTax": {
+      "transactionTypeAdditionalInfo": "~J",
+      "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       }
-    },
-    {
-      "type": "ENTRADA",
-      "transactionType": "APLICACAO",
-      "transactionDate": "2018-02-15",
-      "transactionUnitPrice": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionQuantity": "42.25",
-      "transactionGrossValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionNetValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "financialTransactionTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionTypeAdditionalInfo": "w b2rk",
-      "remunerationTransactionRate": "0.300000",
-      "incomeTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "indexerPercentage": "1.100000"
     }
   ],
   "meta": {
     "hasMoreRecords": true,
-    "requestDateTime": false
+    "requestDateTime": -2370484
   }
 }

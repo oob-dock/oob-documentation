@@ -65,7 +65,7 @@
           },
           "blockedBalance": {
             "type": "object",
-            "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros).",
+            "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.",
             "required": [
               "amount",
               "currency"
@@ -94,8 +94,8 @@
             "type": "string",
             "format": "double",
             "description": "Quatidade total do ativo na data de referência.",
-            "pattern": "^\\d{1,15}\\.\\d{2,8}$",
-            "maxLength": 24,
+            "pattern": "^-?\\d{1,15}\\.\\d{2,8}$",
+            "maxLength": 25,
             "example": "1000.00000004",
             "minimum": -1.7976931348623157e+308,
             "maximum": 1.7976931348623157e+308
@@ -112,8 +112,8 @@
                 "type": "string",
                 "format": "double",
                 "description": "Valor relacionado ao objeto.",
-                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-                "maxLength": 20,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 21,
                 "example": "1000.0004",
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308

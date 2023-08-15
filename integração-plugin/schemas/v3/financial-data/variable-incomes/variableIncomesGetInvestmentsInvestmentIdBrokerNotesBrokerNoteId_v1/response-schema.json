@@ -220,7 +220,7 @@
         },
         "taxes": {
           "type": "object",
-          "description": "Impostos cobrados na operação, exceto imposto de renda.",
+          "description": "Impostos cobrados na operação, inclusive imposto de renda day-trade, exceto imposto de renda retido na fonte.",
           "required": [
             "amount",
             "currency"
@@ -274,7 +274,7 @@
         },
         "netValue": {
           "type": "object",
-          "description": "Valor bruto da nota de negociação após despesas com taxa de corretagem, taxa de liquidação, taxa de registro, taxa A.N.A, emolumentos, taxa de custódia, impostos e IRRF.",
+          "description": "Valor líquido da nota de negociação após despesas com taxa de corretagem, taxa de liquidação, taxa de registro, taxa A.N.A, emolumentos, taxa de custódia, impostos e IRRF.",
           "required": [
             "amount",
             "currency"

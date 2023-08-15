@@ -417,7 +417,7 @@
 | GET      | /v1/investments/{investmentId}/balances             | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/transactions         | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/transactions-current | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
-| GET      | /v1/investments/broker-notes/{brokerNoteId}         | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
+| GET      | /v1/broker-notes/{brokerNoteId}                     | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
 
 ### Treasure titles
 

@@ -128,7 +128,7 @@
 | /investments/{investmentId}/balances             | ```direct:variableIncomesGetInvestmentsInvestmentidBalances```            |
 | /investments/{investmentId}/transactions         | ```direct:variableIncomesGetInvestmentsInvestmentidTransactions```        |
 | /investments/{investmentId}/transactions-current | ```direct:variableIncomesGetInvestmentsInvestmentidTransactionsCurrent``` |
-| /investments/broker-notes/{brokerNoteId}         | ```direct:variableIncomesGetInvestmentsBrokerNotesBrokernoteid```         |
+| /broker-notes/{brokerNoteId}                     | ```direct:variableIncomesGetInvestmentsBrokerNotesBrokernoteid```         |
 
 ## Treasure Titles
 

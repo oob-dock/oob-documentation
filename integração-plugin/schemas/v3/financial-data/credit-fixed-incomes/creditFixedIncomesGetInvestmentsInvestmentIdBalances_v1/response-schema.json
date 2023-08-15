@@ -122,7 +122,7 @@
         },
         "incomeTax": {
           "type": "object",
-          "description": "Valor do imposto provisionado considerando a alíquota vigente na data de referência.\n",
+          "description": "Valor do imposto de renda provisionado considerando a alíquota vigente na data de referência.\n",
           "required": [
             "amount",
             "currency"
@@ -178,7 +178,7 @@
         },
         "blockedBalance": {
           "type": "object",
-          "description": "valor líquido não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros)",
+          "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.",
           "required": [
             "amount",
             "currency"
@@ -236,6 +236,7 @@
           "type": "string",
           "description": "Taxa de remuneração acordada com o cliente na contratação. \nEm casos de produtos progressivos, considerar taxa vigente. \nÉ esperado que o preenchimento deste campo pelas participantes seja enviado de acordo com o campo preFixedRate do endpoint /investment/{investmentId}.\n",
           "maxLength": 8,
+          "minLength": 8,
           "pattern": "^\\d{1}\\.\\d{6}$",
           "example": "0.300000"
         },
@@ -243,6 +244,7 @@
           "type": "string",
           "description": "Percentual do indexador acordado com o cliente na contratação. \nEm casos de produtos progressivos, considerar taxa vigente. \nÉ esperado que o preenchimento deste campo pelas participantes seja enviado de acordo com o campo postFixedIndexerPercentagedo endpoint /investment/{investmentId}.\n",
           "maxLength": 8,
+          "minLength": 8,
           "pattern": "^\\d{1}\\.\\d{6}$",
           "example": "1.100000"
         },

@@ -24,10 +24,10 @@
           "type": "string"
         },
         "productName": {
-          "description": "Descrição do ativo em questão.",
+          "description": "Nome do título em questão, conforme listado no site do Tesouro Direto [https://www.tesourodireto.com.br](https://www.tesourodireto.com.br)",
           "maxLength": 70,
           "pattern": "[\\w\\W\\s]*",
-          "example": "TESOURODIRETO",
+          "example": "Tesouro Selic 2025",
           "type": "string"
         },
         "remuneration": {
@@ -68,6 +68,7 @@
             "preFixedRate": {
               "description": "Valor da taxa da aquisição do contrato.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido com o valor ‘PRE FIXADO’.\n",
               "maxLength": 8,
+              "minLength": 8,
               "pattern": "^\\d{1}\\.\\d{6}$",
               "example": "0.300000",
               "type": "string",
@@ -78,6 +79,7 @@
             "postFixedIndexerPercentage": {
               "description": "Percentual do indexador da aquisição do contrato.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido de forma diferente de ‘PRE FIXADO’.\n",
               "maxLength": 8,
+              "minLength": 8,
               "pattern": "^\\d{1}\\.\\d{6}$",
               "example": "1.100000",
               "type": "string",

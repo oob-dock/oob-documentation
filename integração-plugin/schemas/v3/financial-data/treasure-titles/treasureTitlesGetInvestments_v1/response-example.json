@@ -1,5 +1,48 @@
 {
-  "data": [],
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "investmentId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "investmentId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "investmentId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
+    }
+  ],
   "meta": {
     "totalRecords": 1,
     "totalPages": 1

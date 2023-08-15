@@ -55,7 +55,7 @@
         },
         "netAmount": {
           "type": "object",
-          "description": "Valor do investimento atualizado na data de referência, posterior a dedução de impostos (IOF e IR) e taxa de saída, caso a instituição considere este valor na composição do saldo líquido.",
+          "description": "Valor do investimento atualizado na data de referência, posterior a dedução de impostos (IOF e IR) e taxa de saída, caso a instituição considere este valor na composição do saldo líquido. Este valor considera o valor bloqueado (blockedAmount).",
           "required": [
             "amount",
             "currency"
@@ -82,7 +82,7 @@
         },
         "incomeTaxProvision": {
           "type": "object",
-          "description": "Valor do imposto considerando a alíquota vigente na data de referência.",
+          "description": "Valor do imposto de renda provisionado considerando a alíquota vigente na data de referência.",
           "required": [
             "amount",
             "currency"
@@ -136,7 +136,7 @@
         },
         "blockedAmount": {
           "type": "object",
-          "description": "Valor líquido não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros);",
+          "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.",
           "required": [
             "amount",
             "currency"

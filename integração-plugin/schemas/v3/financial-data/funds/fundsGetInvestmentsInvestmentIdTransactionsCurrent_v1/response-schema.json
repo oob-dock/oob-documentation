@@ -19,21 +19,46 @@
           "transactionQuotaPrice",
           "transactionQuotaQuantity",
           "transactionValue",
-          "transactionGrossValue",
-          "transactionNetValue"
+          "transactionGrossValue"
         ],
         "additionalProperties": false,
         "properties": {
           "transactionId": {
-            "type": "string",
-            "description": "Código ou identificador único prestado pela instituição que mantém a representação individual do movimento na posição do fundo.",
-            "maxLength": 100,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$",
-            "example": "ABCD2126019929279212650822221989319253344"
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
           },
           "type": {
             "type": "string",
-            "description": "Tipo de movimentação (Entrada ou Saída).\n\nENTRADA: APLICACAO, TRANSFERENCIA_COTAS, AMORTIZACAO, OUTROS.\n\nSAIDA: RESGATE, COME_COTAS, TRANSFERENCIA_COTAS, OUTROS.\n",
+            "description": "Tipo de movimentação (Entrada ou Saída).\n\nENTRADA: APLICACAO, TRANSFERENCIA_COTAS,  OUTROS.\n\nSAIDA: RESGATE, COME_COTAS, TRANSFERENCIA_COTAS, AMORTIZACAO, OUTROS.\n",
             "enum": [
               "ENTRADA",
               "SAIDA"
@@ -106,7 +131,7 @@
           },
           "transactionValue": {
             "type": "object",
-            "description": "Valor da movimentação.",
+            "description": "Valor solicitado pelo cliente.",
             "required": [
               "amount",
               "currency"
@@ -133,7 +158,7 @@
           },
           "transactionGrossValue": {
             "type": "object",
-            "description": "Valor da movimentação que se refere a quantidade da cota x valor da cota da movimentação.\n",
+            "description": "Valor da movimentação que se refere a quantidade da cota x valor da cota da movimentação.   \nNos casos em que não houver movimentação de cotas, por exemplo: amortização, não considerar a regra descrita.\n",
             "required": [
               "amount",
               "currency"
@@ -241,7 +266,7 @@
           },
           "transactionNetValue": {
             "type": "object",
-            "description": "Valor líquido da movimentação posterior à dedução de impostos (IOF e IR) e taxa de saída.",
+            "description": "Valor líquido da movimentação posterior à dedução de impostos (IOF e IR) e taxa de saída.   \n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.\n",
             "required": [
               "amount",
               "currency"

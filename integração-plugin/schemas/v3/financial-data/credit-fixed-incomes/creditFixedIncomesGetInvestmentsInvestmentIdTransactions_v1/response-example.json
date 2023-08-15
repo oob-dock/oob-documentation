@@ -12,21 +12,30 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "indexerPercentage": "1.100000",
-      "transactionTypeAdditionalInfo": "TI=`{J7",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "transactionQuantity": "42.25",
+      "indexerPercentage": "1.100000",
       "remunerationTransactionRate": "0.300000",
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": ".Q",
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
       "transactionUnitPrice": {
         "amount": "1000.000004",
-        "currency": "BRL"
-      },
-      "financialTransactionTax": {
-        "amount": "1000.04",
         "currency": "BRL"
       }
     },
@@ -42,14 +51,22 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "remunerationTransactionRate": "0.300000",
-      "transactionTypeAdditionalInfo": "3(",
-      "indexerPercentage": "1.100000",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
+      "remunerationTransactionRate": "0.300000",
+      "transactionTypeAdditionalInfo": "0XFVi",
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
@@ -58,7 +75,8 @@
         "amount": "1000.000004",
         "currency": "BRL"
       },
-      "transactionQuantity": "42.25"
+      "transactionQuantity": "42.25",
+      "indexerPercentage": "1.100000"
     },
     {
       "type": "ENTRADA",
@@ -72,19 +90,28 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "indexerPercentage": "1.100000",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "transactionQuantity": "42.25",
+      "transactionTypeAdditionalInfo": "\"WCf~[t.b",
+      "indexerPercentage": "1.100000",
+      "remunerationTransactionRate": "0.300000",
       "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionTypeAdditionalInfo": "UOy-~dgl",
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "remunerationTransactionRate": "0.300000",
       "transactionUnitPrice": {
         "amount": "1000.000004",
         "currency": "BRL"
@@ -93,6 +120,6 @@
   ],
   "meta": {
     "hasMoreRecords": true,
-    "requestDateTime": "Ut tempor"
+    "requestDateTime": "laboris commodo"
   }
 }

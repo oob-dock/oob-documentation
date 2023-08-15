@@ -107,7 +107,7 @@
           }
         },
         "incomeTax": {
-          "description": "Valor do imposto provisionado considerando a alíquota vigente na data de referência.\n",
+          "description": "Valor do imposto de renda provisionado considerando a alíquota vigente na data de referência.\n",
           "type": "object",
           "required": [
             "amount",
@@ -161,7 +161,7 @@
           }
         },
         "blockedBalance": {
-          "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros).",
+          "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.",
           "type": "object",
           "required": [
             "amount",

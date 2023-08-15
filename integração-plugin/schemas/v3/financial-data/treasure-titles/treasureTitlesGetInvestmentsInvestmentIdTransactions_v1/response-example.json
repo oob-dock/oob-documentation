@@ -17,17 +17,26 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": "gBn7e",
       "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "remunerationTransactionRate": "0.300000",
-      "transactionTypeAdditionalInfo": "KcAL3*Zs6",
-      "incomeTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      }
+      "remunerationTransactionRate": "0.300000"
     },
     {
       "type": "ENTRADA",
@@ -46,17 +55,26 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionTypeAdditionalInfo": ":s`mC(J_",
-      "remunerationTransactionRate": "0.300000",
       "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
-      }
+      },
+      "remunerationTransactionRate": "0.300000",
+      "transactionTypeAdditionalInfo": "!i:q:<Vaju"
     },
     {
       "type": "ENTRADA",
@@ -75,21 +93,30 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "incomeTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "remunerationTransactionRate": "0.300000",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "transactionTypeAdditionalInfo": " :[h",
       "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionTypeAdditionalInfo": "Dg\\LQ[UKH"
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "remunerationTransactionRate": "0.300000"
     }
   ],
   "meta": {
     "hasMoreRecords": true,
-    "requestDateTime": -99294471.27436392
+    "requestDateTime": true
   }
 }

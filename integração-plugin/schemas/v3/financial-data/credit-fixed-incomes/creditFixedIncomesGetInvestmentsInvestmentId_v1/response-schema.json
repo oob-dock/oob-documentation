@@ -7,7 +7,6 @@
     "data": {
       "type": "object",
       "required": [
-        "issuerInstitutionCnpjNumber",
         "investmentType",
         "remuneration",
         "issueUnitPrice",
@@ -15,13 +14,12 @@
         "dueDate",
         "voucherPaymentIndicator",
         "purchaseDate",
-        "gracePeriodDate",
         "taxExemptProduct"
       ],
       "properties": {
         "issuerInstitutionCnpjNumber": {
           "type": "string",
-          "description": "CNPJ da instituição emissora",
+          "description": "CNPJ da instituição emissora.\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
           "maxLength": 14,
           "pattern": "^\\d{14}$",
           "example": "11225860000140"
@@ -69,9 +67,6 @@
         "remuneration": {
           "type": "object",
           "required": [
-            "rateType",
-            "ratePeriodicity",
-            "calculation",
             "indexer"
           ],
           "properties": {
@@ -91,7 +86,7 @@
             },
             "rateType": {
               "type": "string",
-              "description": "Tipo da taxa de remuneração\n  1. LINEAR\n  2. EXPONENCIAL\n",
+              "description": "Tipo da taxa de remuneração\n  1. LINEAR\n  2. EXPONENCIAL\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
               "enum": [
                 "LINEAR",
                 "EXPONENCIAL"
@@ -100,7 +95,7 @@
             },
             "ratePeriodicity": {
               "type": "string",
-              "description": "Periodicidade da taxa de remuneração (mensal, anual, diário, semestral)",
+              "description": "Periodicidade da taxa de remuneração (mensal, anual, diário, semestral).\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
               "enum": [
                 "MENSAL",
                 "ANUAL",
@@ -111,7 +106,7 @@
             },
             "calculation": {
               "type": "string",
-              "description": "Base de cálculo (dias úteis ou dias corridos).\n  1. dias úteis\n  2. dias corridos\n",
+              "description": "Base de cálculo (dias úteis ou dias corridos).\n  1. dias úteis\n  2. dias corridos.\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
               "enum": [
                 "DIAS_UTEIS",
                 "DIAS_CORRIDOS"
@@ -228,7 +223,7 @@
         },
         "gracePeriodDate": {
           "type": "string",
-          "description": "Data até a qual o cliente não poderá resgatar antecipadamente seu investimento",
+          "description": "Data até a qual o cliente não poderá resgatar antecipadamente seu investimento.\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2018-02-16"

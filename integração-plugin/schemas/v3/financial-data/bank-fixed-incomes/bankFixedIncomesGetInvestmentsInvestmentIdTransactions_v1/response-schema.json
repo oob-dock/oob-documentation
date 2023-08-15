@@ -226,11 +226,37 @@
             "maximum": 1.7976931348623157e+308
           },
           "transactionId": {
-            "type": "string",
-            "maxLength": 100,
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$",
-            "example": "ABCD2126019929279212650822221989319253344",
-            "description": "Código ou identificador único prestado pela instituição que mantém a representação individual do movimento."
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
           }
         }
       }
