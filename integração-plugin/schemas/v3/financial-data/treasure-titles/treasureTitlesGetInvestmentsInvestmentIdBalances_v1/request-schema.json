@@ -3,7 +3,8 @@
   "type": "object",
   "required": [
     "requestMeta",
-    "consent"
+    "consent",
+    "investmentId"
   ],
   "properties": {
     "requestMeta": {

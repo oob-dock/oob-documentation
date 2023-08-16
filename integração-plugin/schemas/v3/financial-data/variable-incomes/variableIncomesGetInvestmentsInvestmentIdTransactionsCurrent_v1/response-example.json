@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "type": "ENTRADA",
+      "type": "SAIDA",
       "transactionType": "DIVIDENDOS",
       "transactionDate": "2018-02-15",
       "transactionValue": {
@@ -9,6 +9,54 @@
         "currency": "BRL"
       },
       "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "brokerNoteId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "transactionQuantity": "42.00000025",
+      "transactionTypeAdditionalInfo": "96?NW/",
+      "priceFactor": "100.0005",
+      "transactionUnitPrice": {
+        "amount": "1000.0004",
+        "currency": "BRL"
+      }
+    },
+    {
+      "type": "SAIDA",
+      "transactionType": "DIVIDENDOS",
+      "transactionDate": "2018-02-15",
+      "transactionValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "transactionQuantity": "42.00000025",
+      "transactionTypeAdditionalInfo": "]`E!?Pt0T+",
+      "brokerNoteId": [
         {
           "key": "pk_CampoUm",
           "value": "ABC"
@@ -22,7 +70,26 @@
       "transactionUnitPrice": {
         "amount": "1000.0004",
         "currency": "BRL"
+      }
+    },
+    {
+      "type": "SAIDA",
+      "transactionType": "DIVIDENDOS",
+      "transactionDate": "2018-02-15",
+      "transactionValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
       },
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "brokerNoteId": [
         {
           "key": "pk_CampoUm",
@@ -33,11 +100,16 @@
           "value": "123"
         }
       ],
-      "typeAdditionalInfo": ";fSC",
-      "transactionQuantity": "42.00000025"
+      "transactionUnitPrice": {
+        "amount": "1000.0004",
+        "currency": "BRL"
+      },
+      "priceFactor": "100.0005",
+      "transactionQuantity": "42.00000025",
+      "transactionTypeAdditionalInfo": "3K?("
     },
     {
-      "type": "ENTRADA",
+      "type": "SAIDA",
       "transactionType": "DIVIDENDOS",
       "transactionDate": "2018-02-15",
       "transactionValue": {
@@ -45,6 +117,17 @@
         "currency": "BRL"
       },
       "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "transactionTypeAdditionalInfo": ";p<'",
+      "brokerNoteId": [
         {
           "key": "pk_CampoUm",
           "value": "ABC"
@@ -59,130 +142,11 @@
         "currency": "BRL"
       },
       "transactionQuantity": "42.00000025",
-      "typeAdditionalInfo": "=5h}eT8D+",
-      "priceFactor": "100.0005",
-      "brokerNoteId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ]
-    },
-    {
-      "type": "ENTRADA",
-      "transactionType": "DIVIDENDOS",
-      "transactionDate": "2018-02-15",
-      "transactionValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "typeAdditionalInfo": "KO<",
-      "priceFactor": "100.0005",
-      "transactionUnitPrice": {
-        "amount": "1000.0004",
-        "currency": "BRL"
-      },
-      "brokerNoteId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "transactionQuantity": "42.00000025"
-    },
-    {
-      "type": "ENTRADA",
-      "transactionType": "DIVIDENDOS",
-      "transactionDate": "2018-02-15",
-      "transactionValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "brokerNoteId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "transactionUnitPrice": {
-        "amount": "1000.0004",
-        "currency": "BRL"
-      },
-      "typeAdditionalInfo": ":vdC<",
-      "priceFactor": "100.0005",
-      "transactionQuantity": "42.00000025"
-    },
-    {
-      "type": "ENTRADA",
-      "transactionType": "DIVIDENDOS",
-      "transactionDate": "2018-02-15",
-      "transactionValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "priceFactor": "100.0005",
-      "transactionQuantity": "42.00000025",
-      "typeAdditionalInfo": " X83t*j[8",
-      "transactionUnitPrice": {
-        "amount": "1000.0004",
-        "currency": "BRL"
-      },
-      "brokerNoteId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ]
+      "priceFactor": "100.0005"
     }
   ],
   "meta": {
     "hasMoreRecords": true,
-    "requestDateTime": -99230968
+    "requestDateTime": true
   }
 }
