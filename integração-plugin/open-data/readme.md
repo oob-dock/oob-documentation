@@ -51,7 +51,7 @@ disso, o plugin pode criar suas próprias variáveis de ambiente a serem injetad
 
 ## Rotas do Camel
 
-As subseções seguintes contêm todos os `endpoints` que precisam ter rotas defnidas
+As subseções seguintes contêm todos os `endpoints` que precisam ter rotas definidas
 no camel e para os quais é necessário a criação de um ou mais plugins.
 
 Para o endpoint `/personal-accounts`, por exemplo, a rota deve estar
