@@ -37,23 +37,6 @@ additionalVars:
     value: "DEBUG"
 ```
 
-### APIS_VALIDATION_JSON-SCHEMA
-
-Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin
-com as specs definidas (afeta performance). Em produção é aconselhável desativar.
-
-**Formato:** `true` ou `false`
-
-**Default:** `false`
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: APIS_VALIDATION_JSON
-    value: "true"
-```
-
 ### APIS_VALIDATION_OPENAPI_ENABLED-REQUEST
 
 Habilita a validação dos objetos de request recebidos pela API com a especificação
