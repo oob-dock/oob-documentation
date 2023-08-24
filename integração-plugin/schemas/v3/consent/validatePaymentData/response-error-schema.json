@@ -1,0 +1,71 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreatePixConsent caso o consentimento não possa ser criado por uma restrição de negócio. Deve ser um responseError padrão se for um erro de sistema",
+    "oneOf": [
+        {
+            "$ref": "#/$defs/ResponseErrorValidatePaymentData"
+        },
+        {
+            "$ref": "../../common/response-error-schema.json"
+        }
+    ],
+    "additionalProperties": false,
+    "$defs": {
+        "ResponseErrorValidatePaymentData": {
+            "type": "object",
+            "description": "Listagem de erros ocorridos ao processar a solicitação de criação de pagamento do tipo PIX",
+            "required": [
+                "errors"
+            ],
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 5,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "title",
+                            "detail"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "maxLength": 21,
+                                "enum": [
+                                    "FALHA_INFRAESTRUTURA",
+                                    "CONTAS_ORIGEM_DESTINO_IGUAIS",
+                                    "CONTA_NAO_PERMITE_PAGAMENTO",
+                                    "DETALHE_PAGAMENTO_INVALIDO",
+                                    "PARAMETRO_NAO_INFORMADO",
+                                    "PARAMETRO_INVALIDO",
+                                    "QRCODE_INVALIDO",
+                                    "NAO_INFORMADO"
+                                ],
+                                "example": "FORMA_PAGAMENTO_INVALIDA",
+                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos"
+                            },
+                            "title": {
+                                "type": "string",
+                                "maxLength": 255,
+                                "pattern": "[\\w\\W\\s]*",
+                                "example": "Forma de pagamento inválida.",
+                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida.  \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  \n• PARAMETRO_INVALIDO: Parâmetro inválido.  \n• ERRO_IDEMPOTENCIA: Erro idempotência.  \n• NAO_INFORMADO: Não informado.    \n"
+                            },
+                            "detail": {
+                                "type": "string",
+                                "maxLength": 2048,
+                                "pattern": "[\\w\\W\\s]*",
+                                "example": "Forma de pagamento [Modalidade] não suportada.",
+                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento [Modalidade] não suportada.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida para a forma de pagamento selecionada.  \n• DETALHE_PGTO_INVALIDO: Parâmetro [nome_campo] não obedece às regras de negócio.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro [nome_campo] obrigatório não informado.  \n• PARAMETRO_INVALIDO: Parâmetro [nome_campo] não obedece as regras de formatação esperadas.  \n• ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data) diverge do conteúdo associado a esta chave de idempotência (x-idempotency-key).  \n• NAO_INFORMADO: Não reportado/identificado pela instituição detentora de conta.  \n"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}
