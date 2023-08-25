@@ -70,8 +70,12 @@ BEGIN
   	select
   	'POST',
     '/auth/auth/token',
-    to_char( dt::date, 'YYYY-MM-DD') as data_metrica,
     CASE
+	   WHEN dt::date = dt_end - interval '7 days' THEN  to_char(dt_end - interval '89 days', 'YYYY-MM-DD') || ' - ' || to_char( dt_end, 'YYYY-MM-DD')
+	   else to_char( dt::date, 'YYYY-MM-DD')
+    end  as data_metrica,
+    CASE
+	   WHEN dt::date = dt_end - interval '7 days' THEN 'Últimos três meses'
        WHEN extract(DOW FROM dt::date) = 0 THEN 'Domingo'
        WHEN extract(DOW FROM dt::date ) = 1 THEN 'Segunda-feira'
        WHEN extract(DOW FROM dt::date ) = 2 THEN 'Terça-feira'
@@ -81,7 +85,7 @@ BEGIN
        WHEN extract(DOW FROM dt::date ) = 6 THEN 'Sábado'
      end AS periodo,
      100 as percentual_disponibilidade
-     FROM generate_series(dt_end - interval '6 days', dt_end, interval '1 days') dt
+     FROM generate_series(dt_end - interval '7 days', dt_end, interval '1 days') dt
      order by dt::date desc
   );
 END;
