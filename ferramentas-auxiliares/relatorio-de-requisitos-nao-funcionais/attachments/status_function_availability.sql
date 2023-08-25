@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION status_function_availability (dt_end DATE) RETURNS TABLE (
+CREATE OR REPLACE FUNCTION public.status_function_availability (dt_end DATE) RETURNS TABLE (
   endpoint varchar(200),
   data_metrica TEXT,
   periodo TEXT,
