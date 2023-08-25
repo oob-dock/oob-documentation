@@ -10,6 +10,7 @@
     - [Conectores de discovery](#conectores-de-discovery)
       - [Conector de produto selecionável](#conector-de-produto-selecionável)
       - [Conector de produto não selecionável](#conector-de-produto-não-selecionável)
+    - [Conector de validação de dados de pagamento](#conector-de-validação-de-dados-de-pagamento)
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
   - [Grupos de permissões na criação do consentimento](#grupos-de-permissões-na-criação-do-consentimento)
@@ -239,6 +240,16 @@ Exemplo de response para um produto não selecionável:
 
 **IMPORTANTE**: O sistema legado do banco deve ser responsável pelo controle do
 status do recurso e pela validade do recurso (validUntil).
+
+### Conector de validação de dados de pagamento
+
+O conector de validação de pagamento é implementado em Apache Camel igual aos
+demais conectores de integração e tem função de realizar algumas validações no dados
+de pagamento, como por exemplo:
+
+- Validar dados do DICT
+- Validar QRCODE (QRND/QRES)
+- Validar dados de conta
 
 ### Tratamentos adicionais
 

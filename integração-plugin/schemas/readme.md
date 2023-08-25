@@ -48,6 +48,12 @@ Onde:
 
 ## Changelog
 
+### 2023-08-25 - v3.2.0
+
+- Consent
+  - Incluisão da rota Validação de pagamento
+    - validatePaymentData: Validação de pagamento
+
 ### 2023-07-28 - v3.1.0
 
 - Consent
