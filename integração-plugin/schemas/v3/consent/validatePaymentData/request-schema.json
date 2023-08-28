@@ -69,7 +69,7 @@
                     "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
                 },
                 "externalId": {
-                    "$ref": "../../common/common-consent-schema.json#/$defs/ExternalId"
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/ExternalId"
                 },
                 "validationStage": {
                     "$ref": "#/$defs/EnumValidationStage"
