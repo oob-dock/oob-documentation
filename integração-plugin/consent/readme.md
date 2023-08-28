@@ -251,6 +251,9 @@ de pagamento, como por exemplo:
 - Validar QRCODE (QRND/QRES)
 - Validar dados de conta
 
+A rota camel escuta chamadas realizadas em `direct:validatePaymentData` e um exemplo
+de [request](../schemas/v3/consent/validatePaymentData/request-example.json).
+
 ### Tratamentos adicionais
 
 #### Filtro de contas

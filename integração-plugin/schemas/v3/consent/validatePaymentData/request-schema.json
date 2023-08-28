@@ -53,23 +53,38 @@
                         }
                     ],
                     "endToEndId": {
-                        "$ref": "#/$defs/EndToEndIdWithoutRestriction"
+                        "$ref": "../../payment/common/common-schema.json#/$defs/EndToEndIdWithoutRestriction"
                     },
                     "remittanceInformation": {
-                        "$ref": "#/$defs/RemittanceInformation"
+                        "$ref": "../../payment/common/common-schema.json#/$defs/RemittanceInformation"
                     },
                     "cnpjInitiator": {
-                        "$ref": "#/$defs/CnpjInitiator"
+                        "$ref": "../../payment/common/common-schema.json#/$defs/CnpjInitiator"
                     },
                     "transactionIdentification": {
-                        "$ref": "#/$defs/TransactionIdentification"
+                        "$ref": "../../payment/common/common-schema.json#/$defs/TransactionIdentification"
                     }
                 },
                 "debtorAccount": {
                     "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
+                },
+                "externalId": {
+                    "$ref": "../../common/common-consent-schema.json#/$defs/ExternalId"
+                },
+                "validationStage": {
+                    "$ref": "#/$defs/EnumValidationStage"
                 }
             },
             "additionalProperties": false
+        },
+        "EnumValidationStage": {
+            "type": "string",
+            "enum": [
+              "POST_CONSENT",
+              "POST_PAYMENT"
+            ],
+            "example": "POST_CONSENT",
+            "description": "Momento referente a chamada da validação de pagamento\nSegue descrição de cada valor do ENUM.\n\n- POST_CONSENT - Validação chamada no momento do post consent\n- POST_PAYMENT - Validação chamada no momento do post payment\n"
         }
     }
 }

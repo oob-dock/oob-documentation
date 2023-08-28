@@ -31,36 +31,28 @@
                         ],
                         "properties": {
                             "code": {
-                                "type": "string",
-                                "maxLength": 21,
-                                "enum": [
-                                    "SALDO_INSUFICIENTE",
-                                    "VALOR_ACIMA_LIMITE",
-                                    "VALOR_INVALIDO",
-                                    "COBRANCA_INVALIDA",
-                                    "CONSENTIMENTO_INVALIDO",
-                                    "PAGAMENTO_DIVERGENTE_CONSENTIMENTO",
-                                    "PAGAMENTO_RECUSADO_DETENTORA",
-                                    "DETALHE_PAGAMENTO_INVALIDO",
-                                    "NAO_INFORMADO",
-                                    "PAGAMENTO_RECUSADO_SPI"
-                                ],
-                                "example": "FORMA_PAGAMENTO_INVALIDA",
-                                "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos"
+                                "oneOf": [
+                                    {
+                                        "$ref": "#/$defs/CodeConsentStage"
+                                    },
+                                    {
+                                        "$ref": "#/$defs/CodePaymentStage"
+                                    }
+                                ]
                             },
                             "title": {
                                 "type": "string",
                                 "maxLength": 255,
                                 "pattern": "[\\w\\W\\s]*",
-                                "example": "Forma de pagamento inválida.",
-                                "description": "Título específico do erro reportado, de acordo com o código enviado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento inválida.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida.  \n• DETALHE_PGTO_INVALIDO: Detalhe do pagamento inválido.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  \n• PARAMETRO_INVALIDO: Parâmetro inválido.  \n• ERRO_IDEMPOTENCIA: Erro idempotência.  \n• NAO_INFORMADO: Não informado.    \n"
+                                "example": "Cobrança inválida.",
+                                "description": "Título específico do erro reportado, de acordo com o código enviado (Os valores permitidos dependem do validationStage como indicado nos dois enums de code CodeConsentStage e CodePaymentStage):  \n• COBRANCA_INVALIDA: Cobrança inválida.  \n• DETALHE_PAGAMENTO_INVALIDO: Detalhe de pagamento inválido.  \n• NAO_INFORMADO: Não informado.  \n• PAGAMENTO_RECUSADO_DETENTORA: Pagamento recusado detentora.  \n• PAGAMENTO_RECUSADO_SPI: Pagamento recusado SPI.  \n• SALDO_INSUFICIENTE: Saldo insuficiente.  \n• VALOR_ACIMA_LIMITE: Valor acima do limite.\n• VALOR_INVALIDO: Valor inválido.\n• FALHA_INFRAESTRUTURA: Falha infraestrutura.\n• CONTA_NAO_PERMITE_PAGAMENTO: Conta não permite pagamento.\n• QRCODE_INVALIDO: QR Code inválido.\n"
                             },
                             "detail": {
                                 "type": "string",
                                 "maxLength": 2048,
                                 "pattern": "[\\w\\W\\s]*",
                                 "example": "Forma de pagamento [Modalidade] não suportada.",
-                                "description": "Descrição específica do erro de acordo com o código reportado:  \n• FORMA_PAGAMENTO_INVALIDA: Forma de pagamento [Modalidade] não suportada.  \n• DATA_PAGAMENTO_INVALIDA: Data de pagamento inválida para a forma de pagamento selecionada.  \n• DETALHE_PGTO_INVALIDO: Parâmetro [nome_campo] não obedece às regras de negócio.  \n• PARAMETRO_NAO_INFORMADO: Parâmetro [nome_campo] obrigatório não informado.  \n• PARAMETRO_INVALIDO: Parâmetro [nome_campo] não obedece as regras de formatação esperadas.  \n• ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data) diverge do conteúdo associado a esta chave de idempotência (x-idempotency-key).  \n• NAO_INFORMADO: Não reportado/identificado pela instituição detentora de conta.  \n"
+                                "description": "Descrição específica do erro de acordo com o código reportado (Os valores permitidos dependem do validationStage como indicado nos dois enums de code CodeConsentStage e CodePaymentStage):  \n• COBRANCA_INVALIDA – Validação de expiração, validação de vencimento, Status Válido.\n• DETALHE_PAGAMENTO_INVALIDO: Parâmetro [nome_campo] não obedece às regras de negócio.\n• NAO_INFORMADO: Não informada pela detentora de conta.\n• PAGAMENTO_RECUSADO_DETENTORA: [descrição do motivo de recusa].\n• PAGAMENTO_RECUSADO_SPI: [código de erro conforme tabela de domínios reason PACS.002].\n• SALDO_INSUFICIENTE: A conta selecionada não possui saldo suficiente para realizar o pagamento.\n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido.\n• VALOR_INVALIDO: O valor enviado não é válido para o QR Code informado.\n• FALHA_INFRAESTRUTURA: [Descrição de qual falha na infraestrutura inviabilizou o processamento].\n• CONTA_NAO_PERMITE_PAGAMENTO: [Descrição do motivo que a conta não permite pagamento].\n• QRCODE_INVALIDO: [Descrição do motivo que o qr code é inválido].\n"
                             }
                         },
                         "additionalProperties": false
@@ -68,6 +60,37 @@
                 }
             },
             "additionalProperties": false
+        },
+        "CodePaymentStage": {
+            "type": "string",
+            "maxLength": 30,
+            "enum": [
+                "COBRANCA_INVALIDA",
+                "DETALHE_PAGAMENTO_INVALIDO",
+                "NAO_INFORMADO",
+                "PAGAMENTO_RECUSADO_DETENTORA",
+                "PAGAMENTO_RECUSADO_SPI",
+                "SALDO_INSUFICIENTE",
+                "VALOR_ACIMA_LIMITE",
+                "VALOR_INVALIDO"
+            ],
+            "example": "COBRANCA_INVALIDA",
+            "description": "Códigos de erros previstos na validação de pagamento durante post de pagamento"
+        },
+        "CodeConsentStage": {
+            "type": "string",
+            "maxLength": 30,
+            "enum": [
+                "VALOR_INVALIDO",
+                "NAO_INFORMADO",
+                "FALHA_INFRAESTRUTURA",
+                "CONTA_NAO_PERMITE_PAGAMENTO",
+                "SALDO_INSUFICIENTE",
+                "VALOR_ACIMA_LIMITE",
+                "QRCODE_INVALIDO"
+            ],
+            "example": "VALOR_INVALIDO",
+            "description": "Códigos de erros previstos na validação de pagamento durante post de consentimento"
         }
     }
 }
