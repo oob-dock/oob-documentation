@@ -237,6 +237,18 @@ Para caso de adição de `mtls-` nas URLs de endpoint do AS utilizar os valores
 `find`: "^(https://)(.*)$" e `replace`: "https://mtls-$2". Note que as URLs
 devem ser HTTPS.
 
+#### directory_webhook_guid
+
+GUID gerado randomicamente a ser utilizado para registro de webhook no diretório
+do Open Finance.
+
+Ex: `13032100-c4ae-4aca-9b73-79366f0519a5`
+
+O registro deve ser realizado no diretório após a atualização do serviço com o
+seguinte endereço:
+
+>https://[\<public_fqdn\>](../terraform/readme.md#public_fqdn)/[\<authBasePath\>](readme.md#authbasepath)/webhook/<directory_webhook_guid>
+
 #### application/encryption/key
 
 Valor da chave de encriptação que será utilizada para  
@@ -452,11 +464,11 @@ do `<IDENTIFICADOR>`.
 A mescla permite a instituição receber o identificador através da `query string`,
 `fragment` ou `url`, como exibido na tabela abaixo:
 
-| Formato      | URL Exemplo                                                         |
-| ------------ | ------------------------------------------------------------------- |
-| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>`              |
-| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`                     |
-| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`                     |
+| Formato      | URL Exemplo                                            |
+| ------------ | -------------------------------------------------------|
+| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>` |
+| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
+| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
 
 É recomendado o uso de fragment sempre que possível, dado que ele também remove
 o identificador do histórico de navegação.
