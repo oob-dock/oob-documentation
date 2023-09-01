@@ -322,6 +322,29 @@ utilizado.
     pubSubId: "oof-pub-sub"
 ```
 
+Este módulo também aplica (via Helm) um componente do tipo
+[cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
+utilizado para fazer a sincronização das chaves públicas de assinatura periodicamente.
+
+Dado este cenário, a instalação do Dapr bem como aplicação do componente
+de *binding* são requisitos necessários para o correto funcionamento deste
+módulo.
+
+Arquivo template do helm daprcron.yaml:
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: scheduler-jwks-sync
+spec:
+  type: bindings.cron
+  version: v1
+  metadata:
+  - name: schedule
+    value: "@every 30m"
+```
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
