@@ -30,7 +30,6 @@
       - [internal\_fqdn](#internal_fqdn)
       - [supported\_features](#supported_features)
       - [brand\_id](#brand_id)
-      - [report\_pcm\_enabled](#report_pcm_enabled)
       - [x\_forwarded\_for\_header\_name](#x_forwarded_for_header_name)
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
@@ -219,15 +218,6 @@ Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-ba
 #### brand_id
 
 Vide a [definição](../shared-definitions.md#brand-id)
-
-#### report_pcm_enabled
-
-Define se as rotas do Kong devem ou não permitir a instalação do plugin que
-gera eventos de chamadas de API a serem reportadas à Plataforma de Coleta de
-Métricas (PCM).
-
-**Default:** `true`
-**Valores possíveis:** `true` ou `false`
 
 #### x_forwarded_for_header_name
 
