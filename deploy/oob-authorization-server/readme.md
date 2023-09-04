@@ -239,10 +239,10 @@ devem ser HTTPS.
 
 #### application/encryption/key
 
-Valor da chave de encriptação que será utilizada para  
+Valor da chave de encriptação que será utilizada para
 criptografar dados sensíveis antes de persisti-los nas tabelas do banco de dados
 do Authorization Server. Recomenda-se que a chave possua 256 bits e que o formato
-do valor seja em hexadecimal.  
+do valor seja em hexadecimal.
 
 Ex: `703273357538782F413F4428472B4B6250655368566D59713374367739792442`
 
@@ -299,6 +299,50 @@ fazendo uma restrição de segurança aos serviços Open Banking suportados nas 
 
 ```yaml
 features: "core,payments"
+```
+
+### dapr
+
+Configurações relacionadas ao [Dapr](../shared-definitions.md#Dapr).
+
+* enabled: Habilita o Dapr na aplicação para realizar a produção de
+eventos.
+Possíveis valores: `true` ou `false`. **Default:** `true`.
+* pubSubId: Identificador do componente de pub/sub do Dapr a ser
+utilizado.
+* appId: O ID exclusivo do aplicativo. Usado para descoberta de serviço,
+  encapsulamento de estado e ID do consumidor de pub/sub.
+
+**Exemplo:**
+
+```yaml
+  dapr:
+    enabled: "true"
+    appId: oob-authorization-server
+    pubSubId: "oof-pub-sub"
+```
+
+Este módulo também aplica (via Helm) um componente do tipo
+[cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
+utilizado para fazer a sincronização das chaves públicas de assinatura periodicamente.
+
+Dado este cenário, a instalação do Dapr bem como aplicação do componente
+de *binding* são requisitos necessários para o correto funcionamento deste
+módulo.
+
+Arquivo template do helm daprcron.yaml:
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: scheduler-jwks-sync
+spec:
+  type: bindings.cron
+  version: v1
+  metadata:
+  - name: schedule
+    value: "@every 30m"
 ```
 
 ## additionalVars
