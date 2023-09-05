@@ -2,18 +2,18 @@
 
 Esse documento apresenta as **Rotas do Camel** e **Configurações Suportadas** para
 o serviço de open-data, o qual equivale à junção das seguintes API do
-Open Banking Brasil:
+Open Finance Brasil:
 
 &nbsp;
 
-- [Canais de atendimento](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/33686119/Informa+es+T+cnicas+-+Canais+de+Atendimentos+-+v1.0.2)
-- [Produtos e Serviços](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/1736880/Informa+es+T+cnicas+-+Produtos+e+Servi+os+-+v1.0.2)
-- [Títulos de Capitalização](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/46432740/Informa+es+T+cnicas+-+T+tulos+de+Capitaliza+o+-+v1.0.0-rc1.0)
-- [Investimentos](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/47546407/Informa+es+T+cnicas+-+Investimentos+-+v1.0.0-rc1.0)
-- [Câmbio](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/48005281/Informa+es+T+cnicas+-+C+mbio+-+v1.0.0-rc1.0)
-- [Credenciamento](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/48005288/Informa+es+T+cnicas+-+Credenciamento+-+v1.0.0-rc1.0)
-- [Previdência](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/47906992/Informa+es+T+cnicas+-+Previd+ncia+-+v1.0.0-rc1.0)
-- [Seguros](https://openbankingbrasil.atlassian.net/wiki/spaces/OB/pages/48038088/Informa+es+T+cnicas+-+Seguros+-+v1.0.0-rc1.0)
+- [Canais de atendimento](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368301/API+-+Canais+de+Atendimentos)
+- [Produtos e Serviços](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17367858/API+-+Produtos+e+Servi+os)
+- [Títulos de Capitalização](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368637/API+-+T+tulos+de+Capitaliza+o)
+- [Investimentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368743/API+-+Investimentos)
+- [Câmbio](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368866/API+-+C+mbio)
+- [Credenciamento](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368974/API+-+Credenciamento)
+- [Previdência](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17369082/API+-+Previd+ncia)
+- [Seguros](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17369190/API+-+Seguros)
 
 &nbsp;
 
@@ -36,22 +36,21 @@ A tabela abaixo contém uma lista das variáveis suportadas atualmente.
 | Variável                                 | Objetivo                                                                                                                        | Valor Padrão |
 | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------ |
 | camel.main.routes-include-pattern        | Indica os locais onde o Camel deve procurar por rotas                                                                      |            |
-| apis.validation.json-schema.enabled      | Habilita a validação dos objetos de request/response envidados/recebidos pelo plugin com as specs definidas (afeta performance) | false        |
-| apis.validation.openapi.enabled-request  | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Banking Brasil                       | true         |
-| apis.validation.openapi.enabled-response | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Banking Brasil (afeta performance) | false        |
+| apis.validation.openapi.enabled-request  | Habilita a validação dos objetos de request recebidos pela API com a especificação do Open Finance Brasil                       | true         |
+| apis.validation.openapi.enabled-response | Habilita a validação dos objetos de response devolvidos pela API com a especificação do Open Finance Brasil (afeta performance) | false        |
 
 &nbsp;
 
-**Além das variáveis acima apresentada, dependendo do(s) componente(s) do quarkus
-camel que o plugin venha a utilizar, poderão existir outras de acordo com o que
-estiver específicado na própria documentação do componente sendo utilizado. Além
-disso, o plugin pode criar suas próprias variáveis de ambiente a serem injetadas.
+**Importante**: Além das variáveis acima apresentada, dependendo do(s) componente(s)
+do quarkus camel que o plugin venha a utilizar, poderão existir outras de acordo
+com o que estiver específicado na própria documentação do componente sendo utilizado.
+Além disso, o plugin pode criar suas próprias variáveis de ambiente a serem injetadas.
 
 &nbsp;
 
 ## Rotas do Camel
 
-As subseções seguintes contêm todos os `endpoints` que precisam ter rotas defnidas
+As subseções seguintes contêm todos os `endpoints` que precisam ter rotas definidas
 no camel e para os quais é necessário a criação de um ou mais plugins.
 
 Para o endpoint `/personal-accounts`, por exemplo, a rota deve estar
@@ -60,6 +59,14 @@ definida no plugin como:
 ```xml
 <from uri="direct:getPersonalAccounts"/>
 ```
+
+As respostas enviadas por cada um destas rotas deve estar no formato especificado
+no portal do [Open Finance Brasil](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17367790/Dados+Abertos)
+para a API correspondente a rota.
+
+**Importante**: O serviço de open-data é responsável pela paginação e cacheamento
+do retorno, assim, os campos *meta* e *links* podem ser omitidos.
+Caso estes sejam enviados, serão ignorados pelo serviço.
 
 ## Rotas Padrão
 
