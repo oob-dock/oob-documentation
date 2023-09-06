@@ -321,6 +321,7 @@ utilizado.
     appId: oob-authorization-server
     pubSubId: "oof-pub-sub"
 ```
+### scheduler
 
 Este módulo também aplica (via Helm) um componente do tipo
 [cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
@@ -330,7 +331,7 @@ Dado este cenário, a instalação do Dapr bem como aplicação do componente
 de *binding* são requisitos necessários para o correto funcionamento deste
 módulo.
 
-Configurações do scheduler:
+Configurações:
 
 * jwks_minutes_interval: Intervalo de atualização das chaves públicas
   de assinatura na base de dados.
@@ -341,7 +342,6 @@ Configurações do scheduler:
  scheduler:
     jwks_minutes_interval: "30"
 ```
-
 
 ## additionalVars
 
