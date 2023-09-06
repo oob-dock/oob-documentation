@@ -321,6 +321,7 @@ utilizado.
     appId: oob-authorization-server
     pubSubId: "oof-pub-sub"
 ```
+### scheduler
 
 Este módulo também aplica (via Helm) um componente do tipo
 [cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
@@ -330,19 +331,16 @@ Dado este cenário, a instalação do Dapr bem como aplicação do componente
 de *binding* são requisitos necessários para o correto funcionamento deste
 módulo.
 
-Arquivo template do helm daprcron.yaml:
+Configurações:
+
+* jwks_minutes_interval: Intervalo de atualização das chaves públicas
+  de assinatura na base de dados.
+
+**Exemplo:**
 
 ```yaml
-apiVersion: dapr.io/v1alpha1
-kind: Component
-metadata:
-  name: scheduler-jwks-sync
-spec:
-  type: bindings.cron
-  version: v1
-  metadata:
-  - name: schedule
-    value: "@every 30m"
+ scheduler:
+    jwks_minutes_interval: "30"
 ```
 
 ## additionalVars
