@@ -328,6 +328,23 @@ additionalVars:
 
 As configurações que podem ser definidas neste formato estão listadas abaixo:
 
+### DIRECTORY_KEYSTORE_BASE
+
+Endereço base da API de chaves públicas do diretório central.
+O cadastro deve ser feito sempre com o endereço base da API de
+sandbox para o ambiente de homologação e a oficial para o ambiente de produção.
+
+Sandbox: `https://keystore.sandbox.directory.openbankingbrasil.org.br`
+Produção: `https://keystore.directory.openbankingbrasil.org.br`
+
+O valor default está configurado para o ambiente de produção.
+
+```yaml
+additionalVars:
+  - name: DIRECTORY_KEYSTORE_BASE
+    value: "https://keystore.sandbox.directory.openbankingbrasil.org.br"
+```
+
 ### AS_LOG_REQUESTS
 
 Define se a aplicação deve logar os requests recebidos. É recomendável ativar
