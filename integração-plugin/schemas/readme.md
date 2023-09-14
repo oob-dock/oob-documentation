@@ -48,7 +48,7 @@ Onde:
 
 ## Changelog
 
-### 2023-08-14 - v3.2.0
+### 2023-09-14 - v3.3.0
 
 - Inclusão dos schemas de investments versão 1
   - bank-fixed-incomes
@@ -56,6 +56,12 @@ Onde:
   - variable-incomes
   - funds
   - treasure-titles
+
+### 2023-08-25 - v3.2.0
+
+- Consent
+  - Incluisão da rota Validação de pagamento
+    - validatePaymentData: Validação de pagamento
 
 ### 2023-07-28 - v3.1.0
 

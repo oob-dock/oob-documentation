@@ -9,6 +9,7 @@
       },
       "name": "FUNDO DE INVESTIMENTO EM COTAS DE FUNDOS DE INVESTIMENTO",
       "cnpjNumber": "64108803000191",
+      "isinCode": "BRAAAAAAA000",
       "admin": {
         "name": "ADM OPEN FINANCE DTVM S.A.",
         "cnpjNumber": "14511732000150"
@@ -18,6 +19,17 @@
         "cnpjNumber": "16332711000101"
       },
       "anbimaCategory": "MULTIMERCADO",
+      "fees": {
+        "maxAdminFee": "0.020000",
+        "entryFee": "0.010000",
+        "performanceFee": {
+          "method": "PASSIVO",
+          "benchmark": "CDI",
+          "benchmarkAdditionalInfo": "string",
+          "amount": "0.050000"
+        },
+        "exitFee": "0.030000"
+      },
       "generalConditions": {
         "minimumAmount": {
           "value": "100000.12",
@@ -36,19 +48,7 @@
         },
         "fundQuotaType": "COTA_ABERTURA"
       },
-      "taxation": "CURTO_PRAZO",
-      "fees": {
-        "maxAdminFee": "0.020000",
-        "entryFee": "0.010000",
-        "exitFee": "0.030000",
-        "performanceFee": {
-          "benchmarkAdditionalInfo": "dolor consectetur in cillum",
-          "amount": "0.050000",
-          "method": "PASSIVO",
-          "benchmark": "CDI"
-        }
-      },
-      "isinCode": "BRAAAAAAA000"
+      "taxation": "CURTO_PRAZO"
     }
   ]
 }
