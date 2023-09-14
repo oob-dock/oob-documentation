@@ -1,0 +1,42 @@
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "investmentId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "anbimaClass": "v(M4bCax",
+      "anbimaCategory": "RENDA_FIXA",
+      "anbimaSubclass": "L"
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "investmentId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "anbimaSubclass": ">Co\\c-to",
+      "anbimaClass": "V01cc",
+      "anbimaCategory": "RENDA_FIXA"
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

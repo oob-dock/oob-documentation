@@ -48,6 +48,15 @@ Onde:
 
 ## Changelog
 
+### 2023-09-14 - v3.3.0
+
+- Inclusão dos schemas de investments versão 1
+  - bank-fixed-incomes
+  - credit-fixed-incomes
+  - variable-incomes
+  - funds
+  - treasure-titles
+
 ### 2023-08-25 - v3.2.0
 
 - Consent

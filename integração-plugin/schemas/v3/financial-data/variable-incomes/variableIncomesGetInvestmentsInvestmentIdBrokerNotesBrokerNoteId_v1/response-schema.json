@@ -1,0 +1,333 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "brokerNoteNumber",
+        "grossValue",
+        "brokerageFee",
+        "clearingSettlementFee",
+        "clearingRegistrationFee",
+        "stockExchangeAssetTradeNoticeFee",
+        "stockExchangeFee",
+        "clearingCustodyFee",
+        "taxes",
+        "incomeTax",
+        "netValue"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "brokerNoteNumber": {
+          "type": "string",
+          "description": "Identificador da nota de negociação.",
+          "maxLength": 16,
+          "pattern": "^\\d{1,16}$",
+          "example": "1854009930314350"
+        },
+        "grossValue": {
+          "type": "object",
+          "description": "o valor da nota de negociação é o somatório das operações realizadas. Total de compra e venda do dia.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "5000.0024",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "brokerageFee": {
+          "type": "object",
+          "description": "a taxa de corretagem incide sobre o valor bruto da nota de negociação, e é livremente pactuada entre o investidor e o seu intermediário. \nPode ser cobrada como um valor fixo por operação, ou um como um percentual sobre o valor negociado, ou ainda de forma mista, conforme guia CVM do investidor.\n",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "clearingSettlementFee": {
+          "type": "object",
+          "description": "Valor cobrado para liquidação na custódia.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "clearingRegistrationFee": {
+          "type": "object",
+          "description": "Valor cobrado para registro na custódia.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "stockExchangeAssetTradeNoticeFee": {
+          "type": "object",
+          "description": "Valor cobrada pela bolsa pelo aviso de negociação de ativo.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "stockExchangeFee": {
+          "type": "object",
+          "description": "Valor cobrado pela bolsa para remunerar os serviços de registro prestados.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "clearingCustodyFee": {
+          "type": "object",
+          "description": "Taxa cobrada pelas IF para custódia.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "taxes": {
+          "type": "object",
+          "description": "Impostos cobrados na operação, inclusive imposto de renda day-trade, exceto imposto de renda retido na fonte.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "incomeTax": {
+          "type": "object",
+          "description": "Imposto de renda retido na fonte.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "13.8751",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "netValue": {
+          "type": "object",
+          "description": "Valor líquido da nota de negociação após despesas com taxa de corretagem, taxa de liquidação, taxa de registro, taxa A.N.A, emolumentos, taxa de custódia, impostos e IRRF.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "4889.0012",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente a API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

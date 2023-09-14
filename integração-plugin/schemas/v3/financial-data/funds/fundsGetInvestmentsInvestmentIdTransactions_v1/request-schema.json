@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "required": [
+    "requestMeta",
+    "investmentId",
+    "consent"
+  ],
+  "properties": {
+    "requestMeta": {
+      "$ref": "../../../common/common-schema.json#/$defs/RequestMeta"
+    },
+    "investmentId": {
+      "$ref": "../../../common/common-schema.json#/$defs/LegacyId"
+    },
+    "consent": {
+      "$ref": "../../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
+    },
+    "page": {
+      "$ref": "../../../common/common-schema.json#/$defs/page"
+    },
+    "pageSize": {
+      "$ref": "../../../common/common-schema.json#/$defs/pageSize"
+    },
+    "pagination-key": {
+      "$ref": "../../../common/common-schema.json#/$defs/pagination-key"
+    },
+    "fromTransactionConversionDate": {
+      "$ref": "../../../common/common-schema.json#/$defs/fromTransactionDate"
+    },
+    "toTransactionConversionDate": {
+      "$ref": "../../../common/common-schema.json#/$defs/toTransactionDate"
+    }
+  },
+  "additionalProperties": false
+}
