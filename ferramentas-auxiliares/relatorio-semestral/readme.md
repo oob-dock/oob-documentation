@@ -73,7 +73,7 @@ Exemplo para obtenção dos serviços da fase 3 - Iniciação de Pagamento:
 Exemplo para obtenção dos serviços da fase 2 - Dados Cadastrais:
 
 ```sql
-@set endpoints_services = array ['/consents/v1/consents', '/consents/v1/consents/{consentId}','/resources/v1/resources','/customers/v1/business/financial-relations','/customers/v1/business/identifications','/customers/v1/business/qualifications','/customers/v1/personal/financial-relations','/customers/v1/personal/identifications','/customers/v1/personal/qualifications']
+@set endpoints_services = array ['/consents/v2/consents', '/consents/v2/consents/{consentId}','/resources/v2/resources','/customers/v2/business/financial-relations','/customers/v2/business/identifications','/customers/v2/business/qualifications','/customers/v2/personal/financial-relations','/customers/v2/personal/identifications','/customers/v2/personal/qualifications']
 ```
 
 Logo abaixo são apresentadas tabelas com todos os endpoints divididos em subgrupos
