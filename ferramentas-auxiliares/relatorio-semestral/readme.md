@@ -14,7 +14,7 @@
 
 A Opus está fornecendo alguns scripts SQL que ajudarão os clientes na hora da coleta
 de dados para a elaboração do relatório semestral exigido pelo
-Open Banking Brasil **OBB**.
+Open Finance Brasil **OFB**.
 
 As informações que poderão ser obtidas com eles são:
 
@@ -22,7 +22,7 @@ As informações que poderão ser obtidas com eles são:
 - a disponibilidade média no período
 
 **OBS:** fica a cargo de nossos clientes
-rodar os scripts e formatar as informações da forma e no período exigido pelo OBB.
+rodar os scripts e formatar as informações da forma e no período exigido pelo OFB.
 
 ## Parâmetros de entrada
 
@@ -67,7 +67,7 @@ pela entidade parceira.
 Exemplo para obtenção dos serviços da fase 3 - Iniciação de Pagamento:
 
 ```sql
-@set endpoints_services = array ['/payments/v1/consents', '/payments/v1/consents/{consentId}', '/payments/v1/pix/payments', '/payments/v1/pix/payments/{paymentId}']
+@set endpoints_services = array ['/payments/v2/consents','/payments/v2/consents/{consentId}','/payments/v2/pix/payments','/payments/v2/pix/payments/{paymentId}','/payments/v3/consents','/payments/v3/consents/{consentId}','/payments/v3/pix/payments','/payments/v3/pix/payments/{paymentId}']
 ```
 
 Exemplo para obtenção dos serviços da fase 2 - Dados Cadastrais:
@@ -82,61 +82,67 @@ a fim de facilitar a listagem das URLs dos serviços disponibilizados.
 Endpoints - Fase 3 Iniciação de Pagamento
 
 | Endpoint                                | Categoria                  |
-| --------------------------------------- | -------------------------- |
-| /payments/v1/consents                   | CONSENTIMENTO DE PAGAMENTO |
-| /payments/v1/consents/\{consentId\}     | CONSENTIMENTO DE PAGAMENTO |
-| /payments/v1/pix/payments               | PAGAMENTO PIX              |
-| /payments/v1/pix/payments/\{paymentId\} | PAGAMENTO PIX              |
+| --------------------------------------- | ---------------------------|
+| /payments/v2/consents                   | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v2/consents/\{consentId\}     | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v3/consents                   | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v3/consents/\{consentId\}     | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v2/pix/payments               | PAGAMENTO PIX              |
+| /payments/v2/pix/payments/\{paymentId\} | PAGAMENTO PIX              |
+| /payments/v3/pix/payments               | PAGAMENTO PIX              |
+| /payments/v3/pix/payments/\{paymentId\} | PAGAMENTO PIX              |
 
 Endpoints - Fase 2 Consentimento e Dados Cadastrais:
 
 | Endpoint                                   | Categoria                         |
 | ------------------------------------------ | --------------------------------- |
-| /consents/v1/consents                      | CONSENTIMENTO DE COMPARTILHAMENTO |
-| /consents/v1/consents/\{consentId\}        | CONSENTIMENTO DE COMPARTILHAMENTO |
-| /customers/v1/personal/identifications     | DADOS CADASTRAIS                  |
-| /customers/v1/business/identifications     | DADOS CADASTRAIS                  |
-| /customers/v1/personal/qualifications      | DADOS CADASTRAIS                  |
-| /customers/v1/business/qualifications      | DADOS CADASTRAIS                  |
-| /customers/v1/personal/financial-relations | DADOS CADASTRAIS                  |
-| /customers/v1/business/financial-relations | DADOS CADASTRAIS                  |
-| /resources/v1/resources                    | RECURSOS                          |
+| /consents/v2/consents                      | CONSENTIMENTO DE COMPARTILHAMENTO |
+| /consents/v2/consents/\{consentId\}        | CONSENTIMENTO DE COMPARTILHAMENTO |
+| /customers/v2/personal/identifications     | DADOS CADASTRAIS                  |
+| /customers/v2/business/identifications     | DADOS CADASTRAIS                  |
+| /customers/v2/personal/qualifications      | DADOS CADASTRAIS                  |
+| /customers/v2/business/qualifications      | DADOS CADASTRAIS                  |
+| /customers/v2/personal/financial-relations | DADOS CADASTRAIS                  |
+| /customers/v2/business/financial-relations | DADOS CADASTRAIS                  |
+| /resources/v2/resources                    | RECURSOS                          |
 
 Endpoints - Fase 2 Dados Financeiros
 
 | Endpoint                                                                                 | Categoria            |
 | ---------------------------------------------------------------------------------------- | -------------------- |
-| /credit-cards-accounts/v1/accounts                                                       | CARTÕES DE CRÉDITO   |
-| /credit-cards-accounts/v1/accounts/\{creditCardAccountId\}                               | CARTÕES DE CRÉDITO   |
-| /credit-cards-accounts/v1/accounts/\{creditCardAccountId\}/limits                        | CARTÕES DE CRÉDITO   |
-| /credit-cards-accounts/v1/accounts/\{creditCardAccountId\}/transactions                  | CARTÕES DE CRÉDITO   |
-| /credit-cards-accounts/v1/accounts/\{creditCardAccountId\}/bills                         | CARTÕES DE CRÉDITO   |
-| /credit-cards-accounts/v1/accounts/\{creditCardAccountId\}/bills/\{billId\}/transactions | CARTÕES DE CRÉDITO   |
-| /accounts/v1/accounts                                                                    | CONTAS               |
-| /accounts/v1/accounts/\{accountId\}                                                      | CONTAS               |
-| /accounts/v1/accounts/\{accountId\}/balances                                             | CONTAS               |
-| /accounts/v1/accounts/\{accountId\}/transactions                                         | CONTAS               |
-| /accounts/v1/accounts/\{accountId\}/overdraft-limits                                     | CONTAS               |
-| /loans/v1/contracts                                                                      | EMPRÉSTIMOS          |
-| /loans/v1/contracts/\{contractId\}                                                       | EMPRÉSTIMOS          |
-| /loans/v1/contracts/\{contractId\}/warranties                                            | EMPRÉSTIMOS          |
-| /loans/v1/contracts/\{contractId\}/payments                                              | EMPRÉSTIMOS          |
-| /loans/v1/contracts/\{contractId\}/scheduled-instalments                                 | EMPRÉSTIMOS          |
-| /financings/v1/contracts                                                                 | FINANCIAMENTOS       |
-| /financings/v1/contracts/\{contractId\}                                                  | FINANCIAMENTOS       |
-| /financings/v1/contracts/\{contractId\}/warranties                                       | FINANCIAMENTOS       |
-| /financings/v1/contracts/\{contractId\}/payments                                         | FINANCIAMENTOS       |
-| /financings/v1/contracts/\{contractId\}/scheduled-instalments                            | FINANCIAMENTOS       |
-| /unarranged-accounts-overdraft/v1/contracts                                              | ADIANTAMENTOS        |
-| /unarranged-accounts-overdraft/v1/contracts/\{contractId\}                               | ADIANTAMENTOS        |
-| /unarranged-accounts-overdraft/v1/contracts/\{contractId\}/warranties                    | ADIANTAMENTOS        |
-| /unarranged-accounts-overdraft/v1/contracts/\{contractId\}/payments                      | ADIANTAMENTOS        |
-| /unarranged-accounts-overdraft/v1/contracts/\{contractId\}/scheduled-instalments         | ADIANTAMENTOS        |
-| /invoice-financings/v1/contracts                                                         | DIREITOS CREDITÓRIOS |
-| /invoice-financings/v1/contracts/\{contractId\}                                          | DIREITOS CREDITÓRIOS |
-| /invoice-financings/v1/contracts/\{contractId\}/warranties                               | DIREITOS CREDITÓRIOS |
-| /invoice-financings/v1/contracts/\{contractId\}/payments                                 | DIREITOS CREDITÓRIOS |
-| /invoice-financings/v1/contracts/\{contractId\}/scheduled-instalments                    | DIREITOS CREDITÓRIOS |
+| /credit-cards-accounts/v2/accounts                                                       | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v2/accounts/\{creditCardAccountId\}                               | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v2/accounts/\{creditCardAccountId\}/limits                        | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v2/accounts/\{creditCardAccountId\}/transactions                  | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v2/accounts/\{creditCardAccountId\}/bills                         | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v2/accounts/\{creditCardAccountId\}/bills/\{billId\}/transactions | CARTÕES DE CRÉDITO   |
+| /credit-cards-accounts/v2/accounts/\{creditCardAccountId\}/transactions-current          | CARTÕES DE CRÉDITO   |
+| /accounts/v2/accounts                                                                    | CONTAS               |
+| /accounts/v2/accounts/\{accountId\}                                                      | CONTAS               |
+| /accounts/v2/accounts/\{accountId\}/balances                                             | CONTAS               |
+| /accounts/v2/accounts/\{accountId\}/transactions                                         | CONTAS               |
+| /accounts/v2/accounts/\{accountId\}/transactions-current                                 | CONTAS               |
+| /accounts/v2/accounts/\{accountId\}/overdraft-limits                                     | CONTAS               |
+| /loans/v2/contracts                                                                      | EMPRÉSTIMOS          |
+| /loans/v2/contracts/\{contractId\}                                                       | EMPRÉSTIMOS          |
+| /loans/v2/contracts/\{contractId\}/warranties                                            | EMPRÉSTIMOS          |
+| /loans/v2/contracts/\{contractId\}/payments                                              | EMPRÉSTIMOS          |
+| /loans/v2/contracts/\{contractId\}/scheduled-instalments                                 | EMPRÉSTIMOS          |
+| /financings/v2/contracts                                                                 | FINANCIAMENTOS       |
+| /financings/v2/contracts/\{contractId\}                                                  | FINANCIAMENTOS       |
+| /financings/v2/contracts/\{contractId\}/warranties                                       | FINANCIAMENTOS       |
+| /financings/v2/contracts/\{contractId\}/payments                                         | FINANCIAMENTOS       |
+| /financings/v2/contracts/\{contractId\}/scheduled-instalments                            | FINANCIAMENTOS       |
+| /unarranged-accounts-overdraft/v2/contracts                                              | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v2/contracts/\{contractId\}                               | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v2/contracts/\{contractId\}/warranties                    | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v2/contracts/\{contractId\}/payments                      | ADIANTAMENTOS        |
+| /unarranged-accounts-overdraft/v2/contracts/\{contractId\}/scheduled-instalments         | ADIANTAMENTOS        |
+| /invoice-financings/v2/contracts                                                         | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v2/contracts/\{contractId\}                                          | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v2/contracts/\{contractId\}/warranties                               | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v2/contracts/\{contractId\}/payments                                 | DIREITOS CREDITÓRIOS |
+| /invoice-financings/v2/contracts/\{contractId\}/scheduled-instalments                    | DIREITOS CREDITÓRIOS |
 
 Endpoints - Fase 1 Dados Abertos
 
@@ -159,6 +165,34 @@ Endpoints - Fase 1 Dados Abertos
 | /channels/v1/phone-channels                                 | CANAIS DE ATENDIMENTO |
 | /channels/v1/banking-agents                                 | CANAIS DE ATENDIMENTO |
 | /channels/v1/shared-automated-teller-machines               | CANAIS DE ATENDIMENTO |
+
+Endpoints - Fase 4A Dados Abertos
+
+| Endpoint                                      | Categoria                |
+| --------------------------------------------- | ------------------------ |
+| /opendata-capitalization/v1/bonds             | TÍTULOS DE CAPITALIZAÇÃO |
+| /opendata-investments/v1/funds                | INVESTIMENTOS            |
+| /opendata-investments/v1/bank-fixed-incomes   | INVESTIMENTOS            |
+| /opendata-investments/v1/credit-fixed-incomes | INVESTIMENTOS            |
+| /opendata-investments/v1/variable-incomes     | INVESTIMENTOS            |
+| /opendata-investments/v1/treasure-titles      | INVESTIMENTOS            |
+| /opendata-exchange/v1/online-rates            | CÂMBIO                   |
+| /opendata-exchange/v1/vet-values              | CÂMBIO                   |
+| /opendata-acquiring-services/v1/personals     | CREDENCIAMENTO           |
+| /opendata-acquiring-services/v1/businesses    | CREDENCIAMENTO           |
+| /opendata-pension/v1/risk-coverages           | PREVIDÊNCIA              |
+| /opendata-pension/v1/survival-coverages       | PREVIDÊNCIA              |
+| /opendata-insurance/v1/personals              | SEGUROS                  |
+
+Endpoints - Fase 4B Investimentos
+
+| Endpoint                                                                 | Categoria           |
+| ------------------------------------------------------------------------ | ------------------- |
+| /bank-fixed-incomes/v1/investments                                       | RENDA FIXA BANCÁRIA |
+| /bank-fixed-incomes/v1/investments/\{investmentId\}                      | RENDA FIXA BANCÁRIA |
+| /bank-fixed-incomes/v1/investments/\{investmentId\}/balances             | RENDA FIXA BANCÁRIA |
+| /bank-fixed-incomes/v1/investments/\{investmentId\}/transactions         | RENDA FIXA BANCÁRIA |
+| /bank-fixed-incomes/v1/investments/\{investmentId\}/transactions-current | RENDA FIXA BANCÁRIA |
 
 ## Scripts - Chamadas de APIs
 
