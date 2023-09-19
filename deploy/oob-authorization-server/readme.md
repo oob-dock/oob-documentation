@@ -237,12 +237,24 @@ Para caso de adição de `mtls-` nas URLs de endpoint do AS utilizar os valores
 `find`: "^(https://)(.*)$" e `replace`: "https://mtls-$2". Note que as URLs
 devem ser HTTPS.
 
+#### directory_webhook_guid
+
+GUID gerado randomicamente a ser utilizado para registro de webhook no diretório
+do Open Finance.
+
+Ex: `13032100-c4ae-4aca-9b73-79366f0519a5`
+
+O registro deve ser realizado no diretório após a atualização do serviço com o
+seguinte endereço:
+
+>https://[\<public_fqdn\>](../terraform/readme.md#public_fqdn)/[\<authBasePath\>](readme.md#authbasepath)/webhook/<directory_webhook_guid>
+
 #### application/encryption/key
 
-Valor da chave de encriptação que será utilizada para  
+Valor da chave de encriptação que será utilizada para
 criptografar dados sensíveis antes de persisti-los nas tabelas do banco de dados
 do Authorization Server. Recomenda-se que a chave possua 256 bits e que o formato
-do valor seja em hexadecimal.  
+do valor seja em hexadecimal.
 
 Ex: `703273357538782F413F4428472B4B6250655368566D59713374367739792442`
 
@@ -301,6 +313,48 @@ fazendo uma restrição de segurança aos serviços Open Banking suportados nas 
 features: "core,payments"
 ```
 
+### dapr
+
+Configurações relacionadas ao [Dapr](../shared-definitions.md#Dapr).
+
+* enabled: Habilita o Dapr na aplicação para realizar a produção de
+eventos.
+Possíveis valores: `true` ou `false`. **Default:** `true`.
+* pubSubId: Identificador do componente de pub/sub do Dapr a ser
+utilizado.
+* appId: O ID exclusivo do aplicativo. Usado para descoberta de serviço,
+  encapsulamento de estado e ID do consumidor de pub/sub.
+
+**Exemplo:**
+
+```yaml
+  dapr:
+    enabled: "true"
+    appId: oob-authorization-server
+    pubSubId: "oof-pub-sub"
+```
+### scheduler
+
+Este módulo também aplica (via Helm) um componente do tipo
+[cron binding](https://docs.dapr.io/reference/components-reference/supported-bindings/cron/)
+utilizado para fazer a sincronização das chaves públicas de assinatura periodicamente.
+
+Dado este cenário, a instalação do Dapr bem como aplicação do componente
+de *binding* são requisitos necessários para o correto funcionamento deste
+módulo.
+
+Configurações:
+
+* jwks_minutes_interval: Intervalo de atualização das chaves públicas
+  de assinatura na base de dados.
+
+**Exemplo:**
+
+```yaml
+ scheduler:
+    jwks_minutes_interval: "30"
+```
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
@@ -315,6 +369,23 @@ additionalVars:
 ```
 
 As configurações que podem ser definidas neste formato estão listadas abaixo:
+
+### DIRECTORY_KEYSTORE_BASE
+
+Endereço base da API de chaves públicas do diretório central.
+O cadastro deve ser feito sempre com o endereço base da API de
+sandbox para o ambiente de homologação e a oficial para o ambiente de produção.
+
+Sandbox: `https://keystore.sandbox.directory.openbankingbrasil.org.br`
+Produção: `https://keystore.directory.openbankingbrasil.org.br`
+
+O valor default está configurado para o ambiente de produção.
+
+```yaml
+additionalVars:
+  - name: DIRECTORY_KEYSTORE_BASE
+    value: "https://keystore.sandbox.directory.openbankingbrasil.org.br"
+```
 
 ### AS_LOG_REQUESTS
 
@@ -452,11 +523,11 @@ do `<IDENTIFICADOR>`.
 A mescla permite a instituição receber o identificador através da `query string`,
 `fragment` ou `url`, como exibido na tabela abaixo:
 
-| Formato      | URL Exemplo                                                         |
-| ------------ | ------------------------------------------------------------------- |
-| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>`              |
-| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`                     |
-| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`                     |
+| Formato      | URL Exemplo                                            |
+| ------------ | -------------------------------------------------------|
+| Query string | `https://ev.instituicao.com.br?codigo=<IDENTIFICADOR>` |
+| Fragment     | `https://ev.instituicao.com.br#<IDENTIFICADOR>`        |
+| URL          | `https://ev.instituicao.com.br/<IDENTIFICADOR>`        |
 
 É recomendado o uso de fragment sempre que possível, dado que ele também remove
 o identificador do histórico de navegação.

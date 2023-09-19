@@ -119,15 +119,15 @@ uso de chaves, dificultando o uso da mesma por partes não autorizadas.
 ## Dapr
 
 O [Dapr](https://dapr.io/) é um *Runtime* de Aplicações Distribuídas que visa
-simplificar a conectividade entre microsserviços atráves de vários
+simplificar a conectividade entre microsserviços através de vários
 [blocos de construção](https://docs.dapr.io/concepts/building-blocks-concept/).
 
 O Opus Open Finance faz uso do seguinte bloco de construção do Dapr:
 
 * Publish and Subscribe: Utilizado para publicar e consumir eventos de chamadas
-de APIs que devem ser reportados para a PCM (Plataform de Coleta de Métricas) e
-para o envio de webhooks de pagamento.
+de APIs que devem ser reportados para a PCM (Plataforma de Coleta de Métricas),
+para o envio de webhooks de pagamento e para publicar eventos que permite
+acompanhar o comportamento geral da solução.
 
 * Virtual Actors: Utilizado para reprocessamento dos webhooks de pagamento que
 falharam na primeira tentativa de envio.
-
