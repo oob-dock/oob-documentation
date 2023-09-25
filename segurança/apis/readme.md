@@ -211,6 +211,7 @@
 | Operação | API         | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
 | -------- | ----------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
 | GET      | /v1/metrics | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/metrics | Não          |                  | Não        | Não              | Não  |     |
 
 ## Outages maintance
 
