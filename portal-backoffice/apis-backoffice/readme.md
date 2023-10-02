@@ -128,6 +128,13 @@ apenas com data.
 
 Responsável por notificar ao OOB a alteração de status de um pagamento.
 
+## Detalhamento de prorrogação do consentimento
+
+        GET /open-banking/oob-consents/v1/consents/{consentId}/extends
+
+Esta API é responsável por listar todas as prorrogações de um consentimento.
+A consulta é feita através do identificador interno em formato UUID.
+
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir
