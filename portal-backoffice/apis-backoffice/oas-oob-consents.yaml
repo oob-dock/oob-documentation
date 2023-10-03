@@ -310,6 +310,46 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         "204":
           description: Notification received successfully
+  /open-banking/oob-consents/v1/consents/{consentId}/extends:
+    get:
+      tags:
+      - Consents Opus Open Banking
+      description: Retrieve extended consent list
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentExtendsSchema'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -479,6 +519,17 @@ components:
         tppLogo:
           type: string
           example: "http://www.exemplo.com/logo.png"
+    ConsentExtends:
+      type: object
+      properties:
+        expirationDateTime:
+          format: date-time
+          type: string
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        requestDateTime:
+          format: date-time
+          type: string
     ConsentTypesEnum:
       enum:
       - DATA_SHARING
@@ -934,6 +985,22 @@ components:
           allOf:
           - $ref: '#/components/schemas/ConsentDetail'
           - description: Service execution response
+    ResponseConsentExtendsSchema:
+      type: object
+      properties:
+        data:
+          description: Service execution response
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentExtends'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - description: Meta records information
     ResponseConsentSummaryPaginationSchema:
       type: object
       properties:
