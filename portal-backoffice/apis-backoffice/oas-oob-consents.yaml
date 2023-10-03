@@ -325,6 +325,18 @@ paths:
         in: header
         schema:
           type: string
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
       responses:
         default:
           description: Default error response
