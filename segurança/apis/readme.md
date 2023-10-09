@@ -478,14 +478,16 @@
 
 **Cliente API:** TPP
 
-| Operação | API                 | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs                |
-| -------- | ------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | ------------------ |
-| POST     | /v1/consents        | Sim          | consents         | Não        | Não              | Sim  |                    |
-| GET      | /v1/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
-| DELETE   | /v1/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
-| POST     | /v2/consents        | Sim          | consents         | Não        | Não              | Sim  |                    |
-| DELETE   | /v2/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
-| GET      | /v2/consents/\{ID\} | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| Operação | API                         | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs                |
+| -------- | --------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | ------------------ |
+| POST     | /v1/consents                | Sim          | consents         | Não        | Não              | Sim  |                    |
+| GET      | /v1/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| DELETE   | /v1/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| POST     | /v2/consents                | Sim          | consents         | Não        | Não              | Sim  |                    |
+| DELETE   | /v2/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| GET      | /v2/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
+| POST     | /v2/consents/\{ID\}/extends | Sim          | openid           | Não        | Sim              | Sim  | [*1](#observações) |
+| GET      | /v2/consents/\{ID\}/extends | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 
 ### Resources
 
@@ -521,6 +523,7 @@
 | *PATCH   | /consents/v1/consents/\{ID\}     | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *GET     | /v1/tpps/payment-legacy-ids      | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 | POST     | /v1/payment-status-notification  | Sim          | oob_payments:write               | Não        | Não              | Não  |                    |
+| *GET     | /v1/consents/\{ID\}/extends      | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 
 ## Capitalization bonds catalog
 
