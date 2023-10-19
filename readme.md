@@ -1,5 +1,11 @@
 # Documentação Plataforma OPUS Open Finance
 
+A seguir, apresentamos uma visão geral da plataforma OPUS Open Finance.
+
+Ao final desta página, você também pode encontrar um índice detalhado
+para especificações técnicas e detalhes de implantação, integração e utilização
+dos diversos componentes da plataforma.
+
 ## Caracterização do produto
 
 A Plataforma OPUS Open Finance oferece todos os recursos necessários para integrar
@@ -103,7 +109,7 @@ Plataforma de Coleta de Métricas.
 
 ![Diagrama de sequência ITP e recepção de dados com e sem OPUS Open Finance](./imagens/diag-seq-itp.png)
 
-### Módulo de Iniciação de Transações de Pagamento
+### Módulo de Iniciação de Transações de Pagamento (OPUS TPP)
 
 Um Iniciador de Transação de Pagamento (ITP), ou apenas Iniciador de Pagamentos,
 é uma aplicação cliente que consome serviços de uma Detentora de Conta.
@@ -126,7 +132,7 @@ Com isso, o módulo permite o desenvolvimento de aplicações que se beneficiem 
 iniciação de pagamentos via Open Finance, porém sem a necessidade de implementação
 dos diversos protocolos de segurança e outras obrigatoriedades.
 
-### Módulo de Recepção de Dados (OPUS DRx)
+### Módulo de Recepção de Dados (OPUS TPP)
 
 O Módulo de Recepção de Dados é um *middleware* para consumo dos serviços de
 Transmissoras de Dados, permitindo a criação de consentimentos de
@@ -157,7 +163,7 @@ vigência dos consentimentos obtidos.
 ![Diagrama esquemático do OPUS Open Data Receiver](./imagens/opus-open-data-receiver.png)
 
 Ele utiliza um *Scheduler*
-e as capacidades do Módulo de Recepção de Dados (OPUS DRx)
+e as capacidades do Módulo de Recepção de Dados (OPUS TPP)
 para garantir que os dados sejam atualizados periodicamente,
 respeitando os limites operacionais definidos pela regulação do Open Finance Brasil.
 
@@ -257,7 +263,13 @@ gerando economia de infraestrutura e menor complexidade operacional.
 
 ### Gestão de logs
 
-TODO.
+Os logs gerados pela aplicação podem ser integrados com qualquer ferramenta de gestão
+de logs utilizada pela instituição,
+como Elastic, Data Dog, etc.
+Além disso, as informações sensíveis de clientes finais, como
+dados financeiros, dados cadastrais, etc.,
+são anonimizados dinamicamente, seguindo os princípios da
+Lei Geral de Proteção de Dados (LGPD).
 
 ### Plataforma de Coleta de Métricas
 
@@ -292,62 +304,141 @@ com o envio de reportes. Uma vez configurado e inicializado, o módulo PCM envia
 automaticamente todos os dados necessários, minimizando impacto e garantindo conformidade
 com as regulações.
 
-### Health Check
+### Status (health check)
 
 As APIs obrigatórias de status dos serviços são implementadas pela solução,
 e todas as chamadas recebidas são contabilizadas para efetuação dos
 cálculos de disponibilidade que devem ser informados à estrutura de governança.
 
+Elas informam sobre a disponibilidade momentânea dos diversos *endpoints* regulatórios,
+que podem estar disponíveis, com falha parcial,
+em manutenção programada, ou indisponíveis.
+
 ### Security e autenticação de serviços
 
-TODO.
+Todos os protocolos de segurança são implementados e certificados pela OpenID Foundation.
+A implementação inclui os protocolos FAPI-BR (Financial-Grade API) e também
+a validação e geração de assinaturas JSON Web Token (JWT),
+além dos protocolos de DCR (Dynamic Client Registration)
+e DCM (Dynamic Client Management), necessários no processo de
+registro de Third-Party Applications (TPP)
+com Detentoras de Conta e Transmissoras de Dados.
 
 ### Fila de eventos
 
-TODO.
+A plataforma suporta a geração de notificações sinalizando a ocorrência de diversos
+eventos pertinentes aos diferentes componentes do sistema.
+As notificações enviadas para uma fila de eventos são de diferentes naturezas,
+podendo ser eventos técnicos como notificações de erros HTTP,
+como também de negócio,
+como a revogação de um consentimento ou a realização de um
+registro DCR por um novo TPP.
+
+As notificações são organizadas por tópicos,
+que podem ser assinados independentemente por aplicações externas.
+Assim, aplicações como CRM, Análise de Crédito, etc.,
+receberão apenas as notificações pertinentes,
+e poderão consumi-las em tempo real.
 
 ![Fila de eventos OPUS Open Finance](./imagens/eventos.png)
 
+A plataforma suporta diferentes plataformas de filas de evento,
+pois internamente é utilizado o [DAPR](https://dapr.io/),
+que abstrai particularidades e facilita a integração
+com qualquer plataforma já utilizada pela instituição financeira.
+
 ### Portal Backoffice
 
-TODO.
+O portal de backoffice da plataforma OPUS Open Finance permite que funções
+administrativas sejam executadas.
+De acordo com as especificações regulatórias do Open Finance Brasil,
+as instituições participantes devem cumprir níveis determinados de disponibilidade:
+
+1. 95% do tempo a cada 24 horas
+2. 99,5% do tempo a cada 3 meses
+
+Com isso, faz-se necessário reportar indisponibilidades,
+sejam elas ocasionadas por falhas no sistema ou por eventos de manutenção programada.
+
+### Autenticação via Federation
+
+O suporte à autenticação via Federation permite que as instituições utilizem
+seus próprios Identity Providers (IDP) para controlar o acesso ao portal.
+Em outras palavras,
+usuários podem utilizar o mesmo login institucional que já utilizam em
+outros sistemas da instituição.
+
+![Portal de backoffice OPUS Open Finance](./imagens/backoffice.png)
 
 #### Cadastro de indisponibilidade (regulatório)
 
-TODO.
+O Portal Backoffice oferece uma interface gráfica para
+cadastro de indisponibilidades programadas,
+permitindo que o sistema sinalize apropriadamente para a estrutura de governança
+tais eventos,
+que são contabilizados separadamente de falhas sistêmicas.
 
 #### Registro de falhas (regulatório)
 
-TODO.
+Através de integração com o serviço de status,
+o portal oferece um dashboard de visualização das insdisponibilidades
+parciais e totais detectadas pelo componente de auto-diagnóstico da plataforma.
 
-#### Acompanhamento de SLA
-
-TODO.
-
-### Componentes de apoio
-
-TODO.
+### Ferramentas auxiliares
 
 #### Portal de geração de consentimentos White-label
 
-TODO.
+O portal de geração de consentimentos implementa as funcionalidades obrigatórias
+que permitem que os clientes finais visualizem e aprovem (ou rejeitem)
+consentimentos de iniciação de pagamentos e compartilhamento de dados cadastrais
+e transacionais.
+
+O portal pode ser customizado através de mudanças de logo e paletas de cores,
+podendo ser utilizado como ferramenta para acelerar a implementação
+do ciclo completo de funcionalidades obrigatórias do Open Finance Brasil.
+
+![Portal de geração de consentimentos OPUS Open Finance](./imagens/portal-consentimento.png)
 
 #### Tela de handoff White-label
 
-TODO.
+Em casos de Detentoras de Contas e/ou Transmissoras de Dados que oferecem apenas
+canais digitais mobile (i.e., aplicativos) e **não** têm canais desktop
+(ex.: Internet Banking),
+é obrigatória a implementação do fluxo de ***handoff***,
+no qual usuários utilizando dispositivos desktop devem visualizar
+um QR Code que pode ser utilizado para autorizar a operação
+através de um dispositivo móvel.
+
+A plataforma oferece também um módulo opcional de *handoff* que pode ser
+customizado com definições de imagens, paletas de cores,
+textos informativos e links para lojas de download de aplicativos Android/iOS.
 
 #### Aplicativo móvel com telas de autorização
 
-TODO.
+Oferecemos também um aplicativo móvel com exemplos de design e código-fonte
+de implementação das funcionalidades obrigatórias do Open Finance Brasil,
+e integração completa com a plataforma OPUS Open Finance.
 
 #### Connector Tester
 
-TODO.
+A ferramenta Connector Tester executa simulações de chamadas vindas através do
+ecossistema do Open Finance Brasil e permite que os conectores de integração
+com os sistemas de retaguarda da instituição sejam exercitados e testados,
+facilitando sua depuração durante as fases de desenvolvimento.
 
-#### Quick Simulator
+#### TPP Quick Simulator
 
-TODO.
+A ferramenta TPP Quick Simulator implementa as funcionalidades uma aplicação
+Iniciadora de Pagamentos ou Receptora de Dados e
+executa as chamadas correspondentes de criação de consentimentos e sua
+subsequente utilização, nos contextos apropriados.
 
+Ela oferece grande flexibilidade de construção dos *payloads* enviados em cada requisição,
+permitindo a construção de diversos cenários de uso e/ou exceção,
+e servindo como ferramente de testes, diagnóstico e demonstração de funcionalidades
+de Detentoras de Contas e Transmissoras de Dados.
+
+![TPP Quick Simulator](./imagens/quick-simulator.png)
 
 ---
 
