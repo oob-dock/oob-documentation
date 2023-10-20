@@ -299,33 +299,18 @@ additionalVars:
     value: CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ,CUSTOMERS_PERSONAL_ADITTIONALINFO_READ,CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ,CUSTOMERS_BUSINESS_ADITTIONALINFO_READ,RESOURCES_READ
 ```
 
-### CONSENT_RENOVATION_ENABLED
-
-Utilizado para habilitar ou desabilitar a criação do consentimento `DATA_SHARING`
-com expiração indeterminada.
-
-**Formato:** `true` ou `false`
-
-Valor default: `false`
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: CONSENT_RENOVATION_ENABLED
-    value: "true"
-```
-
-Existem additionalVars para utilização do conector de aprovação de consentimento
-desenvolvido pela Opus, que estão listadas em
-[consent](../../integração-plugin/consent/readme.md) na seção
-`Arquivo de rota implementado pela OPUS`
-
 ### APPLICATION_ENCRYPTION_CHARSET
 
 Utilizado para definir o charset usado na criptografia dos campos na base de dados.
 
 Valor default: `UTF-8`
+
+### Conectores
+
+Existem additionalVars para utilização do conector de aprovação de consentimento
+desenvolvido pela Opus, que estão listadas em
+[consent](../../integração-plugin/consent/readme.md) na seção
+`Arquivo de rota implementado pela OPUS`
 
 ## additionalVarsDaemon
 
