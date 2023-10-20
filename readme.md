@@ -476,9 +476,12 @@ ao BACEN por todas as instituições.
 
 1. Como integrar seus sistemas com a platafora OPUS Open Finance?
     1. Detentoras de Conta e Transmissoras de Dados:
-        1. [Integrando com o aplicativo da instituição](consentimento/app2as/readme.md)
+        1. [Integrando com o aplicativo mobile da instituição](consentimento/app2as/readme.md)
+        1. [Integrando com interface web da instituição](consentimento/web2as/readme.md)
         1. [APIs de visualização e revogação de consentimentos](portal-backoffice/apis-backoffice/readme.md)
-        1. Para instituições *app-only*: [implementando fluxo handoff](consentimento/app2as-handoff/readme.md)
+        1. Para instituições *app-only*:
+            1. [Implementando fluxo handoff](consentimento/app2as-handoff/readme.md)
+            1. [Configurações da página de handoff customizável](consentimento/app2as-handoff/custom-handoff-config/readme.md)
     1. Integração com a retaguarda: **Conectores**
         1. [Visão geral](integração-plugin/readme.md)
         1. Detentoras de Conta:
