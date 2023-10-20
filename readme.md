@@ -304,6 +304,25 @@ com o envio de reportes. Uma vez configurado e inicializado, o módulo PCM envia
 automaticamente todos os dados necessários, minimizando impacto e garantindo conformidade
 com as regulações.
 
+### Conectores
+
+Para garantir desacoplamento funcional e padronização do produto,
+a plataforma OPUS Open Finance se integra com sistemas de retaguarda
+através de **conectores**,
+que são adaptados caso a caso e garantem que transações e dados
+sejam acessados de acordo com a demanda.
+
+Os conectores que devem ser implantados dependem dos Módulos adotados pela instituição.
+Para o perfil de Detentora de Conta,
+são necessários conectores de iniciação (imediata e agendada) de transações Pix,
+consulta de status e cancelamento de agendamento.
+Os conectores para Transmissora de dados abrangem
+dados abertos sobre produtos e serviços oferecidos pela instituição,
+dados cadastrais de clientes finais,
+dados transacionais de contas, cartões de crédito, investimentos,
+e dados de contratos de crédito
+(empréstimos, financiamentos, direitos creditórios descontados, etc.).
+
 ### Status (health check)
 
 As APIs obrigatórias de status dos serviços são implementadas pela solução,
@@ -440,25 +459,77 @@ de Detentoras de Contas e Transmissoras de Dados.
 
 ![TPP Quick Simulator](./imagens/quick-simulator.png)
 
----
+#### Relatórios obrigatórios
 
-- Integração de segurança
-  - [Geração de Consentimento com aplicativo da instituição](consentimento/app2as/readme.md)
-  - [Hybrid-flow com handoff (biblioteca javascript)](consentimento/app2as-handoff/readme.md)
-- [Integração plugins Camel](integração-plugin/readme.md)
-  - [Open data (Fase 1)](integração-plugin/open-data/readme.md)
-  - [Discovery de recursos](integração-plugin/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
-  - [Financial data (Fase 2)](integração-plugin/financial-data/readme.md)
-  - [Payments (Fase 3)](integração-plugin/payments/readme.md)
-- [Domínios e certificados necessários](dominios-e-certificados/readme.md)
-  - [Certificados do diretório central (SANDBOX)](dominios-e-certificados/tpp.md)
-- [Segurança](segurança/readme.md)
+O Banco Central (BACEN) exige a extração e envio de diversos relatórios
+sobre a saúde e utilização dos serviços do Open Finance Brasil.
+Tanto as Detentoras de Conta quanto as Transmissoras de Dados
+devem enviar planilhas semanais e semestrais informando
+à estrutura de governança diversos dados sobre
+consentimentos, transações e disponibilidade de APIs.
 
-## Certificação
+A plataforma OPUS Open Finance oferece uma série de scripts
+e roteiros de extração dos dados que devem ser reportados periodicamente
+ao BACEN por todas as instituições.
 
-[Roteiro para envio da certificação OpenID Foundation](certificacao/seguranca/enviando-certificacao.md)
+## Índice
 
-## Ferramentas úteis
+1. Como integrar seus sistemas com a platafora OPUS Open Finance?
+    1. Detentoras de Conta e Transmissoras de Dados:
+        1. [Integrando com o aplicativo da instituição](consentimento/app2as/readme.md)
+        1. [APIs de visualização e revogação de consentimentos](portal-backoffice/apis-backoffice/readme.md)
+        1. Para instituições *app-only*: [implementando fluxo handoff](consentimento/app2as-handoff/readme.md)
+    1. Integração com a retaguarda: **Conectores**
+        1. [Visão geral](integração-plugin/readme.md)
+        1. Detentoras de Conta:
+            1. [Discovery de recursos (contas, cartões, etc.)](integração-plugin/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
+            1. [Iniciação e consulta de pagamentos (Pix)](integração-plugin/payments/readme.md)
+        1. Transmissoras de Dados:
+            1. [Discovery de recursos (contas, cartões, etc.)](integração-plugin/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
+            1. [Dados abertos (produtos e serviços)](integração-plugin/open-data/readme.md)
+            1. [Dados cadastrais e transacionais](integração-plugin/financial-data/readme.md)
 
-- [JSON Schema](ferramentas-auxiliares/json-schema/readme.md)
-- [Connector Tester](ferramentas-auxiliares/connector-tester/readme.md)
+1. Instalação do produto:
+    1. Implantação do cluster Kubernetes:
+        1. [Visão geral](deploy/readme.md)
+        1. [Configurações via Terraform](deploy/terraform/readme.md)
+        1. [Definições compartilhadas](deploy/shared-definitions.md)
+        1. Detentora de Conta e Transmissora de Dados:
+            1. [Authorization Server](deploy/oob-authorization-server/readme.md)
+            1. [Consentimentos](deploy/oob-consent/readme.md)
+            1. [Status](deploy/oob-status/readme.md)
+            1. [Fila de eventos](deploy/oof-event-service/readme.md)
+            1. [Plataforma de Coleta de Métricas (PCM)](deploy/oof-pcm-service/readme.md)
+        1. Detentora de Conta:
+            1. [Pagamentos](deploy/oob-payment/readme.md)
+        1. Transmissora de Dados:
+            1. [Dados abertos](deploy/oob-open-data/readme.md)
+            1. [Dados cadastrais e transacionais](deploy/oob-financial-data/readme.md)
+        1. Opcionais:
+            1. [Portal Backoffice](deploy/oob-portal-backoffice/readme.md)
+            1. [Handoff Web](deploy/oob-handoff-web/readme.md)
+    1. Configuração de domínios e certificados criptográficos
+        1. [Detentora de Conta e Transmissora de Dados](dominios-e-certificados/readme.md)
+        1. [Iniciadora de Pagamentos e Receptora de Dados](dominios-e-certificados/tpp.md)
+    1. [Configuração de controles de segurança por API](segurança/readme.md)
+
+1. Roteiros de certificações obrigatórias
+    1. [Envio da certificação de Segurança (OpenID Foundation)](certificacao/seguranca/enviando-certificacao.md)
+    1. [Execução da certificação funcional (Governança Open Finance Brasil)](certificacao/funcional/dcr.md)
+
+1. Ferramentas úteis
+    1. Depuração de conectores: [Connector Tester](ferramentas-auxiliares/connector-tester/readme.md)
+    1. Extração de relatórios obrigatórios enviados ao BACEN:
+        1. [Relatório Semestral de Disponibilidade](ferramentas-auxiliares/relatorio-de-disponibilidade-por-grupo-de-apis/readme.md)
+        1. [Relatório Semestral de Volume de Requisições](ferramentas-auxiliares/relatorio-semestral/readme.md)
+        1. Detentora de Conta:
+            1. [Relatório de Acompanhamento de Funcionamento](ferramentas-auxiliares/acompanhamento-do-funcionamento-inicial/fase-3/readme.md)
+            1. [Relatório de Iteroperabilidade](ferramentas-auxiliares/relatorio-de-interoperabilidade/fase-3/readme.md)
+            1. [Relatório de Requisitos não-funcionais](ferramentas-auxiliares/relatorio-de-requisitos-nao-funcionais/readme.md)
+        1. Transmissora de Dados:
+            1. [Relatório de Estoque de Consentimentos](ferramentas-auxiliares/retirada-de-informaçoes-sobre-os-consentimentos/readme.md)
+    1. Portal Backoffice:
+        1. [Instalação](deploy/oob-portal-backoffice/readme.md)
+        1. [Customização de interface](portal-backoffice/customizacao/readme.md)
+        1. [Integração com login institucional via *Federation*](portal-backoffice/federation-usuarios-internos/readme.md)
+        1. [Utilização (guia de usuário)](portal-backoffice/falhas-e-indisponibilidades/readme.md)
