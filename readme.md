@@ -199,6 +199,22 @@ rodando em ambiente de execução clusterizado Kubernetes.
 A solução roda atualmente em produção tanto em ambientes Kubernetes gerenciados
 (Google GKE, AWS AKS e Azure EKS) como clusters gerenciados manualmente.
 
+### Visual geral da arquitetura
+
+A figura abaixo mostra uma visão geral da arquitetura da solução
+
+![Visão geral da Arquitetura OPUS Open Finance](./imagens/visao-geral-solucao.png)
+
+O componente <code>Elastic Stack</code> é uma sugestão para tratar os logs da
+solução. A gestão dos logs pode ser feita em qualquer ferramenta que se integre
+no cluster Kubernetes para fazer a ingestão dos logs gerados pelos PODs, tais
+como a Elastic Stack, Datadog, Loki e outros.
+
+O componente <code>Grafana</code> é uma sugestão opcional para complementar
+a visibilidade da saúde solução. A saúde da solução já é monitorada de forma
+automática pelo microsserviço "Métricas e Status" para todos os efeitos
+regulatórios necessários (APIs regulatórias <code>Admin</code> e <code>Comuns</code>)
+
 ![Arquitetura OPUS Open Finance](./imagens/arquitetura.png)
 
 A plataforma foi concebida para rodar em uma estrutura de rede protegida por um
