@@ -8,6 +8,12 @@ Open Finance Brasil:
 
 - [Canais de atendimento](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368301/API+-+Canais+de+Atendimentos)
 - [Produtos e Serviços](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17367858/API+-+Produtos+e+Servi+os)
+- [Contas](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/180257084/DA+API+-+Contas)
+- [Cartão de Crédito](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/180257194/DA+API+-+Cart+o+de+Cr+dito)
+- [Adiantamento de Recebíveis](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/180061315/DA+API+-+Adiantamento+de+Receb+veis)
+- [Empréstimos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/180256974/DA+API+-+Empr+stimos)
+- [Financiamentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/180257414/DA+API+-+Financiamentos)
+- [Adiantamento a Depositantes](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/180257304/DA+API+-+Adiantamento+a+Depositantes)
 - [Títulos de Capitalização](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368637/API+-+T+tulos+de+Capitaliza+o)
 - [Investimentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368743/API+-+Investimentos)
 - [Câmbio](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17368866/API+-+C+mbio)
@@ -116,6 +122,72 @@ a execução do `endpoint` resultará em `HTTP 404 - Not Found`.
 | /business-loans                              | ```direct:getBusinessLoans```                      |
 | /personal-unarranged-account-overdraft       | ```direct:getPersonalUnarrangedAccountOverdraft``` |
 | /business-unarranged-account-overdraft       | ```direct:getBusinessUnarrangedAccountOverdraft``` |
+
+&nbsp;
+
+### Contas
+
+&nbsp;
+
+| Endpoint                                     | Rota do Camel                                      |
+|----------------------------------------------|----------------------------------------------------|
+| /personal-accounts                           | ```direct:getOpenDataPersonalAccounts```           |
+| /business-accounts                           | ```direct:getOpenDataBusinessAccounts```           |
+
+&nbsp;
+
+### Cartão de Crédito
+
+&nbsp;
+
+| Endpoint                                     | Rota do Camel                                      |
+|----------------------------------------------|----------------------------------------------------|
+| /personal-credit-cards                       | ```direct:getOpenDataPersonalCreditCards```        |
+| /business-credit-cards                       | ```direct:getOpenDataBusinessCreditCards```        |
+
+&nbsp;
+
+### Adiantamento de Recebíveis
+
+&nbsp;
+
+| Endpoint                                     | Rota do Camel                                      |
+|----------------------------------------------|----------------------------------------------------|
+| /personal-invoice-financings                 | ```direct:getOpenDataPersonalInvoiceFinancings```  |
+| /business-invoice-financings                 | ```direct:getOpenDataBusinessInvoiceFinancings```  |
+
+&nbsp;
+
+### Empréstimos
+
+&nbsp;
+
+| Endpoint                                     | Rota do Camel                                      |
+|----------------------------------------------|----------------------------------------------------|
+| /personal-loans                              | ```direct:getOpenDataPersonalLoans```              |
+| /business-loans                              | ```direct:getOpenDataBusinessLoans```              |
+
+&nbsp;
+
+### Financiamentos
+
+&nbsp;
+
+| Endpoint                                     | Rota do Camel                                      |
+|----------------------------------------------|----------------------------------------------------|
+| /personal-financings                         | ```direct:getOpenDataPersonalFinancings```         |
+| /business-financings                         | ```direct:getOpenDataBusinessFinancings```         |
+
+&nbsp;
+
+### Adiantamento a Depositantes
+
+&nbsp;
+
+| Endpoint                                     | Rota do Camel                                              |
+|----------------------------------------------|------------------------------------------------------------|
+| /personal-unarranged-account-overdraft       | ```direct:getOpenDataPersonalUnarrangedAccountOverdraft``` |
+| /business-unarranged-account-overdraft       | ```direct:getOpenDataBusinessUnarrangedAccountOverdraft``` |
 
 &nbsp;
 
