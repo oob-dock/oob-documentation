@@ -331,6 +331,8 @@ components:
       allOf:
         - $ref: "#/components/schemas/Redirect"
       properties:
+        consent:
+          $ref: '#/components/schemas/ConsentCustomerAcceptance'
         type:
           type: string
           description: Tipo do erro
@@ -344,6 +346,15 @@ components:
             - DISCOVERY_ERROR
             - DISCOVERY_TIMEOUT
             - INVALID_STATUS_CONFIRMATION
+            - VALOR_INVALIDO
+            - NAO_INFORMADO
+            - FALHA_INFRAESTRUTURA
+            - CONTAS_ORIGEM_DESTINO_IGUAIS
+            - CONTA_NAO_PERMITE_PAGAMENTO
+            - SALDO_INSUFICIENTE
+            - VALOR_ACIMA_LIMITE
+            - CONTA_DIVERGENTE_DA_SOLICITADA
+            - QRCODE_INVALIDO
             - GENERIC_ERROR
         message:
           type: string
@@ -518,10 +529,6 @@ components:
           items:
             type: object
             description: Recursos selecionável pelo cliente
-            required:
-              - id
-              - type
-              - name
             properties:
               id:
                 type: string
@@ -571,6 +578,28 @@ components:
                 type: boolean
                 example:
                   - "false"
+              rejectionReason:
+                description: Objeto que indica o motivo de rejeição do recurso
+                type: object
+                required:
+                - code
+                properties:
+                  code: 
+                    description: Código que determina o motivo do recurso ter sido negado
+                    type: string
+                    enum:
+                      - VALOR_INVALIDO
+                      - NAO_INFORMADO
+                      - FALHA_INFRAESTRUTURA
+                      - CONTAS_ORIGEM_DESTINO_IGUAIS
+                      - CONTA_NAO_PERMITE_PAGAMENTO
+                      - SALDO_INSUFICIENTE
+                      - VALOR_ACIMA_LIMITE
+                      - CONTA_DIVERGENTE_DA_SOLICITADA
+                      - QRCODE_INVALIDO
+                  detail:
+                    type: string
+                    description: Descrição do motivo de rejeição do recurso. Estará preenchido apenas se um motivo de rejeição for enviado pelo conector.
             additionalProperties: false
           maxItems: 1000
         expirationDateTime:
