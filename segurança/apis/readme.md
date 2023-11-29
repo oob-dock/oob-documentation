@@ -201,6 +201,8 @@
 | -------- | ----------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
 | GET      | /v1/status  | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/outages | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/status  | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/outages | Não          |                  | Não        | Não              | Não  |     |
 
 ### Admin
 
