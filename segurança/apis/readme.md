@@ -5,6 +5,12 @@
   - [Channels catalog maintance](#channels-catalog-maintance)
   - [Products and services catalog](#products-and-services-catalog)
   - [Products and services catalog maintance](#products-and-services-catalog-maintance)
+  - [Accounts catalog](#accounts-catalog)
+  - [Credit cards catalog](#credit-cards-catalog)
+  - [Invoice financings catalog](#invoice-financings-catalog)
+  - [Loans catalog](#loans-catalog)
+  - [Financings catalog](#financings-catalog)
+  - [Unarranged account overdraft catalog](#unarranged-account-overdraft-catalog)
   - [Status](#status)
     - [Status](#status-1)
     - [Admin](#admin)
@@ -188,6 +194,72 @@
 | GET      | /v1/domains/loan-type                                      | Sim          | oob_opendata:read  | Não        | Não              | Não  |     |
 | GET      | /v1/domains/unarranged-account-overdraft-fee-code          | Sim          | oob_opendata:read  | Não        | Não              | Não  |     |
 | GET      | /v1/domains/unarranged-account-overdraft-fee-name          | Sim          | oob_opendata:read  | Não        | Não              | Não  |     |
+
+## Accounts catalog
+
+**Base path:** /open-banking/opendata-accounts
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personal-accounts                     | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-accounts                     | Não          |                  | Não        | Não              | Não  |     |
+
+## Credit cards catalog
+
+**Base path:** /open-banking/opendata-creditcards
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personal-credit-cards                 | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-credit-cards                 | Não          |                  | Não        | Não              | Não  |     |
+
+## Invoice financings catalog
+
+**Base path:** /open-banking/opendata-invoicefinancings
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personal-invoice-financings           | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-invoice-financings           | Não          |                  | Não        | Não              | Não  |     |
+
+## Loans catalog
+
+**Base path:** /open-banking/opendata-loans
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personal-loans                        | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-loans                        | Não          |                  | Não        | Não              | Não  |     |
+
+## Financings catalog
+
+**Base path:** /open-banking/opendata-financings
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personal-financings                   | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-financings                   | Não          |                  | Não        | Não              | Não  |     |
+
+## Unarranged account overdraft catalog
+
+**Base path:** /open-banking/opendata-unarranged
+
+**Cliente API:** Qualquer um (Aberto na internet)
+
+| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| GET      | /v1/personal-unarranged-account-overdraft | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-unarranged-account-overdraft | Não          |                  | Não        | Não              | Não  |     |
 
 ## Status
 
