@@ -849,7 +849,7 @@ para utilizar as funcionalidades.
 
 ### lPad
 
-Esta função tem como objetivo retornar uma string o o tamanho informado,
+Esta função tem como objetivo retornar uma string com o tamanho informado,
 completando a mesma com o caractere informado à esquerda. Segue a assinatura
 da mesma:
 
@@ -1003,6 +1003,63 @@ O resultado desta chamada seria: 1.100
 
 Caso seja informado um número inválido, ou fora do formato americano (separador
 decimal diferente de "."), loga o erro no console, e retorna uma string vazia.
+
+### concatenateStrings
+
+Esta função tem como objetivo retornar uma string que é a concatenação das duas
+strings passadas como parâmetros.
+
+public String concatenateStrings(String s1, String s2)
+
+onde:
+
+**s1** -> primeira string inicial;
+
+**s2** -> segunda string inicial;
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="concatenatedString">
+    <simple>${bean:camelHelper.concatenateStrings("ab", "cd")}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: abcd
+
+### hmacCalculator
+
+Esta função tem como objetivo fazer fazer o cálculo de hash de um data com base
+num algoritmo específico com uma chave secreta fornecida.
+
+public String hmacCalculator(String algorithm, String data, String key)
+
+onde:
+
+**algorithm** -> algoritmo de hash utilizado no cálculo;
+
+**data** -> data a ser calculada;
+
+**key** -> chave secreta utilizada no cálculo;
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="hmacCalculatated">
+    <simple>${bean:camelHelper.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}</simple>
+</setProperty>
+```
+
+Algorimos suportados:
+
+```text
+HmacMD5
+HmacSHA1
+HmacSHA224
+HmacSHA256
+HmacSHA384
+HmacSHA512
+```
 
 ## Componentes Suportados
 
