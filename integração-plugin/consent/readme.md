@@ -429,14 +429,45 @@ conectores.
 
 Os serviços e suas respectivas funcionalidades são:
 
-| Nome do serviço | Descrição                                                                       | Comando de chamada no arquivo .xml   |
-| --------------- | ------------------------------------------------------------------------------- | ------------------------------------ |
-| getDayOfTheWeek | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira) | `${bean:camelUtils.getDayOfTheWeek}` |
+| Nome do serviço    | Descrição                                                                                            | Comando de chamada no arquivo .xml                                                               |
+| ------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| getDayOfTheWeek    | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira)                      | `${bean:camelUtils.getDayOfTheWeek}`                                                             |
+| concatenateStrings | Obter uma string que é a concatenação das duas strings passadas como parâmetros                      | `${bean:camelUtils.concatenateStrings("ab", "cd")}`                                              |
+| hmacCalculator     | Obter o cálculo de hash de um data com base num algoritmo específico com uma chave secreta fornecida | `${bean:camelUtils.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}` |
 
-Exemplo de chamada do serviço getDayOfTheWeek:
+**Exemplo de chamada do serviço getDayOfTheWeek:**
 
 ```xml
 <setProperty name="currentWeekday">
   <simple>${bean:camelUtils.getDayOfTheWeek}</simple>
 </setProperty>
+```
+
+**Exemplo de chamada do serviço concatenateStrings:**
+
+```xml
+<setProperty name="concatenatedString">
+    <simple>${bean:camelHelper.concatenateStrings("ab", "cd")}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: abcd
+
+**Exemplo de chamada do serviço hmacCalculator:**
+
+```xml
+<setProperty name="hmacCalculatated">
+    <simple>${bean:camelHelper.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}</simple>
+</setProperty>
+```
+
+Algorimos suportados:
+
+```text
+HmacMD5
+HmacSHA1
+HmacSHA224
+HmacSHA256
+HmacSHA384
+HmacSHA512
 ```
