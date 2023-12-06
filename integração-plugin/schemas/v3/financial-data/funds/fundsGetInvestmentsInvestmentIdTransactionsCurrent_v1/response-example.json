@@ -1,7 +1,16 @@
 {
   "data": [
     {
-      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "type": "ENTRADA",
       "transactionType": "AMORTIZACAO",
       "transactionConversionDate": "2023-01-07",
@@ -18,39 +27,8 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionTypeAdditionalInfo": "4cV'",
-      "financialTransactionTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionExitFee": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "incomeTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
+      "transactionTypeAdditionalInfo": "lApk",
       "transactionNetValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      }
-    },
-    {
-      "transactionId": "ABCD2126019929279212650822221989319253344",
-      "type": "ENTRADA",
-      "transactionType": "AMORTIZACAO",
-      "transactionConversionDate": "2023-01-07",
-      "transactionQuotaPrice": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionQuotaQuantity": "42.25",
-      "transactionValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionGrossValue": {
         "amount": "1000.04",
         "currency": "BRL"
       },
@@ -62,18 +40,22 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionNetValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionTypeAdditionalInfo": "=Um9|j[Q\"",
       "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       }
     },
     {
-      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "type": "ENTRADA",
       "transactionType": "AMORTIZACAO",
       "transactionConversionDate": "2023-01-07",
@@ -90,11 +72,12 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "incomeTax": {
+      "transactionTypeAdditionalInfo": "`'[",
+      "transactionExitFee": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "financialTransactionTax": {
+      "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
@@ -102,14 +85,22 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionTypeAdditionalInfo": "r&,kKHi5g",
-      "transactionExitFee": {
+      "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       }
     },
     {
-      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "type": "ENTRADA",
       "transactionType": "AMORTIZACAO",
       "transactionConversionDate": "2023-01-07",
@@ -126,7 +117,12 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "financialTransactionTax": {
+      "incomeTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionTypeAdditionalInfo": "mso&uzOI",
+      "transactionNetValue": {
         "amount": "1000.04",
         "currency": "BRL"
       },
@@ -134,12 +130,7 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionTypeAdditionalInfo": "?z*M",
-      "transactionNetValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "incomeTax": {
+      "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       }
@@ -147,6 +138,6 @@
   ],
   "meta": {
     "hasMoreRecords": true,
-    "requestDateTime": 99173618
+    "requestDateTime": true
   }
 }
