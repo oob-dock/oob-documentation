@@ -96,6 +96,29 @@ Unidades aceitas:
 
 **Ex:**: 5M (cinco minutos)
 
+#### cron/scheduled/participantDirectory
+
+* Aplica um `cron binding` para atualização das roles do diretório
+de participantes de forma periódica.
+
+* O valor definido é referente ao intervalo em que é feito a chamada para
+a API do diretório de participantes.
+
+Unidades aceitas:
+
+* S - segundos
+* M - minutos
+* H - horas
+* D - dias
+
+Exemplo:
+
+```yaml
+  cron:
+    scheduled:
+      participantDirectory: 240M
+```
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
