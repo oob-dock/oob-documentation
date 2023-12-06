@@ -545,6 +545,16 @@
 | GET      | /v3/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
 | PATCH    | /v3/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
 
+## Automatic Payments
+
+**Base path:** /open-banking/automatic-payments
+
+**Cliente API:** TPP
+
+| Operação | API                     | Valida token | Escopo de acesso  | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ----------------------- | ------------ | ----------------- | ---------- | ---------------- | ---- | --- |
+| POST     | /v1/recurring-consents  | Sim          | recurringPayments | Sim        | Não              | Sim  |     |
+
 ## Consent
 
 ### Consents
