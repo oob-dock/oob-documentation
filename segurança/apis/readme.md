@@ -536,6 +536,7 @@
 | GET      | /v2/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
 | POST     | /v3/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
 | GET      | /v3/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
+| POST     | /v4/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
 | POST     | /v1/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
 | GET      | /v1/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
 | POST     | /v2/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
