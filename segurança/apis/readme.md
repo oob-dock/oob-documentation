@@ -54,6 +54,11 @@
 | GET      | /v1/phone-channels                   | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/banking-agents                   | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/shared-automated-teller-machines | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/branches                         | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/electronic-channels              | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/phone-channels                   | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/banking-agents                   | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/shared-automated-teller-machines | Não          |                  | Não        | Não              | Não  |     |
 
 ## Channels catalog maintance
 
