@@ -553,9 +553,10 @@
 
 **Cliente API:** TPP
 
-| Operação | API                     | Valida token | Escopo de acesso  | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------- | ------------ | ----------------- | ---------- | ---------------- | ---- | --- |
-| POST     | /v1/recurring-consents  | Sim          | recurringPayments | Sim        | Não              | Sim  |     |
+| Operação | API                            | Valida token | Escopo de acesso   | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | ------------------------------ | ------------ | ------------------ | ---------- | ---------------- | ---- | --- |
+| POST     | /v1/recurring-consents         | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| GET      | /v1/recurring-consents/\{ID\}  | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
 
 ## Consent
 
