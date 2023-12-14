@@ -27,16 +27,16 @@
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionTypeAdditionalInfo": "JyN\"}@}o6",
+      "transactionTypeAdditionalInfo": "=-W",
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "transactionNetValue": {
+      "financialTransactionTax": {
         "amount": "1000.04",
         "currency": "BRL"
       },
-      "financialTransactionTax": {
+      "transactionNetValue": {
         "amount": "1000.04",
         "currency": "BRL"
       },
@@ -48,6 +48,6 @@
   ],
   "meta": {
     "hasMoreRecords": true,
-    "requestDateTime": false
+    "requestDateTime": "elit et"
   }
 }

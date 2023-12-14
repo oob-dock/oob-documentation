@@ -25,10 +25,10 @@
     "pagination-key": {
       "$ref": "../../../common/common-schema.json#/$defs/pagination-key"
     },
-    "fromTransactionConversionDate": {
+    "fromTransactionConversionDateCurrent": {
       "$ref": "../../../common/common-schema.json#/$defs/fromTransactionDateMaxLimited"
     },
-    "toTransactionConversionDate": {
+    "toTransactionConversionDateCurrent": {
       "$ref": "../../../common/common-schema.json#/$defs/toTransactionDateMaxLimited"
     }
   },
