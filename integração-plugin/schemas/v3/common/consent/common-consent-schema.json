@@ -319,7 +319,8 @@
             "enum": [
                 "V1",
                 "V2",
-                "V3"
+                "V3",
+                "V4"
             ],
             "examples": [
                 "V1"
@@ -428,9 +429,22 @@
                     "description": "Valor da transação com 2 casas decimais. O valor deve ser o mesmo enviado no consentimento. \n\nPara QR Code estático com valor pré-determinado no QR Code ou para QR Code dinâmico com indicação de que o valor não pode ser alterado: O campo amount deve ser preenchido com o valor estabelecido no QR Code. \nCaso seja preenchido com valor divergente do QR Code, deve ser retornado um erro HTTP Status 422.\n"
                 },
                 "schedule": {
+                    "description": "[Restrição] Mutuamente excludente com o campo date. \n\nEste campo é obrigatório no caso de agendamento. \n\nNeste caso, o campo date não deve ser informado.\n",
                     "oneOf": [
                         {
                             "$ref": "#/$defs/Schedule"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleDaily"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleWeekly"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleMonthly"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleCustom"
                         }
                     ]
                 }
@@ -438,7 +452,6 @@
         },
         "Schedule": {
             "type": "object",
-            "description": "[Restrição] Mutuamente excludente com o campo date. \n\nEste campo é obrigatório no caso de agendamento. \n\nNeste caso, o campo date não deve ser informado.\n",
             "required": [
                 "single"
             ],
@@ -455,7 +468,167 @@
                             "format": "date",
                             "maxLength": 10,
                             "example": "2021-01-01",
-                            "description": "Define a data alvo da liquidação do pagamento. \n\nO fuso horário de Brasília deve ser utilizado para criação e racionalização sobre os dados deste campo.\n\nObservação: Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo D+365 corridos a partir da data do consentimento considerando o fuso horário de Brasília\n"
+                            "description": "Define a data alvo da liquidação do pagamento.\nO fuso horário de Brasília deve ser utilizado para criação e racionalização sobre os dados deste campo.\n\n[Restrição] Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo D+730 corridos a partir da data do consentimento, também considerando o fuso horário de Brasília."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleDaily": {
+            "type": "object",
+            "required": [
+                "daily"
+            ],
+            "properties": {
+                "daily": {
+                    "type": "object",
+                    "description": "Define a política de agendamento diário.",
+                    "required": [
+                        "startDate",
+                        "quantity"
+                    ],
+                    "properties": {
+                        "startDate": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "maxLength": 10,
+                            "example": "2023-08-23",
+                            "description": "Define a data do primeiro pagamento de recorrência diária"
+                        },
+                        "quantity": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 2,
+                            "maximum": 730,
+                            "example": 3,
+                            "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleWeekly": {
+            "type": "object",
+            "required": [
+                "weekly"
+            ],
+            "properties": {
+                "weekly": {
+                    "type": "object",
+                    "description": "Define a política de agendamento semanal.",
+                    "required": [
+                        "dayOfWeek",
+                        "startDate",
+                        "quantity"
+                    ],
+                    "properties": {
+                        "dayOfWeek": {
+                            "type": "string",
+                            "description": "Dia da semana em que ocorrerá o pagamento",
+                            "enum": [
+                              "SEGUNDA_FEIRA",
+                              "TERCA_FEIRA",
+                              "QUARTA_FEIRA",
+                              "QUINTA_FEIRA",
+                              "SEXTA_FEIRA",
+                              "SABADO",
+                              "DOMINGO"
+                            ],
+                            "example": "QUINTA_FEIRA"
+                        },
+                        "startDate": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "maxLength": 10,
+                            "example": "2023-08-23"
+                        },
+                        "quantity": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 2,
+                            "maximum": 104,
+                            "example": 10,
+                            "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleMonthly": {
+            "type": "object",
+            "required": [
+                "monthly"
+            ],
+            "properties": {
+                "monthly": {
+                    "type": "object",
+                    "description": "Define a política de agendamento mensal.",
+                    "required": [
+                        "dayOfMonth",
+                        "startDate",
+                        "quantity"
+                    ],
+                    "properties": {
+                        "dayOfMonth": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 31,
+                            "example": 10
+                        },
+                        "startDate": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "maxLength": 10,
+                            "example": "2023-08-23"
+                        },
+                        "quantity": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 2,
+                            "maximum": 24,
+                            "example": 24,
+                            "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleCustom": {
+            "type": "object",
+            "required": [
+                "custom"
+            ],
+            "properties": {
+                "custom": {
+                    "type": "object",
+                    "description": "[Restrição] As datas enviadas na lista de datas (array “dates”) não podem ser repetidas.\nCaso datas repetidas sejam enviadas, o detentor deve rejeitar a criação do consentimento, informando o erro PARAMETRO_INVALIDO.",
+                    "required": [
+                        "dates",
+                        "additionalInformation"
+                    ],
+                    "properties": {
+                        "dates": {
+                            "type": "array",
+                            "maxItems": 730,
+                            "minItems": 2,
+                            "example": ["2023-08-23", "2023-09-26"],
+                            "items": {
+                                "type": "string",
+                                "format": "date",
+                                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                                "maxLength": 10,
+                                "example": "2023-08-23"
+                            }
+                        },
+                        "additionalInformation": {
+                            "type": "string",
+                            "description": "Texto livre para Iniciador preencher de forma compreensível pelo usuário aprovador/pagador.\nO texto pode ser utilizado pelo detentor para exibição do resumo da transação durante aprovação do usuário aprovador/pagador.",
+                            "pattern": "[\\w\\W\\s]*",
+                            "maxLength": 255,
+                            "example": "Todas quintas e domingos por 6 meses"
                         }
                     }
                 }

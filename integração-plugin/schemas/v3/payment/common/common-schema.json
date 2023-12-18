@@ -154,69 +154,6 @@
             },
             "additionalProperties": false
         },
-        "ResponsePixPaymentDataV3": {
-            "type": "object",
-            "description": "Objeto contendo dados do pagamento e da conta do recebedor (creditor).",
-            "required": [
-                "paymentId",
-                "creationDateTime",
-                "statusUpdateDateTime",
-                "status",
-                "localInstrument",
-                "payment",
-                "creditorAccount",
-                "cnpjInitiator",
-                "debtorAccount"
-            ],
-            "properties": {
-                "paymentId": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
-                },
-                "endToEndId": {
-                    "$ref": "#/$defs/EndToEndId"
-                },
-                "creationDateTime": {
-                    "$ref": "#/$defs/CreationDateTime"
-                },
-                "statusUpdateDateTime": {
-                    "$ref": "#/$defs/StatusUpdateDateTime"
-                },
-                "proxy": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/Proxy"
-                },
-                "ibgeTownCode": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/IbgeTownCode"
-                },
-                "status": {
-                    "$ref": "#/$defs/PaymentStatusV2"
-                },
-                "rejectionReason": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/PixRejectionReasonV3"
-                },
-                "localInstrument": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/EnumLocalInstrument"
-                },
-                "cnpjInitiator": {
-                    "$ref": "#/$defs/CnpjInitiator"
-                },
-                "payment": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/PaymentData"
-                },
-                "transactionIdentification": {
-                    "$ref": "#/$defs/TransactionIdentification"
-                },
-                "remittanceInformation": {
-                    "$ref": "#/$defs/RemittanceInformation"
-                },
-                "creditorAccount": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/CreditorAccount"
-                },
-                "debtorAccount": {
-                    "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
-                }
-            },
-            "additionalProperties": false
-        },
         "PatchPixPaymentData": {
             "type": "object",
             "required": [

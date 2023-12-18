@@ -60,7 +60,7 @@
             "examples": [
                 "DICT"
             ],
-            "description": "Especifica a forma de iniciação do pagamento:\n- MANU - Inserção manual de dados da conta transacional\n- DICT - Inserção manual de chave Pix\n- QRDN - QR code dinâmico\n- QRES - QR code estático\n- INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.\n"
+            "description": "Especifica a forma de iniciação do pagamento:\n- MANU - Inserção manual de dados da conta transacional\n- DICT - Inserção manual de chave Pix\n- QRDN - QR code dinâmico\n- QRES - QR code estático\n- INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.\n[Restrição] Se /data/payment/schedule enviado com valor diferente de single durante a criação do consentimento, apenas os métodos MANU, DICT ou QRES são permitidos.\n"
         },
         "CreditorAccount": {
             "type": "object",
