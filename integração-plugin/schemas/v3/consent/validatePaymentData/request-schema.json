@@ -12,12 +12,12 @@
         "requestBody": {
             "type": "object",
             "description": "Payload para validacao do pagamento.",
-            "required": [
-                "data"
-            ],
             "properties": {
-                "data": {
+                "dataPaymentConsent": {
                     "$ref": "#/$defs/ValidatePaymentConsent"
+                },
+                "dataRecurringPaymentConsent": {
+                    "$ref": "#/$defs/ValidatePaymentRecurringConsent"
                 }
             }
         }
@@ -50,6 +50,59 @@
                     "oneOf": [
                         {
                             "$ref": "../../common/consent/common-consent-schema.json#/$defs/PixPaymentConsent"
+                        }
+                    ],
+                    "endToEndId": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/EndToEndIdWithoutRestriction"
+                    },
+                    "remittanceInformation": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/RemittanceInformation"
+                    },
+                    "cnpjInitiator": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/CnpjInitiator"
+                    },
+                    "transactionIdentification": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/TransactionIdentification"
+                    }
+                },
+                "debtorAccount": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
+                },
+                "externalId": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/ExternalId"
+                },
+                "validationStage": {
+                    "$ref": "#/$defs/EnumValidationStage"
+                }
+            },
+            "additionalProperties": false
+        },
+        "ValidatePaymentRecurringConsent": {
+            "type": "object",
+            "description": "Objeto contendo as informações de consentimento para a iniciação de pagamento individual.",
+            "required": [
+                "tpp",
+                "loggedUser",
+                "creditor",
+                "payment"
+            ],
+            "properties": {
+                "tpp": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/TPP"
+                },
+                "loggedUser": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser"
+                },
+                "BusinessEntity": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/BusinessEntity"
+                },
+                "creditors": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/Creditors"
+                },
+                "payment": {
+                    "oneOf": [
+                        {
+                            "$ref": "../../common/consent/common-consent-schema.json#/$defs/PixPaymentRecurringConsent"
                         }
                     ],
                     "endToEndId": {

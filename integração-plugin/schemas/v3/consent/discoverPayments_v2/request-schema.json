@@ -2,15 +2,17 @@
     "$schema": "https://json-schema.org/draft-07/schema",
     "type": "object",
     "required": [
-        "requestMeta",
-        "consent"
+        "requestMeta"
     ],
     "properties": {
         "requestMeta": {
             "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
         },
-        "consent": {
+        "consentPayment": {
             "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+        },
+        "consentRecurringPayment": {
+            "$ref": "../../common/consent/consent-recurring-payment-schema.json#/$defs/ConsentRecurringPayment"
         }
     },
     "additionalProperties": false,
