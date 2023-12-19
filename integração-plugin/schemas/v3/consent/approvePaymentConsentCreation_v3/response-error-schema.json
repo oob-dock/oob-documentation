@@ -40,7 +40,8 @@
                                     "PARAMETRO_NAO_INFORMADO",
                                     "PARAMETRO_INVALIDO",
                                     "ERRO_IDEMPOTENCIA",
-                                    "NAO_INFORMADO"
+                                    "NAO_INFORMADO",
+                                    "FUNCIONALIDADE_NAO_HABILITADA"
                                 ],
                                 "example": "FORMA_PAGAMENTO_INVALIDA",
                                 "description": "Códigos de erros previstos na criação de consentimento para a iniciação de pagamentos"

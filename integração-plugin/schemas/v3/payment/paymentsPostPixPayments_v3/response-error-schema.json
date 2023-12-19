@@ -43,7 +43,9 @@
                             "DETALHE_PAGAMENTO_INVALIDO",
                             "PAGAMENTO_RECUSADO_DETENTORA",
                             "PAGAMENTO_RECUSADO_SPI",
-                            "ERRO_IDEMPOTENCIA"
+                            "ERRO_IDEMPOTENCIA",
+                            "LIMITE_PERIODO_VALOR_EXCEDIDO",
+                            "LIMITE_PERIODO_QUANTIDADE_EXCEDIDO"
                         ],
                         "example": "SALDO_INSUFICIENTE",
                         "description": "Códigos de erros previstos na criação da iniciação de pagamento:\n\n• SALDO_INSUFICIENTE: Esta conta não possui saldo suficiente para realizar o pagamento.\n\n• VALOR_ACIMA_LIMITE: O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente.\n\n• VALOR_INVALIDO: O valor enviado não é válido para o QR Code informado.\n\n• COBRANCA_INVALIDA: Validação de expiração, validação de vencimento, Status Válido.\n\n• CONSENTIMENTO_INVALIDO: Consentimento inválido (status não é \"authorised\" ou está expirado).\n\n• PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  \n\n• PARAMETRO_INVALIDO: Parâmetro inválido.\n\n• NAO_INFORMADO: Não informada pela detentora de conta.\n\n• PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Dados do pagamento divergentes dos dados do consentimento.\n\n• DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento inválido.\n\n• PAGAMENTO_RECUSADO_DETENTORA: Pagamento recusado pela detentora de conta.\n\n• PAGAMENTO_RECUSADO_SPI: Pagamento recusado no Sistema de Pagamentos Instantâneos (SPI).\n\n• ERRO_IDEMPOTENCIA: Erro idempotência.\n"
