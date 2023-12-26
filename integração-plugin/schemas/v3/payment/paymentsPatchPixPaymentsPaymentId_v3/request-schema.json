@@ -24,12 +24,19 @@
     },
     "requestBody": {
       "type": "object",
+      "required": [
+        "data"
+      ],
       "properties": {
-        "dataPixPayment": {
-          "$ref": "../common/common-schema.json#/$defs/PatchPixPaymentData"
-        },
-        "dataPixRecurringPayment": {
-          "$ref": "../common/common-schema.json#/$defs/PatchPixRecurringPaymentData"
+        "data": {
+          "oneOf": [
+            {
+              "$ref": "../common/common-schema.json#/$defs/PatchPixPaymentData"
+            },
+            {
+              "$ref": "../common/common-schema.json#/$defs/PatchPixRecurringPaymentData"
+            }
+          ]
         }
       }
     }
