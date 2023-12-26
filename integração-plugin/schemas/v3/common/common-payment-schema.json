@@ -933,6 +933,16 @@
                     }
                 }
             }
+        },
+        "PaymentType": {
+            "type": "string",
+            "description": "Indicador do tipo de pagamento",
+            "maxLength": 25,
+            "enum": [
+              "PAYMENT_CONSENT",
+              "PAYMENT_RECURRING_CONSENT"
+            ],
+            "example": "PAYMENT_CONSENT"
         }
     }
 }

@@ -63,7 +63,8 @@
                     }
                 }
             }
-        }
+        },
+        "dataType": "PAYMENT_RECURRING_CONSENT"
     },
     "requestMeta": {
         "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3",

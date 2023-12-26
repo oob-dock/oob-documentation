@@ -12,12 +12,22 @@
         "requestBody": {
             "type": "object",
             "description": "Payload para criação do consentimento para iniciação do pagamento.",
+            "required": [
+                "data"
+            ],
             "properties": {
-                "dataPaymentConsent": {
-                    "$ref": "#/$defs/CreatePaymentConsent"
+                "data": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/CreatePaymentConsent"
+                        },
+                        {
+                            "$ref": "#/$defs/CreatePaymentRecurringConsent"
+                        }
+                    ]
                 },
-                "dataRecurringPaymentConsent": {
-                    "$ref": "#/$defs/CreatePaymentRecurringConsent"
+                "dataType": {
+                    "$ref": "#/$defs/DataType"
                 }
             }
         }
@@ -110,6 +120,9 @@
                 }
             },
             "additionalProperties": false
+        },
+        "DataType": {
+            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
         }
     }
 }

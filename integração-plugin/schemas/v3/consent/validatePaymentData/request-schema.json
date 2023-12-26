@@ -12,12 +12,22 @@
         "requestBody": {
             "type": "object",
             "description": "Payload para validacao do pagamento.",
+            "required": [
+                "data"
+            ],
             "properties": {
-                "dataPaymentConsent": {
-                    "$ref": "#/$defs/ValidatePaymentConsent"
+                "data": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/ValidatePaymentConsent"
+                        },
+                        {
+                            "$ref": "#/$defs/ValidatePaymentRecurringConsent"
+                        }
+                    ]
                 },
-                "dataRecurringPaymentConsent": {
-                    "$ref": "#/$defs/ValidatePaymentRecurringConsent"
+                "dataType": {
+                    "$ref": "#/$defs/DataType"
                 }
             }
         }
@@ -138,6 +148,9 @@
             ],
             "example": "POST_CONSENT",
             "description": "Momento referente a chamada da validação de pagamento\nSegue descrição de cada valor do ENUM.\n\n- POST_CONSENT - Validação chamada no momento do post consent\n- POST_PAYMENT - Validação chamada no momento do post payment\n"
+        },
+        "DataType": {
+            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
         }
     }
 }

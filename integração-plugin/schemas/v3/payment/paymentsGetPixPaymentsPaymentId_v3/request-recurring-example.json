@@ -115,6 +115,7 @@
         "key": "string",
         "value": "string"
       }
-    ]
+    ],
+    "paymentType": "PAYMENT_RECURRING_CONSENT"
   }
 }
