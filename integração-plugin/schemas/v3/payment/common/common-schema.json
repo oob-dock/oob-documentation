@@ -15,6 +15,9 @@
                 "endToEndId": {
                     "$ref": "#/$defs/EndToEndIdWithoutRestriction"
                 },
+                "recurringConsentId": {
+                    "$ref": "#/$defs/RecurringConsentId"
+                },
                 "localInstrument": {
                     "$ref": "../../common/common-payment-schema.json#/$defs/EnumLocalInstrument"
                 },
@@ -51,6 +54,9 @@
                     ],
                     "example": "HYBRID_FLOW",
                     "description": "Campo condicional utilizado para identificar o fluxo de autorização em que o pagamento foi solicitado.\n\n[Restrição] Se CIBA ou FIDO, preenchimento obrigatório. Caso o campo não esteja presente no payload, subentende-se que o fluxo de autorização utilizado é o HYBRID_FLOW.\n"
+                },
+                "riskSignals": {
+                    "$ref": "#/$defs/RiskSignalsPayments"
                 }
             },
             "additionalProperties": false
@@ -72,6 +78,12 @@
             "description": "Deve ser preenchido no formato padrão ExxxxxxxxyyyyMMddHHmmkkkkkkkkkkk (32 caracteres; “case sensitive”, isso é, diferencia letras maiúsculas e minúsculas), sendo: “E” – fixo (1 caractere);  xxxxxxxx – identificação do agente que gerou o ´EndToEndId´, podendo ser: o ISPB do participante direto ou o ISPB do participante indireto (8 caracteres numéricos [0-9]);  yyyyMMddHHmm – data, hora e minuto (12 caracteres), seguindo o horário UTC, da submissão da ordem de pagamento, caso a liquidação seja prioritária, ou prevista para o envio da ordem ao sistema de liquidação, caso seja realizado um agendamento. Para ordens prioritárias e não prioritárias, aceita-se o preenchimento, pelo agente que gerou o ´EndToEndId´, com uma tolerância máxima de 12 horas, para o futuro e para o passado, em relação ao horário efetivo de processamento da ordem pelo SPI;  kkkkkkkkkkk – sequencial criado pelo agente que gerou o ´EndToEndId´ (11 caracteres alfanuméricos [a-z/A-Z/0-9]). Deve ser único dentro de cada “yyyyMMddHHmm”. Admite-se que o ´EndToEndId´ seja gerado pelo participante direto, pelo participante indireto ou pelo iniciador de pagamento. Ele deve ser único, não podendo ser repetido em qualquer outra operação enviada ao SPI.",
             "pattern": "^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$",
             "example": "E9040088820210128000800123873170"
+        },
+        "RecurringConsentId": {
+            "type": "string",
+            "pattern": "^urn:[a-zA-Z0-9][a-zA-Z0-9\\-]{0,31}:[a-zA-Z0-9()+,\\-.:=@;$_!*'%\\/?#]+$",
+            "maxLength": 256,
+            "description": "Identificador único do consentimento de longa duração criado para a iniciação de pagamento solicitada. Deverá ser um URN - Uniform Resource Name. \nUm URN, conforme definido na [RFC8141](https://tools.ietf.org/html/rfc8141) é um Uniform Resource \nIdentifier - URI - que é atribuído sob o URI scheme \"urn\" e um namespace URN específico, com a intenção de que o URN \nseja um identificador de recurso persistente e independente da localização. \nConsiderando a string urn:bancoex:C1DD33123 como exemplo para `recurringConsentId` temos:\n- o namespace(urn)\n- o identificador associado ao namespace da instituição transmissora (bancoex)\n- o identificador específico dentro do namespace (C1DD33123).\nInformações mais detalhadas sobre a construção de namespaces devem ser consultadas na [RFC8141](https://tools.ietf.org/html/rfc8141).\n\n[Restrição] Este campo é de preenchimento obrigatório quando o valor do campo authorisationFlow for igual a FIDO_FLOW.\n"
         },
         "RemittanceInformation": {
             "description": "Deve ser preenchido sempre que o usuário pagador inserir alguma informação adicional em um pagamento, a ser enviada ao recebedor.",
@@ -398,6 +410,240 @@
                 "PDNG"
             ],
             "description": "Estado atual da iniciação de pagamento. O estado evolui na seguinte ordem:  \n\n1.  RCVD (Received) - Indica que a requisição de pagamento foi recebida com sucesso pela detentora, mas ainda há validações a serem feitas antes de ser submetida para liquidação.\n\n2.  PATC (Partially Accepted Technical Correct) - Indica que a transação precisa da confirmação de mais autorizadores para que o processamento do pagamento possa prosseguir.  \n\n3.  CANC (Cancelled) - Indica que a transação Pix pendente foi cancelada com sucesso pelo usuário antes que fosse confirmada (ACCP) ou rejeitada (RJCT) pela detentora.\n\n4.  ACCP( Accepted Customer Profile) - Indica que todas as verificações necessárias já foram realizadas pela detentora e que a transação está pronta para ser enviada para liquidação (no SPI se for Pix para outra instituição ou internamente se for para outra conta na mesma instituição).\n\n5.  ACPD (Accepted Clearing Processed) - Indica que a detentora já submeteu a transação para liquidação, mas ainda não tem a confirmação se foi liquidada ou rejeitada.\n\n6.  RJCT (Rejected) Indica que a transação foi rejeitada pela detentora ou pelo SPI.\n\n7.  ACSC (Accepted Settlement Completed Debitor Account) - Indica que a transação foi efetivada pela detentora ou pelo SPI.\n\n8.  PDNG (Pending) - Indica que a detentora reteve temporariamente a transação Pix para análise.\n\n9.  SCHD (Scheduled) - Indica que a transação Pix foi agendada com sucesso na detentora.\n\nEm caso insucesso: \n \nRJCT (REJECTED) - Instrução de pagamento rejeitada.\n"
+        },
+        "RiskSignalsPayments": {
+            "type": "object",
+            "description": "Sinais de risco para iniciação de pagamentos automáticos\n\n[Restrição] Deve ser enviado quando o consentimento for para o produto Sweeping Accounts (O objeto \"/data/recurringConfiguration/sweeping\" usado no oneOf)\n",
+            "properties": {
+                "manual": {
+                    "type": "object",
+                    "required": [
+                        "deviceId",
+                        "isRootedDevice",
+                        "screenBrightness",
+                        "elapsedTimeSinceBoot",
+                        "osVersion",
+                        "userTimeZoneOffset",
+                        "language",
+                        "screenDimensions",
+                        "accountTenure"
+                    ],
+                    "description": "Representa a coleta de sinais de risco com a presença do usuário\n\n[Restrição] Obrigatório de ser enviado quando a transação ocorrer na presença do usuário\n",
+                    "properties": {
+                        "deviceId": {
+                            "type": "string",
+                            "description": "ID único do dispositivo gerado pela plataforma.",
+                            "example": "00000000-54b3-e7c7-0000-000046bffd97"
+                        },
+                        "isRootedDevice": {
+                            "type": "boolean",
+                            "description": "Indica se o dispositivo atualmente está com permissão de “root”.",
+                            "example": false
+                        },
+                        "screenBrightness": {
+                            "type": "number",
+                            "format": "double",
+                            "description": "Indica o nível de brilho da tela do dispositivo.  \nEm dispositivos Android o valor é um inteiro, entre 0 e 255, inclusive;  \nEm dispositivos iOS o valor é um ponto flutuante entre 0.0 e 1.0.\n"
+                        },
+                        "elapsedTimeSinceBoot": {
+                            "type": "integer",
+                            "format": "int64",
+                            "description": "Indica por quanto tempo (em milissegundos) o dispositivo está ligado."
+                        },
+                        "osVersion": {
+                            "type": "string",
+                            "description": "Versão do sistema operacional."
+                        },
+                        "userTimeZoneOffset": {
+                            "type": "string",
+                            "description": "Indica a configuração de fuso horário do dispositivo do usuário, com o formato UTC offset: ±hh[:mm]\n"
+                        },
+                        "language": {
+                            "type": "string",
+                            "description": "Indica o idioma do dispositivo no formato ISO 639-1."
+                        },
+                        "screenDimensions": {
+                            "type": "object",
+                            "description": "Dimensões da tela do dispositivo",
+                            "required": [
+                                "height",
+                                "width"
+                            ],
+                            "properties": {
+                                "height": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Altura da tela, em pixels."
+                                },
+                                "width": {
+                                    "type": "integer",
+                                    "format": "int64",
+                                    "description": "Largura da tela, em pixels."
+                                }
+                            }
+                        },
+                        "accountTenure": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "description": "Data de cadastro do cliente na iniciadora."
+                        },
+                        "geolocation": {
+                            "type": "object",
+                            "description": "Dados de geolocalização do cliente enquanto logado na iniciadora",
+                            "properties": {
+                                "latitude": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "description": "Coordenada latitudial do cliente enquanto logado na iniciadora"
+                                },
+                                "longitude": {
+                                    "type": "number",
+                                    "format": "double",
+                                    "description": "Coordenada longitudinal do cliente enquanto logado na iniciadora"
+                                },
+                                "type": {
+                                    "type": "string",
+                                    "description": "Tipo de mecanismo utilizado na geração da geolocalização\n",
+                                    "enum": [
+                                        "COARSE",
+                                        "FINE",
+                                        "INFERRED"
+                                    ]
+                                }
+                            }
+                        },
+                        "isCallInProgress": {
+                            "type": "boolean",
+                            "description": "Indica chamada ativa no momento do vínculo.\n\n[Restrição] Caso o sinal de risco esteja disponível (cliente permitiu que fosse coletado), o mesmo deverá ser enviado\n"
+                        },
+                        "isDevModeEnabled": {
+                            "type": "boolean",
+                            "description": "Indica se o dispositivo está em modo de desenvolvedor."
+                        },
+                        "isMockGPS": {
+                            "type": "boolean",
+                            "description": "Indica se o dispositivo está usando um GPS falso."
+                        },
+                        "isEmulated": {
+                            "type": "boolean",
+                            "description": "Indica se o dispositivo é emulado ou real."
+                        },
+                        "isMonkeyRunner": {
+                            "type": "boolean",
+                            "description": "Indica o uso do MonkeyRunner."
+                        },
+                        "isCharging": {
+                            "type": "boolean",
+                            "description": "Indica se a bateria do dispositivo está sendo carregada."
+                        },
+                        "antennaInformation": {
+                            "type": "string",
+                            "description": "Indica em qual antena o dispositivo está conectado."
+                        },
+                        "isUsbConnected": {
+                            "type": "boolean",
+                            "description": "Indica se o dispositivo está conectado a outro dispositivo via USB."
+                        },
+                        "integrity": {
+                            "type": "object",
+                            "description": "Informa a integridade do dispositivo e app.  \nNo Android, conforme documentação Play API Integrity - [Android](https://developer.android.com/google/play/integrity/overview?hl=pt-br).  \nNo iOS, conforme documentação App Attest [iOS](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)\n",
+                            "properties": {
+                                "appRecognitionVerdict": {
+                                    "type": "string",
+                                    "description": "Informa a integridade do app"
+                                },
+                                "deviceRecognitionVerdict": {
+                                    "type": "string",
+                                    "description": "Informa a integridade do dispositivo"
+                                }
+                            }
+                        }
+                    }
+                },
+                "automatic": {
+                    "type": "object",
+                    "required": [
+                        "lastLoginDateTime",
+                        "pixKeyRegistrationDateTime"
+                    ],
+                    "description": "Representa a coleta de sinais de risco com a presença do usuário\n\n[Restrição] Obrigatório de ser enviado quando a transação não ocorrer na presença do usuário\n",
+                    "properties": {
+                        "lastLoginDateTime": {
+                            "type": "string",
+                            "description": "Data e hora do último login do cliente na iniciadora",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$"
+                        },
+                        "pixKeyRegistrationDateTime": {
+                            "type": "string",
+                            "description": "Data e hora de cadastro da chave Pix do recebedor na iniciadora",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$"
+                        }
+                    }
+                }
+            }
+        },
+        "PatchPixRecurringPaymentData": {
+            "type": "object",
+            "required": [
+                "status",
+                "cancellation"
+            ],
+            "properties": {
+                "status": {
+                    "$ref": "#/$defs/EnumRecurringPaymentCancellationStatusType"
+                },
+                "cancellation": {
+                    "type": "object",
+                    "description": "Informações gerais sobre o cancelamento.\n",
+                    "required": [
+                        "cancelledBy"
+                    ],
+                    "properties": {
+                        "cancelledBy": {
+                            "type": "object",
+                            "description": "Informações gerais sobre o usuário que solicitou o cancelamento.",
+                            "required": [
+                                "document"
+                            ],
+                            "properties": {
+                                "document": {
+                                    "type": "object",
+                                    "description": "Objeto que consolida os dados do documento do usuário que solicitou o cancelamento.",
+                                    "required": [
+                                        "identification",
+                                        "rel"
+                                    ],
+                                    "properties": {
+                                        "identification": {
+                                            "type": "string",
+                                            "maxLength": 11,
+                                            "description": "Número do documento de identificação oficial do usuário.",
+                                            "example": "11111111111",
+                                            "pattern": "^\\d{11}$"
+                                        },
+                                        "rel": {
+                                            "type": "string",
+                                            "maxLength": 3,
+                                            "description": "Tipo do documento de identificação oficial do usuário.",
+                                            "example": "CPF",
+                                            "pattern": "^[A-Z]{3}$"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "EnumRecurringPaymentCancellationStatusType": {
+            "type": "string",
+            "enum": [
+                "REJECTED"
+            ],
+            "example": "REJECTED",
+            "description": "Estado para qual o pagamento deverá transitar\n"
         }
     }
 }

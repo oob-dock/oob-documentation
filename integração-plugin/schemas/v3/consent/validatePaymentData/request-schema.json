@@ -17,7 +17,17 @@
             ],
             "properties": {
                 "data": {
-                    "$ref": "#/$defs/ValidatePaymentConsent"
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/ValidatePaymentConsent"
+                        },
+                        {
+                            "$ref": "#/$defs/ValidatePaymentRecurringConsent"
+                        }
+                    ]
+                },
+                "dataType": {
+                    "$ref": "#/$defs/DataType"
                 }
             }
         }
@@ -77,6 +87,59 @@
             },
             "additionalProperties": false
         },
+        "ValidatePaymentRecurringConsent": {
+            "type": "object",
+            "description": "Objeto contendo as informações de consentimento para a iniciação de pagamento individual.",
+            "required": [
+                "tpp",
+                "loggedUser",
+                "creditor",
+                "payment"
+            ],
+            "properties": {
+                "tpp": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/TPP"
+                },
+                "loggedUser": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser"
+                },
+                "BusinessEntity": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/BusinessEntity"
+                },
+                "creditors": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/Creditors"
+                },
+                "payment": {
+                    "oneOf": [
+                        {
+                            "$ref": "../../common/consent/common-consent-schema.json#/$defs/PixPaymentRecurringConsent"
+                        }
+                    ],
+                    "endToEndId": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/EndToEndIdWithoutRestriction"
+                    },
+                    "remittanceInformation": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/RemittanceInformation"
+                    },
+                    "cnpjInitiator": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/CnpjInitiator"
+                    },
+                    "transactionIdentification": {
+                        "$ref": "../../payment/common/common-schema.json#/$defs/TransactionIdentification"
+                    }
+                },
+                "debtorAccount": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
+                },
+                "externalId": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/ExternalId"
+                },
+                "validationStage": {
+                    "$ref": "#/$defs/EnumValidationStage"
+                }
+            },
+            "additionalProperties": false
+        },
         "EnumValidationStage": {
             "type": "string",
             "enum": [
@@ -85,6 +148,9 @@
             ],
             "example": "POST_CONSENT",
             "description": "Momento referente a chamada da validação de pagamento\nSegue descrição de cada valor do ENUM.\n\n- POST_CONSENT - Validação chamada no momento do post consent\n- POST_PAYMENT - Validação chamada no momento do post payment\n"
+        },
+        "DataType": {
+            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
         }
     }
 }

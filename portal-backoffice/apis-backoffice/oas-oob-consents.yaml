@@ -151,12 +151,6 @@ paths:
       - Consents Opus Open Banking
       description: Get active consents for a given time frame
       parameters:
-      - name: endDate
-        in: query
-        schema:
-          format: date-time
-          type: string
-          example: 2022-01-30T18:31:28Z
       - name: page
         in: query
         schema:
@@ -169,12 +163,6 @@ paths:
           format: int32
           default: 25
           type: integer
-      - name: startDate
-        in: query
-        schema:
-          format: date-time
-          type: string
-          example: 2022-01-30T17:31:28Z
       responses:
         default:
           description: Default error response

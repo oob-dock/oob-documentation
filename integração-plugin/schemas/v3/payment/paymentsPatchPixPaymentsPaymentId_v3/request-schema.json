@@ -10,10 +10,17 @@
       "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
     },
     "paymentId": {
-            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
-        },
+      "$ref": "../../common/common-payment-schema.json#/$defs/PaymentId"
+    },
     "consent": {
-      "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+      "oneOf": [
+        {
+          "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+        },
+        {
+          "$ref": "../../common/consent/consent-recurring-payment-schema.json#/$defs/ConsentRecurringPayment"
+        }
+      ]
     },
     "requestBody": {
       "type": "object",
@@ -22,7 +29,14 @@
       ],
       "properties": {
         "data": {
-          "$ref": "../common/common-schema.json#/$defs/PatchPixPaymentData"
+          "oneOf": [
+            {
+              "$ref": "../common/common-schema.json#/$defs/PatchPixPaymentData"
+            },
+            {
+              "$ref": "../common/common-schema.json#/$defs/PatchPixRecurringPaymentData"
+            }
+          ]
         }
       }
     }

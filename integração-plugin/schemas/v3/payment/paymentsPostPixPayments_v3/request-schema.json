@@ -10,7 +10,14 @@
       "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
     },
     "consent": {
-      "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+      "oneOf": [
+        {
+          "$ref": "../../common/consent/consent-payment-schema.json#/$defs/ConsentPayment"
+        },
+        {
+          "$ref": "../../common/consent/consent-recurring-payment-schema.json#/$defs/ConsentRecurringPayment"
+        }
+      ]
     },
     "IdempotencyKey": {
       "type": "string",

@@ -1,0 +1,73 @@
+{
+    "requestBody": {
+        "data": {
+            "tpp": {
+                "name": "GuiaBolsa"
+            },
+            "loggedUser": {
+                "document": {
+                    "identification": "11111111111",
+                    "rel": "CPF"
+                }
+            },
+            "creditors": [
+                {
+                    "personType": "PESSOA_NATURAL",
+                    "cpfCnpj": "58764789000137",
+                    "name": "Marco Antonio de Brito"
+                }
+            ],
+            "payment": {
+                "recurringConfiguration": {
+                    "automatic": {
+                        "contractId": "XE00038166201907261559y6j6",
+                        "amount": "100000.12",
+                        "transactionLimit": "1000000.12",
+                        "period": "DIARIO",
+                        "dayOfMonth": 10,
+                        "dayOfWeek": "SEGUNDA_FEIRA",
+                        "month": "JANEIRO",
+                        "contractDebtor": {
+                            "name": "Policarpo Quaresma",
+                            "document": {
+                                "identification": "11111111111111",
+                                "rel": "CNPJ"
+                            }
+                        },
+                        "immediatePayment": {
+                            "type": "PIX",
+                            "date": "2021-01-01",
+                            "currency": "BRL",
+                            "amount": "100000.12",
+                            "remittanceInformation": "Pagamento da nota RSTO035-002",
+                            "creditorAccount": {
+                                "ispb": "12345678",
+                                "issuer": "1774",
+                                "number": "1234567890",
+                                "accountType": "CACC"
+                            }
+                        }
+                    }
+                },
+                "ibgeTownCode": "5300108",
+                "endToEndId": "E9040088820210128000800123873170",
+                "remittanceInformation": "Pagamento da nota XPTO035-002.",
+                "cnpjInitiator": "50685362000135",
+                "transactionIdentification": "E00038166201907261559y6j6"
+            },
+            "debtorAccount": {
+                "ispb": "87654321",
+                "number": "0987654321",
+                "accountType": "CACC",
+                "issuer": "1774"
+            },
+            "externalId": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf",
+            "validationStage": "POST_CONSENT"
+        },
+        "dataType": "PAYMENT_RECURRING_CONSENT"
+    },
+    "requestMeta": {
+        "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3",
+        "brandId": "cbanco"
+    }
+}

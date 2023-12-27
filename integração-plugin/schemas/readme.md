@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2023-12-19 - v3.4.0
+
+- Inclusão dos schemas de pagamento automático versão 1
+na fase 3 versão 3
+
 ### 2023-09-14 - v3.3.0
 
 - Inclusão dos schemas de investments versão 1
