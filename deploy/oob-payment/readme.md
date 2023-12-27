@@ -220,3 +220,37 @@ additionalVars:
   - name: OOB_ALLOWAUTHCODETOKEN_LIMITDATE
     value: "2023-07-18"
 ```
+
+### CAMEL_CONNECTOR_MTLS_CERT
+
+Utilizado para definir o certificado mtls para chamadas ao endpoint de legado.
+
+**IMPORTANTE**: Caso planeje utilizar o camelUtils de makePostCall and makeGetCall,
+essa variável se torna obrigatória.
+
+**Ex:**
+
+Colocar o certificado completo, apenas uma parte da chave foi colocada como exemplo.
+
+```yaml
+additionalVars:
+  - name: CAMEL_CONNECTOR_MTLS_CERT
+    value: -----BEGIN CERTIFICATE-----\nMIIEyzCCArMCAQEwDQYJKoZIhvcNAQELBQAwgasxCzAJBgNVBAYTAkJSMRIwEAYD(...)\n-----ENDCERTIFICATE-----
+```
+
+### CAMEL_CONNECTOR_MTLS_KEY
+
+Utilizado para definir a chave privada mtls para chamadas ao endpoint de legado.
+
+**IMPORTANTE**: Caso planeje utilizar o camelUtils de makePostCall and makeGetCall,
+essa variável se torna obrigatória.
+
+**Ex:**
+
+Colocar a chave completa, apenas uma parte da chave foi colocada como exemplo.
+
+```yaml
+additionalVars:
+  - name: CAMEL_CONNECTOR_MTLS_KEY
+    value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
+```
