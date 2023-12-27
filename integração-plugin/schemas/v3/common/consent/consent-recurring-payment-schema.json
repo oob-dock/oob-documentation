@@ -1,8 +1,8 @@
 {
     "$schema": "https://json-schema.org/draft-07/schema",
     "$defs": {
-        "ConsentPayment": {
-            "description": "Consentimento de pagamento",
+        "ConsentRecurringPayment": {
+            "description": "Consentimento de pagamento recorrente",
             "type": "object",
             "required": [
                 "brandId",
@@ -11,8 +11,8 @@
                 "externalId",
                 "loggedUser",
                 "expirationDateTime",
-                "creditor",
-                "payment"
+                "creditors",
+                "recurringConfiguration"
             ],
             "properties": {
                 "brandId": {
@@ -42,18 +42,27 @@
                 "expirationDateTime": {
                     "$ref": "./common-consent-schema.json#/$defs/ExpirationDateTime"
                 },
-                "creditor": {
-                    "$ref": "../common-payment-schema.json#/$defs/Identification"
+                "creditors": {
+                    "$ref": "../common-payment-schema.json#/$defs/Creditors"
                 },
-                "payment": {
+                "recurringConfiguration": {
                     "oneOf": [
                         {
-                            "$ref": "./common-consent-schema.json#/$defs/PixPaymentConsent"
+                            "$ref": "../common-payment-schema.json#/$defs/Automatic"
                         },
                         {
-                            "$ref": "./common-consent-schema.json#/$defs/TedTefPaymentConsent"
+                            "$ref": "../common-payment-schema.json#/$defs/PostSweeping"
+                        },
+                        {
+                            "$ref": "../common-payment-schema.json#/$defs/Vrp"
                         }
                     ]
+                },
+                "cancellation": {
+                    "$ref": "./common-consent-schema.json#/$defs/PixPaymentCancellation"
+                },
+                "additionalInformation": {
+                    "$ref": "../common-payment-schema.json#/$defs/AdditionalInformation"
                 },
                 "debtorAccount": {
                     "$ref": "../common-payment-schema.json#/$defs/DebtorAccount"
