@@ -254,6 +254,11 @@ de pagamento, como por exemplo:
 A rota camel escuta chamadas realizadas em `direct:validatePaymentData` e um exemplo
 de [request](../schemas/v3/consent/validatePaymentData/request-example.json).
 
+**Importante**: A partir da versão 4 do consentimento, caso múltiplos erros sejam
+identificados durante a validação, deve-se retornar o erro de maior prioridade.
+A tabela de prioridade pode ser encontrada nas *Informações Técnicas* da
+[API de Pagamentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17375943/SV+API+-+Pagamentos).
+
 ### Tratamentos adicionais
 
 #### Filtro de contas
