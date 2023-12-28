@@ -434,11 +434,13 @@ conectores.
 
 Os serviços e suas respectivas funcionalidades são:
 
-| Nome do serviço    | Descrição                                                                                            | Comando de chamada no arquivo .xml                                                               |
-| ------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| getDayOfTheWeek    | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira)                      | `${bean:camelUtils.getDayOfTheWeek}`                                                             |
-| concatenateStrings | Obter uma string que é a concatenação das duas strings passadas como parâmetros                      | `${bean:camelUtils.concatenateStrings("ab", "cd")}`                                              |
-| hmacCalculator     | Obter o cálculo de hash de um data com base num algoritmo específico com uma chave secreta fornecida | `${bean:camelUtils.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}` |
+| Nome do serviço    | Descrição                                                                                            | Comando de chamada no arquivo .xml                                                                             |
+| ------------------ | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| getDayOfTheWeek    | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira)                      | `${bean:camelUtils.getDayOfTheWeek}`                                                                           |
+| concatenateStrings | Obter uma string que é a concatenação das duas strings passadas como parâmetros                      | `${bean:camelUtils.concatenateStrings("ab", "cd")}`                                                            |
+| hmacCalculator     | Obter o cálculo de hash de um data com base num algoritmo específico com uma chave secreta fornecida | `${bean:camelUtils.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}`               |
+| makePostCall       | Utilizado para chamadas post com mtls                                                                | `${bean:camelUtils.makePostCall(${authorization}, ${transactionHash}, ${contentType},  ${endpoint}, ${body})}` |
+| makeGetCall        | Utilizado para chamadas get com mtls                                                                 | `${bean:camelUtils.makeGetCall(${authorization}, ${transactionHash}, ${contentType}, ${endpoint})}`            |
 
 **Exemplo de chamada do serviço getDayOfTheWeek:**
 
