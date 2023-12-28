@@ -1029,7 +1029,7 @@ O resultado desta chamada seria: abcd
 
 ### hmacCalculator
 
-Esta função tem como objetivo fazer fazer o cálculo de hash de um data com base
+Esta função tem como objetivo fazer o cálculo de hash de um data com base
 num algoritmo específico com uma chave secreta fornecida.
 
 public String hmacCalculator(String algorithm, String data, String key)
@@ -1059,6 +1059,72 @@ HmacSHA224
 HmacSHA256
 HmacSHA384
 HmacSHA512
+```
+
+### makePostCall
+
+Esta função tem como objetivo fazer chamadas post com certificado/key
+mtls configurada nas variáveis adicionais do camel
+
+public static String makePostCall(String authorization, String transactionHash,
+        String contentType, String endpoint, String payload)
+
+onde:
+
+**authorization** -> header "Authorization", se não houver deixar em branco;
+
+**transactionHash** -> header "Transaction-Hash", se não houver deixar em branco;
+
+**contentType** -> header "Content-Type", se não houver deixar em branco;
+
+**endpoint** -> url do endpoint da chamada;
+
+**payload** -> body da chamada;
+
+Exemplos de chamada no camel:
+
+```xml
+<setProperty name="makePostCall">
+    <simple>${bean:camelHelper.makePostCall(${authorization}, ${transactionHash}, ${contentType}, ${endpoint}, ${body})}</simple>
+</setProperty>
+```
+
+```xml
+<setProperty name="makePostCall">
+    <simple>${bean:camelHelper.makePostCall("", "", ${contentType}, ${endpoint}, ${body})}</simple>
+</setProperty>
+```
+
+### makeGetCall
+
+Esta função tem como objetivo fazer chamadas post com certificado/key
+mtls configurada nas variáveis adicionais do camel
+
+public static String makeGetCall(String authorization, String transactionHash,
+        String contentType, String endpoint)
+
+onde:
+
+**authorization** -> header "Authorization", se não houver deixar em branco;
+
+**transactionHash** -> header "Transaction-Hash", se não houver deixar em branco;
+
+**contentType** -> header "Content-Type", se não houver deixar em branco;
+
+**endpoint** -> url do endpoint da chamada;
+
+Exemplos de chamada no camel:
+
+```xml
+<setProperty name="makeGetCall">
+    <simple>${bean:camelHelper.makeGetCall(${authorization}, ${transactionHash}, ${contentType}, ${endpoint})}</simple>
+</setProperty>
+```
+
+```xml
+<setProperty name="makeGetCall">
+    <simple>${bean:camelHelper.makeGetCall("", "", ${contentType}, ${endpoint})}</simple>
+</setProperty>
 ```
 
 ## Componentes Suportados
