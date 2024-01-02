@@ -1,0 +1,133 @@
+{
+  "data": [
+    {
+      "postalAddress": {
+        "townName": "Marília",
+        "countrySubDivision": "SP",
+        "ibgeCode": "3515890",
+        "geographicCoordinates": {
+          "longitude": "-180.836519",
+          "latitude": "-90.8365180"
+        },
+        "address": "Av Naburo Ykesaki, 1270",
+        "country": "Brasil",
+        "additionalInfo": "Informações Adicionais",
+        "districtName": "Centro",
+        "postCode": "17500001",
+        "countryCode": "BRA"
+      },
+      "availability": {
+        "standards": [
+          {
+            "openingTime": "10:00:57Z",
+            "closingTime": "16:00:57Z",
+            "weekday": "SEGUNDA_FEIRA"
+          },
+          {
+            "openingTime": "10:00:57Z",
+            "closingTime": "16:00:57Z",
+            "weekday": "SEGUNDA_FEIRA"
+          },
+          {
+            "openingTime": "10:00:57Z",
+            "closingTime": "16:00:57Z",
+            "weekday": "SEGUNDA_FEIRA"
+          }
+        ],
+        "exception": "Exceto feriados municipais, nacionais e estaduais",
+        "isPublicAccessAllowed": false
+      },
+      "services": [
+        {
+          "additionalInfo": "Informações Adicionais",
+          "code": "OUTROS_PRODUTOS_SERVICOS",
+          "name": "OUTROS_PRODUTOS_SERVICOS"
+        },
+        {
+          "code": "OUTROS_PRODUTOS_SERVICOS",
+          "additionalInfo": "Informações Adicionais",
+          "name": "OUTROS_PRODUTOS_SERVICOS"
+        },
+        {
+          "additionalInfo": "Informações Adicionais",
+          "name": "OUTROS_PRODUTOS_SERVICOS",
+          "code": "OUTROS_PRODUTOS_SERVICOS"
+        }
+      ],
+      "identification": {
+        "ownerName": "João da Silva Santos"
+      },
+      "participant": {
+        "urlComplementaryList": "https://empresadaorganizacaoa.com/complementarylist",
+        "name": "Empresa da Organização A",
+        "brand": "Organização A",
+        "cnpjNumber": "50685362000135"
+      }
+    },
+    {
+      "participant": {
+        "name": "Empresa da Organização A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://empresadaorganizacaoa.com/complementarylist",
+        "brand": "Organização A"
+      },
+      "availability": {
+        "exception": "Exceto feriados municipais, nacionais e estaduais",
+        "isPublicAccessAllowed": true,
+        "standards": [
+          {
+            "weekday": "SEGUNDA_FEIRA",
+            "openingTime": "10:00:57Z",
+            "closingTime": "16:00:57Z"
+          },
+          {
+            "closingTime": "16:00:57Z",
+            "weekday": "SEGUNDA_FEIRA",
+            "openingTime": "10:00:57Z"
+          },
+          {
+            "weekday": "SEGUNDA_FEIRA",
+            "openingTime": "10:00:57Z",
+            "closingTime": "16:00:57Z"
+          }
+        ]
+      },
+      "postalAddress": {
+        "ibgeCode": "3515890",
+        "districtName": "Centro",
+        "countryCode": "BRA",
+        "townName": "Marília",
+        "postCode": "17500001",
+        "additionalInfo": "Informações Adicionais",
+        "countrySubDivision": "SP",
+        "address": "Av Naburo Ykesaki, 1270",
+        "country": "Brasil",
+        "geographicCoordinates": {
+          "longitude": "-180.836519",
+          "latitude": "-90.8365180"
+        }
+      },
+      "identification": {
+        "ownerName": "João da Silva Santos",
+        "eu558": -98844869.97800793
+      },
+      "services": [
+        {
+          "name": "OUTROS_PRODUTOS_SERVICOS",
+          "additionalInfo": "Informações Adicionais",
+          "code": "OUTROS_PRODUTOS_SERVICOS"
+        },
+        {
+          "code": "OUTROS_PRODUTOS_SERVICOS",
+          "name": "OUTROS_PRODUTOS_SERVICOS",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "OUTROS_PRODUTOS_SERVICOS",
+          "code": "OUTROS_PRODUTOS_SERVICOS",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ]
+    }
+  ]
+}

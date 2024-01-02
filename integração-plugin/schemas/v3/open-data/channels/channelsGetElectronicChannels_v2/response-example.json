@@ -1,0 +1,145 @@
+{
+  "data": [
+    {
+      "identification": {
+        "type": "CHAT",
+        "urls": [
+          "https://empresaa1.com/internet-banking",
+          "https://empresaa1.com/sac",
+          "https://empresaa1.com/ouvidoria"
+        ],
+        "additionalInfo": "Informações Adicionais"
+      },
+      "services": [
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Marca A",
+        "name": "Empresa da Marca A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    },
+    {
+      "identification": {
+        "type": "CHAT",
+        "urls": [
+          "https://empresaa1.com/internet-banking",
+          "https://empresaa1.com/sac",
+          "https://empresaa1.com/ouvidoria"
+        ],
+        "additionalInfo": "Informações Adicionais"
+      },
+      "services": [
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Marca A",
+        "name": "Empresa da Marca A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    },
+    {
+      "identification": {
+        "type": "CHAT",
+        "urls": [
+          "https://empresaa1.com/internet-banking",
+          "https://empresaa1.com/sac",
+          "https://empresaa1.com/ouvidoria"
+        ],
+        "additionalInfo": "Informações Adicionais"
+      },
+      "services": [
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Marca A",
+        "name": "Empresa da Marca A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    },
+    {
+      "identification": {
+        "type": "CHAT",
+        "urls": [
+          "https://empresaa1.com/internet-banking",
+          "https://empresaa1.com/sac",
+          "https://empresaa1.com/ouvidoria"
+        ],
+        "additionalInfo": "Informações Adicionais"
+      },
+      "services": [
+        {
+          "name": "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Marca A",
+        "name": "Empresa da Marca A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    }
+  ]
+}
