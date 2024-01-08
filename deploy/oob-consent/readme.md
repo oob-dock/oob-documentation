@@ -299,11 +299,29 @@ additionalVars:
     value: CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ,CUSTOMERS_PERSONAL_ADITTIONALINFO_READ,CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ,CUSTOMERS_BUSINESS_ADITTIONALINFO_READ,RESOURCES_READ
 ```
 
+### CONSENT_DEBTORACCOUNT_IBGETOWNCODE
+
+Configuração utilizada no contexto de Pagamentos Automáticos. Utilizado para
+indicar o código do município de cadastro do usuário pagador na instituição
+detentora. Caso a instituição possua todos os cadastros no mesmo município esta
+variável pode ser utilizada. No entanto, caso a instituição possua várias
+localidades esta informação deverá vir do sistema legado.
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CONSENT_DEBTORACCOUNT_IBGETOWNCODE
+    value: "3550308"
+```
+
 ### APPLICATION_ENCRYPTION_CHARSET
 
 Utilizado para definir o charset usado na criptografia dos campos na base de dados.
 
 Valor default: `UTF-8`
+
+### 
 
 ### Conectores
 
