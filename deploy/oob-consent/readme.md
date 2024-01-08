@@ -321,8 +321,6 @@ Utilizado para definir o charset usado na criptografia dos campos na base de dad
 
 Valor default: `UTF-8`
 
-### 
-
 ### Conectores
 
 Existem additionalVars para utilização do conector de aprovação de consentimento
