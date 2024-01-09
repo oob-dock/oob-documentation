@@ -73,11 +73,12 @@ Open Banking e seus tipos:
 | Compartilhamento de dados | FINANCING                    | Não selecionável | ```direct:discoverFinancings```                  |
 | Compartilhamento de dados | LOAN                         | Não selecionável | ```direct:discoverLoans```                       |
 | Compartilhamento de dados | UNARRANGED_ACCOUNT_OVERDRAFT | Não selecionável | ```direct:discoverUnarrangedAccountOverdrafts``` |
-| Compartilhamento de dados | BANK_FIXED_INCOMES_READ      | Não selecionável | ```direct:discoverBankFixedIncomes```        |
-| Compartilhamento de dados | CREDIT_FIXED_INCOMES_READ    | Não selecionável | ```direct:discoverCreditFixedIncomes```      |
-| Compartilhamento de dados | FUNDS_READ                   | Não selecionável | ```direct:discoverFunds```                   |
-| Compartilhamento de dados | VARIABLE_INCOMES_READ        | Não selecionável | ```direct:discoverVariableIncomes```         |
-| Compartilhamento de dados | TREASURE_TITLES_READ         | Não selecionável | ```direct:discoverTreasureTitles```          |
+| Compartilhamento de dados | BANK_FIXED_INCOMES_READ      | Não selecionável | ```direct:discoverBankFixedIncomes```            |
+| Compartilhamento de dados | CREDIT_FIXED_INCOMES_READ    | Não selecionável | ```direct:discoverCreditFixedIncomes```          |
+| Compartilhamento de dados | FUNDS_READ                   | Não selecionável | ```direct:discoverFunds```                       |
+| Compartilhamento de dados | VARIABLE_INCOMES_READ        | Não selecionável | ```direct:discoverVariableIncomes```             |
+| Compartilhamento de dados | TREASURE_TITLES_READ         | Não selecionável | ```direct:discoverTreasureTitles```              |
+| Compartilhamento de dados | EXCHANGES_READ               | Não selecionável | ```direct:discoverExchanges```                   |
 
 Caso a instituição forneça algum produto do tipo de compartilhamento de dados,
 será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
