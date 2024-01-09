@@ -580,6 +580,7 @@
 | GET      | /v2/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | POST     | /v2/consents/\{ID\}/extends | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
 | GET      | /v2/consents/\{ID\}/extends | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
+| POST     | /v3/consents                | Sim          | consents         | Não        | Não              | Sim  |                    |
 
 ### Resources
 
