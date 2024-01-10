@@ -319,7 +319,8 @@
             "enum": [
                 "V1",
                 "V2",
-                "V3"
+                "V3",
+                "V4"
             ],
             "examples": [
                 "V1"
@@ -374,6 +375,7 @@
                     "FUNDS_READ",
                     "VARIABLE_INCOMES_READ",
                     "TREASURE_TITLES_READ",
+                    "EXCHANGES_READ",
                     "RESOURCES_READ"
                 ]
             },
@@ -428,9 +430,22 @@
                     "description": "Valor da transação com 2 casas decimais. O valor deve ser o mesmo enviado no consentimento. \n\nPara QR Code estático com valor pré-determinado no QR Code ou para QR Code dinâmico com indicação de que o valor não pode ser alterado: O campo amount deve ser preenchido com o valor estabelecido no QR Code. \nCaso seja preenchido com valor divergente do QR Code, deve ser retornado um erro HTTP Status 422.\n"
                 },
                 "schedule": {
+                    "description": "[Restrição] Mutuamente excludente com o campo date. \n\nEste campo é obrigatório no caso de agendamento. \n\nNeste caso, o campo date não deve ser informado.\n",
                     "oneOf": [
                         {
                             "$ref": "#/$defs/Schedule"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleDaily"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleWeekly"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleMonthly"
+                        },
+                        {
+                            "$ref": "#/$defs/ScheduleCustom"
                         }
                     ]
                 }
@@ -438,7 +453,6 @@
         },
         "Schedule": {
             "type": "object",
-            "description": "[Restrição] Mutuamente excludente com o campo date. \n\nEste campo é obrigatório no caso de agendamento. \n\nNeste caso, o campo date não deve ser informado.\n",
             "required": [
                 "single"
             ],
@@ -455,7 +469,167 @@
                             "format": "date",
                             "maxLength": 10,
                             "example": "2021-01-01",
-                            "description": "Define a data alvo da liquidação do pagamento. \n\nO fuso horário de Brasília deve ser utilizado para criação e racionalização sobre os dados deste campo.\n\nObservação: Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo D+365 corridos a partir da data do consentimento considerando o fuso horário de Brasília\n"
+                            "description": "Define a data alvo da liquidação do pagamento.\nO fuso horário de Brasília deve ser utilizado para criação e racionalização sobre os dados deste campo.\n\n[Restrição] Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo D+730 corridos a partir da data do consentimento, também considerando o fuso horário de Brasília."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleDaily": {
+            "type": "object",
+            "required": [
+                "daily"
+            ],
+            "properties": {
+                "daily": {
+                    "type": "object",
+                    "description": "Define a política de agendamento diário.",
+                    "required": [
+                        "startDate",
+                        "quantity"
+                    ],
+                    "properties": {
+                        "startDate": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "maxLength": 10,
+                            "example": "2023-08-23",
+                            "description": "Define a data do primeiro pagamento de recorrência diária"
+                        },
+                        "quantity": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 2,
+                            "maximum": 730,
+                            "example": 3,
+                            "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleWeekly": {
+            "type": "object",
+            "required": [
+                "weekly"
+            ],
+            "properties": {
+                "weekly": {
+                    "type": "object",
+                    "description": "Define a política de agendamento semanal.",
+                    "required": [
+                        "dayOfWeek",
+                        "startDate",
+                        "quantity"
+                    ],
+                    "properties": {
+                        "dayOfWeek": {
+                            "type": "string",
+                            "description": "Dia da semana em que ocorrerá o pagamento",
+                            "enum": [
+                              "SEGUNDA_FEIRA",
+                              "TERCA_FEIRA",
+                              "QUARTA_FEIRA",
+                              "QUINTA_FEIRA",
+                              "SEXTA_FEIRA",
+                              "SABADO",
+                              "DOMINGO"
+                            ],
+                            "example": "QUINTA_FEIRA"
+                        },
+                        "startDate": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "maxLength": 10,
+                            "example": "2023-08-23"
+                        },
+                        "quantity": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 2,
+                            "maximum": 104,
+                            "example": 10,
+                            "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleMonthly": {
+            "type": "object",
+            "required": [
+                "monthly"
+            ],
+            "properties": {
+                "monthly": {
+                    "type": "object",
+                    "description": "Define a política de agendamento mensal.",
+                    "required": [
+                        "dayOfMonth",
+                        "startDate",
+                        "quantity"
+                    ],
+                    "properties": {
+                        "dayOfMonth": {
+                            "type": "integer",
+                            "minimum": 1,
+                            "maximum": 31,
+                            "example": 10
+                        },
+                        "startDate": {
+                            "type": "string",
+                            "format": "date",
+                            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                            "maxLength": 10,
+                            "example": "2023-08-23"
+                        },
+                        "quantity": {
+                            "type": "integer",
+                            "format": "int32",
+                            "minimum": 2,
+                            "maximum": 24,
+                            "example": 24,
+                            "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
+                        }
+                    }
+                }
+            }
+        },
+        "ScheduleCustom": {
+            "type": "object",
+            "required": [
+                "custom"
+            ],
+            "properties": {
+                "custom": {
+                    "type": "object",
+                    "description": "[Restrição] As datas enviadas na lista de datas (array “dates”) não podem ser repetidas.\nCaso datas repetidas sejam enviadas, o detentor deve rejeitar a criação do consentimento, informando o erro PARAMETRO_INVALIDO.",
+                    "required": [
+                        "dates",
+                        "additionalInformation"
+                    ],
+                    "properties": {
+                        "dates": {
+                            "type": "array",
+                            "maxItems": 730,
+                            "minItems": 2,
+                            "example": ["2023-08-23", "2023-09-26"],
+                            "items": {
+                                "type": "string",
+                                "format": "date",
+                                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                                "maxLength": 10,
+                                "example": "2023-08-23"
+                            }
+                        },
+                        "additionalInformation": {
+                            "type": "string",
+                            "description": "Texto livre para Iniciador preencher de forma compreensível pelo usuário aprovador/pagador.\nO texto pode ser utilizado pelo detentor para exibição do resumo da transação durante aprovação do usuário aprovador/pagador.",
+                            "pattern": "[\\w\\W\\s]*",
+                            "maxLength": 255,
+                            "example": "Todas quintas e domingos por 6 meses"
                         }
                     }
                 }
@@ -596,6 +770,31 @@
                 }
             }
         },
+        "PixPaymentRecurringConsent": {
+            "type": "object",
+            "description": "Somente para consentimentos de pagamento pix. Objeto contendo dados de pagamento para consentimento.",
+            "properties": {
+                "cancellation": {
+                    "$ref": "#/$defs/PixPaymentCancellation"
+                },
+                "ibgeTownCode": {
+                    "$ref": "../common-payment-schema.json#/$defs/IbgeTownCode"
+                },
+                "recurringConfiguration": {
+                    "oneOf": [
+                        {
+                            "$ref": "../common-payment-schema.json#/$defs/Automatic"
+                        },
+                        {
+                            "$ref": "../common-payment-schema.json#/$defs/PostSweeping"
+                        },
+                        {
+                            "$ref": "../common-payment-schema.json#/$defs/Vrp"
+                        }
+                    ]
+                }
+            }
+        },
         "PixPaymentCancellation": {
             "type": "object",
             "description": "Objeto que contém os dados referentes ao usuário pagador que solicitou o cancelamento, o canal utilizado por ele e o motivo.  \n\n[Restrição] O objeto cancellation será obrigatório apenas quando o valor do campo status for igual a CANC. \n",
@@ -700,39 +899,39 @@
             "type": "object",
             "description": "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status\n[Restrição] Esse motivo deverá ser enviado quando o campo /data/status for igual a RJCT (REJECTED).",
             "required": [
-              "code",
-              "detail"
+                "code",
+                "detail"
             ],
             "properties": {
-              "code": {
-                "type": "string",
-                "enum": [
-                  "SALDO_INSUFICIENTE",
-                  "VALOR_ACIMA_LIMITE",
-                  "VALOR_INVALIDO",
-                  "COBRANCA_INVALIDA",
-                  "NAO_INFORMADO",
-                  "PAGAMENTO_DIVERGENTE_CONSENTIMENTO",
-                  "DETALHE_PAGAMENTO_INVALIDO",
-                  "PAGAMENTO_RECUSADO_DETENTORA",
-                  "PAGAMENTO_RECUSADO_SPI",
-                  "FALHA_INFRAESTRUTURA",
-                  "FALHA_INFRAESTRUTURA_SPI",
-                  "FALHA_INFRAESTRUTURA_DICT",
-                  "FALHA_INFRAESTRUTURA_ICP",
-                  "FALHA_INFRAESTRUTURA_PSP_RECEBEDOR",
-                  "FALHA_INFRAESTRUTURA_DETENTORA",
-                  "CONTAS_ORIGEM_DESTINO_IGUAIS"
-                ],
-                "example": "SALDO_INSUFICIENTE",
-                "description": "Define o código da razão pela qual o pagamento foi rejeitado\n\n- SALDO_INSUFICIENTE - A conta selecionada não possui saldo suficiente para realizar o pagamento.\n\n- VALOR_ACIMA_LIMITE - O valor ultrapassa o limite estabelecido [na instituição/no arranjo/outro] para permitir a realização de transações pelo cliente.\n\n- VALOR_INVALIDO - O valor enviado não é válido para o QR Code informado.\n\n- COBRANCA_INVALIDA - Validação de expiração, validação de vencimento ou Status Válido.\n\n- NAO_INFORMADO - Não reportado/identificado pela instituição detentora de conta.\n\n- PAGAMENTO_DIVERGENTE_CONSENTIMENTO - Dados do pagamento divergentes dos dados do consentimento.\n\n- DETALHE_PAGAMENTO_INVALIDO - Parâmetro [nome_campo] não obedecer às regras de negócio.\n\n- PAGAMENTO_RECUSADO_DETENTORA - [Descrição do motivo de recusa].\n\n- PAGAMENTO_RECUSADO_SPI - [Código de erro conforme tabela de domínios reason PACS.002].\n\n- FALHA_INFRAESTRUTURA - [Descrição de qual falha na infraestrutura inviabilizou o processamento].\n\n- FALHA_INFRAESTRUTURA_SPI - Indica uma falha no Sistema de Pagamentos Instantâneos (SPI).\n\n- FALHA_INFRAESTRUTURA_DICT - Indica uma falha no Diretório de Identificadores de Contas Transacionais (DICT).\n\n- FALHA_INFRAESTRUTURA_ICP - Indica uma falha na Infraestrutura de Chaves Públicas (ICP).\n\n- FALHA_INFRAESTRUTURA_PSP_RECEBEDOR - Indica uma falha na infraestrutura do Prestador de Serviço de Pagamento (PSP) que recebe o pagamento.\n\n- FALHA_INFRAESTRUTURA_DETENTORA - indica uma falha na infraestrutura da instituição detentora das informações ou recursos.\n\n- CONTAS_ORIGEM_DESTINO_IGUAIS - Indica uma tentativa de pagamento onde a conta origem e a conta de destino são iguais.\n\nO rejectionReason FALHA_INFRAESTRUTURA não será excluído, apenas deixará de ser utilizado, permitindo assim, retrocompatibilidade e integridade entre os participantes.\n"
-              },
-              "detail": {
-                "type": "string",
-                "pattern": "[\\w\\W\\s]*",
-                "maxLength": 2048,
-                "description": "Contém informações adicionais ao pagamento rejeitado"
-              }
+                "code": {
+                    "type": "string",
+                    "enum": [
+                        "SALDO_INSUFICIENTE",
+                        "VALOR_ACIMA_LIMITE",
+                        "VALOR_INVALIDO",
+                        "COBRANCA_INVALIDA",
+                        "NAO_INFORMADO",
+                        "PAGAMENTO_DIVERGENTE_CONSENTIMENTO",
+                        "DETALHE_PAGAMENTO_INVALIDO",
+                        "PAGAMENTO_RECUSADO_DETENTORA",
+                        "PAGAMENTO_RECUSADO_SPI",
+                        "FALHA_INFRAESTRUTURA",
+                        "FALHA_INFRAESTRUTURA_SPI",
+                        "FALHA_INFRAESTRUTURA_DICT",
+                        "FALHA_INFRAESTRUTURA_ICP",
+                        "FALHA_INFRAESTRUTURA_PSP_RECEBEDOR",
+                        "FALHA_INFRAESTRUTURA_DETENTORA",
+                        "CONTAS_ORIGEM_DESTINO_IGUAIS"
+                    ],
+                    "example": "SALDO_INSUFICIENTE",
+                    "description": "Define o código da razão pela qual o pagamento foi rejeitado\n\n- SALDO_INSUFICIENTE - A conta selecionada não possui saldo suficiente para realizar o pagamento.\n\n- VALOR_ACIMA_LIMITE - O valor ultrapassa o limite estabelecido [na instituição/no arranjo/outro] para permitir a realização de transações pelo cliente.\n\n- VALOR_INVALIDO - O valor enviado não é válido para o QR Code informado.\n\n- COBRANCA_INVALIDA - Validação de expiração, validação de vencimento ou Status Válido.\n\n- NAO_INFORMADO - Não reportado/identificado pela instituição detentora de conta.\n\n- PAGAMENTO_DIVERGENTE_CONSENTIMENTO - Dados do pagamento divergentes dos dados do consentimento.\n\n- DETALHE_PAGAMENTO_INVALIDO - Parâmetro [nome_campo] não obedecer às regras de negócio.\n\n- PAGAMENTO_RECUSADO_DETENTORA - [Descrição do motivo de recusa].\n\n- PAGAMENTO_RECUSADO_SPI - [Código de erro conforme tabela de domínios reason PACS.002].\n\n- FALHA_INFRAESTRUTURA - [Descrição de qual falha na infraestrutura inviabilizou o processamento].\n\n- FALHA_INFRAESTRUTURA_SPI - Indica uma falha no Sistema de Pagamentos Instantâneos (SPI).\n\n- FALHA_INFRAESTRUTURA_DICT - Indica uma falha no Diretório de Identificadores de Contas Transacionais (DICT).\n\n- FALHA_INFRAESTRUTURA_ICP - Indica uma falha na Infraestrutura de Chaves Públicas (ICP).\n\n- FALHA_INFRAESTRUTURA_PSP_RECEBEDOR - Indica uma falha na infraestrutura do Prestador de Serviço de Pagamento (PSP) que recebe o pagamento.\n\n- FALHA_INFRAESTRUTURA_DETENTORA - indica uma falha na infraestrutura da instituição detentora das informações ou recursos.\n\n- CONTAS_ORIGEM_DESTINO_IGUAIS - Indica uma tentativa de pagamento onde a conta origem e a conta de destino são iguais.\n\nO rejectionReason FALHA_INFRAESTRUTURA não será excluído, apenas deixará de ser utilizado, permitindo assim, retrocompatibilidade e integridade entre os participantes.\n"
+                },
+                "detail": {
+                    "type": "string",
+                    "pattern": "[\\w\\W\\s]*",
+                    "maxLength": 2048,
+                    "description": "Contém informações adicionais ao pagamento rejeitado"
+                }
             }
         }
     }

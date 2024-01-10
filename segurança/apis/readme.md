@@ -54,6 +54,11 @@
 | GET      | /v1/phone-channels                   | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/banking-agents                   | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/shared-automated-teller-machines | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/branches                         | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/electronic-channels              | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/phone-channels                   | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/banking-agents                   | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v2/shared-automated-teller-machines | Não          |                  | Não        | Não              | Não  |     |
 
 ## Channels catalog maintance
 
@@ -576,6 +581,8 @@
 | GET      | /v2/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | POST     | /v2/consents/\{ID\}/extends | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
 | GET      | /v2/consents/\{ID\}/extends | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
+| POST     | /v3/consents                | Sim          | consents         | Não        | Não              | Sim  |                    |
+| GET      | /v3/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 
 ### Resources
 
@@ -587,6 +594,7 @@
 | -------- | ------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
 | GET      | /v1/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 | GET      | /v2/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
+| GET      | /v3/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 
 ### OOB consents
 

@@ -1,0 +1,123 @@
+{
+    "requestMeta": {
+        "correlationId": "5a53ed84-86dc-de78-f63a-2109c6db0652",
+        "brandId": "elit laboris"
+    },
+    "consent": {
+        "brandId": "qui sunt proident amet id",
+        "creationDateTime": "5035-01-30T18:32:13Z",
+        "tpp": {
+            "name": "ut sunt amet"
+        },
+        "externalId": "exercitation do reprehenderit",
+        "loggedUser": {
+            "document": {
+                "identification": "14503271944",
+                "rel": "LOM"
+            }
+        },
+        "businessEntity": {
+            "document": {
+                "identification": "11111111111111",
+                "rel": "CNPJ"
+            }
+        },
+        "creditors": [
+            {
+                "personType": "PESSOA_NATURAL",
+                "cpfCnpj": "58764789000137",
+                "name": "Marco Antonio de Brito"
+            }
+        ],
+        "startDateTime": "2021-05-21T08:30:00Z",
+        "expirationDateTime": "2021-05-21T08:30:00Z",
+        "additionalInformation": "Minha recorrência",
+        "recurringConfiguration": {
+            "automatic": {
+                "contractId": "XE00038166201907261559y6j6",
+                "amount": "100000.12",
+                "transactionLimit": "1000000.12",
+                "period": "DIARIO",
+                "dayOfMonth": 10,
+                "dayOfWeek": "SEGUNDA_FEIRA",
+                "month": "JANEIRO",
+                "contractDebtor": {
+                    "name": "Policarpo Quaresma",
+                    "document": {
+                        "identification": "11111111111111",
+                        "rel": "CNPJ"
+                    }
+                },
+                "immediatePayment": {
+                    "type": "PIX",
+                    "date": "2021-01-01",
+                    "currency": "BRL",
+                    "amount": "100000.12",
+                    "remittanceInformation": "Pagamento da nota RSTO035-002",
+                    "creditorAccount": {
+                        "ispb": "12345678",
+                        "issuer": "1774",
+                        "number": "1234567890",
+                        "accountType": "CACC"
+                    }
+                }
+            }
+        },
+        "resources": [
+            {
+                "type": "FUND",
+                "resourceLegacyId": [
+                    {
+                        "key": "minim",
+                        "value": "aliqua veniam reprehenderit enim"
+                    }
+                ],
+                "hasMultipleAuthorisers": true
+            }
+        ],
+        "consentOwner": [
+            {
+                "key": "do",
+                "value": "exercitation"
+            }
+        ],
+        "version": "V3",
+        "debtorAccount": {
+            "ispb": "92652864",
+            "number": "49125465243",
+            "accountType": "SVGS",
+            "issuer": "364"
+        },
+        "authExtraData": [
+            {
+                "key": "Ut",
+                "value": "aute"
+            }
+        ],
+        "paymentType": "PAYMENT_RECURRING_CONSENT"
+    },
+    "IdempotencyKey": "b5564623-2ec8-4557-8931-dda2432a4a41",
+    "requestBody": {
+        "data": {
+            "recurringConsentId": "urn:LEGISqiy8yk8q0rsSDu0G:7L)y9Qht?",
+            "localInstrument": "QRES",
+            "payment": {
+                "amount": "686217499344.95",
+                "currency": "NQZ"
+            },
+            "creditorAccount": {
+                "ispb": "55230985",
+                "number": "40532753017251",
+                "accountType": "SVGS"
+            },
+            "cnpjInitiator": "34003832252411",
+            "endToEndId": "E880855110920042222050YXWUNEvLWF",
+            "qrCode": "T;B;/n_3:",
+            "ibgeTownCode": "3831234",
+            "authorisationFlow": "FIDO_FLOW",
+            "transactionIdentification": "n9NNUXqfLKMQjNCRq9MCCIn2tXc7t",
+            "remittanceInformation": "@Vn",
+            "proxy": "psD=+"
+        }
+    }
+}

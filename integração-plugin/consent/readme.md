@@ -73,11 +73,12 @@ Open Banking e seus tipos:
 | Compartilhamento de dados | FINANCING                    | Não selecionável | ```direct:discoverFinancings```                  |
 | Compartilhamento de dados | LOAN                         | Não selecionável | ```direct:discoverLoans```                       |
 | Compartilhamento de dados | UNARRANGED_ACCOUNT_OVERDRAFT | Não selecionável | ```direct:discoverUnarrangedAccountOverdrafts``` |
-| Compartilhamento de dados | BANK_FIXED_INCOMES_READ      | Não selecionável | ```direct:discoverBankFixedIncomes```        |
-| Compartilhamento de dados | CREDIT_FIXED_INCOMES_READ    | Não selecionável | ```direct:discoverCreditFixedIncomes```      |
-| Compartilhamento de dados | FUNDS_READ                   | Não selecionável | ```direct:discoverFunds```                   |
-| Compartilhamento de dados | VARIABLE_INCOMES_READ        | Não selecionável | ```direct:discoverVariableIncomes```         |
-| Compartilhamento de dados | TREASURE_TITLES_READ         | Não selecionável | ```direct:discoverTreasureTitles```          |
+| Compartilhamento de dados | BANK_FIXED_INCOMES_READ      | Não selecionável | ```direct:discoverBankFixedIncomes```            |
+| Compartilhamento de dados | CREDIT_FIXED_INCOMES_READ    | Não selecionável | ```direct:discoverCreditFixedIncomes```          |
+| Compartilhamento de dados | FUNDS_READ                   | Não selecionável | ```direct:discoverFunds```                       |
+| Compartilhamento de dados | VARIABLE_INCOMES_READ        | Não selecionável | ```direct:discoverVariableIncomes```             |
+| Compartilhamento de dados | TREASURE_TITLES_READ         | Não selecionável | ```direct:discoverTreasureTitles```              |
+| Compartilhamento de dados | EXCHANGES_READ               | Não selecionável | ```direct:discoverExchanges```                   |
 
 Caso a instituição forneça algum produto do tipo de compartilhamento de dados,
 será preciso criar a rota camel como referenciada na tabela, respeitando o [formato
@@ -254,6 +255,11 @@ de pagamento, como por exemplo:
 A rota camel escuta chamadas realizadas em `direct:validatePaymentData` e um exemplo
 de [request](../schemas/v3/consent/validatePaymentData/request-example.json).
 
+**Importante**: A partir da versão 4 do consentimento, caso múltiplos erros sejam
+identificados durante a validação, deve-se retornar o erro de maior prioridade.
+A tabela de prioridade pode ser encontrada nas *Informações Técnicas* da
+[API de Pagamentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17375943/SV+API+-+Pagamentos).
+
 ### Tratamentos adicionais
 
 #### Filtro de contas
@@ -291,7 +297,8 @@ para documentação oficial):
 | Operações de Crédito | Financiamentos                | FINANCINGS_READ, FINANCINGS_WARRANTIES_READ, FINANCINGS_SCHEDULED_INSTALMENTS_READ, FINANCINGS_PAYMENTS_READ, RESOURCES_READ                                                                             |
 | Operações de Crédito | Empréstimos                   | LOANS_READ, LOANS_WARRANTIES_READ, LOANS_SCHEDULED_INSTALMENTS_READ, LOANS_PAYMENTS_READ, RESOURCES_READ                                                                                                 |
 | Operações de Crédito | Adiantamento a depositantes   | UNARRANGED_ACCOUNTS_OVERDRAFT_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ, UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ, RESOURCES_READ |
-| Operações de Crédito | Investimentos                 | BANK_FIXED_INCOMES_READ,CREDIT_FIXED_INCOMES_READ,FUNDS_READ,VARIABLE_INCOMES_READ,TREASURE_TITLES_READ,RESOURCES_READ |
+| Operações de Crédito | Investimentos                 | BANK_FIXED_INCOMES_READ,CREDIT_FIXED_INCOMES_READ,FUNDS_READ,VARIABLE_INCOMES_READ,TREASURE_TITLES_READ,RESOURCES_READ                                                                                   |
+| Operações de Crédito | Câmbio                        | EXCHANGES_READ,RESOURCES_READ                                                                                                                                                                            |
 
 ## Aprovação de criação de consentimento de pagamento
 
@@ -429,11 +436,13 @@ conectores.
 
 Os serviços e suas respectivas funcionalidades são:
 
-| Nome do serviço    | Descrição                                                                                            | Comando de chamada no arquivo .xml                                                               |
-| ------------------ | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| getDayOfTheWeek    | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira)                      | `${bean:camelUtils.getDayOfTheWeek}`                                                             |
-| concatenateStrings | Obter uma string que é a concatenação das duas strings passadas como parâmetros                      | `${bean:camelUtils.concatenateStrings("ab", "cd")}`                                              |
-| hmacCalculator     | Obter o cálculo de hash de um data com base num algoritmo específico com uma chave secreta fornecida | `${bean:camelUtils.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}` |
+| Nome do serviço    | Descrição                                                                                            | Comando de chamada no arquivo .xml                                                                             |
+| ------------------ | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| getDayOfTheWeek    | Obter o dia da semana atual em inglês no padrão `EEE` (ex: "Fri" - sexta-feira)                      | `${bean:camelUtils.getDayOfTheWeek}`                                                                           |
+| concatenateStrings | Obter uma string que é a concatenação das duas strings passadas como parâmetros                      | `${bean:camelUtils.concatenateStrings("ab", "cd")}`                                                            |
+| hmacCalculator     | Obter o cálculo de hash de um data com base num algoritmo específico com uma chave secreta fornecida | `${bean:camelUtils.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}`               |
+| makePostCall       | Utilizado para chamadas post com mtls                                                                | `${bean:camelUtils.makePostCall(${authorization}, ${transactionHash}, ${contentType},  ${endpoint}, ${body})}` |
+| makeGetCall        | Utilizado para chamadas get com mtls                                                                 | `${bean:camelUtils.makeGetCall(${authorization}, ${transactionHash}, ${contentType}, ${endpoint})}`            |
 
 **Exemplo de chamada do serviço getDayOfTheWeek:**
 

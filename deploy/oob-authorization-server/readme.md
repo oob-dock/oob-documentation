@@ -733,6 +733,30 @@ additionalVars:
     value: "2023-07-18"
 ```
 
+### UNIQUE_PROFILE_START_DATE
+
+Habilita a validação para o período de adaptação do perfil único FAPI
+do Open Finance Brasil.
+
+O valor padrão é '2024-03-27' conforme especificação. Para executar os testes
+de segurança, deve-se alterar para uma data no passado.
+
+**Formato:** `yyyy-MM-dd`
+
+**Default:** `2024-03-27`
+
+### UNIQUE_PROFILE_MANDATORY_DATE
+
+Habilita o bloqueio dos clients que não estão de acordo com o perfil único FAPI
+do Open Finance Brasil.
+
+O valor padrão é '2024-05-22' conforme especificação. Para executar os testes
+de segurança, deve-se alterar para uma data no passado.
+
+**Formato:** `yyyy-MM-dd`
+
+**Default:** `2024-05-22`
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress

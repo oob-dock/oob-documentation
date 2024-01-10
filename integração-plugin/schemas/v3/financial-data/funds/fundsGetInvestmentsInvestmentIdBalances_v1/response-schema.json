@@ -36,7 +36,6 @@
           "properties": {
             "amount": {
               "type": "string",
-              "format": "double",
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
@@ -63,7 +62,6 @@
           "properties": {
             "amount": {
               "type": "string",
-              "format": "double",
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
@@ -90,7 +88,6 @@
           "properties": {
             "amount": {
               "type": "string",
-              "format": "double",
               "description": "Valor relacionado ao objeto.",
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 20,
@@ -117,7 +114,6 @@
           "properties": {
             "amount": {
               "type": "string",
-              "format": "double",
               "description": "Valor relacionado ao objeto.",
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 20,
@@ -144,7 +140,6 @@
           "properties": {
             "amount": {
               "type": "string",
-              "format": "double",
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
@@ -163,7 +158,6 @@
         },
         "quotaQuantity": {
           "type": "string",
-          "format": "double",
           "description": "Quantidade de cotas detidas em posição do cliente .",
           "pattern": "^\\d{1,15}\\.\\d{2,8}$",
           "maxLength": 24,
@@ -181,7 +175,6 @@
           "properties": {
             "amount": {
               "type": "string",
-              "format": "double",
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,8}$",
               "maxLength": 25,
