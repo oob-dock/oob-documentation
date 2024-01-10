@@ -592,6 +592,7 @@
 | -------- | ------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
 | GET      | /v1/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 | GET      | /v2/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
+| GET      | /v3/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 
 ### OOB consents
 
