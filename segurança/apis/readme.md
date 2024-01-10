@@ -580,6 +580,7 @@
 | GET      | /v2/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | POST     | /v2/consents/\{ID\}/extends | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
 | GET      | /v2/consents/\{ID\}/extends | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
+| POST     | /v3/consents                | Sim          | consents         | Não        | Não              | Sim  |                    |
 | GET      | /v3/consents/\{ID\}         | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 
 ### Resources
@@ -592,6 +593,7 @@
 | -------- | ------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
 | GET      | /v1/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 | GET      | /v2/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
+| GET      | /v3/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 
 ### OOB consents
 
