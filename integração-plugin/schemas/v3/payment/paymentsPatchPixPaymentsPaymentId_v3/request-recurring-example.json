@@ -115,9 +115,9 @@
                 "key": "string",
                 "value": "string"
             }
-        ],
-        "paymentType": "PAYMENT_RECURRING_CONSENT"
+        ]
     },
+    "paymentType": "PAYMENT_RECURRING_CONSENT",
     "requestBody": {
         "data": {
             "status": "REJECTED",

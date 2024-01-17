@@ -22,6 +22,9 @@
         }
       ]
     },
+    "paymentType": {
+      "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
+    },
     "requestBody": {
       "type": "object",
       "required": [

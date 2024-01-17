@@ -16,7 +16,6 @@
         "status",
         "localInstrument",
         "payment",
-        "creditorAccount",
         "cnpjInitiator",
         "debtorAccount"
       ],
@@ -53,6 +52,42 @@
               }
             ]
           ]
+        },
+        "date": {
+          "type": "string",
+          "description": "Data em que o recurso foi criado. Uma string com a utilização de timezone UTC(UTC time format).",
+          "format": "date-time",
+          "maxLength": 10,
+          "examples": [
+              "2021-01-01"
+          ]
+        },
+        "document": {
+          "type": "object",
+            "description": "Informações do documento identificador.",
+            "required": [
+                "identification",
+                "rel"
+            ],
+            "properties": {
+                "identification": {
+                    "type": "string",
+                    "minLength": 11,
+                    "maxLength": 14,
+                    "description": "Número do documento de identificação oficial do titular pessoa natural ou jurídica.",
+                    "example": "11111111111111",
+                    "pattern": "^(?:\\d{11}|\\d{14})$"
+                },
+                "rel": {
+                    "type": "string",
+                    "enum": [
+                        "CPF",
+                        "CNPJ"
+                    ],
+                    "example": "CNPJ",
+                    "description": "Tipo do documento de identificação oficial do titular pessoa natural ou jurídica."
+                }
+            }
         },
         "endToEndId": {
           "type": "string",

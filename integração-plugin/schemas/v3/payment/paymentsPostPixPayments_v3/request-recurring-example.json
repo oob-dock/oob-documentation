@@ -99,20 +99,60 @@
     "IdempotencyKey": "b5564623-2ec8-4557-8931-dda2432a4a41",
     "requestBody": {
         "data": {
-            "recurringConsentId": "urn:LEGISqiy8yk8q0rsSDu0G:7L)y9Qht?",
-            "localInstrument": "QRES",
+            "localInstrument": "DICT",
             "payment": {
                 "amount": "686217499344.95",
                 "currency": "NQZ"
             },
+            "riskSignals": {
+                "manual": {
+                    "deviceId": "00000000-54b3-e7c7-0000-000046bffd97",
+                    "isRootedDevice": false,
+                    "screenBrightness": 0,
+                    "elapsedTimeSinceBoot": 0,
+                    "osVersion": "string",
+                    "userTimeZoneOffset": "string",
+                    "language": "string",
+                    "screenDimensions": {
+                        "height": 0,
+                        "width": 0
+                    },
+                    "accountTenure": "2024-01-16",
+                    "geolocation": {
+                        "latitude": 0,
+                        "longitude": 0,
+                        "type": "COARSE"
+                    },
+                    "isCallInProgress": true,
+                    "isDevModeEnabled": true,
+                    "isMockGPS": true,
+                    "isEmulated": true,
+                    "isMonkeyRunner": true,
+                    "isCharging": true,
+                    "antennaInformation": "string",
+                    "isUsbConnected": true,
+                    "integrity": {
+                        "appRecognitionVerdict": "string",
+                        "deviceRecognitionVerdict": "string"
+                    }
+                },
+                "automatic": {
+                    "lastLoginDateTime": "2024-01-16T20:41:52.092Z",
+                    "pixKeyRegistrationDateTime": "2024-01-16T20:41:52.092Z"
+                }
+            },
             "creditorAccount": {
                 "ispb": "55230985",
                 "number": "40532753017251",
+                "issuer": "1774",
                 "accountType": "SVGS"
+            },
+            "document": {
+                "identification": "11111111111111",
+                "rel": "CNPJ"
             },
             "cnpjInitiator": "34003832252411",
             "endToEndId": "E880855110920042222050YXWUNEvLWF",
-            "qrCode": "T;B;/n_3:",
             "ibgeTownCode": "3831234",
             "authorisationFlow": "FIDO_FLOW",
             "transactionIdentification": "n9NNUXqfLKMQjNCRq9MCCIn2tXc7t",
