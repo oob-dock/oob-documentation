@@ -93,9 +93,9 @@
                 "key": "Ut",
                 "value": "aute"
             }
-        ],
-        "paymentType": "PAYMENT_RECURRING_CONSENT"
+        ]
     },
+    "paymentType": "PAYMENT_RECURRING_CONSENT",
     "IdempotencyKey": "b5564623-2ec8-4557-8931-dda2432a4a41",
     "requestBody": {
         "data": {

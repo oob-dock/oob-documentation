@@ -63,9 +63,6 @@
                 },
                 "consentOwner": {
                     "$ref": "./common-consent-schema.json#/$defs/ConsentOwner"
-                },
-                "paymentType": {
-                    "$ref": "../common-payment-schema.json#/$defs/PaymentType"
                 }
             },
             "additionalProperties": false
