@@ -39,6 +39,9 @@
                 "version": {
                     "$ref": "./common-consent-schema.json#/$defs/Version"
                 },
+                "startDateTime": {
+                    "$ref": "./common-consent-schema.json#/$defs/StartDateTime"
+                },
                 "expirationDateTime": {
                     "$ref": "./common-consent-schema.json#/$defs/ExpirationDateTime"
                 },
@@ -72,9 +75,6 @@
                 },
                 "consentOwner": {
                     "$ref": "./common-consent-schema.json#/$defs/ConsentOwner"
-                },
-                "paymentType": {
-                    "$ref": "../common-payment-schema.json#/$defs/PaymentType"
                 }
             },
             "additionalProperties": false
