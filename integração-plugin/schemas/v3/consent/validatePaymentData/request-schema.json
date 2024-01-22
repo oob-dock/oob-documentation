@@ -26,8 +26,8 @@
                         }
                     ]
                 },
-                "dataType": {
-                    "$ref": "#/$defs/DataType"
+                "paymentType": {
+                    "$ref": "#/$defs/PaymentType"
                 }
             }
         }
@@ -149,7 +149,7 @@
             "example": "POST_CONSENT",
             "description": "Momento referente a chamada da validação de pagamento\nSegue descrição de cada valor do ENUM.\n\n- POST_CONSENT - Validação chamada no momento do post consent\n- POST_PAYMENT - Validação chamada no momento do post payment\n"
         },
-        "DataType": {
+        "PaymentType": {
             "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
         }
     }

@@ -26,8 +26,8 @@
                         }
                     ]
                 },
-                "dataType": {
-                    "$ref": "#/$defs/DataType"
+                "paymentType": {
+                    "$ref": "#/$defs/PaymentType"
                 }
             }
         }
@@ -121,7 +121,7 @@
             },
             "additionalProperties": false
         },
-        "DataType": {
+        "PaymentType": {
             "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
         }
     }

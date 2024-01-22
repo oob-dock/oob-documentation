@@ -64,7 +64,7 @@
             "externalId": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf",
             "validationStage": "POST_CONSENT"
         },
-        "dataType": "PAYMENT_RECURRING_CONSENT"
+        "paymentType": "PAYMENT_RECURRING_CONSENT"
     },
     "requestMeta": {
         "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3",

@@ -16,7 +16,6 @@
         "status",
         "localInstrument",
         "payment",
-        "creditorAccount",
         "cnpjInitiator",
         "debtorAccount"
       ],
@@ -61,6 +60,33 @@
           "pattern": "^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$",
           "example": "E9040088820210128000800123873170",
           "description": "Trata-se de um identificador único, gerado na instituição iniciadora de pagamento e recebido na instituição detentora de conta, permeando toda a jornada do pagamento Pix.\n\n[Restrição] A detentora deve obrigatoriamente retornar o campo Com o mesmo valor recebido da iniciadora.\n"
+        },
+        "document": {
+          "type": "object",
+            "description": "Informações do documento identificador.",
+            "required": [
+                "identification",
+                "rel"
+            ],
+            "properties": {
+                "identification": {
+                    "type": "string",
+                    "minLength": 11,
+                    "maxLength": 14,
+                    "description": "Número do documento de identificação oficial do titular pessoa natural ou jurídica.",
+                    "example": "11111111111111",
+                    "pattern": "^(?:\\d{11}|\\d{14})$"
+                },
+                "rel": {
+                    "type": "string",
+                    "enum": [
+                        "CPF",
+                        "CNPJ"
+                    ],
+                    "example": "CNPJ",
+                    "description": "Tipo do documento de identificação oficial do titular pessoa natural ou jurídica."
+                }
+            }
         },
         "consentId": {
           "type": "string",
@@ -152,6 +178,15 @@
               "description": "Contém informações adicionais ao pagamento rejeitado"
             }
           }
+        },
+        "date": {
+          "type": "string",
+          "description": "Data em que o recurso foi criado. Uma string com a utilização de timezone UTC(UTC time format).",
+          "format": "date-time",
+          "maxLength": 10,
+          "examples": [
+              "2021-01-01"
+          ]
         },
         "localInstrument": {
           "type": "string",

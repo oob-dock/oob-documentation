@@ -21,6 +21,9 @@
           "$ref": "../../common/consent/consent-recurring-payment-schema.json#/$defs/ConsentRecurringPayment"
         }
       ]
+    },
+    "paymentType": {
+      "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
     }
   },
   "additionalProperties": false

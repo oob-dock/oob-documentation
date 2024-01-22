@@ -77,7 +77,7 @@
                 "key": "conta",
                 "value": "12345678"
             }
-        ],
-        "paymentType": "PAYMENT_RECURRING_CONSENT"
-    }
+        ]
+    },
+    "paymentType": "PAYMENT_RECURRING_CONSENT"
 }
