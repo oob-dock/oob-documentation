@@ -158,6 +158,13 @@ Caso não seja preenchido, utilizará o nome padrão "oob-consent".
 
 Ex: `oob-consent-cbanco`
 
+### brandId
+
+Deve ser obrigatoriamente preenchida com a marca associada a instância do serviço.
+Para mais detalhes, consulta a [definição](../shared-definitions.md#brand-id).
+
+Ex: `cbanco`
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
@@ -362,11 +369,6 @@ additionalVars:
 Utilizado para definir o charset usado na criptografia dos campos na base de dados.
 
 Valor default: `UTF-8`
-
-### BRANDID
-
-Deve ser obrigatoriamente preenchida com a marca associada a instância do serviço.
-Para mais detalhes, consulta a [definição](../shared-definitions.md#brand-id).
 
 ### Conectores
 
