@@ -10,7 +10,6 @@
                 "tpp",
                 "externalId",
                 "loggedUser",
-                "expirationDateTime",
                 "creditors",
                 "recurringConfiguration"
             ],
