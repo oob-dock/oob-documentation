@@ -29,6 +29,7 @@
     - [Treasure titles](#treasure-titles)
     - [Funds](#funds)
   - [Payments](#payments)
+  - [Automatic Payments](#automatic-payments)
   - [Consent](#consent)
     - [Consents](#consents)
     - [Resources](#resources)
@@ -563,6 +564,7 @@
 | -------- | ------------------------------ | ------------ | ------------------ | ---------- | ---------------- | ---- | --- |
 | POST     | /v1/recurring-consents         | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
 | GET      | /v1/recurring-consents/\{ID\}  | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| PATCH    | /v1/recurring-consents/\{ID\}  | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
 
 ## Consent
 
