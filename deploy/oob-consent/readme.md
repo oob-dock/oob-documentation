@@ -150,6 +150,21 @@ Identificador do componente de pub/sub do Dapr a ser utilizado.
 
 Ex: `oob-consent-pub-sub`
 
+### dapr/appId
+
+Identificador do serviço a ser utilizado caso exista mais de uma instância
+para marcas diferentes dentro do mesmo ambiente.
+Caso não seja preenchido, utilizará o nome padrão "oob-consent".
+
+Ex: `oob-consent-cbanco`
+
+### brandId
+
+Deve ser obrigatoriamente preenchida com a marca associada a instância do serviço.
+Para mais detalhes, consulta a [definição](../shared-definitions.md#brand-id).
+
+Ex: `cbanco`
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração

@@ -553,6 +553,7 @@
 | GET      | /v3/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
 | PATCH    | /v3/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
 | POST     | /v4/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
+| GET      | /v4/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
 
 ## Automatic Payments
 
