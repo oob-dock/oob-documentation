@@ -145,6 +145,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/payments:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revoke payment consent
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          nullable: false
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobPaymentConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
   /open-banking/oob-consents/consents/v2/active:
     get:
       tags:
@@ -886,6 +925,18 @@ components:
         applicationName:
           description: Client application name
           type: string
+    RequestRevokeOobPaymentConsent:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokePaymentConsentData'
+          - nullable: false
+        applicationName:
+          description: Client application name
+          type: string
     RequestPaymentStatusChangeNotification:
       required:
       - data
@@ -1073,6 +1124,13 @@ components:
       - ACCOUNT_CLOSURE
       - OTHER
       type: string
+    RevokePaymentConsentData:
+      type: object
+      properties:
+        rejection:
+          $ref: '#/components/schemas/RejectionPaymentOob'
+        revocation:
+          $ref: '#/components/schemas/RevocationPaymentOob'
     RejectedReasonCodeEnum:
       enum:
       - CONSENT_EXPIRED
@@ -1081,6 +1139,79 @@ components:
       - CONSENT_MAX_DATE_REACHED
       - CONSENT_TECHNICAL_ISSUE
       - INTERNAL_SECURITY_REASON
+      type: string
+    RevocationPaymentOob:
+      type: object
+      properties:
+        revokedFrom:
+          $ref: '#/components/schemas/RecurringConsentRejectedFromEnum'
+        reason:
+          $ref: '#/components/schemas/RecurringConsentRevocationReason'
+        revokedAt:
+          format: date-time
+          type: string
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        revokedBy:
+          type: object
+    RejectionPaymentOob:
+      type: object
+      properties:
+        rejectedFrom:
+          $ref: '#/components/schemas/RecurringConsentRejectedFromEnum'
+        reason:
+          $ref: '#/components/schemas/RejectionReason'
+        rejectedAt:
+          format: date-time
+          type: string
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        rejectedBy:
+          type: object
+    RecurringConsentRevocationReason:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ConsentRevocationReasonCodeEnum'
+        detail:
+          type: string
+    RejectionReason:
+      required:
+      - code
+      - detail
+      type: object
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/ConsentRejectionReasonCodeEnum'
+          - example: CONTAS_ORIGEM_DESTINO_IGUAIS
+        detail:
+          type: string
+    RecurringConsentRejectedFromEnum:
+      enum:
+      - INICIADORA
+      - DETENTORA
+      type: string
+    ConsentRevocationReasonCodeEnum:
+      enum:
+      - NAO_INFORMADO
+      - REVOGADO_USUARIO
+      - REVOGADO_RECEBEDOR
+      type: string
+    ConsentRejectionReasonCodeEnum:
+      enum:
+      - VALOR_INVALIDO
+      - NAO_INFORMADO
+      - FALHA_INFRAESTRUTURA
+      - TEMPO_EXPIRADO_AUTORIZACAO
+      - TEMPO_EXPIRADO_CONSUMO
+      - REJEITADO_USUARIO
+      - CONTAS_ORIGEM_DESTINO_IGUAIS
+      - CONTA_NAO_PERMITE_PAGAMENTO
+      - SALDO_INSUFICIENTE
+      - VALOR_ACIMA_LIMITE
+      - QRCODE_INVALIDO
+      - CONTA_DIVERGENTE_DA_SOLICITADA
       type: string
     PaymentStatusEnum:
       enum:
