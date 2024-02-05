@@ -67,13 +67,6 @@ como:
 | GET      | v3     | /pix/payments/\{paymentId\}     | ```direct:paymentsGetPixPaymentsPaymentId_v3```   |
 | PATCH    | v3     | /pix/payments/\{paymentId\}     | ```direct:paymentsPatchPixPaymentsPaymentId_v3``` |
 
-### TED/TEF
-
-| Método   | Versão | Endpoint                        | Rota do Camel                                   |
-| -------- | ------ | ------------------------------- | ----------------------------------------------- |
-| POST     | v1     | /ted-tef/payments               | ```direct:paymentsPostTedTefPayments```         |
-| GET      | v1     | /ted-tef/payments/\{paymentId\} | ```direct:paymentsGetTedTefPaymentsPaymentId``` |
-
 ## O que muda na versão 2 da API de Iniciação de Pagamentos?
 
 O Open Finance Brasil definiu oficialmente suporte a pagamentos agendados via PIX
@@ -95,3 +88,10 @@ conta do usuário utilizada para o pagamento através do campo *debtorAccount*.
 A principal mudança para pagamento v3 são as validações executadas durante
 o processamento assíncrono do consentimento pela detentora que devem obedecer um
 domínio especificado aqui: [paymentv3](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/142672139/Informa+es+T+cnicas+-+Pagamentos+-+v3.0.0-beta.2)
+
+## Ações esperadas dos conectores
+
+### paymentsPostPixPayments_v3
+
+- Validar se contas origem e destino são iguais (*debtorAccount* e *creditorAccount*)
+e lançar erro 422 - DETALHE_PAGAMENTO_INVALIDO em caso positivo.
