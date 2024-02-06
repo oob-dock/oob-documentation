@@ -91,7 +91,12 @@ domínio especificado aqui: [paymentv3](https://openfinancebrasil.atlassian.net/
 
 ## Ações esperadas dos conectores
 
-### paymentsPostPixPayments_v3
+### paymentsPostPixPayments_v3 WIP
 
-- Validar se contas origem e destino são iguais (*debtorAccount* e *creditorAccount*)
-e lançar erro 422 - DETALHE_PAGAMENTO_INVALIDO em caso positivo.
+- Validar se proxy é válido e bate com o creditorAccount (se enviado).
+- Validar se proxy pertence a um dos creditors cadastrados no consentimento.
+- Validar se EndToEndId é válido e não foi reutilizado.
+- Validar se QRCode é válido.
+- Validar se contas origem e destino são iguais.
+
+**Obs:** retornar erro 422 - PAGAMENTO_RECUSADO_DETENTORA em caso positivo.
