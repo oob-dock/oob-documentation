@@ -93,10 +93,15 @@ domínio especificado aqui: [paymentv3](https://openfinancebrasil.atlassian.net/
 
 ### paymentsPostPixPayments_v3 WIP
 
-- Validar se proxy é válido e bate com o creditorAccount (se enviado).
+- Validar se proxy é válido e bate com o creditorAccount (se enviado). [*1](#obs)
 - Validar se proxy pertence a um dos creditors cadastrados no consentimento.
-- Validar se EndToEndId é válido e não foi reutilizado.
-- Validar se QRCode é válido.
-- Validar se contas origem e destino são iguais.
+[*1](#obs)
+- Validar se EndToEndId é válido e não foi reutilizado. [*1](#obs)
+- Validar se QRCode é válido. [*1](#obs)
+- Validar se contas origem e destino são iguais. [*1](#obs)
 
-**Obs:** retornar erro 422 - DETALHE_PAGAMENTO_INVALIDO em caso positivo.
+## Obs
+
+- `*1:` retornar erro 422 - DETALHE_PAGAMENTO_INVALIDO em caso positivo.
+
+**Atenção**:  mais validações para todas rotas serão incluídas
