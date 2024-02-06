@@ -99,4 +99,4 @@ domínio especificado aqui: [paymentv3](https://openfinancebrasil.atlassian.net/
 - Validar se QRCode é válido.
 - Validar se contas origem e destino são iguais.
 
-**Obs:** retornar erro 422 - PAGAMENTO_RECUSADO_DETENTORA em caso positivo.
+**Obs:** retornar erro 422 - DETALHE_PAGAMENTO_INVALIDO em caso positivo.
