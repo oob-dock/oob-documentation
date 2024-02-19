@@ -75,9 +75,7 @@
             "required": [
                 "tpp",
                 "loggedUser",
-                "businessEntity",
                 "creditors",
-                "startDateTime",
                 "recurringConfiguration"
             ],
             "properties": {

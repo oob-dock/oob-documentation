@@ -534,26 +534,28 @@
 
 **Cliente API:** TPP
 
-| Operação | API                     | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| POST     | /v1/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
-| GET      | /v1/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
-| POST     | /v2/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
-| GET      | /v2/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
-| POST     | /v3/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
-| GET      | /v3/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
-| POST     | /v4/consents            | Sim          | payments         | Sim        | Não              | Sim  |     |
-| GET      | /v4/consents/\{ID\}     | Sim          | payments         | Não        | Não              | Sim  |     |
-| POST     | /v1/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
-| GET      | /v1/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
-| POST     | /v2/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
-| GET      | /v2/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
-| PATCH    | /v2/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
-| POST     | /v3/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
-| GET      | /v3/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
-| PATCH    | /v3/pix/payments/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
-| POST     | /v4/pix/payments        | Sim          | payments         | Sim        | Sim              | Sim  |     |
-| GET      | /v4/pix/payments/\{ID\} | Sim          | payments         | Não        | Não              | Sim  |     |
+| Operação | API                              | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | -------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| POST     | /v1/consents                     | Sim          | payments         | Sim        | Não              | Sim  |     |
+| GET      | /v1/consents/\{ID\}              | Sim          | payments         | Não        | Não              | Sim  |     |
+| POST     | /v2/consents                     | Sim          | payments         | Sim        | Não              | Sim  |     |
+| GET      | /v2/consents/\{ID\}              | Sim          | payments         | Não        | Não              | Sim  |     |
+| POST     | /v3/consents                     | Sim          | payments         | Sim        | Não              | Sim  |     |
+| GET      | /v3/consents/\{ID\}              | Sim          | payments         | Não        | Não              | Sim  |     |
+| POST     | /v4/consents                     | Sim          | payments         | Sim        | Não              | Sim  |     |
+| GET      | /v4/consents/\{ID\}              | Sim          | payments         | Não        | Não              | Sim  |     |
+| POST     | /v1/pix/payments                 | Sim          | payments         | Sim        | Sim              | Sim  |     |
+| GET      | /v1/pix/payments/\{ID\}          | Sim          | payments         | Não        | Não              | Sim  |     |
+| POST     | /v2/pix/payments                 | Sim          | payments         | Sim        | Sim              | Sim  |     |
+| GET      | /v2/pix/payments/\{ID\}          | Sim          | payments         | Não        | Não              | Sim  |     |
+| PATCH    | /v2/pix/payments/\{ID\}          | Sim          | payments         | Sim        | Não              | Sim  |     |
+| POST     | /v3/pix/payments                 | Sim          | payments         | Sim        | Sim              | Sim  |     |
+| GET      | /v3/pix/payments/\{ID\}          | Sim          | payments         | Não        | Não              | Sim  |     |
+| PATCH    | /v3/pix/payments/\{ID\}          | Sim          | payments         | Sim        | Não              | Sim  |     |
+| POST     | /v4/pix/payments                 | Sim          | payments         | Sim        | Sim              | Sim  |     |
+| GET      | /v4/pix/payments/\{ID\}          | Sim          | payments         | Não        | Não              | Sim  |     |
+| PATCH    | /v4/pix/payments/\{ID\}          | Sim          | payments         | Sim        | Não              | Sim  |     |
+| PATCH    | /v4/pix/payments/consents/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
 
 ## Automatic Payments
 
@@ -561,11 +563,14 @@
 
 **Cliente API:** TPP
 
-| Operação | API                            | Valida token | Escopo de acesso   | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------ | ------------ | ------------------ | ---------- | ---------------- | ---- | --- |
-| POST     | /v1/recurring-consents         | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
-| GET      | /v1/recurring-consents/\{ID\}  | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
-| PATCH    | /v1/recurring-consents/\{ID\}  | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| Operação | API                              | Valida token | Escopo de acesso   | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | -------------------------------- | ------------ | ------------------ | ---------- | ---------------- | ---- | --- |
+| POST     | /v1/recurring-consents           | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| GET      | /v1/recurring-consents/\{ID\}    | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| PATCH    | /v1/recurring-consents/\{ID\}    | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| POST     | /v1/pix/recurring-payments       | Sim          | recurring-payments | Sim        | Sim              | Sim  |     |
+| GET      | /v1/pix/recurring-payments       | Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| GET      | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
 
 ## Consent
 
