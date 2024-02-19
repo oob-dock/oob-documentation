@@ -97,11 +97,12 @@ domínio especificado aqui: [paymentv3](https://openfinancebrasil.atlassian.net/
 - Validar se proxy pertence a um dos creditors cadastrados no consentimento.
 [*1](#obs)
 - Validar se EndToEndId é válido e não foi reutilizado. [*1](#obs)
-- Validar se QRCode é válido. [*1](#obs)
+- Validar se QRCode é válido. [*2](#obs)
 - Validar se contas origem e destino são iguais. [*1](#obs)
 
 ## Obs
 
 - `*1:` retornar erro 422 - DETALHE_PAGAMENTO_INVALIDO em caso positivo.
+- `*2:` retornar erro 422 - VALOR_INVALIDO em caso positivo.
 
 **Atenção**:  mais validações para todas rotas serão incluídas
