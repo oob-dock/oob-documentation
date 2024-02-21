@@ -1,0 +1,290 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "description": "Detalhes dos eventos da operação de câmbio.",
+        "required": [
+          "eventSequenceNumber",
+          "eventType",
+          "eventDate"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "eventSequenceNumber": {
+            "type": "string",
+            "description": "Número sequência do registro do evento de câmbio no Bacen.",
+            "maxLength": 12,
+            "pattern": "^\\d{12}$",
+            "example": "493874649457"
+          },
+          "eventType": {
+            "type": "string",
+            "description": "Para o campo domínio:\n\n1 - Contratação no Mercado Primário.  \n2 - Alteração de Operação Cambial no Mercado Primário.  \n3 - Cancelamento de Operação Cambial no Mercado Primário.  \n4 - Liquidação de Operação Cambial no Mercado Primário.  \n5 - Baixa de Valor a Liquidar de Operação Cambial no Mercado Primário.  \n6 - Restabelecimento de Baixa de Valor a Liquidar de Operação Cambial no Mercado Primário.  \n9 - Anulação de Operação Cambial no Mercado Primário (utilizado, por exemplo, na anulação de um evento de liquidação/cancelamento).  \nObs.: Códigos seguem o layout de mensageria enviada pelas instituições ao Banco Central.  \n\nO evento está relacionado ao tipo de contratação.\n",
+            "enum": [
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "9"
+            ],
+            "example": "2"
+          },
+          "eventDate": {
+            "type": "string",
+            "description": "Data do evento relacionado com a operação.",
+            "maxLength": 20,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+            "example": "2023-03-07T08:30:00Z"
+          },
+          "dueDate": {
+            "type": "string",
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "description": "Data em que a operação (compra ou venda), após evento, está prevista para ser liquidada.",
+            "maxLength": 10,
+            "example": "2018-02-15"
+          },
+          "localCurrencyOperationTax": {
+            "type": "object",
+            "description": "Valor da taxa de câmbio aplicada à operação, em moeda nacional.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 31,
+                "pattern": "^\\d{1,15}\\.\\d{1,15}$",
+                "example": "1.3",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "localCurrencyOperationValue": {
+            "type": "object",
+            "description": "Valor negociado em moeda nacional.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 20,
+                "pattern": "^\\d{1,17}\\.\\d{2}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "foreignOperationValue": {
+            "type": "object",
+            "description": "Valor da operação em moeda estrangeira.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 20,
+                "pattern": "^\\d{1,17}\\.\\d{2}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "USD"
+              }
+            }
+          },
+          "operationOutstandingBalance": {
+            "type": "object",
+            "description": "Valor do saldo da operação, após evento, a liquidar em moeda estrangeira. Objeto de envio obrigatório nos casos de operações de câmbio com liquidação futura.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 20,
+                "pattern": "^\\d{1,17}\\.\\d{2}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "vetAmount": {
+            "type": "object",
+            "description": "Representa o custo de uma operação de câmbio em reais por moeda estrangeira, englobando a taxa de câmbio, as tarifas e tributos incidentes sobre essa operação. Campo de envio obrigatório nas operações de câmbio pronto que atingirem até o limite de US$100.000 ou equivalente em outras moedas.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 31,
+                "pattern": "\\d{1,15}\\.\\d{1,15}$",
+                "example": "1000.000004",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "localCurrencyAdvancePercentage": {
+            "type": "string",
+            "description": "Percentual do valor de moeda nacional concedido ao cliente antecipadamente. p.ex. 0.014500.\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). Campos de envio obrigatório no caso de operações de câmbio com liquidação futura.\n",
+            "pattern": "^\\d{1}\\.\\d{1,6}$",
+            "maxLength": 8,
+            "minLength": 3,
+            "example": "0.12"
+          },
+          "deliveryForeignCurrency": {
+            "type": "string",
+            "description": "Forma de entrega da moeda estrangeira.",
+            "enum": [
+              "CONTA_DEPOSITO_MOEDA_ESTRANGEIRA_PAIS",
+              "CONTA_DEPOSITO_OU_PAGAMENTO_EXPORTADOR_INSTITUICAO_EXTERIOR",
+              "ESPECIE_CHEQUES_VIAGEM",
+              "CARTAO_PREPAGO",
+              "TELETRANSMISSAO",
+              "SEM_MOVIMENTACAO_VALORES",
+              "DEMAIS",
+              "CARTA_CREDITO_A_VISTA",
+              "CARTA_CREDITO_A_PRAZO",
+              "CONTA_DEPOSITO",
+              "CHEQUE",
+              "TITULOS_VALORES",
+              "SIMBOLICA"
+            ],
+            "example": "CARTA_CREDITO_A_PRAZO"
+          },
+          "operationCategoryCode": {
+            "type": "string",
+            "maxLength": 5,
+            "pattern": "^\\d{5}$",
+            "description": "Código da natureza fato do fechamento da operação. Deve respeitar os códigos de natureza referenciados na resolução 277 ou na Circular 3690, conforme se aplicar ao contrato de câmbio.",
+            "example": "90302"
+          },
+          "foreignPartie": {
+            "type": "object",
+            "required": [
+              "relationshipCode",
+              "foreignPartieName",
+              "foreignPartieCountryCode"
+            ],
+            "description": "Lista para envio de informações de parte envolvida.\n\n[Restrição] Lista de preenchimento opcional pelas participantes quando:\n- O campo `deliveryForeignCurrency` for igual a ESPECIE_CHEQUES_VIAGEM ou CARTAO_PREPAGO.\n- O campo `eventType` for diferente de \"4 - Liquidação de Operação Cambial no Mercado Primário.\"\n\nCaso a instituição possua a informação, ela é de envio obrigatório. Caso a informação seja atualizada\nposteriormente à contratação, ela deve ser enviada através de eventos.\n",
+            "properties": {
+              "relationshipCode": {
+                "type": "string",
+                "maxLength": 2,
+                "pattern": "^\\d{2}$",
+                "description": "Código de Relação de vínculo entre o Cliente e o Pagador/Recebedor no Exterior. Deve respeitar os códigos de vínculo referenciados na resolução 277 ou na Circular 3690, conforme se aplicar ao contrato de câmbio.\n",
+                "example": "50"
+              },
+              "foreignPartieName": {
+                "type": "string",
+                "description": "Nome do pagador ou recebedor no exterior.\n",
+                "maxLength": 80,
+                "pattern": "[\\w\\W\\s]*",
+                "example": "José da Silva"
+              },
+              "foreignPartieCountryCode": {
+                "type": "string",
+                "description": "País do pagador ou recebedor. Código do país segundo a norma ISO 3166-1.\n",
+                "maxLength": 2,
+                "pattern": "^[A-Z]{2}$",
+                "example": "ZA"
+              }
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}
