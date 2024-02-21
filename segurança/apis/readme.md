@@ -28,6 +28,7 @@
     - [Variable incomes](#variable-incomes)
     - [Treasure titles](#treasure-titles)
     - [Funds](#funds)
+    - [Exchanges](#exchanges)
   - [Payments](#payments)
   - [Automatic Payments](#automatic-payments)
   - [Consent](#consent)
@@ -527,6 +528,19 @@
 | GET      | /v1/investments/{investmentId}/balances             | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/transactions         | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/transactions-current | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
+
+### Exchanges
+
+**Base path:** /open-banking/exchanges
+
+**Cliente API:** TPP
+
+| Operação | API                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission | Valida consentId | mTLS | Obs |
+| -------- | ----------------------------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
+| GET      | /v1/operations                      | Sim          | exchanges        | Não        | EXCHANGES_READ    | Sim              | Sim  |     |
+| GET      | /v1/operations/{operationId}        | Sim          | exchanges        | Não        | EXCHANGES_READ    | Sim              | Sim  |     |
+| GET      | /v1/operations/{operationId}/events | Sim          | exchanges        | Não        | EXCHANGES_READ    | Sim              | Sim  |     |
+
 
 ## Payments
 
