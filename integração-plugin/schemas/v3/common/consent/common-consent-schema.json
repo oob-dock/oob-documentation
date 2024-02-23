@@ -510,7 +510,7 @@
                             "type": "integer",
                             "format": "int32",
                             "minimum": 2,
-                            "maximum": 730,
+                            "maximum": 60,
                             "example": 3,
                             "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
                         }
@@ -558,7 +558,7 @@
                             "type": "integer",
                             "format": "int32",
                             "minimum": 2,
-                            "maximum": 104,
+                            "maximum": 60,
                             "example": 10,
                             "description": "Define a quantidade de pagamentos que serão enviados para liquidação."
                         }
@@ -622,7 +622,7 @@
                     "properties": {
                         "dates": {
                             "type": "array",
-                            "maxItems": 730,
+                            "maxItems": 60,
                             "minItems": 2,
                             "example": ["2023-08-23", "2023-09-26"],
                             "items": {
