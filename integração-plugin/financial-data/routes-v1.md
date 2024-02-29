@@ -145,7 +145,7 @@
 | Endpoint                                         | Rota do Camel                                                   |
 | ------------------------------------------------ | --------------------------------------------------------------- |
 | /investments                                     | ```direct:fundsGetInvestments```                                |
-| /investments/{investmentId}                      | ```direct:fundsGetInvestmentsInvestmentid```                    |
-| /investments/{investmentId}/balances             | ```direct:fundsGetInvestmentsInvestmentidBalances```            |
-| /investments/{investmentId}/transactions         | ```direct:fundsGetInvestmentsInvestmentidTransactions```        |
-| /investments/{investmentId}/transactions-current | ```direct:fundsGetInvestmentsInvestmentidTransactionsCurrent``` |
+| /investments/{investmentId}                      | ```direct:fundsGetInvestmentsInvestmentId```                    |
+| /investments/{investmentId}/balances             | ```direct:fundsGetInvestmentsInvestmentIdBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:fundsGetInvestmentsInvestmentIdTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:fundsGetInvestmentsInvestmentIdTransactionsCurrent``` |
