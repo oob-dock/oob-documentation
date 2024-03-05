@@ -104,48 +104,48 @@
 | Endpoint                                         | Rota do Camel                                                              |
 | ------------------------------------------------ | -------------------------------------------------------------------------- |
 | /investments                                     | ```direct:bankFixedIncomesGetInvestments```                                |
-| /investments/{investmentId}                      | ```direct:bankFixedIncomesGetInvestmentsInvestmentid```                    |
-| /investments/{investmentId}/balances             | ```direct:bankFixedIncomesGetInvestmentsInvestmentidBalances```            |
-| /investments/{investmentId}/transactions         | ```direct:bankFixedIncomesGetInvestmentsInvestmentidTransactions```        |
-| /investments/{investmentId}/transactions-current | ```direct:bankFixedIncomesGetInvestmentsInvestmentidTransactionsCurrent``` |
+| /investments/{investmentId}                      | ```direct:bankFixedIncomesGetInvestmentsInvestmentId```                    |
+| /investments/{investmentId}/balances             | ```direct:bankFixedIncomesGetInvestmentsInvestmentIdBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:bankFixedIncomesGetInvestmentsInvestmentIdTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:bankFixedIncomesGetInvestmentsInvestmentIdTransactionsCurrent``` |
 
 ## Credit Fixed Incomes
 
 | Endpoint                                         | Rota do Camel                                                                |
 | ------------------------------------------------ | ---------------------------------------------------------------------------- |
 | /investments                                     | ```direct:creditFixedIncomesGetInvestments```                                |
-| /investments/{investmentId}                      | ```direct:creditFixedIncomesGetInvestmentsInvestmentid```                    |
-| /investments/{investmentId}/balances             | ```direct:creditFixedIncomesGetInvestmentsInvestmentidBalances```            |
-| /investments/{investmentId}/transactions         | ```direct:creditFixedIncomesGetInvestmentsInvestmentidTransactions```        |
-| /investments/{investmentId}/transactions-current | ```direct:creditFixedIncomesGetInvestmentsInvestmentidTransactionsCurrent``` |
+| /investments/{investmentId}                      | ```direct:creditFixedIncomesGetInvestmentsInvestmentId```                    |
+| /investments/{investmentId}/balances             | ```direct:creditFixedIncomesGetInvestmentsInvestmentIdBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:creditFixedIncomesGetInvestmentsInvestmentIdTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:creditFixedIncomesGetInvestmentsInvestmentIdTransactionsCurrent``` |
 
 ## Variable Incomes
 
 | Endpoint                                         | Rota do Camel                                                             |
 | ------------------------------------------------ | ------------------------------------------------------------------------- |
 | /investments                                     | ```direct:variableIncomesGetInvestments```                                |
-| /investments/{investmentId}                      | ```direct:variableIncomesGetInvestmentsInvestmentid```                    |
-| /investments/{investmentId}/balances             | ```direct:variableIncomesGetInvestmentsInvestmentidBalances```            |
-| /investments/{investmentId}/transactions         | ```direct:variableIncomesGetInvestmentsInvestmentidTransactions```        |
-| /investments/{investmentId}/transactions-current | ```direct:variableIncomesGetInvestmentsInvestmentidTransactionsCurrent``` |
-| /broker-notes/{brokerNoteId}                     | ```direct:variableIncomesGetInvestmentsBrokerNotesBrokernoteid```         |
+| /investments/{investmentId}                      | ```direct:variableIncomesGetInvestmentsInvestmentId```                    |
+| /investments/{investmentId}/balances             | ```direct:variableIncomesGetInvestmentsInvestmentIdBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:variableIncomesGetInvestmentsInvestmentIdTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:variableIncomesGetInvestmentsInvestmentIdTransactionsCurrent``` |
+| /broker-notes/{brokerNoteId}                     | ```direct:variableIncomesGetInvestmentsBrokerNotesBrokernoteId```         |
 
 ## Treasure Titles
 
 | Endpoint                                         | Rota do Camel                                                            |
 | ------------------------------------------------ | ------------------------------------------------------------------------ |
 | /investments                                     | ```direct:treasureTitlesGetInvestments```                                |
-| /investments/{investmentId}                      | ```direct:treasureTitlesGetInvestmentsInvestmentid```                    |
-| /investments/{investmentId}/balances             | ```direct:treasureTitlesGetInvestmentsInvestmentidBalances```            |
-| /investments/{investmentId}/transactions         | ```direct:treasureTitlesGetInvestmentsInvestmentidTransactions```        |
-| /investments/{investmentId}/transactions-current | ```direct:treasureTitlesGetInvestmentsInvestmentidTransactionsCurrent``` |
+| /investments/{investmentId}                      | ```direct:treasureTitlesGetInvestmentsInvestmentId```                    |
+| /investments/{investmentId}/balances             | ```direct:treasureTitlesGetInvestmentsInvestmentIdBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:treasureTitlesGetInvestmentsInvestmentIdTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:treasureTitlesGetInvestmentsInvestmentIdTransactionsCurrent``` |
 
 ## Funds
 
 | Endpoint                                         | Rota do Camel                                                   |
 | ------------------------------------------------ | --------------------------------------------------------------- |
 | /investments                                     | ```direct:fundsGetInvestments```                                |
-| /investments/{investmentId}                      | ```direct:fundsGetInvestmentsInvestmentid```                    |
-| /investments/{investmentId}/balances             | ```direct:fundsGetInvestmentsInvestmentidBalances```            |
-| /investments/{investmentId}/transactions         | ```direct:fundsGetInvestmentsInvestmentidTransactions```        |
-| /investments/{investmentId}/transactions-current | ```direct:fundsGetInvestmentsInvestmentidTransactionsCurrent``` |
+| /investments/{investmentId}                      | ```direct:fundsGetInvestmentsInvestmentId```                    |
+| /investments/{investmentId}/balances             | ```direct:fundsGetInvestmentsInvestmentIdBalances```            |
+| /investments/{investmentId}/transactions         | ```direct:fundsGetInvestmentsInvestmentIdTransactions```        |
+| /investments/{investmentId}/transactions-current | ```direct:fundsGetInvestmentsInvestmentIdTransactionsCurrent``` |
