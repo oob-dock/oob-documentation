@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2024-03-06 - v3.5.0
+
+- Inclusão de idempotencyKey em patchPixPaymentsPaymentId_v3
+- Inclusão de REJECTED em EnumPaymentCancellationStatusType
+
 ### 2023-12-19 - v3.4.0
 
 - Inclusão dos schemas de pagamento automático versão 1
