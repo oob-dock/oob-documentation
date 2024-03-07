@@ -150,6 +150,15 @@ Identificador do componente de pub/sub do Dapr a ser utilizado.
 
 Ex: `oob-consent-pub-sub`
 
+### dapr/daprRetryPubsubId
+
+Identificador do componente de pub/sub que implementa políticas de retentativa.
+
+Quando um determinado tópico de mensagens precisar de suporte a reprocessamento
+de mensagens, este componente será utilizado.
+
+Ex: `oob-consent-pub-sub-retry`
+
 ### dapr/appId
 
 Identificador do serviço a ser utilizado caso exista mais de uma instância
