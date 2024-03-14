@@ -571,6 +571,7 @@
 | POST     | /v1/pix/recurring-payments       | Sim          | recurring-payments | Sim        | Sim              | Sim  |     |
 | GET      | /v1/pix/recurring-payments       | Sim          | recurring-payments | Não        | Não              | Sim  |     |
 | GET      | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| PATCH    | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
 
 ## Consent
 
