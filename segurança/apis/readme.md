@@ -585,6 +585,7 @@
 | POST     | /v1/pix/recurring-payments       | Sim          | recurring-payments | Sim        | Sim              | Sim  |     |
 | GET      | /v1/pix/recurring-payments       | Sim          | recurring-payments | Não        | Não              | Sim  |     |
 | GET      | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| PATCH    | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
 
 ## Consent
 
@@ -603,7 +604,7 @@
 | DELETE   | /v2/consents/\{ID\}            | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | GET      | /v2/consents/\{ID\}            | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | POST     | /v2/consents/\{ID\}/extends    | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
-| GET      | /v2/consents/\{ID\}/extends    | Sim          | consents         | Não        | Sim              | Sim  | [*1](#observações) |
+| GET      | /v2/consents/\{ID\}/extends    | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | POST     | /v3/consents                   | Sim          | consents         | Não        | Não              | Sim  |                    |
 | GET      | /v3/consents/\{ID\}            | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | DELETE   | /v3/consents/\{ID\}            | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |

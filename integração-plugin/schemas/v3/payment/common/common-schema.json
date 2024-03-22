@@ -264,7 +264,8 @@
         "EnumPaymentCancellationStatusType": {
             "type": "string",
             "enum": [
-                "CANC"
+                "CANC",
+                "REJECTED"
             ],
             "example": "CANC",
             "description": "Utilizado para informar para qual estado deve ir o pagamento.  \nAtualmente o único valor possível é CANC.\n"
