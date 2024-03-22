@@ -149,3 +149,11 @@
 | /investments/{investmentId}/balances             | ```direct:fundsGetInvestmentsInvestmentIdBalances```            |
 | /investments/{investmentId}/transactions         | ```direct:fundsGetInvestmentsInvestmentIdTransactions```        |
 | /investments/{investmentId}/transactions-current | ```direct:fundsGetInvestmentsInvestmentIdTransactionsCurrent``` |
+
+## Exchanges
+
+| Endpoint                         | Rota do Camel                                       |
+| ---------------------------------| ----------------------------------------------------|
+| /operations                      | ```direct:exchangesGetOperations```                 |
+| /operations/{operationId}        | ```direct:exchangesGetOperationsOperationId```      |
+| /operations/{operationId}/events | ```direct:exchangesGetOperationsOperationIdEvents```|
