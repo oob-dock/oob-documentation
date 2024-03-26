@@ -5,13 +5,17 @@ info:
 security:
 - jwt: []
 tags:
-- name: Consents Opus Open Banking
+- name: General
+  description: opus open banking services
+- name: Consents
+  description: Consents opus open banking services
+- name: Payments
   description: Consents opus open banking services
 paths:
   /open-banking/oob-consents/v1/consents:
     get:
       tags:
-      - Consents Opus Open Banking
+      - General
       description: Retrieve list of consents
       parameters:
       - name: consentOwner
@@ -37,6 +41,7 @@ paths:
           type: string
           example: 2022-01-30T17:31:28Z
       - name: modalityType
+        description: Modalidade do pagamento. Uso exclusivo para type = PAYMENT
         in: query
         schema:
           $ref: '#/components/schemas/ModalityPaymentEnum'
@@ -65,6 +70,7 @@ paths:
         schema:
           $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
       - name: type
+        description: Retorna apenas os consentimentos do tipo informado
         in: query
         schema:
           $ref: '#/components/schemas/ConsentTypesEnum'
@@ -84,7 +90,7 @@ paths:
   /open-banking/oob-consents/v1/consents/{consentId}:
     get:
       tags:
-      - Consents Opus Open Banking
+      - General
       description: Retrieve consent data
       parameters:
       - name: consentId
@@ -110,8 +116,9 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseConsentDetailSchema'
     patch:
+      deprecated: true
       tags:
-      - Consents Opus Open Banking
+      - Consents
       description: Revoke consent deprecated
       parameters:
       - name: consentId
@@ -146,9 +153,80 @@ paths:
               schema:
                 $ref: '#/components/schemas/ResponseConsentDetailSchema'
   /open-banking/oob-consents/consents/v1/consents/{consentId}/payments:
+    get:
+      tags:
+      - Payments
+      description: Retrieve payments of a consent, ordered by payment date desc
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/consents/v2/active:
+    get:
+      tags:
+      - General
+      description: Get active consents for a given time frame
+      parameters:
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentListSchema'
+  /open-banking/oob-consents/payments/v1/consents/{consentId}:
     patch:
       tags:
-      - Consents Opus Open Banking
+      - Payments
       description: Revoke payment consent
       parameters:
       - name: consentId
@@ -184,48 +262,12 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentDetailSchema'
-  /open-banking/oob-consents/consents/v2/active:
-    get:
-      tags:
-      - Consents Opus Open Banking
-      description: Get active consents for a given time frame
-      parameters:
-      - name: page
-        in: query
-        schema:
-          format: int32
-          default: 1
-          type: integer
-      - name: page-size
-        in: query
-        schema:
-          format: int32
-          default: 25
-          type: integer
-      responses:
-        default:
-          description: Default error response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseConsentListSchema'
-  /open-banking/oob-consents/payments/v1/consents/{consentId}:
+  /open-banking/oob-consents/payments/v1/payments:
     patch:
       tags:
-      - Consents Opus Open Banking
-      description: Revoke payment consent
+      - Payments
+      description: Revoke a single payment
       parameters:
-      - name: consentId
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/UUID'
       - name: X-Correlation-ID
         in: header
         schema:
@@ -238,7 +280,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestRevokeOobConsent'
+              $ref: '#/components/schemas/RequestRevokeOobPaymentPayment'
       responses:
         default:
           description: Default error response
@@ -255,7 +297,7 @@ paths:
   /open-banking/oob-consents/consents/v1/consents/{consentId}:
     patch:
       tags:
-      - Consents Opus Open Banking
+      - Consents
       description: Revoke data sharing consent
       parameters:
       - name: consentId
@@ -292,7 +334,7 @@ paths:
   /open-banking/oob-consents/v1/tpps/payment-legacy-ids:
     get:
       tags:
-      - Consents Opus Open Banking
+      - Payments
       description: Get legacy payments generated in a period
       parameters:
       - name: endDate
@@ -321,7 +363,7 @@ paths:
   /open-banking/oob-consents/v1/payment-status-notification:
     post:
       tags:
-      - Consents Opus Open Banking
+      - Payments
       description: Post information about payments status change
       requestBody:
         content:
@@ -340,7 +382,7 @@ paths:
   /open-banking/oob-consents/v1/consents/{consentId}/extends:
     get:
       tags:
-      - Consents Opus Open Banking
+      - Consents
       description: Retrieve extended consent list
       parameters:
       - name: consentId
@@ -546,6 +588,278 @@ components:
         tppLogo:
           type: string
           example: "http://www.exemplo.com/logo.png"
+    ResponseRecurringPaymentsDataRead:
+      type: object
+      properties:
+        legacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueObject'
+        paymentId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$'
+          example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+          description: |
+            Código ou identificador único informado pela instituição detentora da conta para representar a iniciação de pagamento. O `recurringPaymentId` deve ser diferente do `endToEndId`. 
+            Este é o identificador que deverá ser utilizado na consulta ao status da iniciação de pagamento efetuada.
+        consentId:
+          type: string
+          maxLength: 256
+          pattern: '^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{0,31}:[a-zA-Z0-9()+,\-.:=@;$_!*''%\/?#]+$'
+          example: 'urn:bancoex:C1DD33123'
+          description: |
+            Identificador único do consentimento criado para a iniciação de pagamento solicitada. Deverá ser um URN - Uniform Resource Name.
+            Um URN, conforme definido na [RFC8141](https://tools.ietf.org/html/rfc8141) é um Uniform Resource
+            Identifier - URI - que é atribuído sob o URI scheme "urn" e um namespace URN específico, com a intenção de que o URN
+            seja um identificador de recurso persistente e independente da localização.
+            Considerando a string urn:bancoex:C1DD33123 como exemplo para `recurringConsentId` temos:
+            - o namespace(urn)
+            - o identificador associado ao namespace da instituição transmissora (bancoex)
+            - o identificador específico dentro do namespace (C1DD33123).
+            Informações mais detalhadas sobre a construção de namespaces devem ser consultadas na [RFC8141](https://tools.ietf.org/html/rfc8141).
+
+            [Restrição] Este campo é de preenchimento obrigatório quando o valor do campo authorisationFlow for igual a FIDO_FLOW.
+        endToEndId:
+          $ref: '#/components/schemas/EndToEndId'
+        date:
+          type: string
+          maxLength: 10
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          example: '2023-10-10'
+          description: Data em que o pagamento será realizado.
+        creationDateTime:
+          type: string
+          format: date-time
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+          example: '2020-07-21T08:30:00Z'
+          description: |
+            Data e hora em que o pagamento foi criado. 
+            Uma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), 
+            sempre com a utilização de timezone UTC(UTC time format).
+        statusUpdateDateTime:
+          type: string
+          format: date-time
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+          example: '2020-07-21T08:30:00Z'
+          description: |
+            Data e hora em que o pagamento teve o status atualizado. 
+            Uma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), 
+            sempre com a utilização de timezone UTC(UTC time format).
+        ibgeTownCode:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '^\d{7}$'
+          example: '5300108'
+          description: |
+            O campo ibgeTownCode no arranjo Pix tem o mesmo comportamento que o campo codMun descrito no item 1.6.6 do manual do Pix.
+
+            1. Caso a informação referente ao município não seja enviada, o PSP do recebedor assumirá que não existem feriados estaduais e municipais no período em questão;
+        status:
+          $ref: '#/components/schemas/EnumPaymentStatusType'
+        rejectionReason:
+          $ref: '#/components/schemas/RejectionReason'
+        cnpjInitiator:
+          type: string
+          pattern: '^\d{14}$'
+          maxLength: 14
+          example: '50685362000135'
+          description: CNPJ do Iniciador de Pagamento devidamente habilitado para a prestação de Serviço de Iniciação no Pix.
+        payment:
+          $ref: '#/components/schemas/PaymentPix'
+        remittanceInformation:
+          type: string
+          maxLength: 140
+          pattern: '[\w\W\s]*'
+          example: Pagamento da nota RSTO035-002.
+          description: |
+            Deve ser preenchido sempre que o usuário pagador inserir alguma informação adicional em um pagamento, a ser enviada ao recebedor.
+        creditorAccount:
+          $ref: '#/components/schemas/CreditorAccount'
+        debtorAccount:
+            $ref: '#/components/schemas/DebtorAccount'
+        cancellation:
+          $ref: '#/components/schemas/PixPaymentCancellation'
+        authorisationFlow:
+          type: string
+          enum:
+            - HYBRID_FLOW
+            - CIBA_FLOW
+            - FIDO_FLOW
+          example: HYBRID_FLOW
+          description: |
+            Campo condicional utilizado para identificar o fluxo de autorização em que o pagamento foi solicitado.
+            
+            [Restrição] Se CIBA ou FIDO, preenchimento obrigatório. Caso o campo não esteja presente no payload, subentende-se que o fluxo de autorização utilizado é o HYBRID_FLOW.
+        transactionIdentification:
+          type: string
+          pattern: ^[a-zA-Z0-9]{1,35}$
+          maxLength: 35
+          example: 'E00038166201907261559y6j6'
+          description: |
+            Trata-se de um identificador de transação que deve ser retransmitido intacto pelo PSP do pagador ao gerar a ordem de pagamento. 
+            Essa informação permitirá ao recebedor identificar e correlacionar a transferência, quando recebida, com a apresentação das instruções ao pagador. 
+            Os caracteres permitidos no contexto do Pix para o campo txid (EMV 62-05) são:Letras minúsculas, de 'a' a 'z' Letras maiúsculas, de 'A' a 'z' Dígitos decimais, de '0' a '9'.
+        document:
+          type: object
+          description: Informações do documento identificador.
+          required:
+            - identification
+            - rel
+          properties:
+            identification:
+              type: string
+              pattern: ^(?:\d{11}|\d{14})$
+              minLength: 11
+              maxLength: 14
+              example: '11111111111111'
+              description: Número do documento de identificação oficial do titular pessoa natural ou jurídica.
+            rel:
+              type: string
+              enum:
+                - CPF
+                - CNPJ
+              example: 'CNPJ'
+              description: Tipo do documento de identificação oficial do titular pessoa natural ou jurídica.  
+    PixPaymentCancellation:
+      type: object
+      description: |
+        Objeto que contém os dados referentes ao usuário pagador que solicitou o cancelamento, o canal utilizado por ele e o motivo.  
+
+        [Restrição] O objeto cancellation será obrigatório apenas quando o valor do campo status for igual a CANC. 
+      required:
+        - cancelledAt
+        - cancelledBy
+        - reason
+        - cancelledFrom
+      properties:
+        reason:
+          $ref: '#/components/schemas/EnumPaymentCancellationReasonType'
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumPaymentCancellationFromType'
+        cancelledAt:
+          type: string
+          description: 'Data e hora que foi realizado o cancelamento, conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), formato UTC.'
+          format: date-time
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+          example: '2021-05-21T08:30:00Z'
+        cancelledBy:
+          type: object
+          description: Informação relacionada ao usuário pagador que solicitou o cancelamento do pagamento.
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Objeto que consolida os dados do documento do usuário que solicitou o cancelamento.
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: Número do documento do usuário pagador responsável pelo cancelamento do pagamento.
+                  example: '11111111111'
+                  pattern: '^\d{11}$'
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Tipo do documento do usuário pagador responsável pelo cancelamento do pagamento.
+                  example: CPF
+                  pattern: '^[A-Z]{3}$'
+    EnumPaymentCancellationFromType:
+      type: string
+      enum:
+        - INICIADORA
+        - DETENTORA
+      example: INICIADORA
+      description: |
+        Campo utilizado para informar o meio pelo qual foi realizado o cancelamento.
+
+        Valores possíveis:
+
+        INICIADORA - Pagamento cancelado pelo usuário pagador nos canais da iniciadora
+
+        DETENTORA - Pagamento cancelado pelo usuário pagador nos canais da detentora
+    EnumPaymentCancellationReasonType:
+      type: string
+      enum:
+        - CANCELADO_PENDENCIA
+        - CANCELADO_AGENDAMENTO
+        - CANCELADO_MULTIPLAS_ALCADAS
+      example: CANCELADO_PENDENCIA
+      description: |
+        O preenchimento desse campo para retorno, deve ocorrer pela detentora de contas a partir do status em que o pagamento estiver no momento da solicitação do cancelamento (ex. Status de pagamento = PDNG, campo deve ser preenchido com enum CANCELADO_PENDENCIA)
+
+        Valores possíveis:
+
+        CANCELADO_PENDENCIA - Pagamento cancelado enquanto estava na situação PDNG
+
+        CANCELADO_AGENDAMENTO - Pagamento cancelado enquanto estava na situação SCHD
+
+        CANCELADO_MULTIPLAS_ALCADAS - Pagamento cancelado enquanto estava na situação PATC
+    PaymentPix:
+      type: object
+      description: Objeto contendo as informações do pagamento.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          minLength: 4
+          maxLength: 19
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          example: '100000.12'
+          description: |
+            Valor da transação com 2 casas decimais.
+        currency:
+          type: string
+          maxLength: 3
+          pattern: '^([A-Z]{3})$'
+          example: BRL
+          description: |
+            Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'. Todos os valores monetários informados estão representados com a moeda vigente do Brasil.
+    EndToEndId:
+      type: string
+      minLength: 32
+      maxLength: 32
+      pattern: '^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$'
+      example: E9040088820210128000800123873170
+      description: |
+        Trata-se de um identificador único, gerado na instituição iniciadora de pagamento e recebido na instituição detentora de conta, permeando toda a jornada do pagamento Pix.
+
+        [Restrição] A detentora deve obrigatoriamente retornar o campo com o mesmo valor recebido da iniciadora.
+    EnumPaymentStatusType:
+      type: string
+      enum:
+        - RCVD
+        - CANC
+        - ACCP
+        - ACPD
+        - RJCT
+        - ACSC
+        - PDNG
+        - SCHD
+      example: PDNG
+      description: |
+        Estado atual do pagamento. O estado evolui na seguinte ordem:
+        - RCVD (Received) - Indica que a requisição de pagamento foi recebida com sucesso pela detentora, mas ainda há validações a serem feitas antes de ser submetida para liquidação.
+        - CANC (Cancelled) - Indica que a transação Pix pendente foi cancelada com sucesso pelo usuário antes que fosse confirmada (ACCP) ou rejeitada (RJCT) pela detentora.
+        - ACCP( Accepted Customer Profile) - Indica que todas as verificações necessárias já foram realizadas pela detentora e que a transação está pronta para ser enviada para liquidação (no SPI se for Pix para outra instituição ou internamente se for para outra conta na mesma instituição).
+        - ACPD (Accepted Clearing Processed) - Indica que a detentora já submeteu a transação para liquidação, mas ainda não tem a confirmação se foi liquidada ou rejeitada.
+        - RJCT (Rejected) Indica que a transação foi rejeitada pela detentora ou pelo SPI.
+        - ACSC (Accepted Settlement Completed Debitor Account) - Indica que a transação foi efetivada pela detentora ou pelo SPI.
+        - PDNG (Pending) - Indica que a detentora reteve temporariamente a transação Pix para análise.
+        - SCHD (Scheduled) - Indica que a transação Pix foi agendada com sucesso na detentora.  
+        Em caso insucesso:
+        - RJCT (REJECTED) - Instrução de pagamento rejeitada.
     ConsentExtends:
       type: object
       properties:
@@ -628,106 +942,52 @@ components:
           allOf:
           - $ref: '#/components/schemas/AccountPaymentTypeEnum'
           - nullable: false
-    EnumPurposeTed:
-      enum:
-      - _1
-      - _10
-      - _100
-      - _101
-      - _103
-      - _104
-      - _107
-      - _108
-      - _109
-      - _11
-      - _110
-      - _111
-      - _112
-      - _113
-      - _114
-      - _117
-      - _12
-      - _121
-      - _123
-      - _124
-      - _13
-      - _131
-      - _132
-      - _136
-      - _139
-      - _14
-      - _149
-      - _15
-      - _150
-      - _157
-      - _175
-      - _18
-      - _19
-      - _2
-      - _200
-      - _201
-      - _202
-      - _203
-      - _204
-      - _205
-      - _206
-      - _207
-      - _208
-      - _209
-      - _23
-      - _27
-      - _28
-      - _29
-      - _3
-      - _30
-      - _300
-      - _301
-      - _302
-      - _303
-      - _31
-      - _33
-      - _34
-      - _35
-      - _36
-      - _37
-      - _38
-      - _39
-      - _4
-      - _40
-      - _41
-      - _42
-      - _43
-      - _44
-      - _45
-      - _47
-      - _5
-      - _50
-      - _500
-      - _501
-      - _502
-      - _504
-      - _505
-      - _507
-      - _508
-      - _509
-      - _510
-      - _511
-      - _512
-      - _513
-      - _514
-      - _515
-      - _516
-      - _517
-      - _518
-      - _519
-      - _520
-      - _6
-      - _7
-      - _8
-      - _9
-      - _97
-      - _99999
+        ibgeTownCode:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '^\d{7}$'
+          example: '5300108'
+    Creditors:
+      type: array
+      minItems: 1
+      items:
+        type: object
+        description: Objeto contendo os dados do recebedor (creditor).
+        required:
+          - personType
+          - cpfCnpj
+          - name
+        properties:
+          personType:
+            $ref: '#/components/schemas/EnumPaymentPersonType'
+          cpfCnpj:
+            type: string
+            minLength: 11
+            maxLength: 14
+            pattern: '^\d{11}$|^\d{14}$'
+            example: '58764789000137'
+            description: |
+              Identificação da pessoa envolvida na transação.  
+              Preencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.  
+              O CPF será utilizado com 11 números e deverá ser informado sem pontos ou traços.  
+              O CNPJ será utilizado com 14 números e deverá ser informado sem pontos ou traços.
+          name:
+            type: string
+            pattern: ^([A-Za-zÀ-ÖØ-öø-ÿ,.@:&*+_<>()!?/\\$%\d' -]+)$
+            maxLength: 120
+            example: Marco Antonio de Brito
+            description: |
+              Em caso de pessoa natural deve ser informado o nome completo do titular da conta do recebedor.  
+              Em caso de pessoa jurídica deve ser informada a razão social ou o nome fantasia da conta do recebedor.
+    EnumPaymentPersonType:
       type: string
+      enum:
+        - PESSOA_NATURAL
+        - PESSOA_JURIDICA
+      example: PESSOA_NATURAL
+      description: |
+        Titular, pessoa natural ou juridica a quem se referem os dados de recebedor (creditor).
     ErrorResponse:
       type: object
       properties:
@@ -812,6 +1072,7 @@ components:
       enum:
       - IMMEDIATE
       - SCHEDULED
+      - SWEEPING
       type: string
     OrderTypeEnum:
       enum:
@@ -849,22 +1110,21 @@ components:
           $ref: '#/components/schemas/CreditorAccount'
         schedule:
           $ref: '#/components/schemas/SchedulePayment'
-        purpose:
-          allOf:
-          - $ref: '#/components/schemas/EnumPurposeTed'
-          - example: "1"
-        purposeAdditionalInfo:
-          maxLength: 100
-          type: string
     PaymentData:
       type: object
       properties:
         creditor:
           $ref: '#/components/schemas/Creditor'
+        creditors:
+          $ref: '#/components/schemas/Creditors'
         payment:
           $ref: '#/components/schemas/PaymentConsent'
         debtorAccount:
           $ref: '#/components/schemas/DebtorAccount'
+        recurringConfiguration:
+          $ref: '#/components/schemas/RecurringConfiguration'
+        riskSignals:
+          $ref: '#/components/schemas/RiskSignalsConsents'
     PaymentDetails:
       required:
       - localInstrument
@@ -890,6 +1150,246 @@ components:
           allOf:
           - $ref: '#/components/schemas/CreditorAccount'
           - nullable: false
+    RiskSignalsConsents:
+      type: object
+      required:
+        - deviceId
+        - isRootedDevice
+        - screenBrightness
+        - elapsedTimeSinceBoot
+        - osVersion
+        - userTimeZoneOffset
+        - language
+        - screenDimensions
+        - accountTenure
+      description: |
+        Sinais de risco para iniciação de pagamentos automáticos
+
+        [Restrição] Deve ser enviado quando o consentimento for para o produto Pix Automático (O objeto "/data/recurringConfiguration/automatic" usado no oneOf). Só estará presente após a primeira edição do consentimento de longa duração.
+      properties:
+        deviceId:
+          type: string
+          description: ID único do dispositivo gerado pela plataforma.
+          example: 00000000-54b3-e7c7-0000-000046bffd97
+        isRootedDevice:
+          type: boolean
+          description: Indica se o dispositivo atualmente está com permissão de “root”.
+          example: false
+        screenBrightness:
+          type: number
+          format: double
+          description: |
+            Indica o nível de brilho da tela do dispositivo.  
+            Em dispositivos Android o valor é um inteiro, entre 0 e 255, inclusive;  
+            Em dispositivos iOS o valor é um ponto flutuante entre 0.0 e 1.0.
+        elapsedTimeSinceBoot:
+          type: integer
+          format: int64
+          description: Indica por quanto tempo (em milissegundos) o dispositivo está ligado.
+        osVersion:
+          type: string
+          description: Versão do sistema operacional.
+        userTimeZoneOffset:
+          type: string
+          description: |
+            Indica a configuração de fuso horário do dispositivo do usuário, com o formato UTC offset: ±hh[:mm]
+        language:
+          type: string
+          description: Indica o idioma do dispositivo no formato ISO 639-1.
+        screenDimensions:
+          type: object
+          description: Dimensões da tela do dispositivo
+          required:
+            - height
+            - width
+          properties:
+            height:
+              type: integer
+              format: int64
+              description: Altura da tela, em pixels.
+            width:
+              type: integer
+              format: int64
+              description: Largura da tela, em pixels.
+        accountTenure:
+          type: string
+          format: date
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          description: Data de cadastro do cliente na iniciadora.
+        geolocation:
+          type: object
+          description: Dados de geolocalização do cliente enquanto logado na iniciadora
+          properties:
+            latitude:
+              type: number
+              format: double
+              description: Coordenada latitudial do cliente enquanto logado na iniciadora
+            longitude:
+              type: number
+              format: double
+              description: Coordenada longitudinal do cliente enquanto logado na iniciadora
+            type:
+              type: string
+              description: |
+                Tipo de mecanismo utilizado na geração da geolocalização
+              enum:
+                - COARSE
+                - FINE
+                - INFERRED
+        isCallInProgress:
+          type: boolean
+          description: |
+            Indica chamada ativa no momento do vínculo.
+
+            [Restrição] Caso o sinal de risco esteja disponível (cliente permitiu que fosse coletado), o mesmo deverá ser enviado
+        isDevModeEnabled:
+          type: boolean
+          description: Indica se o dispositivo está em modo de desenvolvedor.
+        isMockGPS:
+          type: boolean
+          description: Indica se o dispositivo está usando um GPS falso.
+        isEmulated:
+          type: boolean
+          description: Indica se o dispositivo é emulado ou real.
+        isMonkeyRunner:
+          type: boolean
+          description: Indica o uso do MonkeyRunner.
+        isCharging:
+          type: boolean
+          description: Indica se a bateria do dispositivo está sendo carregada.
+        antennaInformation:
+          type: string
+          description: Indica em qual antena o dispositivo está conectado.
+        isUsbConnected:
+          type: boolean
+          description: Indica se o dispositivo está conectado a outro dispositivo via USB.
+        integrity:
+          type: object
+          description: |
+            Informa a integridade do dispositivo e app.  
+            No Android, conforme documentação Play API Integrity - [Android](https://developer.android.com/google/play/integrity/overview?hl=pt-br).  
+            No iOS, conforme documentação App Attest [iOS](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)
+          properties:
+            appRecognitionVerdict:
+              type: string
+              description: Informa a integridade do app
+            deviceRecognitionVerdict:
+              type: string
+              description: Informa a integridade do dispositivo
+    RecurringConfiguration:
+      type: object
+      description: Campo destinado a configuração dos diferentes produtos de pagamentos recorrentes.
+      oneOf:
+        - $ref: '#/components/schemas/Sweeping'
+    Sweeping:
+      type: object
+      required:
+        - sweeping
+      properties:
+        sweeping:
+          type: object
+          description: Definição da configuração de recorrência para transferências automáticas de fundos.
+          properties:
+            totalAllowedAmount:
+              type: string
+              minLength: 4
+              maxLength: 19
+              pattern: '^((\d{1,16}\.\d{2}))$'
+              example: '100000.12'
+              description: Valor máximo a ser atingido pelo somatório de todas as transações que utilizam o consentimento autorizado pelo cliente. Caso o valor seja superado, a detentora de conta deve negar a transação solicitada pela iniciadora.
+            transactionLimit:
+              type: string
+              pattern: '^((\d{1,16}\.\d{2}))$'
+              minLength: 4
+              maxLength: 19
+              example: '1000000.12'
+              description: Valor máximo para cada transação de pagamento associada a esse consentimento. Caso valor do pagamento seja maior que esse limite, a detentora de contas deve rejeitar a transação de pagamento.
+            periodicLimits:
+              $ref: "#/components/schemas/PeriodicLimits"
+    PeriodicLimits:
+      type: object
+      description: Limites transacionais por período determinado pelo usuário pagador.
+      properties:
+        day:
+          $ref: '#/components/schemas/Day'
+        week:
+          $ref: '#/components/schemas/Week'
+        month:
+          $ref: '#/components/schemas/Month'
+        year:
+          $ref: '#/components/schemas/Year'
+    Day:
+      type: object
+      description: |
+        Configurar limite transacional diário determinado pelo usuário pagador.
+        
+        [Restrição] Caso enviado o objeto, ao menos um dos campos (`quantityLimit` ou `transactionLimit`) devem ser preenchidos.
+      properties:
+        quantityLimit:
+          type: integer
+          example: 2
+          description: Quantidade limite de transações permitidas para ocorrer durante um dia.
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Valor máximo a ser transacionado diariamente.
+    Week:
+      type: object
+      description: |
+        Configurar limite transacional semanal determinado pelo usuário pagador.
+        
+        [Restrição] Caso enviado o objeto, ao menos um dos campos (`quantityLimit` ou `transactionLimit`) devem ser preenchidos
+      properties:
+        quantityLimit:
+          type: integer
+          example: 10
+          description: Quantidade limite de transações permitidas para ocorrer durante uma semana.
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Valor máximo a ser transacionado semanalmente.
+    Month:
+      type: object
+      description: |
+        Configurar limite transacional mensal determinado pelo usuário pagador.
+        
+        [Restrição] Caso enviado o objeto, ao menos um dos campos (`quantityLimit` ou `transactionLimit`) devem ser preenchidos
+      properties:
+        quantityLimit:
+          type: integer
+          example: 30
+          description: Quantidade limite de transações permitidas para ocorrer durante um mês.
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Valor máximo a ser transacionado mensalmente.
+    Year:
+      type: object
+      description: |
+        Configurar limite transacional anual determinado pelo usuário pagador.
+        
+        [Restrição] Caso enviado o objeto, ao menos um dos campos (`quantityLimit` ou `transactionLimit`) devem ser preenchidos
+      properties:
+        quantityLimit:
+          type: integer
+          example: 100
+          description: Quantidade limite de transações permitidas para ocorrer durante um ano. 
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Valor máximo a ser transacionado por um ano, a partir da data definida no campo `/data/startDateTime`.
     PaymentPersonTypeEnum:
       enum:
       - PESSOA_NATURAL
@@ -898,8 +1398,6 @@ components:
     PaymentTypeEnum:
       enum:
       - PIX
-      - TED
-      - TEF
       type: string
     Permission:
       type: object
@@ -934,6 +1432,17 @@ components:
           allOf:
           - $ref: '#/components/schemas/RevokePaymentConsentData'
           - nullable: false
+        applicationName:
+          description: Client application name
+          type: string
+    RequestRevokeOobPaymentPayment:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokePaymentPaymentData'
         applicationName:
           description: Client application name
           type: string
@@ -1021,9 +1530,19 @@ components:
       type: object
       properties:
         data:
+          description: Service execution response
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ResponseRecurringPaymentsDataRead'
+        links:
           allOf:
-          - $ref: '#/components/schemas/ConsentDetail'
-          - description: Service execution response
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - description: Meta records information
     ResponseConsentExtendsSchema:
       type: object
       properties:
@@ -1131,6 +1650,17 @@ components:
           $ref: '#/components/schemas/RejectionPaymentOob'
         revocation:
           $ref: '#/components/schemas/RevocationPaymentOob'
+    RevokePaymentPaymentData:
+      type: object
+      required:
+        - legacyId
+      properties:
+        legacyId:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueObject'
+      allOf:
+        - $ref: '#/components/schemas/RevokePaymentConsentData'
     RejectedReasonCodeEnum:
       enum:
       - CONSENT_EXPIRED
@@ -1349,20 +1879,165 @@ components:
       required:
       - single
       type: object
+      oneOf:
+        - $ref: '#/components/schemas/ScheduleSingle'
+        - $ref: '#/components/schemas/ScheduleDaily'
+        - $ref: '#/components/schemas/ScheduleWeekly'
+        - $ref: '#/components/schemas/ScheduleMonthly'
+        - $ref: '#/components/schemas/ScheduleCustom'
+    ScheduleSingle:
+      type: object
+      required:
+        - single
       properties:
         single:
-          allOf:
-          - $ref: '#/components/schemas/SinglePayment'
-          - nullable: false
-    SinglePayment:
-      required:
-      - date
+          type: object
+          description: Define a política de agendamento único.
+          required:
+            - date
+          properties:
+            date:
+              type: string
+              format: date
+              maxLength: 10
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              example: '2023-08-23'
+              description: |
+                Define a data alvo da liquidação do pagamento.
+                O fuso horário de Brasília deve ser utilizado para criação e racionalização sobre os dados deste campo.
+
+                [Restrição] Esse campo deverá sempre ser no mínimo D+1 corrido, ou seja, a data imediatamente posterior em 
+                relação a data do consentimento considerando o fuso horário de Brasília e deverá ser no máximo D+730 corridos a 
+                partir da data do consentimento, também considerando o fuso horário de Brasília.
+    ScheduleDaily:
       type: object
+      required:
+        - daily
       properties:
-        date:
-          type: string
-          example: 2022-01-13
-          nullable: false
+        daily:
+          type: object
+          required:
+            - startDate
+            - quantity
+          properties:
+            startDate:
+              description: Define o início da vigência da recorrência.
+              type: string
+              format: date
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              maxLength: 10
+              example: '2023-08-23'
+            quantity:
+              description: Define a quantidade de pagamentos que serão enviados para liquidação.
+              type: integer
+              format: int32
+              minimum: 2
+              maximum: 60
+              example: 3
+    ScheduleWeekly:
+      type: object
+      required:
+        - weekly
+      properties:
+        weekly:
+          type: object
+          required:
+            - dayOfWeek
+            - startDate
+            - quantity
+          properties:
+            dayOfWeek:
+              description: Define o dia da semana planejado para a ocorrência das liquidações.
+              type: string
+              enum:
+                - SEGUNDA_FEIRA
+                - TERCA_FEIRA
+                - QUARTA_FEIRA
+                - QUINTA_FEIRA
+                - SEXTA_FEIRA
+                - SABADO
+                - DOMINGO
+              example: QUINTA_FEIRA
+            startDate:
+              description: Define o início da vigência da recorrência.
+              type: string
+              format: date
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              maxLength: 10
+              example: '2023-08-23'
+            quantity:
+              description: Define a quantidade de pagamentos que serão enviados para liquidação.
+              type: integer
+              format: int32
+              minimum: 2
+              maximum: 60
+              example: 10
+    ScheduleMonthly:
+      type: object
+      required:
+        - monthly
+      properties:
+        monthly:
+          type: object
+          required:
+            - dayOfMonth
+            - startDate
+            - quantity
+          properties:
+            dayOfMonth:
+              description: Define o dia do mês planejado para a ocorrência das liquidações.
+              type: integer
+              minimum: 1
+              maximum: 31
+              example: 10
+            startDate:
+              description: Define o início da vigência da recorrência.
+              type: string
+              format: date
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              maxLength: 10
+              example: '2023-08-23'
+            quantity:
+              description: Define a quantidade de pagamentos que serão enviados para liquidação.
+              type: integer
+              format: int32
+              minimum: 2
+              maximum: 24
+              example: 24
+    ScheduleCustom:
+      type: object
+      required:
+        - custom
+      properties:
+        custom:
+          type: object
+          description: |
+            [Restrição] As datas enviadas na lista de datas (array “dates”) não podem ser repetidas. 
+            Caso datas repetidas sejam enviadas, o detentor deve rejeitar a criação do consentimento, informando o erro PARAMETRO_INVALIDO.
+          required:
+            - dates
+            - additionalInformation
+          properties:
+            dates:
+              description: Define os dias em que estão planejadas as ocorrências das liquidações.
+              type: array
+              maxItems: 60
+              minItems: 2
+              example: ['2023-08-23', '2023-09-26']
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: '2023-08-23'
+            additionalInformation:
+              type: string
+              description: |
+                Texto livre para Iniciador preencher de forma compreensível pelo usuário aprovador/pagador. 
+                O texto pode ser utilizado pelo detentor para exibição do resumo da transação durante aprovação do usuário aprovador/pagador.
+              pattern: '[\w\W\s]*'
+              maxLength: 255
+              example: Todas quintas e domingos por 6 meses
     StatusEnum:
       enum:
       - AUTHORISED
