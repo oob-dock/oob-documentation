@@ -78,15 +78,6 @@ do identificador interno em formato UUID.
 A utilização é equivalente a da revogação de consentimento de pagamento abaixo
 mas esse endpoint será descontinuado.
 
-## Revogação de consentimento de pagamento
-
-        PATCH /open-banking/oob-consents/payments/v1/consents/{consentId}
-
-Responsável pela revogação do consentimento relacionado ao *consentId* informado.
-
-**Importante**: é permitida revogação de consentimentos de pagamento agendado APENAS
-até o dia anterior a data de efetivação dele.
-
 ## Revogação de consentimento de compartilhamento de dados
 
         PATCH /open-banking/oob-consents/consents/v1/consents/{consentId}
@@ -98,6 +89,18 @@ Responsável pela revogação do consentimento relacionado ao *consentId* inform
         GET /open-banking/oob-consents/consents/v2/active
 
 Responsável pela listagem de consentimentos autorizados.
+
+## Listagem de pagamentos relacionados a um consentimento
+
+        GET /open-banking/oob-consents/consents/v1/consents/{consentId}/payments
+
+Exibe a lista de todos os pagamentos relacionados ao consentimento identificado pelo *consentId* informado
+
+## Revogação de consentimento de pagamento
+
+        PATCH /open-banking/oob-consents/payments/v1/consents/{consentId}
+
+Responsável pela revogação de consentimentos de pagamento automático identificado pelo *consentId* informado.
 
 ## Revogação de pagamento
 
