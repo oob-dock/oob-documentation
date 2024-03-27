@@ -130,10 +130,6 @@ paths:
         in: header
         schema:
           type: string
-      - name: paymentStatus
-        in: header
-        schema:
-          type: string
       requestBody:
         content:
           application/json:
@@ -234,12 +230,6 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/UUID'
-      - name: X-Brand-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          nullable: false
       - name: X-Correlation-ID
         in: header
         schema:
@@ -249,38 +239,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/RequestRevokeOobPaymentConsent'
-      responses:
-        default:
-          description: Default error response
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ResponseConsentDetailSchema'
-  /open-banking/oob-consents/payments/v1/payments:
-    patch:
-      tags:
-      - Payments
-      description: Revoke a single payment
-      parameters:
-      - name: X-Correlation-ID
-        in: header
-        schema:
-          type: string
-      - name: paymentStatus
-        in: header
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RequestRevokeOobPaymentPayment'
       responses:
         default:
           description: Default error response
@@ -306,10 +264,6 @@ paths:
         schema:
           $ref: '#/components/schemas/UUID'
       - name: X-Correlation-ID
-        in: header
-        schema:
-          type: string
-      - name: paymentStatus
         in: header
         schema:
           type: string
@@ -574,9 +528,11 @@ components:
           type: string
           example: Marco Antonio de Brito
         amount:
+          deprecated: true
           type: string
           example: "22.00"
         scheduleDate:
+          deprecated: true
           type: string
           example: 2022-07-06
         orgName:
@@ -1680,22 +1636,16 @@ components:
         revokedAt:
           format: date-time
           type: string
-        loggedUser:
-          $ref: '#/components/schemas/LoggedUser'
         revokedBy:
-          type: object
+          $ref: '#/components/schemas/RevokedByV4Enum'
     RejectionPaymentOob:
       type: object
       properties:
-        rejectedFrom:
-          $ref: '#/components/schemas/RecurringConsentRejectedFromEnum'
         reason:
           $ref: '#/components/schemas/RejectionReason'
         rejectedAt:
           format: date-time
           type: string
-        loggedUser:
-          $ref: '#/components/schemas/LoggedUser'
         rejectedBy:
           type: object
     RecurringConsentRevocationReason:
@@ -1869,6 +1819,12 @@ components:
       - USER
       - ASPSP
       - TPP
+      type: string
+    RevokedByV4Enum:
+      enum:
+      - INICIADORA
+      - USUARIO
+      - DETENTORA 
       type: string
     RejectedByEnum:
       enum:
