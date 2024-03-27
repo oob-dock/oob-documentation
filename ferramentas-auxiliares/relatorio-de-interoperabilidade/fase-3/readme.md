@@ -113,34 +113,34 @@ retornados a fim de determinar quantos deles foram concluídos.
 
 Mais informações sobre a API podem ser encontradas em [apis-backoffice](../../../portal-backoffice/apis-backoffice/readme.md).
 
-## Scripts - Status de Pagamento
+## Scripts - Validações síncronas
 
 **Importante:** Os scripts SQL fornecidos nessa seção devem ser
-operados no **banco de dados do OOB-Consent**.
+operados no **banco de dados do PCM**.
 
-Na primeira execução é necessário criar a função *payment_consent_error_reason*
-executando o seguinte [script](attachments/payment_consent_error_reason.sql).
+Na primeira execução é necessário criar a função *payment_sync_validation*
+executando o seguinte [script](attachments/payment_sync_validation.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM payment_consent_error_reason('<data_inicio>','<data_fim>');
+SELECT * FROM payment_sync_validation('<data_inicio>','<data_fim>');
 ```
 
 Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
 
 ```sql
-SELECT * FROM payment_consent_error_reason('2022-01-02','2022-10-08');
+SELECT * FROM payment_sync_validation('2022-01-02','2022-10-08');
 ```
 
 Após execução, consulte o ParentOrganization Reference através dos passos
 descritos em [ParentOrg Iniciador](#parentorg-iniciador).
 
-## ParentOrg Iniciador
+## ParentOrg Iniciador e nome do ITP
 
-Para obter a organização principal, deve-se executar o script [getParentOrganization](../../parent-org-reference-script/getParentOrganization.js)
+Para obter a organização principal e o nome do ITP, deve-se executar o script [getParentOrganization](../../parent-org-reference-script/getParentOrganization.js)
 informando os IDs das organizações retornados pelas consultas *payment_consent_count*
-e *payment_consent_error_reason*.
+e *payment_sync_validation*.
 
 Será necessário instalar a versão do [Node.js](https://nodejs.org/en/download)
 correspondente ao seu Sistema Operacional.
@@ -158,9 +158,11 @@ conforme exemplo abaixo:
 $ node ferramentas-auxiliares/parent-org-reference-script/getParentOrganization.js f83bee4f-26df-53d7-8335-a8a6edd7e340 fd0ea3e7-aeca-55f9-a0a2-ec56980059fb fd0ea3e7-aeca-55f9-a0a2-ec56980059fc
 ----------------------------------------------
 Org ID: f83bee4f-26df-53d7-8335-a8a6edd7e340
+Name: AYMORE CFI S.A.
 Parent Organization: 90400888000142
 ----------------------------------------------
 Org ID: fd0ea3e7-aeca-55f9-a0a2-ec56980059fb
+Name: BCO WOORI BANK DO BRASIL S.A.
 Parent Organization: N/A
 ----------------------------------------------
 Org ID fd0ea3e7-aeca-55f9-a0a2-ec56980059fc Not found
