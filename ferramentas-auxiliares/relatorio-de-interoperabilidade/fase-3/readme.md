@@ -136,6 +136,29 @@ SELECT * FROM payment_sync_validation('2022-01-02','2022-10-08');
 Após execução, consulte o ParentOrganization Reference através dos passos
 descritos em [ParentOrg Iniciador](#parentorg-iniciador).
 
+## Scripts - Validações assíncronas
+
+**Importante:** Os scripts SQL fornecidos nessa seção devem ser
+operados no **banco de dados do Consentimento**.
+
+Na primeira execução é necessário criar a função *payment_async_validation*
+executando o seguinte [script](attachments/payment_async_validation.sql).
+
+Para obter os dados, deve-se chamar a função usando o seguinte comando:
+
+```sql
+SELECT * FROM payment_async_validation('<data_inicio>','<data_fim>');
+```
+
+Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+
+```sql
+SELECT * FROM payment_async_validation('2022-01-02','2022-10-08');
+```
+
+Após execução, consulte o ParentOrganization Reference do ITP_ID através dos passos
+descritos em [ParentOrg Iniciador](#parentorg-iniciador).
+
 ## ParentOrg Iniciador e nome do ITP
 
 Para obter a organização principal e o nome do ITP, deve-se executar o script [getParentOrganization](../../parent-org-reference-script/getParentOrganization.js)
