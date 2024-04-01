@@ -21,6 +21,7 @@ function makeRequest(url, orgIds, retryCount) {
                     console.log('----------------------------------------------');
                 } else {
                     console.log(`Org ID: ${orgId}`);
+                    console.log(`Name: ${participant?.OrganisationName}`)
                     console.log(`Parent Organization: ${!participant?.ParentOrganisationReference? "N/A" : participant?.ParentOrganisationReference}`);
                     console.log('----------------------------------------------');
                 }
