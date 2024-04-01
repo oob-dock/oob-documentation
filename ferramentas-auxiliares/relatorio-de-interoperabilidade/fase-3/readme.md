@@ -139,7 +139,7 @@ descritos em [ParentOrg Iniciador](#parentorg-iniciador).
 ## Scripts - Validações assíncronas
 
 **Importante:** Os scripts SQL fornecidos nessa seção devem ser
-operados no **banco de dados do Consentimento**.
+operados no **banco de dados do OOB-Consent**.
 
 Na primeira execução é necessário criar a função *payment_async_validation*
 executando o seguinte [script](attachments/payment_async_validation.sql).
