@@ -775,6 +775,14 @@ components:
           items:
             allOf:
             - $ref: '#/components/schemas/ResponseRecurringPaymentsDataRead'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - description: Meta records information
     ResponseRecurringPaymentsDataRead:
       type: object
       properties:
