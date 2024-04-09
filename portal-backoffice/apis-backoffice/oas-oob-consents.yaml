@@ -856,6 +856,10 @@ components:
             1. Caso a informação referente ao município não seja enviada, o PSP do recebedor assumirá que não existem feriados estaduais e municipais no período em questão;
         status:
           $ref: '#/components/schemas/EnumPaymentStatusType'
+        localInstrument:
+          allOf:
+          - $ref: '#/components/schemas/LocalInstrumentEnum'
+          - nullable: false
         rejectionReason:
           $ref: '#/components/schemas/RejectionReason'
         cnpjInitiator:
