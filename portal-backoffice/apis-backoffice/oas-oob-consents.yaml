@@ -1764,6 +1764,38 @@ components:
         paymentStatusUpdateDateTime:
           allOf:
           - $ref: '#/components/schemas/StatusUpdateDateTime'
+        rejectionReason:
+          $ref: '#/components/schemas/PaymentRejection'
+    PaymentRejection:
+      type: object
+      description: "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status. Deverá ser enviado quando o campo /data/status for igual a RJCT (REJECTED)."
+      properties:
+        code:
+          $ref: '#/components/schemas/PaymentRejectionReasonEnum'
+        detail:
+          example: "A conta selecionada não possui saldo suficiente para realizar o pagamento."
+          type: string
+    PaymentRejectionReasonEnum:
+      type: string
+      enum:
+      - SALDO_INSUFICIENTE
+      - VALOR_ACIMA_LIMITE
+      - VALOR_INVALIDO
+      - COBRANCA_INVALIDA
+      - NAO_INFORMADO
+      - PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+      - DETALHE_PAGAMENTO_INVALIDO
+      - PAGAMENTO_RECUSADO_DETENTORA
+      - PAGAMENTO_RECUSADO_SPI
+      - FALHA_INFRAESTRUTURA
+      - FALHA_INFRAESTRUTURA_SPI
+      - FALHA_INFRAESTRUTURA_DICT
+      - FALHA_INFRAESTRUTURA_ICP
+      - FALHA_INFRAESTRUTURA_PSP_RECEBEDOR
+      - FALHA_INFRAESTRUTURA_DETENTORA
+      - CONTAS_ORIGEM_DESTINO_IGUAIS
+      - FALHA_AGENDAMENTO_PAGAMENTOS
+      - TITULARIDADE_INCONSISTENTE
     ResponseConsentListSchema:
       type: object
       properties:
