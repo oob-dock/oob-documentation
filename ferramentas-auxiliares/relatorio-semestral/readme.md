@@ -67,7 +67,7 @@ pela entidade parceira.
 Exemplo para obtenção dos serviços da fase 3 - Iniciação de Pagamento:
 
 ```sql
-@set endpoints_services = array ['/payments/v2/consents','/payments/v2/consents/{consentId}','/payments/v2/pix/payments','/payments/v2/pix/payments/{paymentId}','/payments/v3/consents','/payments/v3/consents/{consentId}','/payments/v3/pix/payments','/payments/v3/pix/payments/{paymentId}']
+@set endpoints_services = array ['/payments/v3/consents','/payments/v3/consents/{consentId}','/payments/v3/pix/payments','/payments/v3/pix/payments/{paymentId}','/payments/v4/consents','/payments/v4/consents/{consentId}','/payments/v4/pix/payments','/payments/v4/pix/payments/{paymentId}','/payments/v4/pix/payments/consents/{consentId}','/automatic-payments/v1/recurring-consents','/automatic-payments/v1/recurring-consents/{recurringConsentId}','/automatic-payments/v1/pix/recurring-payments','/automatic-payments/v1/pix/recurring-payments/{recurringPaymentId}']
 ```
 
 Exemplo para obtenção dos serviços da fase 2 - Dados Cadastrais:
@@ -81,16 +81,21 @@ a fim de facilitar a listagem das URLs dos serviços disponibilizados.
 
 Endpoints - Fase 3 Iniciação de Pagamento
 
-| Endpoint                                | Categoria                  |
-| --------------------------------------- | ---------------------------|
-| /payments/v2/consents                   | CONSENTIMENTO DE PAGAMENTO |
-| /payments/v2/consents/\{consentId\}     | CONSENTIMENTO DE PAGAMENTO |
-| /payments/v3/consents                   | CONSENTIMENTO DE PAGAMENTO |
-| /payments/v3/consents/\{consentId\}     | CONSENTIMENTO DE PAGAMENTO |
-| /payments/v2/pix/payments               | PAGAMENTO PIX              |
-| /payments/v2/pix/payments/\{paymentId\} | PAGAMENTO PIX              |
-| /payments/v3/pix/payments               | PAGAMENTO PIX              |
-| /payments/v3/pix/payments/\{paymentId\} | PAGAMENTO PIX              |
+| Endpoint                                                            | Categoria                  |
+| ---------------------------------------------------------------     | ---------------------------|
+| /payments/v3/consents                                               | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v3/consents/\{consentId\}                                 | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v4/consents                                               | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v4/consents/\{consentId\}                                 | CONSENTIMENTO DE PAGAMENTO |
+| /automatic-payments/v1/recurring-consents                           | CONSENTIMENTO DE PAGAMENTO |
+| /automatic-payments/v1/recurring-consents/{recurringConsentId}      | CONSENTIMENTO DE PAGAMENTO |
+| /payments/v3/pix/payments                                           | PAGAMENTO PIX              |
+| /payments/v3/pix/payments/\{paymentId\}                             | PAGAMENTO PIX              |
+| /payments/v4/pix/payments                                           | PAGAMENTO PIX              |
+| /payments/v4/pix/payments/\{paymentId\}                             | PAGAMENTO PIX              |
+| /payments/v4/pix/payments/consents/{consentId}                      | PAGAMENTO PIX              |
+| /automatic-payments/v1/pix/recurring-payments                       | PAGAMENTO PIX              |
+| /automatic-payments/v1/pix/recurring-payments/{recurringPaymentId}  | PAGAMENTO PIX              |
 
 Endpoints - Fase 2 Consentimento e Dados Cadastrais:
 
