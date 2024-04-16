@@ -1,4 +1,3 @@
-
 CREATE OR REPLACE FUNCTION status_function_availability (dt_end DATE) RETURNS TABLE (
   metodo_http TEXT,
   endpoint varchar(200),
@@ -8,10 +7,7 @@ CREATE OR REPLACE FUNCTION status_function_availability (dt_end DATE) RETURNS TA
 )
 LANGUAGE plpgsql
 AS $$
-declare includes_automatic boolean;
-begin
-  select (now() > '2024-04-29') into includes_automatic;
-  
+begin  
   RETURN QUERY
   WITH availability AS
   (
@@ -23,7 +19,7 @@ begin
 	 FROM
 	    daily_metric_endpoint d
 	 INNER JOIN endpoint e on e.id = d.id_endpoint
-	 WHERE endpoint_url like '/payment%' or (includes_automatic and endpoint_url like '/automatic-payment%')
+	 WHERE endpoint_url like '/payment%' or (dt_end > '2024-04-29' and endpoint_url like '/automatic-payment%')
 	 AND metric_date >= dt_end - interval '89 days'
 	 AND metric_date <= dt_end
   )

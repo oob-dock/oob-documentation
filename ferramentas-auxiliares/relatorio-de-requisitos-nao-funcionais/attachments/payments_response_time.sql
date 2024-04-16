@@ -1,15 +1,12 @@
-
 create or replace function public.payments_response_time(dt_end date)
  returns table(organizacao uuid, data_metrica date, periodo text, metodo_http text, endpoint text, menos_um_meio_segundos int8, mais_um_meio_segundos int8)
  language plpgsql
 as $function$
 declare dt_initial_interval varchar;
 declare dt_end_interval varchar;
-declare includes_automatic boolean;
 begin
 	select (dt_end - INTERVAL '6 days')::varchar INTO dt_initial_interval;
 	select (dt_end + INTERVAL '1 days')::varchar INTO dt_end_interval;
-	select (now() > '2024-04-29') into includes_automatic;
 	
    	return query
 	   	with endpoints as (
@@ -31,7 +28,7 @@ begin
 				from report r
 				where
 					(event_data->>'endpoint' like '/open-banking/payments%' or
-					(includes_automatic and event_data->>'endpoint' like '/open-banking/automatic-payments%')) and
+					(dt_end > '2024-04-29' and event_data->>'endpoint' like '/open-banking/automatic-payments%')) and
 					event_data->>'role' = 'SERVER' and
 					event_timestamp between dt_initial_interval and dt_end_interval and
 					event_data->>'statusCode' not in ('423', '429', '529')
