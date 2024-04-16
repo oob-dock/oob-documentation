@@ -1,18 +1,25 @@
+
 create or replace function public.payments_response_time(dt_end date)
  returns table(organizacao uuid, data_metrica date, periodo text, metodo_http text, endpoint text, menos_um_meio_segundos int8, mais_um_meio_segundos int8)
  language plpgsql
 as $function$
 declare dt_initial_interval varchar;
 declare dt_end_interval varchar;
+declare includes_automatic boolean;
 begin
 	select (dt_end - INTERVAL '6 days')::varchar INTO dt_initial_interval;
 	select (dt_end + INTERVAL '1 days')::varchar INTO dt_end_interval;
+	select (now() > '2024-04-29') into includes_automatic;
 	
    	return query
 	   	with endpoints as (
 			select
 				r.server_org_id,
 				case
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/pix/recurring-payments/%' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/consents', 'automatic-payments/v\2/pix/recurring-payments/paymentId')
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/pix/recurring-payments' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/consents', 'automatic-payments/v\2/pix/recurring-payments')
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/recurring-consents' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/recurring-consents', 'automatic-payments/v\2/recurring-consents')
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/recurring-consents/v%' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/recurring-consents', 'automatic-payments/v\2/recurring-consents/consentId')
 					when r.event_data#>>'{endpoint}' like '%/payments/v%/consents' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/payments/v(.*)/consents', 'payments/v\2/consents')
 					when r.event_data#>>'{endpoint}' like '%/payments/v%/consents/%' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/payments/v(.*)/consents/.*', 'payments/v\2/consents/consentId')
 					when r.event_data#>>'{endpoint}' like '%/payments/v%/pix/payments' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/payments/v(.*)/pix/payments', 'payments/v\2/pix/payments')
@@ -23,7 +30,8 @@ begin
 				r.event_timestamp::date as measure_date
 				from report r
 				where
-					event_data->>'endpoint' like '/open-banking/payments%' and
+					(event_data->>'endpoint' like '/open-banking/payments%' or
+					(includes_automatic and event_data->>'endpoint' like '/open-banking/automatic-payments%')) and
 					event_data->>'role' = 'SERVER' and
 					event_timestamp between dt_initial_interval and dt_end_interval and
 					event_data->>'statusCode' not in ('423', '429', '529')
