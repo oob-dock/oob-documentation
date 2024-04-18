@@ -19,13 +19,15 @@ operados no **banco de dados do OOB-Consent**.
 Para obter os dados, execute função com o seguinte comando:
 
 ```sql
-SELECT * FROM payment_consent_count('<data_inicio>','<data_fim>');
+SELECT * FROM payment_consent_count('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
+preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+por exemplo:
 
 ```sql
-SELECT * FROM payment_consent_count('2023-01-02','2023-01-08');
+SELECT * FROM payment_consent_count('2023-01-02','2023-01-08', false);
 ```
 
 Após execução, consulte o ParentOrganization Reference através dos passos
@@ -45,13 +47,15 @@ o seguinte [script](attachments/payment_consent_extract_authorization_data.sql).
 Para obter os dados, execute a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM payment_consent_extract_authorization_data('<data_inicio>','<data_fim>');
+SELECT * FROM payment_consent_extract_authorization_data('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
+preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+por exemplo:
 
 ```sql
-SELECT * FROM payment_consent_extract_authorization_data('2022-10-02','2022-10-08');
+SELECT * FROM payment_consent_extract_authorization_data('2022-10-02','2022-10-08', false);
 ```
 
 ### Funil Detentor - Conclusão da autenticação e autorização do cliente
@@ -65,13 +69,15 @@ executando o seguinte [script](attachments/payment_consent_client_authorization.
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM payment_consent_client_authorization('<data_inicio>','<data_fim>');
+SELECT * FROM payment_consent_client_authorization('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
+preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+por exemplo:
 
 ```sql
-SELECT * FROM payment_consent_client_authorization('2022-01-02','2022-10-08');
+SELECT * FROM payment_consent_client_authorization('2022-01-02','2022-10-08', false);
 ```
 
 ### Funil Detentor - Pagamentos recebidos e ids gerados
@@ -85,14 +91,20 @@ executando o seguinte [script](attachments/payment_consent_payment_id.sql).
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM payment_consent_payment_id('<data_inicio>','<data_fim>');
+SELECT * FROM payment_consent_payment_id('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
+O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
+preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+por exemplo:
 
 ```sql
-SELECT * FROM payment_consent_payment_id('2022-01-02','2022-10-08');
+SELECT * FROM payment_consent_payment_id('2022-01-02','2022-10-08', false);
 ```
+
+**Importante**: As quantidades de pagamentos agendados e finalizados retornadas pela query
+só devem ser utilizadas caso a instituição implemente corretamente a [API de notificação](../../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento)
+de mudança de status do pagamento.
 
 ## API - Funil Detentor
 
