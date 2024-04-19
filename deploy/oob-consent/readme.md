@@ -339,6 +339,26 @@ additionalVars:
     value: "3550308"
 ```
 
+### CONSENT_CUSTOMERS_ENABLED
+
+Utilizado para habilitar ou desabilitar o retorno de lista vazia na API de
+resources v3.
+
+**IMPORTANTE**: Essa funcionalidade deve ser habilitada somente para instituições
+que transmitem apenas dados cadastrais.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CONSENT_CUSTOMERS_ENABLED
+    value: "false"
+```
+
 ### CAMEL_CONNECTOR_MTLS_CERT
 
 Utilizado para definir o certificado mtls para chamadas ao endpoint de legado.
