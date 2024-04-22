@@ -31,6 +31,7 @@
       - [supported\_features](#supported_features)
       - [brand\_id](#brand_id)
       - [x\_forwarded\_for\_header\_name](#x_forwarded_for_header_name)
+      - [ssl\_certificate\_header\_name](#ssl_certificate_header_name)
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
       - [route\_block\_enabled](#route_block_enabled)
@@ -227,6 +228,16 @@ preencher o campo `additionalInfo.clientIp` no evento gerado pelo plugin
 `oob-api-event` do Kong.
 
 **Default:** `X-Forwarded-For`
+
+#### ssl_certificate_header_name
+
+Define qual será o nome do header utilizado que será enviado o certificado
+mTLS do client que fez o request. No contexto de PCM e MQD este header é
+utilizado para obter o clientOrgId da receptora de dados ou iniciadora
+de pagamentos para ser utilizado pelo plugin `oob-api-event` `oob-mqd-event` 
+do Kong.
+
+**Default:** `X-SSL-Client-Cert`
 
 #### server_org_id
 
