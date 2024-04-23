@@ -393,6 +393,24 @@ additionalVars:
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
 ```
 
+### APPLICATION_FEATURE_CONSENT-ACCEPTANCE-CREDITOR
+
+Utilizado para definir se retorna ou não o campo **creditor** no command do authorization-server
+para fluxos app2as.
+
+**IMPORTANTE**: Essa funcionalidade deve ser desabilitada após todos os clientes
+se adaptarem ao novo formato que usa **creditors** (array).
+
+**Formato:** `true` ou `false`
+
+Valor default: `true`
+
+```yaml
+additionalVars:
+  - name: APPLICATION_FEATURE_CONSENT-ACCEPTANCE-CREDITOR
+    value: "true"
+```
+
 ### APPLICATION_ENCRYPTION_CHARSET
 
 Utilizado para definir o charset usado na criptografia dos campos na base de dados.
