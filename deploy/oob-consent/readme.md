@@ -398,8 +398,8 @@ additionalVars:
 Utilizado para definir se retorna ou não o campo **creditor** no command do authorization-server
 para fluxos app2as.
 
-**IMPORTANTE**: Essa funcionalidade deve ser desabilitada após todos os clientes
-se adaptarem ao novo formato que usa **creditors** (array).
+**IMPORTANTE**: Essa funcionalidade deve ser desabilitada após a instituição
+se adaptar ao novo formato que usa **creditors** (array).
 
 **Formato:** `true` ou `false`
 
@@ -407,7 +407,7 @@ Valor default: `true`
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_FEATURE_CONSENT-ACCEPTANCE-CREDITOR
+  - name: APPLICATION_FEATURE_CONSENT_ACCEPTANCE_CREDITOR
     value: "true"
 ```
 
