@@ -393,7 +393,7 @@ additionalVars:
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
 ```
 
-### APPLICATION_FEATURE_CONSENT-ACCEPTANCE-CREDITOR
+### APPLICATION_FEATURE_CONSENT_ACCEPTANCE_CREDITOR
 
 Utilizado para definir se retorna ou não o campo **creditor** no command do authorization-server
 para fluxos app2as.
