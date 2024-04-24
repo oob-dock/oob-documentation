@@ -339,6 +339,26 @@ additionalVars:
     value: "3550308"
 ```
 
+### CONSENT_CUSTOMERS_ENABLED
+
+Utilizado para habilitar ou desabilitar o retorno de lista vazia na API de
+resources v3.
+
+**IMPORTANTE**: Essa funcionalidade deve ser habilitada somente para instituições
+que transmitem apenas dados cadastrais.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: CONSENT_CUSTOMERS_ENABLED
+    value: "false"
+```
+
 ### CAMEL_CONNECTOR_MTLS_CERT
 
 Utilizado para definir o certificado mtls para chamadas ao endpoint de legado.
@@ -371,6 +391,24 @@ Colocar a chave completa, apenas uma parte da chave foi colocada como exemplo.
 additionalVars:
   - name: CAMEL_CONNECTOR_MTLS_KEY
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
+```
+
+### APPLICATION_FEATURE_CONSENT_ACCEPTANCE_CREDITOR
+
+Utilizado para definir se retorna ou não o campo **creditor** no command do authorization-server
+para fluxos app2as.
+
+**IMPORTANTE**: Essa funcionalidade deve ser desabilitada após a instituição
+se adaptar ao novo formato que usa **creditors** (array).
+
+**Formato:** `true` ou `false`
+
+Valor default: `true`
+
+```yaml
+additionalVars:
+  - name: APPLICATION_FEATURE_CONSENT_ACCEPTANCE_CREDITOR
+    value: "true"
 ```
 
 ### APPLICATION_ENCRYPTION_CHARSET
