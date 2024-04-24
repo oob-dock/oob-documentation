@@ -181,7 +181,7 @@
         },
         "date": {
           "type": "string",
-          "description": "Data em que o recurso foi criado. Uma string com a utilização de timezone UTC(UTC time format).",
+          "description": "Data em que o recurso foi criado. Uma string com a utilização de timezone UTC(UTC time format). Atenção: campo de retorno obrigatório para pagamentos de transferências inteligentes.",
           "format": "date-time",
           "maxLength": 10,
           "examples": [
