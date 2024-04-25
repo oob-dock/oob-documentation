@@ -10,7 +10,6 @@
       "required": [
         "paymentId",
         "endToEndId",
-        "consentId",
         "creationDateTime",
         "statusUpdateDateTime",
         "status",
@@ -67,7 +66,7 @@
           "maxLength": 256,
           "pattern": "^urn:[a-zA-Z0-9][a-zA-Z0-9\\-]{0,31}:[a-zA-Z0-9()+,\\-.:=@;$_!*'%\\/?#]+$",
           "example": "urn:bancoex:C1DD33123",
-          "description": "Identificador único do consentimento criado para a iniciação de pagamento solicitada. Deverá ser um URN - Uniform Resource Name.\nUm URN, conforme definido na [RFC8141](https://tools.ietf.org/html/rfc8141) é um Uniform Resource\nIdentifier - URI - que é atribuído sob o URI scheme \"urn\" e um namespace URN específico, com a intenção de que o URN\nseja um identificador de recurso persistente e independente da localização.\nConsiderando a string urn:bancoex:C1DD33123 como exemplo para consentId temos:\n- o namespace(urn)\n- o identificador associado ao namespace da instituição transnmissora (bancoex)\n- o identificador específico dentro do namespace (C1DD33123).\nInformações mais detalhadas sobre a construção de namespaces devem ser consultadas na [RFC8141](https://tools.ietf.org/html/rfc8141).\n"
+          "description": "Identificador único do consentimento criado para a iniciação de pagamento solicitada. Deverá ser um URN - Uniform Resource Name.\nUm URN, conforme definido na [RFC8141](https://tools.ietf.org/html/rfc8141) é um Uniform Resource\nIdentifier - URI - que é atribuído sob o URI scheme \"urn\" e um namespace URN específico, com a intenção de que o URN\nseja um identificador de recurso persistente e independente da localização.\nConsiderando a string urn:bancoex:C1DD33123 como exemplo para consentId temos:\n- o namespace(urn)\n- o identificador associado ao namespace da instituição transnmissora (bancoex)\n- o identificador específico dentro do namespace (C1DD33123).\nInformações mais detalhadas sobre a construção de namespaces devem ser consultadas na [RFC8141](https://tools.ietf.org/html/rfc8141). Não deve ser retornado para pagamentos automáticos.\n"
         },
         "creationDateTime": {
           "type": "string",
