@@ -22,8 +22,8 @@ Para obter os dados, execute função com o seguinte comando:
 SELECT * FROM payment_consent_count('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
-preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+O parâmetro *automatic_payment* indica se a consulta deve consultar apenas pagamentos automáticos ou desconsiderá-los
+e deve ser preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
 por exemplo:
 
 ```sql
@@ -50,8 +50,8 @@ Para obter os dados, execute a função usando o seguinte comando:
 SELECT * FROM payment_consent_extract_authorization_data('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
-preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+O parâmetro *automatic_payment* indica se a consulta deve consultar apenas pagamentos automáticos ou desconsiderá-los
+e deve ser preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
 por exemplo:
 
 ```sql
@@ -72,8 +72,8 @@ Para obter os dados, deve-se chamar a função usando o seguinte comando:
 SELECT * FROM payment_consent_client_authorization('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
-preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+O parâmetro *automatic_payment* indica se a consulta deve consultar apenas pagamentos automáticos ou desconsiderá-los
+e deve ser preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
 por exemplo:
 
 ```sql
@@ -94,8 +94,8 @@ Para obter os dados, deve-se chamar a função usando o seguinte comando:
 SELECT * FROM payment_consent_payment_id('<data_inicio>','<data_fim>', <automatic_payment>);
 ```
 
-O parâmetro *automatic_payment* indica se a consulta deve considerar pagamentos automáticos e deve ser
-preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
+O parâmetro *automatic_payment* indica se a consulta deve consultar apenas pagamentos automáticos ou desconsiderá-los
+e deve ser preenchido com *true* ou *false*. Os parâmetros de data devem ser preenchidos no formato yyyy-MM-dd,
 por exemplo:
 
 ```sql

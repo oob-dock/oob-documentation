@@ -32,7 +32,7 @@ begin
                 "Clients" c
             where
             ((is_automatic is false and x.decoded#>>'{scope}' like '%consent%' and x.decoded#>>'{scope}' like '%payments%' and x.decoded#>>'{scope}' not like '%recurring%')
-            or (is_automatic is true and x.decoded#>>'{scope}' like '%recurring-consent%' and x.decoded#>>'{scope}' like '%recurring-payments%'))
+            or (is_automatic is true and x.decoded#>>'{scope}' like '%recurring-consent%'))
             and x."createdAt" between dt_start_utc and dt_end_utc
             and c.id = x.decoded#>>'{client_id}'
         ) t1,
@@ -53,7 +53,7 @@ begin
             where   g."createdAt" between dt_start_utc and dt_end_utc
             and     ac."grantId" = g.id
             and 	((is_automatic is false and g.data#>>'{openid,scope}' like '%consent%' and g.data#>>'{openid,scope}' like '%payments%' and g.data#>>'{openid,scope}' not like '%recurring%')
-                or  (is_automatic is true and g.data#>>'{openid,scope}' like '%recurring-consent%' and g.data#>>'{openid,scope}' like '%recurring-payments%'))
+                or  (is_automatic is true and g.data#>>'{openid,scope}' like '%recurring-consent%'))
             group by g.data#>>'{clientId}'
     union all
             select  g.data#>>'{clientId}' as id,
@@ -67,7 +67,7 @@ begin
             and     ac."grantId" = g.id
             and     ac."consumedAt" is not null
             and     ((is_automatic is false and g.data#>>'{openid,scope}' like '%consent%' and g.data#>>'{openid,scope}' like '%payments%' and g.data#>>'{openid,scope}' not like '%recurring%')
-                or  (is_automatic is true and g.data#>>'{openid,scope}' like '%recurring-consent%' and g.data#>>'{openid,scope}' like '%recurring-payments%'))
+                or  (is_automatic is true and g.data#>>'{openid,scope}' like '%recurring-consent%'))
             group by g.data#>>'{clientId}'
 )
    select   convert_from(decode_base64url(regexp_replace(c.data#>>'{software_statement}', '^(.*?)\.(.*?)\.(.*?)$', '\2')), 'UTF-8')::json#>>'{org_name}' itp,
