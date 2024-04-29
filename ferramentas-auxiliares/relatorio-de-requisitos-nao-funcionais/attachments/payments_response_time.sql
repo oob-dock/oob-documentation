@@ -13,6 +13,10 @@ begin
 			select
 				r.server_org_id,
 				case
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/pix/recurring-payments/%' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/consents', 'automatic-payments/v\2/pix/recurring-payments/paymentId')
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/pix/recurring-payments' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/consents', 'automatic-payments/v\2/pix/recurring-payments')
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/recurring-consents' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/recurring-consents', 'automatic-payments/v\2/recurring-consents')
+					when r.event_data#>>'{endpoint}' like '%/automatic-payments/v%/recurring-consents/v%' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/automatic-payments/v(.*)/recurring-consents', 'automatic-payments/v\2/recurring-consents/consentId')
 					when r.event_data#>>'{endpoint}' like '%/payments/v%/consents' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/payments/v(.*)/consents', 'payments/v\2/consents')
 					when r.event_data#>>'{endpoint}' like '%/payments/v%/consents/%' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/payments/v(.*)/consents/.*', 'payments/v\2/consents/consentId')
 					when r.event_data#>>'{endpoint}' like '%/payments/v%/pix/payments' then REGEXP_REPLACE(r.event_data#>>'{endpoint}', '(.*)/payments/v(.*)/pix/payments', 'payments/v\2/pix/payments')
@@ -23,7 +27,8 @@ begin
 				r.event_timestamp::date as measure_date
 				from report r
 				where
-					event_data->>'endpoint' like '/open-banking/payments%' and
+					(event_data->>'endpoint' like '/open-banking/payments%' or
+					(dt_end > '2024-04-29' and event_data->>'endpoint' like '/open-banking/automatic-payments%')) and
 					event_data->>'role' = 'SERVER' and
 					event_timestamp between dt_initial_interval and dt_end_interval and
 					event_data->>'statusCode' not in ('423', '429', '529')

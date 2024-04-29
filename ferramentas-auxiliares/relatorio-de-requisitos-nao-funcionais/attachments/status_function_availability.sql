@@ -7,7 +7,7 @@ CREATE OR REPLACE FUNCTION status_function_availability (dt_end DATE) RETURNS TA
 )
 LANGUAGE plpgsql
 AS $$
-BEGIN
+begin  
   RETURN QUERY
   WITH availability AS
   (
@@ -19,7 +19,7 @@ BEGIN
 	 FROM
 	    daily_metric_endpoint d
 	 INNER JOIN endpoint e on e.id = d.id_endpoint
-	 WHERE endpoint_url like '/payment%'
+	 WHERE endpoint_url like '/payment%' or (dt_end > '2024-04-29' and endpoint_url like '/automatic-payment%')
 	 AND metric_date >= dt_end - interval '89 days'
 	 AND metric_date <= dt_end
   )
