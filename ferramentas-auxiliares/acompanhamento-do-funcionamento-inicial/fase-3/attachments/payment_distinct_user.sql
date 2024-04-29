@@ -16,7 +16,7 @@ begin
 	return query
 		select 
 			count(distinct(c.sha_person_document_number)) as qty_distinct_cpf,
-			count(distinct(c.sha_business_document_number)) FILTER (where c.sha_business_document_number is not null) as qty_distinct_cnpj
+			count(distinct(c.sha_business_document_number)) as qty_distinct_cnpj
 		from consent c  
 			where c.dt_creation between dt_start_utc and dt_end_utc
 			and c.tp_consent = 2
