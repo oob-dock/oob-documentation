@@ -488,6 +488,12 @@ components:
         orgName:
           type: string
           example: "Guia Seguros S.A."
+        additionalInformation:
+          description: Informação adicional inserida pelo usuário pagador nos consentimentos de Pagamento Automático
+          type: string
+          example: 'Minha recorrência'
+          pattern: '[\w\W\s]*'
+          maxLength: 140
         tppName:
           type: string
           example: "Guia Seguros"
