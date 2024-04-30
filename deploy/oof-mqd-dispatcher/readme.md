@@ -6,8 +6,8 @@
 
 Este módulo consome e processa eventos publicados em uma fila de mensagens.
 Portanto, é necessário que exista um *message broker* instalado e configurado
-corretamente que possa ser utilizado pelo OOF PCM Service e que seja compatível
-com o [Dapr](/deploy/shared-definitions.md#dapr).
+corretamente que possa ser utilizado pelo OOF MQD Dispatcher e que seja
+compatível com o [Dapr](/deploy/shared-definitions.md#dapr).
 
 ### Dapr
 
