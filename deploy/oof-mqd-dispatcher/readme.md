@@ -37,7 +37,7 @@ Configurações relacionadas ao Dapr.
 eventos.
 Possíveis valores: `true` ou `false`. **Default:** `true`.
 
-* `dapr.retryPubSubId`: Identificador do componente de pub/sub que implementa
+* `dapr.retryPubsubId`: Identificador do componente de pub/sub que implementa
 políticas de retentativa. Todas os eventos consumidos por este módulo
 possuem suporte à reprocessamento em caso de falhas, sendo assim o componente
 pub/sub a ser utilizado pelo módulo como um todo deve ser o componente que
@@ -48,7 +48,7 @@ oferece suporte à retentativas.
 ```yaml
   dapr:
     enabled: "true"
-    retryPubSubId: "pub-sub-retry"
+    retryPubsubId: "pub-sub-retry"
 ```
 
 ### organisation.ids
