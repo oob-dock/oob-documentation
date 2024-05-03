@@ -5,7 +5,7 @@
 ### Proxy reverso
 
 Deve ser configurado um proxy reverso que tenha a capacidade de rodar em modo
-transparente com e injetar os arquivos de certificados (cert e key) da
+transparente e injetar os arquivos de certificados (cert e key) da
 instituição financeira para permitir o estabelecimento de uma conexão segura
 com o servidor de mqd (Motor de Qualidade de Dados).
 
@@ -236,9 +236,9 @@ type: Opaque
 ### Configuração do service do MQD Client no cluster
 
 Vale ressaltar que o MQD Client receberá as chamadas de Validate Response
-do MQD Dispatcher internamente no cluster internamente no cluster pelo
-endpoint configurado como ``http://mqd-client-<transmitter|receiver>-serverOrgId`.
-Sendo o transmitter/receiver o applicationMode no qual o mqd client foi instalador
+do MQD Dispatcher internamente no cluster pelo endpoint configurado como
+`http://mqd-client-<transmitter|receiver>-serverOrgId`.
+Sendo o transmitter/receiver o applicationMode da instalação do mqd-client
 e o serverOrgId o ID da organização da IF onde o motor está sendo
 instalado.
 
