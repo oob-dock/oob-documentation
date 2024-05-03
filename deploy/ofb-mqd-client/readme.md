@@ -11,7 +11,7 @@ com o servidor de mqd (Motor de Qualidade de Dados).
 
 Para essa função é aconselhado subir um container com nginx configurado
 com os volumes de `/etc/nginx/conf.d/default.conf`, `/etc/ssl` e `/etc/nginx/nginx.conf`
-sendo respectivamente a conf default das locations do nginx, olocal de onde essa
+sendo respectivamente a conf default das locations do nginx, o local de onde essa
 conf vai buscar o certificado e a key da instalação e a config do nginx.
 
 Além disso, o container desse proxy deve ser acessível no cluster internamente de
