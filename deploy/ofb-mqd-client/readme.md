@@ -5,17 +5,17 @@
 ### Proxy reverso
 
 Deve ser configurado um proxy reverso que tenha a capacidade de rodar em modo
-"transparente"com e injetar os arquivos de certificados (cert e key) da
+transparente com e injetar os arquivos de certificados (cert e key) da
 instituição financeira para permitir o estabelecimento de uma conexão segura
-com o servidor de mqd.
+com o servidor de mqd (Motor de Qualidade de Dados).
 
-Para essa função aconselhado subir um container com nginx configurado
-com os volumes de `/etc/nginx/conf.d/default.conf` e `/etc/ssl` para
-sendo respectivamente a conf do nginx e o local de onde essa conf vai buscar
-o certificado e a key da instalação.
+Para essa função é aconselhado subir um container com nginx configurado
+com os volumes de `/etc/nginx/conf.d/default.conf`, `/etc/ssl` e `/etc/nginx/nginx.conf`
+sendo respectivamente a conf default das locations do nginx, olocal de onde essa
+conf vai buscar o certificado e a key da instalação e a config do nginx.
 
 Além disso, o container desse proxy deve ser acessível no cluster internamente de
-mode que a variavel de ambiente `proxyUrl` a ser explicada mais a frente represente
+modo que a variável de ambiente `proxyUrl` a ser explicada mais a frente represente
 a url interna de acesso desse container.
 
 *Exemplo de arquivo de Deployment do nginx*:
@@ -53,16 +53,25 @@ spec:
           volumeMounts:
             - mountPath: /etc/ssl
               name: secret-nginx-mqd
-            - mountPath: /etc/nginx/conf.d/default.conf
-              name: config
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-config
               subPath: nginx.conf
+            - mountPath: /etc/nginx/conf.d/default.conf
+              name: default-config
+              subPath: default.conf
       volumes:
       - configMap:
           items:
           - key: nginx.conf
             path: nginx.conf
           name: nginx-mqd
-        name: config
+        name: nginx-config
+      - configMap:
+          items:
+          - key: default.conf
+            path: default.conf
+          name: nginx-mqd
+        name: default-config
       - name: secret-nginx-mqd
         secret:
           secretName: mqd-client-secret
@@ -86,6 +95,41 @@ metadata:
   name: nginx-mqd
 data:
   nginx.conf: |
+    user  nginx;
+    worker_processes  auto;
+
+    error_log  /var/log/nginx/error.log notice;
+    pid        /var/run/nginx.pid;
+
+
+    events {
+        worker_connections  1024;
+    }
+
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+
+        server_tokens off;
+
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                          '$status $body_bytes_sent "$http_referer" '
+                          '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log  /var/log/nginx/access.log  main;
+
+        sendfile        on;
+        #tcp_nopush     on;
+
+        keepalive_timeout  65;
+
+        #gzip  on;
+
+        include /etc/nginx/conf.d/*.conf;
+    }
+
+  default.conf: |
     server {
       listen                  80;
       server_name             localhost;
@@ -189,6 +233,15 @@ metadata:
 type: Opaque
 ```
 
+### Configuração do service do MQD Client no cluster
+
+Vale ressaltar que o MQD Client receberá as chamadas de Validate Response
+do MQD Dispatcher internamente no cluster internamente no cluster pelo
+endpoint configurado como ``http://mqd-client-<transmitter|receiver>-serverOrgId`.
+Sendo o transmitter/receiver o applicationMode no qual o mqd client foi instalador
+e o serverOrgId o ID da organização da IF onde o motor está sendo
+instalado.
+
 ## Instalação
 
 A instalação do módulo é feita via Helm Chart.
@@ -208,7 +261,7 @@ Valores: `":" + porta`
 ### serverOrgId
 
  ID da organização da instituição financeira. A configuração como variável
-de ambiente deve indicar o ID da organização do IF onde o motor está sendo
+de ambiente deve indicar o ID da organização da IF onde o motor está sendo
 instalado (ex.: ID da Instituição Financeira no Diretório Central).
 
 Valores: `Organisation Id Válido`
@@ -255,6 +308,8 @@ Valores:
 
 Indica a forma como será executada a aplicação, isso
 dependerá se se trata de uma instituição do tipo transmissora ou receptora.
+Caso a instituição cumpra os dois papéis dois deploys devem ser realizados,
+um como TRANSMITTER e o outro como RECEIVER.
 
 Valores:
 
