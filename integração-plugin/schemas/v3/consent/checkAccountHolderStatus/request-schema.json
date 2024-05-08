@@ -2,13 +2,28 @@
     "$schema": "https://json-schema.org/draft-07/schema",
     "type": "object",
     "required": [
-        "document"
+        "requestMeta",
+        "requestBody"
     ],
     "properties": {
-        "document": {
-            "$ref": "../../common/consent/common-consent-schema.json#/$defs/Document"
+        "requestMeta": {
+            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+        },
+        "requestBody": {
+            "type": "object",
+            "description": "Payload para verificação de correntista",
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "document": {
+                        "$ref": "../../common/consent/common-consent-schema.json#/$defs/Document"
+                    }
+                }
+            },
+            "additionalProperties": false
         }
-    },
-    "additionalProperties": false,
-    "$defs": {}
+    },        
+    "additionalProperties": false
 }

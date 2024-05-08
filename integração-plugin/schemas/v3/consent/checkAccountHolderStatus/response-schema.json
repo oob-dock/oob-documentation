@@ -21,7 +21,7 @@
                         "ERROR"
                     ],
                     "description": "Indica se documento consultado possui conta na detentora",
-                    "example": true
+                    "example": "POSITIVE"
                 }            
             },
             "additionalProperties": false
