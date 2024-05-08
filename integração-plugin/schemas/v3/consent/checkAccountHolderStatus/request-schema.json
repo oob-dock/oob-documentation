@@ -1,0 +1,14 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "document"
+    ],
+    "properties": {
+        "document": {
+            "$ref": "../../common/consent/common-consent-schema.json#/$defs/Document"
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {}
+}

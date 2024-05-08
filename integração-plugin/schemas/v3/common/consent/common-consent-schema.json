@@ -278,6 +278,36 @@
                 }
             }
         },
+        "Document": {
+            "type": "object",
+            "description": "Documento de identificação oficial do usuário.",
+            "additionalProperties": false,
+            "required": [
+                "identification",
+                "rel"
+            ],
+            "properties": {
+                "identification": {
+                    "type": "string",
+                    "maxLength": 14,
+                    "description": "Número do documento de identificação oficial do usuário.",
+                    "examples": [
+                        "11111111111"
+                    ],
+                    "pattern": "^\\d{11,14}$"
+                },
+                "rel": {
+                    "type": "string",
+                    "maxLength": 4,
+                    "description": "Tipo do documento de identificação oficial do usuário.",
+                    "examples": [
+                        "CPF",
+                        "CNPJ"
+                    ],
+                    "pattern": "^[A-Z]{3,4}$"
+                }
+            }
+        },
         "TPP": {
             "type": "object",
             "description": "Detalhes do TPP que solicitou o consentimento",

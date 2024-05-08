@@ -260,6 +260,33 @@ identificados durante a validação, deve-se retornar o erro de maior prioridade
 A tabela de prioridade pode ser encontrada nas *Informações Técnicas* da
 [API de Pagamentos](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17375943/SV+API+-+Pagamentos).
 
+### Conector de descoberta de correntista
+
+Devido à uma resolução regulatória, o PCM (Plataforma de Coleta de Métricas)
+deve enviar a informação se a pessoa (PF/PJ) que pediu consentimento é correntista
+na instituição ou não.
+
+Para isso um conector de correntistas foi criado com a seguinte funcionalidade,
+receber um CPF/CNPJ e validar contra a instituição se o mesmo pertence a um correntista.
+
+A resposta deve ser:
+- Positiva (CPF/CNPJ pertence a um correntista);
+- Negativa (CPF/CNPJ não pertence a um correntista);
+- Erro (não foi possível realizar a consulta).
+
+Definições:
+- [request-schema](../schemas/v3/consent/checkAccountHolderStatus/request-schema.json)
+- [response-schema](../schemas/v3/consent/checkAccountHolderStatus/response-schema.json)
+- [request-example](../schemas/v3/consent/checkAccountHolderStatus/request-example.json)
+- [response-example](../schemas/v3/consent/checkAccountHolderStatus/response-example.json)
+
+**Observação**
+
+O conector padrão implementado deverá chamar o conector de discovery
+apropriado, caso exista algum recurso, entende-se que a pessoa é correntista.
+Caso não exista discovery a ser chamado, deve-se implementar um conector
+de correntista personalizado.
+
 ### Tratamentos adicionais
 
 #### Filtro de contas
