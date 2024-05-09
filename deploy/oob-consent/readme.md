@@ -289,6 +289,23 @@ additionalVars:
     value: "false"
 ```
 
+### FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
+
+Utilizado para habilitar ou desabilitar a persistência de último uso e histórico
+de uso de consentimentos.
+
+**Formato:** `true` ou `false`
+
+Valor default: `true`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_TEDTEF_ENABLED
+    value: "true"
+```
+
 ### APPLICATION_WEBHOOK_PAYMENT_ENABLED
 
 Utilizado para habilitar ou desabilitar o envio de webhook de pagamentos.
