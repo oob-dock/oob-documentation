@@ -360,6 +360,8 @@ Configurações:
 Este módulo suporta uso de cache para introspection utilizando
 uma das state stores [suportadas pelo dapr](https://docs.dapr.io/reference/components-reference/supported-state-stores/).
 
+**Importante**: A state store escolhida deve, obrigatóriamente, suportar TTL.
+
 Configurações:
 
 * name: Nome dado ao componente da state store
