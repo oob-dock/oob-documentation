@@ -35,6 +35,7 @@
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
       - [route\_block\_enabled](#route_block_enabled)
+      - [mqd\_event\_enabled](#mqd_event_enabled)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -256,6 +257,18 @@ Essa variável deve ser mantida como `true` nos ambientes produtivos, mas config
 como `false` nos ambientes de homologação para execução da certificação.
 
 **Default:** `true`
+**Valores possíveis:** `true` ou `false`
+
+#### mqd_event_enabled
+
+Define se a instalação deverá ou não enviar eventos de chamadas dos endpoints
+vinculados ao Motor de Qualidade de Dados (MQD). Caso a variável seja definida
+com o valor `true` a configuração de cada rota será levada em conta para
+decidir se o evento será enviado ou não. Caso a variável seja definda com o
+valor `false` a configuração de cada rota será ignorada e nenhum evento será
+gerado.
+
+**Default:** `false`
 **Valores possíveis:** `true` ou `false`
 
 ## Configuração do Grafana
