@@ -305,6 +305,23 @@ additionalVars:
     value: "true"
 ```
 
+### FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
+
+Utilizado para habilitar ou desabilitar a persistência de último uso e histórico
+de uso de consentimentos.
+
+**Formato:** `true` ou `false`
+
+Valor default: `true`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
+    value: "true"
+```
+
 ### CONSENT_PERMISSIONS
 
 Utilizado para definir a lista de permissões suportadas pela instituição.
