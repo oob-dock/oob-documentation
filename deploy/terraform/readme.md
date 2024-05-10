@@ -235,8 +235,8 @@ preencher o campo `additionalInfo.clientIp` no evento gerado pelo plugin
 Define qual será o nome do header utilizado que será enviado o certificado
 mTLS do client que fez o request. No contexto de PCM e MQD este header é
 utilizado para obter o clientOrgId da receptora de dados ou iniciadora
-de pagamentos para ser utilizado pelo plugin `oob-api-event` `oob-mqd-event` 
-do Kong.
+de pagamentos para ser utilizado pelos plugins `oob-api-event` e
+`oob-mqd-event` do Kong.
 
 **Default:** `X-SSL-Client-Cert`
 
@@ -268,7 +268,6 @@ decidir se o evento será enviado ou não. Caso a variável seja definda com o
 valor `false` a configuração de cada rota será ignorada e nenhum evento será
 gerado.
 
-**Default:** `false`
 **Valores possíveis:** `true` ou `false`
 
 ## Configuração do Grafana
