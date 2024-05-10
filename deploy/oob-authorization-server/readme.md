@@ -355,6 +355,60 @@ Configurações:
     jwks_minutes_interval: "30"
 ```
 
+## state store
+
+Este módulo suporta uso de cache para introspection utilizando
+uma das state stores [suportadas pelo dapr](https://docs.dapr.io/reference/components-reference/supported-state-stores/).
+
+**Importante**: A state store escolhida deve, obrigatóriamente, suportar TTL.
+
+Configurações:
+
+* name: Nome dado ao componente da state store
+* type: Tipo a ser preenchido conforme documentação do [dapr](https://docs.dapr.io/operations/components/setup-state-store/).
+* version: Versão a ser utilizada. Por padrão, será utilizada *v1*.
+* connectionMetadata: Metadados necessários para conexão com a state
+store desejada a serem incluídos no formato name/value, conforme exemplo.
+
+**Exemplo:**
+
+```yaml
+env:
+  dapr:
+    stateStore:
+      introspection:
+        name: tokenStateStore
+        type: state.redis
+        version: v1
+        connectionMetadata:
+          - name: redisHost
+            value: localhost:6379
+          - name: redisPassword
+            value: password
+```
+
+**Importante:** Para habilitar o uso de cache, deve-se ativar a *feature flag* a seguir.
+
+### feature/introspection/cache/enabled
+
+Habilita ou desabilita o cache para introspection no Authorization Server.
+
+Deve ser habilitada **APENAS** se a configuração do state store for realizada
+nesse serviço e no serviço [OOB-Consents](../oob-consent/readme.md#daprstatestoreintrospectionname);
+
+**Valor default**: `0` (desabilitado)
+
+**Formato:** : `0` ou `1`.
+
+**Exemplo:**
+```
+env:
+  feature:
+    introspection:
+      cache:
+        enabled: "1"
+```
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
