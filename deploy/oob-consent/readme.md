@@ -176,7 +176,7 @@ Ex: `cbanco`
 
 ### feature/introspection/cache/enabled
 
-Habilita ou desabilita a cache para introspection no serviço.
+Habilita ou desabilita o cache para introspection no serviço.
 
 Deve ser habilitada **APENAS** se a funcionalidade estiver corretamente configurada
 no [Authorization Server](../oob-authorization-server/readme.md#state-store).

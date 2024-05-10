@@ -387,16 +387,16 @@ env:
             value: password
 ```
 
-**Importante:** Para habilitar o uso da cache, deve-se ativar a *feature flag* a seguir.
+**Importante:** Para habilitar o uso de cache, deve-se ativar a *feature flag* a seguir.
 
 ### feature/introspection/cache/enabled
 
-Habilita ou desabilita a cache para introspection no Authorization Server.
+Habilita ou desabilita o cache para introspection no Authorization Server.
 
 Deve ser habilitada **APENAS** se a configuração do state store for realizada
 nesse serviço e no serviço [OOB-Consents](../oob-consent/readme.md#daprstatestoreintrospectionname);
 
-**Valor default**: `0` (desabilitada)
+**Valor default**: `0` (desabilitado)
 
 **Formato:** : `0` ou `1`.
 
