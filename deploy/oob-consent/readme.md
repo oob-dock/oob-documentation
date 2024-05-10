@@ -174,6 +174,26 @@ Para mais detalhes, consulta a [definição](../shared-definitions.md#brand-id).
 
 Ex: `cbanco`
 
+### feature/introspection/cache/enabled
+
+Habilita ou desabilita o cache para introspection no serviço.
+
+Deve ser habilitada **APENAS** se a funcionalidade estiver corretamente configurada
+no [Authorization Server](../oob-authorization-server/readme.md#state-store).
+
+Ex: `1`
+
+**Importante**: Depende da configuração do nome da state store a ser realizada
+conforme item a seguir.
+
+### dapr/stateStore/introspection/name
+
+Nome da state store a ser utilizada para cache do introspection dos tokens.
+
+Deve receber o mesmo valor atribuído ao [Authorization Server](../oob-authorization-server/readme.md#state-store) na propriedade de mesmo nome.
+
+Ex: `tokenStateStore`
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
