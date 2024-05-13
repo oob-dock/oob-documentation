@@ -272,20 +272,20 @@ receber um CPF/CNPJ e validar contra a instituição se o mesmo pertence a um co
 A resposta deve ser:
 - Positiva (CPF/CNPJ pertence a um correntista);
 - Negativa (CPF/CNPJ não pertence a um correntista);
-- Erro (não foi possível realizar a consulta).
 
 Definições:
 - [request-schema](../schemas/v3/consent/checkAccountHolderStatus/request-schema.json)
 - [response-schema](../schemas/v3/consent/checkAccountHolderStatus/response-schema.json)
+
+Exemplos:
 - [request-example](../schemas/v3/consent/checkAccountHolderStatus/request-example.json)
 - [response-example](../schemas/v3/consent/checkAccountHolderStatus/response-example.json)
 
 **Observação**
 
-O conector padrão implementado deverá chamar o conector de discovery
-apropriado, caso exista algum recurso, entende-se que a pessoa é correntista.
-Caso não exista discovery a ser chamado, deve-se implementar um conector
-de correntista personalizado.
+O conector padrão implementado deverá chamar o conector de correntista,
+caso o mesmo não exista então será chamado o conector discovery de contas
+e se este não atender, deve ser implementado o novo conector.
 
 ### Tratamentos adicionais
 

@@ -13,15 +13,9 @@
             ],
             "properties": {
                 "isAccountHolder": {
-                    "type": "string",
-                    "maxLength": 15,
-                    "enum": [
-                        "POSITIVE",
-                        "NEGATIVE",
-                        "ERROR"
-                    ],
+                    "type": "boolean",
                     "description": "Indica se documento consultado possui conta na detentora",
-                    "example": "POSITIVE"
+                    "example": "true"
                 }            
             },
             "additionalProperties": false
