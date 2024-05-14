@@ -377,7 +377,7 @@ env:
   dapr:
     stateStore:
       introspection:
-        name: tokenStateStore
+        name: token-state-store
         type: state.redis
         version: v1
         connectionMetadata:

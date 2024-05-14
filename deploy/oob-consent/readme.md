@@ -192,7 +192,7 @@ Nome da state store a ser utilizada para cache do introspection dos tokens.
 
 Deve receber o mesmo valor atribuído ao [Authorization Server](../oob-authorization-server/readme.md#state-store) na propriedade de mesmo nome.
 
-Ex: `tokenStateStore`
+Ex: `token-state-store`
 
 ## additionalVars
 
