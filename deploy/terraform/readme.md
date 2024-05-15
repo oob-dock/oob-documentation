@@ -35,6 +35,7 @@
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
       - [route\_block\_enabled](#route_block_enabled)
+      - [mqd\_event\_enabled](#mqd_event_enabled)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -234,8 +235,8 @@ preencher o campo `additionalInfo.clientIp` no evento gerado pelo plugin
 Define qual será o nome do header utilizado que será enviado o certificado
 mTLS do client que fez o request. No contexto de PCM e MQD este header é
 utilizado para obter o clientOrgId da receptora de dados ou iniciadora
-de pagamentos para ser utilizado pelo plugin `oob-api-event` `oob-mqd-event` 
-do Kong.
+de pagamentos para ser utilizado pelos plugins `oob-api-event` e
+`oob-mqd-event` do Kong.
 
 **Default:** `X-SSL-Client-Cert`
 
@@ -256,6 +257,17 @@ Essa variável deve ser mantida como `true` nos ambientes produtivos, mas config
 como `false` nos ambientes de homologação para execução da certificação.
 
 **Default:** `true`
+**Valores possíveis:** `true` ou `false`
+
+#### mqd_event_enabled
+
+Define se a instalação deverá ou não enviar eventos de chamadas dos endpoints
+vinculados ao Motor de Qualidade de Dados (MQD). Caso a variável seja definida
+com o valor `true` a configuração de cada rota será levada em conta para
+decidir se o evento será enviado ou não. Caso a variável seja definda com o
+valor `false` a configuração de cada rota será ignorada e nenhum evento será
+gerado.
+
 **Valores possíveis:** `true` ou `false`
 
 ## Configuração do Grafana
