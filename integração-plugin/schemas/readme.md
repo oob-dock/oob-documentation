@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2024-05-13 - v3.6.0
+
+- Novo conector checkAccountHolderStatus para verificação de correntistas
+para relatório enviado ao pcm.
+
 ### 2024-03-06 - v3.5.0
 
 - Inclusão de idempotencyKey em patchPixPaymentsPaymentId_v3
