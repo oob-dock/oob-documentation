@@ -174,18 +174,6 @@ Para mais detalhes, consulta a [definição](../shared-definitions.md#brand-id).
 
 Ex: `cbanco`
 
-### feature/introspection/cache/enabled
-
-Habilita ou desabilita o cache para introspection no serviço.
-
-Deve ser habilitada **APENAS** se a funcionalidade estiver corretamente configurada
-no [Authorization Server](../oob-authorization-server/readme.md#state-store).
-
-Ex: `1`
-
-**Importante**: Depende da configuração do nome da state store a ser realizada
-conforme item a seguir.
-
 ### dapr/stateStore/introspection/name
 
 Nome da state store a ser utilizada para cache do introspection dos tokens.
@@ -193,6 +181,43 @@ Nome da state store a ser utilizada para cache do introspection dos tokens.
 Deve receber o mesmo valor atribuído ao [Authorization Server](../oob-authorization-server/readme.md#state-store) na propriedade de mesmo nome.
 
 Ex: `token-state-store`
+
+
+## dapr/stateStore/accountHolder
+
+Este módulo suporta uso de cache para verificação de correntistas utilizando
+uma das state stores [suportadas pelo dapr](https://docs.dapr.io/reference/components-reference/supported-state-stores/).
+
+**Importante**: A state store escolhida deve, obrigatóriamente, suportar TTL.
+
+Configurações:
+
+* name: Nome dado ao componente da state store
+* type: Tipo a ser preenchido conforme documentação do [dapr](https://docs.dapr.io/operations/components/setup-state-store/).
+* version: Versão a ser utilizada. Por padrão, será utilizada *v1*.
+* ttlInSeconds: Tempo de vida da state store em segundos.
+* connectionMetadata: Metadados necessários para conexão com a state
+store desejada a serem incluídos no formato name/value, conforme exemplo.
+
+**Exemplo:**
+
+```yaml
+env:
+  dapr:
+    stateStore:
+      accountHolder:
+        name: documentStateStore
+        type: state.redis
+        version: v1
+        ttlInSeconds: 3600
+        connectionMetadata:
+          - name: redisHost
+            value: localhost:6379
+          - name: redisPassword
+            value: password
+```
+
+**Importante:** Para habilitar o uso de cache, deve-se ativar a *feature flag* [accountHolder](#featureaccountholdercacheenabled)
 
 ## additionalVars
 
@@ -325,22 +350,7 @@ additionalVars:
     value: "true"
 ```
 
-### FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
 
-Utilizado para habilitar ou desabilitar a persistência de último uso e histórico
-de uso de consentimentos.
-
-**Formato:** `true` ou `false`
-
-Valor default: `true`
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
-    value: "true"
-```
 
 ### CONSENT_PERMISSIONS
 
@@ -542,3 +552,47 @@ additionalVarsDaemon:
   - name: DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
     value: "true"
 ```
+
+## FEATURE FLAGS
+
+### feature/consentusagepersistence/enabled
+
+Utilizado para habilitar ou desabilitar a persistência de último uso e histórico
+de uso de consentimentos.
+
+**Formato:** `true` ou `false`
+
+Valor default: `true`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
+    value: "true"
+```
+
+### feature/introspection/cache/enabled
+
+Habilita ou desabilita o cache para introspection no serviço.
+
+Deve ser habilitada **APENAS** se a funcionalidade estiver corretamente configurada
+no [Authorization Server](../oob-authorization-server/readme.md#state-store).
+
+Ex: `1`
+
+**Importante**: Depende da configuração do nome da state store a ser realizada
+conforme item [introspection state store name](#daprstatestoreintrospectionname)
+
+
+### feature/accountHolder/cache/enabled
+
+Habilita ou desabilita o cache para verificação de correntista.
+
+Deve ser habilitada **APENAS** se a funcionalidade estiver corretamente configurada
+no [Authorization Server](../oob-authorization-server/readme.md#state-store).
+
+Ex: `1`
+
+**Importante**: Depende da configuração do nome da state store a ser realizada
+conforme item [accountHolder state store](#daprstatestoreaccountholder)
