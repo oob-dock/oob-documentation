@@ -821,3 +821,25 @@ precisa ser criado. [Mais detalhes aqui](../readme.md)
 ### Senha para autenticação (tela de mock do login)
 
 testeOpenBanking
+
+## SERVER_ORG_ID
+
+Utilizado no envio de PCM do tipo Hybrid Flow. Pode ser deixado vazio caso o report seja da mesma instituicao que obteve o token para uso da PCM.
+Caso contrario, deve ser o organisationId da instituição filha para o qual a instituição mãe está fazendo o report. 
+
+```yaml
+additionalVars:
+  - name: SERVER_ORG_ID
+    value: "6fd64cd7-a56d-4287-b12c-15bacf242f72"
+```
+
+## PCM_HYBRID_FLOW_ENABLED
+Feature flag para habilitar o envio de eventos PCM do tipo Hybrid Flow.
+
+**Default:** `false`
+
+```yaml
+additionalVars:
+  - name: PCM_HYBRID_FLOW_ENABLED
+    value: true
+```
