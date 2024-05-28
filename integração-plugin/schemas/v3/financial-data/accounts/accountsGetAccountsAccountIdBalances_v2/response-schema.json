@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -11,7 +10,8 @@
       "required": [
         "availableAmount",
         "blockedAmount",
-        "automaticallyInvestedAmount"
+        "automaticallyInvestedAmount",
+        "updateDateTime"
       ],
       "properties": {
         "availableAmount": {
@@ -81,8 +81,8 @@
             "amount": {
               "type": "string",
               "format": "double",
-              "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-              "maxLength": 20,
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
               "minLength": 4,
               "example": "1000.0400",
               "description": "Valor relacionado ao objeto.",
@@ -97,6 +97,13 @@
               "example": "BRL"
             }
           }
+        },
+        "updateDateTime": {
+          "type": "string",
+          "maxLength": 20,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+          "example": "2021-05-21T08:30:00Z",
+          "description": "Data e hora da última atualização do saldo. É esperado que a instituição informe a última vez que capturou o saldo para compartilhamento no Open Finance. Dessa forma, é possível que:\n- Caso a instituição capture dados de forma síncrona essa informação seja de poucos momentos;\n- Caso a instituição capture dados de forma assíncrona essa informação seja de horas ou dias no passado;\n- Quando não existente uma data vinculada especificamente ao bloco, se assume a data e hora de atualização do cadastro como um todo.\n\nDe toda forma, é preciso continuar respeitando o prazo máximo de tempestividade da API de Contas.\n"
         }
       }
     },

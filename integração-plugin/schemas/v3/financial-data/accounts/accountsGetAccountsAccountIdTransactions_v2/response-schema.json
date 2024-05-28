@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -12,12 +11,13 @@
       "items": {
         "type": "object",
         "required": [
+          "transactionId",
           "completedAuthorisedPaymentType",
           "creditDebitType",
           "transactionName",
           "type",
           "transactionAmount",
-          "transactionDate"
+          "transactionDateTime"
         ],
         "properties": {
           "transactionId": {
@@ -55,10 +55,11 @@
           },
           "completedAuthorisedPaymentType": {
             "type": "string",
-            "description": "Indicador da transação: \n- Transação efetivada\n- Lançamento futuro\n",
+            "description": "Indicador da transação: \n  - Transação efetivada: a transação atinge esse status quando o `transactionId` torna-se imutável;\n  - Lançamento futuro: a transação será efetivada em momento futuro, ou seja, o `transactionId` pode mudar;\n  - Transação processando: a transação está em processamento, ou seja, o `transactionId` pode mudar.\n",
             "enum": [
               "TRANSACAO_EFETIVADA",
-              "LANCAMENTO_FUTURO"
+              "LANCAMENTO_FUTURO",
+              "TRANSACAO_PROCESSANDO"
             ],
             "example": "TRANSACAO_EFETIVADA"
           },
@@ -73,14 +74,14 @@
           },
           "transactionName": {
             "type": "string",
-            "maxLength": 60,
+            "maxLength": 200,
             "pattern": "[\\w\\W\\s]*",
-            "description": "Campo livre que corresponde ao identificador da transação na instituição financeira",
+            "description": "Literal usada na instituição financeira para identificar a transação. A informação apresentada precisa ser a mesma utilizada nos canais eletrônicos da instituição (extrato).",
             "example": "TRANSFCWAR5TXHCX5I9IDBHML8082N8NEO30M6LNNG7ANAYIJYRM00ZBZPU8"
           },
           "type": {
             "type": "string",
-            "description": "O campo deve classificar a transação em um dos tipos descritos. O transmissor deve classificar as transações disponíveis associando-a a um dos itens do Enum listado neste campo. \nA opção OUTROS só deve ser utilizada para os casos em que de fato a transação compartilhada não possa ser classificada como um dos itens deste Enum.\n",
+            "description": "O campo deve classificar a transação em um dos tipos descritos. \nO transmissor deve classificar as transações disponíveis associando-a a um dos itens do Enum listado neste campo. \nA opção OUTROS só deve ser utilizada para os casos em que de fato a transação compartilhada não possa ser classificada como um dos itens deste Enum. \nPor exemplo no caso de recebimento de pensão alimentícia.\n",
             "enum": [
               "TED",
               "DOC",
@@ -131,18 +132,18 @@
               }
             }
           },
-          "transactionDate": {
+          "transactionDateTime": {
             "type": "string",
-            "maxLength": 10,
-            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
-            "description": "Se indicador de transação:\nTRANSACAO_EFETIVADA - corresponde a data de lançamento da transação\nLANCAMENTO_FUTURO - corresponde a data prevista de efetivação da transação\n",
-            "example": "2021-01-07"
+            "maxLength": 24,
+            "pattern": "(^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)\\.(?:[0-9]){3}Z$)",
+            "description": "Data e hora original da transação.\n",
+            "example": "2016-01-29T12:29:03.374Z"
           },
           "partieCnpjCpf": {
             "type": "string",
             "maxLength": 14,
             "pattern": "^\\d{11}$|^\\d{14}$",
-            "description": "Identificação da pessoa envolvida na transação: pagador ou recebedor (Preencher com o CPF ou CNPJ, sem formatação)\n",
+            "description": "Identificação da pessoa envolvida na transação: pagador ou recebedor (Preencher com o CPF ou CNPJ, sem formatação). Com a IN BCB nº 371, a partir de 02/05/23, o envio das informações de identificação de contraparte tornou-se obrigatória para transações de pagamento. Para maiores detalhes, favor consultar a página `Orientações - Contas`.\n\n[Restrição] Quando o \"type“ for preenchido com valor FOLHA_PAGAMENTO e a transmissora for a responsável pelo pagamento de salário (banco-folha), o partieCnpjCpf informado deve ser do empregador relacionado.\n",
             "example": "43908445778"
           },
           "partiePersonType": {
@@ -158,7 +159,7 @@
             "type": "string",
             "maxLength": 3,
             "pattern": "^\\d{3}$",
-            "description": "Código identificador atribuído pelo Banco Central do Brasil às instituições participantes do STR (Sistema de Transferência de reservas) referente à pessoa envolvida na transação. O número-código substituiu o antigo código COMPE. Todos os participantes do STR, exceto as Infraestruturas do Mercado Financeiro (IMF) e a Secretaria do Tesouro Nacional, possuem um número-código independentemente de participarem da Centralizadora da Compensação de Cheques (Compe). O campo tem a anotação “n/a” (“não se aplica”) para os participantes do STR aos quais não é atribuído um número-código",
+            "description": "Código identificador atribuído pelo Banco Central do Brasil às instituições participantes do STR (Sistema de Transferência de reservas) referente à pessoa envolvida na transação. O número-código substituiu o antigo código COMPE. Todos os participantes do STR, exceto as Infraestruturas do Mercado Financeiro (IMF) e a Secretaria do Tesouro Nacional, possuem um número-código independentemente de participarem da Centralizadora da Compensação de Cheques (Compe).",
             "example": "001"
           },
           "partieBranchCode": {

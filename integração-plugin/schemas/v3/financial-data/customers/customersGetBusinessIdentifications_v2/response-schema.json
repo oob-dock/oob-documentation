@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -191,7 +190,7 @@
                   "maxLength": 70,
                   "pattern": "[\\w\\W\\s]*",
                   "example": "Juan Kaique Cláudio Fernandes",
-                  "description": "Nome civil completo da pessoa natural (Direito fundamental da pessoa, o nome civil é aquele atribuído à pessoa natural desde o registro de seu nascimento, com o qual será identificada por toda a sua vida, bem como após a sua morte)\n\n[Restrição] O campo civilName deve ser obrigatoriamente preenchido quando personType for PESSOA_JURIDICA.\n"
+                  "description": "Nome civil completo da pessoa natural (Direito fundamental da pessoa, o nome civil é aquele atribuído à pessoa natural desde o registro de seu nascimento, com o qual será identificada por toda a sua vida, bem como após a sua morte)\n\n[Restrição] O campo civilName deve ser obrigatoriamente preenchido quando personType for PESSOA_NATURAL.\n"
                 },
                 "socialName": {
                   "type": "string",
@@ -291,7 +290,7 @@
             "properties": {
               "postalAddresses": {
                 "type": "array",
-                "minItems": 1,
+                "minItems": 0,
                 "description": "Lista de endereços da pessoa jurídica",
                 "items": {
                   "type": "object",
@@ -311,7 +310,7 @@
                       "type": "string",
                       "maxLength": 150,
                       "minLength": 2,
-                      "pattern": "^\\w{2}[\\w\\W\\s]*$",
+                      "pattern": "^[\\w\\W\\s]*$",
                       "example": "Av Naburo Ykesaki, 1270",
                       "description": "Corresponde ao endereço comercial do cliente.\n"
                     },
@@ -332,7 +331,7 @@
                     "townName": {
                       "type": "string",
                       "maxLength": 50,
-                      "pattern": "^\\w{2}[\\w\\W\\s]*$",
+                      "pattern": "^[\\w\\W\\s]*$",
                       "minLength": 2,
                       "example": "Marília",
                       "description": "Localidade: O nome da localidade corresponde à designação da cidade ou município no qual o endereço está localizado.  \n"
@@ -472,80 +471,14 @@
                       "type": "string",
                       "example": "19",
                       "description": "Número de DDD (Discagem Direta à Distância) do telefone do cliente - se houver",
-                      "enum": [
-                        "11",
-                        "12",
-                        "13",
-                        "14",
-                        "15",
-                        "16",
-                        "17",
-                        "18",
-                        "19",
-                        "21",
-                        "22",
-                        "24",
-                        "27",
-                        "28",
-                        "31",
-                        "32",
-                        "33",
-                        "34",
-                        "35",
-                        "37",
-                        "38",
-                        "41",
-                        "42",
-                        "43",
-                        "44",
-                        "45",
-                        "46",
-                        "47",
-                        "48",
-                        "49",
-                        "51",
-                        "53",
-                        "54",
-                        "55",
-                        "61",
-                        "62",
-                        "63",
-                        "64",
-                        "65",
-                        "66",
-                        "67",
-                        "68",
-                        "69",
-                        "71",
-                        "73",
-                        "74",
-                        "75",
-                        "77",
-                        "79",
-                        "81",
-                        "82",
-                        "83",
-                        "84",
-                        "85",
-                        "86",
-                        "87",
-                        "88",
-                        "89",
-                        "91",
-                        "92",
-                        "93",
-                        "94",
-                        "95",
-                        "96",
-                        "97",
-                        "98",
-                        "99"
-                      ]
+                      "maxLength": 3,
+                      "minLength": 2,
+                      "pattern": "^(\\d{2,3})$"
                     },
                     "number": {
                       "type": "string",
-                      "maxLength": 11,
-                      "pattern": "^([0-9]{8,11})$",
+                      "maxLength": 13,
+                      "pattern": "^([0-9]{6,13})$",
                       "example": "29875132",
                       "description": "Número de telefone do cliente"
                     },
@@ -579,7 +512,7 @@
                       "type": "string",
                       "description": "Endereço de email",
                       "maxLength": 320,
-                      "pattern": "[\\w\\W\\s]*",
+                      "pattern": "^[a-z0-9.!#$&'*+\\/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$",
                       "example": "karinafernandes-81@br.inter.net"
                     }
                   }
