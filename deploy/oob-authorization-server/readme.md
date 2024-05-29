@@ -824,8 +824,7 @@ testeOpenBanking
 
 ## SERVER_ORG_ID
 
-Utilizado no envio de PCM do tipo Hybrid Flow. Pode ser deixado vazio caso o report seja da mesma instituicao que obteve o token para uso da PCM.
-Caso contrario, deve ser o organisationId da instituição filha para o qual a instituição mãe está fazendo o report. 
+Organization ID utilizado no report de PCM do tipo Hybrid Flow, conforme a [especificação do OF](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/37912663/Documenta+o+da+API).
 
 ```yaml
 additionalVars:
