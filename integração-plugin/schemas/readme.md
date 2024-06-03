@@ -48,7 +48,7 @@ Onde:
 
 ## Changelog
 
-### 2024-05-28 - v4.0.0
+### 2024-05-28 - v3.6.0
 
 - Alterações de schemas de financial-data customers, adaptando à versão
  2.1.0-beta.2 da especificação open finance.
