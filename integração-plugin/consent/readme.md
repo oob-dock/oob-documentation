@@ -273,6 +273,12 @@ A resposta deve ser:
 - Positiva (CPF/CNPJ pertence a um correntista);
 - Negativa (CPF/CNPJ não pertence a um correntista);
 
+A tabela a seguir lista os pontos de integração para a verificação de correntista:
+
+| Tipo do consentimento | Nome da rota Camel                            |
+| --------------------- | --------------------------------------------- |
+| Todos                 | ```direct:checkAccountHolderStatus```         |
+
 Definições:
 - [request-schema](../schemas/v3/consent/checkAccountHolderStatus/request-schema.json)
 - [response-schema](../schemas/v3/consent/checkAccountHolderStatus/response-schema.json)
