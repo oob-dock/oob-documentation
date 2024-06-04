@@ -218,3 +218,16 @@ additionalVars:
   - name: LOG_LEVEL
     value: "debug"
 ```
+
+### REPORT_PCM_BATCH_DELAY
+
+Delay para a coleta dos eventos em batch para envio de pcm em minutos.
+Valor default é 60 minutos.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: REPORT_PCM_BATCH_DELAY
+    value: "60"
+```
