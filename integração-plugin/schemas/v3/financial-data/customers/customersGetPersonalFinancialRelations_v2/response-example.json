@@ -32,6 +32,30 @@
         "type": "CONTA_DEPOSITO_A_VISTA",
         "subtype": "INDIVIDUAL",
         "branchCode": "6272"
+      },
+      {
+        "compeCode": "001",
+        "number": "24550245",
+        "checkDigit": "4",
+        "type": "CONTA_DEPOSITO_A_VISTA",
+        "subtype": "INDIVIDUAL",
+        "branchCode": "6272"
+      },
+      {
+        "compeCode": "001",
+        "number": "24550245",
+        "checkDigit": "4",
+        "type": "CONTA_DEPOSITO_A_VISTA",
+        "subtype": "INDIVIDUAL",
+        "branchCode": "6272"
+      },
+      {
+        "compeCode": "001",
+        "number": "24550245",
+        "checkDigit": "4",
+        "type": "CONTA_DEPOSITO_A_VISTA",
+        "subtype": "INDIVIDUAL",
+        "branchCode": "6272"
       }
     ],
     "procurators": [
@@ -52,15 +76,41 @@
         "cpfNumber": "73677831148",
         "civilName": "Elza Milena Stefany Teixeira",
         "socialName": "Carlos"
-      },
-      {
-        "type": "PROCURADOR",
-        "cpfNumber": "73677831148",
-        "civilName": "Elza Milena Stefany Teixeira",
-        "socialName": "Carlos"
       }
     ],
-    "productsServicesTypeAdditionalInfo": "Informações adicionais do tipo de serviço."
+    "productsServicesTypeAdditionalInfo": "Informações adicionais do tipo de serviço.",
+    "portabilitiesReceived": [
+      {
+        "employerName": ">.cgDCOEs]",
+        "employerCnpjCpf": "11756403819",
+        "paycheckBankDetainerCnpj": "97781063054795",
+        "paycheckBankDetainerIspb": "13325229",
+        "portabilityApprovalDate": "1118-6-2"
+      }
+    ],
+    "paychecksBankLink": [
+      {
+        "employerName": "bl",
+        "employerCnpjCpf": "39598211807",
+        "paycheckBankCnpj": "86654716222340",
+        "paycheckBankIspb": "47469286",
+        "accountOpeningDate": "6422-03-9"
+      },
+      {
+        "employerName": "-b8",
+        "employerCnpjCpf": "39811591147",
+        "paycheckBankCnpj": "51941943849810",
+        "paycheckBankIspb": "97304458",
+        "accountOpeningDate": "4731-04-31"
+      },
+      {
+        "employerName": "b\\Ho^\"j",
+        "employerCnpjCpf": "54450349815",
+        "paycheckBankCnpj": "33594843617493",
+        "paycheckBankIspb": "32082332",
+        "accountOpeningDate": "1846-11-30"
+      }
+    ]
   },
   "meta": {
     "totalRecords": 1,
