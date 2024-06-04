@@ -48,6 +48,13 @@ Onde:
 
 ## Changelog
 
+### 2024-05-28 - v3.7.0
+
+- Alterações de schemas de financial-data customers, adaptando à versão
+ 2.1.0-beta.2 da especificação open finance.
+- Alterações de schemas de financial-data accounts, adaptando à versão
+ 2.4.0-beta.1 da especificação open finance.
+
 ### 2024-05-13 - v3.6.0
 
 - Novo conector checkAccountHolderStatus para verificação de correntistas

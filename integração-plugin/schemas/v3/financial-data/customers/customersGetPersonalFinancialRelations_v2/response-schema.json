@@ -171,6 +171,102 @@
               }
             }
           }
+        },
+        "portabilitiesReceived": {
+          "type": "array",
+          "minItems": 0,
+          "description": "Lista de informações de empregador recebidos através de portabilidade de salário solicitada pelo cliente da transmissora à instituição detentora(s) de sua conta salário, ativos ou que já estiveram ativos,. Cada vínculo é associado a uma portabilidade de salário recebida pela transmissora.\n\nObs.: a portabilidade não é explicitamente encerrada, ou seja, a IF para a qual o salário foi portado não é avisado quando a conta salário se encerra ou o salário é portado para outra IF. Não é possível garantir que os dados informados sejam de uma portabilidade ativa, nem que o vínculo com o banco folha ainda exista. A transmissora terá tais informações apenas quando o pedido da portabilidade tiver sido solicitado em seus canais.\n",
+          "items": {
+            "type": "object",
+            "required": [
+              "employerName",
+              "employerCnpjCpf",
+              "paycheckBankDetainerCnpj",
+              "paycheckBankDetainerIspb",
+              "portabilityApprovalDate"
+            ],
+            "properties": {
+              "employerName": {
+                "type": "string",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "maxLength": 80,
+                "minLength": 2,
+                "description": "Nome do empregador conforme recebido pela comunicação de portabilidade.\n"
+              },
+              "employerCnpjCpf": {
+                "type": "string",
+                "pattern": "^\\d{14}$|^\\d{11}$",
+                "maxLength": 14,
+                "description": "Número de inscrição (CPF/CNPJ) do empregador (contratante dos serviços de pagamento), conforme recebido pela comunicação de portabilidade.\n"
+              },
+              "paycheckBankDetainerCnpj": {
+                "type": "string",
+                "pattern": "^\\d{14}$",
+                "maxLength": 14,
+                "description": "Número de inscrição no Cadastro Nacional da Pessoa Jurídica (CNPJ) do banco folha (instituição financeira detentora da conta salário) conforme recebido pela comunicação de portabilidade.\n"
+              },
+              "paycheckBankDetainerIspb": {
+                "type": "string",
+                "pattern": "^[0-9]{8}$",
+                "maxLength": 8,
+                "description": "Número do ISPB do Banco Folha (instituição financeira detentora da conta salário) conforme recebido pela comunicação de portabilidade.\n"
+              },
+              "portabilityApprovalDate": {
+                "type": "string",
+                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                "maxLength": 10,
+                "description": "Data de aprovação da portabilidade, conforme recebido pela comunicação de portabilidade.\n\nObs.: somente devem ser compartilhadas solicitações aprovadas, mesmo que de forma compulsória.\n"
+              }
+            }
+          }
+        },
+        "paychecksBankLink": {
+          "type": "array",
+          "minItems": 0,
+          "description": "Lista de informações de contas salário relacionadas com vínculos empregatícios, existentes ou que já existiram, firmados entre o cliente pessoa natural e um ou mais empregadores. Cada vínculo é associado a uma conta salário aberta mantida no banco-folha (instituição transmissora).\n\nObs: como empregadores antigos podem não ter solicitado o fechamento da conta salário, não é possível garantir que os dados informados sejam do empregador atual.\n",
+          "items": {
+            "type": "object",
+            "required": [
+              "employerName",
+              "employerCnpjCpf",
+              "paycheckBankCnpj",
+              "paycheckBankIspb",
+              "accountOpeningDate"
+            ],
+            "properties": {
+              "employerName": {
+                "type": "string",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "maxLength": 80,
+                "minLength": 2,
+                "description": "Nome do empregador conforme registrado na abertura da conta salário.\n"
+              },
+              "employerCnpjCpf": {
+                "type": "string",
+                "pattern": "^\\d{14}$|^\\d{11}$",
+                "maxLength": 14,
+                "description": "Documento do empregador (CNPJ/CPF), conforme registrado na abertura da conta salário.\n"
+              },
+              "paycheckBankCnpj": {
+                "type": "string",
+                "pattern": "^\\d{14}$",
+                "maxLength": 14,
+                "description": "CNPJ da instituição financeira contratada para prestar serviço de pagamento de salário (banco-folha).\n"
+              },
+              "paycheckBankIspb": {
+                "type": "string",
+                "pattern": "^[0-9]{8}$",
+                "maxLength": 8,
+                "description": "Número ISPB (Identificador do Sistema de Pagamentos Brasileiros) do instituição financeira contratada para prestar serviço de pagamento de salário (banco-folha).\n"
+              },
+              "accountOpeningDate": {
+                "type": "string",
+                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+                "maxLength": 10,
+                "description": "Data de abertura da conta salário.\n"
+              }
+            }
+          }
         }
       }
     },
