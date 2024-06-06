@@ -98,4 +98,4 @@ Exemplo:
 
 ### HTTP
 
-O componente HTTP não suporta configuração de timeout por chamada realizada.
+O componente HTTP não suporta configuração de timeout por rota.
