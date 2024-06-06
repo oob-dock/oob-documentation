@@ -5,10 +5,12 @@
 Atualmente, o produto OOB suporta os seguintes componentes Camel para a realização de requisições HTTP:
 
 - [HTTP](https://camel.apache.org/components/3.21.x/http-component.html): Baseado no Apache HttpClient, recomendado para necessidades simples de comunicação HTTP.
-- [Netty HTTP](https://camel.apache.org/components/3.21.x/netty-http-component.html) e [Vertx HTTP](https://camel.apache.org/components/3.21.x/vertx-http-component.html): Baseados no framework Netty para comunicações HTTP, utilizando I/O não bloqueante.
+- [Netty HTTP](https://camel.apache.org/components/3.21.x/netty-http-component.html): Baseado no framework Netty, o componente cria comunicações HTTP não bloqueantes,
+resultando em uma maior eficiência em cenários com múltiplas requisições simultâneas.
+- [Vertx HTTP](https://camel.apache.org/components/3.21.x/vertx-http-component.html): Baseado no Vert.x, um toolkit geralmente utilizado para construção de aplicações reativas.
+O componente do Camel utiliza o Vert.x Web Client para criar comunicação HTTP assíncrona, evitando bloqueios de I/O nas requisições.
 
-**Recomendação**: Utilize os componentes Netty HTTP ou Vertx HTTP para a construção dos conectores
-devido ao cenário de alta demanda ao qual o produto é submetido.
+**Importante**: Recomendamos o uso do componente Netty HTTP no nosso produto por proporcionar maior eficiência por oferecer configurações que permitem maior controle sobre seu funcionamento.
 
 ### Exemplo de migração
 
@@ -67,7 +69,8 @@ Para migrar para o Vertx HTTP, será necessário apenas remover o parâmetro `br
 
 ### Configurando timeout
 
-Independentemente do componente utilizado, é crucial configurar o timeout de conexão e requisição para evitar bloqueio de recursos por longos períodos em cenários de sobrecarga ou mal funcionamento do Camel. A configuração de timeout pode ser adicionada em cada uma das requisições da seguinte forma:
+Independentemente do componente utilizado, é crucial configurar o timeout de conexão e requisição para evitar bloqueio de recursos por longos períodos em cenários de sobrecarga ou mal funcionamento do Camel.
+A configuração de timeout pode ser adicionada em cada uma das requisições da seguinte forma:
 
 #### Netty HTTP
 
@@ -79,6 +82,8 @@ Exemplo:
 ```xml
 <toD uri="netty-http:{{host}}/api/v1/loans?bridgeEndpoint=true&amp;throwExceptionOnFailure=false?connectTimeout=10000&amp;requestTimeout=10000"/>
 ```
+
+**Obs:** O Netty HTTP permite a configuração de um timeout geral para todas as rotas. Nosso produto estabelece um tempo padrão de 15 segundos, que será utilizado caso a rota não especifique os parâmetros mencionados acima.
 
 ### Vertx HTTP
 
