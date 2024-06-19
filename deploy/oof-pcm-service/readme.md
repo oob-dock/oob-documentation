@@ -246,7 +246,7 @@ additionalVars:
 ```
 
 **Importante**: Atualmente esta configuração só está disponível para
-os eventos de monitoramente de métricas internas.
+os eventos de monitoramento de métricas internas.
 
 ### DAPR_BULK_SUBSCRIBE_MAX_AWAITING_DURATION_MS
 
@@ -262,7 +262,7 @@ additionalVars:
 ```
 
 **Importante**: Atualmente esta configuração só está disponível para
-os eventos de monitoramente de métricas internas.
+os eventos de monitoramento de métricas internas.
 
 ### METRIC_MAX_TIME_SECONDS
 
