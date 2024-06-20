@@ -3,12 +3,10 @@
     "correlationId": "f54a557a-26bd-149d-b4b1-1952b59adf7c",
     "brandId": "cbanco"
   },
-  "requestBody": {
+ "requestBody": {
     "data": {
-      "document": {
-        "identification": "21979340072",
-        "rel": "CPF"
-      }
+      "loggedUserDocument": "01293650353",
+      "businessEntityDocument": "75859123583215"
     }
   }
 }

@@ -17,13 +17,28 @@
             ],
             "properties": {
                 "data": {
-                    "document": {
-                        "$ref": "../../common/consent/common-consent-schema.json#/$defs/Document"
+                    "loggedUserDocument": {
+                        "type": "string",
+                        "maxLength": 11,
+                        "description": "Número do CPF do usuário.",
+                        "examples": [
+                            "11111111111"
+                        ],
+                        "pattern": "^\\d{11}$"
+                    },
+                    "businessEntityDocument": {
+                        "type": "string",
+                        "maxLength": 14,
+                        "description": "Número do CNPJ da empresa.",
+                        "examples": [
+                            "11111111111111"
+                        ],
+                        "pattern": "^\\d{14}$"
                     }
                 }
             },
             "additionalProperties": false
         }
-    },        
+    },
     "additionalProperties": false
 }

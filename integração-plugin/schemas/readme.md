@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2024-06-20 - v3.8.0
+
+- Alteração no conector de consentimento checkAccountHolderStatus,
+ para suportar dois documentos.
+
 ### 2024-05-28 - v3.7.0
 
 - Alterações de schemas de financial-data customers, adaptando à versão
