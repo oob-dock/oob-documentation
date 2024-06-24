@@ -15,7 +15,9 @@
         "productType",
         "productSubType",
         "contractDate",
+        "contractAmount",
         "instalmentPeriodicity",
+        "CET",
         "amortizationScheduled",
         "interestRates",
         "contractedFees",
@@ -26,7 +28,7 @@
           "type": "string",
           "maxLength": 100,
           "minLength": 1,
-          "pattern": "^\\d{1,100}$",
+          "pattern": "^[\\w\\W]{1,100}$",
           "example": "1324926521496",
           "description": "Número do contrato dado pela instituição contratante."
         },
@@ -34,7 +36,7 @@
           "type": "string",
           "maxLength": 67,
           "minLength": 22,
-          "pattern": "^\\d{22,67}$",
+          "pattern": "^[\\w\\W]{22,67}$",
           "example": "92792126019929279212650822221989319252576",
           "description": "Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\n"
         },
@@ -102,7 +104,7 @@
           "maxLength": 20,
           "minLength": 4,
           "example": "1000.0400",
-          "description": "Valor contratado da operação.  Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+          "description": "Valor contratado da operação. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais. Nos casos em que não houver este valor explícito no contrato do produto, enviar como 0.00",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
         },
@@ -158,7 +160,7 @@
           "maxLength": 9,
           "minLength": 8,
           "example": "0.290000",
-          "description": "CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas). \n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\n",
+          "description": "CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas).\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\n\nPara o público PF (pessoa física) o campo é de envio obrigatório para contratos firmados a partir de 2008, conforme Resolução CMN 3.517. Para o público PJ (pessoa jurídica) o campo é de envio obrigatório para contratos firmados a partir de 2011, conforme Resolução CMN 3.909. O campo poderá ser preenchido com 0.00 em cenários nos quais a casa não tenha a informação de CET (Custo efetivo total) apenas para as exceções listadas abaixo: \n\n- Em contratos anteriores a 2008 (para o público PF); \n- Em contratos anteriores a 2011 (para o público PJ); \n- Público PJ de médio ou grande porte. \n",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
         },
@@ -296,7 +298,7 @@
                 "maxLength": 9,
                 "minLength": 8,
                 "example": "0.600000",
-                "description": "Taxa pré fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.014500.\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\n",
+                "description": "Taxa pré fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.014500. O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). Preencher o campo não aplicável ao contrato com zeros, seguindo o pattern (0.000000).\n",
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
               },
@@ -306,7 +308,7 @@
                 "format": "double",
                 "maxLength": 9,
                 "minLength": 8,
-                "description": "Taxa pós fixada aplicada sob o contrato da modalidade crédito.\n\np.ex. 0.0045 .O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros\n(representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)\n",
+                "description": "Taxa pós fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.0045 .O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%). Preencher o campo não aplicável ao contrato com zeros, seguindo o pattern (0.000000)\n",
                 "example": "0.550000",
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308

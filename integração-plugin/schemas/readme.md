@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2024-06-24 - v4.0.0
+
+- Alteração de schemas de financial-data: credit-cards-accounts (2.3.1), loans (2.2.0),
+financings (2.1.0), invoice-financings (2.1.0) e unarranged-accounts-overdraft (2.1.0).
+
 ### 2024-05-28 - v3.7.0
 
 - Alterações de schemas de financial-data customers, adaptando à versão

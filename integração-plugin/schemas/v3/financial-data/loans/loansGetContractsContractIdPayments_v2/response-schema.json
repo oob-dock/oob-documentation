@@ -38,6 +38,7 @@
             "type": "object",
             "description": "Lista dos pagamentos realizados no período",
             "required": [
+              "paymentId",
               "isOverParcelPayment",
               "paidDate",
               "currency",

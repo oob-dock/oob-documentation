@@ -6,7 +6,9 @@
     "productType": "DIREITOS_CREDITORIOS_DESCONTADOS",
     "productSubType": "DESCONTO_CHEQUES",
     "contractDate": "2018-01-05",
+    "contractAmount": "1000.0400",
     "instalmentPeriodicity": "SEMANAL",
+    "CET": "0.290000",
     "amortizationScheduled": "SAC",
     "interestRates": [
       {
@@ -18,8 +20,8 @@
         "additionalInfo": "Informações adicionais",
         "referentialRateIndexerAdditionalInfo": "Informações adicionais de Indexador ou tipo de taxa referencial",
         "preFixedRate": "0.600000",
-        "postFixedRate": "0.550000",
-        "referentialRateIndexerSubType": "TJLP"
+        "referentialRateIndexerSubType": "TJLP",
+        "postFixedRate": "0.550000"
       }
     ],
     "contractedFees": [
@@ -28,28 +30,51 @@
         "feeCode": "EXCESSO_CONTA",
         "feeChargeType": "UNICA",
         "feeCharge": "MINIMO",
+        "feeRate": "0.062000",
+        "feeAmount": "1000.0400"
+      },
+      {
+        "feeName": "Excesso em Conta",
+        "feeCode": "EXCESSO_CONTA",
+        "feeChargeType": "UNICA",
+        "feeCharge": "MINIMO",
         "feeAmount": "1000.0400",
         "feeRate": "0.062000"
+      },
+      {
+        "feeName": "Excesso em Conta",
+        "feeCode": "EXCESSO_CONTA",
+        "feeChargeType": "UNICA",
+        "feeCharge": "MINIMO",
+        "feeRate": "0.062000",
+        "feeAmount": "1000.0400"
+      },
+      {
+        "feeName": "Excesso em Conta",
+        "feeCode": "EXCESSO_CONTA",
+        "feeChargeType": "UNICA",
+        "feeCharge": "MINIMO",
+        "feeRate": "0.062000",
+        "feeAmount": "1000.0400"
       }
     ],
     "contractedFinanceCharges": [
       {
         "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-        "chargeAdditionalInfo": "Informações adicionais sobre encargos",
-        "chargeRate": "0.071200"
+        "chargeRate": "0.071200",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos"
       },
       {
         "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-        "chargeAdditionalInfo": "Informações adicionais sobre encargos",
-        "chargeRate": "0.071200"
+        "chargeRate": "0.071200",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos"
       }
     ],
-    "instalmentPeriodicityAdditionalInfo": "Informações adicionais sobre periodicidade",
-    "dueDate": "2028-01-15",
-    "contractAmount": "1000.0400",
-    "CET": "0.290000",
-    "settlementDate": "2018-01-15",
     "firstInstalmentDueDate": "2018-02-15",
+    "settlementDate": "2018-01-15",
+    "currency": "BRL",
+    "dueDate": "2028-01-15",
+    "instalmentPeriodicityAdditionalInfo": "Informações adicionais sobre periodicidade",
     "amortizationScheduledAdditionalInfo": "Informações complementares relativa à amortização do tipo 'OUTROS'",
     "disbursementDates": [
       "2018-01-15",
@@ -57,8 +82,7 @@
       "2018-01-15",
       "2018-01-15",
       "2018-01-15"
-    ],
-    "currency": "BRL"
+    ]
   },
   "meta": {
     "totalRecords": 1,
