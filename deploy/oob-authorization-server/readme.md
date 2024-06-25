@@ -831,14 +831,3 @@ additionalVars:
   - name: SERVER_ORG_ID
     value: "6fd64cd7-a56d-4287-b12c-15bacf242f72"
 ```
-
-## PCM_HYBRID_FLOW_ENABLED
-Feature flag para habilitar o envio de eventos PCM do tipo Hybrid Flow.
-
-**Default:** `false`
-
-```yaml
-additionalVars:
-  - name: PCM_HYBRID_FLOW_ENABLED
-    value: true
-```
