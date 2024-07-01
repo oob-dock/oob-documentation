@@ -39,6 +39,30 @@ Exemplo:
     host: "postgres.local"
 ```
 
+### Suporte a réplica de leitura
+
+O OOB Consent suporta utilização de uma réplica de leitura do banco de
+dados. A réplica necessita das mesmas configurações da base, mas com na
+propriedade de nome "read-only", conforme exemplo a seguir:
+
+```yaml
+  db:
+    read-only:
+      name: "api_consent"
+      username: "readonly-user"
+      password: "readonly-password"
+      kind: "postgresql"
+      host: "readonly.postgres.local"
+```
+
+Para ativar a utilização da réplica de leitura, a propriedade "db.multitenant"
+deve ter seu valor alterado para "DATABASE", conforme exemplo:
+
+```yaml
+  db:
+    multitenant: DATABASE
+```
+
 ### liquibase/contexts
 
 Vide a [definição](../shared-definitions.md#liquibase-contexts)
