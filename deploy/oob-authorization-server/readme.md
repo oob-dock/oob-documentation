@@ -78,6 +78,31 @@ Exemplo:
     type: "postgres"
 ```
 
+### Suporte a réplica de leitura
+
+O OOB Authorization Server suporta utilização de uma réplica de leitura do banco de
+dados. A réplica necessita das mesmas configurações da base, mas com na
+propriedade de nome "read-only", conforme exemplo a seguir:
+
+```yaml
+  db:
+    read-only:
+      name: "authorization_server"
+      username: "readonly-user"
+      password: "readonly-password"
+      host: "readonly.postgres.local"
+      type: "postgresql"
+```
+
+Para ativar a utilização da réplica de leitura, a propriedade feature/readReplica/enabled
+deve ter seu valor alterado para "1", conforme exemplo:
+
+```yaml
+  feature:
+    readReplica:
+      enabled: "1"
+```
+
 ### api/baseUrlOobConsents
 
 - Endereço base do serviço de consentimento

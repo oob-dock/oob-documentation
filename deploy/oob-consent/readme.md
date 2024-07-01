@@ -55,12 +55,13 @@ propriedade de nome "read-only", conforme exemplo a seguir:
       host: "readonly.postgres.local"
 ```
 
-Para ativar a utilização da réplica de leitura, a propriedade "db.multitenant"
-deve ter seu valor alterado para "DATABASE", conforme exemplo:
+Para ativar a utilização da réplica de leitura, a propriedade feature/readReplica/enabled
+deve ter seu valor alterado para "1", conforme exemplo:
 
 ```yaml
-  db:
-    multitenant: DATABASE
+  feature:
+    readReplica:
+      enabled: "1"
 ```
 
 **Importante**: Com a ativação da réplica de leitura, todas as configurações do
