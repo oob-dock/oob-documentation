@@ -63,6 +63,21 @@ deve ter seu valor alterado para "DATABASE", conforme exemplo:
     multitenant: DATABASE
 ```
 
+**Importante**: Com a ativação da réplica de leitura, todas as configurações do
+Quarkus relacionadas a base de dados devem incluir o nome **base** para a instancia
+principal e **read-only** para a réplica.
+Por exemplo, caso seja necessário alterar o pool de conexões das bases de dados, deve-se
+adicionar a configuração da seguinte forma:
+
+```yaml
+  # Configuração da instancia principal (base)
+  - name: quarkus.datasource.base.jdbc.max-size
+    value: 100
+  # Configuração da réplica de leitura
+  - name: quarkus.datasource.read-only.jdbc.max-size
+    value: 110
+```
+
 ### liquibase/contexts
 
 Vide a [definição](../shared-definitions.md#liquibase-contexts)
