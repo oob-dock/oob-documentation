@@ -833,13 +833,12 @@ precisa ser criado. [Mais detalhes aqui](../readme.md)
 
 testeOpenBanking
 
-## PCM_HYBRID_FLOW_ENABLED
-Feature flag para habilitar o envio de eventos PCM do tipo Hybrid Flow.
+## SERVER_ORG_ID
 
-**Default:** `false`
+Organization ID utilizado no report de PCM do tipo Hybrid Flow, conforme a [especificação do OF](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/37912663/Documenta+o+da+API).
 
 ```yaml
 additionalVars:
-  - name: PCM_HYBRID_FLOW_ENABLED
-    value: true
+  - name: SERVER_ORG_ID
+    value: "6fd64cd7-a56d-4287-b12c-15bacf242f72"
 ```

@@ -218,3 +218,61 @@ additionalVars:
   - name: LOG_LEVEL
     value: "debug"
 ```
+
+### REPORT_PCM_BATCH_DELAY
+
+Delay para a coleta dos eventos em batch para envio de pcm em minutos.
+Valor default é 60 minutos.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: REPORT_PCM_BATCH_DELAY
+    value: "60"
+```
+
+### DAPR_BULK_SUBSCRIBE_MAX_MESSAGES_COUNT
+
+Define o número máximo de mensagens entregues de uma vez pelo Dapr para a
+aplicação. Valor padrão definido é `10`.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: DAPR_BULK_SUBSCRIBE_MAX_MESSAGES_COUNT
+    value: "10"
+```
+
+**Importante**: Atualmente esta configuração só está disponível para
+os eventos de monitoramento de métricas internas.
+
+### DAPR_BULK_SUBSCRIBE_MAX_AWAITING_DURATION_MS
+
+Tempo máximo de espera em milissegundos antes que um lote de mensagens seja
+entregue pelo Dapr para a aplicação. Valor padrão definido é `1000`.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: DAPR_BULK_SUBSCRIBE_MAX_AWAITING_DURATION_MS
+    value: "1000"
+```
+
+**Importante**: Atualmente esta configuração só está disponível para
+os eventos de monitoramento de métricas internas.
+
+### METRIC_MAX_TIME_SECONDS
+
+Tempo máximo de atraso permitido, em segundos, para que o evento seja
+considerado para emissão da métrica. Valor padrão definido é `60` segundos.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: METRIC_MAX_TIME_SECONDS
+    value: "60"
+```
