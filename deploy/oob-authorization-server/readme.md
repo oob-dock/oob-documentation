@@ -81,8 +81,11 @@ Exemplo:
 ### Suporte a réplica de leitura
 
 O OOB Authorization Server suporta utilização de uma réplica de leitura do banco de
-dados. A réplica necessita das mesmas configurações da base, mas com na
-propriedade de nome "read-only", conforme exemplo a seguir:
+dados. 
+
+A réplica necessita das mesmas configurações da base, com exceção do *type*.
+Essas propriedades usam o identificador da base *read-only*, conforme exemplo
+a seguir:
 
 ```yaml
   db:
@@ -91,7 +94,6 @@ propriedade de nome "read-only", conforme exemplo a seguir:
       username: "readonly-user"
       password: "readonly-password"
       host: "readonly.postgres.local"
-      type: "postgresql"
 ```
 
 Para ativar a utilização da réplica de leitura, a propriedade feature/readReplica/enabled

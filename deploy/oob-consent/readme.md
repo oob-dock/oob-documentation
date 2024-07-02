@@ -42,8 +42,8 @@ Exemplo:
 ### Suporte a réplica de leitura
 
 O OOB Consent suporta utilização de uma réplica de leitura do banco de
-dados. A réplica necessita das mesmas configurações da base, mas com na
-propriedade de nome "read-only", conforme exemplo a seguir:
+dados. A réplica necessita das mesmas configurações da base, mas com o
+identificador *read-only*, conforme exemplo a seguir:
 
 ```yaml
   db:
@@ -65,13 +65,13 @@ deve ter seu valor alterado para "1", conforme exemplo:
 ```
 
 **Importante**: Com a ativação da réplica de leitura, todas as configurações do
-Quarkus relacionadas a base de dados devem incluir o nome **base** para a instancia
+Quarkus relacionadas a base de dados devem incluir o nome **base** para a instância
 principal e **read-only** para a réplica.
 Por exemplo, caso seja necessário alterar o pool de conexões das bases de dados, deve-se
 adicionar a configuração da seguinte forma:
 
 ```yaml
-  # Configuração da instancia principal (base)
+  # Configuração da instância principal (base)
   - name: quarkus.datasource.base.jdbc.max-size
     value: 100
   # Configuração da réplica de leitura
