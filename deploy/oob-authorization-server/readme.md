@@ -436,6 +436,17 @@ env:
         enabled: "1"
 ```
 
+## server/org/id
+
+Organization ID utilizado no report de PCM do tipo Hybrid Flow, conforme a [especificação do OF](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/37912663/Documenta+o+da+API).
+
+```yaml
+env:
+  server:
+    org:
+      id: "6fd64cd7-a56d-4287-b12c-15bacf242f72"
+```
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
