@@ -859,13 +859,3 @@ precisa ser criado. [Mais detalhes aqui](../readme.md)
 ### Senha para autenticação (tela de mock do login)
 
 testeOpenBanking
-
-## SERVER_ORG_ID
-
-Organization ID utilizado no report de PCM do tipo Hybrid Flow, conforme a [especificação do OF](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/37912663/Documenta+o+da+API).
-
-```yaml
-additionalVars:
-  - name: SERVER_ORG_ID
-    value: "6fd64cd7-a56d-4287-b12c-15bacf242f72"
-```
