@@ -1,10 +1,10 @@
 {
   "data": {
-    "overdraftContractedLimit": {
+    "overdraftUsedLimit": {
       "amount": "1000.0400",
       "currency": "BRL"
     },
-    "overdraftUsedLimit": {
+    "overdraftContractedLimit": {
       "amount": "1000.0400",
       "currency": "BRL"
     },
