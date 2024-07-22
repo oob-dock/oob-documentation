@@ -1786,7 +1786,7 @@ components:
           $ref: '#/components/schemas/PaymentRejection'
     PaymentRejection:
       type: object
-      description: "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status. Deverá ser enviado quando o campo /data/status for igual a RJCT (REJECTED)."
+      description: "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status. Deverá ser enviado quando o campo /data/paymentStatus for igual a RJCT (REJECTED)."
       properties:
         code:
           $ref: '#/components/schemas/PaymentRejectionReasonEnum'
