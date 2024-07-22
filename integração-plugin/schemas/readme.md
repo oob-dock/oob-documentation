@@ -48,6 +48,15 @@ Onde:
 
 ## Changelog
 
+### 2024-07-16 - v4.1.0
+
+- Alteração de schemas de financial-data: accounts (2.4.0-rc.1), customers (2.1.0-rc.1).
+
+### 2024-06-24 - v4.0.0
+
+- Alteração de schemas de financial-data: credit-cards-accounts (2.3.1), loans (2.2.0),
+financings (2.1.0), invoice-financings (2.1.0) e unarranged-accounts-overdraft (2.1.0).
+
 ### 2024-06-20 - v3.8.0
 
 - Alteração no conector de consentimento checkAccountHolderStatus,

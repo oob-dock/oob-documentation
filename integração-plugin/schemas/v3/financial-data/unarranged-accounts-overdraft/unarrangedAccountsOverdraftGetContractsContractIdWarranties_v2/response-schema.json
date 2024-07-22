@@ -13,6 +13,8 @@
         "type": "object",
         "description": "Conjunto de informações referentes às garantias que avalizam a operação de crédito contratada",
         "required": [
+          "currency",
+          "warrantyAmount",
           "warrantyType",
           "warrantySubType"
         ],
@@ -105,7 +107,7 @@
             "example": "NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO"
           },
           "warrantyAmount": {
-            "description": "Valor original da garantia. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.\n",
+            "description": "Valor original da garantia. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.\n\n[Restrição] Para casos em que warrantyType for igual a \"GARANTIA_FIDEJUSSORIA\" o valor da garantia corresponde a uma porcentagem do total garantido. \nDessa forma, os casos de garantia fidejussória para os quais não é possível determinar um valor monetário para a garantia devem ser preenchidos com 0.00.\n",
             "type": "string",
             "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
             "maxLength": 21,

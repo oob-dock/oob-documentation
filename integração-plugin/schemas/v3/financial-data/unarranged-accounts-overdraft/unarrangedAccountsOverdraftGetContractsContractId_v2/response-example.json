@@ -6,6 +6,7 @@
     "productType": "ADIANTAMENTO_A_DEPOSITANTES",
     "productSubType": "ADIANTAMENTO_A_DEPOSITANTES",
     "contractDate": "2018-01-05",
+    "contractAmount": "100000.0400",
     "instalmentPeriodicity": "SEMANAL",
     "instalmentPeriodicityAdditionalInfo": "Informações adicionais sobre periodicidade",
     "amortizationScheduled": "SAC",
@@ -43,8 +44,8 @@
         "referentialRateIndexerType": "PRE_FIXADO",
         "preFixedRate": "0.600000",
         "postFixedRate": "0.550000",
-        "additionalInfo": "Informações adicionais",
         "referentialRateIndexerSubType": "TJLP",
+        "additionalInfo": "Informações adicionais",
         "referentialRateIndexerAdditionalInfo": "Informações adicionais"
       },
       {
@@ -67,9 +68,9 @@
         "referentialRateIndexerType": "PRE_FIXADO",
         "preFixedRate": "0.600000",
         "postFixedRate": "0.550000",
-        "referentialRateIndexerSubType": "TJLP",
+        "additionalInfo": "Informações adicionais",
         "referentialRateIndexerAdditionalInfo": "Informações adicionais",
-        "additionalInfo": "Informações adicionais"
+        "referentialRateIndexerSubType": "TJLP"
       }
     ],
     "contractedFees": [
@@ -86,28 +87,23 @@
         "feeCode": "EXCESSO_CONTA",
         "feeChargeType": "UNICA",
         "feeCharge": "MINIMO",
-        "feeRate": "0.062000",
-        "feeAmount": "1000.0400"
-      },
-      {
-        "feeName": "Excesso em Conta",
-        "feeCode": "EXCESSO_CONTA",
-        "feeChargeType": "UNICA",
-        "feeCharge": "MINIMO",
         "feeAmount": "1000.0400",
         "feeRate": "0.062000"
       }
     ],
     "contractedFinanceCharges": [],
-    "contractAmount": "100000.0400",
-    "dueDate": "2028-01-15",
     "settlementDate": "2018-01-15",
+    "CET": "0.290000",
+    "dueDate": "2028-01-15",
     "currency": "BRL",
-    "firstInstalmentDueDate": "2018-02-15",
     "disbursementDates": [
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15",
       "2018-01-15"
     ],
-    "CET": "0.290000"
+    "firstInstalmentDueDate": "2018-02-15"
   },
   "meta": {
     "totalRecords": 1,
