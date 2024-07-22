@@ -194,6 +194,18 @@ paths:
       - General
       description: Get active consents for a given time frame
       parameters:
+      - name: startDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+      - name: endDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T18:31:28Z
       - name: page
         in: query
         schema:

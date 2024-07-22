@@ -88,7 +88,9 @@ Responsável pela revogação do consentimento relacionado ao *consentId* inform
 
         GET /open-banking/oob-consents/consents/v2/active
 
-Responsável pela listagem de consentimentos autorizados.
+Responsável pela listagem de consentimentos autorizados. Possui dois parâmetros opcionais:
+- startDate: Caso fornecido, seleciona todos os consentimentos ativos que tenham sido criados após essa data.
+- endDate: Caso informado, seleciona todos os consentimentos cuja a expiração seja anterior a data fornecida.
 
 ## Listagem de pagamentos relacionados a um consentimento
 
