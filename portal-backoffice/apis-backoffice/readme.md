@@ -68,7 +68,7 @@ Suporta os tipos: *PIX*, *TED* ou *TEF*.
         GET /open-banking/oob-consents/v1/consents/{consentId}
 
 Esta API é responsável por recuperar todas as informações de um consentimento,
-incluindo um histórico das mudanças de status realizadas. A consulta é feita através
+incluindo os recursos e um histórico das mudanças de status realizadas. A consulta é feita através
 do identificador interno em formato UUID.
 
 ## Revogação de consentimento (Deprecated)
@@ -91,6 +91,9 @@ Responsável pela revogação do consentimento relacionado ao *consentId* inform
 Responsável pela listagem de consentimentos autorizados. Possui dois parâmetros opcionais:
 - startDate: Caso fornecido, seleciona todos os consentimentos ativos que tenham sido criados após essa data.
 - endDate: Caso informado, seleciona todos os consentimentos cuja a expiração seja anterior a data fornecida.
+  - Consentimentos indeterminados não serão retornados quando esse parâmetro for informado.
+- page: Número da página desjada.
+- page-size: Tamanho da página.
 
 ## Listagem de pagamentos relacionados a um consentimento
 

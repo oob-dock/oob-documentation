@@ -1509,14 +1509,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ConsentDetail'
-        links:
-          allOf:
-          - $ref: '#/components/schemas/Links'
-          - description: Service links
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          - description: Meta records information
     ResponseConsentExtendsSchema:
       type: object
       properties:
@@ -1861,7 +1853,7 @@ components:
         businessDocumentNumber:
           type: string
           example: "33273542000197"
-        createdOn:
+        creationDateTime:
           format: date-time
           type: string
           example: 2022-01-30T17:31:28Z
