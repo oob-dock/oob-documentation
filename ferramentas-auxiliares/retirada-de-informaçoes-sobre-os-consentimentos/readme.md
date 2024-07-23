@@ -25,7 +25,7 @@ As informações que poderão ser obtidas com eles são:
 rodar os scripts e formatar as informações da forma e no período exigido pelo Open
 Banking Brasil **OBB**.
 
-O modelo de preenchimento pode ser encontrado em [neste link](attachments/fase_2_interoperabilidade_modelo.xlsx)
+O modelo de preenchimento pode ser encontrado [neste link](attachments/fase_2_interoperabilidade_modelo.xlsx)
 
 ## Scripts - Consentimento Transmissor
 
