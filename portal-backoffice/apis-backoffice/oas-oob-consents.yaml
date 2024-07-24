@@ -194,6 +194,18 @@ paths:
       - General
       description: Get active consents for a given time frame
       parameters:
+      - name: startDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+      - name: endDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T18:31:28Z
       - name: page
         in: query
         schema:
@@ -1497,14 +1509,6 @@ components:
       properties:
         data:
           $ref: '#/components/schemas/ConsentDetail'
-        links:
-          allOf:
-          - $ref: '#/components/schemas/Links'
-          - description: Service links
-        meta:
-          allOf:
-          - $ref: '#/components/schemas/Meta'
-          - description: Meta records information
     ResponseConsentExtendsSchema:
       type: object
       properties:
@@ -1849,7 +1853,7 @@ components:
         businessDocumentNumber:
           type: string
           example: "33273542000197"
-        createdOn:
+        creationDateTime:
           format: date-time
           type: string
           example: 2022-01-30T17:31:28Z
