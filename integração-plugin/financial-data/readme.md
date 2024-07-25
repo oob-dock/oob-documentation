@@ -18,6 +18,7 @@ Open Banking Brasil:
 - [Investimentos - Renda Variável](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/82378753/API+-+Investimentos+-+Renda+Vari+vel)
 - [Investimentos - Títulos do Tesouro Direto](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/86605826/API+-+Investimentos+-+T+tulos+do+Tesouro+Direto)
 - [Investimentos - Fundos de Investimento](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/89784321/API+-+Investimentos+-+Fundos+de+Investimento)
+- [Câmbio](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/114032641/DC+API+-+C+mbio)
 
 &nbsp;
 
