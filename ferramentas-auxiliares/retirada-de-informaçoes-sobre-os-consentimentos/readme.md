@@ -3,9 +3,9 @@
 - [Scripts SQL - informações dos consentimentos](#scripts-sql---informações-dos-consentimentos)
   - [Introdução](#introdução)
   - [Scripts - Consentimento Transmissor](#scripts---consentimento-transmissor)
-    - [Consentimento transmissor - Autorização do Cliente](#consentimento-transmissor---autorização-do-cliente)
-    - [Consentimento transmissor - informações do authorization server](#consentimento-transmissor---informações-do-authorization-server)
     - [Consentimento transmissor - informações do consent](#consentimento-transmissor---informações-do-consent)
+    - [Consentimento transmissor - informações do authorization server](#consentimento-transmissor---informações-do-authorization-server)
+    - [Consentimento transmissor - Autorização do Cliente](#consentimento-transmissor---autorização-do-cliente)    
   - [Scripts - Estoque de consentimentos](#scripts---estoque-de-consentimentos)
     - [Estoque de consentimentos - informação consolidada](#estoque-de-consentimentos---informação-consolidada)
     - [Estoque de consentimentos - informação por receptor](#estoque-de-consentimentos---informação-por-receptor)
@@ -18,34 +18,46 @@ Open Banking **OOB**.
 
 As informações que poderão ser obtidas com eles são:
 
-- Estoque de consentimentos
 - Consentimento Transmissor
+- Estoque de consentimentos
 
 **OBS:** fica a cargo de nossos clientes
 rodar os scripts e formatar as informações da forma e no período exigido pelo Open
 Banking Brasil **OBB**.
+
+O modelo de preenchimento pode ser encontrado [neste link](attachments/fase_2_interoperabilidade_modelo.xlsx)
 
 ## Scripts - Consentimento Transmissor
 
 Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Consent**
 
-### Consentimento transmissor - Autorização do Cliente
+### Consentimento transmissor - informações do consent
 
-Primeiramente é necessário criar a function consent_authorization_client
-executando o seguinte [script](attachments/consent_function_authorization_client.sql).
+Os scripts SQL fornecidos nessa seção devem ser operados no
+**banco de dados do OOB-Consent**
+
+Primeiramente, deve ser criada a function CONSENT_USAGE_REPORT executando o seguinte [script](attachments/consent_function_extract_usage_report.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM consent_authorization_client('<data_inicio>','<data_fim>');
+SELECT * FROM CONSENT_USAGE_REPORT('<data_inicio>','<data_fim>', <offset?>, <size?>);
 ```
 
 Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
 
 ```sql
-SELECT * FROM consent_authorization_client('2022-01-02','2022-10-08');
+SELECT * FROM CONSENT_USAGE_REPORT('2022-10-02','2022-10-08');
 ```
+
+Os parâmetros `<offset?>` e `<size?>` são opcionais, servem para paginação e indicam quantas linhas devem
+ser puladas e capturadas, respectivamente.
+
+Os dados obtidos devem ser preenchidos na aba "Consentimento_transmissor", colunas C e D ("Geração do consent ID - Não Clientes" e ""Geração do consent ID   -  Clientes)
+
+
+![Preenchimento Consentimento_transmissor 1](attachments/img/img_consent_usage_report.png)
 
 ### Consentimento transmissor - informações do authorization server
 
@@ -69,27 +81,30 @@ Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exempl
 SELECT * FROM extract_report_data('2022-10-02','2022-10-08');
 ```
 
-### Consentimento transmissor - informações do consent
+Os dados obtidos devem ser preenchidos na aba "Consentimento_transmissor", colunas E, H, I e J ("Início da autenticação", "Authorization code emitido", "Redirect para receptora" e "Access token gerado")
 
-Os scripts SQL fornecidos nessa seção devem ser operados no
-**banco de dados do OOB-Consent**
+![Preenchimento Consentimento_transmissor 1](attachments/img/img_extract_report_data.png)
 
-Primeiramente, deve ser criada a function CONSENT_USAGE_REPORT executando o seguinte [script](attachments/consent_function_extract_usage_report.sql).
+### Consentimento transmissor - Autorização do Cliente
+
+Primeiramente é necessário criar a function consent_authorization_client
+executando o seguinte [script](attachments/consent_function_authorization_client.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM CONSENT_USAGE_REPORT('<data_inicio>','<data_fim>', <offset?>, <size?>);
+SELECT * FROM consent_authorization_client('<data_inicio>','<data_fim>');
 ```
 
 Sendo que os parâmetros devem ser preenchidos no formato yyyy-MM-dd, por exemplo:
 
 ```sql
-SELECT * FROM CONSENT_USAGE_REPORT('2022-10-02','2022-10-08');
+SELECT * FROM consent_authorization_client('2022-01-02','2022-10-08');
 ```
 
-Os parâmetros `<offset?>` e `<size?>` são opcionais, servem para paginação e indicam quantas linhas devem
-ser puladas e capturadas, respectivamente.
+Os dados obtidos devem ser preenchidos na aba "Consentimento_transmissor", colunas F e G ("Conclusão da autenticação" e "Autorização do Cliente")
+
+![Preenchimento Consentimento_transmissor 3](attachments/img/img_consent_authorization_client.png)
 
 ## Scripts - Estoque de consentimentos
 
@@ -136,6 +151,10 @@ com o resultado da execução da function anterior. Por exemplo:
 SELECT * FROM consent_consolidated_stock('2022-10-08', array ['f769dfb4-e537-4458-9408-42b24ef1edc8','c33da603-f7a6-42af-9eba-d10ca59c463b']);
 ```
 
+Os dados obtidos devem ser preenchidos na aba "Estoque_Consentimentos", Visão Transmissora, colunas J e K ("Clientes únicos PF total" e "Clientes únicos PJ (CNPJ raíz)")
+
+![Preenchimento Estoque_Consentimentos 1](attachments/img/img_consent_consolidated_stock.png)
+
 ### Estoque de consentimentos - informação por receptor
 
 Os scripts SQL fornecidos nessa seção devem ser operados no
@@ -156,6 +175,10 @@ com o resultado da execução da function as_function_access_token_generated. Po
 ```sql
 SELECT * FROM consent_receptor_stock('2022-10-08',  array ['f769dfb4-e537-4458-9408-42b24ef1edc8','c33da603-f7a6-42af-9eba-d10ca59c463b']);
 ```
+
+Os dados obtidos devem ser preenchidos na aba "Estoque_Consentimentos", Visão Transmissora, colunas K e L ("Estoque de consentimentos ativos" e "OrganisationId Receptor")
+
+![Preenchimento Estoque_Consentimentos 2](attachments/img/img_consent_receptor_stock.png)
 
 ### ParentOrg Iniciador
 
@@ -190,3 +213,8 @@ Org ID fd0ea3e7-aeca-55f9-a0a2-ec56980059fc Not found
 
 Caso a receptora não possua uma Parent Organization, o retorno do script para
 ela será *N/A*. Caso ela não exista, o retorno será *Not found*.
+
+Os dados obtidos devem ser preenchidos na aba "Estoque_Consentimentos", Visão Transmissora, coluna N ("ParentOrganisationReference
+Transmissor")
+
+![Preenchimento Estoque_Consentimentos 3](attachments/img/img_getParentOrganization.png)
