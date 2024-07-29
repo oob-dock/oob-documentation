@@ -143,6 +143,14 @@ Responsável por notificar ao OOB a alteração de status de um pagamento.
 Esta API é responsável por listar todas as prorrogações de um consentimento.
 A consulta é feita através do identificador interno em formato UUID.
 
+## Autorização completa de consentimento de pagamento de múltipla alçada
+
+        POST /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation
+
+Esta API é responsável autorizar completamente um consentimento de pagamento de
+múltipla alçada sinalizando a aprovação dos múltiplos autorizadores deste consentimento.
+A consulta é feita através do identificador interno em formato UUID.
+
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir

@@ -349,6 +349,25 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         "204":
           description: Notification received successfully
+  /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation:
+    post:
+      tags:
+      - Payments
+      description: Post payment authorisation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPaymentConsentAuthorisation'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "204":
+          description: Notification received successfully
   /open-banking/oob-consents/v1/consents/{consentId}/extends:
     get:
       tags:
@@ -1444,6 +1463,17 @@ components:
         applicationName:
           description: Client application name
           type: string
+    RequestPaymentConsentAuthorisation:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RequestPaymentConsentAuthorisationData'
+        applicationName:
+          description: Client application name
+          type: string
     RequestPaymentStatusChangeNotification:
       required:
       - data
@@ -1637,6 +1667,14 @@ components:
             $ref: '#/components/schemas/KeyValueObject'
       allOf:
         - $ref: '#/components/schemas/RevokePaymentConsentData'
+    RequestPaymentConsentAuthorisationData:
+      type: object
+      required:
+        - authorised
+      properties:
+        authorised:
+          type: boolean
+          example: true
     RejectedReasonCodeEnum:
       enum:
       - CONSENT_EXPIRED
