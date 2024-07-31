@@ -279,7 +279,7 @@ additionalVars:
 
 ### DAPR_ACTOR_TYPE
 
-Define o sufixo que será usado nos tipos do actors utilizados por este módulo
+Define o sufixo que será usado nos tipos dos actors utilizados por este módulo
 que serão instanciados no ambiente, tipicamente o nome do próprio ambiente;
 se vazio nada é acrescentado, ou seja, usa-se o tipo do actor ex:
 `pcmDispatcherBatch`. Isso é usado para que o dapr instancie um actor por
