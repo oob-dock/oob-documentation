@@ -147,9 +147,51 @@ A consulta é feita através do identificador interno em formato UUID.
 
         POST /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation
 
-Esta API é responsável autorizar completamente um consentimento de pagamento de
-múltipla alçada sinalizando a aprovação dos múltiplos autorizadores deste consentimento.
-A consulta é feita através do identificador interno em formato UUID.
+Esta API é responsável por autorizar completamente um consentimento de pagamento
+de múltipla alçada sinalizando a aprovação dos múltiplos autorizadores deste consentimento.
+
+## Post de search key
+
+        POST /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}
+
+Esta API é responsável por adicionar um search-key relacionada a um consentimento
+permitindo que consentimentos sejam listados com base nessa search-key posteriormente.
+
+## Delete de search key
+
+        DELETE /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}
+
+Esta API é responsável por deletar uma search-key relacionada a um consentimento.
+
+## Put consent metadata
+
+        PUT /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+Esta API é responsável por adicionar um json de metadata vinculado a um consentimento,
+substituindo qualquer valor que esteja anteriormente nesse campo de metadata.
+Pode ser usado para de adição de informações extras ao consentimento,
+por exemplo para adicionar informações pertinentes as telas da aplicação.
+
+## Get consent metadata
+
+        GET /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+Esta API é responsável por recuperar o json de informações de metadata previamente
+enviado.
+
+## Patch consent metadata
+
+        Patch /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+Esta API é responsável por atualizar o json de metadata vinculado a um consentimento,
+adicionando informação ao metadata já existente.
+
+## Delete consent metadata
+
+        DELETE /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+Esta API é responsável por apagar as informações de metadata relacionada
+a um consentimento.
 
 ## Autenticação
 

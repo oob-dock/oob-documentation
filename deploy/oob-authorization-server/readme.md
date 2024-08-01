@@ -825,6 +825,23 @@ additionalVars:
     value: "2023-07-18"
 ```
 
+### FEATURE_MULTIPLE_REQUIRER
+
+Habilita fluxo de múltipla alçada no processo de autorização
+do consentimento.
+
+O valor padrão é '0' conforme especificação.
+
+**Formato:** `0` ou `1`
+
+**Default:** `0`
+
+```yaml
+additionalVars:
+  - name: FEATURE_MULTIPLE_REQUIRER
+    value: "1"
+```
+
 ### UNIQUE_PROFILE_START_DATE
 
 Habilita a validação para o período de adaptação do perfil único FAPI
