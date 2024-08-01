@@ -157,6 +157,21 @@ compartilhados com base nas permissões fornecidas no consentimento
 de compartilhamento de dados. Portanto durante a aprovação do consentimento
 não é feita a seleção deles.
 
+### Multipla alçada
+
+Dois parâmetros opcionais foram adicionados ao request do comando de
+consentimento como forma de especificar se o consetimento é de múltipla
+alçada:
+
+| Nome                  | Default | Descrição                                               |
+| --------------------- | ------- | ------------------------------------------------------- |
+| isMultipleRequirer    | false   | Indica se o consentimento é de múltipla alçada          |
+| isConsentAuthorized   | true    | Indica se o consentimento foi completamente aprovado    |
+
+Os valores default garantem que o não envio desses parâmetros sinalize que o
+consentimento não é de múltipla alçada e portanto o comando consent garante
+uma autorização completa.
+
 ## Comando *error*
 
 Indica a ocorrência de algum erro durante o fluxo de autenticação OIDC.
