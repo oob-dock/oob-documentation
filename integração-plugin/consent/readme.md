@@ -311,13 +311,13 @@ de contas.
 
 #### Tratamento do status PENDING_AUTHORISATION
 
-Os conectores de discovery devem tratar o status `PENDING_AUTHORISATION`. Será de
-responsabilidade do nosso cliente tratar o status dos produtos (e dados cadastrais
-se a instituição exigir tratamento de múltipla alçada para isso). O produto
-armazenará a situação de cada recurso da transmissão de dados e fará a validação
-da situação nas chamadas dos produtos, impedindo chamadas de acontecer em caso de
-pendência (erro 403 conforme a documentação de todos tipos de recurso na
-documentação do Open Finance Brasil).
+Os conectores de discoverye compartilhamento de dados devem tratar o status
+`PENDING_AUTHORISATION`. Será de responsabilidade da instituição tratar o
+status dos produtos (e dados cadastrais se a instituição exigir tratamento de
+múltipla alçada para isso). O produto armazenará a situação de cada recurso da
+transmissão de dados e fará a validação da situação nas chamadas dos produtos,
+impedindo chamadas de acontecer em caso de pendência (erro 403 conforme a
+documentação de todos tipos de recurso na documentação do Open Finance Brasil).
 
 O tratamento do retorno dos conectores de discovery deve aceitar o status
 `PENDING_AUTHORISATION` quando o consentimento for de múltipla alçada, listando
@@ -325,8 +325,8 @@ o recurso na API `GET /resources` adequadamente e impedindo a chamada da instân
 quando essa for nominada.
 
 As futuras chamadas dos conectores de discovery poderão retornar o status `AVAILABLE`,
-fazendo com que o OOB mude o status desse recurso para `AVAILABLE` na nossa base
-de dados e passe a aceitar as chamadas específicas a determinada instância de produto.
+fazendo com que o OOB mude o status desse recurso para `AVAILABLE` e passe a aceitar
+as chamadas específicas a determinada instância de produto.
 
 Importante lembrar que o discovery de contas e cartão, os chamados produtos selecionáveis,
 acontece exclusivamente no momento da criação do consentimento, então a transição
