@@ -497,7 +497,7 @@ paths:
               $ref: '#/components/schemas/MetadataData'
       responses:
         '204':
-          description: Search key added successfully
+          description: Meta-data added successfully
         default:
           description: Default error response
           content:
@@ -525,7 +525,7 @@ paths:
               $ref: '#/components/schemas/MetadataData'
       responses:
         '204':
-          description: Search key added successfully
+          description: Meta-data updated successfully
         default:
           description: Default error response
           content:
@@ -548,7 +548,7 @@ paths:
             type: string
       responses:
         '204':
-          description: Search key deleted successfully
+          description: Meta-data deleted successfully
         default:
           description: Default error response
           content:
