@@ -311,7 +311,7 @@ de contas.
 
 #### Tratamento do status PENDING_AUTHORISATION
 
-Os conectores de discoverye compartilhamento de dados devem tratar o status
+Os conectores de discovery de compartilhamento de dados devem tratar o status
 `PENDING_AUTHORISATION`. Será de responsabilidade da instituição tratar o
 status dos produtos (e dados cadastrais se a instituição exigir tratamento de
 múltipla alçada para isso). O produto armazenará a situação de cada recurso da
