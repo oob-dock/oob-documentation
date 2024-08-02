@@ -227,6 +227,14 @@ components:
           items:
             type: string
           maxItems: 100
+        isMultipleRequirer:
+          type: boolean
+          description: Define se o consentimento é de múltipla alçada(se não enviado o padrão é false)
+          example: false
+        isConsentAuthorized:
+          type: boolean
+          description: Define se o consentimento foi autorizado totalmente(se não enviado o padrão é true)
+          example: true
     AuthenticateCommand:
       type: object
       properties:
