@@ -13,6 +13,8 @@
     - [Conector de validação de dados de pagamento](#conector-de-validação-de-dados-de-pagamento)
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
+    - [Multipla alçada](#multipla-alçada)
+      - [Tratamento do status PENDING_AUTHORISATION](#tratamento-do-status-pending_authorisation)
   - [Grupos de permissões na criação do consentimento](#grupos-de-permissões-na-criação-do-consentimento)
   - [Aprovação de criação de consentimento de pagamento](#aprovação-de-criação-de-consentimento-de-pagamento)
     - [Solução provisória para rota approvePaymentConsentCreation](#solução-provisória-para-rota-approvepaymentconsentcreation)
@@ -304,6 +306,42 @@ consentimento e a lista retornada deve ser filtrada para retornar somente a
 conta pré-selecionada ou uma lista vazia caso essa não seja uma opção selecionável
 para o cliente. Esse tratamento deve ser feito no conector ou serviço remoto de listagem
 de contas.
+
+### Multipla alçada
+
+#### Tratamento do status PENDING_AUTHORISATION
+
+Os conectores de discovery de compartilhamento de dados devem tratar o status
+`PENDING_AUTHORISATION`. Será de responsabilidade da instituição tratar o
+status dos produtos (e dados cadastrais se a instituição exigir tratamento de
+múltipla alçada para isso). O produto armazenará a situação de cada recurso da
+transmissão de dados e fará a validação da situação nas chamadas dos produtos,
+impedindo chamadas de acontecer em caso de pendência (erro 403 conforme a
+documentação de todos tipos de recurso na documentação do Open Finance Brasil).
+
+O tratamento do retorno dos conectores de discovery deve aceitar o status
+`PENDING_AUTHORISATION` quando o consentimento for de múltipla alçada, listando
+o recurso na API `GET /resources` adequadamente e impedindo a chamada da instância
+quando essa for nominada.
+
+As futuras chamadas dos conectores de discovery poderão retornar o status `AVAILABLE`,
+fazendo com que o OOB mude o status desse recurso para `AVAILABLE` e passe a aceitar
+as chamadas específicas a determinada instância de produto.
+
+Importante lembrar que o discovery de contas e cartão, os chamados produtos selecionáveis,
+acontece exclusivamente no momento da criação do consentimento, então a transição
+nesse caso deverá acontecer através de API de listagem da categoria do produto,
+que é então uma segunda forma de transição de status. Os conectores de listagem
+de produtos devem então aceitar o status (a ser removido da resposta
+final) do item. Esse status sensibilizará os recursos no OOB da mesma forma que
+o conector de discovery de produtos, alterando eventualmente a situação de um
+recurso de `PENDING_AUTHORISATION` para `AVAILABLE`. Instâncias de produtos que retornam
+como `PENDING_AUTHORISATION` na listagem de produtos são removidas do
+resultado da API regulatória até serem atualizados para o estado `AVAILABLE`.
+
+Qualquer tentativa de mudança do status de `AVAILABLE` para `PENDING_AUTHORISATION`
+será impedida pelo produto para garantir o diagrama de estado possível de dados
+cadastrais definido pelo Open Finance Brasil.
 
 ## Grupos de permissões na criação do consentimento
 
