@@ -48,6 +48,10 @@ Onde:
 
 ## Changelog
 
+### 2024-08-01 - v4.2.0
+
+- Inclusão do connector de validação de risk signals para JSR
+
 ### 2024-07-16 - v4.1.0
 
 - Alteração de schemas de financial-data: accounts (2.4.0-rc.1), customers (2.1.0-rc.1).
