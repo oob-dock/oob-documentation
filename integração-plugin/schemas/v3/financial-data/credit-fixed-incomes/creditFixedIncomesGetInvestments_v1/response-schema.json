@@ -41,6 +41,17 @@
             ],
             "example": "CRI"
           },
+          "status": {
+              "description": "Indica o status atual do recurso",
+              "type": "string",
+              "default": "AVAILABLE",
+              "enum": [
+                  "AVAILABLE",
+                  "PENDING_AUTHORISATION",
+                  "UNAVAILABLE",
+                  "TEMPORARILY_UNAVAILABLE"
+              ]
+          },
           "investmentId": {
             "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
             "type": "array",

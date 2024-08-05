@@ -349,6 +349,35 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
         "204":
           description: Notification received successfully
+  /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation:
+    post:
+      tags:
+      - Payments
+      description: Post payment authorisation
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPaymentConsentAuthorisation'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "204":
+          description: Notification received successfully
   /open-banking/oob-consents/v1/consents/{consentId}/extends:
     get:
       tags:
@@ -389,6 +418,170 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentExtendsSchema'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}:
+    post:
+      tags:
+        - Consents
+      description: Post search key to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: searchKey
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Search key added successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Consents
+      description: Delete search key to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: searchKey
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Search key deleted successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data:
+    put:
+      tags:
+        - Consents
+      description: Put meta-data information to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataData'
+      responses:
+        '204':
+          description: Meta-data added successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+        - Consents
+      description: Patch meta-data information to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataData'
+      responses:
+        '204':
+          description: Meta-data updated successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Consents
+      description: Delete meta-data information to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Meta-data deleted successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+        - Consents
+      description: Get meta-data information frpm consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '200':
+          description: Get meta-data information from consent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataData'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -1444,6 +1637,17 @@ components:
         applicationName:
           description: Client application name
           type: string
+    RequestPaymentConsentAuthorisation:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RequestPaymentConsentAuthorisationData'
+        applicationName:
+          description: Client application name
+          type: string
     RequestPaymentStatusChangeNotification:
       required:
       - data
@@ -1637,6 +1841,14 @@ components:
             $ref: '#/components/schemas/KeyValueObject'
       allOf:
         - $ref: '#/components/schemas/RevokePaymentConsentData'
+    RequestPaymentConsentAuthorisationData:
+      type: object
+      required:
+        - authorised
+      properties:
+        authorised:
+          type: boolean
+          example: true
     RejectedReasonCodeEnum:
       enum:
       - CONSENT_EXPIRED
@@ -1788,6 +2000,13 @@ components:
           - $ref: '#/components/schemas/StatusUpdateDateTime'
         rejectionReason:
           $ref: '#/components/schemas/PaymentRejection'
+    MetadataData:
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: string
     PaymentRejection:
       type: object
       description: "Motivo da rejeição do pagamento. Informações complementares sobre o motivo do status. Deverá ser enviado quando o campo /data/paymentStatus for igual a RJCT (REJECTED)."
