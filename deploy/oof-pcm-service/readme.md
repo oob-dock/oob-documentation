@@ -14,6 +14,38 @@ Portanto, é necessário que exista um *message broker* instalado e configurado
 corretamente que possa ser utilizado pelo OOF PCM Service e que seja compatível
 com o [Dapr](/deploy/shared-definitions.md#dapr).
 
+### Virtual Actors
+
+Este módulo utiliza os [virtual actors](https://docs.dapr.io/developing-applications/building-blocks/actors/actors-overview/)
+do [Dapr](/deploy/shared-definitions.md#dapr).
+A utilização dessa funcionalidade depende da inclusão de uma [state store](https://docs.dapr.io/reference/components-reference/supported-state-stores/)
+para manter seus estados de funcionamento. Assim, será necessário incluir esta
+configuração. **Importante:** Necessário definir na state store uma propriedade
+chamada `actorStateStore` com valor `true`.
+
+Segue um exemplo de definição de um componente de state store que utiliza o Redis.
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: <host>:<port>
+  - name: redisPassword
+    value: ""
+  - name: actorStateStore
+    value: "true"
+
+```
+
+**Atenção:** Este é apenas um **exemplo**. Necessário ajustar a tecnologia desejada
+e revisar todas as propriedades configuradas.
+
 ### Dapr
 
 O módulo OOF PCM Service faz uso do Dapr para realizar a subscrição à eventos
@@ -276,3 +308,18 @@ additionalVars:
   - name: METRIC_MAX_TIME_SECONDS
     value: "60"
 ```
+
+### DAPR_ACTOR_TYPE
+
+Define o sufixo que será usado nos tipos dos actors utilizados por este módulo
+que serão instanciados no ambiente, tipicamente o nome do próprio ambiente;
+se vazio nada é acrescentado, ou seja, usa-se o tipo do actor ex:
+`pcmDispatcherBatch`. Isso é usado para que o dapr instancie um actor por
+ambiente.
+
+**Exemplo:**
+
+```yaml
+additionalVars:
+  - name: DAPR_ACTOR_TYPE
+    value: "Qa"

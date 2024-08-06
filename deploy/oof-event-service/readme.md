@@ -19,7 +19,32 @@ com o [Dapr](/deploy/shared-definitions.md#dapr).
 Este módulo utiliza os [virtual actors](https://docs.dapr.io/developing-applications/building-blocks/actors/actors-overview/)
 do [Dapr](/deploy/shared-definitions.md#dapr).
 A utilização dessa funcionalidade depende da inclusão de uma [state store](https://docs.dapr.io/reference/components-reference/supported-state-stores/)
-para manter seus estados de funcionamento. Assim, será necessário incluir esta configuração.
+para manter seus estados de funcionamento. Assim, será necessário incluir esta
+configuração. **Importante:** Necessário definir na state store uma propriedade
+chamada `actorStateStore` com valor `true`.
+
+Segue um exemplo de definição de um componente de state store que utiliza o Redis.
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: <host>:<port>
+  - name: redisPassword
+    value: ""
+  - name: actorStateStore
+    value: "true"
+
+```
+
+**Atenção:** Este é apenas um **exemplo**. Necessário ajustar a tecnologia desejada
+e revisar todas as propriedades configuradas.
 
 ### Dapr
 
