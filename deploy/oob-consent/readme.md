@@ -514,6 +514,7 @@ desenvolvido pela Opus, que estão listadas em
 Utilizado para definir a lista de permissões de vínculo de dispositivo suportadas pela instituição.
 
 **IMPORTANTE**: Obrigatório caso a instituição utilize JSR (Jornada Sem Redirecionamento)
+
 **Ex:**
 
 Exemplo de configuração para uma instalação que suporta JSR para pagamento v4:
