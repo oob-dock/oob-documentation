@@ -390,8 +390,6 @@ additionalVars:
     value: "true"
 ```
 
-
-
 ### CONSENT_PERMISSIONS
 
 Utilizado para definir a lista de permissões suportadas pela instituição.
@@ -510,6 +508,21 @@ Existem additionalVars para utilização do conector de aprovação de consentim
 desenvolvido pela Opus, que estão listadas em
 [consent](../../integração-plugin/consent/readme.md) na seção
 `Arquivo de rota implementado pela OPUS`
+
+### ENROLLMENT_PERMISSIONS
+
+Utilizado para definir a lista de permissões de vínculo de dispositivo suportadas pela instituição.
+
+**IMPORTANTE**: Obrigatório caso a instituição utilize JSR (Jornada Sem Redirecionamento)
+**Ex:**
+
+Exemplo de configuração para uma instalação que suporta JSR para pagamento v4:
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_PERMISSIONS
+    value: PAYMENTS_INITIATE
+```
 
 ## additionalVarsDaemon
 
