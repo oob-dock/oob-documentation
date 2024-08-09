@@ -11,6 +11,7 @@
       - [Conector de produto selecionável](#conector-de-produto-selecionável)
       - [Conector de produto não selecionável](#conector-de-produto-não-selecionável)
     - [Conector de validação de dados de pagamento](#conector-de-validação-de-dados-de-pagamento)
+    - [Connector de validação de Risk Signals](#connector-de-validação-de-risk-signals)
     - [Tratamentos adicionais](#tratamentos-adicionais)
       - [Filtro de contas](#filtro-de-contas)
     - [Multipla alçada](#multipla-alçada)
@@ -294,6 +295,21 @@ Exemplos:
 O conector padrão implementado deverá chamar o conector de correntista,
 caso o mesmo não exista então será chamado o conector discovery de contas
 e se este não atender, deve ser implementado o novo conector.
+
+### Connector de validação de Risk Signals
+
+Durante dois momentos da jornada sem redirecionamento (JSR), o usuário deverá
+enviar diversas informações relacionadas a seu dispositivo como, por exemplo,
+geolocalização, versão do sistema operacional, idioma, etc.
+
+Caso a instituição deseje realizar validações nesses dados, ela deverá implementar
+a rota `direct:validateRiskSignals`.
+
+**Importante**: A implementação da rota não é obrigatória, mas é recomendada.
+
+Definições:
+- [request-schema](../schemas/v3/consent/validateRiskSignals/request-schema.json)
+- [response-schema](../schemas/v3/consent/validateRiskSignals/response-schema.json)
 
 ### Tratamentos adicionais
 
