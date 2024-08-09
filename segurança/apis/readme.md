@@ -571,6 +571,18 @@
 | PATCH    | /v4/pix/payments/\{ID\}          | Sim          | payments         | Sim        | Não              | Sim  |     |
 | PATCH    | /v4/pix/payments/consents/\{ID\} | Sim          | payments         | Sim        | Não              | Sim  |     |
 
+## JSR
+
+**Base path:** /open-banking/enrollments
+
+**Cliente API:** TPP
+
+| Operação | API                                    | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+| -------- | -------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+| POST     | /v1/enrollments                        | Sim          | payments         | Sim        | Não              | Sim  |     |
+| POST     | /v1/enrollments/\{ID\}/risk-signals    | Sim          | payments         | Sim        | Não              | Sim  |     |
+| GET      | /v1/enrollments/\{ID\}                 | Sim          | payments         | Não        | Não              | Sim  |     |
+
 ## Automatic Payments
 
 **Base path:** /open-banking/automatic-payments
