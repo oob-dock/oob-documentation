@@ -1,0 +1,2604 @@
+openapi: 3.0.0
+info:
+  title: API Internal Payment - Open Finance Brasil
+  description: >
+    API for internal payment endpoints, responsible for non-regulatory endpoints.
+  version: 1.0.0
+servers:
+  - url: https://api.banco.com.br/open-banking/oob-payments/v2
+    description: Production Server
+  - url: https://apih.banco.com.br/open-banking/oob-payments/v2
+    description: Staging Server
+tags:
+  - name: Payments
+paths:
+  /pix/payments/{paymentId}:
+    patch:
+      tags:
+        - Payments
+      summary: Cancel payment initiation.
+      operationId: paymentsPatchPixPaymentsPaymentId
+      description: >
+        This endpoint should be used to cancel transactions, at the payer's request, that are in one of the following statuses: Successfully Scheduled (SCHD), Pending for Review (PDNG), or Awaiting Multiple Approvals (PATC).
+
+        - If the request is successful, the transaction will move to the CANC status.
+
+        - If the payment status is different from SCHD/PDNG/PATC or if any other business rule prevents the cancellation, the PATCH request returns HTTP Status 422 with the code PAGAMENTO_NAO_PERMITE_CANCELAMENTO.
+
+        - If a 422 is received, the initiator should make a GET request on the payment to check its current status and associated details.
+
+        Payment cancellation must be sent by 11:59 PM (Brasilia Time) on the day before the payment execution date.
+      parameters:
+        - name: paymentId
+          in: path
+          description: Payment operation identifier.
+          required: true
+          schema:
+            type: string
+            pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
+            maxLength: 100
+        - name: Authorization
+          in: header
+          description: >-
+            Standard HTTP header. Allows credentials to be provided depending on the type of resource requested.
+          required: true
+          schema:
+            type: string
+            pattern: '[\w\W\s]*'
+            maxLength: 2048
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  type: object
+                  required:
+                    - status
+                    - cancellation
+                  properties:
+                    status:
+                      type: string
+                      enum:
+                        - CANC
+                      example: CANC
+                      description: >
+                        Used to specify the state to which the payment should transition.
+
+                        Currently, the only possible value is CANC.
+                    cancellation:
+                      type: object
+                      description: >
+                        Object that groups information about the payer who requested the transaction cancellation.
+
+                        Note: this field is necessary because, in cases of multiple approval levels, the payment may be requested by one payer and canceled by another.
+                      required:
+                        - cancelledBy
+                      properties:
+                        cancelledBy:
+                          type: object
+                          description: >-
+                            Information related to the payer who requested the payment cancellation.
+                          required:
+                            - document
+                          properties:
+                            document:
+                              type: object
+                              description: >-
+                                Object consolidating the document data of the user who requested the cancellation.
+                              required:
+                                - identification
+                                - rel
+                              properties:
+                                identification:
+                                  type: string
+                                  maxLength: 11
+                                  description: >-
+                                    Document number of the payer responsible for the payment cancellation.
+                                  example: '11111111111'
+                                  pattern: ^\d{11}$
+                                rel:
+                                  type: string
+                                  maxLength: 3
+                                  description: >-
+                                    Document type of the payer responsible for the payment cancellation.
+                                  example: CPF
+                                  pattern: ^[A-Z]{3}$
+        description: Payload for payment cancellation.
+        required: true
+      responses:
+        '200':
+          description: Pix payment initiation successfully canceled.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - data
+                  - links
+                  - meta
+                properties:
+                  data:
+                    type: object
+                    description: >-
+                      Object containing payment and creditor account details.
+                    required:
+                      - paymentId
+                      - endToEndId
+                      - consentId
+                      - creationDateTime
+                      - statusUpdateDateTime
+                      - status
+                      - localInstrument
+                      - payment
+                      - creditorAccount
+                      - cnpjInitiator
+                      - debtorAccount
+                      - cancellation
+                    properties:
+                      paymentId:
+                        type: string
+                        minLength: 1
+                        maxLength: 100
+                        pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
+                        example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+                        description: >
+                          Unique identifier code provided by the account-holding institution to represent the individual payment initiation.
+
+                          The `paymentId` should be different from the `endToEndId`.
+
+                          This is the identifier that should be used to query the status of the initiated payment.
+                      endToEndId:
+                        type: string
+                        minLength: 32
+                        maxLength: 32
+                        pattern: >-
+                          ^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$
+                        example: E9040088820210128000800123873170
+                        description: >
+                          This is a unique identifier, generated by the payment initiating institution and received by the account-holding institution, that follows the entire Pix payment journey.
+
+                          [Restriction] The account-holding institution must return this field with the same value received from the initiator.
+                      consentId:
+                        type: string
+                        maxLength: 256
+                        pattern: >-
+                          ^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{0,31}:[a-zA-Z0-9()+,\-.:=@;$_!*'%\/?#]+$
+                        example: urn:bancoex:C1DD33123
+                        description: >
+                          Unique identifier of the consent created for the requested payment initiation. It should be a URN - Uniform Resource Name.
+
+                          A URN, as defined in [RFC8141](https://tools.ietf.org/html/rfc8141), is a Uniform Resource Identifier - URI - assigned under the "urn" URI scheme and a specific URN namespace, with the intent that the URN be a persistent and location-independent resource identifier.
+
+                          Considering the string urn:bancoex:C1DD33123 as an example for consentId, we have:
+
+                          - the namespace(urn)
+
+                          - the identifier associated with the transmitting institution's namespace (bancoex)
+
+                          - the specific identifier within the namespace (C1DD33123).
+
+                          More detailed information on namespace construction should be consulted in [RFC8141](https://tools.ietf.org/html/rfc8141).
+                      creationDateTime:
+                        type: string
+                        format: date-time
+                        pattern: >-
+                          ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+                        example: '2020-07-21T08:30:00Z'
+                        description: >
+                          Date and time when the resource was created.
+
+                          A date-time string as specified in RFC-3339, always using UTC timezone.
+                      statusUpdateDateTime:
+                        type: string
+                        format: date-time
+                        pattern: >-
+                          ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+                        example: '2020-07-21T08:30:00Z'
+                        description: >
+                          Date and time of the last update to the payment initiation.
+
+                          A date-time string as specified in RFC-3339, always using UTC timezone.
+                      proxy:
+                        type: string
+                        maxLength: 77
+                        pattern: '[\w\W\s]*'
+                        example: '12345678901'
+                        description: >
+                          Key registered in DICT belonging to the creditor. The types of keys can be: phone, email, CPF/CNPJ, or random key.
+
+                          For a mobile phone, it should be provided in E.1641 format.
+
+                          For email, it should be in the format xxxxxxxx@xxxxxxx.xxx(.xx) and no more than 77 characters.
+
+                          For CPF, it should be provided with 11 numbers, without dots or dashes.
+
+                          For CNPJ, it should be provided with 14 numbers, without dots or dashes.
+
+                          For a random key, it should be provided with the UUID generated by DICT, following the format specified in RFC41223.
+
+                          If provided, the account-holding institution must validate the proxy in DICT when localInstrument equals DICT, QRDN, or QRES, and validate the creditorAccount field.
+
+                          This validation is optional if the localInstrument equals INIC.
+
+                          [Restriction] If localInstrument equals MANU, the proxy field should not be filled. If localInstrument equals INIC, DICT, QRDN, or QRES, the proxy field should always be filled with the Pix key.
+                      ibgeTownCode:
+                        type: string
+                        minLength: 7
+                        maxLength: 7
+                        pattern: ^\d{7}$
+                        example: '5300108'
+                        description: >
+                          The ibgetowncode field in the PIX arrangement behaves the same as the codMun field described in item 1.6.6 of the PIX manual, as follows:
+
+                          1. If the information regarding the municipality is not sent, the creditor's PSP will assume that there are no state and municipal holidays in the relevant period.
+                      status:
+                        type: string
+                        enum:
+                          - RCVD
+                          - PATC
+                          - CANC
+                          - ACCP
+                          - ACPD
+                          - RJCT
+                          - ACSC
+                          - PDNG
+                          - SCHD
+                        example: PDNG
+                        description: >
+                          Current payment initiation status. The status evolves in the following order:
+
+                          1.  RCVD (Received) - Indicates that the payment request was successfully received by the account-holding institution, but further validations need to be performed before it can be submitted for settlement.
+
+                          2.  PATC (Partially Accepted Technical Correct) - Indicates that the transaction requires confirmation from additional approvers before the payment process can proceed.
+
+                          3.  CANC (Cancelled) - Indicates that the pending Pix transaction was successfully canceled by the user before being confirmed (ACCP) or rejected (RJCT) by the account-holding institution.
+
+                          4.  ACCP (Accepted Customer Profile) - Indicates that all necessary checks have been completed by the account-holding institution, and the transaction is ready to be sent for settlement (in SPI if it is a Pix to another institution or internally if it is for another account in the same institution).
+
+                          5.  ACPD (Accepted Clearing Processed) - Indicates that the account-holding institution has already submitted the transaction for settlement, but confirmation of whether it was settled or rejected has not yet been received.
+
+                          6.  RJCT (Rejected) - Indicates that the transaction was rejected by the account-holding institution or SPI.
+
+                          7.  ACSC (Accepted Settlement Completed Debitor Account) - Indicates that the transaction was successfully settled by the account-holding institution or SPI.
+
+                          8.  PDNG (Pending) - Indicates that the account-holding institution temporarily held the Pix transaction for review.
+
+                          9.  SCHD (Scheduled) - Indicates that the Pix transaction was successfully scheduled by the account-holding institution.
+
+                          In case of failure:
+
+                          RJCT (REJECTED) - Payment instruction rejected.
+                      rejectionReason:
+                        type: object
+                        description: >-
+                          Reason for payment rejection. Additional information about the reason for the status.
+
+                          [Restriction] This reason must be provided when the /data/status field equals RJCT (REJECTED).
+                        required:
+                          - code
+                          - detail
+                        properties:
+                          code:
+                            type: string
+                            enum:
+                              - SALDO_INSUFICIENTE
+                              - VALOR_ACIMA_LIMITE
+                              - VALOR_INVALIDO
+                              - COBRANCA_INVALIDA
+                              - NAO_INFORMADO
+                              - PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+                              - DETALHE_PAGAMENTO_INVALIDO
+                              - PAGAMENTO_RECUSADO_DETENTORA
+                              - PAGAMENTO_RECUSADO_SPI
+                              - FALHA_INFRAESTRUTURA
+                            example: SALDO_INSUFICIENTE
+                            description: >
+                              Defines the code for the reason the payment was rejected:
+
+                              SALDO_INSUFICIENTE
+
+                              VALOR_ACIMA_LIMITE
+
+                              VALOR_INVALIDO
+
+                              COBRANCA_INVALIDA
+
+                              NAO_INFORMADO
+
+                              PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+
+                              DETALHE_PAGAMENTO_INVALIDO
+
+                              PAGAMENTO_RECUSADO_DETENTORA
+
+                              PAGAMENTO_RECUSADO_SPI
+
+                              FALHA_INFRAESTRUTURA
+                          detail:
+                            type: string
+                            pattern: '[\w\W\s]*'
+                            maxLength: 2048
+                            description: >-
+                              Contains additional information about the rejected payment.
+                      localInstrument:
+                        type: string
+                        enum:
+                          - MANU
+                          - DICT
+                          - QRDN
+                          - QRES
+                          - INIC
+                        example: DICT
+                        description: >
+                          Specifies the form of payment initiation:
+
+                          - MANU - Manual input of account data
+
+                          - DICT - Manual input of Pix key
+
+                          - QRDN - Dynamic QR code
+
+                          - QRES - Static QR code
+
+                          - INIC - Indicates that the creditor contracted the Payment Initiator specifically to initiate payments where the beneficiary is previously known.
+                      cnpjInitiator:
+                        type: string
+                        pattern: ^\d{14}$
+                        maxLength: 14
+                        example: '50685362000135'
+                        description: >-
+                          CNPJ of the Payment Initiator duly authorized to provide Initiation Services in Pix.
+                      payment:
+                        type: object
+                        description: Object containing payment details such as currency and amount.
+                        required:
+                          - amount
+                          - currency
+                        properties:
+                          amount:
+                            type: string
+                            minLength: 4
+                            maxLength: 19
+                            pattern: ^((\d{1,16}\.\d{2}))$
+                            example: '100000.12'
+                            description: >
+                              Transaction amount with 2 decimal places. The amount must match the one sent in the consent.
+
+                              For static QR Code with a predetermined value in the QR Code or for dynamic QR Code indicating that the value cannot be changed: The amount field must be filled with the value set in the QR Code.
+
+                              If filled with a value different from the QR Code, an HTTP Status 422 error must be returned.
+                          currency:
+                            type: string
+                            maxLength: 3
+                            pattern: ^([A-Z]{3})$
+                            example: BRL
+                            description: >
+                              National currency code according to the ISO-4217 model, i.e., 'BRL'.
+
+                              All monetary values provided are represented in the current Brazilian currency.
+                      transactionIdentification:
+                        type: string
+                        pattern: ^[a-zA-Z0-9]{1,35}$
+                        maxLength: 35
+                        example: E00038166201907261559y6j6
+                        description: >
+                          A transaction identifier that must be retransmitted intact by the payer's PSP when generating the payment order.
+
+                          [Restriction] The account-holding institution must return this field with the same value received from the initiator if it was sent in the payment initiation request.
+                      remittanceInformation:
+                        type: string
+                        maxLength: 140
+                        pattern: '[\w\W\s]*'
+                        example: Payment of invoice RSTO035-002.
+                        description: >
+                          Must be filled whenever the payer inserts any additional information in a payment to be sent to the creditor.
+                      creditorAccount:
+                        type: object
+                        description: >
+                          Object containing the identification of the beneficiary/creditor's destination account.
+                        required:
+                          - ispb
+                          - number
+                          - accountType
+                        properties:
+                          ispb:
+                            type: string
+                            minLength: 8
+                            maxLength: 8
+                            pattern: ^[0-9]{8}$
+                            example: '12345678'
+                            description: >
+                              Must be filled with the ISPB (Brazilian Payment System Identifier) of the participant in SPI (Instant Payments System), using only numbers.
+                          issuer:
+                            type: string
+                            minLength: 1
+                            maxLength: 4
+                            pattern: ^[0-9]{1,4}$
+                            example: '1774'
+                            description: >
+                              Code of the issuing agency of the account, without a digit.
+
+                              (Agency is the branch designated to serve customers, the general public, and members of credit cooperatives, exercising the institution's activities, and cannot be mobile or temporary).
+
+                              [Restriction] Mandatory for the following account types: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA), and SLRY (CONTA_SALARIO).
+                          number:
+                            type: string
+                            minLength: 1
+                            maxLength: 20
+                            pattern: ^[0-9]{1,20}$
+                            example: '1234567890'
+                            description: >
+                              Must be filled with the recipient user's account number, including the check digit (if present). If there is an alphanumeric value, it should be converted to 0.
+                          accountType:
+                            type: string
+                            enum:
+                              - CACC
+                              - SLRY
+                              - SVGS
+                              - TRAN
+                            example: CACC
+                            description: >
+                              Types of accounts used for Pix payments.
+
+                              Traditional modalities provided by Resolution 4.753, excluding linked accounts, accounts of residents abroad, accounts in foreign currencies, and electronic money correspondent accounts.
+
+                              Here are the descriptions of each ENUM value for the Pix scope:
+
+                              CACC - Current - Checking Account.
+
+                              SLRY - Salary - Salary Account.
+
+                              SVGS - Savings - Savings Account.
+
+                              TRAN - TransactingAccount - Prepaid Payment Account.
+                      cancellation:
+                        type: object
+                        description: >
+                          Object containing the details related to the payer who requested the cancellation, the channel they used, and the reason.
+                        required:
+                          - cancelledAt
+                          - cancelledBy
+                          - reason
+                          - cancelledFrom
+                        properties:
+                          reason:
+                            type: string
+                            enum:
+                              - CANCELADO_PENDENCIA
+                              - CANCELADO_AGENDAMENTO
+                              - CANCELADO_MULTIPLAS_ALCADAS
+                            example: CANCELADO_PENDENCIA
+                            description: >
+                              The account-holding institution should fill this field for return based on the payment status at the time of the cancellation request (e.g., payment status = PDNG, the field should be filled with the enum CANCELADO_PENDENCIA).
+
+                              Possible values:
+
+                              CANCELADO_PENDENCIA - Payment canceled while in PDNG status.
+
+                              CANCELADO_AGENDAMENTO - Payment canceled while in SCHD status.
+
+                              CANCELADO_MULTIPLAS_ALCADAS - Payment canceled while in PATC status.
+                          cancelledFrom:
+                            type: string
+                            enum:
+                              - INICIADORA
+                              - DETENTORA
+                            example: INICIADORA
+                            description: >
+                              Field used to indicate the medium through which the cancellation was made.
+
+                              Possible values:
+
+                              INICIADORA - Payment canceled by the payer through the initiator's channels.
+
+                              DETENTORA - Payment canceled by the payer through the account-holding institution's channels.
+                          cancelledAt:
+                            type: string
+                            description: >-
+                              Date and time when the cancellation was made, as specified by RFC-3339, UTC format.
+                            format: date-time
+                            maxLength: 20
+                            pattern: >-
+                              ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+                            example: '2021-05-21T08:30:00Z'
+                          cancelledBy:
+                            type: object
+                            description: >-
+                              Information related to the payer who requested the payment cancellation.
+                            required:
+                              - document
+                            properties:
+                              document:
+                                type: object
+                                description: >-
+                                  Object consolidating the document data of the user who requested the cancellation.
+                                required:
+                                  - identification
+                                  - rel
+                                properties:
+                                  identification:
+                                    type: string
+                                    maxLength: 11
+                                    description: >-
+                                      Document number of the payer responsible for the payment cancellation.
+                                    example: '11111111111'
+                                    pattern: ^\d{11}$
+                                  rel:
+                                    type: string
+                                    maxLength: 3
+                                    description: >-
+                                      Document type of the payer responsible for the payment cancellation.
+                                    example: CPF
+                                    pattern: ^[A-Z]{3}$
+                      debtorAccount:
+                        type: object
+                        description: >
+                          Object containing the identification of the payer's source account.
+
+                          Information regarding the payer's source account may be provided in the consent to the account-holding institution if the initiator has collected this information from the customer. Otherwise, it will be collected by the account-holding institution and provided to the initiator as a response to the payment creation.
+                        required:
+                          - ispb
+                          - number
+                          - accountType
+                        properties:
+                          ispb:
+                            type: string
+                            minLength: 8
+                            maxLength: 8
+                            pattern: ^[0-9]{8}$
+                            example: '12345678'
+                            description: >
+                              Must be filled with the ISPB (Brazilian Payment System Identifier) of the participant in SPI (Instant Payments System), using only numbers.
+                          issuer:
+                            type: string
+                            minLength: 1
+                            maxLength: 4
+                            pattern: ^[0-9]{1,4}$
+                            example: '1774'
+                            description: >
+                              Code of the issuing agency of the account, without a digit.
+
+                              (Agency is the branch designated to serve customers, the general public, and members of credit cooperatives, exercising the institution's activities, and cannot be mobile or temporary).
+
+                              [Restriction] Mandatory for the following account types: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA), and SLRY (CONTA_SALARIO).
+                          number:
+                            type: string
+                            minLength: 1
+                            maxLength: 20
+                            pattern: ^[0-9]{1,20}$
+                            example: '1234567890'
+                            description: >
+                              Must be filled with the payer's transaction account number, including the check digit (if present). If there is an alphanumeric value, it should be converted to 0.
+                          accountType:
+                            type: string
+                            enum:
+                              - CACC
+                              - SLRY
+                              - SVGS
+                              - TRAN
+                            example: CACC
+                            description: >
+                              Types of accounts used for Pix payments.
+
+                              Traditional modalities provided by Resolution 4.753, excluding linked accounts, accounts of residents abroad, accounts in foreign currencies, and electronic money correspondent accounts.
+
+                              Here are the descriptions of each ENUM value for the Pix scope:
+
+                              CACC - Current - Checking Account.
+
+                              SLRY - Salary - Salary Account.
+
+                              SVGS - Savings - Savings Account.
+
+                              TRAN - TransactingAccount - Prepaid Payment Account.
+                  links:
+                    type: object
+                    description: References to other requested API resources.
+                    required:
+                      - self
+                    properties:
+                      self:
+                        type: string
+                        format: uri
+                        maxLength: 2000
+                        description: The full URI that generated the current response.
+                        example: https://api.banco.com.br/open-banking/api/v1/resource
+                        pattern: >-
+                          ^(https:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '400':
+          description: >-
+            The request was malformed, omitting required attributes, either in the payload or through attributes in the URL.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Endpoint-specific error code
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '401':
+          description: Authentication header missing/invalid or token invalid
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Endpoint-specific error code
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '403':
+          description: >-
+            The token has an incorrect scope or a security policy was violated
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Endpoint-specific error code
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '404':
+          description: The requested resource does not exist or has not been implemented
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Endpoint-specific error code
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '405':
+          description: The consumer tried to access the resource with an unsupported method
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Endpoint-specific error code
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '406':
+          description: >-
+            The request contained an Accept header different from the allowed media types or a charset different from UTF-8
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Endpoint-specific error code
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '422':
+          description: >-
+            The request was well-formed but could not be processed due to specific business logic in the request.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 9
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          type: string
+                          enum:
+                            - SALDO_INSUFICIENTE
+                            - BENEFICIARIO_INCOMPATIVEL
+                            - VALOR_INCOMPATIVEL
+                            - VALOR_ACIMA_LIMITE
+                            - VALOR_INVALIDO
+                            - COBRANCA_INVALIDA
+                            - CONSENTIMENTO_INVALIDO
+                            - JANELA_OPER_INVALIDA
+                            - PARAMETRO_NAO_INFORMADO
+                            - PARAMETRO_INVALIDO
+                            - NAO_INFORMADO
+                            - PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+                            - DETALHE_PAGAMENTO_INVALIDO
+                            - PAGAMENTO_RECUSADO_DETENTORA
+                            - PAGAMENTO_RECUSADO_SPI
+                            - ERRO_IDEMPOTENCIA
+                            - PAGAMENTO_NAO_PERMITE_CANCELAMENTO
+                          example: SALDO_INSUFICIENTE
+                          description: >
+                            Error codes expected in the creation of payment initiation:
+
+                            • SALDO_INSUFICIENTE: This account does not have enough balance to make the payment.
+
+                            • BENEFICIARIO_INCOMPATIVEL: The beneficiary informed in the consent does not match the one expected by DICT.
+
+                            • VALOR_INCOMPATIVEL: The amount informed in the consent does not match the amount in the payment payload.
+
+                            • VALOR_ACIMA_LIMITE: The amount (or number of transactions) exceeds the limit range set by the account-holding institution to allow transactions by the customer.
+
+                            • VALOR_INVALIDO: The value sent is not valid for the specified QR Code.
+
+                            • COBRANCA_INVALIDA: Expiration validation, due date validation, Valid Status.
+
+                            • CONSENTIMENTO_INVALIDO: Invalid consent (status is not "authorized" or is expired).
+
+                            • JANELA_OPER_INVALIDA: Request is outside the operating window.
+
+                            • PARAMETRO_NAO_INFORMADO: Parameter not provided.
+
+                            • PARAMETRO_INVALIDO: Invalid parameter.
+
+                            • NAO_INFORMADO: Not provided by the account-holding institution.
+
+                            • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Payment data differs from consent data.
+
+                            • DETALHE_PAGAMENTO_INVALIDO: Invalid payment detail.
+
+                            • PAGAMENTO_RECUSADO_DETENTORA: Payment refused by the account-holding institution.
+
+                            • PAGAMENTO_RECUSADO_SPI: Payment refused in the Instant Payment System (SPI).
+
+                            • ERRO_IDEMPOTENCIA: Idempotency error.
+
+                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Payment does not allow cancellation.
+                        title:
+                          type: string
+                          maxLength: 255
+                          pattern: '[\w\W\s]*'
+                          example: Insufficient balance.
+                          description: >
+                            Specific error title reported, according to the code sent:
+
+                            • SALDO_INSUFICIENTE: Insufficient balance.
+
+                            • BENEFICIARIO_INCOMPATIVEL: Incompatible beneficiary.
+
+                            • VALOR_INCOMPATIVEL: Transaction amount incompatible.
+
+                            • VALOR_ACIMA_LIMITE: Above the established limit.
+
+                            • VALOR_INVALIDO: Invalid amount.
+
+                            • COBRANCA_INVALIDA: Invalid charge.
+
+                            • CONSENTIMENTO_INVALIDO: Invalid consent.
+
+                            • JANELA_OPER_INVALIDA: Invalid operation window.
+
+                            • PARAMETRO_NAO_INFORMADO: Required parameter not provided.
+
+                            • PARAMETRO_INVALIDO: Parameter with invalid value.
+
+                            • NAO_INFORMADO: Not provided.
+
+                            • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Divergence between payment and consent.
+
+                            • DETALHE_PAGAMENTO_INVALIDO: Invalid payment detail.
+
+                            • PAGAMENTO_RECUSADO_DETENTORA: Payment refused by the account-holding institution.
+
+                            • PAGAMENTO_RECUSADO_SPI: Payment refused in the Instant Payment System (SPI).
+
+                            • ERRO_IDEMPOTENCIA: Idempotency error.
+
+                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Payment does not allow cancellation.
+                        detail:
+                          type: string
+                          maxLength: 2048
+                          pattern: '[\w\W\s]*'
+                          example: >-
+                            The selected account does not have enough balance to make the payment.
+                          description: >
+                            Specific error description according to the reported code:
+
+                            • SALDO_INSUFICIENTE: The selected account does not have enough balance to make the payment.
+
+                            • BENEFICIARIO_INCOMPATIVEL: The beneficiary informed in the consent does not match the one expected by DICT.
+
+                            • VALOR_INCOMPATIVEL: The amount informed in the consent does not match the amount in the payment payload.
+
+                            • VALOR_ACIMA_LIMITE: The amount (or number of transactions) exceeds the limit range set by the account-holding institution to allow transactions by the customer.
+
+                            • VALOR_INVALIDO: The value sent is not valid for the specified QR Code.
+
+                            • COBRANCA_INVALIDA: Expiration validation, due date validation, or Valid Status.
+
+                            • CONSENTIMENTO_INVALIDO: Invalid consent (status different from "AUTHORIZED" or expired).
+
+                            • JANELA_OPER_INVALIDA: Request is outside the operating window.
+
+                            • PARAMETRO_NAO_INFORMADO: endToEndId
+
+                            • PARAMETRO_INVALIDO: endToEndId
+
+                            • NAO_INFORMADO: Not reported/identified by the account-holding institution.
+
+                            • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Payment data differs from consent data.
+
+                            • DETALHE_PAGAMENTO_INVALIDO: Parameter [field_name] does not follow business rules.
+
+                            • PAGAMENTO_RECUSADO_DETENTORA: [description of refusal reason].
+
+                            • PAGAMENTO_RECUSADO_SPI: [error code according to PACS.002 reason code table].
+
+                            • ERRO_IDEMPOTENCIA: Message content (claim data) differs from the content associated with this idempotency key (x-idempotency-key).
+
+                            • PAGAMENTO_NAO_PERMITE_CANCELAMENTO: Payment does not allow cancellation.
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+              examples:
+                Insufficient balance:
+                  summary: Insufficient balance
+                  value:
+                    errors:
+                      - code: SALDO_INSUFICIENTE
+                        title: Insufficient balance.
+                        detail: >-
+                          The selected account does not have enough balance to make the payment.
+                    meta:
+                      requestDateTime: '2021-05-21T08:30:00Z'
+        '429':
+          description: >-
+            The operation was refused because too many requests were made within a certain period, or the global limit of concurrent requests was reached.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Endpoint-specific error code
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information related to the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Date and time of the query, as specified by RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+          headers:
+            Retry-After:
+              description: >
+                Header indicating the time (in seconds) that the client should wait before making another request. This header should be present when the HTTP response code is 429 Too many requests.
+              schema:
+                description: >
+                  Header indicating the time (in seconds) that the client should wait before making another request. This header should be present when the HTTP response code is 429 Too many requests.
+                type: integer          
+        '500':
+          description: An error occurred in the API gateway or the microservice
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Specific error code for the endpoint
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information regarding the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Request date and time, as specified in RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        '529':
+          description: >-
+            The site is overloaded, and the operation was rejected because the global TPS limit has been reached at this time.
+          content:
+            application/json; charset=utf-8:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Specific error code for the endpoint
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information regarding the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Request date and time, as specified in RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+        default:
+          description: Unexpected error.
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - errors
+                properties:
+                  errors:
+                    type: array
+                    minItems: 1
+                    maxItems: 13
+                    items:
+                      type: object
+                      required:
+                        - code
+                        - title
+                        - detail
+                      properties:
+                        code:
+                          description: Specific error code for the endpoint
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        title:
+                          description: Human-readable title of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 255
+                        detail:
+                          description: Human-readable description of this specific error
+                          type: string
+                          pattern: '[\w\W\s]*'
+                          maxLength: 2048
+                  meta:
+                    type: object
+                    description: Meta information regarding the requested API.
+                    required:
+                      - requestDateTime
+                    properties:
+                      requestDateTime:
+                        description: >-
+                          Request date and time, as specified in RFC-3339, UTC format.
+                        type: string
+                        maxLength: 20
+                        format: date-time
+                        example: '2021-05-21T08:30:00Z'
+components:
+  parameters:
+    paymentId:
+      name: paymentId
+      in: path
+      description: Payment operation identifier.
+      required: true
+      schema:
+        type: string
+        pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
+        maxLength: 100
+    Authorization:
+      name: Authorization
+      in: header
+      description: >-
+        Standard HTTP header. Allows credentials to be provided depending on the type of resource requested.
+      required: true
+      schema:
+        type: string
+        pattern: '[\w\W\s]*'
+        maxLength: 2048
+  responses:
+    200PatchPixPayments:
+      description: Pix payment initiation successfully canceled.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+              - links
+              - meta
+            properties:
+              data:
+                type: object
+                description: >-
+                  Object containing payment data and the creditor's account.
+                required:
+                  - paymentId
+                  - endToEndId
+                  - consentId
+                  - creationDateTime
+                  - statusUpdateDateTime
+                  - status
+                  - localInstrument
+                  - payment
+                  - creditorAccount
+                  - cnpjInitiator
+                  - debtorAccount
+                  - cancellation
+                properties:
+                  paymentId:
+                    type: string
+                    minLength: 1
+                    maxLength: 100
+                    pattern: ^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$
+                    example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+                    description: >
+                      Unique code or identifier provided by the account holder's institution to represent
+
+                      the individual payment initiation. The `paymentId` must be different from the `endToEndId`.
+
+                      This is the identifier to be used when querying the status of the payment initiation.
+                  endToEndId:
+                    type: string
+                    minLength: 32
+                    maxLength: 32
+                    pattern: >-
+                      ^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$
+                    example: E9040088820210128000800123873170
+                    description: >
+                      This is a unique identifier generated by the payment initiating institution and received by the account holding institution, tracking the entire Pix payment journey.
+
+                      [Restriction] The account holder must return this field with the same value received from the initiator.
+                  consentId:
+                    type: string
+                    maxLength: 256
+                    pattern: >-
+                      ^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{0,31}:[a-zA-Z0-9()+,\-.:=@;$_!*'%\/?#]+$
+                    example: urn:bancoex:C1DD33123
+                    description: >
+                      Unique identifier of the consent created for the requested payment initiation. It should be a URN - Uniform Resource Name.
+
+                      A URN, as defined in
+                      [RFC8141](https://tools.ietf.org/html/rfc8141) is a Uniform Resource
+
+                      Identifier - URI - that is assigned under the URI scheme "urn" and a specific URN namespace, with the intention that the URN
+
+                      be a persistent and location-independent resource identifier.
+
+                      Considering the string urn:bancoex:C1DD33123 as an example for consentId, we have:
+
+                      - the namespace(urn)
+
+                      - the identifier associated with the transmitter institution's namespace (bancoex)
+
+                      - the specific identifier within the namespace (C1DD33123).
+
+                      More detailed information about namespace construction can be found in
+                      [RFC8141](https://tools.ietf.org/html/rfc8141).
+                  creationDateTime:
+                    type: string
+                    format: date-time
+                    pattern: >-
+                      ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+                    example: '2020-07-21T08:30:00Z'
+                    description: >
+                      Date and time when the resource was created.
+
+                      A string with date and time as specified in
+                      RFC-3339,
+
+                      always using the UTC timezone (UTC time format).
+                  statusUpdateDateTime:
+                    type: string
+                    format: date-time
+                    pattern: >-
+                      ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+                    example: '2020-07-21T08:30:00Z'
+                    description: >
+                      Date and time of the last payment initiation update.
+
+                      A string with date and time as specified in
+                      RFC-3339,
+
+                      always using the UTC timezone (UTC time format).
+                  proxy:
+                    type: string
+                    maxLength: 77
+                    pattern: '[\w\W\s]*'
+                    example: '12345678901'
+                    description: >
+                      Key registered in the DICT belonging to the creditor. The key types can be: phone, email, CPF/CNPJ, or random key.
+
+                      In the case of a mobile phone, it must be provided in the E.1641 format.
+
+                      For email, it must be in the format xxxxxxxx@xxxxxxx.xxx(.xx) and up to 77 characters.
+
+                      For CPF, it should be provided with 11 digits, without dots or hyphens.
+
+                      For CNPJ, it should be provided with 14 digits, without dots or hyphens.
+
+                      In the case of a random key, the UUID generated by the DICT must be provided, as per the format specified in
+                      RFC41223.
+
+                      If provided, the account holder must validate the proxy in the DICT when localInstrument equals DICT, QRDN, or QRES and validate the creditorAccount field.
+
+                      This validation is optional if localInstrument equals INIC.
+
+                      [Restriction] If localInstrument equals MANU, the proxy field should not be filled. If localInstrument equals INIC, DICT, QRDN, or QRES, the proxy field must always be filled with the Pix key.
+                  ibgeTownCode:
+                    type: string
+                    minLength: 7
+                    maxLength: 7
+                    pattern: ^\d{7}$
+                    example: '5300108'
+                    description: >
+                      The ibgetowncode field in the PIX arrangement behaves the same as the codMun field described in item 1.6.6 of the PIX manual, as follows:
+
+                      1. If the municipality information is not sent, the creditor's PSP will assume that there are no state and municipal holidays in the relevant period.
+                  status:
+                    type: string
+                    enum:
+                      - RCVD
+                      - PATC
+                      - CANC
+                      - ACCP
+                      - ACPD
+                      - RJCT
+                      - ACSC
+                      - PDNG
+                      - SCHD
+                    example: PDNG
+                    description: >
+                      Current state of the payment initiation. The state progresses in the following order:
+
+                      1.  RCVD (Received) - Indicates that the payment request was successfully received by the account holder, but further validations are required before submitting it for settlement.
+
+                      2.  PATC (Partially Accepted Technical Correct) - Indicates that the transaction requires confirmation from more authorizers for payment processing to proceed.
+
+                      3.  CANC (Cancelled) - Indicates that the pending Pix transaction was successfully canceled by the user before it was confirmed (ACCP) or rejected (RJCT) by the account holder.
+
+                      4.  ACCP (Accepted Customer Profile) - Indicates that all necessary checks have been completed by the account holder, and the transaction is ready to be sent for settlement (in SPI if it's a Pix payment to another institution or internally if it's to another account in the same institution).
+
+                      5.  ACPD (Accepted Clearing Processed) - Indicates that the account holder has submitted the transaction for settlement but has not yet confirmed whether it was settled or rejected.
+
+                      6.  RJCT (Rejected) - Indicates that the transaction was rejected by the account holder or the SPI.
+
+                      7.  ACSC (Accepted Settlement Completed Debitor Account) - Indicates that the transaction was completed by the account holder or the SPI.
+
+                      8.  PDNG (Pending) - Indicates that the account holder temporarily held the Pix transaction for review.
+
+                      9.  SCHD (Scheduled) - Indicates that the Pix transaction was successfully scheduled with the account holder.
+
+                      In case of failure: 
+                       
+                      RJCT (REJECTED) - Payment instruction rejected.
+                  rejectionReason:
+                    type: object
+                    description: >-
+                      Reason for payment rejection. Additional information on the reason for the status.
+
+                      [Restriction] This reason must be sent when the /data/status field is equal to RJCT (REJECTED).
+                    required:
+                      - code
+                      - detail
+                    properties:
+                      code:
+                        type: string
+                        enum:
+                          - SALDO_INSUFICIENTE
+                          - VALOR_ACIMA_LIMITE
+                          - VALOR_INVALIDO
+                          - COBRANCA_INVALIDA
+                          - NAO_INFORMADO
+                          - PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+                          - DETALHE_PAGAMENTO_INVALIDO
+                          - PAGAMENTO_RECUSADO_DETENTORA
+                          - PAGAMENTO_RECUSADO_SPI
+                          - FALHA_INFRAESTRUTURA
+                        example: SALDO_INSUFICIENTE
+                        description: >
+                          Defines the code for the reason why the payment was rejected.
+
+                          SALDO_INSUFICIENTE
+
+                          VALOR_ACIMA_LIMITE
+
+                          VALOR_INVALIDO
+
+                          COBRANCA_INVALIDA
+
+                          NAO_INFORMADO
+
+                          PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+
+                          DETALHE_PAGAMENTO_INVALIDO
+
+                          PAGAMENTO_RECUSADO_DETENTORA
+
+                          PAGAMENTO_RECUSADO_SPI
+
+                          FALHA_INFRAESTRUTURA
+                      detail:
+                        type: string
+                        pattern: '[\w\W\s]*'
+                        maxLength: 2048
+                        description: Contains additional information on the rejected payment.
+                  localInstrument:
+                    type: string
+                    enum:
+                      - MANU
+                      - DICT
+                      - QRDN
+                      - QRES
+                      - INIC
+                    example: DICT
+                    description: >
+                      Specifies the payment initiation method:
+
+                      - MANU - Manual input of the transactional account data.
+
+                      - DICT - Manual input of the Pix key.
+
+                      - QRDN - Dynamic QR code.
+
+                      - QRES - Static QR code.
+
+                      - INIC - Indicates that the creditor has contracted the Payment Initiator specifically to perform payment initiations where the beneficiary is previously known.
+                  cnpjInitiator:
+                    type: string
+                    pattern: ^\d{14}$
+                    maxLength: 14
+                    example: '50685362000135'
+                    description: >-
+                      CNPJ of the Payment Initiator duly authorized to provide the Payment Initiation Service in Pix.
+                  payment:
+                    type: object
+                    description: Object containing payment data such as currency and amount.
+                    required:
+                      - amount
+                      - currency
+                    properties:
+                      amount:
+                        type: string
+                        minLength: 4
+                        maxLength: 19
+                        pattern: ^((\d{1,16}\.\d{2}))$
+                        example: '100000.12'
+                        description: >
+                          Transaction amount with 2 decimal places. The amount must be the same as sent in the consent. 
+
+                          For a static QR Code with a predetermined value in the QR Code or for a dynamic QR Code with an indication that the value cannot be altered: The amount field must be filled with the value established in the QR Code.
+
+                          If filled with a value different from the QR Code, an HTTP Status 422 error must be returned.
+                      currency:
+                        type: string
+                        maxLength: 3
+                        pattern: ^([A-Z]{3})$
+                        example: BRL
+                        description: >
+                          National currency code according to the ISO-4217 model, i.e., 'BRL'.  
+
+                          All monetary values provided are represented in the current currency of Brazil.
+                  transactionIdentification:
+                    type: string
+                    pattern: ^[a-zA-Z0-9]{1,35}$
+                    maxLength: 35
+                    example: E00038166201907261559y6j6
+                    description: >
+                      This is a transaction identifier that must be transmitted intact by the payer's PSP when generating the payment order.
+
+                      [Restriction] The account holder must return this field with the same value received from the initiator, if it was sent in the payment initiation request.
+                  remittanceInformation:
+                    type: string
+                    maxLength: 140
+                    pattern: '[\w\W\s]*'
+                    example: Payment of invoice RSTO035-002.
+                    description: >
+                      Should be filled whenever the payer inserts additional information in a payment to be sent to the creditor.
+                  creditorAccount:
+                    type: object
+                    description: >
+                      Object containing the identification of the destination account of the creditor/beneficiary.
+                    required:
+                      - ispb
+                      - number
+                      - accountType
+                    properties:
+                      ispb:
+                        type: string
+                        minLength: 8
+                        maxLength: 8
+                        pattern: ^[0-9]{8}$
+                        example: '12345678'
+                        description: >
+                          Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payments System) participant, using numbers only.
+                      issuer:
+                        type: string
+                        minLength: 1
+                        maxLength: 4
+                        pattern: ^[0-9]{1,4}$
+                        example: '1774'
+                        description: >
+                          Issuing branch code without a digit.  
+
+                          (The branch is the unit intended to serve customers, the public in general, and the associates of credit unions,  
+
+                          in the exercise of the institution's activities, and cannot be mobile or temporary).  
+
+                          [Restriction] Mandatory for the following account types: CACC
+                          (CHECKING_ACCOUNT), SVGS (SAVINGS_ACCOUNT), and SLRY (SALARY_ACCOUNT).
+                      number:
+                        type: string
+                        minLength: 1
+                        maxLength: 20
+                        pattern: ^[0-9]{1,20}$
+                        example: '1234567890'
+                        description: >
+                          Must be filled with the account number of the creditor, including the verification digit (if any).  
+
+                          If there is an alphanumeric value, it should be converted to 0.
+                      accountType:
+                        type: string
+                        enum:
+                          - CACC
+                          - SLRY
+                          - SVGS
+                          - TRAN
+                        example: CACC
+                        description: >
+                          Account types used for Pix payment.  
+
+                          Traditional modalities provided by Resolution 4,753, not including linked accounts,  
+
+                          accounts of domiciled abroad, accounts in foreign currencies, and electronic money correspondent accounts.  
+
+                          Below is a description of each ENUM value within the Pix scope.  
+
+                          CACC - Current - Checking Account.  
+
+                          SLRY - Salary - Salary Account.  
+
+                          SVGS - Savings - Savings Account.  
+
+                          TRAN - TransactingAccount - Prepaid Payment Account.
+                  cancellation:
+                    type: object
+                    description: >
+                      Object containing data related to the payer who requested the cancellation, the channel they used, and the reason.
+                    required:
+                      - cancelledAt
+                      - cancelledBy
+                      - reason
+                      - cancelledFrom
+                    properties:
+                      reason:
+                        type: string
+                        enum:
+                          - CANCELADO_PENDENCIA
+                          - CANCELADO_AGENDAMENTO
+                          - CANCELADO_MULTIPLAS_ALCADAS
+                        example: CANCELADO_PENDENCIA
+                        description: >
+                          This field must be filled in for return by the account holder based on the payment status at the time of the cancellation request (e.g., Payment status = PDNG, the field should be filled with enum CANCELADO_PENDENCIA).
+
+
+                          Possible values:
+
+
+                          CANCELADO_PENDENCIA - Payment canceled while in PDNG status
+
+
+                          CANCELADO_AGENDAMENTO - Payment canceled while in SCHD status
+
+
+                          CANCELADO_MULTIPLAS_ALCADAS - Payment canceled while in PATC status
+                      cancelledFrom:
+                        type: string
+                        enum:
+                          - INICIADORA
+                          - DETENTORA
+                        example: INICIADORA
+                        description: >
+                          Field used to indicate the means by which the cancellation was made.
+
+
+                          Possible values:
+
+
+                          INICIADORA - Payment canceled by the payer on the initiator's channels
+
+
+                          DETENTORA - Payment canceled by the payer on the account holder's channels
+                      cancelledAt:
+                        type: string
+                        description: >-
+                          Date and time when the cancellation was made, as specified in RFC-3339, UTC format.
+                        format: date-time
+                        maxLength: 20
+                        pattern: >-
+                          ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+                        example: '2021-05-21T08:30:00Z'
+                      cancelledBy:
+                        type: object
+                        description: >-
+                          Information related to the payer who requested the payment cancellation.
+                        required:
+                          - document
+                        properties:
+                          document:
+                            type: object
+                            description: >-
+                              Object that consolidates the document data of the user who requested the cancellation.
+                            required:
+                              - identification
+                              - rel
+                            properties:
+                              identification:
+                                type: string
+                                maxLength: 11
+                                description: >-
+                                  Document number of the payer responsible for canceling the payment.
+                                example: '11111111111'
+                                pattern: ^\d{11}$
+                              rel:
+                                type: string
+                                maxLength: 3
+                                description: >-
+                                  Document type of the payer responsible for canceling the payment.
+                                example: CPF
+                                pattern: ^[A-Z]{3}$
+                  debtorAccount:
+                    type: object
+                    description: >
+                      Object containing the identification of the payer's source account.  
+
+                      Information about the payer's source account may be included in the consent for the account holder if the initiator has collected this information from the customer. Otherwise, it will be collected by the account holder and returned to the initiator as a response to the payment creation.
+                    required:
+                      - ispb
+                      - number
+                      - accountType
+                    properties:
+                      ispb:
+                        type: string
+                        minLength: 8
+                        maxLength: 8
+                        pattern: ^[0-9]{8}$
+                        example: '12345678'
+                        description: >
+                          Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payments System) participant, using numbers only.
+                      issuer:
+                        type: string
+                        minLength: 1
+                        maxLength: 4
+                        pattern: ^[0-9]{1,4}$
+                        example: '1774'
+                        description: >
+                          Issuing branch code without a digit.  
+
+                          (The branch is the unit intended to serve customers, the public in general, and the associates of credit unions,  
+
+                          in the exercise of the institution's activities, and cannot be mobile or temporary).  
+
+                          [Restriction] Mandatory for the following account types: CACC
+                          (CHECKING_ACCOUNT), SVGS (SAVINGS_ACCOUNT), and SLRY (SALARY_ACCOUNT).
+                      number:
+                        type: string
+                        minLength: 1
+                        maxLength: 20
+                        pattern: ^[0-9]{1,20}$
+                        example: '1234567890'
+                        description: >
+                          Must be filled with the payer's transactional account number, including the verification digit (if any).  
+
+                          If there is an alphanumeric value, it should be converted to 0.
+                      accountType:
+                        type: string
+                        enum:
+                          - CACC
+                          - SLRY
+                          - SVGS
+                          - TRAN
+                        example: CACC
+                        description: >
+                          Account types used for Pix payment.  
+
+                          Traditional modalities provided by Resolution 4,753, not including linked accounts,  
+
+                          accounts of domiciled abroad, accounts in foreign currencies, and electronic money correspondent accounts.  
+
+                          Below is a description of each ENUM value within the Pix scope.  
+
+                          CACC - Current - Checking Account.  
+
+                          SLRY - Salary - Salary Account.  
+
+                          SVGS - Savings - Savings Account.  
+
+                          TRAN - TransactingAccount - Prepaid Payment Account.
+              links:
+                type: object
+                description: References to other resources in the requested API.
+                required:
+                  - self
+                properties:
+                  self:
+                    type: string
+                    format: uri
+                    maxLength: 2000
+                    description: Full URI that generated the current response.
+                    example: https://api.banco.com.br/open-banking/api/v1/resource
+                    pattern: >-
+                      ^(https:\/\/)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&\/\/=]*)$
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    BadRequest:
+      description: >-
+        The request was malformed, omitting mandatory attributes, either in the payload or through attributes in the URL.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    Forbidden:
+      description: The token has an incorrect scope or a security policy was violated
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    InternalServerError:
+      description: An error occurred in the API gateway or the microservice
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    MethodNotAllowed:
+      description: The consumer attempted to access the resource with an unsupported method
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    NotAcceptable:
+      description: >-
+        The request contained an Accept header different from the permitted media types or a character set different from UTF-8
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    NotFound:
+      description: The requested resource does not exist or has not been implemented
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    SiteIsOverloaded:
+      description: >-
+        The site is overloaded, and the operation was rejected because the global TPS limit has been reached at this time.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+    TooManyRequests:
+      description: >-
+        The operation was rejected because too many requests were made within a certain period, or the global request concurrency limit was reached.
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+      headers:
+        Retry-After:
+          description: >
+            Header indicating the time (in seconds) that the client should wait before making another call attempt. This header must be present when the HTTP return code is 429 Too many requests.
+          schema:
+            description: >
+              Header indicating the time (in seconds) that the client should wait before making another call attempt. This header must be present when the HTTP return code is 429 Too many requests.
+            type: integer
+    UnprocessableEntityConsents:
+      description: >-
+        The request was well-formed but could not be processed due to specific business logic related to the request.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 3
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      type: string
+                      enum:
+                        - FORMA_PAGAMENTO_INVALIDA
+                        - DATA_PAGAMENTO_INVALIDA
+                        - DETALHE_PGTO_INVALIDO
+                        - PARAMETRO_NAO_INFORMADO
+                        - PARAMETRO_INVALIDO
+                        - ERRO_IDEMPOTENCIA
+                        - NAO_INFORMADO
+                      example: FORMA_PAGAMENTO_INVALIDA
+                      description: >
+                        Expected error codes in consent creation for payment initiation:
+
+                        • FORMA_PAGAMENTO_INVALIDA: Invalid payment method.
+
+                        • DATA_PAGAMENTO_INVALIDA: Invalid payment date.
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Invalid payment detail.
+
+                        • PARAMETRO_NAO_INFORMADO: Parameter not provided.
+
+                        • PARAMETRO_INVALIDO: Invalid parameter.
+
+                        • ERRO_IDEMPOTENCIA: Idempotency error.
+
+                        • NAO_INFORMADO: Not reported.
+                    title:
+                      type: string
+                      maxLength: 255
+                      pattern: '[\w\W\s]*'
+                      example: Invalid payment method.
+                      description: >
+                        Specific title of the reported error, according to the code sent:
+
+                        • FORMA_PAGAMENTO_INVALIDA: Invalid payment method.
+
+                        • DATA_PAGAMENTO_INVALIDA: Invalid payment date.
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Invalid payment detail.
+
+                        • PARAMETRO_NAO_INFORMADO: Parameter not provided.
+
+                        • PARAMETRO_INVALIDO: Invalid parameter.
+
+                        • ERRO_IDEMPOTENCIA: Idempotency error.
+
+                        • NAO_INFORMADO: Not reported.
+                    detail:
+                      type: string
+                      maxLength: 2048
+                      pattern: '[\w\W\s]*'
+                      example: Invalid payment method [Modality].
+                      description: >
+                        Specific description of the error according to the reported code:
+
+                        • FORMA_PAGAMENTO_INVALIDA: Unsupported payment method [Modality].
+
+                        • DATA_PAGAMENTO_INVALIDA: Invalid payment date for the selected payment method.
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Parameter [field_name] does not comply with business rules.
+
+                        • PARAMETRO_NAO_INFORMADO: Required parameter [field_name] not provided.
+
+                        • PARAMETRO_INVALIDO: Parameter [field_name] does not comply with the expected formatting rules.
+
+                        • ERRO_IDEMPOTENCIA: The message content (claim data) differs from the content associated with this idempotency key (x-idempotency-key).
+
+                        • NAO_INFORMADO: Not reported/identified by the account holder institution.
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+          examples:
+            Invalid payment method:
+              summary: Invalid payment method
+              value:
+                errors:
+                  - code: FORMA_PAGAMENTO_INVALIDA
+                    title: Invalid payment method.
+                    detail: Unsupported payment method [Modality].
+                meta:
+                  requestDateTime: '2021-05-21T08:30:00Z'
+    UnprocessableEntityPixPayments:
+      description: >-
+        The request was well-formed but could not be processed due to specific business logic related to the request.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 9
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      type: string
+                      enum:
+                        - SALDO_INSUFICIENTE
+                        - BENEFICIARIO_INCOMPATIVEL
+                        - VALOR_INCOMPATIVEL
+                        - VALOR_ACIMA_LIMITE
+                        - VALOR_INVALIDO
+                        - COBRANCA_INVALIDA
+                        - CONSENTIMENTO_INVALIDO
+                        - JANELA_OPER_INVALIDA
+                        - PARAMETRO_NAO_INFORMADO
+                        - PARAMETRO_INVALIDO
+                        - NAO_INFORMADO
+                        - PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+                        - DETALHE_PAGAMENTO_INVALIDO
+                        - PAGAMENTO_RECUSADO_DETENTORA
+                        - PAGAMENTO_RECUSADO_SPI
+                        - ERRO_IDEMPOTENCIA
+                      example: SALDO_INSUFICIENTE
+                      description: >
+                        Expected error codes in payment initiation creation:
+
+                        • SALDO_INSUFICIENTE: This account does not have sufficient balance to make the payment.
+
+                        • BENEFICIARIO_INCOMPATIVEL: The beneficiary informed in the consent is not the same as expected by the DICT.
+
+                        • VALOR_INCOMPATIVEL: The value informed in the consent is not the same as the value informed in the payment payload.
+
+                        • VALOR_ACIMA_LIMITE: The value (or number of transactions) exceeds the limit range set by the account holder to allow transactions by the customer.
+
+                        • VALOR_INVALIDO: The value sent is not valid for the specified QR Code.
+
+                        • COBRANCA_INVALIDA: Expiration validation, maturity validation, Valid Status.
+
+                        • CONSENTIMENTO_INVALIDO: Invalid consent (status is not "authorized" or is expired).
+
+                        • JANELA_OPER_INVALIDA: The request is outside the operating window.
+
+                        • PARAMETRO_NAO_INFORMADO: Parameter not provided.
+
+                        • PARAMETRO_INVALIDO: Invalid parameter.
+
+                        • NAO_INFORMADO: Not reported by the account holder.
+
+                        • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Payment data differs from consent data.
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Invalid payment detail.
+
+                        • PAGAMENTO_RECUSADO_DETENTORA: Payment refused by the account holder.
+
+                        • PAGAMENTO_RECUSADO_SPI: Payment refused in the Instant Payments System (SPI).
+
+                        • ERRO_IDEMPOTENCIA: Idempotency error.
+                    title:
+                      type: string
+                      maxLength: 255
+                      pattern: '[\w\W\s]*'
+                      example: Insufficient balance.
+                      description: >
+                        Specific title of the reported error, according to the code sent:
+
+                        • SALDO_INSUFICIENTE: Insufficient balance.
+
+                        • BENEFICIARIO_INCOMPATIVEL: Incompatible beneficiary.
+
+                        • VALOR_INCOMPATIVEL: Incompatible transaction amount.
+
+                        • VALOR_ACIMA_LIMITE: Above the established limit.
+
+                        • VALOR_INVALIDO: Invalid amount.
+
+                        • COBRANCA_INVALIDA: Invalid charge.
+
+                        • CONSENTIMENTO_INVALIDO: Invalid consent.
+
+                        • JANELA_OPER_INVALIDA: Invalid operating window.
+
+                        • PARAMETRO_NAO_INFORMADO: Mandatory parameter not provided.
+
+                        • PARAMETRO_INVALIDO: Parameter with invalid value.
+
+                        • NAO_INFORMADO: Not reported.
+
+                        • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Payment and consent mismatch.
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Invalid payment detail.
+
+                        • PAGAMENTO_RECUSADO_DETENTORA: Payment refused by the account holder.
+
+                        • PAGAMENTO_RECUSADO_SPI: Payment refused in the Instant Payments System (SPI).
+
+                        • ERRO_IDEMPOTENCIA: Idempotency error.
+                    detail:
+                      type: string
+                      maxLength: 2048
+                      pattern: '[\w\W\s]*'
+                      example: >-
+                        The selected account does not have sufficient balance to make the payment.
+                      description: >
+                        Specific description of the error according to the reported code:
+
+                        • SALDO_INSUFICIENTE: The selected account does not have sufficient balance to make the payment.
+
+                        • BENEFICIARIO_INCOMPATIVEL: The beneficiary informed in the consent is not the same as expected by the DICT.
+
+                        • VALOR_INCOMPATIVEL: The value informed in the consent is not the same as the value informed in the payment payload.
+
+                        • VALOR_ACIMA_LIMITE: The value (or number of transactions) exceeds the limit range set by the account holder to allow transactions by the customer.
+
+                        • VALOR_INVALIDO: The value sent is not valid for the specified QR Code.
+
+                        • COBRANCA_INVALIDA: Expiration validation, maturity validation, or Valid Status.
+
+                        • CONSENTIMENTO_INVALIDO: Invalid consent (status different from "AUTHORIZED" or is expired).
+
+                        • JANELA_OPER_INVALIDA: The request is outside the operating window.
+
+                        • PARAMETRO_NAO_INFORMADO: endToEndId
+
+                        • PARAMETRO_INVALIDO: endToEndId
+
+                        • NAO_INFORMADO: Not reported/identified by the account holder institution.
+
+                        • PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Payment data differs from consent data.
+
+                        • DETALHE_PAGAMENTO_INVALIDO: Parameter [field_name] does not comply with business rules.
+
+                        • PAGAMENTO_RECUSADO_DETENTORA: [reason for refusal].
+
+                        • PAGAMENTO_RECUSADO_SPI: [error code according to reason PACS.002 domain table].
+
+                        • ERRO_IDEMPOTENCIA: The message content (claim data) differs from the content associated with this idempotency key (x-idempotency-key).
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'
+          examples:
+            Insufficient balance:
+              summary: Insufficient balance
+              value:
+                errors:
+                  - code: SALDO_INSUFICIENTE
+                    title: Insufficient balance.
+                    detail: >-
+                      The selected account does not have sufficient balance to make the payment.
+                meta:
+                  requestDateTime: '2021-05-21T08:30:00Z'
+    Unauthorized:
+      description: Authentication header missing/invalid or invalid token
+      content:
+        application/json; charset=utf-8:
+          schema:
+            type: object
+            required:
+              - errors
+            properties:
+              errors:
+                type: array
+                minItems: 1
+                maxItems: 13
+                items:
+                  type: object
+                  required:
+                    - code
+                    - title
+                    - detail
+                  properties:
+                    code:
+                      description: Specific error code for the endpoint
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    title:
+                      description: Human-readable title of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 255
+                    detail:
+                      description: Human-readable description of this specific error
+                      type: string
+                      pattern: '[\w\W\s]*'
+                      maxLength: 2048
+              meta:
+                type: object
+                description: Meta information regarding the requested API.
+                required:
+                  - requestDateTime
+                properties:
+                  requestDateTime:
+                    description: >-
+                      Request date and time, as specified in RFC-3339, UTC format.
+                    type: string
+                    maxLength: 20
+                    format: date-time
+                    example: '2021-05-21T08:30:00Z'

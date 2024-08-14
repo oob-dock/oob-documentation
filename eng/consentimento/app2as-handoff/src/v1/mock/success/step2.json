@@ -1,0 +1,11 @@
+{
+    "events": [
+        {
+            "type": "read"
+        }
+    ],
+    "next": {
+        "step": "3",
+        "interval": 8000
+    }
+}

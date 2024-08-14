@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "currency": "BRL",
+      "warrantyAmount": "100000.0400",
+      "warrantyType": "CESSAO_DIREITOS_CREDITORIOS",
+      "warrantySubType": "NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO"
+    },
+    {
+      "currency": "BRL",
+      "warrantyAmount": "100000.0400",
+      "warrantyType": "CESSAO_DIREITOS_CREDITORIOS",
+      "warrantySubType": "NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO"
+    },
+    {
+      "currency": "BRL",
+      "warrantyAmount": "100000.0400",
+      "warrantyType": "CESSAO_DIREITOS_CREDITORIOS",
+      "warrantySubType": "NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO"
+    },
+    {
+      "currency": "BRL",
+      "warrantyAmount": "100000.0400",
+      "warrantyType": "CESSAO_DIREITOS_CREDITORIOS",
+      "warrantySubType": "NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO"
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

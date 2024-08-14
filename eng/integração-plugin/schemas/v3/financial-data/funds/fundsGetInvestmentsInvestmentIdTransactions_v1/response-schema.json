@@ -1,0 +1,306 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "description": "Informações da posição do fundo de investimento a que se refere investmentId.",
+        "required": [
+          "transactionId",
+          "type",
+          "transactionType",
+          "transactionConversionDate",
+          "transactionQuotaPrice",
+          "transactionQuotaQuantity",
+          "transactionValue",
+          "transactionGrossValue"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "transactionId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
+          },
+          "type": {
+            "type": "string",
+            "description": "Tipo de movimentação (Entrada ou Saída).\n\nENTRADA: APLICACAO, TRANSFERENCIA_COTAS,  OUTROS.\n\nSAIDA: RESGATE, COME_COTAS, TRANSFERENCIA_COTAS, AMORTIZACAO, OUTROS.\n",
+            "enum": [
+              "ENTRADA",
+              "SAIDA"
+            ],
+            "example": "ENTRADA"
+          },
+          "transactionType": {
+            "type": "string",
+            "description": "O campo deve classificar a transação de movimentação de investimento em um dos tipos descritos (amortização, transferência de cotas, aplicação, resgate ou come-cotas).  \nA opção OUTROS só deve ser utilizada para os casos em que de fato a transação compartilhada não possa ser classificada como um dos itens deste Enum, e nesse caso deve-se preencher informações adicionais.\n",
+            "enum": [
+              "AMORTIZACAO",
+              "TRANSFERENCIA_COTAS",
+              "APLICACAO",
+              "RESGATE",
+              "COME_COTAS",
+              "OUTROS"
+            ],
+            "example": "AMORTIZACAO"
+          },
+          "transactionTypeAdditionalInfo": {
+            "type": "string",
+            "description": "Informação adicional do tipo do motivo, para preenchimento no caso de movimentações não delimitadas no domínio.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com o valor 'OUTROS'.\n",
+            "maxLength": 100,
+            "pattern": "[\\w\\W\\s]*"
+          },
+          "transactionConversionDate": {
+            "type": "string",
+            "description": "Data da conversão da transação de movimentação do fundo de investimento.",
+            "maxLength": 10,
+            "minLength": 10,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2023-01-07"
+          },
+          "transactionQuotaPrice": {
+            "type": "object",
+            "description": "É o valor da cota utilizada na conversão para a realização da movimentação do cliente no fundo, conforme a regra prevista em regulamento - valor pode ser negativo.\n",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 25,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,8}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "transactionQuotaQuantity": {
+            "type": "string",
+            "description": "Número de cotas convertidas na data da movimentação.\n",
+            "maxLength": 24,
+            "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+            "example": "42.25",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308
+          },
+          "transactionValue": {
+            "type": "object",
+            "description": "Valor solicitado pelo cliente.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 21,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "transactionGrossValue": {
+            "type": "object",
+            "description": "Valor da movimentação que se refere a quantidade da cota x valor da cota da movimentação.   \nNos casos em que não houver movimentação de cotas, por exemplo: amortização, não considerar a regra descrita.\n",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 21,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "incomeTax": {
+            "type": "object",
+            "description": "Valor do Imposto de Renda (IR) retido na fonte considerando a alíquota vigente na data da movimentação.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.\n",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 21,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "financialTransactionTax": {
+            "type": "object",
+            "description": "Valor do Imposto sobre Operações Financeiras (IOF) retido na fonte considerando a alíquota vigente na data da movimentação.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.\n",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 21,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "transactionExitFee": {
+            "type": "object",
+            "description": "Valor da taxa de saída considerado na movimentação.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.\n",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 20,
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "transactionNetValue": {
+            "type": "object",
+            "description": "Valor líquido da movimentação posterior à dedução de impostos (IOF e IR) e taxa de saída.   \n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'type' for preenchido com o valor 'SAIDA'.\n",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 21,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "hasMoreRecords",
+        "requestDateTime"
+      ],
+      "properties": {
+        "hasMoreRecords": {
+          "type": "boolean",
+          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
+          "example": true
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

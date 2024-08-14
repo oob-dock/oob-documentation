@@ -1,0 +1,43 @@
+{
+	"consent": {
+        "brandId": "gfh546u3hey6uet467ie",
+        "creationDateTime": "2021-05-21T08:30:00Z",
+        "tpp": {
+            "name": "GuiaBolsa"
+        },
+        "externalId": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf",
+        "loggedUser" : {
+            "document": {
+                "identification": "12312312333",
+                "rel": "CPF"
+            }
+        },
+        "expirationDateTime": "2021-05-21T08:30:00Z",
+        "permissions": [
+            "ACCOUNTS_READ", 
+            "ACCOUNTS_BALANCES_READ",
+            "ACCOUNTS_TRANSACTIONS_READ", 
+            "ACCOUNTS_OVERDRAFT_LIMITS_READ", 
+            "RESOURCES_READ"
+        ]
+    },
+	"accountId": [
+        {
+            "key": "agencia",
+            "value": "0001"
+        },
+        {
+            "key": "conta",
+            "value": "980467"
+        }
+    ],
+	"fromBookingDate": "2021-05-21",
+	"toBookingDate": "2021-05-22",
+	"creditDebitIndicator": "CREDITO",
+	"page": 1,
+	"pageSize": 25,
+    "requestMeta": {
+        "correlationId": "05377b30-3c10-4aef-a4a8-c96b26775bb7",
+        "brandId": "gfh546u3hey6uet467ie"
+    }
+}

@@ -1,0 +1,202 @@
+type: object
+description: Only for PIX payment consents. Object containing payment data for consent.
+required:
+  - type
+  - currency
+  - amount
+  - details
+properties:
+  type:
+    type: string
+    maxLength: 3
+    enum:
+      - PIX
+    example:
+      - PIX
+    description: |
+      This field defines the type of payment to be initiated after consent authorization.
+  date:
+    type: string
+    format: date
+    maxLength: 10
+    pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9])$
+    example:
+      - "2021-01-01"
+    description: Payment date, according to RFC-3339 specification.
+  schedule:
+    type: object
+    description: |
+      Defines the payment schedule. Used only in the payment scheduling functionality.
+      Mutually exclusive with the date field. This field is mandatory in the case of scheduling. In this case, the date field should not be informed.
+    properties:
+      single:
+        type: object
+        description: Defines the single scheduling policy.
+        additionalProperties: false
+        required:
+          - date
+        properties:
+          date:
+            type: string
+            format: date
+            maxLength: 10
+            pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9])$'
+            example: '2021-01-01'
+            description: |
+              Defines the target date for payment settlement. The Brasília time zone should be used to create and rationalize the data in this field.
+              Note: This field must always be at least D+1 calendar days, i.e., the day immediately following the consent date considering the Brasília time zone and must be at most one year from the consent date considering the Brasília time zone.
+    required:
+          - single
+    additionalProperties: false
+  currency:
+    type: string
+    maxLength: 3
+    pattern: ^([A-Z]{3})$
+    example:
+      - BRL
+    description: |
+      National currency code according to the ISO-4217 model, i.e., 'BRL'.
+      All reported monetary values are represented with the current currency of Brazil.
+  amount:
+    type: string
+    minLength: 4
+    maxLength: 19
+    pattern: ^((\d{1,16}\.\d{2}))$
+    example:
+      - "100000.12"
+    description: |
+      Transaction amount with 2 decimal places.
+  ibgeTownCode:
+    type: string
+    minLength: 7
+    maxLength: 7
+    pattern: ^\d{7}$
+    example:
+      - "5300108"
+    description: |
+      Contains the city code according to the IBGE (Brazilian Institute of Geography and Statistics).
+      For the filling of this field, the Payment Initiator must follow the payment arrangement guidance.
+      The filling of the field in both pix/payments and /consents must be the same. If there is a discrepancy in values, the institution must return HTTP 422 with the error code PAYMENT_CONSENT_MISMATCH.
+      This field refers to the CodMun field of the Pix arrangement.
+  details:
+    type: object
+    description: |
+      Object containing payment details.
+    required:
+      - localInstrument
+      - creditorAccount
+    properties:
+      localInstrument:
+        type: string
+        maxLength: 4
+        enum:
+          - MANU
+          - DICT
+          - QRDN
+          - QRES
+          - INIC
+        example:
+          - DICT
+        description: |
+          Specifies the form of payment initiation:
+          - MANU - Manual entry of transactional account data
+          - DICT - Manual entry of Pix key
+          - QRDN - Dynamic QR code
+          - QRES - Static QR code
+          - INIC - Indicates that the creditor has contracted the Payment Initiator specifically to carry out payment initiations where the beneficiary is previously known.
+      qrCode:
+        type: string
+        maxLength: 512
+        pattern: '[\w\W\s]*'
+        example:
+          - |
+            00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012
+            BR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062
+            530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB
+            CD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76
+        description: |
+          Sequence of characters corresponding to the QR Code made available to the payer.
+          It is the sequence of characters that would be read by the QR Code reader and should provide the payer's data after consultation in the DICT.
+          This functionality is possible for both static QR Code and dynamic QR Code.
+          In the Pix arrangement, this is the same sequence generated and/or read by the Pix Copy and Paste functionality.
+          This field must be in UTF-8 format.
+          [Restriction] Mandatory for QR Code payments, observing the maximum size of 512 bytes.
+      proxy:
+        type: string
+        maxLength: 77
+        pattern: '[\w\W\s]*'
+        example:
+          - "12345678901"
+        description: |
+          Key registered in the DICT belonging to the creditor. Key types can be: phone, email, CPF/CNPJ, or random key.
+          For the phone number, it must be informed in the E.1641 standard.
+          For email, it must have the format xxxxxxxx@xxxxxxx.xxx(.xx) and a maximum of 77 characters.
+          For CPF, it must be informed with 11 numbers, without dots or dashes.
+          For CNPJ, it must be informed with 14 numbers, without dots or dashes.
+          For the random key, it must be informed the UUID generated by the DICT, as specified in RFC41223 format.
+          If informed, the account holder must validate the proxy in the DICT when localInstrument is equal to DICT, QRDN, or QRES and validate the field creditorAccount.
+          This validation is optional if the localInstrument is equal to INIC.
+          [Restriction]
+          If localInstrument is equal to MANU, the proxy field must not be filled.
+          If localInstrument is equal INIC, DICT, QRDN, or QRES, the proxy field must always be filled with the Pix key.
+      creditorAccount:
+        type: object
+        description: |
+          Object containing the identification of the beneficiary's destination account.
+        required:
+          - ispb
+          - number
+          - accountType
+        properties:
+          ispb:
+            type: string
+            minLength: 8
+            maxLength: 8
+            pattern: ^[0-9]{8}$
+            example:
+              - "12345678"
+            description: |
+              Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payment System) participant using only numbers.
+          issuer:
+            type: string
+            maxLength: 4
+            pattern: ^\d{4}$
+            example:
+              - "1774"
+            description: |
+              Agency code issuing the account without digit.
+              (The agency is the branch intended for serving customers, the general public, and credit union members,
+              in the institution's activities, and cannot be mobile or transitory).
+              [Restriction] Mandatory for the following account types: CACC (CURRENT_ACCOUNT), SVGS (SAVINGS_ACCOUNT), and SLRY (SALARY_ACCOUNT).
+          number:
+            type: string
+            minLength: 3
+            maxLength: 20
+            pattern: ^\d{3,20}$
+            example:
+              - "1234567890"
+            description: |
+              Must be filled with the payee's account number, with a check digit (if it exists),
+              if there is an alphanumeric value, it should be converted to 0.
+          accountType:
+            type: string
+            maxLength: 4
+            enum:
+              - CACC
+              - SLRY
+              - SVGS
+              - TRAN
+            example:
+              - CACC
+            description: |
+              Types of accounts used for payment via Pix.
+              Traditional modalities provided by Resolution 4.753, not including linked accounts,
+              accounts of residents abroad, foreign currency accounts, and corresponding electronic money accounts.
+              Here is a description of each ENUM value for the Pix scope.
+              CACC - Current - Current Account.
+              SLRY - Salary - Salary Account.
+              SVGS - Savings - Savings Account.
+              TRAN - TransactingAccount - Prepaid Payment Account.
+        additionalProperties: false
+    additionalProperties: false
+additionalProperties: false

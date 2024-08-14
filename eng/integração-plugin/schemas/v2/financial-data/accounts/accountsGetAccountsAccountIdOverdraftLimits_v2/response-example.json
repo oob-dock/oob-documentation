@@ -1,0 +1,20 @@
+{
+  "data": {
+    "unarrangedOverdraftAmount": {
+      "amount": "1000.0400",
+      "currency": "BRL"
+    },
+    "overdraftContractedLimit": {
+      "amount": "1000.0400",
+      "currency": "BRL"
+    },
+    "overdraftUsedLimit": {
+      "amount": "1000.0400",
+      "currency": "BRL"
+    }
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "requestMeta": {
+    "correlationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "brandId": "string"
+  },
+  "paymentId": [
+    {
+      "key": "string",
+      "value": "string"
+    }
+  ],
+  "consent": {
+    "brandId": "string",
+    "creationDateTime": "5300-11-17T01:10:09Z",
+    "tpp": {
+      "name": "string"
+    },
+    "externalId": "string",
+    "loggedUser": {
+      "document": {
+        "identification": "69016963014",
+        "rel": "YHE"
+      }
+    },
+    "businessDocumentType": {
+      "document": {
+        "identification": "55760980010742",
+        "rel": "TRGH"
+      }
+    },
+    "resources": [
+      {
+        "type": "ACCOUNT",
+        "resourceLegacyId": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ],
+        "authorizers": [
+          {
+            "cpf": "31290607435",
+            "name": "string"
+          }
+        ],
+        "hasMultipleAuthorisers": true
+      }
+    ],
+    "version": "V1",
+    "expirationDateTime": "7335-12-17T09:09:29Z",
+    "creditor": {
+      "personType": "PESSOA_NATURAL",
+      "cpfCnpj": "39249643311",
+      "name": "wbl7Au%bk5+BjiN41u w_clC5bT0/B0VC?%)AM'Vp@$7N-pC8E d7Xv9/Bq(%@*CGp!H$AREK@H20zm*ONgs:/GNdL"
+    },
+    "payment": {
+      "type": "PIX",
+      "date": "2023-07-26",
+      "currency": "FXG",
+      "amount": "40136752954.60",
+      "schedule": {
+        "single": {
+          "date": "2021-01-01"
+        }
+      },
+      "cancellation": {
+        "reason": "CANCELADO_PENDENCIA",
+        "cancelledFrom": "INICIADORA",
+        "cancelledAt": "2021-05-21T08:30:00Z",
+        "cancelledBy": {
+          "document": {
+            "identification": "11111111111",
+            "rel": "CPF"
+          }
+        }
+      },
+      "ibgeTownCode": "5170097",
+      "details": {
+        "localInstrument": "MANU",
+        "qrCode": "E$ JU /mw",
+        "proxy": "8H5}dQ,6$Si;n\\ZoLnp>w<VQCLT,AGak?lM/LqZ[,%v'2vT>zlD",
+        "creditorAccount": {
+          "ispb": "63009190",
+          "issuer": "40",
+          "number": "357992401640342259",
+          "accountType": "CACC"
+        }
+      }
+    },
+    "debtorAccount": {
+      "ispb": "21758661",
+      "issuer": "9610",
+      "number": "832",
+      "accountType": "CACC"
+    },
+    "authExtraData": [
+      {
+        "key": "string",
+        "value": "string"
+      }
+    ],
+    "consentOwner": [
+      {
+        "key": "string",
+        "value": "string"
+      }
+    ]
+  },
+  "requestBody": {
+    "data": {
+      "status": "CANC",
+      "cancellation": {
+        "cancelledBy": {
+          "document": {
+            "identification": "11111111111",
+            "rel": "CPF"
+          }
+        }
+      }
+    }
+  }
+}

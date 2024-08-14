@@ -1,0 +1,10 @@
+{
+    "errors": [
+        {
+            "code": "NAO_INFORMADO",
+            "title": "Não informado.",
+            "detail": "Esta solicitação não poderá ser atendida pois está fora do horário de funcionamento estabelecido nesta fase inicial. O Open Banking está sendo disponibilizado gradualmente para garantir um sistema seguro e estável"
+        }
+    ],
+    "restrictionType": "TRANSACTION_TIME_NOT_ALLOWED"
+}

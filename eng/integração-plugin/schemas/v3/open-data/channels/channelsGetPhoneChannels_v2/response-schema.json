@@ -1,0 +1,231 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Conjunto de informações referente aos canais telefônicos de atendimento da instituição",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "identification",
+          "services"
+        ],
+        "properties": {
+          "participant": {
+            "type": "object",
+            "description": "Conjunto de informações relativas ao participante do produto de Open Finance",
+            "required": [
+              "brand",
+              "name",
+              "cnpjNumber"
+            ],
+            "x-regulatory-required": [
+              "brand",
+              "name",
+              "cnpjNumber",
+              "urlComplementaryList"
+            ],
+            "properties": {
+              "brand": {
+                "type": "string",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Nome da Marca reportada pelo participante do Open Finance. O conceito a que se refere a 'marca' utilizada está em definição pelos participantes.",
+                "example": "Marca A"
+              },
+              "name": {
+                "type": "string",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "minLength": 1,
+                "maxLength": 80,
+                "description": "Nome da Instituição, pertencente à organização, responsável pelo Canal Telefônico.",
+                "example": "Empresa da Marca A"
+              },
+              "cnpjNumber": {
+                "type": "string",
+                "pattern": "^\\d{14}$",
+                "description": "Número completo do CNPJ da instituição",
+                "maxLength": 14,
+                "minLength": 14,
+                "example": "50685362000135"
+              },
+              "urlComplementaryList": {
+                "type": "string",
+                "description": "URL do link que conterá a lista complementar com os nomes e CNPJs agrupados sob o mesmo cnpjNumber. Os contidos nessa lista possuem as mesmas características para produtos e serviços. \nEndereço eletrônico de acesso ao canal. Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada. \n\nRestrição: Será obrigatoriamente preenchido se houver lista complementar com os nomes e CNPJs a ser disponibilizada\n",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "minLength": 1,
+                "maxLength": 1024,
+                "example": "https://example.com/mobile-banking"
+              }
+            }
+          },
+          "identification": {
+            "type": "object",
+            "description": "Identificação dos canais telefônicos de atendimento",
+            "required": [
+              "type"
+            ],
+            "x-regulatory-required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "CENTRAL_TELEFONICA",
+                  "SAC",
+                  "OUVIDORIA",
+                  "OUTROS"
+                ],
+                "description": " Tipo de canal telefônico de atendimento: \n* `CENTRAL_TELEFONICA` \n* `SAC` \n* `OUVIDORIA` \n* `OUTROS`",
+                "example": "OUVIDORIA"
+              },
+              "additionalInfo": {
+                "type": "string",
+                "description": "Campo de texto livre para descrever informações complementateres sobre canais telefônicos. De preenchimento obrigatório quando o tipo de canal de atendimento telefônico selecionado for \"OUTROS\"",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "minLength": 1,
+                "maxLength": 300,
+                "example": "Informações Adicionais"
+              },
+              "phones": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Lista de telefones do Canal de Atendimento",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "number"
+                  ],
+                  "x-regulatory-required": [
+                    "countryCallingCode",
+                    "areaCode",
+                    "number"
+                  ],
+                  "properties": {
+                    "countryCallingCode": {
+                      "type": "string",
+                      "maxLength": 4,
+                      "minLength": 1,
+                      "pattern": "^\\d{1,4}$",
+                      "example": "55",
+                      "description": "Número de DDI (Discagem Direta Internacional) para telefone de acesso ao Canal - se houver."
+                    },
+                    "areaCode": {
+                      "type": "string",
+                      "maxLength": 2,
+                      "minLength": 2,
+                      "pattern": "^(\\d{2})$",
+                      "example": "19",
+                      "description": "Número de DDD (Discagem Direta à Distância) para telefone de acesso ao Canal - se houver."
+                    },
+                    "number": {
+                      "type": "string",
+                      "maxLength": 11,
+                      "minLength": 8,
+                      "pattern": "^([0-9]{8,11})$",
+                      "example": "08007787788",
+                      "description": "Número de telefone de acesso ao canal."
+                    },
+                    "additionalInfo": {
+                      "type": "string",
+                      "description": "Informações adicionais referente ao canal telefônico de atendimento",
+                      "maxLength": 300,
+                      "minLength": 1,
+                      "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                      "example": "Informações Adicionais"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "services": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Traz a relação de serviços disponbilizados pelo Canal de Atendimento",
+            "items": {
+              "type": "object",
+              "required": [
+                "name",
+                "code"
+              ],
+              "x-regulatory-required": [
+                "name",
+                "code"
+              ],
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "enum": [
+                    "ABERTURA_CONTAS_DEPOSITOS_OU_PAGAMENTO_PRE_PAGA",
+                    "SAQUE_MOEDA_EM_ESPECIE",
+                    "RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA",
+                    "TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES",
+                    "CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_CONTAS_PAGAMENTOS",
+                    "APLICACOES_RESGATES_INVESTIMENTOS",
+                    "EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS",
+                    "DEPOSITOS_MOEDA_ESPECIE_CHEQUE",
+                    "OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO",
+                    "CARTAO_CREDITO",
+                    "SEGUROS",
+                    "OPERACOES_ARRENDAMENTO_MERCANTIL",
+                    "ABERTURA_CONTA_PAGAMENTO_POS_PAGA",
+                    "COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE",
+                    "COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_BEM_COMO_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO",
+                    "COMPRA_VENDA_OURO",
+                    "OUTROS_PRODUTOS_SERVICOS",
+                    "CANCELAMENTO",
+                    "INFORMACOES",
+                    "RECLAMACOES"
+                  ],
+                  "description": "Nome dos Serviços efetivamente prestados pelo Canal de Atendimento"
+                },
+                "code": {
+                  "type": "string",
+                  "enum": [
+                    "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+                    "SAQUE_MOEDA_ESPECIE",
+                    "RECEBE_PAGA_QUALQUER_NATUREZA",
+                    "TRANSFERENCIAS_ELETRONICAS_MOVIMENTA_CONTAS_DEPOSITOS_OU_PAGTO_TITULARES_CLIENTES",
+                    "CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS",
+                    "APLICA_RESGATA_INVESTIMENTOS",
+                    "EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO",
+                    "DEPOSITO_MOEDA_ESPECIE_CHEQUE",
+                    "OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO",
+                    "CARTAO_CREDITO",
+                    "SEGUROS",
+                    "OPERA_ARRENDAMENTO_MERCANTIL",
+                    "ABERTURA_CONTA_PAGAMENTO_POS_PAGA",
+                    "COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE",
+                    "COMPRA_VENDA_CHEQUE_CHEQUE_VIAGEM_CARGA_MOEDA_ESTRANGEIRA_CARTAO_PRE_PAGO",
+                    "COMPRA_VENDA_OURO",
+                    "OUTROS_PRODUTOS_SERVICOS",
+                    "CANCELAMENTO",
+                    "INFORMACOES",
+                    "RECLAMACOES"
+                  ],
+                  "description": "Código dos Serviços efetivamente prestados pelo Canal de Atendimento"
+                },
+                "additionalInfo": {
+                  "type": "string",
+                  "description": "Texto livre para complementar informação relativa ao Serviço disponível, quando for selecionada a opção 'OUTROS_PRODUTOS_SERVICOS'",
+                  "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                  "minLength": 1,
+                  "maxLength": 2000,
+                  "example": "Informações Adicionais"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

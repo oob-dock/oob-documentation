@@ -1,0 +1,550 @@
+{
+  "data": {
+    "participant": {
+      "brand": "Organização A",
+      "name": "Empresa da Organização A",
+      "cnpjNumber": "50685362000135"
+    },
+    "bankingAgents": [
+      {
+        "identification": {
+          "cnpjNumber": "50685362000135",
+          "corporationName": "Empresa Correspondente A",
+          "isUnderestablishment": true,
+          "groupName": "Grupo Master"
+        },
+        "locations": [
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "ibgeCode": "3515890",
+              "country": "Brasil",
+              "countryCode": "BRA",
+              "geographicCoordinates": {
+                "longitude": "-180.836519",
+                "latitude": "-90.8365180"
+              },
+              "additionalInfo": "Informações Adicionais"
+            },
+            "phones": [
+              {
+                "number": "35721199",
+                "areaCode": "19",
+                "type": "FIXO",
+                "countryCallingCode": "55"
+              }
+            ],
+            "availability": {
+              "standards": [
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "openingTime": "Z",
+                  "closingTime": "19:21:18"
+                },
+                {
+                  "weekday": "QUINTA_FEIRA",
+                  "openingTime": "23:44:22",
+                  "closingTime": "20:14:13"
+                },
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "Z"
+                },
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "18:22:57"
+                }
+              ],
+              "exception": "Exceto feriados municipais, nacionais e estaduais",
+              "isPublicAccessAllowed": true
+            }
+          },
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "country": "Brasil",
+              "ibgeCode": "3515890",
+              "countryCode": "BRA",
+              "additionalInfo": "Informações Adicionais",
+              "geographicCoordinates": {
+                "latitude": "-90.8365180",
+                "longitude": "-180.836519"
+              }
+            },
+            "availability": {
+              "exception": "Exceto feriados municipais, nacionais e estaduais",
+              "isPublicAccessAllowed": false,
+              "standards": [
+                {
+                  "weekday": "QUINTA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "Z"
+                },
+                {
+                  "weekday": "SABADO",
+                  "openingTime": "20:16:36",
+                  "closingTime": "Z"
+                },
+                {
+                  "weekday": "SABADO",
+                  "closingTime": "11:07:39",
+                  "openingTime": "Z"
+                },
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "closingTime": "13:48:27",
+                  "openingTime": "Z"
+                },
+                {
+                  "weekday": "SEXTA_FEIRA",
+                  "closingTime": "22:03:29",
+                  "openingTime": "Z"
+                }
+              ]
+            },
+            "phones": [
+              {
+                "number": "35721199",
+                "areaCode": "19",
+                "countryCallingCode": "55",
+                "type": "FIXO"
+              }
+            ]
+          },
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "geographicCoordinates": {
+                "longitude": "-180.836519",
+                "latitude": "-90.8365180"
+              },
+              "ibgeCode": "3515890",
+              "countryCode": "BRA",
+              "additionalInfo": "Informações Adicionais",
+              "country": "Brasil"
+            },
+            "availability": {
+              "exception": "Exceto feriados municipais, nacionais e estaduais",
+              "isPublicAccessAllowed": true,
+              "standards": [
+                {
+                  "weekday": "QUINTA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "21:18:51"
+                },
+                {
+                  "weekday": "SEXTA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "21:06:21"
+                },
+                {
+                  "weekday": "TERCA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "06:01:04"
+                },
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "openingTime": "08:53:19",
+                  "closingTime": "Z"
+                },
+                {
+                  "weekday": "TERCA_FEIRA",
+                  "openingTime": "14:09:21",
+                  "closingTime": "21:47:52"
+                }
+              ]
+            },
+            "phones": [
+              {
+                "number": "35721199",
+                "areaCode": "19",
+                "type": "FIXO",
+                "countryCallingCode": "55"
+              },
+              {
+                "number": "35721199",
+                "areaCode": "19",
+                "type": "FIXO",
+                "countryCallingCode": "55"
+              },
+              {
+                "countryCallingCode": "55",
+                "type": "FIXO",
+                "areaCode": "19",
+                "number": "35721199"
+              },
+              {
+                "type": "FIXO",
+                "countryCallingCode": "55",
+                "areaCode": "19",
+                "number": "35721199"
+              },
+              {
+                "type": "FIXO",
+                "areaCode": "19",
+                "number": "35721199",
+                "countryCallingCode": "55"
+              }
+            ]
+          },
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "countryCode": "BRA",
+              "ibgeCode": "3515890",
+              "geographicCoordinates": {
+                "longitude": "-180.836519",
+                "latitude": "-90.8365180"
+              },
+              "country": "Brasil",
+              "additionalInfo": "Informações Adicionais"
+            },
+            "availability": {
+              "standards": [
+                {
+                  "weekday": "SEXTA_FEIRA",
+                  "openingTime": "20:29:40",
+                  "closingTime": "Z"
+                },
+                {
+                  "weekday": "DOMINGO",
+                  "openingTime": "10:21:16",
+                  "closingTime": "Z"
+                }
+              ],
+              "isPublicAccessAllowed": true,
+              "exception": "Exceto feriados municipais, nacionais e estaduais"
+            },
+            "phones": [
+              {
+                "number": "35721199",
+                "areaCode": "19",
+                "countryCallingCode": "55",
+                "type": "FIXO"
+              },
+              {
+                "number": "35721199",
+                "areaCode": "19",
+                "type": "FIXO",
+                "countryCallingCode": "55"
+              },
+              {
+                "areaCode": "19",
+                "countryCallingCode": "55",
+                "number": "35721199",
+                "type": "FIXO"
+              }
+            ]
+          },
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "country": "Brasil",
+              "ibgeCode": "3515890",
+              "geographicCoordinates": {
+                "longitude": "-180.836519",
+                "latitude": "-90.8365180"
+              },
+              "additionalInfo": "Informações Adicionais",
+              "countryCode": "BRA"
+            },
+            "phones": [
+              {
+                "areaCode": "19",
+                "type": "FIXO",
+                "number": "35721199",
+                "countryCallingCode": "55"
+              },
+              {
+                "type": "FIXO",
+                "number": "35721199",
+                "areaCode": "19",
+                "countryCallingCode": "55"
+              },
+              {
+                "type": "FIXO",
+                "countryCallingCode": "55",
+                "number": "35721199",
+                "areaCode": "19"
+              },
+              {
+                "areaCode": "19",
+                "number": "35721199",
+                "type": "FIXO",
+                "countryCallingCode": "55"
+              },
+              {
+                "type": "FIXO",
+                "areaCode": "19",
+                "number": "35721199",
+                "countryCallingCode": "55"
+              }
+            ],
+            "availability": {
+              "isPublicAccessAllowed": false,
+              "standards": [
+                {
+                  "weekday": "DOMINGO",
+                  "openingTime": "Z",
+                  "closingTime": "08:29:23"
+                },
+                {
+                  "weekday": "SEXTA_FEIRA",
+                  "openingTime": "23:27:57",
+                  "closingTime": "Z"
+                },
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "Z"
+                },
+                {
+                  "weekday": "TERCA_FEIRA",
+                  "closingTime": "17:44:31",
+                  "openingTime": "Z"
+                },
+                {
+                  "weekday": "TERCA_FEIRA",
+                  "closingTime": "06:58:06",
+                  "openingTime": "Z"
+                }
+              ],
+              "exception": "Exceto feriados municipais, nacionais e estaduais"
+            }
+          }
+        ],
+        "services": [
+          {
+            "name": "RECEPCAO_ENCAMINHAMENTO_PROPOSTAS_FORNECIMENTO_CARTAO_CREDITO_RESPONSABILIDADE_INSTITUICAO_CONTRATANTE",
+            "code": "RECEBE_PAGAMENTOS_RELACIONADOS_LETRAS_CAMBIO_ACEITE_INSTITUICAO",
+            "additionalInfo": "Informações Adicionais"
+          }
+        ],
+        "contractors": [
+          {
+            "name": "Empresa Contratante",
+            "cnpjNumber": "50685362000135"
+          },
+          {
+            "name": "Empresa Contratante",
+            "cnpjNumber": "50685362000135"
+          },
+          {
+            "name": "Empresa Contratante",
+            "cnpjNumber": "50685362000135"
+          },
+          {
+            "name": "Empresa Contratante",
+            "cnpjNumber": "50685362000135"
+          },
+          {
+            "name": "Empresa Contratante",
+            "cnpjNumber": "50685362000135"
+          }
+        ]
+      },
+      {
+        "identification": {
+          "cnpjNumber": "50685362000135",
+          "corporationName": "Empresa Correspondente A",
+          "isUnderestablishment": true,
+          "groupName": "Grupo Master"
+        },
+        "locations": [
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "additionalInfo": "Informações Adicionais",
+              "countryCode": "BRA",
+              "geographicCoordinates": {
+                "latitude": "-90.8365180",
+                "longitude": "-180.836519"
+              },
+              "country": "Brasil",
+              "ibgeCode": "3515890"
+            },
+            "availability": {
+              "isPublicAccessAllowed": true,
+              "exception": "Exceto feriados municipais, nacionais e estaduais",
+              "standards": [
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "closingTime": "22:57:08",
+                  "openingTime": "Z"
+                }
+              ]
+            },
+            "phones": [
+              {
+                "countryCallingCode": "55",
+                "type": "FIXO",
+                "areaCode": "19",
+                "number": "35721199"
+              },
+              {
+                "areaCode": "19",
+                "type": "FIXO",
+                "number": "35721199",
+                "countryCallingCode": "55"
+              }
+            ]
+          },
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "ibgeCode": "3515890",
+              "additionalInfo": "Informações Adicionais",
+              "countryCode": "BRA",
+              "geographicCoordinates": {
+                "longitude": "-180.836519",
+                "latitude": "-90.8365180"
+              },
+              "country": "Brasil"
+            },
+            "phones": [
+              {
+                "type": "FIXO",
+                "number": "35721199",
+                "countryCallingCode": "55",
+                "areaCode": "19"
+              },
+              {
+                "areaCode": "19",
+                "type": "FIXO",
+                "number": "35721199",
+                "countryCallingCode": "55"
+              }
+            ],
+            "availability": {
+              "standards": [
+                {
+                  "weekday": "DOMINGO",
+                  "closingTime": "Z",
+                  "openingTime": "03:27:20"
+                }
+              ],
+              "exception": "Exceto feriados municipais, nacionais e estaduais",
+              "isPublicAccessAllowed": true
+            }
+          },
+          {
+            "postalAddress": {
+              "address": "Av Naburo Ykesaki, 1270",
+              "districtName": "Centro",
+              "townName": "Marília",
+              "countrySubDivision": "SP",
+              "postCode": "17500001",
+              "country": "Brasil",
+              "countryCode": "BRA",
+              "ibgeCode": "3515890",
+              "additionalInfo": "Informações Adicionais",
+              "geographicCoordinates": {
+                "longitude": "-180.836519",
+                "latitude": "-90.8365180"
+              }
+            },
+            "phones": [
+              {
+                "number": "35721199",
+                "countryCallingCode": "55",
+                "areaCode": "19",
+                "type": "FIXO"
+              },
+              {
+                "countryCallingCode": "55",
+                "number": "35721199",
+                "areaCode": "19",
+                "type": "FIXO"
+              },
+              {
+                "type": "FIXO",
+                "countryCallingCode": "55",
+                "number": "35721199",
+                "areaCode": "19"
+              },
+              {
+                "number": "35721199",
+                "areaCode": "19",
+                "type": "FIXO",
+                "countryCallingCode": "55"
+              }
+            ],
+            "availability": {
+              "exception": "Exceto feriados municipais, nacionais e estaduais",
+              "isPublicAccessAllowed": false,
+              "standards": [
+                {
+                  "weekday": "SEGUNDA_FEIRA",
+                  "openingTime": "22:59:30",
+                  "closingTime": "04:44:39"
+                },
+                {
+                  "weekday": "DOMINGO",
+                  "openingTime": "Z",
+                  "closingTime": "Z"
+                },
+                {
+                  "weekday": "TERCA_FEIRA",
+                  "closingTime": "21:40:12",
+                  "openingTime": "06:28:10"
+                },
+                {
+                  "weekday": "QUARTA_FEIRA",
+                  "closingTime": "Z",
+                  "openingTime": "14:33:03"
+                }
+              ]
+            }
+          }
+        ],
+        "services": [
+          {
+            "name": "REALIZACAO_RECEBIMENTOS_PAGAMENTOS_TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_TITULARIDADE_CLIENTES_MANTIDAS_INSTITUICAO_CONTRATANTE",
+            "code": "RECEBIMENTOS_PAGAMENTOS_QUALQUER_NATUREZA_EXECUCAO_CONTRATOS_CONVENIO",
+            "additionalInfo": "Informações Adicionais"
+          }
+        ],
+        "contractors": [
+          {
+            "name": "Empresa Contratante",
+            "cnpjNumber": "50685362000135"
+          },
+          {
+            "name": "Empresa Contratante",
+            "cnpjNumber": "50685362000135"
+          }
+        ]
+      }
+    ]
+  }
+}

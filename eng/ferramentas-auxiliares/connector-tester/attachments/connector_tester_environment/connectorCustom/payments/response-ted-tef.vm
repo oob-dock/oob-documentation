@@ -1,0 +1,39 @@
+{
+    "data": {
+        "paymentId": [
+            {
+                "key": "instPayId",
+                "value": "${body.instPayId}"
+            }
+        ],
+        "creationDateTime": "${body.initiationTimestampUTC}",
+        "statusUpdateDateTime": "${body.statusTimestampUTC}",
+#if(${body.status.code} == 2)
+        "status": "ACSP",
+#elseif(${body.status.code} == 3)
+        "status": "ACCC",
+#else
+        "status": "PDNG",
+#end
+        "payment": {
+            "amount": "${body.transaction.amount}",
+            "currency": "${body.transaction.currency}"
+        },
+        "creditorAccount": {
+#if(${body.payee.ispb})
+            "ispb": "${body.payee.ispb}",
+#end
+            "issuer": "${body.payee.issuer}",
+            "number": "${body.payee.number}",
+            "accountType": "${body.payee.accountType}"
+        }
+#if(${body.purpose})
+        ,
+        "purpose": ${body.purpose}
+#end
+#if(${body.purposeAdditionalInfo})
+        ,
+        "purposeAdditionalInfo": "${body.purposeAdditionalInfo}"
+#end
+    }
+}

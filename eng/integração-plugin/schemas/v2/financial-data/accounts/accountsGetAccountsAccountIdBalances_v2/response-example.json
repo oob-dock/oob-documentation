@@ -1,0 +1,20 @@
+{
+  "data": {
+    "availableAmount": {
+      "amount": "1000.0400",
+      "currency": "BRL"
+    },
+    "blockedAmount": {
+      "amount": "1000.0400",
+      "currency": "BRL"
+    },
+    "automaticallyInvestedAmount": {
+      "amount": "1000.0400",
+      "currency": "BRL"
+    }
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}
