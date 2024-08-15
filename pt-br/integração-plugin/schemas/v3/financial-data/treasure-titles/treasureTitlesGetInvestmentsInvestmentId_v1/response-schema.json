@@ -1,0 +1,186 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "isinCode",
+        "productName",
+        "remuneration",
+        "dueDate",
+        "purchaseDate",
+        "voucherPaymentIndicator"
+      ],
+      "properties": {
+        "isinCode": {
+          "description": "Código ISIN da emissão, Código ISIN do produto, Código da emissora\n: código universal que identifica cada valor mobiliário ou instrumento\nfinanceiro, conforme Norma ISO 6166.\n",
+          "maxLength": 12,
+          "pattern": "^[A-Z]{2}([A-Z0-9]){9}\\d{1}$",
+          "example": "BRCST4CTF001",
+          "type": "string"
+        },
+        "productName": {
+          "description": "Nome do título em questão, conforme listado no site do Tesouro Direto [https://www.tesourodireto.com.br](https://www.tesourodireto.com.br)",
+          "maxLength": 70,
+          "pattern": "[\\w\\W\\s]*",
+          "example": "Tesouro Selic 2025",
+          "type": "string"
+        },
+        "remuneration": {
+          "description": "Objeto para detalhamento de remuneração do titulo.",
+          "type": "object",
+          "required": [
+            "indexer",
+            "ratePeriodicity",
+            "calculation"
+          ],
+          "properties": {
+            "indexer": {
+              "description": "Índice utilizado como referência para a correção da rentabilidade e/ou rendimentos do ativo (CDI, DI , TR, IPCA, IGP_M, IGP_DI, INPC, BCP, TLC, SELIC, PRE_FIXADO e OUTROS)",
+              "example": "CDI",
+              "enum": [
+                "CDI",
+                "DI",
+                "TR",
+                "IPCA",
+                "IGP_M",
+                "IGP_DI",
+                "INPC",
+                "BCP",
+                "TLC",
+                "SELIC",
+                "PRE_FIXADO",
+                "OUTROS"
+              ],
+              "type": "string"
+            },
+            "indexerAdditionalInfo": {
+              "description": "Informações adicionais do indexador.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido com o valor 'OUTROS'.\n",
+              "maxLength": 50,
+              "pattern": "[\\w\\W\\s]*",
+              "example": "Dólar",
+              "type": "string"
+            },
+            "preFixedRate": {
+              "description": "Valor da taxa da aquisição do contrato.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido com o valor ‘PRE FIXADO’.\n",
+              "maxLength": 8,
+              "minLength": 8,
+              "pattern": "^\\d{1}\\.\\d{6}$",
+              "example": "0.300000",
+              "type": "string",
+              "format": "double",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "postFixedIndexerPercentage": {
+              "description": "Percentual do indexador da aquisição do contrato.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido de forma diferente de ‘PRE FIXADO’.\n",
+              "maxLength": 8,
+              "minLength": 8,
+              "pattern": "^\\d{1}\\.\\d{6}$",
+              "example": "1.100000",
+              "type": "string",
+              "format": "double",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "ratePeriodicity": {
+              "description": "Periodicidade da taxa de remuneração (mensal, anual, diário e semestral)",
+              "example": "DIARIO",
+              "enum": [
+                "MENSAL",
+                "ANUAL",
+                "DIARIO",
+                "SEMESTRAL"
+              ],
+              "type": "string"
+            },
+            "calculation": {
+              "description": "Base de cálculo (dias úteis ou dias corridos)",
+              "example": "DIAS_CORRIDOS",
+              "enum": [
+                "DIAS_UTEIS",
+                "DIAS_CORRIDOS"
+              ],
+              "type": "string"
+            }
+          }
+        },
+        "dueDate": {
+          "description": "Data de vencimento do título.",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-02-15",
+          "type": "string"
+        },
+        "purchaseDate": {
+          "description": "Data de aquisição do cliente.",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-02-15",
+          "type": "string"
+        },
+        "voucherPaymentIndicator": {
+          "description": "Indicativo se há pagamento de cupom (Sim ou não).",
+          "example": "SIM",
+          "enum": [
+            "SIM",
+            "NAO"
+          ],
+          "type": "string"
+        },
+        "voucherPaymentPeriodicity": {
+          "description": "Em caso de haver pagamento de cupom, descrever a periodicidade\n(mensal, trimestral, semestral, anual, irregular e outros)\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'voucherPaymentIndicator' for preenchido com o valor 'SIM'.\n",
+          "example": "MENSAL",
+          "enum": [
+            "MENSAL",
+            "TRIMESTRAL",
+            "SEMESTRAL",
+            "ANUAL",
+            "IRREGULAR",
+            "OUTROS"
+          ],
+          "type": "string"
+        },
+        "voucherPaymentPeriodicityAdditionalInfo": {
+          "description": "Informações adicionais da periodicidade de pagamento de cupom.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'voucherPaymentPeriodicity' for preenchido com o valor 'OUTROS'.\n",
+          "maxLength": 50,
+          "pattern": "[\\w\\W\\s]*",
+          "example": "Diária",
+          "type": "string"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente a API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

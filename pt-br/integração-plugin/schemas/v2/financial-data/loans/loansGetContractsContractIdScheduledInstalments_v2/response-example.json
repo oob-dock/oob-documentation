@@ -1,0 +1,45 @@
+{
+  "data": {
+    "dueInstalments": 57,
+    "pastDueInstalments": 73,
+    "typeContractRemaining": "DIA",
+    "typeNumberOfInstalments": "MES",
+    "paidInstalments": 73,
+    "contractRemainingNumber": 14600,
+    "totalNumberOfInstalments": 130632,
+    "balloonPayments": [
+      {
+        "dueDate": "2021-05-21",
+        "amount": {
+          "amount": "1000.0400",
+          "currency": "BRL"
+        }
+      },
+      {
+        "dueDate": "2021-05-21",
+        "amount": {
+          "amount": "1000.0400",
+          "currency": "BRL"
+        }
+      },
+      {
+        "dueDate": "2021-05-21",
+        "amount": {
+          "amount": "1000.0400",
+          "currency": "BRL"
+        }
+      },
+      {
+        "dueDate": "2021-05-21",
+        "amount": {
+          "amount": "1000.0400",
+          "currency": "BRL"
+        }
+      }
+    ]
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

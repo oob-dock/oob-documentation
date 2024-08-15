@@ -1,0 +1,109 @@
+{
+  "requestMeta": {
+    "correlationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+    "brandId": "string"
+  },
+  "paymentId": [
+    {
+      "key": "string",
+      "value": "string"
+    }
+  ],
+  "consent": {
+    "brandId": "string",
+    "creationDateTime": "9676-11-04T20:30:44Z",
+    "tpp": {
+      "name": "string"
+    },
+    "externalId": "string",
+    "loggedUser": {
+      "document": {
+        "identification": "08759299356",
+        "rel": "AUS"
+      }
+    },
+    "businessDocumentType": {
+      "document": {
+        "identification": "82740232785982",
+        "rel": "WBDJ"
+      }
+    },
+    "resources": [
+      {
+        "type": "ACCOUNT",
+        "resourceLegacyId": [
+          {
+            "key": "string",
+            "value": "string"
+          }
+        ],
+        "authorizers": [
+          {
+            "cpf": "22482189395",
+            "name": "string"
+          }
+        ],
+        "hasMultipleAuthorisers": true
+      }
+    ],
+    "version": "V1",
+    "expirationDateTime": "5186-03-31T20:05:12Z",
+    "creditor": {
+      "personType": "PESSOA_NATURAL",
+      "cpfCnpj": "87265042235712",
+      "name": "ZqQru!rDc!nnhf+BeGW7A@o,)(2xAG4Aj1k (>Hj>fM"
+    },
+    "payment": {
+      "type": "PIX",
+      "date": "2023-07-26",
+      "currency": "GVZ",
+      "amount": "4719.47",
+      "schedule": {
+        "single": {
+          "date": "2021-01-01"
+        }
+      },
+      "cancellation": {
+        "reason": "CANCELADO_PENDENCIA",
+        "cancelledFrom": "INICIADORA",
+        "cancelledAt": "2021-05-21T08:30:00Z",
+        "cancelledBy": {
+          "document": {
+            "identification": "11111111111",
+            "rel": "CPF"
+          }
+        }
+      },
+      "ibgeTownCode": "9697505",
+      "details": {
+        "localInstrument": "MANU",
+        "qrCode": "y^:q~UK1iYn](K[T]a|hf*$]++V49R-Q6#Tz{dbJVZ1+Ue=td2DEw\\1cwU>`No=H6{&B9GFin m +xq2BM{-5k!)\"*j9x~)h}\"",
+        "proxy": "m8NLz'(eE*OA]Q p/B",
+        "creditorAccount": {
+          "ispb": "63879703",
+          "issuer": "994",
+          "number": "86117",
+          "accountType": "CACC"
+        }
+      }
+    },
+    "debtorAccount": {
+      "ispb": "07773819",
+      "issuer": "5851",
+      "number": "32333100759",
+      "accountType": "CACC"
+    },
+    "authExtraData": [
+      {
+        "key": "string",
+        "value": "string"
+      }
+    ],
+    "consentOwner": [
+      {
+        "key": "string",
+        "value": "string"
+      }
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+{
+    "instPayId": "${body.requestBody.paymentId[0].value}",
+    "user": "${body.requestBody.data.revocation.loggedUser.document.identification}",
+    "reason": "${body.requestBody.data.revocation.reason.additionalInformation}"
+}

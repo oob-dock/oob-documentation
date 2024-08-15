@@ -1,0 +1,131 @@
+{
+  "type": "object",
+  "required": [
+    "data",
+    "meta"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Conjunto de informações das Contas de: depósito à vista, poupança e de pagamento pré-paga\n",
+      "required": [
+        "availableAmount",
+        "blockedAmount",
+        "automaticallyInvestedAmount"
+      ],
+      "properties": {
+        "availableAmount": {
+          "type": "object",
+          "description": "Saldo disponível para utilização imediata. No caso de conta de depósito a vista, sem considerar cheque especial e investimentos atrelados a conta. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "minLength": 4,
+              "example": "1000.0400",
+              "description": "Valor relacionado ao objeto.",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "example": "BRL"
+            }
+          }
+        },
+        "blockedAmount": {
+          "type": "object",
+          "description": "Saldo bloqueado, não disponível para utilização imediata, por motivo de bloqueio apresentado para o cliente nos canais eletrônicos. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 20,
+              "minLength": 4,
+              "example": "1000.0400",
+              "description": "Valor relacionado ao objeto.",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "example": "BRL"
+            }
+          }
+        },
+        "automaticallyInvestedAmount": {
+          "type": "object",
+          "description": "Saldo disponível com aplicação automática - corresponde a soma do saldo disponível acrescido do valor obtido a partir da aplicação automática. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "format": "double",
+              "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 20,
+              "minLength": 4,
+              "example": "1000.0400",
+              "description": "Valor relacionado ao objeto.",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "example": "BRL"
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

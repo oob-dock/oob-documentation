@@ -1,0 +1,1146 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA"
+            ],
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "differentiatedDeductibleDays": 15,
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "allowApartPurchase": true,
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "maximumQtyIndemnifiableInstallments": 10,
+            "deductibleDays": 10,
+            "indemnityPaymentMethods": [
+              "REEMBOLSO_DESPESAS",
+              "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO",
+              "REEMBOLSO_DESPESAS",
+              "PRESTACAO_SERVICOS"
+            ],
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        }
+      ],
+      "assistanceTypes": [
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA"
+      ],
+      "additionals": [
+        "SORTEIO"
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "VITALICIA",
+        "VITALICIA",
+        "VITALICIA",
+        "VITALICIA"
+      ],
+      "benefitRecalculation": {
+        "criterias": [
+          "VINCULADO_SALDO_DEVEDOR",
+          "INDICE",
+          "INDICE"
+        ],
+        "updateIndexes": [
+          "IPCA",
+          "IPCA"
+        ]
+      },
+      "indemnityPaymentMethods": [
+        "UNICO"
+      ],
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO"
+        ],
+        "frequencies": [
+          "DIARIA",
+          "DIARIA",
+          "DIARIA"
+        ],
+        "contributionTax": "Excepteur in non"
+      },
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "portabilityGraceTime": {
+        "amount": 90,
+        "unit": "MESES"
+      },
+      "pmbacRemuneration": {
+        "updateIndexes": [
+          "IPCA",
+          "IPCA",
+          "IPCA"
+        ],
+        "interestRate": "14.2521"
+      },
+      "ageAdjustment": {
+        "criterias": [
+          "APOS_PERIODO_ANOS"
+        ],
+        "frequency": 10
+      },
+      "globalCapital": true,
+      "otherGuaranteedValues": [
+        "SALDAMENTO",
+        "SALDAMENTO"
+      ],
+      "modality": "FUNERAL",
+      "financialRegimes": [
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES"
+      ],
+      "category": "TRADICIONAL",
+      "assistanceTypesAdditionalInfos": [
+        "Assistance additional info."
+      ],
+      "indemnityPaymentIncomes": [
+        "CERTA",
+        "CERTA",
+        "CERTA"
+      ],
+      "allowPortability": false,
+      "reclaim": {
+        "gracePeriod": {
+          "amount": 90,
+          "unit": "MESES"
+        },
+        "table": [
+          {
+            "finalMonthRange": 12,
+            "percentage": "0.5000",
+            "initialMonthRange": 1
+          },
+          {
+            "initialMonthRange": 1,
+            "percentage": "0.5000",
+            "finalMonthRange": 12
+          },
+          {
+            "initialMonthRange": 1,
+            "finalMonthRange": 12,
+            "percentage": "0.5000"
+          },
+          {
+            "initialMonthRange": 1,
+            "finalMonthRange": 12,
+            "percentage": "0.5000"
+          },
+          {
+            "percentage": "0.5000",
+            "finalMonthRange": 12,
+            "initialMonthRange": 1
+          }
+        ],
+        "differenciatedPercentage": "https://openinsurance.com.br/aaa’\nObs.: Exceção de cobertura ou critério definido acima será descrito aqui na URL\nExemplo: Cobertura X: a partir de 25 meses = 100%\n"
+      }
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "maximumQtyIndemnifiableInstallments": 10,
+            "deductibleDays": 10,
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "allowApartPurchase": true,
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA"
+            ],
+            "indemnityPaymentMethods": [
+              "REEMBOLSO_DESPESAS"
+            ],
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "differentiatedDeductibleDays": 15,
+            "excludedRisksURL": "https://openinsurance.com.br/aaa"
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "deductibleDays": 10,
+            "maximumQtyIndemnifiableInstallments": 10,
+            "allowApartPurchase": true,
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA"
+            ],
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "differentiatedDeductibleDays": 15,
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "indemnityPaymentMethods": [
+              "PRESTACAO_SERVICOS",
+              "REEMBOLSO_DESPESAS"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        }
+      ],
+      "assistanceTypes": [
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA"
+      ],
+      "additionals": [
+        "SORTEIO",
+        "SORTEIO",
+        "SORTEIO"
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "VITALICIA"
+      ],
+      "benefitRecalculation": {
+        "criterias": [
+          "INDICE"
+        ],
+        "updateIndexes": [
+          "IPCA",
+          "IPCA",
+          "IPCA",
+          "IPCA"
+        ]
+      },
+      "indemnityPaymentMethods": [
+        "UNICO",
+        "UNICO",
+        "UNICO",
+        "UNICO",
+        "UNICO"
+      ],
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO"
+        ],
+        "frequencies": [
+          "DIARIA",
+          "DIARIA",
+          "DIARIA",
+          "DIARIA"
+        ],
+        "contributionTax": "ut ullamco exercitation"
+      },
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "ageAdjustment": {
+        "criterias": [
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS"
+        ],
+        "frequency": 10
+      },
+      "modality": "FUNERAL",
+      "reclaim": {
+        "table": [
+          {
+            "finalMonthRange": 12,
+            "percentage": "0.5000",
+            "initialMonthRange": 1
+          },
+          {
+            "percentage": "0.5000",
+            "initialMonthRange": 1,
+            "finalMonthRange": 12
+          },
+          {
+            "percentage": "0.5000",
+            "finalMonthRange": 12,
+            "initialMonthRange": 1
+          },
+          {
+            "percentage": "0.5000",
+            "initialMonthRange": 1,
+            "finalMonthRange": 12
+          },
+          {
+            "percentage": "0.5000",
+            "finalMonthRange": 12,
+            "initialMonthRange": 1
+          }
+        ],
+        "differenciatedPercentage": "https://openinsurance.com.br/aaa’\nObs.: Exceção de cobertura ou critério definido acima será descrito aqui na URL\nExemplo: Cobertura X: a partir de 25 meses = 100%\n",
+        "gracePeriod": {
+          "amount": 90,
+          "unit": "MESES"
+        }
+      },
+      "pmbacRemuneration": {
+        "interestRate": "14.2521",
+        "updateIndexes": [
+          "IPCA",
+          "IPCA",
+          "IPCA",
+          "IPCA"
+        ]
+      },
+      "portabilityGraceTime": {
+        "amount": 90,
+        "unit": "MESES"
+      },
+      "assistanceTypesAdditionalInfos": [
+        "Assistance additional info."
+      ],
+      "indemnityPaymentIncomes": [
+        "CERTA",
+        "CERTA",
+        "CERTA",
+        "CERTA"
+      ],
+      "category": "TRADICIONAL",
+      "otherGuaranteedValues": [
+        "SALDAMENTO",
+        "SALDAMENTO"
+      ],
+      "globalCapital": true,
+      "financialRegimes": [
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES"
+      ],
+      "allowPortability": false
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA"
+            ],
+            "allowApartPurchase": true,
+            "differentiatedDeductibleDays": 15,
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "maximumQtyIndemnifiableInstallments": 10,
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "deductibleDays": 10,
+            "indemnityPaymentMethods": [
+              "REEMBOLSO_DESPESAS",
+              "REEMBOLSO_DESPESAS",
+              "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO",
+              "PRESTACAO_SERVICOS",
+              "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "allowApartPurchase": true,
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA"
+            ],
+            "indemnityPaymentMethods": [
+              "PRESTACAO_SERVICOS",
+              "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO",
+              "PRESTACAO_SERVICOS",
+              "REEMBOLSO_DESPESAS",
+              "REEMBOLSO_DESPESAS"
+            ],
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "deductibleDays": 10,
+            "differentiatedDeductibleDays": 15,
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "maximumQtyIndemnifiableInstallments": 10
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        }
+      ],
+      "assistanceTypes": [
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA"
+      ],
+      "additionals": [
+        "SORTEIO",
+        "SORTEIO",
+        "SORTEIO",
+        "SORTEIO"
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "VITALICIA",
+        "VITALICIA",
+        "VITALICIA",
+        "VITALICIA"
+      ],
+      "benefitRecalculation": {
+        "criterias": [
+          "VINCULADO_SALDO_DEVEDOR"
+        ],
+        "updateIndexes": [
+          "IPCA",
+          "IPCA"
+        ]
+      },
+      "indemnityPaymentMethods": [
+        "UNICO",
+        "UNICO",
+        "UNICO"
+      ],
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO"
+        ],
+        "frequencies": [
+          "DIARIA"
+        ],
+        "contributionTax": "elit commodo ut eiusmod"
+      },
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "ageAdjustment": {
+        "criterias": [
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS"
+        ],
+        "frequency": 10
+      },
+      "financialRegimes": [
+        "REPARTICAO_SIMPLES"
+      ],
+      "otherGuaranteedValues": [
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO"
+      ],
+      "globalCapital": true,
+      "indemnityPaymentIncomes": [
+        "CERTA"
+      ],
+      "allowPortability": false,
+      "pmbacRemuneration": {
+        "interestRate": "14.2521",
+        "updateIndexes": [
+          "IPCA"
+        ]
+      },
+      "portabilityGraceTime": {
+        "amount": 90,
+        "unit": "MESES"
+      },
+      "category": "TRADICIONAL",
+      "assistanceTypesAdditionalInfos": [
+        "Assistance additional info."
+      ],
+      "modality": "FUNERAL",
+      "reclaim": {
+        "differenciatedPercentage": "https://openinsurance.com.br/aaa’\nObs.: Exceção de cobertura ou critério definido acima será descrito aqui na URL\nExemplo: Cobertura X: a partir de 25 meses = 100%\n",
+        "gracePeriod": {
+          "amount": 90,
+          "unit": "MESES"
+        },
+        "table": [
+          {
+            "initialMonthRange": 1,
+            "percentage": "0.5000",
+            "finalMonthRange": 12
+          },
+          {
+            "initialMonthRange": 1,
+            "percentage": "0.5000",
+            "finalMonthRange": 12
+          },
+          {
+            "initialMonthRange": 1,
+            "finalMonthRange": 12,
+            "percentage": "0.5000"
+          },
+          {
+            "percentage": "0.5000",
+            "finalMonthRange": 12,
+            "initialMonthRange": 1
+          },
+          {
+            "initialMonthRange": 1,
+            "percentage": "0.5000",
+            "finalMonthRange": 12
+          }
+        ]
+      }
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA"
+            ],
+            "deductibleDays": 10,
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "indemnityPaymentMethods": [
+              "PRESTACAO_SERVICOS",
+              "PRESTACAO_SERVICOS",
+              "PRESTACAO_SERVICOS",
+              "PRESTACAO_SERVICOS",
+              "PRESTACAO_SERVICOS"
+            ],
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "differentiatedDeductibleDays": 15,
+            "allowApartPurchase": false,
+            "maximumQtyIndemnifiableInstallments": 10,
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "excludedRisksURL": "https://openinsurance.com.br/aaa"
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "maximumQtyIndemnifiableInstallments": 10,
+            "indemnityPaymentMethods": [
+              "REEMBOLSO_DESPESAS",
+              "REEMBOLSO_DESPESAS"
+            ],
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "differentiatedDeductibleDays": 15,
+            "allowApartPurchase": true,
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "deductibleDays": 10,
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA"
+            ],
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            }
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "differentiatedDeductibleDays": 15,
+            "deductibleDays": 10,
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "allowApartPurchase": true,
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA"
+            ],
+            "maximumQtyIndemnifiableInstallments": 10,
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnityPaymentMethods": [
+              "PRESTACAO_SERVICOS",
+              "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO"
+            ],
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            }
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "INVALIDEZ_PERMANENTE_TOTAL_PARCIAL",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "gracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "differentiatedGracePeriod": {
+              "amount": 90,
+              "unit": "MESES"
+            },
+            "deductibleDays": 10,
+            "indemnityPaymentMethods": [
+              "PAGAMENTO_CAPITAL_SEGURADO_VALOR_MONETARIO",
+              "PRESTACAO_SERVICOS",
+              "REEMBOLSO_DESPESAS"
+            ],
+            "indemnityPaymentFrequencies": [
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA",
+              "INDENIZACAO_UNICA"
+            ],
+            "differentiatedDeductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "deductible": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "maximumQtyIndemnifiableInstallments": 10,
+            "differentiatedDeductibleDays": 15,
+            "allowApartPurchase": false
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        }
+      ],
+      "assistanceTypes": [
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA",
+        "ACOMPANHANTE_CASO_HOSPITALIZACAO_PROLONGADA"
+      ],
+      "additionals": [
+        "SORTEIO",
+        "SORTEIO",
+        "SORTEIO",
+        "SORTEIO"
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "VITALICIA",
+        "VITALICIA",
+        "VITALICIA"
+      ],
+      "benefitRecalculation": {
+        "criterias": [
+          "VARIAVEL_ACORDO_CRITERIO_ESPECIFICO",
+          "VARIAVEL_ACORDO_CRITERIO_ESPECIFICO",
+          "VARIAVEL_ACORDO_CRITERIO_ESPECIFICO"
+        ],
+        "updateIndexes": [
+          "IPCA",
+          "IPCA"
+        ]
+      },
+      "indemnityPaymentMethods": [
+        "UNICO",
+        "UNICO",
+        "UNICO"
+      ],
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO"
+        ],
+        "frequencies": [
+          "DIARIA"
+        ],
+        "contributionTax": "sunt ipsum ea magna sed"
+      },
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "portabilityGraceTime": {
+        "amount": 90,
+        "unit": "MESES"
+      },
+      "financialRegimes": [
+        "REPARTICAO_SIMPLES"
+      ],
+      "otherGuaranteedValues": [
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO"
+      ],
+      "globalCapital": true,
+      "reclaim": {
+        "table": [
+          {
+            "initialMonthRange": 1,
+            "percentage": "0.5000",
+            "finalMonthRange": 12
+          },
+          {
+            "initialMonthRange": 1,
+            "finalMonthRange": 12,
+            "percentage": "0.5000"
+          }
+        ],
+        "gracePeriod": {
+          "amount": 90,
+          "unit": "MESES"
+        },
+        "differenciatedPercentage": "https://openinsurance.com.br/aaa’\nObs.: Exceção de cobertura ou critério definido acima será descrito aqui na URL\nExemplo: Cobertura X: a partir de 25 meses = 100%\n"
+      },
+      "ageAdjustment": {
+        "criterias": [
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS"
+        ],
+        "frequency": 10
+      },
+      "assistanceTypesAdditionalInfos": [
+        "Assistance additional info."
+      ],
+      "allowPortability": true,
+      "indemnityPaymentIncomes": [
+        "CERTA",
+        "CERTA",
+        "CERTA"
+      ],
+      "modality": "FUNERAL",
+      "category": "TRADICIONAL",
+      "pmbacRemuneration": {
+        "updateIndexes": [
+          "IPCA",
+          "IPCA",
+          "IPCA",
+          "IPCA",
+          "IPCA"
+        ],
+        "interestRate": "14.2521"
+      }
+    }
+  ]
+}

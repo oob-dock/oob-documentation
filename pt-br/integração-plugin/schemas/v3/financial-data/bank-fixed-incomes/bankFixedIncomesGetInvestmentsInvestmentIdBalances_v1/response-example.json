@@ -1,0 +1,40 @@
+{
+  "data": {
+    "referenceDateTime": "2022-07-21T17:32:00Z",
+    "quantity": "1000.0004",
+    "updatedUnitPrice": {
+      "amount": "1000.000004",
+      "currency": "BRL"
+    },
+    "grossAmount": {
+      "amount": "1000.0004",
+      "currency": "BRL"
+    },
+    "netAmount": {
+      "amount": "1000.0004",
+      "currency": "BRL"
+    },
+    "incomeTax": {
+      "amount": "1000.0004",
+      "currency": "BRL"
+    },
+    "financialTransactionTax": {
+      "amount": "1000.0004",
+      "currency": "BRL"
+    },
+    "blockedBalance": {
+      "amount": "1000.0004",
+      "currency": "BRL"
+    },
+    "purchaseUnitPrice": {
+      "amount": "1000.000004",
+      "currency": "BRL"
+    },
+    "preFixedRate": "0.300000",
+    "postFixedIndexerPercentage": "1.000000"
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

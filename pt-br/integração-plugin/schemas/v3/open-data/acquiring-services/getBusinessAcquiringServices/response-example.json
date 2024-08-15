@@ -1,0 +1,39 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "feeName": "TAXA_DESCONTO_MODALIDADE_CREDITO",
+      "code": "MDR_CREDITO",
+      "prices": [
+        {
+          "interval": "1_FAIXA",
+          "value": "0.020300",
+          "customerRate": "0.500000"
+        },
+        {
+          "interval": "2_FAIXA",
+          "value": "0.030600",
+          "customerRate": "0.100000"
+        },
+        {
+          "interval": "3_FAIXA",
+          "value": "0.034300",
+          "customerRate": "0.300000"
+        },
+        {
+          "interval": "4_FAIXA",
+          "value": "0.246800",
+          "customerRate": "0.100000"
+        }
+      ],
+      "chargingTriggerInfo": "Recebimento através de transação de cartão.",
+      "minimum": "0.019800",
+      "maximum": "0.019800"
+    }
+  ]
+}

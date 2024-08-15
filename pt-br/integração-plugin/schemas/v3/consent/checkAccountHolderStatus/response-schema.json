@@ -1,0 +1,25 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "type": "object",
+            "description": "Verifica se documento consultado possui conta na detentora",
+            "required": [
+              "isAccountHolder"
+            ],
+            "properties": {
+                "isAccountHolder": {
+                    "type": "boolean",
+                    "description": "Indica se documento consultado possui conta na detentora",
+                    "example": "true"
+                }            
+            },
+            "additionalProperties": false
+          }
+    },
+    "additionalProperties": false
+}

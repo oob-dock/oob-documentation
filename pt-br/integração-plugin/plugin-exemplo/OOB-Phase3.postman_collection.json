@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "30cec40f-3137-4f56-b2f4-de308ba33061",
+		"name": "OOB-Phase3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "payments",
+			"item": [
+				{
+					"name": "paymentsPostPixPayments",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "x-idempotency-key",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/jwt",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "eyJhbGciOiJQUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImxvY2FsSW5zdHJ1bWVudCI6IkRJQ1QiLCJwYXltZW50Ijp7ImFtb3VudCI6IjEuMjMiLCJjdXJyZW5jeSI6IkJSTCJ9LCJjcmVkaXRvckFjY291bnQiOnsiaXNwYiI6IjEyMzQ1Njc4IiwibnVtYmVyIjoiMTIzNDU2Nzg5MCIsImFjY291bnRUeXBlIjoiQ0FDQyIsImlzc3VlciI6IjE3NzQifSwiY25wakluaXRpYXRvciI6IjAwMDAwMDAwMDAwMTkxIiwicmVtaXR0YW5jZUluZm9ybWF0aW9uIjoiUGFnYW1lbnRvIGRhIG5vdGEgWFBUTzAzNS0wMDIuIiwicHJveHkiOiIxMjM0NTY3ODkwMSIsInRyYW5zYWN0aW9uSWRlbnRpZmljYXRpb24iOiJFMDAwMzgxNjYyMDE5MDcyNjE1NTl5Nmo2IiwiaWJnZVRvd25Db2RlIjoiNTMwMDEwOCJ9LCJhdWQiOiJodHRwczovL29wdXMtc29mdHdhcmUuY29tLmJyIiwiaXNzIjoiNTc2MGU5ZTMtYjZjMS00YjAzLTgyNzYtMzhmNDEzNDRiMDA2IiwianRpIjoiMDVjZjc0MGItNGQ1My00NzAyLThjMzItN2M1YjNhYjYxNDAwIiwiaWF0IjoxNjMxNzIzMjgyfQ.KW9ouCs4VHOvI5roJ_v3tBdStPBY3S-_Yj1gVWGcAijq1V7rw9aO2YCQBu-dtoMYq0OiHMjxePOjKq7clFrhaMe5TAHfW8iDVhkKXIjzHhU56fDgjNbYZv5R-0BzgD5T4rZEPNaSof6ihlLtcu15BoWRP5o9TCRQyZSP1ZTtYCRd_YfX3uFR40tqfl--ZJOc1O-xOPbzxKUU_9ESLeBg7nQamKem7voH191h1d63DIO3oyXil7dw15x07CnWUdkcHpMO4KWPn1vusBSvfpf8NjBC9VJhKnlKLHlxouZtd9x4YpWE_2jfrk9ywScIFqMLca6jqmG6lQ1KSTTJ_XJHGA",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{HostBase}}/payments/v1/pix/payments",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"payments",
+								"v1",
+								"pix",
+								"payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "paymentsGetPixPaymentsPaymentId",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "X-Correlation-ID",
+								"value": "{{$guid}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Brand-ID",
+								"value": "cbanco",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/jwt",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{HostBase}}/payments/v1/pix/payments/:paymentId",
+							"host": [
+								"{{HostBase}}"
+							],
+							"path": [
+								"payments",
+								"v1",
+								"pix",
+								"payments",
+								":paymentId"
+							],
+							"variable": [
+								{
+									"key": "paymentId",
+									"value": "EE883F009A81FA6D5CFF5BA549F281CE40342B4A2B0908BD33D7874A861C40E7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{OAuth_Token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HostBase",
+			"value": "http://localhost:8080/open-banking"
+		},
+		{
+			"key": "TokenEndpoint",
+			"value": ""
+		},
+		{
+			"key": "TokenClientId",
+			"value": ""
+		},
+		{
+			"key": "TokenClientSecret",
+			"value": ""
+		},
+		{
+			"key": "TokenScope",
+			"value": "payments consent:urn:amazingbank:"
+		},
+		{
+			"key": "OAuth_Timestamp",
+			"value": ""
+		},
+		{
+			"key": "OAuth_ExpiresInTime",
+			"value": ""
+		},
+		{
+			"key": "OAuth_Token",
+			"value": ""
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "Resource Discovery Request",
+    "type": "object",
+    "properties": {
+        "consent": {
+            "$ref": "../../common/consent/consent-data-sharing-schema.json"
+        }
+    },
+    "required": [
+        "consent"
+    ]
+}

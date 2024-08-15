@@ -1,0 +1,126 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "requestMeta",
+        "requestBody"
+    ],
+    "properties": {
+        "requestMeta": {
+            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+        },
+        "requestBody": {
+            "type": "object",
+            "description": "Payload para criação do consentimento para iniciação do pagamento.",
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/CreatePaymentConsent"
+                        },
+                        {
+                            "$ref": "#/$defs/CreatePaymentRecurringConsent"
+                        }
+                    ]
+                },
+                "paymentType": {
+                    "$ref": "#/$defs/PaymentType"
+                }
+            }
+        }
+    },
+    "additionalProperties": false,
+    "$defs": {
+        "CreatePaymentConsent": {
+            "type": "object",
+            "description": "Objeto contendo as informações de consentimento para a iniciação de pagamento individual.",
+            "required": [
+                "tpp",
+                "loggedUser",
+                "creditor",
+                "payment"
+            ],
+            "properties": {
+                "tpp": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/TPP"
+                },
+                "loggedUser": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser"
+                },
+                "BusinessEntity": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/BusinessEntity"
+                },
+                "creditor": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/Identification"
+                },
+                "payment": {
+                    "oneOf": [
+                        {
+                            "$ref": "../../common/consent/common-consent-schema.json#/$defs/PixPaymentConsent"
+                        }
+                    ]
+                },
+                "debtorAccount": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
+                }
+            },
+            "additionalProperties": false
+        },
+        "CreatePaymentRecurringConsent": {
+            "type": "object",
+            "description": "Objeto contendo as informações de consentimento para a iniciação de pagamento recorrente.",
+            "required": [
+                "tpp",
+                "loggedUser",
+                "creditors",
+                "recurringConfiguration"
+            ],
+            "properties": {
+                "tpp": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/TPP"
+                },
+                "loggedUser": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/LoggedUser"
+                },
+                "businessEntity": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/BusinessEntity"
+                },
+                "creditors": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/Creditors"
+                },
+                "startDateTime": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/StartDateTime"
+                },
+                "expirationDateTime": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/ExpirationDateTime"
+                },
+                "additionalInformation": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/AdditionalInformation"
+                },
+                "debtorAccount": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/DebtorAccount"
+                },
+                "recurringConfiguration": {
+                    "oneOf": [
+                        {
+                            "$ref": "../../common/common-payment-schema.json#/$defs/Automatic"
+                        },
+                        {
+                            "$ref": "../../common/common-payment-schema.json#/$defs/PostSweeping"
+                        },
+                        {
+                            "$ref": "../../common/common-payment-schema.json#/$defs/Vrp"
+                        }
+                    ]
+                }
+            },
+            "additionalProperties": false
+        },
+        "PaymentType": {
+            "$ref": "../../common/common-payment-schema.json#/$defs/PaymentType"
+        }
+    }
+}
