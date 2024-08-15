@@ -1,0 +1,98 @@
+{
+  "data": [
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "otherCreditsAdditionalInfo": "uPi#~Lkiy",
+      "transactionalAdditionalInfo": "q2~l)UK",
+      "payeeMCC": 5137,
+      "feeTypeAdditionalInfo": "uMzE",
+      "chargeNumber": 12,
+      "billId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "paymentType": "A_VISTA",
+      "feeType": "ANUIDADE"
+    },
+    {
+      "identificationNumber": "4453",
+      "transactionName": "PGTO",
+      "creditDebitType": "DEBITO",
+      "transactionType": "CASHBACK",
+      "chargeIdentificator": "PARCELA_1",
+      "brazilianAmount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "amount": {
+        "amount": "1000.0400",
+        "currency": "BRL"
+      },
+      "transactionDate": "2021-05-21",
+      "billPostDate": "2021-05-21",
+      "transactionalAdditionalInfo": "c",
+      "billId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "otherCreditsType": "CREDITO_ROTATIVO",
+      "chargeNumber": 12,
+      "paymentType": "A_VISTA",
+      "otherCreditsAdditionalInfo": "(c",
+      "feeTypeAdditionalInfo": "B:rG",
+      "feeType": "ANUIDADE",
+      "payeeMCC": 5137
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

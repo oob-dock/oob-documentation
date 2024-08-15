@@ -1,0 +1,261 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "required": [
+        "investmentType",
+        "remuneration",
+        "issueUnitPrice",
+        "issueDate",
+        "dueDate",
+        "voucherPaymentIndicator",
+        "purchaseDate",
+        "taxExemptProduct"
+      ],
+      "properties": {
+        "issuerInstitutionCnpjNumber": {
+          "type": "string",
+          "description": "CNPJ da instituição emissora.\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
+          "maxLength": 14,
+          "pattern": "^\\d{14}$",
+          "example": "11225860000140"
+        },
+        "isinCode": {
+          "type": "string",
+          "description": "Código ISIN é um código universal que identifica cada valor mobiliário ou instrumento financeiro, conforme Norma ISO 6166. Caso a transmissora possua a informação o envio deste campo é obrigatório.\n\n[Restrição] Deve ser preenchido nos casos em que o 'clearingCode' não seja preenchido.\n",
+          "maxLength": 12,
+          "pattern": "^[A-Z]{2}([A-Z0-9]){9}\\d{1}$",
+          "example": "BRCST4CTF001"
+        },
+        "investmentType": {
+          "type": "string",
+          "description": "Especificação do ativo em questão (Debêntures, CRI ou CRA).",
+          "enum": [
+            "DEBENTURES",
+            "CRI",
+            "CRA"
+          ],
+          "example": "CRI"
+        },
+        "debtorCnpjNumber": {
+          "type": "string",
+          "description": "CNPJ do devedor. Caso a transmissora possua a informação para os produtos CRI e CRA, o envio deste campo é obrigatório.\n",
+          "maxLength": 14,
+          "pattern": "^\\d{14}$",
+          "example": "11225860000140"
+        },
+        "debtorName": {
+          "type": "string",
+          "description": "Nome do devedor. Caso a transmissora possua a informação para os produtos CRI e CRA, o envio deste campo é obrigatório.\n",
+          "pattern": "[\\w\\W\\s]*",
+          "maxLength": 70,
+          "example": "Roberto Marino"
+        },
+        "taxExemptProduct": {
+          "type": "string",
+          "description": "Indicador de um produto incentivado",
+          "enum": [
+            "SIM",
+            "NAO"
+          ],
+          "example": "SIM"
+        },
+        "remuneration": {
+          "type": "object",
+          "required": [
+            "indexer"
+          ],
+          "properties": {
+            "preFixedRate": {
+              "type": "string",
+              "description": "Valor da taxa de emissão do contrato.         \n[Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'PRE_FIXADO' no campo 'indexer' ou quando se tratar de produto com remuneração híbrida.\n",
+              "maxLength": 8,
+              "pattern": "^\\d{1}\\.\\d{6}$",
+              "example": "0.300000"
+            },
+            "postFixedIndexerPercentage": {
+              "type": "string",
+              "description": "Percentual do indexador de emissão do contrato.    \n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'indexer' for preenchido de forma diferente de 'PRE_FIXADO' ou quando se tratar de produto com remuneração híbrida.\n",
+              "maxLength": 8,
+              "pattern": "^\\d{1}\\.\\d{6}$",
+              "example": "1.100000"
+            },
+            "rateType": {
+              "type": "string",
+              "description": "Tipo da taxa de remuneração\n  1. LINEAR\n  2. EXPONENCIAL\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
+              "enum": [
+                "LINEAR",
+                "EXPONENCIAL"
+              ],
+              "example": "LINEAR"
+            },
+            "ratePeriodicity": {
+              "type": "string",
+              "description": "Periodicidade da taxa de remuneração (mensal, anual, diário, semestral).\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
+              "enum": [
+                "MENSAL",
+                "ANUAL",
+                "DIARIO",
+                "SEMESTRAL"
+              ],
+              "example": "MENSAL"
+            },
+            "calculation": {
+              "type": "string",
+              "description": "Base de cálculo (dias úteis ou dias corridos).\n  1. dias úteis\n  2. dias corridos.\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
+              "enum": [
+                "DIAS_UTEIS",
+                "DIAS_CORRIDOS"
+              ],
+              "example": "DIAS_CORRIDOS"
+            },
+            "indexer": {
+              "type": "string",
+              "description": "Índice utilizado como referência para a correção da rentabilidade e/ou rendimentos do ativo \n1. CDI\n2. DI \n3. TR\n4. IPCA\n5. IGP_M\n6. IGP_DI\n7. INPC\n8. BCP\n10. TLC\n11. SELIC\n12. PRE_FIXADO\n13. OUTROS\n",
+              "enum": [
+                "CDI",
+                "DI",
+                "TR",
+                "IPCA",
+                "IGP_M",
+                "IGP_DI",
+                "INPC",
+                "BCP",
+                "TLC",
+                "SELIC",
+                "PRE_FIXADO",
+                "OUTROS"
+              ],
+              "example": "CDI"
+            },
+            "indexerAdditionalInfo": {
+              "type": "string",
+              "description": "Informações adicionais do indexador  \n[Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'Outros' no campo 'indexer'.\n",
+              "pattern": "[\\w\\W\\s]*",
+              "maxLength": 50,
+              "example": "Dólar"
+            }
+          }
+        },
+        "issueUnitPrice": {
+          "type": "object",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "description": "Valor relacionado ao objeto.",
+              "maxLength": 24,
+              "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+              "example": "1000.000004"
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "maxLength": 3,
+              "pattern": "^[A-Z]{3}$",
+              "example": "BRL"
+            }
+          }
+        },
+        "issueDate": {
+          "type": "string",
+          "description": "Data de emissão do título",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-02-16"
+        },
+        "dueDate": {
+          "type": "string",
+          "description": "Data de vencimento do título",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-02-15"
+        },
+        "voucherPaymentIndicator": {
+          "type": "string",
+          "description": "Indicativo se há pagamento de cupom\n  1. Sim\n  2. Nao\n",
+          "enum": [
+            "SIM",
+            "NAO"
+          ],
+          "example": "SIM"
+        },
+        "voucherPaymentPeriodicity": {
+          "type": "string",
+          "description": "Em caso de haver pagamento de cupom, descrever a periodicidade (mensal, trimestral, semestral, anual, irregular e outros)\n  1. Mensal  \n\n  2. Trimestral  \n\n  3. Semestral  \n\n  4. Anual  \n\n  5. Irregular  \n\n  6. Outros   \n    \n  [Restrição] Campo de preenchimento obrigatório pelos participantes quando houver 'SIM' no campo indicativo de pagamento de cupom 'voucherPaymentIndicator'.\n",
+          "enum": [
+            "MENSAL",
+            "TRIMESTRAL",
+            "SEMESTRAL",
+            "ANUAL",
+            "IRREGULAR",
+            "OUTROS"
+          ],
+          "example": "MENSAL"
+        },
+        "voucherPaymentPeriodicityAdditionalInfo": {
+          "type": "string",
+          "description": "Informações adicionais da periodicidade de pagamento de cupom  \n[Restrição] Campo de preenchimento obrigatório pelas participantes quando houver 'Outros' no campo 'voucherPaymentPeriodicity'.\n",
+          "maxLength": 50,
+          "pattern": "[\\w\\W\\s]*",
+          "example": "Diária"
+        },
+        "clearingCode": {
+          "type": "string",
+          "description": "Código de registro do ativo na Clearing. Caso a transmissora possua a informação o envio deste campo é obrigatório.\n\n[Restrição] Deve ser preenchido nos casos em que o 'isinCode' não seja preenchido.\n",
+          "maxLength": 30,
+          "pattern": "[\\w\\W-]*",
+          "example": "CDB421GPXXX"
+        },
+        "purchaseDate": {
+          "type": "string",
+          "description": "Data de aquisição do cliente",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-02-15"
+        },
+        "gracePeriodDate": {
+          "type": "string",
+          "description": "Data até a qual o cliente não poderá resgatar antecipadamente seu investimento.\n\nCaso a instituição tenha a informação, o envio será obrigatório.\n",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2018-02-16"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente a API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

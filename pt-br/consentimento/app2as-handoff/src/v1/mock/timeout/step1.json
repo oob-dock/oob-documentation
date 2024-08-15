@@ -1,0 +1,16 @@
+{
+    "events": [
+        {
+            "type": "ready",
+            "args": {
+                "qrCode": "https://www.opus-software.com.br/",
+                "timeoutSeconds": 10,
+                "typeCode": "123456"
+            }
+        }
+    ],
+    "next": {
+        "step": "2",
+        "interval": 5000
+    }
+}

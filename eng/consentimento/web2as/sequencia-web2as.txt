@@ -1,0 +1,73 @@
+title WEB2AS Flow
+
+actor "Correntista" as user
+participant "Browser" as browser
+participant "TPP" as tpp
+participant "Authorization and Consent Application of the Institution" as custom
+participant "IDP-Institution" as idp
+participant "API-AS-OOB" as as
+
+browser->as:GET /auth/auth
+browser<--as:HTTP:REDIRECT /authConsent#{commandID}
+browser->custom:GET /authConsent#{commandID}
+custom->as: GET /auth/app/commands/{commandId}
+custom<--as: Command authenticate
+browser<--custom: HTML:Authentication page
+user->browser: Enters credentials
+
+alt case Success
+
+browser->custom: Sends credentials
+custom->idp: Authenticates user
+custom<--idp: Authenticated
+note over custom:The JWT generation to be sent to the institution's AS must be done in the backend to avoid exposure of signing keys
+custom->custom:Generates signed authentication JWT
+custom->as: PUT /auth/app/commands/{commandId}/authentication
+
+else case Abort
+
+custom->as:PUT /auth/app/commands/{commandId}/authentication {refused: true}
+custom<--as:Command error
+browser<--custom:HTML: Transition screen + {redirectTo}
+note over browser:Displays error screen and after n seconds performs redirection
+browser->tpp: GET {redirectTo}
+
+end
+
+alt case Standard OOB consent generation screens
+
+custom<--as:Command completed
+browser<--custom:HTTP:REDIRECT: {redirectTo} (AS-OOB)
+browser->as:GET {redirectTo} (AS-OOB)
+browser<--as: HTML: consent screen
+note over browser, as: OOB resolves consent
+
+else case Custom consent generation screens
+
+custom<--as:Command consent
+browser<--custom:HTML: consent screen
+
+alt case Success
+
+user->browser: Grants consent
+browser->custom:Sends consent
+custom->as: PUT /auth/app/commands/{commandId}/consent
+custom<--as:Command completed
+browser<--custom:HTML: Transition screen + {redirectTo}
+note over browser:Displays success screen and after n seconds performs redirection
+note over browser:after n seconds
+browser->tpp: GET {redirectTo}
+
+else case Abort
+
+user->browser: Refuses consent
+browser->custom:Refuses consent
+custom->as: PUT /auth/app/commands/{commandId}/consent {refused: true}
+custom<--as:Command error
+browser<--custom:HTML: Transition screen + {redirectTo}
+note over browser:Displays error screen and after n seconds performs redirection
+browser->tpp: GET {redirectTo}
+
+end
+
+end

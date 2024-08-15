@@ -1,0 +1,100 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "description": "Lista de títulos de tesouro direto mantidos pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento",
+        "required": [
+          "brandName",
+          "companyCnpj",
+          "investmentId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "brandName": {
+            "description": "Nome da Marca reportada pelo participante no Open Finance.\nRecomenda-se utilizar, sempre que possível, o mesmo nome de marca atribuído no\ncampo do diretório Customer Friendly Server Name (Authorisation Server).\n",
+            "maxLength": 80,
+            "pattern": "[\\w\\W\\s]*",
+            "example": "Organização A",
+            "type": "string"
+          },
+          "companyCnpj": {
+            "description": "Número completo do CNPJ da instituição responsável pelo Cadastro -\no CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica.\nDeve-se ter apenas os números do CNPJ, sem máscara\n",
+            "maxLength": 14,
+            "pattern": "^\\d{14}$",
+            "example": "21128159000166",
+            "type": "string"
+          },
+          "investmentId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente a API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

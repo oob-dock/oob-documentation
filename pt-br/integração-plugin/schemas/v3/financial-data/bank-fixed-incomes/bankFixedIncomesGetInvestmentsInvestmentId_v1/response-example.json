@@ -1,0 +1,29 @@
+{
+  "data": {
+    "issuerInstitutionCnpjNumber": "11225860000140",
+    "investmentType": "CDB",
+    "remuneration": {
+      "rateType": "LINEAR",
+      "ratePeriodicity": "MENSAL",
+      "calculation": "DIAS_CORRIDOS",
+      "indexer": "CDI",
+      "preFixedRate": "0.300000",
+      "indexerAdditionalInfo": "Dólar",
+      "postFixedIndexerPercentage": "1.100000"
+    },
+    "issueUnitPrice": {
+      "amount": "1000.000004",
+      "currency": "BRL"
+    },
+    "dueDate": "2018-02-15",
+    "issueDate": "2018-02-16",
+    "purchaseDate": "2018-02-15",
+    "gracePeriodDate": "2018-02-16",
+    "clearingCode": "CDB421GPXXX",
+    "isinCode": "BRCST4CTF001"
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

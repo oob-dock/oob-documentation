@@ -1,0 +1,80 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreatePixPayment em caso de erro de negócio ao tentar realizar o pagamento. Deve ser um responseError padrão se for um erro de sistema",
+    "oneOf": [
+        {
+            "$ref": "#/$defs/ResponseErrorCreatePixPayment"
+        },
+        {
+            "$ref": "../../common/response-error-schema.json"
+        }
+    ],
+    "additionalProperties": false,
+    "$defs": {
+        "ResponseErrorCreatePixPayment": {
+            "type": "object",
+            "description": "Listagem de erros ocorridos ao processar a solicitação de pagamento",
+            "required": [
+                "errors"
+            ],
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 9,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "title",
+                            "detail"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "enum": [
+                                    "SALDO_INSUFICIENTE",
+                                    "BENEFICIARIO_INCOMPATIVEL",
+                                    "VALOR_INCOMPATIVEL",
+                                    "VALOR_ACIMA_LIMITE",
+                                    "VALOR_INVALIDO",
+                                    "COBRANCA_INVALIDA",
+                                    "CONSENTIMENTO_INVALIDO",
+                                    "JANELA_OPER_INVALIDA",
+                                    "PARAMETRO_NAO_INFORMADO",
+                                    "PARAMETRO_INVALIDO",
+                                    "NAO_INFORMADO",
+                                    "PAGAMENTO_DIVERGENTE_CONSENTIMENTO",
+                                    "DETALHE_PAGAMENTO_INVALIDO",
+                                    "PAGAMENTO_RECUSADO_DETENTORA",
+                                    "PAGAMENTO_RECUSADO_SPI",
+                                    "ERRO_IDEMPOTENCIA"
+                                ],
+                                "examples": [
+                                    "SALDO_INSUFICIENTE"
+                                ],
+                                "description": "Códigos de erros previstos na criação da iniciação de pagamento:\n\n• SALDO_INSUFICIENTE: Esta conta não possui saldo suficiente para realizar o pagamento.\n\n• BENEFICIARIO_INCOMPATIVEL: O beneficiário informado no consentimento não é o mesmo do esperado pelo DICT.\n\n• VALOR_INCOMPATIVEL: O valor informado no consentimento não é o mesmo valor do informado no payload de pagamento.\n\n• VALOR_ACIMA_LIMITE: O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente.\n\n• VALOR_INVALIDO: O valor enviado não é válido para o QR Code informado.\n\n• COBRANCA_INVALIDA: Validação de expiração, validação de vencimento, Status Válido.\n\n• CONSENTIMENTO_INVALIDO: Consentimento inválido (status não é \"authorised\" ou está expirado).\n\n• JANELA_OPER_INVALIDA: Requisição está fora da janela de funcionamento.\n\n• PARAMETRO_NAO_INFORMADO: Parâmetro não informado.  \n\n• PARAMETRO_INVALIDO: Parâmetro inválido.\n\n• NAO_INFORMADO: Não informada pela detentora de conta.\n\n• PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Dados do pagamento divergentes dos dados do consentimento.\n\n• DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento inválido.\n\n• PAGAMENTO_RECUSADO_DETENTORA: Pagamento recusado pela detentora de conta.\n\n• PAGAMENTO_RECUSADO_SPI: Pagamento recusado no Sistema de Pagamentos Instantâneos (SPI).\n\n• ERRO_IDEMPOTENCIA: Erro idempotência.\n"
+                            },
+                            "title": {
+                                "type": "string",
+                                "maxLength": 255,
+                                "pattern": "[\\w\\W\\s]*",
+                                "example": "Saldo insuficiente.",
+                                "description": "Título específico do erro reportado, de acordo com o código enviado:\n\n• SALDO_INSUFICIENTE: Saldo insuficiente.\n\n• BENEFICIARIO_INCOMPATIVEL: Beneficiário incompatível.\n\n• VALOR_INCOMPATIVEL: Valor da transação incompatível.\n\n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido.\n\n• VALOR_INVALIDO: Valor inválido.\n\n• COBRANCA_INVALIDA: Cobrança inválida.\n\n• CONSENTIMENTO_INVALIDO: Consentimento inválido.\n\n• JANELA_OPER_INVALIDA: Janela de operação inválida.\n\n• PARAMETRO_NAO_INFORMADO: Parâmetro obrigatório não informado.\n\n• PARAMETRO_INVALIDO: Parâmetro com valor inválido.\n\n• NAO_INFORMADO: Não informado.\n\n• PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Divergência entre pagamento e consentimento.\n\n• DETALHE_PAGAMENTO_INVALIDO: Detalhe do pagamento inválido.\n\n• PAGAMENTO_RECUSADO_DETENTORA: Pagamento recusado pela detentora de conta.\n\n• PAGAMENTO_RECUSADO_SPI: Pagamento recusado no Sistema de Pagamentos Instantâneos (SPI).\n\n• ERRO_IDEMPOTENCIA: Erro idempotência.\n"
+                            },
+                            "detail": {
+                                "type": "string",
+                                "maxLength": 2048,
+                                "pattern": "[\\w\\W\\s]*",
+                                "example": "A conta selecionada não possui saldo suficiente para realizar o pagamento.",
+                                "description": "Descrição específica do erro de acordo com o código reportado:\n\n• SALDO_INSUFICIENTE: A conta selecionada não possui saldo suficiente para realizar o pagamento.\n\n• BENEFICIARIO_INCOMPATIVEL: O beneficiário informado no consentimento não é o mesmo do esperado pelo DICT.\n\n• VALOR_INCOMPATIVEL: O valor informado no consentimento não é o mesmo valor do informado no payload de pagamento.\n\n• VALOR_ACIMA_LIMITE: O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente.\n\n• VALOR_INVALIDO: O valor enviado não é válido para o QR Code informado.\n\n• COBRANCA_INVALIDA: Validação de expiração, validação de vencimento ou Status Válido.\n\n• CONSENTIMENTO_INVALIDO: Consentimento inválido (status diferente de \"AUTHORISED\" ou está expirado).\n\n• JANELA_OPER_INVALIDA: Requisição está fora da janela de funcionamento.\n\n• PARAMETRO_NAO_INFORMADO: endToEndId\n\n• PARAMETRO_INVALIDO: endToEndId\n\n• NAO_INFORMADO: Não reportado/identificado pela instituição detentora de conta.\n\n• PAGAMENTO_DIVERGENTE_CONSENTIMENTO: Dados do pagamento divergentes dos dados do consentimento.\n\n• DETALHE_PAGAMENTO_INVALIDO: Parâmetro [nome_campo] não obedece às regras de negócio.\n\n• PAGAMENTO_RECUSADO_DETENTORA: [descrição do motivo de recusa].\n\n• PAGAMENTO_RECUSADO_SPI: [código de erro conforme tabela de domínios reason PACS.002].\n\n• ERRO_IDEMPOTENCIA: Conteúdo da mensagem (claim data) diverge do conteúdo associado a esta chave de idempotência (x-idempotency-key).\n"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

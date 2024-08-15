@@ -1,0 +1,225 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Informações da posição do fundo de investimento a que se refere investmentId.",
+      "required": [
+        "referenceDate",
+        "grossAmount",
+        "netAmount",
+        "incomeTaxProvision",
+        "financialTransactionTaxProvision",
+        "blockedAmount",
+        "quotaQuantity",
+        "quotaGrossPriceValue"
+      ],
+      "properties": {
+        "referenceDate": {
+          "type": "string",
+          "description": "Data da última posição consolidada disponível a que se referem os dados transacionais do cliente disponíveis nos canais eletrônicos.",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+          "example": "2023-01-07"
+        },
+        "grossAmount": {
+          "type": "object",
+          "description": "Valor do investimento que se refere a quantidade da cota x valor da cota, atualizado na data de referência.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "1000.04",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "netAmount": {
+          "type": "object",
+          "description": "Valor do investimento atualizado na data de referência, posterior a dedução de impostos (IOF e IR) e taxa de saída, caso a instituição considere este valor na composição do saldo líquido. Este valor considera o valor bloqueado (blockedAmount).",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "1000.04",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "incomeTaxProvision": {
+          "type": "object",
+          "description": "Valor do imposto de renda provisionado considerando a alíquota vigente na data de referência.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 20,
+              "example": "50.02",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "financialTransactionTaxProvision": {
+          "type": "object",
+          "description": "Valor do imposto considerando a alíquota vigente na data de referência.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 20,
+              "example": "50.02",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "blockedAmount": {
+          "type": "object",
+          "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 21,
+              "example": "1000.04",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        },
+        "quotaQuantity": {
+          "type": "string",
+          "description": "Quantidade de cotas detidas em posição do cliente .",
+          "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+          "maxLength": 24,
+          "example": "42.25",
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308
+        },
+        "quotaGrossPriceValue": {
+          "type": "object",
+          "description": "Valor bruto da cota atualizado na data de referência.",
+          "required": [
+            "amount",
+            "currency"
+          ],
+          "properties": {
+            "amount": {
+              "type": "string",
+              "description": "Valor relacionado ao objeto.",
+              "pattern": "^-?\\d{1,15}\\.\\d{2,8}$",
+              "maxLength": 25,
+              "example": "1000.04",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            },
+            "currency": {
+              "type": "string",
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+              "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
+              "example": "BRL"
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente a API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

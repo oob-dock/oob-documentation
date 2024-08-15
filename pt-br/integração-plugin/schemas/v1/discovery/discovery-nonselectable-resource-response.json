@@ -1,0 +1,51 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "Non-Selectable Resource Discovery Response",
+    "type": "object",
+    "properties": {
+        "resources": {
+            "description": "Lista de recursos relacionados ao discovery",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "resourceLegacyId": {
+                        "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "description": "Nome do campo do identificador no sistema de origem",
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "description": "Valor do campo do identificador no sistema de origem",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "key"
+                            ],
+                            "additionalItems": false
+                        }
+                    },
+                    "validUntil": {
+                        "description": "Indica se o recurso deve estar selecionado por padrão na tela de consentimento. Valor padrão: false",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2024-05-21"
+                    }                
+                },
+                "required": [
+                    "resourceLegacyId"
+                ],
+                "additionalItems": false
+            }
+        }
+    },
+    "required": [
+        "resources"
+    ],
+    "additionalItems": false
+}

@@ -1,0 +1,138 @@
+{
+  "data": [
+    {
+      "identification": {
+        "type": "OUVIDORIA",
+        "phones": [
+          {
+            "number": "08007787788",
+            "additionalInfo": "Informações Adicionais",
+            "countryCallingCode": "55",
+            "areaCode": "19"
+          },
+          {
+            "number": "08007787788",
+            "areaCode": "19",
+            "countryCallingCode": "55",
+            "additionalInfo": "Informações Adicionais"
+          },
+          {
+            "number": "08007787788",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "additionalInfo": "Informações Adicionais"
+          },
+          {
+            "number": "08007787788",
+            "countryCallingCode": "55",
+            "additionalInfo": "Informações Adicionais",
+            "areaCode": "19"
+          }
+        ],
+        "additionalInfo": "Informações Adicionais"
+      },
+      "services": [
+        {
+          "name": "COMPRA_VENDA_OURO",
+          "code": "COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "COMPRA_VENDA_MOEDA_ESTRANGEIRA_ESPECIE",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Marca A",
+        "name": "Empresa da Marca A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    },
+    {
+      "identification": {
+        "type": "OUVIDORIA",
+        "phones": [
+          {
+            "number": "08007787788",
+            "countryCallingCode": "55",
+            "areaCode": "19",
+            "additionalInfo": "Informações Adicionais"
+          }
+        ],
+        "additionalInfo": "Informações Adicionais"
+      },
+      "services": [
+        {
+          "name": "OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO",
+          "code": "INFORMACOES",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "APLICACOES_RESGATES_INVESTIMENTOS",
+          "code": "CONSULTA_SALDOS_EXTRATOS_CONTAS_DEPOSITOS_PAGTOS",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "OPERACOES_ARRENDAMENTO_MERCANTIL",
+          "code": "OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Marca A",
+        "name": "Empresa da Marca A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    },
+    {
+      "identification": {
+        "type": "OUVIDORIA",
+        "phones": [
+          {
+            "number": "08007787788",
+            "additionalInfo": "Informações Adicionais",
+            "countryCallingCode": "55",
+            "areaCode": "19"
+          }
+        ],
+        "additionalInfo": "Informações Adicionais"
+      },
+      "services": [
+        {
+          "name": "ABERTURA_CONTA_PAGAMENTO_POS_PAGA",
+          "code": "CANCELAMENTO",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "OPERACOES_CREDITO_BEM_COMO_OUTROS_SERVICOS_PRESTADOS_ACOMPANHAMENTO_OPERACAO",
+          "code": "OPERA_CREDITO_OUTROS_SERVICOS_ACOMPANHA_OPERACAO",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "SEGUROS",
+          "code": "COMPRA_VENDA_OURO",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "CANCELAMENTO",
+          "code": "ABRE_CONTA_DEPOSITO_OU_PRE_PAGA",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "name": "APLICACOES_RESGATES_INVESTIMENTOS",
+          "code": "RECLAMACOES",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Marca A",
+        "name": "Empresa da Marca A",
+        "cnpjNumber": "50685362000135",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    }
+  ]
+}

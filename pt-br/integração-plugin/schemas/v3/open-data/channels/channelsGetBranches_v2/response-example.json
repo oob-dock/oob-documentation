@@ -1,0 +1,192 @@
+{
+  "data": [
+    {
+      "identification": {
+        "type": "UNIDADE_ADMINISTRATIVA_DESMEMBRADA",
+        "code": "0001",
+        "checkDigit": "1",
+        "name": "Dependência X",
+        "relatedBranch": "0001",
+        "openingDate": "2023-10-16"
+      },
+      "postalAddress": {
+        "address": "Av Naburo Ykesaki, 1270",
+        "districtName": "Centro",
+        "townName": "Marília",
+        "countrySubDivision": "SP",
+        "postCode": "17500001",
+        "country": "Brasil",
+        "ibgeCode": "3515890",
+        "geographicCoordinates": {
+          "longitude": "-180.836519",
+          "latitude": "-90.8365180"
+        },
+        "additionalInfo": "Informações Adicionais",
+        "countryCode": "BRA"
+      },
+      "availability": {
+        "standards": [
+          {
+            "weekday": "QUARTA_FEIRA",
+            "openingTime": "23:53:00",
+            "closingTime": "17:37:13"
+          },
+          {
+            "weekday": "SEXTA_FEIRA",
+            "openingTime": "Z",
+            "closingTime": "02:37:38"
+          },
+          {
+            "weekday": "SABADO",
+            "openingTime": "23:35:30",
+            "closingTime": "21:14:19"
+          },
+          {
+            "weekday": "TERCA_FEIRA",
+            "openingTime": "Z",
+            "closingTime": "01:11:33"
+          },
+          {
+            "weekday": "SABADO",
+            "openingTime": "Z",
+            "closingTime": "Z"
+          }
+        ],
+        "isPublicAccessAllowed": true,
+        "exception": "Exceto feriados municipais, estaduais e nacionais"
+      },
+      "services": [
+        {
+          "code": "INFORMACOES",
+          "name": "TRANSFERENCIAS_ELETRONICAS_VISANDO_MOVIMENTACAO_CONTAS_DEPOSITOS_OU_PAGAMENTO_TITULARIDADE_CLIENTES",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "code": "SAQUE_MOEDA_ESPECIE",
+          "name": "DEPOSITOS_MOEDA_ESPECIE_CHEQUE",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "code": "EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGTO",
+          "name": "COMPRA_VENDA_OURO",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "phones": [
+        {
+          "countryCallingCode": "55",
+          "areaCode": "19",
+          "number": "35721199",
+          "type": "FIXO"
+        },
+        {
+          "countryCallingCode": "55",
+          "areaCode": "19",
+          "type": "FIXO",
+          "number": "35721199"
+        },
+        {
+          "number": "35721199",
+          "areaCode": "19",
+          "countryCallingCode": "55",
+          "type": "FIXO"
+        },
+        {
+          "type": "FIXO",
+          "number": "35721199",
+          "countryCallingCode": "55",
+          "areaCode": "19"
+        }
+      ],
+      "participant": {
+        "brand": "Organização A",
+        "name": "Empresa A1",
+        "cnpjNumber": "45086338000178",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      }
+    },
+    {
+      "identification": {
+        "type": "POSTO_ATENDIMENTO_ELETRONICO",
+        "code": "0001",
+        "checkDigit": "1",
+        "name": "Dependência X",
+        "openingDate": "2023-10-16",
+        "relatedBranch": "0001"
+      },
+      "postalAddress": {
+        "address": "Av Naburo Ykesaki, 1270",
+        "districtName": "Centro",
+        "townName": "Marília",
+        "countrySubDivision": "SP",
+        "postCode": "17500001",
+        "additionalInfo": "Informações Adicionais",
+        "ibgeCode": "3515890",
+        "countryCode": "BRA",
+        "geographicCoordinates": {
+          "latitude": "-90.8365180",
+          "longitude": "-180.836519"
+        },
+        "country": "Brasil"
+      },
+      "availability": {
+        "standards": [
+          {
+            "weekday": "QUINTA_FEIRA",
+            "openingTime": "22:26:46",
+            "closingTime": "Z"
+          },
+          {
+            "weekday": "QUARTA_FEIRA",
+            "openingTime": "Z",
+            "closingTime": "Z"
+          },
+          {
+            "weekday": "SABADO",
+            "openingTime": "20:45:33",
+            "closingTime": "Z"
+          },
+          {
+            "weekday": "SEGUNDA_FEIRA",
+            "openingTime": "Z",
+            "closingTime": "Z"
+          }
+        ],
+        "exception": "Exceto feriados municipais, estaduais e nacionais",
+        "isPublicAccessAllowed": true
+      },
+      "services": [
+        {
+          "code": "RECEBE_PAGA_QUALQUER_NATUREZA",
+          "name": "SEGUROS",
+          "additionalInfo": "Informações Adicionais"
+        },
+        {
+          "code": "RECLAMACOES",
+          "name": "EXECUCAO_ATIVA_PASSIVA_ORDENS_PAGAMENTO_SOLICITACAO_CLIENTES_USUARIOS",
+          "additionalInfo": "Informações Adicionais"
+        }
+      ],
+      "participant": {
+        "brand": "Organização A",
+        "name": "Empresa A1",
+        "cnpjNumber": "45086338000178",
+        "urlComplementaryList": "https://example.com/mobile-banking"
+      },
+      "phones": [
+        {
+          "type": "FIXO",
+          "countryCallingCode": "55",
+          "number": "35721199",
+          "areaCode": "19"
+        },
+        {
+          "number": "35721199",
+          "type": "FIXO",
+          "areaCode": "19",
+          "countryCallingCode": "55"
+        }
+      ]
+    }
+  ]
+}

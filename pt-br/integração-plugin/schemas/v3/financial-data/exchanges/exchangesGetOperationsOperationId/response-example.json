@@ -1,0 +1,39 @@
+{
+  "data": {
+    "authorizedInstitutionCnpjNumber": "11225860000140",
+    "authorizedInstitutionName": "AGENCIA CORRETORA",
+    "operationType": "COMPRA",
+    "operationDate": "2023-03-07T08:30:00Z",
+    "dueDate": "2018-02-15",
+    "localCurrencyOperationTax": {
+      "amount": "1.3",
+      "currency": "BRL"
+    },
+    "localCurrencyOperationValue": {
+      "amount": "1000.04",
+      "currency": "BRL"
+    },
+    "foreignOperationValue": {
+      "amount": "1000.04",
+      "currency": "USD"
+    },
+    "deliveryForeignCurrency": "CARTA_CREDITO_A_PRAZO",
+    "operationCategoryCode": "90302",
+    "vetAmount": {
+      "amount": "1000.000004",
+      "currency": "BRL"
+    },
+    "intermediaryInstitutionName": "AGENCIA CORRETORA",
+    "operationNumber": "393874649456",
+    "intermediaryInstitutionCnpjNumber": "11225860000140",
+    "operationOutstandingBalance": {
+      "amount": "1000.04",
+      "currency": "BRL"
+    },
+    "localCurrencyAdvancePercentage": "0.12"
+  },
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": 19411596.427267686
+  }
+}

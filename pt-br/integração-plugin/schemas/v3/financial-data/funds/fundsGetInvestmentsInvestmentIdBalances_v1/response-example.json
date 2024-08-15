@@ -1,0 +1,34 @@
+{
+  "data": {
+    "referenceDate": "2023-01-07",
+    "grossAmount": {
+      "amount": "1000.04",
+      "currency": "BRL"
+    },
+    "netAmount": {
+      "amount": "1000.04",
+      "currency": "BRL"
+    },
+    "incomeTaxProvision": {
+      "amount": "50.02",
+      "currency": "BRL"
+    },
+    "financialTransactionTaxProvision": {
+      "amount": "50.02",
+      "currency": "BRL"
+    },
+    "blockedAmount": {
+      "amount": "1000.04",
+      "currency": "BRL"
+    },
+    "quotaQuantity": "42.25",
+    "quotaGrossPriceValue": {
+      "amount": "1000.04",
+      "currency": "BRL"
+    }
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

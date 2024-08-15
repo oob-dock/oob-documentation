@@ -1,0 +1,23 @@
+{
+  "data": {
+    "isinCode": "BRCST4CTF001",
+    "productName": "TESOURODIRETO",
+    "remuneration": {
+      "indexer": "CDI",
+      "ratePeriodicity": "DIARIO",
+      "calculation": "DIAS_CORRIDOS",
+      "indexerAdditionalInfo": "Dólar",
+      "preFixedRate": "0.300000",
+      "postFixedIndexerPercentage": "1.100000"
+    },
+    "dueDate": "2018-02-15",
+    "purchaseDate": "2018-02-15",
+    "voucherPaymentIndicator": "SIM",
+    "voucherPaymentPeriodicity": "MENSAL",
+    "voucherPaymentPeriodicityAdditionalInfo": "Diária"
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}
