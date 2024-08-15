@@ -1,6 +1,7 @@
 # Development of Connectors
 
-This documentation aims to guide the development of connector to integrate the OPUS Open Finance Platform to Financial Institution's business backend systems.
+This documentation aims to guide the development of connector to integrate the
+OPUS Open Finance Platform to Financial Institution's business backend systems.
 &nbsp;
 
 Index:
@@ -8,7 +9,7 @@ Index:
 
 - [Development of Connectors](#development-of-connectors)
   - [Introduction](#introduction)
-    - [What is a Connector](#what-is-a-Connector)
+    - [What is a Connector](#what-is-a-connector)
     - [How the OPUS Open Finance Platform Loads the Connector](#how-the-opus-open-finance-platform-loads-the-connector)
     - [Processing Responsibility](#processing-responsibility)
       - [Opus Open Finance Platform](#opus-open-finance-platform)
