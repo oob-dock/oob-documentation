@@ -288,8 +288,8 @@ The OPUS Open Finance platform offers a series of scripts and reports for extrac
     1. [API security controls configuration](segurança/readme.md)
 
 1. Mandatory Certification Scripts
-    1. [Security Certification Submission (OpenID Foundation)](certificacao/seguranca/enviando-certificacao.md)
-    1. [Functional Certification Execution (Open Finance Brazil Governance)](certificacao/funcional/dcr.md)
+    1. [Security Certification Submission (OpenID Foundation)](certification/security/enviando-certificacao.md)
+    1. [Functional Certification Execution (Open Finance Brazil Governance)](certification/functional/dcr.md)
 
 1. Useful Tools
     1. Connector debugging: [Connector Tester](ferramentas-auxiliares/connector-tester/readme.md)
