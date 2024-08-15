@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+    oob-connector-custom:
+        build: 
+          context: ./connectorCustom
+          dockerfile: Dockerfile
+        image: oob-connector-custom:teste
+        ports:
+          - "8080:8080"
+        env_file: 
+          - ./connectorCustom/env_variables.env

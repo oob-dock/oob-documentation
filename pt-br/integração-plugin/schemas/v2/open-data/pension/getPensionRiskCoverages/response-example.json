@@ -1,0 +1,412 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "MORTE",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "MORTE",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "MORTE",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "MORTE",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "MORTE",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        }
+      ],
+      "assistanceTypes": [
+        "PET",
+        "FUNERAL"
+      ],
+      "additionals": [
+        "SORTEIO",
+        "OUTROS"
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "targetAudience": "PESSOA_NATURAL",
+      "reclaim": {
+        "gracePeriod": {
+          "amount": 90,
+          "unit": "MESES"
+        },
+        "table": [
+          {
+            "percentage": "0.5000",
+            "finalMonthRange": 12,
+            "initialMonthRange": 1
+          },
+          {
+            "percentage": "0.5000",
+            "initialMonthRange": 1,
+            "finalMonthRange": 12
+          }
+        ],
+        "differenciatedPercentage": "https://openinsurance.com.br/aaa’\nObs.: Exceção de cobertura ou critério definido acima será descrito aqui na URL\nExemplo: Cobertura X: a partir de 25 meses = 100%\n"
+      },
+      "ageAdjustment": {
+        "criterias": [
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS"
+        ],
+        "frequency": 10
+      },
+      "financialRegimeContractTypes": [
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES"
+      ],
+      "assistanceTypesAdditionalInfos": [
+        "Assistance additional info."
+      ],
+      "modality": "FUNERAL",
+      "minimumRequirement": {
+        "contractType": "COLETIVO_AVERBADO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "indemnityPaymentMethods": [
+        "UNICO",
+        "UNICO",
+        "UNICO",
+        "UNICO"
+      ],
+      "pmbacRemuneration": {
+        "interestRate": "14.2521",
+        "updateIndexes": [
+          "IPCA",
+          "IPCA",
+          "IPCA"
+        ]
+      },
+      "otherGuaranteedValues": [
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO"
+      ]
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "MORTE",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "excludedRisksURL": "https://openinsurance.com.br/aaa",
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ]
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        },
+        {
+          "type": "MORTE",
+          "attributes": {
+            "minValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxValue": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "indemnifiablePeriods": [
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS",
+              "QUANTIDADE_DETERMINADA_PARCELAS"
+            ],
+            "excludedRisks": [
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO",
+              "ATO_RECONHECIMENTO_PERIGOSO"
+            ],
+            "excludedRisksURL": "https://openinsurance.com.br/aaa"
+          },
+          "typeAdditionalInfos": [
+            "Detalhar os serviços",
+            "benefícios",
+            "outros"
+          ]
+        }
+      ],
+      "assistanceTypes": [
+        "PET",
+        "FUNERAL"
+      ],
+      "additionals": [
+        "SORTEIO",
+        "OUTROS"
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "targetAudience": "PESSOA_NATURAL",
+      "financialRegimeContractTypes": [
+        "REPARTICAO_SIMPLES",
+        "REPARTICAO_SIMPLES"
+      ],
+      "ageAdjustment": {
+        "criterias": [
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS",
+          "APOS_PERIODO_ANOS"
+        ],
+        "frequency": 10
+      },
+      "indemnityPaymentMethods": [
+        "UNICO",
+        "UNICO"
+      ],
+      "assistanceTypesAdditionalInfos": [
+        "Assistance additional info."
+      ],
+      "otherGuaranteedValues": [
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO",
+        "SALDAMENTO"
+      ],
+      "minimumRequirement": {
+        "contractType": "COLETIVO_AVERBADO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "reclaim": {
+        "differenciatedPercentage": "https://openinsurance.com.br/aaa’\nObs.: Exceção de cobertura ou critério definido acima será descrito aqui na URL\nExemplo: Cobertura X: a partir de 25 meses = 100%\n",
+        "table": [
+          {
+            "finalMonthRange": 12,
+            "initialMonthRange": 1,
+            "percentage": "0.5000"
+          },
+          {
+            "percentage": "0.5000",
+            "initialMonthRange": 1,
+            "finalMonthRange": 12
+          }
+        ],
+        "gracePeriod": {
+          "amount": 90,
+          "unit": "MESES"
+        }
+      },
+      "modality": "FUNERAL",
+      "pmbacRemuneration": {
+        "interestRate": "14.2521",
+        "updateIndexes": [
+          "IPCA",
+          "IPCA",
+          "IPCA",
+          "IPCA"
+        ]
+      }
+    }
+  ]
+}

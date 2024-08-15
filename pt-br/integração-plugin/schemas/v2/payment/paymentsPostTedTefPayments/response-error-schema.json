@@ -1,0 +1,77 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreateTedTefPayment em caso de erro de negócio ao tentar realizar o pagamento. Deve ser um responseError padrão se for um erro de sistema",
+    "oneOf": [
+        {
+            "$ref": "#/$defs/ResponseErrorCreateTedTefPayment"
+        },
+        {
+            "$ref": "../../common/response-error-schema.json"
+        }
+    ],
+    "additionalProperties": false,
+    "$defs": {
+        "ResponseErrorCreateTedTefPayment": {
+            "type": "object",
+            "description": "Listagem de erros ocorridos ao processar a solicitação de pagamento",
+            "required": [
+                "errors"
+            ],
+            "properties": {
+                "errors": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 9,
+                    "items": {
+                        "type": "object",
+                        "required": [
+                            "code",
+                            "title",
+                            "detail"
+                        ],
+                        "properties": {
+                            "code": {
+                                "type": "string",
+                                "enum": [
+                                    "SALDO_INSUFICIENTE",
+                                    "VALOR_ACIMA_LIMITE",
+                                    "CONSENTIMENTO_INVALIDO",
+                                    "JANELA_OPER_INVALIDA",
+                                    "NAO_INFORMADO",
+                                    "PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO",
+                                    "LIQUIDACAO_ERRO_INESPERADO",
+                                    "AGENCIA_REQUERIDA",
+                                    "FINALIDADE_REQUERIDA"
+                                ],
+                                "examples": [
+                                    "SALDO_INSUFICIENTE"
+                                ],
+                                "description": "Códigos de erros previstos na criação da iniciação de pagamento:\n• SALDO_INSUFICIENTE – Esta conta não possui saldo suficiente para realizar o pagamento.\n• VALOR_ACIMA_LIMITE – O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente.\n• CONSENTIMENTO_INVALIDO – Consentimento inválido (status não é \"authorised\" ou está expirado).\n• JANELA_OPER_INVALIDA – Requisição está fora da janela de funcionamento.\n• NAO_INFORMADO – Não informada pela detentora de conta.\n• PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO: O tipo de conta alvo requer as informações de agência.\n• FINALIDADE_REQUERIDA: Finalidade é requerida para o pagamento no arranjo alvo.\n"
+                            },
+                            "title": {
+                                "type": "string",
+                                "maxLength": 255,
+                                "pattern": "\\w*\\W*",
+                                "examples": [
+                                    "Saldo insuficiente."
+                                ],
+                                "description": "Título específico do erro reportado, de acordo com o código enviado:\n• SALDO_INSUFICIENTE: Saldo insuficiente.\n• VALOR_ACIMA_LIMITE: Acima do limite estabelecido.\n• CONSENTIMENTO_INVALIDO: Consentimento inválido.\n• JANELA_OPER_INVALIDA: Janela de operação inválida.\n• NAO_INFORMADO: Não informado.\n• PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO: divergência entre pagamento e consentimento.\n• LIQUIDACAO_ERRO_INESPERADO: Erro na liquidação do pagamento no arranjo.\n• AGENCIA_REQUERIDA: Pagamento inválido.\n• FINALIDADE_REQUERIDA: Pagamento inválido.\n"
+                            },
+                            "detail": {
+                                "type": "string",
+                                "maxLength": 2048,
+                                "pattern": "\\w*\\W*",
+                                "examples": [
+                                    "A conta selecionada não possui saldo suficiente para realizar o pagamento."
+                                ],
+                                "description": "Descrição específica do erro de acordo com o código reportado:\n• SALDO_INSUFICIENTE: A conta selecionada não possui saldo suficiente para realizar o pagamento.\n• VALOR_ACIMA_LIMITE: O valor (ou quantidade de transações) ultrapassa a faixa de limite parametrizada na detentora para permitir a realização de transações pelo cliente.\n• CONSENTIMENTO_INVALIDO: Consentimento inválido (status diferente de \"AUTHORISED\" ou está expirado).\n• JANELA_OPER_INVALIDA: Requisição está fora da janela de funcionamento.\n• NAO_INFORMADO: Não reportado/identificado pela instituição detentora de conta.\n• PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO: Dados do pagamento divergentes dos dados do consentimento.\n• LIQUIDACAO_ERRO_INESPERADO: Erro na liquidação do pagamento no arranjo alvo.\n• AGENCIA_REQUERIDA: O tipo de conta alvo requer as informações de agência.\n• FINALIDADE_REQUERIDA: Finalidade é requerida para o pagamento no arranjo alvo.\n"
+                            }
+                        },
+                        "additionalProperties": false
+                    }
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

@@ -1,0 +1,70 @@
+{
+  "data": {
+    "contractNumber": "1324926521496",
+    "ipocCode": "92792126019929279212650822221989319252576",
+    "productName": "Crédito Pessoal Consignado",
+    "productType": "FINANCIAMENTOS",
+    "productSubType": "AQUISICAO_BENS_VEICULOS_AUTOMOTORES",
+    "contractDate": "2018-01-05",
+    "contractAmount": "1000.0400",
+    "instalmentPeriodicity": "SEMANAL",
+    "CET": "0.290000",
+    "amortizationScheduled": "SAC",
+    "interestRates": [
+      {
+        "taxType": "EFETIVA",
+        "interestRateType": "SIMPLES",
+        "taxPeriodicity": "AA",
+        "calculation": "21/252",
+        "referentialRateIndexerType": "PRE_FIXADO",
+        "preFixedRate": "0.600000",
+        "referentialRateIndexerSubType": "TJLP",
+        "referentialRateIndexerAdditionalInfo": "Informações adicionais",
+        "additionalInfo": "Informações adicionais",
+        "postFixedRate": "0.550000"
+      },
+      {
+        "taxType": "EFETIVA",
+        "interestRateType": "SIMPLES",
+        "taxPeriodicity": "AA",
+        "calculation": "21/252",
+        "referentialRateIndexerType": "PRE_FIXADO",
+        "referentialRateIndexerAdditionalInfo": "Informações adicionais",
+        "preFixedRate": "0.600000",
+        "additionalInfo": "Informações adicionais",
+        "referentialRateIndexerSubType": "TJLP",
+        "postFixedRate": "0.550000"
+      }
+    ],
+    "contractedFees": [],
+    "contractedFinanceCharges": [
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
+        "chargeRate": "0.071200"
+      },
+      {
+        "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+        "chargeAdditionalInfo": "Informações adicionais sobre encargos.",
+        "chargeRate": "0.071200"
+      }
+    ],
+    "currency": "BRL",
+    "disbursementDates": [
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15",
+      "2018-01-15"
+    ],
+    "settlementDate": "2018-01-15",
+    "amortizationScheduledAdditionalInfo": "Informações complementares relativa à amortização do tipo 'OUTROS'",
+    "dueDate": "2028-01-15",
+    "firstInstalmentDueDate": "2018-02-15",
+    "instalmentPeriodicityAdditionalInfo": "Informações adicionais sobre periodicidade"
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

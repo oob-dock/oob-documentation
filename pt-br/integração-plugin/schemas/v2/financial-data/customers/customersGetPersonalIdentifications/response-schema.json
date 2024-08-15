@@ -1,0 +1,739 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Conjunto de informações relativas a Identificação ou seja a ação e o efeito de identificar de forma única a pessoa natural através de seus dados cadastrais.",
+        "required": [
+          "updateDateTime",
+          "personalId",
+          "brandName",
+          "civilName",
+          "socialName",
+          "birthDate",
+          "maritalStatusCode",
+          "sex",
+          "companyCnpj",
+          "documents",
+          "otherDocuments",
+          "hasBrazilianNationality",
+          "nationality",
+          "filiation",
+          "contacts"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "updateDateTime": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+            "example": "2021-05-21T08:30:00Z"
+          },
+          "personalId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string",
+                  "examples": [
+                    "pk_brown",
+                    "pk_green",
+                    "pk_yellow"
+                  ]
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string",
+                  "examples": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "value1",
+                    "value2",
+                    "value3",
+                    "20220511"
+                  ]
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            }
+          },
+          "brandName": {
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "[\\w\\W\\s]*",
+            "example": "Organização A",
+            "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes"
+          },
+          "civilName": {
+            "type": "string",
+            "maxLength": 70,
+            "pattern": "[\\w\\W\\s]*",
+            "example": "Juan Kaique Cláudio Fernandes",
+            "description": "Nome civil completo da pessoa natural (Direito fundamental da pessoa, o nome civil é aquele atribuído à pessoa natural desde o registro de seu nascimento, com o qual será identificada por toda a sua vida, bem como após a sua morte)"
+          },
+          "socialName": {
+            "type": "string",
+            "maxLength": 70,
+            "pattern": "[\\w\\W\\s]*",
+            "example": "Jaqueline de Freitas",
+            "description": "Nome social da pessoa natural, se houver. (aquele pelo qual travestis e transexuais se reconhecem, bem como são identificados por sua comunidade e em seu meio social, conforme Decreto Local)"
+          },
+          "birthDate": {
+            "type": "string",
+            "maxLength": 10,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2021-05-21",
+            "description": "Data de nascimento, conforme especificação RFC-3339"
+          },
+          "maritalStatusCode": {
+            "type": "string",
+            "enum": [
+              "SOLTEIRO",
+              "CASADO",
+              "VIUVO",
+              "SEPARADO_JUDICIALMENTE",
+              "DIVORCIADO",
+              "UNIAO_ESTAVEL",
+              "OUTRO"
+            ],
+            "example": "SOLTEIRO",
+            "description": "Estado marital do cliente. \n"
+          },
+          "maritalStatusAdditionalInfo": {
+            "type": "string",
+            "pattern": "[\\w\\W\\s]*",
+            "maxLength": 50,
+            "example": "Casado",
+            "description": "Campo livre para complementar a informação relativa ao estado marital, quando selecionada a opção 'OUTROS'"
+          },
+          "sex": {
+            "type": "string",
+            "enum": [
+              "FEMININO",
+              "MASCULINO",
+              "OUTRO",
+              "NAO_DISPONIVEL"
+            ],
+            "example": "FEMININO",
+            "description": "\"Conjunto de características anatomofisiológicas que distinguem o homem e a mulher: Sexo masculino; sexo feminino\". \nNo caso de não ser feminino nem masculino é classificado como 'OUTRO'\n"
+          },
+          "companyCnpj": {
+            "type": "array",
+            "example": [
+              "01773247000103",
+              "01773247000563"
+            ],
+            "description": "Número completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. \nDeve-se ter apenas os números do CNPJ, sem máscara\n",
+            "items": {
+              "type": "string",
+              "pattern": "\\d{14}|^NA$",
+              "maxLength": 14
+            }
+          },
+          "documents": {
+            "type": "object",
+            "description": "Objeto agrupador de informações relativas a Documentos da pessoa natural",
+            "required": [
+              "cpfNumber",
+              "passportNumber",
+              "passportCountry",
+              "passportExpirationDate"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "cpfNumber": {
+                "type": "string",
+                "maxLength": 11,
+                "pattern": "^\\d{11}$|^NA$",
+                "example": "25872252137",
+                "description": "Número completo do CPF. Atributo que corresponde às informações mínimas exigidas pela Regulamentação em vigor. O CPF é o Cadastro de Pessoa natural.  Ele é um documento feito pela Receita Federal e serve para identificar os contribuintes. O CPF é uma numeração com 11 dígitos, que só mudam por decisão judicial. O documento é emitido pela receita federal"
+              },
+              "passportNumber": {
+                "type": "string",
+                "maxLength": 20,
+                "pattern": "[\\w\\W\\s]*",
+                "example": "75253468744594820620",
+                "description": "Número do Passaporte. Documento concedido aos viajantes por uma autoridade\nadministrativa nacional a fim de certificar sua identidade perante autoridades\nestrangeiras. De preenchimento obrigatório. Aplicável somente à Pessoa natural\nresidente no exterior desobrigada de inscrição no CPF.\n"
+              },
+              "passportCountry": {
+                "type": "string",
+                "maxLength": 3,
+                "pattern": "^(\\w{3}){1}$|^NA$",
+                "example": "CAN",
+                "description": "Pais de emissão do passaporte. Código do pais de acordo com o código 'alpha3' do ISO-3166."
+              },
+              "passportExpirationDate": {
+                "type": "string",
+                "maxLength": 10,
+                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+                "example": "2021-05-21",
+                "description": "Data vigência do Passaporte, conforme especificação RFC-3339."
+              },
+              "passportIssueDate": {
+                "type": "string",
+                "maxLength": 10,
+                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+                "example": "2021-05-21",
+                "description": "Data de emissão do passaporte, conforme especificação RFC-3339."
+              }
+            }
+          },
+          "otherDocuments": {
+            "type": "array",
+            "minItems": 1,
+            "description": "Relação dos demais documentos",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "typeAdditionalInfo",
+                "number",
+                "checkDigit",
+                "expirationDate"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "CNH",
+                    "RG",
+                    "NIF",
+                    "RNE",
+                    "OUTROS",
+                    "SEM_OUTROS_DOCUMENTOS"
+                  ],
+                  "description": "Relação dos Códigos dos demais documentos pessoa natural.\n"
+                },
+                "typeAdditionalInfo": {
+                  "type": "string",
+                  "maxLength": 70,
+                  "pattern": "[\\w\\W\\s]*",
+                  "example": "NA",
+                  "description": "Campo livre de preenchimento obrigatório se selecionada a opção OUTROS tipos de documentos"
+                },
+                "number": {
+                  "type": "string",
+                  "maxLength": 11,
+                  "pattern": "[\\w\\W\\s]*",
+                  "example": "15291908",
+                  "description": "Identificação/Número do documento informado"
+                },
+                "checkDigit": {
+                  "type": "string",
+                  "maxLength": 2,
+                  "pattern": "[\\w\\W\\s]*",
+                  "example": "P",
+                  "description": "Dígito verificador do documento informado. De preenchimento obrigatório se o documento informado tiver dígito verificador"
+                },
+                "additionalInfo": {
+                  "type": "string",
+                  "maxLength": 50,
+                  "pattern": "[\\w\\W\\s]*",
+                  "example": "SSP/SP",
+                  "description": "Para documentos em que se aplique o uso do local de emissão o mesmo deve ser enviado mandatoriamente, com a informação de órgão e UF. Exemplo: RG, local de emissão: SSP/RS.\n[Restrição] Obrigatório quando o Local de Emissão do Documento for relevante.\n"
+                },
+                "expirationDate": {
+                  "type": "string",
+                  "maxLength": 10,
+                  "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+                  "example": "2021-05-21",
+                  "description": "Data de validade do documento informado, conforme especificação RFC-3339."
+                }
+              }
+            }
+          },
+          "hasBrazilianNationality": {
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "example": false,
+            "description": "Informa se o Cliente tem nacionalidade brasileira."
+          },
+          "nationality": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "description": "Objeto que agrupa informações relativas à nacionalidade da Pessoa Natural",
+              "required": [
+                "otherNationalitiesInfo",
+                "documents"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "otherNationalitiesInfo": {
+                  "type": "string",
+                  "maxLength": 40,
+                  "example": "CAN",
+                  "description": "Campo de preenchimento obrigatório caso o cliente não possua nacionalidade brasileira. Preencher indicando todas suas demais nacionalidades utilizando o código de pais de acordo com o código “alpha3” do ISO-3166.p.ex.'CAN'\n"
+                },
+                "documents": {
+                  "type": "array",
+                  "description": "Lista que traz relação de documentos complementares de pessoas com nacionalidade diferente de brasileira",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "type",
+                      "number",
+                      "expirationDate",
+                      "issueDate"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "type": {
+                        "type": "string",
+                        "maxLength": 10,
+                        "pattern": "[\\w\\W\\s]*",
+                        "description": "Tipo de documento. Campo livre, de preenchimento obrigatório quando a nacionalidade for diferente de brasileira. Informar tipo e número do documento, além da, vigência e demais informações complementares para se identificar o documento de pessoa estrangeira",
+                        "example": "SOCIAL SEC"
+                      },
+                      "number": {
+                        "type": "string",
+                        "maxLength": 40,
+                        "pattern": "[\\w\\W\\s]*",
+                        "description": "Número de identificação do documento. Campo livre, de preenchimento obrigatório quando a nacionalidade for diferente de brasileira. Informar o número do documento e demais informações complementares para se identificar o documento de pessoa estrangeira",
+                        "example": "423929299"
+                      },
+                      "expirationDate": {
+                        "description": "Data de validade do documento informado, conforme especificação RFC-3339.",
+                        "type": "string",
+                        "maxLength": 10,
+                        "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+                        "example": "2021-05-21"
+                      },
+                      "issueDate": {
+                        "description": "Data de emissão do documento, conforme especificação RFC-3339.",
+                        "type": "string",
+                        "maxLength": 10,
+                        "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+                        "example": "2021-05-21"
+                      },
+                      "country": {
+                        "type": "string",
+                        "maxLength": 80,
+                        "pattern": "[\\w\\W\\s]*",
+                        "example": "Brasil",
+                        "description": "Nome do país"
+                      },
+                      "typeAdditionalInfo": {
+                        "type": "string",
+                        "maxLength": 70,
+                        "pattern": "[\\w\\W\\s]*",
+                        "description": "Campo livre de preenchimento obrigatório se selecionada a opção OUTROS tipos de documentos.",
+                        "example": "Informações adicionais."
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "filiation": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "civilName"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "MAE",
+                    "PAI",
+                    "SEM_FILIACAO"
+                  ],
+                  "example": "PAI",
+                  "description": "Tipo de filiação."
+                },
+                "civilName": {
+                  "type": "string",
+                  "maxLength": 70,
+                  "pattern": "[\\w\\W\\s]*",
+                  "example": "Marcelo Cláudio Fernandes",
+                  "description": "Nome civil completo da pessoa relativa à filiação.\n(Direito fundamental da pessoa, o nome civil é aquele atribuído à pessoa natural desde o registro de seu nascimento, \ncom o qual será identificada por toda a sua vida, bem como após a sua morte)\n"
+                },
+                "socialName": {
+                  "type": "string",
+                  "maxLength": 70,
+                  "pattern": "[\\w\\W\\s]*",
+                  "example": "NA",
+                  "description": "Nome social da pessoa natural, se houver. \n(aquele pelo qual travestis e transexuais se reconhecem, \nbem como são identificados por sua comunidade e em seu meio social, conforme Decreto Local)\n"
+                }
+              }
+            }
+          },
+          "contacts": {
+            "type": "object",
+            "description": "Conjunto de informações referentes às formas para contatar o cliente.",
+            "required": [
+              "postalAddresses",
+              "phones",
+              "emails"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "postalAddresses": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Lista de endereços da pessoa natural",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "isMain",
+                    "address",
+                    "districtName",
+                    "townName",
+                    "countrySubDivision",
+                    "postCode",
+                    "country"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "isMain": {
+                      "type": "boolean",
+                      "example": true,
+                      "description": "Indica se o endereço informado é o principal."
+                    },
+                    "address": {
+                      "type": "string",
+                      "maxLength": 150,
+                      "pattern": "[\\w\\W\\s]*",
+                      "example": "Av Naburo Ykesaki, 1270",
+                      "description": "Corresponde ao endereço residencial do cliente."
+                    },
+                    "additionalInfo": {
+                      "type": "string",
+                      "maxLength": 30,
+                      "pattern": "[\\w\\W\\s]*",
+                      "example": "Fundos",
+                      "description": "Alguns logradouros ainda necessitam ser especificados por meio de complemento."
+                    },
+                    "districtName": {
+                      "type": "string",
+                      "maxLength": 50,
+                      "pattern": "[\\w\\W\\s]*",
+                      "example": "Centro",
+                      "description": "Bairro é uma comunidade ou região localizada em uma cidade ou município de acordo com as suas subdivisões geográficas."
+                    },
+                    "townName": {
+                      "type": "string",
+                      "maxLength": 50,
+                      "pattern": "[\\w\\W\\s]*",
+                      "example": "Marília",
+                      "description": "Localidade: O nome da localidade corresponde à designação da cidade ou município no qual o endereço está localizado.\n"
+                    },
+                    "ibgeTownCode": {
+                      "type": "string",
+                      "pattern": "\\d{7}$",
+                      "maxLength": 7,
+                      "example": "3550308",
+                      "description": "Código IBGE de Município. A Tabela de Códigos de Municípios do IBGE apresenta a lista dos municípios brasileiros associados a um código composto de 7 dígitos, sendo os dois primeiros referentes ao código da Unidade da Federação."
+                    },
+                    "countrySubDivision": {
+                      "type": "string",
+                      "description": "Enumeração referente a cada sigla da unidade da federação que identifica o estado ou o distrito federal, no qual o endereço está localizado. p.ex. 'AC'. São consideradas apenas as siglas para os estados brasileiros",
+                      "enum": [
+                        "AC",
+                        "AL",
+                        "AP",
+                        "AM",
+                        "BA",
+                        "CE",
+                        "DF",
+                        "ES",
+                        "GO",
+                        "MA",
+                        "MT",
+                        "MS",
+                        "MG",
+                        "PA",
+                        "PB",
+                        "PR",
+                        "PE",
+                        "PI",
+                        "RJ",
+                        "RN",
+                        "RS",
+                        "RO",
+                        "RR",
+                        "SC",
+                        "SP",
+                        "SE",
+                        "TO",
+                        "NA"
+                      ],
+                      "example": "SP"
+                    },
+                    "postCode": {
+                      "type": "string",
+                      "pattern": "\\d{8}|^NA$",
+                      "maxLength": 8,
+                      "example": "17500001",
+                      "description": "Código de Endereçamento Postal: Composto por um conjunto numérico de oito dígitos, o objetivo principal do CEP é orientar e acelerar o encaminhamento, o tratamento e a entrega de objetos postados nos Correios, por meio da sua atribuição a localidades, logradouros, unidades dos Correios, serviços, órgãos públicos, empresas e edifícios. p.ex. '01311000'.\n"
+                    },
+                    "country": {
+                      "type": "string",
+                      "maxLength": 80,
+                      "pattern": "[\\w\\W\\s]*",
+                      "example": "Brasil",
+                      "description": "Nome do país"
+                    },
+                    "countryCode": {
+                      "type": "string",
+                      "maxLength": 3,
+                      "example": "BRA",
+                      "description": "Código do pais de acordo com o código “alpha3” do ISO-3166."
+                    },
+                    "geographicCoordinates": {
+                      "type": "object",
+                      "description": "Conjunto de informações, que correspondem aos valores das coordenadas geográficas em graus decimais, no Sistema de referência WGS84",
+                      "additionalProperties": false,
+                      "properties": {
+                        "latitude": {
+                          "description": "Informação da Latitude referente a geolocalização informada. Entre -90 e 90.p.ex. '-90.8365180'. (2 casas antes da vírgula, 11 posições) \n",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,2}\\.\\d{1,9}$",
+                          "maxLength": 13,
+                          "example": "-90.8365180"
+                        },
+                        "longitude": {
+                          "description": "Informação da Longitude referente a geolocalização informada. Entre -180 e 180. p.ex '-180.836519.' (3 casas antes da vírgula, 11 posições) \n",
+                          "type": "string",
+                          "pattern": "^-?\\d{1,3}\\.\\d{1,8}$",
+                          "maxLength": 13,
+                          "example": "-180.836519"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "phones": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Lista com telefones de contato da pessoa natural",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "isMain",
+                    "type",
+                    "countryCallingCode",
+                    "areaCode",
+                    "number",
+                    "phoneExtension"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "isMain": {
+                      "type": "boolean",
+                      "description": "Indica se o telefone informado é o principal",
+                      "example": true
+                    },
+                    "type": {
+                      "type": "string",
+                      "description": "Identificação do Tipo de telefone do cliente.",
+                      "maxLength": 5,
+                      "enum": [
+                        "FIXO",
+                        "MOVEL",
+                        "OUTRO"
+                      ],
+                      "example": "FIXO"
+                    },
+                    "additionalInfo": {
+                      "type": "string",
+                      "description": "Informação complementar relativa ao tipo de telefone selecionado. [Restrição] De preenchimento obrigatório quando selecionado o tipo 'OUTRO'.",
+                      "pattern": "[\\w\\W\\s]*",
+                      "maxLength": 70,
+                      "example": "Informações adicionais."
+                    },
+                    "countryCallingCode": {
+                      "type": "string",
+                      "maxLength": 4,
+                      "pattern": "^\\d{2,4}$|^NA$",
+                      "example": "55",
+                      "description": "Número de DDI (Discagem Direta Internacional) para telefone de acesso ao Cliente - se houver"
+                    },
+                    "areaCode": {
+                      "type": "string",
+                      "example": "19",
+                      "description": "Número de DDD (Discagem Direta à Distância) do telefone do cliente - se houver",
+                      "maxLength": 2,
+                      "enum": [
+                        "11",
+                        "12",
+                        "13",
+                        "14",
+                        "15",
+                        "16",
+                        "17",
+                        "18",
+                        "19",
+                        "21",
+                        "22",
+                        "24",
+                        "27",
+                        "28",
+                        "31",
+                        "32",
+                        "33",
+                        "34",
+                        "35",
+                        "37",
+                        "38",
+                        "41",
+                        "42",
+                        "43",
+                        "44",
+                        "45",
+                        "46",
+                        "47",
+                        "48",
+                        "49",
+                        "51",
+                        "53",
+                        "54",
+                        "55",
+                        "61",
+                        "62",
+                        "63",
+                        "64",
+                        "65",
+                        "66",
+                        "67",
+                        "68",
+                        "69",
+                        "71",
+                        "73",
+                        "74",
+                        "75",
+                        "77",
+                        "79",
+                        "81",
+                        "82",
+                        "83",
+                        "84",
+                        "85",
+                        "86",
+                        "87",
+                        "88",
+                        "89",
+                        "91",
+                        "92",
+                        "93",
+                        "94",
+                        "95",
+                        "96",
+                        "97",
+                        "98",
+                        "99",
+                        "NA"
+                      ]
+                    },
+                    "number": {
+                      "type": "string",
+                      "maxLength": 11,
+                      "pattern": "^([0-9]{8,11})|^NA$",
+                      "example": "29875132",
+                      "description": "Número de telefone do cliente"
+                    },
+                    "phoneExtension": {
+                      "type": "string",
+                      "maxLength": 5,
+                      "pattern": "^\\d{1,5}$|^NA$",
+                      "description": "Número do ramal. De preenchimento obrigatório se fizer parte da identificação do número do telefone informado",
+                      "example": "932"
+                    }
+                  }
+                }
+              },
+              "emails": {
+                "type": "array",
+                "minItems": 1,
+                "description": "Lista e-mails de contato",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "isMain",
+                    "email"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "isMain": {
+                      "type": "boolean",
+                      "description": "Indica se o email informado é o principal",
+                      "example": true
+                    },
+                    "email": {
+                      "type": "string",
+                      "description": "Endereço de email",
+                      "maxLength": 320,
+                      "pattern": "[\\w\\W\\s]*",
+                      "example": "karinafernandes-81@br.inter.net"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages",
+        "requestDateTime"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

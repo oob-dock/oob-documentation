@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$defs": {
+    "ConsentDataSharing": {
+      "description": "Consentimento de compartilhamento de dados",
+      "type": "object",
+      "required": [
+        "brandId",
+        "creationDateTime",
+        "tpp",
+        "externalId",
+        "loggedUser",
+        "expirationDateTime",
+        "permissions"
+      ],
+      "properties": {
+        "authExtraData": {
+          "$ref": "./common-consent-schema.json#/$defs/AuthExtraData"
+        },
+        "consentOwner": {
+          "$ref": "./common-consent-schema.json#/$defs/ConsentOwner"
+        },
+        "brandId": {
+          "$ref": "../common-schema.json#/$defs/BrandId"
+        },
+        "creationDateTime": {
+          "$ref": "./common-consent-schema.json#/$defs/CreationDateTime"
+        },
+        "tpp": {
+          "$ref": "./common-consent-schema.json#/$defs/TPP"
+        },
+        "externalId": {
+          "$ref": "./common-consent-schema.json#/$defs/ExternalId"
+        },
+        "loggedUser": {
+          "$ref": "./common-consent-schema.json#/$defs/LoggedUser"
+        },
+        "businessDocumentType": {
+          "$ref": "./common-consent-schema.json#/$defs/BusinessEntity"
+        },
+        "resources": {
+          "$ref": "./common-consent-schema.json#/$defs/AcceptedResources"
+        },
+        "expirationDateTime": {
+          "$ref": "./common-consent-schema.json#/$defs/ExpirationDateTime"
+        },
+        "permissions": {
+          "$ref": "./common-consent-schema.json#/$defs/Permissions"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

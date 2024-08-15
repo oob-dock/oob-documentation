@@ -1,0 +1,713 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL",
+              "NORMAL",
+              "NORMAL",
+              "NORMAL",
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "fullIndemnityPercentage": "0.75",
+            "deductiblePaymentByCoverage": true,
+            "newCar": {
+              "contractBase": {
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                },
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                }
+              },
+              "maximumCalculatingPeriod": 12
+            },
+            "contractBase": {
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              },
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              }
+            },
+            "deductiblePercentage": "0.75",
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "geographicScope": {
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n",
+              "coverages": [
+                "NACIONAL",
+                "NACIONAL",
+                "NACIONAL"
+              ]
+            }
+          },
+          "permissionSeparateAcquisition": true,
+          "detail": "NA"
+        },
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "deductiblePaymentByCoverage": true,
+            "newCar": {
+              "maximumCalculatingPeriod": 12,
+              "contractBase": {
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                },
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                }
+              }
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "deductiblePercentage": "0.75",
+            "geographicScope": {
+              "coverages": [
+                "NACIONAL"
+              ],
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n"
+            },
+            "fullIndemnityPercentage": "0.75",
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "contractBase": {
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              },
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              }
+            }
+          },
+          "permissionSeparateAcquisition": true,
+          "detail": "NA"
+        },
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL",
+              "NORMAL",
+              "NORMAL",
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "newCar": {
+              "contractBase": {
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                },
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                }
+              },
+              "maximumCalculatingPeriod": 12
+            },
+            "deductiblePaymentByCoverage": true,
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "fullIndemnityPercentage": "0.75",
+            "geographicScope": {
+              "coverages": [
+                "NACIONAL",
+                "NACIONAL",
+                "NACIONAL",
+                "NACIONAL"
+              ],
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n"
+            },
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "contractBase": {
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              },
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              }
+            },
+            "deductiblePercentage": "0.75"
+          },
+          "detail": "NA",
+          "permissionSeparateAcquisition": true
+        },
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL",
+              "NORMAL",
+              "NORMAL",
+              "NORMAL",
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "geographicScope": {
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n",
+              "coverages": [
+                "NACIONAL",
+                "NACIONAL",
+                "NACIONAL"
+              ]
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "contractBase": {
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              },
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              }
+            },
+            "deductiblePaymentByCoverage": true,
+            "deductiblePercentage": "0.75",
+            "fullIndemnityPercentage": "0.75",
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "newCar": {
+              "maximumCalculatingPeriod": 12,
+              "contractBase": {
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                },
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                }
+              }
+            }
+          },
+          "detail": "NA",
+          "permissionSeparateAcquisition": true
+        },
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL",
+              "NORMAL",
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "fullIndemnityPercentage": "0.75",
+            "newCar": {
+              "contractBase": {
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                },
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                }
+              },
+              "maximumCalculatingPeriod": 12
+            },
+            "deductiblePercentage": "0.75",
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "geographicScope": {
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n",
+              "coverages": [
+                "NACIONAL",
+                "NACIONAL",
+                "NACIONAL",
+                "NACIONAL"
+              ]
+            },
+            "deductiblePaymentByCoverage": true,
+            "contractBase": {
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              },
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              }
+            }
+          },
+          "permissionSeparateAcquisition": true,
+          "detail": "NA"
+        }
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "ANUAL",
+        "ANUAL",
+        "ANUAL"
+      ],
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "termsAdditionalInfo": "nulla fugiat deserunt Ut elit",
+      "assistanceServices": [
+        {
+          "chargeType": "GRATUITA",
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "package": "ATE_10_SERVICOS"
+        },
+        {
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "chargeType": "GRATUITA",
+          "package": "ATE_10_SERVICOS"
+        },
+        {
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "package": "ATE_10_SERVICOS",
+          "chargeType": "GRATUITA"
+        }
+      ],
+      "carParts": [
+        {
+          "condition": "NOVAS",
+          "type": "ORIGINAIS"
+        }
+      ],
+      "additionalInfo": "Detalhar os serviços, benefícios e outros",
+      "vehicleOvernightPostalCode": 1311000,
+      "additionals": [
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO"
+      ],
+      "carModel": {
+        "model": "KA",
+        "fipeCode": "003128-3",
+        "year": 1985,
+        "manufacturer": "FORD"
+      },
+      "customerService": "REDE_REFERENCIADA",
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO"
+        ],
+        "paymentType": "A_VISTA",
+        "paymentMethodsAdditionalInfo": "Descritivo"
+      }
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL",
+              "NORMAL",
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "geographicScope": {
+              "coverages": [
+                "NACIONAL",
+                "NACIONAL"
+              ],
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n"
+            },
+            "deductiblePercentage": "0.75",
+            "contractBase": {
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              },
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              }
+            },
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "deductiblePaymentByCoverage": true,
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "fullIndemnityPercentage": "0.75",
+            "newCar": {
+              "maximumCalculatingPeriod": 12,
+              "contractBase": {
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                },
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                }
+              }
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            }
+          },
+          "permissionSeparateAcquisition": true,
+          "detail": "NA"
+        },
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "geographicScope": {
+              "coverages": [
+                "NACIONAL"
+              ],
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n"
+            },
+            "fullIndemnityPercentage": "0.75",
+            "deductiblePaymentByCoverage": true,
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "contractBase": {
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              },
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              }
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "newCar": {
+              "maximumCalculatingPeriod": 12,
+              "contractBase": {
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                },
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                }
+              }
+            },
+            "deductiblePercentage": "0.75"
+          },
+          "detail": "NA",
+          "permissionSeparateAcquisition": true
+        },
+        {
+          "type": "ROUBO_TOTAL_OU_PARCIAL",
+          "attributes": {
+            "deductibleTypes": [
+              "NORMAL",
+              "NORMAL",
+              "NORMAL"
+            ],
+            "fullIndemnityDeductible": true,
+            "contractBase": {
+              "determinedValue": {
+                "min": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                },
+                "max": {
+                  "amount": "50.000",
+                  "currency": "BRL"
+                }
+              },
+              "marketValuePercentage": {
+                "min": "0.20",
+                "max": "1.00"
+              }
+            },
+            "newCar": {
+              "maximumCalculatingPeriod": 12,
+              "contractBase": {
+                "marketValuePercentage": {
+                  "min": "0.20",
+                  "max": "1.00"
+                },
+                "determinedValue": {
+                  "min": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  },
+                  "max": {
+                    "amount": "50.000",
+                    "currency": "BRL"
+                  }
+                }
+              }
+            },
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "deductiblePercentage": "0.75",
+            "mandatoryParticipation": "Casco: R$ 0,00\nRCF-V Danos\nMateriais: X%\n",
+            "fullIndemnityPercentage": "0.75",
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "deductiblePaymentByCoverage": true,
+            "geographicScope": {
+              "coverages": [
+                "NACIONAL",
+                "NACIONAL",
+                "NACIONAL"
+              ],
+              "details": "Brasil, Argentina,\nUruguai, Paraguai,\nChile, Bolívia e\nVenezuela\n"
+            }
+          },
+          "permissionSeparateAcquisition": true,
+          "detail": "NA"
+        }
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "ANUAL",
+        "ANUAL"
+      ],
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "additionalInfo": "Detalhar os serviços, benefícios e outros",
+      "vehicleOvernightPostalCode": 1311000,
+      "assistanceServices": [
+        {
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "package": "ATE_10_SERVICOS",
+          "chargeType": "GRATUITA"
+        }
+      ],
+      "additionals": [
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO",
+        "SORTEIO_GRATUITO"
+      ],
+      "termsAdditionalInfo": "sed ea sit",
+      "carModel": {
+        "year": 1985,
+        "fipeCode": "003128-3",
+        "manufacturer": "FORD",
+        "model": "KA"
+      },
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO"
+        ],
+        "paymentType": "A_VISTA",
+        "paymentMethodsAdditionalInfo": "Descritivo"
+      },
+      "customerService": "REDE_REFERENCIADA",
+      "carParts": [
+        {
+          "type": "ORIGINAIS",
+          "condition": "NOVAS"
+        },
+        {
+          "type": "ORIGINAIS",
+          "condition": "NOVAS"
+        }
+      ]
+    }
+  ]
+}

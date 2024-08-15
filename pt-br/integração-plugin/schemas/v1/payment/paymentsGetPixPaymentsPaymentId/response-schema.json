@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "required": [
+        "correlationId",
+        "data"
+    ],
+    "properties": {
+        "correlationId": {
+          "$ref": "../commons-schema.json#/definitions/CorrelationId"
+        },
+        "data": {
+            "$ref": "../commons-schema.json#/definitions/ResponsePixPaymentData"
+        }
+    },
+    "additionalProperties": false
+}

@@ -1,0 +1,75 @@
+{
+    "idempotencyKey": "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl",
+    "consent": {
+        "brandId": "cbanco",
+        "creationDateTime": "2021-05-21T08:30:00Z",
+        "tpp": {
+            "name": "GuiaBolsa"
+        },
+        "externalId": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf",
+        "loggedUser": {
+            "document": {
+                "identification": "11111111111",
+                "rel": "CPF"
+            }
+        },
+        "expirationDateTime": "2021-05-21T08:30:00Z",
+        "creditor": {
+            "personType": "PESSOA_NATURAL",
+            "cpfCnpj": "11111111111",
+            "name": "Marco Antonio de Brito"
+        },
+        "payment": {
+            "type": "TED",
+            "date": "2021-01-01",
+            "currency": "BRL",
+            "amount": "123.45",
+            "creditorAccount": {
+                "ispb": "12345678",
+                "number": "1234567890",
+                "accountType": "CACC",
+                "issuer": "1774"
+            },
+            "purpose": 99999,
+            "purposeAdditionalInfo": "Informações adicionais"
+        },
+        "resources": [
+            {
+                "type": "PAYMENT",
+                "resourceLegacyId": [
+                    {
+                        "key": "internalAccountId",
+                        "value": "1234"
+                    }
+                ],
+                "authorizers": [
+                    {
+                        "cpf": "22222222222",
+                        "name": "Marco Antonio de Brito"
+                    }
+                ],
+                "hasMultipleAuthorisers": false
+            }
+        ]
+    },
+    "requestBody": {
+        "data": {
+            "payment": {
+                "amount": "123.45",
+                "currency": "BRL"
+            },
+            "creditorAccount": {
+                "ispb": "12345678",
+                "number": "1234567890",
+                "accountType": "CACC",
+                "issuer": "1774"
+            },
+            "purpose": 99999,
+            "purposeAdditionalInfo": "Informações adicionais"
+        }
+    },
+    "requestMeta": {
+        "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3",
+        "brandId": "cbanco"
+    }
+}

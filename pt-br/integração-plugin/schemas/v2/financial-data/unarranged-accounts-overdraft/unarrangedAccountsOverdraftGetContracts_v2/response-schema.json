@@ -1,0 +1,126 @@
+{
+  "type": "object",
+  "required": [
+    "data",
+    "meta"
+  ],
+  "properties": {
+    "data": {
+      "type": "array",
+      "minItems": 0,
+      "description": "Conjunto de informações de contratos de adiantamento a depositantes mantidos pelo cliente na instituição transmissora e para os quais ele tenha fornecido consentimento",
+      "items": {
+        "type": "object",
+        "description": "Conjunto de informações de contratos de adiantamento a depositantes mantidos pelo cliente na instituição transmissora e para os quais ele tenha fornecido consentimento.",
+        "required": [
+          "brandName",
+          "companyCnpj",
+          "productType",
+          "productSubType",
+          "ipocCode",
+          "contractId"
+        ],
+        "properties": {
+          "contractId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
+          },
+          "brandName": {
+            "type": "string",
+            "maxLength": 80,
+            "pattern": "[\\w\\W\\s]*",
+            "description": "Nome da Marca reportada pelo participante no Open Finance. Recomenda-se utilizar, sempre que possível, o mesmo nome de marca atribuído no campo do diretório Customer Friendly Server Name (Authorisation Server).\n",
+            "example": "Organização A"
+          },
+          "companyCnpj": {
+            "type": "string",
+            "maxLength": 14,
+            "pattern": "^\\d{14}$",
+            "description": "Número completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara",
+            "example": "60500998000144"
+          },
+          "productType": {
+            "type": "string",
+            "description": "\"Tipo da modalidade de crédito contratada, conforme circular 4.015 e descrição do DOC3040 do SCR). (Vide Enum)\nAdiantamento a depositantes, Direitos creditórios descontados Empréstimos,  Financiamentos, Financiamentos rurais  e Financiamentos imobiliários\"\n",
+            "enum": [
+              "ADIANTAMENTO_A_DEPOSITANTES"
+            ],
+            "example": "ADIANTAMENTO_A_DEPOSITANTES"
+          },
+          "productSubType": {
+            "type": "string",
+            "description": "\"Sub tipo da modalidades de crédito contratadas, conforme  circular 4.015 e descrição do DOC3040 do SCR). (Vide Enum)\nAdiantamento a depositantes\n",
+            "enum": [
+              "ADIANTAMENTO_A_DEPOSITANTES"
+            ],
+            "example": "ADIANTAMENTO_A_DEPOSITANTES"
+          },
+          "ipocCode": {
+            "type": "string",
+            "maxLength": 67,
+            "minLength": 22,
+            "pattern": "^\\d{22,67}$",
+            "description": "\"Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\"\n",
+            "example": "92792126019929279212650822221989319252576"
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

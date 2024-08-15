@@ -1,0 +1,220 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "type",
+          "transactionType",
+          "transactionDate",
+          "transactionValue",
+          "transactionId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Tipo de movimentação na visão de investimento: entrada ou saída. Nos casos de pagamento de dividendos, JCP e aluguéis, fica convencionado que será considerado que o tipo de movimento será saída.\n",
+            "enum": [
+              "ENTRADA",
+              "SAIDA"
+            ],
+            "example": "SAIDA"
+          },
+          "transactionType": {
+            "type": "string",
+            "description": "O campo deve classificar a movimentação em um dos tipos descritos: compra, venda, dividendos, JCP, aluguéis, transferência de custódia, transferência de titularidade e outros. \nO transmissor deve classificar as movimentações disponíveis associando-a a um dos itens do Enum listado neste campo. \nA opção OUTROS só deve ser utilizada para os casos em que de fato a movimentação compartilhada não possa ser classificada como um dos itens deste Enum. \nA expressão “aluguéis” deverá ser utilizada apenas para informar os juros/remuneração pagos/recebidos pelo cliente dos contratos de ações alugadas, seguindo o mesmo entendimento de ENTRADA/SAÍDA da expressão “dividendos”.\n",
+            "enum": [
+              "COMPRA",
+              "VENDA",
+              "DIVIDENDOS",
+              "JCP",
+              "ALUGUEIS",
+              "TRANSFERENCIA_CUSTODIA",
+              "TRANSFERENCIA_TITULARIDADE",
+              "OUTROS"
+            ],
+            "example": "DIVIDENDOS"
+          },
+          "transactionTypeAdditionalInfo": {
+            "type": "string",
+            "description": "Informação adicional do tipo de movimentação, para preenchimento no caso de movimentações não delimitadas no domínio.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com o valor 'OUTROS'.\n",
+            "maxLength": 100,
+            "pattern": "[\\w\\W\\s]*"
+          },
+          "transactionDate": {
+            "type": "string",
+            "description": "Data da movimentação.\n\n[Restrição] Data do pregão: compartilhar movimentos até a data da posição.\n",
+            "maxLength": 10,
+            "minLength": 10,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2018-02-15"
+          },
+          "priceFactor": {
+            "type": "string",
+            "format": "double",
+            "description": "Fator que indica o número de ações utilizadas para a formação do preço. Valor informado deve ser maior que zero.\n",
+            "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+            "maxLength": 24,
+            "example": "100.0005",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308
+          },
+          "transactionUnitPrice": {
+            "type": "object",
+            "description": "Preço unitário da movimentação: valor da unidade do produto na movimentação do investimento.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com os valores 'COMPRA' ou 'VENDA'.\n",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 21,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.0004",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "transactionQuantity": {
+            "type": "string",
+            "format": "double",
+            "description": "Quantidade de ativos movimentados.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com os valores 'COMPRA', 'VENDA' ou 'ALUGUEIS'.\n",
+            "maxLength": 24,
+            "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+            "example": "42.00000025",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308
+          },
+          "transactionValue": {
+            "type": "object",
+            "description": "Valor da operação realizada pelo cliente.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "maxLength": 20,
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "transactionId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
+          },
+          "brokerNoteId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "hasMoreRecords",
+        "requestDateTime"
+      ],
+      "properties": {
+        "hasMoreRecords": {
+          "type": "boolean",
+          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
+          "example": true
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

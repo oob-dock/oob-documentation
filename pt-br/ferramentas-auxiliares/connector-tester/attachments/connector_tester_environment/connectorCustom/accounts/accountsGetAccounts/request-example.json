@@ -1,0 +1,31 @@
+{
+    "consent": {
+        "brandId": "gfh546u3hey6uet467ie",
+        "creationDateTime": "2021-05-21T08:30:00Z",
+        "tpp": {
+            "name": "GuiaBolsa"
+        },
+        "externalId": "urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf",
+        "loggedUser" : {
+            "document": {
+                "identification": "12312312333",
+                "rel": "CPF"
+            }
+        },
+        "expirationDateTime": "2021-05-21T08:30:00Z",
+        "permissions": [
+            "ACCOUNTS_READ", 
+            "ACCOUNTS_BALANCES_READ",
+            "ACCOUNTS_TRANSACTIONS_READ", 
+            "ACCOUNTS_OVERDRAFT_LIMITS_READ", 
+            "RESOURCES_READ"
+        ]
+    },
+    "page": 1,
+    "pageSize": 25,
+    "accountType": "CONTA_DEPOSITO_A_VISTA",
+    "requestMeta": {
+        "correlationId": "8fa51b87-c7e3-4708-999e-1241e1b9f2b3",
+        "brandId": "gfh546u3hey6uet467ie"
+    }
+}

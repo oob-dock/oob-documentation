@@ -1,0 +1,92 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Informações do produto de fundo de investimento a que se refere investmentId.",
+      "required": [
+        "name",
+        "cnpjNumber"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Nome oficial do fundo de investimento conforme exibido para os clientes nos canais eletrônicos.",
+          "maxLength": 250,
+          "example": "CONSTELLATION MASTER FIA"
+        },
+        "cnpjNumber": {
+          "type": "string",
+          "description": "CNPJ do fundo de investimento.",
+          "maxLength": 14,
+          "pattern": "^\\d{14}$",
+          "example": "11225860000140"
+        },
+        "isinCode": {
+          "type": "string",
+          "description": "Código universal que identifica cada valor mobiliário ou instrumento financeiro, conforme Norma ISO 6166.\n\nDEFINIÇÃO: O ISIN (International Securities Identification Number) é um código que identifica um valor mobiliário, conforme a norma ISO 6166.\n\nESTRUTURA: O ISIN é um código alfanumérico que possui 12 caracteres com a seguinte estrutura:  \n- Um prefixo, composto de 2 caracteres alfa, que identifica o código do país (Norma ISO 3166);\n- O número básico, composto de 9 caracteres alfabéticos ou numéricos em sua extensão;\n- Um dígito numérico de controle.\n",
+          "maxLength": 12,
+          "minLength": 12,
+          "pattern": "^[A-Z]{2}([A-Z0-9]){9}\\d{1}$",
+          "example": "BRCST4CTF001"
+        },
+        "anbimaCategory": {
+          "type": "string",
+          "description": "Conforme classificação ANBIMA, que segue a deliberação 77 da ANBIMA.\n\n– Renda Fixa\n\n– Ações\n\n– Multimercado\n\n– Cambial\n\nhttps://www.anbima.com.br/data/files/5A/44/2C/B7/8411B510CD3B4DA568A80AC2/DeliberacaoN77-Diretriz-de-Classificacao-de-Fundos.pdf\n",
+          "enum": [
+            "RENDA_FIXA",
+            "ACOES",
+            "MULTIMERCADO",
+            "CAMBIAL"
+          ],
+          "example": "RENDA_FIXA"
+        },
+        "anbimaClass": {
+          "type": "string",
+          "description": "Campo necessário para aderência a Resolução CVM175. Aguardando definições de mercado. Deve se tratar de campo do tipo enum.",
+          "maxLength": 70,
+          "pattern": "[\\w\\W\\s]*"
+        },
+        "anbimaSubclass": {
+          "type": "string",
+          "description": "Campo necessário para aderência a Resolução CVM175. Aguardando definições de mercado. Deve se tratar de campo do tipo enum.",
+          "maxLength": 70,
+          "pattern": "[\\w\\W\\s]*"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente a API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

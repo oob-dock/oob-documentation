@@ -1,0 +1,84 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "foreignCurrency": "USD",
+      "deliveryForeignCurrency": "TELETRANSMISSAO_SWIFT",
+      "transactionType": "COMPRA",
+      "transactionCategory": "COMERCIO_EXTERIOR",
+      "targetAudience": "PESSOA_NATURAL",
+      "value": "0.019800",
+      "valueUpdateDateTime": "2017-07-21T17:32:28Z",
+      "disclaimer": "Informamos que esta taxa é estimada e exclusiva para fins de Open Finance,  não sendo válida para a contratação de operações de câmbio. Para obter a taxa para fechamento do câmbio, pedimos consultar os canais disponíveis para contratação."
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "foreignCurrency": "USD",
+      "deliveryForeignCurrency": "TELETRANSMISSAO_SWIFT",
+      "transactionType": "COMPRA",
+      "transactionCategory": "COMERCIO_EXTERIOR",
+      "targetAudience": "PESSOA_NATURAL",
+      "value": "0.019800",
+      "valueUpdateDateTime": "2017-07-21T17:32:28Z",
+      "disclaimer": "Informamos que esta taxa é estimada e exclusiva para fins de Open Finance,  não sendo válida para a contratação de operações de câmbio. Para obter a taxa para fechamento do câmbio, pedimos consultar os canais disponíveis para contratação."
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "foreignCurrency": "USD",
+      "deliveryForeignCurrency": "TELETRANSMISSAO_SWIFT",
+      "transactionType": "COMPRA",
+      "transactionCategory": "COMERCIO_EXTERIOR",
+      "targetAudience": "PESSOA_NATURAL",
+      "value": "0.019800",
+      "valueUpdateDateTime": "2017-07-21T17:32:28Z",
+      "disclaimer": "Informamos que esta taxa é estimada e exclusiva para fins de Open Finance,  não sendo válida para a contratação de operações de câmbio. Para obter a taxa para fechamento do câmbio, pedimos consultar os canais disponíveis para contratação."
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "foreignCurrency": "USD",
+      "deliveryForeignCurrency": "TELETRANSMISSAO_SWIFT",
+      "transactionType": "COMPRA",
+      "transactionCategory": "COMERCIO_EXTERIOR",
+      "targetAudience": "PESSOA_NATURAL",
+      "value": "0.019800",
+      "valueUpdateDateTime": "2017-07-21T17:32:28Z",
+      "disclaimer": "Informamos que esta taxa é estimada e exclusiva para fins de Open Finance,  não sendo válida para a contratação de operações de câmbio. Para obter a taxa para fechamento do câmbio, pedimos consultar os canais disponíveis para contratação."
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "foreignCurrency": "USD",
+      "deliveryForeignCurrency": "TELETRANSMISSAO_SWIFT",
+      "transactionType": "COMPRA",
+      "transactionCategory": "COMERCIO_EXTERIOR",
+      "targetAudience": "PESSOA_NATURAL",
+      "value": "0.019800",
+      "valueUpdateDateTime": "2017-07-21T17:32:28Z",
+      "disclaimer": "Informamos que esta taxa é estimada e exclusiva para fins de Open Finance,  não sendo válida para a contratação de operações de câmbio. Para obter a taxa para fechamento do câmbio, pedimos consultar os canais disponíveis para contratação."
+    }
+  ]
+}

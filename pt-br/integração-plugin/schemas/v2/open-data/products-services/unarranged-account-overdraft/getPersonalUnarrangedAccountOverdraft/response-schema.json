@@ -1,0 +1,108 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "description": "Obtém a lista de adiantamento de depositante de Pessoa Natural.",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "$ref": "#/$defs/ResponsePersonalUnarrangedAccountOverdraft"
+        }
+    },
+    "additionalProperties": false,
+    "$desf": {
+        "ResponsePersonalUnarrangedAccountOverdraft": {
+            "type": "object",
+            "required": [
+                "brand"
+            ],
+            "properties": {
+                "brand": {
+                    "$ref": "#/$defs/PersonalUnarrangedAccountOverdraftBrand"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalUnarrangedAccountOverdraftBrand": {
+            "type": "object",
+            "required": [
+                "name",
+                "companies"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Marca reportada pelo participante do Open Banking. O conceito a que se refere a 'marca' é em essência uma promessa da empresa em fornecer uma série específica de atributos, benefícios e serviços uniformes aos clientes."
+                },
+                "companies": {
+                    "$ref": "#/$defs/PersonalUnarrangedAccountOverdraftCompany"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalUnarrangedAccountOverdraftCompany": {
+            "type": "object",
+            "minItems": 1,
+            "description": "Companies traz uma lista de todas as instituições da Marca.",
+            "required": [
+                "name",
+                "cnpjNumber",
+                "personalUnarrangedAccountOverdraft"
+            ],
+            "properties": {
+                "name": {
+                    "$ref": "../../../common/common-schema.json#/$defs/Name",
+                    "description": "Nome da Instituição, pertencente à marca, responsável pela comercialização dos produtos e serviços."
+                },
+                "cnpjNumber": {
+                    "$ref": "../../../common/common-schema.json#/$defs/CnpjNumber"
+                },
+                "urlComplementaryList": {
+                    "$ref": "../../../common/common-schema.json#/$defs/urlComplementaryList"
+                },
+                "personalUnarrangedAccountOverdraft": {
+                    "$ref": "#/$defs/PersonalUnarrangedAccountOverdraft"
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalUnarrangedAccountOverdraft": {
+            "type": "object",
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "Lista de produtos e serviços referente adiantamento a depositante.",
+            "required": [
+                "fees",
+                "interestRates",
+                "termsConditions"
+            ],
+            "properties": {
+                "fees": {
+                    "$ref": "#/$defs/PersonalUnarrangedAccountOverdraftFee"
+                },
+                "interestRates": {
+                    "$ref": "../../../common/common-schema.json#/$defs/InterestRate"
+                },
+                "termsConditions": {
+                    "$ref": "../../../common/common-schema.json#/$defs/TermsConditions",
+                    "description": "Campo aberto para informar as condições contratuais relativas à Modalidade de Adiantamento a depositante para pessoa natural. Pode ser informada a URL referente ao endereço onde constam as condições informadas. Endereço eletrônico de acesso ao canal."
+                }
+            },
+            "additionalProperties": false
+        },
+        "PersonalUnarrangedAccountOverdraftFee": {
+            "type": "object",
+            "minItems": 1,
+            "required": [
+                "priorityServices"
+            ],
+            "properties": {
+                "priorityServices": {
+                    "$ref": "../../common/common-schema.json#/$defs/UnarrangedAccountOverdraftService"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

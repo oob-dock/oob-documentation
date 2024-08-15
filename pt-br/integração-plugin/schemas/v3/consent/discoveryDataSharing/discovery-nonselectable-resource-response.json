@@ -1,0 +1,89 @@
+{
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "title": "Non-Selectable Resource Discovery Response",
+    "type": "object",
+    "properties": {
+        "resources": {
+            "description": "Lista de recursos relacionados ao discovery",
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "resourceLegacyId": {
+                        "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "description": "Nome do campo do identificador no sistema de origem",
+                                    "type": "string"
+                                },
+                                "value": {
+                                    "description": "Valor do campo do identificador no sistema de origem",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "key"
+                            ],
+                            "additionalItems": false
+                        }
+                    },
+                    "validUntil": {
+                        "description": "Indica a data até a qual o recurso estará disponível.",
+                        "type": "string",
+                        "format": "date",
+                        "example": "2025-05-21"
+                    },
+                    "status": {
+                        "description": "Indica o status atual do recurso",
+                        "type": "string",
+                        "default": "AVAILABLE",
+                        "enum": [
+                            "AVAILABLE",
+                            "PENDING_AUTHORISATION",
+                            "UNAVAILABLE",
+                            "TEMPORARILY_UNAVAILABLE"
+                        ]
+                    },
+                    "authorizers": {
+                        "description": "Lista dos autorizadores para o recurso para casos de multipla alçada. Caso o recurso seja selecionado, todos os autorizadores deverão aceitar o consentimento que o recurso faz parte",
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "cpf": {
+                                    "description": "CPF do autorizador",
+                                    "type": "string",
+                                    "minLength": 11,
+                                    "maxLength": 11,
+                                    "pattern": "^\\d{11}$"
+                                },
+                                "name": {
+                                    "description": "Nome do autorizador",
+                                    "type": "string"
+                                }
+                            },
+                            "required": [
+                                "cpf",
+                                "name"
+                            ],
+                            "additionalItems": false
+                        },
+                        "minItems": 1
+                    }
+                },
+                "required": [
+                    "resourceLegacyId",
+                    "validUntil"
+                ],
+                "additionalItems": false
+            }
+        }
+    },
+    "required": [
+        "resources"
+    ],
+    "additionalItems": false
+}

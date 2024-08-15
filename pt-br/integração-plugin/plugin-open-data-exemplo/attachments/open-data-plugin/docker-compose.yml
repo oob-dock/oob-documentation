@@ -1,0 +1,11 @@
+version: "3.9"
+services:
+    oob-open-data:
+        build: 
+          context: .
+          dockerfile: Dockerfile
+        image: oob-open-data-local
+        ports:
+          - "8080:8080"
+        env_file: 
+          - ./env_variables.env

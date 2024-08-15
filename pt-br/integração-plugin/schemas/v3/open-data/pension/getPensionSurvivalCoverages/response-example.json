@@ -1,0 +1,354 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "segment": "PREVIDENCIA",
+      "type": "DEMAIS_PRODUTOS_PREVIDENCIA",
+      "targetAudience": "PESSOA_NATURAL",
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "costs": {
+        "loadingAntecipated": {
+          "minValue": "0.000000",
+          "maxValue": "0.100000"
+        },
+        "loadingLate": {
+          "minValue": "0.000000",
+          "maxValue": "0.100000"
+        }
+      },
+      "additionalInfo": "https://openinsurance.com.br/aaa",
+      "grantPeriodBenefit": {
+        "incomeModalities": [
+          "PAGAMENTO_UNICO"
+        ],
+        "biometricTable": [
+          "AT_2000_MALE",
+          "AT_2000_MALE"
+        ],
+        "interestRate": "0.225222",
+        "reversalFinancialResults": "1.252111",
+        "investmentFunds": [
+          {
+            "cnpjNumber": "13456789000112",
+            "currency": "BRL",
+            "maximumAdministrationFee": "0.201000",
+            "minimumContributionAmount": "1000.00",
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "name": "EMPRESAAPREV",
+            "maximumPerformanceFee": "0.201000",
+            "typePerformanceFee": "DIRETAMENTE",
+            "eligibilityRule": true
+          },
+          {
+            "eligibilityRule": true,
+            "name": "EMPRESAAPREV",
+            "currency": "BRL",
+            "maximumPerformanceFee": "0.201000",
+            "minimumContributionAmount": "1000.00",
+            "maximumAdministrationFee": "0.201000",
+            "cnpjNumber": "13456789000112",
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "typePerformanceFee": "DIRETAMENTE"
+          },
+          {
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "cnpjNumber": "13456789000112",
+            "maximumPerformanceFee": "0.201000",
+            "name": "EMPRESAAPREV",
+            "maximumAdministrationFee": "0.201000",
+            "minimumContributionAmount": "1000.00",
+            "eligibilityRule": true,
+            "currency": "BRL",
+            "typePerformanceFee": "DIRETAMENTE"
+          }
+        ],
+        "updateIndex": "IPCA"
+      },
+      "modality": "BENEFICIO_DEFINIDO",
+      "defferalPeriod": {
+        "premiumPaymentMethods": [
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO"
+        ],
+        "permissionScheduledFinancialPayments": true,
+        "gracePeriod": {
+          "redemption": 100,
+          "betweenRedemptionRequests": 30,
+          "portability": 12,
+          "betweenPortabilityRequests": 15
+        },
+        "updateIndex": "IPCA",
+        "redemptionPaymentTerm": 10,
+        "permissionExtraordinaryContributions": true,
+        "investmentFunds": [
+          {
+            "eligibilityRule": true,
+            "maximumPerformanceFee": "0.201000",
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "typePerformanceFee": "DIRETAMENTE",
+            "cnpjNumber": "13456789000112",
+            "currency": "BRL",
+            "minimumContributionAmount": "1000.00",
+            "name": "EMPRESAAPREV",
+            "maximumAdministrationFee": "0.201000"
+          },
+          {
+            "typePerformanceFee": "DIRETAMENTE",
+            "name": "EMPRESAAPREV",
+            "currency": "BRL",
+            "eligibilityRule": true,
+            "maximumAdministrationFee": "0.201000",
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "maximumPerformanceFee": "0.201000",
+            "cnpjNumber": "13456789000112",
+            "minimumContributionAmount": "1000.00"
+          },
+          {
+            "cnpjNumber": "13456789000112",
+            "name": "EMPRESAAPREV",
+            "currency": "BRL",
+            "minimumContributionAmount": "1000.00",
+            "typePerformanceFee": "DIRETAMENTE",
+            "eligibilityRule": true,
+            "maximumAdministrationFee": "0.201000",
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "maximumPerformanceFee": "0.201000"
+          },
+          {
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "currency": "BRL",
+            "name": "EMPRESAAPREV",
+            "maximumAdministrationFee": "0.201000",
+            "typePerformanceFee": "DIRETAMENTE",
+            "maximumPerformanceFee": "0.201000",
+            "cnpjNumber": "13456789000112",
+            "minimumContributionAmount": "1000.00",
+            "eligibilityRule": true
+          }
+        ],
+        "interestRate": "0.251231",
+        "otherMinimumPerformanceGarantees": "SELIC",
+        "portabilityPaymentTerm": 20,
+        "reversalFinancialResults": "0.051230",
+        "minimumPremiums": [
+          {
+            "amount": "250.00",
+            "currency": "BRL",
+            "periodicity": "MENSAL"
+          },
+          {
+            "currency": "BRL",
+            "periodicity": "MENSAL",
+            "amount": "250.00"
+          }
+        ]
+      },
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "participantQualified": true,
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      }
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "segment": "PREVIDENCIA",
+      "type": "VDR",
+      "targetAudience": "PESSOA_NATURAL",
+      "defferalPeriod": {
+        "premiumPaymentMethods": [
+          "CARTAO_CREDITO"
+        ],
+        "reversalFinancialResults": "0.051230",
+        "permissionScheduledFinancialPayments": true,
+        "redemptionPaymentTerm": 10,
+        "otherMinimumPerformanceGarantees": "SELIC",
+        "interestRate": "0.251231",
+        "minimumPremiums": [
+          {
+            "amount": "250.00",
+            "periodicity": "MENSAL",
+            "currency": "BRL"
+          },
+          {
+            "currency": "BRL",
+            "amount": "250.00",
+            "periodicity": "MENSAL"
+          }
+        ],
+        "investmentFunds": [
+          {
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "typePerformanceFee": "DIRETAMENTE",
+            "cnpjNumber": "13456789000112",
+            "currency": "BRL",
+            "maximumPerformanceFee": "0.201000",
+            "minimumContributionAmount": "1000.00",
+            "eligibilityRule": true,
+            "maximumAdministrationFee": "0.201000",
+            "name": "EMPRESAAPREV"
+          },
+          {
+            "minimumContributionAmount": "1000.00",
+            "maximumPerformanceFee": "0.201000",
+            "currency": "BRL",
+            "eligibilityRule": true,
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "typePerformanceFee": "DIRETAMENTE",
+            "name": "EMPRESAAPREV",
+            "cnpjNumber": "13456789000112",
+            "maximumAdministrationFee": "0.201000"
+          }
+        ],
+        "gracePeriod": {
+          "redemption": 100,
+          "betweenRedemptionRequests": 30,
+          "portability": 12,
+          "betweenPortabilityRequests": 15
+        },
+        "permissionExtraordinaryContributions": true,
+        "updateIndex": "IPCA",
+        "portabilityPaymentTerm": 20
+      },
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "participantQualified": true,
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "costs": {
+        "loadingAntecipated": {
+          "minValue": "0.000000",
+          "maxValue": "0.100000"
+        },
+        "loadingLate": {
+          "minValue": "0.000000",
+          "maxValue": "0.100000"
+        }
+      },
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "additionalInfo": "https://openinsurance.com.br/aaa",
+      "grantPeriodBenefit": {
+        "incomeModalities": [
+          "PAGAMENTO_UNICO",
+          "PAGAMENTO_UNICO",
+          "PAGAMENTO_UNICO"
+        ],
+        "reversalFinancialResults": "1.252111",
+        "biometricTable": [
+          "AT_2000_MALE"
+        ],
+        "updateIndex": "IPCA",
+        "interestRate": "0.225222",
+        "investmentFunds": [
+          {
+            "currency": "BRL",
+            "typePerformanceFee": "DIRETAMENTE",
+            "minimumContributionAmount": "1000.00",
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "eligibilityRule": true,
+            "cnpjNumber": "13456789000112",
+            "name": "EMPRESAAPREV",
+            "maximumPerformanceFee": "0.201000",
+            "maximumAdministrationFee": "0.201000"
+          },
+          {
+            "maximumAdministrationFee": "0.201000",
+            "typePerformanceFee": "DIRETAMENTE",
+            "cnpjNumber": "13456789000112",
+            "currency": "BRL",
+            "name": "EMPRESAAPREV",
+            "eligibilityRule": true,
+            "maximumPerformanceFee": "0.201000",
+            "minimumContributionAmount": "1000.00",
+            "minimumMathematicalProvisionAmount": "1000.00"
+          },
+          {
+            "minimumContributionAmount": "1000.00",
+            "eligibilityRule": true,
+            "currency": "BRL",
+            "maximumAdministrationFee": "0.201000",
+            "name": "EMPRESAAPREV",
+            "maximumPerformanceFee": "0.201000",
+            "cnpjNumber": "13456789000112",
+            "typePerformanceFee": "DIRETAMENTE",
+            "minimumMathematicalProvisionAmount": "1000.00"
+          },
+          {
+            "currency": "BRL",
+            "typePerformanceFee": "DIRETAMENTE",
+            "name": "EMPRESAAPREV",
+            "maximumAdministrationFee": "0.201000",
+            "maximumPerformanceFee": "0.201000",
+            "cnpjNumber": "13456789000112",
+            "eligibilityRule": true,
+            "minimumContributionAmount": "1000.00",
+            "minimumMathematicalProvisionAmount": "1000.00"
+          },
+          {
+            "maximumPerformanceFee": "0.201000",
+            "minimumContributionAmount": "1000.00",
+            "typePerformanceFee": "DIRETAMENTE",
+            "name": "EMPRESAAPREV",
+            "minimumMathematicalProvisionAmount": "1000.00",
+            "currency": "BRL",
+            "cnpjNumber": "13456789000112",
+            "eligibilityRule": true,
+            "maximumAdministrationFee": "0.201000"
+          }
+        ]
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "modality": "BENEFICIO_DEFINIDO"
+    }
+  ]
+}

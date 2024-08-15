@@ -1,0 +1,49 @@
+{
+    "requestBody": {
+        "data": {
+            "tpp": {
+                "name": "GuiaBolsa"
+            },
+            "loggedUser": {
+                "document": {
+                    "identification": "11111111111",
+                    "rel": "CPF"
+                }
+            },
+            "creditor": {
+                "personType": "PESSOA_NATURAL",
+                "cpfCnpj": "11111111111",
+                "name": "Marco Antonio de Brito"
+            },
+            "payment": {
+                "type": "TED",
+                "date": "2021-01-01",
+                "schedule": {
+                    "single": {
+                        "date": "2021-01-01"
+                    }
+                },
+                "currency": "BRL",
+                "amount": "100000.12",
+                "creditorAccount": {
+                    "ispb": "12345678",
+                    "issuer": "1774",
+                    "number": "1234567890",
+                    "accountType": "CACC"
+                },
+                "purpose": 99999,
+                "purposeAdditionalInfo": "Informações adicionais"
+            },
+            "debtorAccount": {
+                "ispb": "87654321",
+                "number": "0987654321",
+                "accountType": "CACC",
+                "issuer": "1774"
+            }
+        }
+    },
+    "requestMeta": {
+        "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3",
+        "brandId": "cbanco"
+    }
+}
