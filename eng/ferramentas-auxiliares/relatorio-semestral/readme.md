@@ -85,7 +85,7 @@ Example for obtaining services from phase 3 - Payment Initiation:
 @set endpoints_services = array ['/payments/v3/consents','/payments/v3/consents/{consentId}','/payments/v3/pix/payments','/payments/v3/pix/payments/{paymentId}','/payments/v4/consents','/payments/v4/consents/{consentId}','/payments/v4/pix/payments','/payments/v4/pix/payments/{paymentId}','/payments/v4/pix/payments/consents/{consentId}','/automatic-payments/v1/recurring-consents','/automatic-payments/v1/recurring-consents/{recurringConsentId}','/automatic-payments/v1/pix/recurring-payments','/automatic-payments/v1/pix/recurring-payments/{recurringPaymentId}']
 ```
 
-Exemplo para obtenção dos serviços da fase 4A - Dados Abertos
+Example for obtaining services from fase 4A - Open Data
 
 ```sql
 @set endpoints_services = array ['/opendata-capitalization/v1/bonds', '/opendata-investments/v1/funds', '/opendata-investments/v1/bank-fixed-incomes', '/opendata-investments/v1/credit-fixed-incomes', '/opendata-investments/v1/variable-incomes', '/opendata-investments/v1/treasure-titles', '/opendata-exchange/v1/online-rates', '/opendata-exchange/v1/vet-values', '/opendata-acquiring-services/v1/personals', '/opendata-acquiring-services/v1/businesses', '/opendata-pension/v1/risk-coverages', '/opendata-pension/v1/survival-coverages', '/opendata-insurance/v1/personals', '/opendata-insurance/v1/automotives', '/opendata-insurance/v1/homes']
