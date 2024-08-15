@@ -67,7 +67,7 @@ The JWT must have the following claims, with those marked with an asterisk being
 
 - `authExtraData`: Set of extra information related to the logged-in user represented by an array of key/value dictionaries with two mandatory fields, `key` and `value`. It should be used to send user credentials if the institution does not use *cpf* or *cnpj* for authentication.
 
-- `consentOwner`: Set of information defined by the institution to identify the consent owner, such as agency, account, CPF, and/or CNPJ. It consists of an array of key/value dictionaries with two mandatory fields, `key` and `value`. This field is used for consent consultation via the [Backoffice API](../portal-backoffice/apis-backoffice/readme.md).
+- `consentOwner`: Set of information defined by the institution to identify the consent owner, such as agency, account, CPF, and/or CNPJ. It consists of an array of key/value dictionaries with two mandatory fields, `key` and `value`. This field is used for consent consultation via the [Backoffice API](../backoffice-portal/apis-backoffice/readme.md).
 
 **Important**: If the `consentOwner` claim is not sent, the OOB solution will use the user's `cpf` and `cnpj` to define the consent owner.
 

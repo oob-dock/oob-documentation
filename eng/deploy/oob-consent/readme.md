@@ -463,7 +463,7 @@ additionalVarsDaemon:
     value: "true"
 ```
 
-**IMPORTANT**: Activating the daemon is part of the temporary webhook solution and should only be enabled while the holder does not implement the [Payment Status Change Notification API](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento). The daemon is disabled by default, but if the holder chooses to use it, the recommended interval value is `1s`, to meet the regulatory expected time.
+**IMPORTANT**: Activating the daemon is part of the temporary webhook solution and should only be enabled while the holder does not implement the [Payment Status Change Notification API](../../backoffice-portal/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento). The daemon is disabled by default, but if the holder chooses to use it, the recommended interval value is `1s`, to meet the regulatory expected time.
 
 Default value: `disabled`
 
