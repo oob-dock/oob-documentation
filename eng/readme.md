@@ -256,10 +256,10 @@ The OPUS Open Finance platform offers a series of scripts and reports for extrac
     1. Backend Integration: **Connectors**
         1. [Overview](integration-connector/readme.md)
         1. Account Holders:
-            1. [Resource discovery (accounts, cards, etc.)](integration-connector/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
+            1. [Resource discovery (accounts, cards, etc.)](integration-connector/consent/readme.md#resource-discovery-in-opus-open-finance)
             1. [Payment initiation and query (Pix)](integration-connector/payments/readme.md)
         1. Data Transmitters:
-            1. [Resource discovery (accounts, cards, etc.)](integration-connector/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
+            1. [Resource discovery (accounts, cards, etc.)](integration-connector/consent/readme.md#resource-discovery-in-opus-open-finance)
             1. [Open data (products and services)](integration-connector/open-data/readme.md)
             1. [Registration and transactional data](integration-connector/financial-data/readme.md)
 
@@ -280,7 +280,7 @@ The OPUS Open Finance platform offers a series of scripts and reports for extrac
             1. [Open data](deploy/oob-open-data/readme.md)
             1. [Registration and transactional data](deploy/oob-financial-data/readme.md)
         1. Optional:
-            1. [Backoffice Portal](deploy/oob-backoffice-portal/readme.md)
+            1. [Backoffice Portal](deploy/oob-portal-backoffice/readme.md)
             1. [Handoff Web](deploy/oob-handoff-web/readme.md)
     1. Domain and cryptographic certificate configuration
         1. [Account Holder and Data Transmitter](domains-and-certificate/readme.md)
@@ -297,13 +297,13 @@ The OPUS Open Finance platform offers a series of scripts and reports for extrac
         1. [Semi-annual Availability Report](additional-tools/availability-report-by-api-group/readme.md)
         1. [Semi-annual Request Volume Report](additional-tools/biannual-report/readme.md)
         1. Account Holder:
-            1. [Functionality Monitoring Report](additional-tools/monitoring-of-initial-operation/phase-3/readme.md)
+            1. [Functionality Monitoring Report](additional-tools/monitoring-of-initial-operation/phase-3/fase-3/readme.md)
             1. [Interoperability Report](additional-tools/interoperability-report/fase-3/readme.md)
             1. [Non-functional Requirements Report](additional-tools/non-functional-requirements-report/readme.md)
         1. Data Transmitter:
             1. [Consent Inventory Report](additional-tools/consent-information-script/readme.md)
     1. Backoffice Portal:
-        1. [Installation](deploy/oob-backoffice-portal/readme.md)
+        1. [Installation](deploy/oob-portal-backoffice/readme.md)
         1. [Interface customization](backoffice-portal/customization/readme.md)
         1. [Integration with institutional login via *Federation*](backoffice-portal/internal-users-federation/readme.md)
         1. [Usage (user guide)](backoffice-portal/errors-and-downtime/readme.md)
