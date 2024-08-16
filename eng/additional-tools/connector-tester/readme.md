@@ -16,7 +16,7 @@ Index:
 
 This tool is designed to facilitate the construction of Camel connectors, which must integrate with backend systems, allowing the connectors to be executed in isolation from the security contexts required by Open Banking.
 
-The application has REST endpoints that represent the integration points of all OOB modules, and it is possible to include the routes (the same Camel XML files that will be used in the production environment, see the following [link](../../integração-plugin/readme.md)) and test them via Swagger. The endpoints do not have business logic; they only call the connectors exactly as the OOB modules do. The endpoints receive a JSON in the format expected by the connector, according to its specification. Thus, all input information for the connector (consent, headers, etc.) must be present in the Swagger call.
+The application has REST endpoints that represent the integration points of all OOB modules, and it is possible to include the routes (the same Camel XML files that will be used in the production environment, see the following [link](../../integration-connector/readme.md)) and test them via Swagger. The endpoints do not have business logic; they only call the connectors exactly as the OOB modules do. The endpoints receive a JSON in the format expected by the connector, according to its specification. Thus, all input information for the connector (consent, headers, etc.) must be present in the Swagger call.
 
 The tool is provided as a Docker image, which must be extended with request and response mapping templates and the route file(s) responsible for directing calls to the institution's backend systems.
 

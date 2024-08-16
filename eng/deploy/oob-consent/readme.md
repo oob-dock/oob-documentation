@@ -441,7 +441,7 @@ Default value: `UTF-8`
 
 ### Connectors
 
-There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integração-plugin/consent/readme.md) in the `File route implemented by OPUS` section.
+There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
 
 ## additionalVarsDaemon
 

@@ -12,7 +12,7 @@ With the user's identification in hand, the Authorization Server generates and r
 a valid access token to the Back Office Portal, which is used to communicate
 with relevant APIs.
 
-![Overview - Federation](imagens/visao-geral-federation.png)
+![Overview - Federation](images/visao-geral-federation.png)
 
 Therefore, for the correct functioning of the federation, it is necessary to perform
 some configurations and pay attention to some points, namely:

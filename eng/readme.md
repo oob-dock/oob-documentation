@@ -247,21 +247,21 @@ The OPUS Open Finance platform offers a series of scripts and reports for extrac
 
 1. How to integrate your systems with the OPUS Open Finance platform?
     1. Account Holders and Data Transmitters:
-        1. [Integrating with the institution's mobile application](consentimento/app2as/readme.md)
-        1. [Integrating with the institution's web interface](consentimento/web2as/readme.md)
+        1. [Integrating with the institution's mobile application](consent/app2as/readme.md)
+        1. [Integrating with the institution's web interface](consent/web2as/readme.md)
         1. [Consent viewing and revocation APIs](backoffice-portal/apis-backoffice/readme.md)
         1. For *app-only* institutions:
-            1. [Implementing handoff flow](consentimento/app2as-handoff/readme.md)
-            1. [Customizable handoff page configurations](consentimento/app2as-handoff/custom-handoff-config/readme.md)
+            1. [Implementing handoff flow](consent/app2as-handoff/readme.md)
+            1. [Customizable handoff page configurations](consent/app2as-handoff/custom-handoff-config/readme.md)
     1. Backend Integration: **Connectors**
-        1. [Overview](integração-plugin/readme.md)
+        1. [Overview](integration-connector/readme.md)
         1. Account Holders:
-            1. [Resource discovery (accounts, cards, etc.)](integração-plugin/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
-            1. [Payment initiation and query (Pix)](integração-plugin/payments/readme.md)
+            1. [Resource discovery (accounts, cards, etc.)](integration-connector/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
+            1. [Payment initiation and query (Pix)](integration-connector/payments/readme.md)
         1. Data Transmitters:
-            1. [Resource discovery (accounts, cards, etc.)](integração-plugin/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
-            1. [Open data (products and services)](integração-plugin/open-data/readme.md)
-            1. [Registration and transactional data](integração-plugin/financial-data/readme.md)
+            1. [Resource discovery (accounts, cards, etc.)](integration-connector/consent/readme.md#discovery-de-recursos-no-opus-open-banking)
+            1. [Open data (products and services)](integration-connector/open-data/readme.md)
+            1. [Registration and transactional data](integration-connector/financial-data/readme.md)
 
 1. Product Installation:
     1. Kubernetes cluster deployment:
@@ -285,10 +285,10 @@ The OPUS Open Finance platform offers a series of scripts and reports for extrac
     1. Domain and cryptographic certificate configuration
         1. [Account Holder and Data Transmitter](domains-and-certificate/readme.md)
         1. [Payment Initiator and Data Receiver](domains-and-certificate/tpp.md)
-    1. [API security controls configuration](segurança/readme.md)
+    1. [API security controls configuration](security/readme.md)
 
 1. Mandatory Certification Scripts
-    1. [Security Certification Submission (OpenID Foundation)](certification/security/enviando-certificacao.md)
+    1. [Security Certification Submission (OpenID Foundation)](certification/security/submitting-certification.md)
     1. [Functional Certification Execution (Open Finance Brazil Governance)](certification/functional/dcr.md)
 
 1. Useful Tools
@@ -304,8 +304,8 @@ The OPUS Open Finance platform offers a series of scripts and reports for extrac
             1. [Consent Inventory Report](additional-tools/consent-information-script/readme.md)
     1. Backoffice Portal:
         1. [Installation](deploy/oob-backoffice-portal/readme.md)
-        1. [Interface customization](backoffice-portal/customizacao/readme.md)
-        1. [Integration with institutional login via *Federation*](backoffice-portal/federation-usuarios-internos/readme.md)
-        1. [Usage (user guide)](backoffice-portal/falhas-e-indisponibilidades/readme.md)
+        1. [Interface customization](backoffice-portal/customization/readme.md)
+        1. [Integration with institutional login via *Federation*](backoffice-portal/internal-users-federation/readme.md)
+        1. [Usage (user guide)](backoffice-portal/errors-and-downtime/readme.md)
 
 
