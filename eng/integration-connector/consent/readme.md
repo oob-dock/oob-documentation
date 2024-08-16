@@ -1,7 +1,7 @@
 # API Consent
 
 - [API Consent](#api-consent)
-  - [Resource Discovery in Opus Open Finance](#discovery-de-recursos-no-opus-open-finance)
+  - [Resource Discovery in Opus Open Finance](#resource-discovery-in-opus-open-finance)
     - [Discovery Moments](#discovery-moments)
       - [Selectable Products](#selectable-products)
       - [Non-selectable Products](#non-selectable-products)
