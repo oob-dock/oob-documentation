@@ -938,7 +938,8 @@
             "maxLength": 25,
             "enum": [
               "PAYMENT_CONSENT",
-              "PAYMENT_RECURRING_CONSENT"
+              "PAYMENT_RECURRING_CONSENT",
+              "PAYMENT_ENROLLMENT_CONSENT"
             ],
             "example": "PAYMENT_CONSENT"
         }

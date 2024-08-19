@@ -130,7 +130,7 @@ Indicates the occurrence of an error during the OIDC authentication flow. The er
 | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
 | CPF_MISMATCH                                 | User's authenticated CPF differs from the one sent by the TPP in the consent intent                         |
 | CNPJ_MISMATCH                                | User's authenticated CNPJ differs from the one sent by the TPP in the consent intent                        |
-| EXPIRED_CONSENT                              | Expired consent                                                                                            |
+| EXPIRED_CONSENT                              | Expired consent                                                                                             |
 | INVALID_SESSION                              | Session does not exist or expired due to the 10-minute timeout                                              |
 | RESOURCE_MUST_CONTAIN_ID                     | The resource list in consent approval must contain at least one ID                                          |
 | RESOURCE_MUST_CONTAIN_ID_SELECTABLE_PRODUCTS | The resource list in consent approval must contain at least one ID for each selectable product              |
@@ -138,6 +138,7 @@ Indicates the occurrence of an error during the OIDC authentication flow. The er
 | DISCOVERY_TIMEOUT                            | Discovery process exceeded the timeout                                                                      |
 | INVALID_STATUS_CONFIRMATION                  | Consent status is not valid for confirmation                                                                |
 | INVALID_PAYMENT_DATA                         | Consent payment data validation failure                                                                     |
+| INVALID_ENROLLMENT_INFORMATION               | Enrollment consent parameters selected by client are invalid                                                |
 | GENERIC_ERROR                                | AS generic error, the `message` field contains the error description to be displayed to the user            |
 
 The `error` command concludes the consent generation. In handoff cases, the application should only display the error message to the user and end the consent generation process. The page on the device that initiated the consent process will automatically return to the TPP informing the consent error reason.

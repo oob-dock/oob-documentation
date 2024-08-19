@@ -48,6 +48,10 @@ Onde:
 
 ## Changelog
 
+### 2024-08-19 - v4.3.0
+
+- Incluisão do consentimento de JSR para pagamento na rota discoverPayments_v2
+
 ### 2024-08-01 - v4.2.0
 
 - Inclusão do connector de validação de risk signals para JSR

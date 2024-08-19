@@ -235,6 +235,26 @@ components:
           type: boolean
           description: Define se o consentimento foi autorizado totalmente(se não enviado o padrão é true)
           example: true
+        selectedTransactionLimit:
+          type: number
+          description: Limite por transação selecionado pelo cliente para os pagamentos atrelados ao vínculo de dispositivo da JSR.
+            [Restrição]  Preenchimento obrigatório para os consentimentos de tipo ENROLLMENT
+          example: 100000.12
+          minimum: 0.01
+        selectedDailyLimit:
+          type: number
+          description: Limite de transação diário selecionado pelo cliente para os pagamentos atrelados ao vínculo de dispositivo da JSR.
+            [Restrição]  Preenchimento obrigatório para os consentimentos de tipo ENROLLMENT
+          example: 100000.12
+          minimum: 0.01
+        selectedExpirationDate:
+          type: string
+          maxLength: 20
+          description: Data de expiração selecionada pelo cliente para o vínculo de dispositivo da JSR.
+            [Restrição]  Preenchimento obrigatório para os consentimentos de tipo ENROLLMENT
+          format: date-time
+          example:
+            - "2021-05-21T08:30:00Z"
     AuthenticateCommand:
       type: object
       properties:
@@ -272,7 +292,7 @@ components:
         permissions:
           allOf:
             - $ref: '#/components/schemas/ResponseDomainPermissionSchema'
-          description: "Descrição das permissões do consentimento. Exclusivo de consentimento de compartilhamento de dados."
+          description: "Descrição das permissões do consentimento. Para consentimento de compartilhamento de dados ou vínculo de dispositivo para JSR."
         resourceTypes:
           allOf:
             - $ref: '#/components/schemas/ResponseDomainResourceSchema'      
@@ -335,6 +355,7 @@ components:
             - DISCOVERY_TIMEOUT
             - INVALID_STATUS_CONFIRMATION
             - INVALID_PAYMENT_DATA
+            - INVALID_ENROLLMENT_INFORMATION
             - GENERIC_ERROR
         message:
           type: string
@@ -409,6 +430,7 @@ components:
           enum:
             - DATA_SHARING
             - PAYMENT
+            - ENROLLMENT
         brandId:
           type: string
           description: Identificador da marca reportada pelo participante do Open Banking
@@ -621,7 +643,7 @@ components:
         debtorAccount:
           type: object
           description: |
-            Somente para consentimentos de pagamento. Objeto que contém a identificação da conta de origem do pagador.
+            Para consentimentos de pagamento e vínculo de dispositivo para JSR. Objeto que contém a identificação da conta de origem do pagador.
             As informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do pagamento.
           required:
             - ispb
@@ -713,6 +735,7 @@ components:
               - UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ
               - UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ
               - UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ
+              - PAYMENTS_INITIATE
               - RESOURCES_READ
           minItems: 1
           maxItems: 30
