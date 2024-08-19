@@ -1,0 +1,46 @@
+{
+    "requestBody": {
+        "data": {
+            "isRootedDevice": false,
+            "screenBrightness": 100.0,
+            "elapsedTimeSinceBoot": 1000,
+            "osVersion": "Android",
+            "userTimeZoneOffset": "GMT-3",
+            "language": "pt-BR",
+            "screenDimensions": {
+                "height": 1920,
+                "width": 1080
+            },
+            "accountTenure": "2024-08-01",
+            "deviceId": "c3aecafa-6697-4730-aea4-106731d6767e"
+        }
+    },
+    "requestMeta": {
+        "brandId": "cbanco",
+        "correlationId": "700dd46b-b2a6-2e28-41ef-f5c597640af3"
+    },
+    "consent": {
+        "brandId": "cbanco",
+        "creationDateTime": "2024-08-01T18:18:34Z",
+        "tpp": {
+            "name": "GuiaBolsa"
+        },
+        "externalId": "urn:bancoex:a0475766-e864-45d1-9980-7d249968dd33",
+        "loggedUser": {
+            "document": {
+                "identification": "12312312333",
+                "rel": "CPF"
+            }
+        },
+        "businessDocumentType": {
+            "document": {
+                "identification": "99999999999999",
+                "rel": "CNPJ"
+            }
+        },
+        "expirationDateTime": "2025-08-01T18:18:34Z",
+        "permissions": [
+            "PAYMENTS_INITIATE"
+        ]
+    }
+}

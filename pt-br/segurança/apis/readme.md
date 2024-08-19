@@ -30,6 +30,7 @@
     - [Funds](#funds)
     - [Exchanges](#exchanges)
   - [Payments](#payments)
+  - [JSR](#jsr)
   - [Automatic Payments](#automatic-payments)
   - [Consent](#consent)
     - [Consents](#consents)

@@ -28,6 +28,14 @@ Where:
 
 ## Changelog
 
+### 2024-08-19 - v4.3.0
+
+- Inclusion of No Redirect Journey consent for payment in the discoverPayments_v2 route
+
+### 2024-08-01 - v4.2.0
+
+- Inclusion of the risk signals validation connector for No Redirect Journey
+
 ### 2024-07-16 - v4.1.0
 
 - Schema changes for financial-data: accounts (2.4.0-rc.1), customers (2.1.0-rc.1).

@@ -11,6 +11,7 @@
       - [Selectable Product Connector](#selectable-product-connector)
       - [Non-selectable Product Connector](#non-selectable-product-connector)
     - [Payment Data Validation Connector](#payment-data-validation-connector)
+    - [Risk Signals Validation Connector](#risk-signals-validation-connector)
     - [Additional Processing](#additional-processing)
       - [Account Filter](#account-filter)
   - [Permission Groups in Consent Creation](#permission-groups-in-consent-creation)
@@ -233,6 +234,22 @@ Examples:
 **Note**
 
 The standard implemented connector should call the account holder connector. If it does not exist, the account discovery connector will be called, and if this does not suffice, a new connector must be implemented.
+
+### Risk Signals Validation Connector
+
+During two moments of the No Redirect Journey, the user must
+send various information related to their device, such as geolocation,
+operating system version, language, etc.
+
+If the institution wishes to perform validations on this data, it should implement
+the `direct:validateRiskSignals` route.
+
+**IMPORTANT**: The implementation of the route is not mandatory, but it is recommended.
+
+Definitions:
+
+- [request-schema](../schemas/v3/consent/validateRiskSignals/request-schema.json)
+- [response-schema](../schemas/v3/consent/validateRiskSignals/response-schema.json)
 
 ### Additional Processing
 
