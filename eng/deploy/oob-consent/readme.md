@@ -439,6 +439,22 @@ Used to define the charset used in encrypting fields in the database.
 
 Default value: `UTF-8`
 
+### ENROLLMENT_PERMISSIONS
+
+Used to define the list of device binding permissions supported by the institution.
+
+**IMPORTANTE**: Mandatory if the institution supports No Redirect Journey
+
+**Ex:**
+
+Configuration example for an installation that supports No Redirect Journey for payment v4:
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_PERMISSIONS
+    value: PAYMENTS_INITIATE
+```
+
 ### Connectors
 
 There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integração-plugin/consent/readme.md) in the `File route implemented by OPUS` section.

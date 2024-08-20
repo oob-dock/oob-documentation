@@ -30,6 +30,7 @@
     - [Funds](#funds)
     - [Exchanges](#exchanges)
   - [Payments](#payments)
+  - [JSR](#jsr)
   - [Automatic Payments](#automatic-payments)
   - [Consent](#consent)
     - [Consents](#consents)
@@ -582,7 +583,7 @@
 | POST     | /v1/enrollments                        | Sim          | payments         | Sim        | Não              | Sim  |     |
 | POST     | /v1/enrollments/\{ID\}/risk-signals    | Sim          | payments         | Sim        | Não              | Sim  |     |
 | GET      | /v1/enrollments/\{ID\}                 | Sim          | payments         | Não        | Não              | Sim  |     |
-| PATCH    | /v1/enrollments/\{ID\}                 | Sim          | payments         | Sim        | Não              | Sim  |     |
+| PATCH    | /v2/enrollments/\{ID\}                 | Sim          | payments         | Sim        | Não              | Sim  |     |
 
 ## Automatic Payments
 

@@ -16,6 +16,9 @@
                 },
                 {
                     "$ref": "../../common/consent/consent-recurring-payment-schema.json#/$defs/ConsentRecurringPayment"
+                },
+                {
+                    "$ref": "../../common/consent/consent-enrollment-schema.json#/$defs/ConsentEnrollment"
                 }
             ]
         },

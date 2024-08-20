@@ -4,7 +4,7 @@
         "Permissions": {
             "type": "array",
             "items": {
-                "description": "Permissões atribuídas ao vínculo de conta",
+                "description": "Permissions assigned to the enrollment consent",
                 "type": "string",
                 "enum": [
                     "PAYMENTS_INITIATE"
@@ -25,11 +25,11 @@
                 "TRAN"
             ],
             "example": "CACC",
-            "description": "Tipos de contas usadas para pagamento.\nModalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, \nconta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.\nSegue descrição de cada valor do ENUM.\n\n- CACC - Current - Conta Corrente.\n- SVGS - Savings - Conta de Poupança.\n- TRAN - TransactingAccount - Conta de Pagamento pré-paga.\n"
+            "description": "Types of accounts used for payment.\nTraditional modalities provided by Resolution 4.753, not including linked accounts, \naccounts of residents abroad, foreign currency accounts, and electronic money correspondent accounts.\n"
         },
         "DebtorAccount": {
             "type": "object",
-            "description": "Objeto que contém a identificação da conta de origem do pagador.  \nAs informações quanto à conta de origem do pagador poderão ser trazidas no consentimento para a detentora, caso a iniciadora tenha coletado essas informações do cliente. Do contrário, será coletada na detentora e trazida para a iniciadora como resposta à criação do vínculo.\n",
+            "description": "Object containing the identification of the payer's source account.  \nInformation regarding the payer's source account may be brought in the consent to the holder, if the initiator has collected this information from the customer. Otherwise, it will be collected by the holder and brought to the initiator as a response to the enrollment creation.\n",
             "required": [
                 "ispb",
                 "number",
@@ -44,7 +44,7 @@
                     "examples": [
                         "12345678"
                     ],
-                    "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.\n"
+                    "description": "Must be filled with the ISPB (Identifier of the Brazilian Payment System) of the SPI (Instant Payment System) participant, using only numbers.\n"
                 },
                 "issuer": {
                     "type": "string",
@@ -54,7 +54,7 @@
                     "examples": [
                         "1774"
                     ],
-                    "description": "Código da Agência emissora da conta sem dígito.  \n(Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito,  \nno exercício de atividades da instituição, não podendo ser móvel ou transitória).  \n[Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA), SVGS (CONTA_POUPANCA) e SLRY (CONTA_SALARIO).\n"
+                    "description": "Code of the issuing agency of the account without a digit.  \n(Agency is the dependency intended for customer service, the general public, and credit cooperative members,  \nin the exercise of the institution's activities, and cannot be mobile or transitory).  \n[Restriction] Mandatory for the following account types: CACC, SVGS and SLRY.\n"
                 },
                 "number": {
                     "type": "string",
@@ -64,7 +64,7 @@
                     "examples": [
                         "1234567890"
                     ],
-                    "description": "Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir),  \nse houver valor alfanumérico, este deve ser convertido para 0.\n"
+                    "description": "Must be filled with the payer's account number, including the check digit (if it exists).  \nIf there is an alphanumeric value, it should be converted to 0.\n"
                 },
                 "accountType": {
                     "$ref": "#/$defs/EnumAccountPaymentsType"

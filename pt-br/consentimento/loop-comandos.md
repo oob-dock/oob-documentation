@@ -190,6 +190,7 @@ Banking ou erros inesperados conforme vemos na tabela a seguir.
 | DISCOVERY_TIMEOUT                            | Processo de discovery passou do tempo limite                                                                |
 | INVALID_STATUS_CONFIRMATION                  | Status do consentimento não é valido para realizar a confirmação                                            |
 | INVALID_PAYMENT_DATA                         | Falha na validação dos dados de pagamento do consentimento                                                  |
+| INVALID_ENROLLMENT_INFORMATION               | Parâmetros inválidos para consentimento de vínculo de dispositivo                                           |
 | GENERIC_ERROR                                | Erro genérico do AS, o campo `message` possui a descrição do erro que deve ser exibida ao usuário           |
 
 O comando `error` conclui a geração do consentimento. Nos casos

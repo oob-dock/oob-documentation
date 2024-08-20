@@ -364,6 +364,11 @@ paths:
         in: header
         schema:
           type: string
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
       requestBody:
         content:
           application/json:
@@ -438,6 +443,11 @@ paths:
           in: header
           schema:
             type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         '204':
           description: Search key added successfully
@@ -466,6 +476,11 @@ paths:
           in: header
           schema:
             type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         '204':
           description: Search key deleted successfully
@@ -488,6 +503,11 @@ paths:
             $ref: '#/components/schemas/UUID'
         - name: X-Correlation-ID
           in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
           schema:
             type: string
       requestBody:
@@ -518,6 +538,11 @@ paths:
           in: header
           schema:
             type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -546,6 +571,11 @@ paths:
           in: header
           schema:
             type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
       responses:
         '204':
           description: Meta-data deleted successfully
@@ -567,6 +597,11 @@ paths:
             $ref: '#/components/schemas/UUID'
         - name: X-Correlation-ID
           in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
           schema:
             type: string
       responses:
@@ -1645,9 +1680,6 @@ components:
         data:
           allOf:
           - $ref: '#/components/schemas/RequestPaymentConsentAuthorisationData'
-        applicationName:
-          description: Client application name
-          type: string
     RequestPaymentStatusChangeNotification:
       required:
       - data

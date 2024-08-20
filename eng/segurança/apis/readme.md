@@ -30,6 +30,7 @@
     - [Funds](#funds)
     - [Exchanges](#exchanges)
   - [Payments](#payments)
+  - [No Redirect Journey](#no-redirect-journey)
   - [Automatic Payments](#automatic-payments)
   - [Consent](#consent)
     - [Consents](#consents)
@@ -570,7 +571,7 @@
 | PATCH     | /v4/pix/payments/\{ID\}          | Yes             | payments     | Yes           | No                  | Yes  |       |
 | PATCH     | /v4/pix/payments/consents/\{ID\} | Yes             | payments     | Yes           | No                  | Yes  |       |
 
-## JSR
+## No Redirect Journey
 
 **Base path:** /open-banking/enrollments
 
@@ -581,7 +582,7 @@
 | POST     | /v1/enrollments                        | Yes             | payments         | Yes           | No                  | Yes  |       |
 | POST     | /v1/enrollments/\{ID\}/risk-signals    | Yes             | payments         | Yes           | No                  | Yes  |       |
 | GET      | /v1/enrollments/\{ID\}                 | Yes             | payments         | No            | No                  | Yes  |       |
-| PATCH    | /v1/enrollments/\{ID\}                 | Yes             | payments         | Yes           | No                  | Yes  |       |
+| PATCH    | /v2/enrollments/\{ID\}                 | Yes             | payments         | Yes           | No                  | Yes  |       |
 
 ## Automatic Payments
 
