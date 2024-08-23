@@ -32,7 +32,7 @@ Example: `backoffice-portal`
 
 ### webAppConfigUrl
 
-Public address of the endpoint used for *customization* of the Back Office Portal. The response from this API should be a JSON object with the properties defined in the [Back Office Portal](../../portal-backoffice/customizacao/readme.md) documentation.
+Public address of the endpoint used for *customization* of the Back Office Portal. The response from this API should be a JSON object with the properties defined in the [Back Office Portal](../../backoffice-portal/customization/readme.md) documentation.
 
 This configuration can be made through the `Access-Control-Allow-Origin` header, configuring the domain of the portal URL.
 
@@ -42,7 +42,7 @@ Example: `https://kong.bank.com.br/backoffice-config`
 
 JSON used for *customization* of the Back Office Portal.
 
-This variable should receive a JSON formatted as a String with the properties defined in the [Back Office Portal](../../portal-backoffice/customizacao/readme.md) documentation.
+This variable should receive a JSON formatted as a String with the properties defined in the [Back Office Portal](../../backoffice-portal/customization/readme.md) documentation.
 
 **Note**: The JSON object should use single quotes instead of double quotes to avoid issues during the injection of the variable value during the front-end module initialization.
 
@@ -68,9 +68,9 @@ Example: `backoffice-portal-client-secret`
 
 ### basePath
 
-This variable defines the root path of the portal-backoffice application.
+This variable defines the root path of the backoffice-portal application.
 
-**Important**: When adding this variable, changes need to be made to the postLogoutRedirectUris and redirectUris variables of the authorization-server. [More details here](../../portal-backoffice/federation-usuarios-internos/readme.md#configuração-do-client-do-portal-back-office).
+**Important**: When adding this variable, changes need to be made to the postLogoutRedirectUris and redirectUris variables of the authorization-server. [More details here](../../backoffice-portal/internal-users-federation/readme.md#configuração-do-client-do-portal-back-office).
 
 Example: `portal`
 

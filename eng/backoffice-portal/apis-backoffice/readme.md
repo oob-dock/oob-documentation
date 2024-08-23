@@ -135,7 +135,7 @@ To access the endpoints listed here, a token generated from the *Client Credenti
 
 The AS configuration, as well as details for creating clients, can be found in the [deploy](../../deploy/oob-authorization-server/readme.md) section.
 
-The necessary scopes for access are listed in the [security](../../segurança/apis/readme.md#oob-consents) section.
+The necessary scopes for access are listed in the [security](../../security/apis/readme.md#oob-consents) section.
 
 ## Notes
 

@@ -513,7 +513,7 @@ additionalVars:
 ### AUTH_JWT_JTI_VALIDATION
 
 Define se o processo de autenticação definido na integração
-[APP2AS](../../consentimento/app2as/readme.md) deve realizar a validação do
+[APP2AS](../../consent/app2as/readme.md) deve realizar a validação do
 `jti` informado no payload durante o request.
 
 **Formato:** `0` ou `1`

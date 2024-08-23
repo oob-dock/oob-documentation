@@ -8,7 +8,7 @@ The O2B Status service monitors the availability of Open Banking endpoints based
 
 All detected failures will be displayed, whether active or concluded, and can be filtered by detection date and failure end date. All Failures can be viewed, but only ongoing Failures can be edited.
 
-![Failure List](imagens/lista-falhas.png)
+![Failure List](images/lista-falhas.png)
 
 ### Viewing
 
@@ -21,11 +21,11 @@ Fields:
 
 In case all endpoints are in Failure, it is indicated as Total Failure:
 
-![View Total Failure](imagens/visualiza-falha-total.png)
+![View Total Failure](images/visualiza-falha-total.png)
 
 If only a set of endpoints is in Failure, the list of endpoints in failure is presented:
 
-![View Partial Failure](imagens/visualiza-falha-parcial.png)
+![View Partial Failure](images/visualiza-falha-parcial.png)
 
 ### Editing
 
@@ -36,7 +36,7 @@ Editable fields:
 - **Scheduled End Time:** Expected time for the Failure to end
 - **Description:** Description of the ongoing Failure
 
-![Edit Failures](imagens/edita-falha.png)
+![Edit Failures](images/edita-falha.png)
 
 ## Unavailabilities
 
@@ -46,7 +46,7 @@ Unavailabilities are time windows during which the service is scheduled to be do
 
 Screen where it is possible to view all registered unavailabilities, whether past or future. It is also possible to add, edit, or delete unavailabilities.
 
-![Unavailability List](imagens/lista-indisponibilidades.png)
+![Unavailability List](images/lista-indisponibilidades.png)
 
 ### Inclusion
 
@@ -61,8 +61,8 @@ Additionally, an unavailability can be Total, affecting all endpoints, or Partia
 
 In the case of Partial Unavailability, it is necessary to select the list of endpoints that will be unavailable:
 
-![Register Partial Unavailability](imagens/cadastra-indisponibilidade-parcial.png)
+![Register Partial Unavailability](images/cadastra-indisponibilidade-parcial.png)
 
 In the case of Total Unavailability, it is not necessary to select endpoints:
 
-![Register Total Unavailability](imagens/cadastra-indisponibilidade-total.png)
+![Register Total Unavailability](images/cadastra-indisponibilidade-total.png)
