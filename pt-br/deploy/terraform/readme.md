@@ -27,6 +27,7 @@
       - [introspection\_client\_secret](#introspection_client_secret)
       - [auth\_server\_url](#auth_server_url)
       - [auth\_server\_base\_path](#auth_server_base_path)
+      - [auth\_server\_nonfapi\_base\_path](#auth_server_nonfapi_base_path)
       - [public\_fqdn](#public_fqdn)
       - [public\_fqdn\_mtls](#public_fqdn_mtls)
       - [internal\_fqdn](#internal_fqdn)
@@ -205,6 +206,10 @@ Vide a [definição](../shared-definitions.md#auth_server_url)
 #### auth_server_base_path
 
 Vide a [definição](../shared-definitions.md#auth_server_base_path)
+
+#### auth_server_nonfapi_base_path
+
+Vide a [definição](../shared-definitions.md#auth_server_nonfapi_base_path)
 
 #### public_fqdn
 
