@@ -52,6 +52,12 @@ Base path to access the authorization server.
 
 **Example:** "/auth/"
 
+## auth_server_nonfapi_base_path
+
+Base path to access the non-FAPI endpoints of the authorization server.
+
+**Example:** "/auth-nonfapi/"
+
 ## introspection_client_id
 
 Client identifier for introspection.

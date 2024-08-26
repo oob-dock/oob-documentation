@@ -13,6 +13,8 @@
       - [oob\_status\_api\_port](#oob_status_api_port)
       - [oob\_consent\_api\_host](#oob_consent_api_host)
       - [oob\_consent\_api\_port](#oob_consent_api_port)
+      - [oob\_authorization\_server\_host](#oob_authorization_server_host)
+      - [oob\_authorization\_server\_port](#oob_authorization_server_port)
       - [cors\_origins](#cors_origins)
       - [transaction\_limit\_global\_per\_second](#transaction_limit_global_per_second)
       - [transaction\_limit\_per\_ip\_per\_minute](#transaction_limit_per_ip_per_minute)
@@ -122,6 +124,18 @@ Host da API de consentimento
 #### oob_consent_api_port
 
 Porta da API de consentimento
+
+**Ex:** "80"
+
+#### oob_authorization_server_host
+
+Host da API do servidor de autorização
+
+**Ex:** "oob-authorization-server"
+
+#### oob_authorization_server_port
+
+Porta da API do servidor de autorização
 
 **Ex:** "80"
 

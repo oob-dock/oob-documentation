@@ -1,6 +1,6 @@
 # Configurations using Terraform
 
-- [Configurations using Terraform](#terraform-configurations)
+- [Configurations using Terraform](#configurations-using-terraform)
   - [Kong Routes Configuration](#kong-routes-configuration)
     - [Configuration](#configuration)
       - [kong\_admin\_uri](#kong_admin_uri)
@@ -13,6 +13,8 @@
       - [oob\_status\_api\_port](#oob_status_api_port)
       - [oob\_consent\_api\_host](#oob_consent_api_host)
       - [oob\_consent\_api\_port](#oob_consent_api_port)
+      - [oob\_authorization\_server\_host](#oob_authorization_server_host)
+      - [oob\_authorization\_server\_port](#oob_authorization_server_port)
       - [cors\_origins](#cors_origins)
       - [transaction\_limit\_global\_per\_second](#transaction_limit_global_per_second)
       - [transaction\_limit\_per\_ip\_per\_minute](#transaction_limit_per_ip_per_minute)
@@ -46,7 +48,7 @@
   - [Running Terraform Scripts](#running-terraform-scripts)
     - [main.tf](#maintf)
     - [variables.tf](#variablestf)
-    - [ambiente.tfvars](#ambientetfvars)
+    - [environment.tfvars](#environmenttfvars)
 
 The configuration of external systems to OOB is done via Terraform, with two base modules available for use:
 
@@ -119,6 +121,18 @@ Host of the consent API
 Port of the consent API
 
 **Example:** "80"
+
+#### oob_authorization_server_host
+
+Host of the Authorization Server API
+
+**Ex:** "oob-authorization-server"
+
+#### oob_authorization_server_port
+
+Port of the Authorization Server API
+
+**Ex:** "80"
 
 #### cors_origins
 
