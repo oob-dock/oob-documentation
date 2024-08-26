@@ -137,7 +137,7 @@ Host da API do servidor de autorização
 
 Porta da API do servidor de autorização
 
-**Ex:** "3000"
+**Ex:** "80"
 
 #### cors_origins
 
