@@ -1,0 +1,161 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "description": "Lista de títulos de renda fixa bancária mantidos pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento",
+        "required": [
+          "referenceDate",
+          "priceFactor",
+          "grossAmount",
+          "blockedBalance",
+          "quantity",
+          "closingPrice"
+        ],
+        "properties": {
+          "referenceDate": {
+            "type": "string",
+            "description": "Posição fechada para o ativo da data do dia anterior.",
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2023-01-07",
+            "maxLength": 10
+          },
+          "priceFactor": {
+            "type": "string",
+            "format": "double",
+            "description": "Fator que indica o número de ações utilizadas para a formação do preço. Valor informado deve ser maior que zero.\n",
+            "pattern": "^\\d{1,15}\\.\\d{2,8}$",
+            "maxLength": 24,
+            "example": "100.0005",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308
+          },
+          "grossAmount": {
+            "type": "object",
+            "description": "Valor do investimento anterior à dedução de impostos, taxas e tarifas (se houver), atualizado na data de referência. Quantidade de ativos dividido pelo Fator de cotação e multiplicado pelo pelo preço de fechamento da data de referência.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 21,
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "blockedBalance": {
+            "type": "object",
+            "description": "Valor não disponível para movimentação naquele momento por qualquer motivo (bloqueio judicial, bloqueio em garantia, entre outros). Prazo de carência não é considerado como bloqueio.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 20,
+                "example": "1000.04",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          },
+          "quantity": {
+            "type": "string",
+            "format": "double",
+            "description": "Quatidade total do ativo na data de referência.",
+            "pattern": "^-?\\d{1,15}\\.\\d{2,8}$",
+            "maxLength": 25,
+            "example": "1000.00000004",
+            "minimum": -1.7976931348623157e+308,
+            "maximum": 1.7976931348623157e+308
+          },
+          "closingPrice": {
+            "type": "object",
+            "description": "Preço de fechamento da data de referência.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "description": "Valor relacionado ao objeto.",
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 21,
+                "example": "1000.0004",
+                "minimum": -1.7976931348623157e+308,
+                "maximum": 1.7976931348623157e+308
+              },
+              "currency": {
+                "type": "string",
+                "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                "pattern": "^[A-Z]{3}$",
+                "maxLength": 3,
+                "example": "BRL"
+              }
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente a API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

@@ -1,0 +1,12 @@
+{
+  "requestMeta": {
+    "correlationId": "f54a557a-26bd-149d-b4b1-1952b59adf7c",
+    "brandId": "cbanco"
+  },
+ "requestBody": {
+    "data": {
+      "loggedUserDocument": "01293650353",
+      "businessEntityDocument": "75859123583215"
+    }
+  }
+}

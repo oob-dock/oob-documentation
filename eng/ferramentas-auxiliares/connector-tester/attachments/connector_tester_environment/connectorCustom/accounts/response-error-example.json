@@ -1,0 +1,9 @@
+{
+    "errors": [
+        {
+            "code": "500",
+            "title": "Erro interno",
+            "detail": "Um erro interno ocorreu ao processar a solicitação, tente novamente mais tarde."
+        }
+    ]
+}

@@ -1,0 +1,26 @@
+{
+  "data": {
+    "updateDateTime": "2020-07-21T08:30:00Z",
+    "startDate": "2020-07-21T08:30:00Z",
+    "productsServicesType": [
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO",
+      "SEGURO"
+    ],
+    "procurators": [],
+    "accounts": []
+  },
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": 13464180.272854477
+  }
+}

@@ -1,0 +1,183 @@
+<!-- Example page for integrating with the Authorization Server (AS) handoff library -->
+<!DOCTYPE html>
+<html>
+
+<!-- The handoff script should be loaded from the Authorization Server (AS) -->
+<script src="AS_BASE_URL/auth/handoff/v1/oob-handoff.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/130527/qrcode.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var code = window.location.hash.substring(1);
+        oobHandoff.init({
+            // Gets the oobStartCode from the URL fragment (https://example.com/#oobStartCode)
+            oobStartCode: code,
+            oobAsPublicUrl: 'AS_BASE_URL',
+            onHandoffReady(e) {
+                console.log(`Handoff ready qrCode: ${e.qrCode}, timeoutSeconds: ${e.timeoutSeconds}, typeCode: ${e.typeCode}, tppName: ${e.tppName}, tppLogoUrl: ${e.tppLogoUrl}`);
+                setAbortCode(code);
+                showQR(e);
+                startCountdown(e.timeoutSeconds);
+            },
+            onHandoffQRRead() {
+                // User read the QR code on the mobile device
+                console.log('Handoff QR Read');
+                showQRRead();
+            },
+            onHandoffTimedOut(e) {
+                // OIDC flow timeout
+                console.log('Handoff timed-out');
+                showTimeout(e);
+            },
+            onHandoffCompleted(e) {
+                // User successfully accepted the consent
+                console.log('Handoff completedCommand', e);
+                showCompleted(e);
+            },
+            onHandoffError(e) {
+                // Consent failure
+                console.log('Handoff errorCommand', e);
+                showError(e);
+            }
+        });
+
+        // Removes the fragment from the browser URL and history
+        window.location.replace("#");
+        if (typeof window.history.replaceState == 'function') {
+           history.replaceState({}, '', window.location.href.slice(0, -1));
+        }
+    });
+
+    function showQR(e) {
+        $('#step').empty();
+        $('#step').qrcode({ width: 200, height: 200, text: e.qrCode });
+        $('#step').append(`<p>Code: ${e.typeCode}</p>`);
+        $('#step').append(`<p>TPP Name: ${e.tppName}</p>`);
+        $('#step').append(`<p><img src='${e.tppLogoUrl}'></p>`);
+    }
+
+    function showQRRead() {
+        $('#step')
+            .empty()
+            .append('<p>QR read on your phone</p><p>Keep this window open</p>');
+    }
+
+    function showTimeout(e) {
+        $('#step')
+            .empty()
+            .append('<p>Time expired, please try again</p>');
+        $('#abort').hide();
+
+        handleRedirect(e?.errorCommand?.redirect);
+    }
+
+    function showCompleted(e) {
+        $('#step')
+            .empty()
+            .append(`<p>Consent successfully completed, redirecting to the application ${e?.tpp?.name}</p>`)
+            .append(`<p><img src='${e.tpp.logoUrl}'></p>`);
+
+        handleRedirect(e?.completedCommand?.redirect);
+    }
+
+    function showError(e) {
+        $('#step')
+            .empty()
+            .append('<p>Request interrupted</p>')
+            .append(`<p>Interruption category: ${e.errorCommand.type}</p>`);
+
+        if (e.errorCommand?.message) {
+            $('#step').append(`<p>Message: ${e.errorCommand.message}</p>`);
+        }
+
+        if (e?.tpp?.logoUrl) {
+            $('#step')
+                .append(`<p><img src='${e.tpp.logoUrl}'></p>`)
+                .append(`<p>${e.tpp.name}</p>`);
+        }
+
+        handleRedirect(e?.errorCommand?.redirect);
+    }
+
+    function startCountdown(seconds) {
+        var started = new Date().getTime();
+        var showTimer = function () {
+            var s = parseInt(seconds - (new Date().getTime() - started) / 1000);
+            if (s > 0) {
+                $('#countdown').text(`Expires in ${(s - (s %= 60)) / 60 + (9 < s ? ':' : ':0') + s}`);
+                setTimeout(showTimer, 750);
+            } else {
+                $('#countdown').text('Timeout');
+            }
+        };
+        showTimer();
+    }
+
+    function handleRedirect(redirect) {
+        if (!(redirect?.redirectTo)) return;
+        $('#abort').hide();
+        $('#countdown').hide();
+        setTimeout(function () { window.location.href = redirect.redirectTo }, 5000);
+    }
+
+    function abortHandoff(){
+        var code  = $('#codeabort').val();
+        $('#btabort').prop('disabled', true);
+        $('#btabort').text('Processing...');
+        $.ajax({
+            url: `AS_BASE_URL/auth/handoff/v1/${code}/abort`,
+            type: 'PUT',
+            success: function (result) {
+                console.log('Handoff aborted');
+            }
+        });
+    }
+
+    function setAbortCode(code){
+        console.log(oobHandoff.oobStartCode);
+        $('#codeabort').val(code);
+    }
+
+</script>
+
+<body>
+    <div id="countdown">
+    </div>
+    <div id="step">
+        Starting...
+    </div>
+    <div id="abort">
+        <button id="btabort" onclick="abortHandoff()">Cancel Request</button>
+    </div>
+    <div id="codeabort" style="display:hidden">
+    </div>
+</body>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    html,
+    body {
+        min-height: 100%;
+        background: #fff;
+        color: #000;
+    }
+
+    body {
+        font-size: 1.4rem;
+        text-rendering: optimizeLegibility;
+    }
+
+    img {
+        max-height: 50px;
+        max-width: 50px;
+        height: auto;
+        width: auto;
+    }
+</style>
+
+</html>

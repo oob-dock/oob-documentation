@@ -1,0 +1,2349 @@
+openapi: 3.0.3
+info:
+  title: Consent BackOffice Services
+  version: 1.0.0
+security:
+- jwt: []
+tags:
+- name: General
+  description: opus open banking services
+- name: Consents
+  description: Consents opus open banking services
+- name: Payments
+  description: Consents opus open banking services
+paths:
+  /open-banking/oob-consents/v1/consents:
+    get:
+      tags:
+      - General
+      description: Retrieve list of consents
+      parameters:
+      - name: consentOwner
+        in: query
+        schema:
+          type: string
+          example: '[{"key":"cpf","value":"99999999999"},{"key":"cnpj","value":"11199999999999"}]'
+      - name: cpf
+        in: query
+        schema:
+          type: string
+          example: "99999999999"
+      - name: createdOnBegin
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+      - name: createdOnEnd
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+      - name: modalityType
+        description: Payment modality. Exclusive use for type = PAYMENT
+        in: query
+        schema:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
+      - name: orderType
+        in: query
+        schema:
+          $ref: '#/components/schemas/OrderTypeEnum'
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      - name: paymentType
+        in: query
+        schema:
+          $ref: '#/components/schemas/PaymentTypeEnum'
+      - name: status
+        in: query
+        schema:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+      - name: type
+        description: Returns only the consents of the specified type
+        in: query
+        schema:
+          $ref: '#/components/schemas/ConsentTypesEnum'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentSummaryPaginationSchema'
+  /open-banking/oob-consents/v1/consents/{consentId}:
+    get:
+      tags:
+      - General
+      description: Retrieve consent data
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+    patch:
+      deprecated: true
+      tags:
+      - Consents
+      description: Revoke consent deprecated
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/payments:
+    get:
+      tags:
+      - Payments
+      description: Retrieve payments of a consent, ordered by payment date desc
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsePaymentsDetailSchema'
+  /open-banking/oob-consents/consents/v2/active:
+    get:
+      tags:
+      - General
+      description: Get active consents for a given time frame
+      parameters:
+      - name: startDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+      - name: endDate
+        in: query
+        schema:
+          format: date-time
+          type: string
+          example: 2022-01-30T18:31:28Z
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentListSchema'
+  /open-banking/oob-consents/payments/v1/consents/{consentId}:
+    patch:
+      tags:
+      - Payments
+      description: Revoke payment consent
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobPaymentConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}:
+    patch:
+      tags:
+      - Consents
+      description: Revoke data sharing consent
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: paymentStatus
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RevokeDataSharingConsentData'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/v1/tpps/payment-legacy-ids:
+    get:
+      tags:
+      - Payments
+      description: Get legacy payments generated in a period
+      parameters:
+      - name: endDate
+        in: query
+        schema:
+          type: string
+          example: 2022-02-30
+      - name: startDate
+        in: query
+        schema:
+          type: string
+          example: 2022-01-30
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseMapItpLegacyIds'
+  /open-banking/oob-consents/v1/payment-status-notification:
+    post:
+      tags:
+      - Payments
+      description: Post information about payments status change
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPaymentStatusChangeNotification'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "204":
+          description: Notification received successfully
+  /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation:
+    post:
+      tags:
+      - Payments
+      description: Post payment authorisation
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPaymentConsentAuthorisation'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "204":
+          description: Notification received successfully
+  /open-banking/oob-consents/v1/consents/{consentId}/extends:
+    get:
+      tags:
+      - Consents
+      description: Retrieve extended consent list
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      - name: page
+        in: query
+        schema:
+          format: int32
+          default: 1
+          type: integer
+      - name: page-size
+        in: query
+        schema:
+          format: int32
+          default: 25
+          type: integer
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentExtendsSchema'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}:
+    post:
+      tags:
+        - Consents
+      description: Post search key to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: searchKey
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Search key added successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Consents
+      description: Delete search key to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: searchKey
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Search key deleted successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data:
+    put:
+      tags:
+        - Consents
+      description: Put meta-data information to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataData'
+      responses:
+        '204':
+          description: Meta-data added successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    patch:
+      tags:
+        - Consents
+      description: Patch meta-data information to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataData'
+      responses:
+        '204':
+          description: Meta-data updated successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - Consents
+      description: Delete meta-data information to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Meta-data deleted successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    get:
+      tags:
+        - Consents
+      description: Get meta-data information frpm consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '200':
+          description: Get meta-data information from consent successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataData'
+components:
+  schemas:
+    AccountPaymentTypeEnum:
+      enum:
+      - CACC
+      - SLRY
+      - SVGS
+      - TRAN
+      type: string
+    ApiError:
+      type: object
+      properties:
+        code:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        typeError:
+          type: string
+    Authorization:
+      type: object
+      properties:
+        personDocumentNumber:
+          type: string
+        personName:
+          type: string
+        isRequirer:
+          type: boolean
+          example: true
+        status:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+    ConsentAuthorizationStatusEnum:
+      enum:
+      - AUTHORISED
+      - AWAITING_AUTHORISATION
+      - REJECTED
+      - REVOKED
+      - EXPIRED
+      - CONSUMED
+      - TIMEOUT_AUTHORISATION
+      - TIMEOUT_PAYMENT
+      type: string
+    ConsentDetail:
+      type: object
+      properties:
+        brandId:
+          type: string
+          example: cbanco
+        externalId:
+          type: string
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+        personDocumentType:
+          type: string
+          example: CPF
+        personDocumentNumber:
+          type: string
+          example: "77721813700"
+        businessDocumentType:
+          type: string
+          example: CNPJ
+        businessDocumentNumber:
+          type: string
+          example: "33273542000197"
+        createdOn:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+        expiredOn:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:41:28Z
+        paymentData:
+          $ref: '#/components/schemas/PaymentData'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/Resource'
+        authorizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Authorization'
+        permissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Permission'
+        consentHistoryStatus:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentHistoryStatus'
+        modalityPayment:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
+        revocation:
+          $ref: '#/components/schemas/ConsentRevocation'
+        rejection:
+          $ref: '#/components/schemas/ConsentRejection'
+        status:
+          allOf:
+          - $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+          - example: AUTHORISED
+        type:
+          allOf:
+          - $ref: '#/components/schemas/ConsentTypesEnum'
+          - example: PAYMENT
+        paymentIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourcePaymentId'
+        orgName:
+          type: string
+          example: "Guia Seguros S.A."
+        additionalInformation:
+          description: Additional information provided by the payer in automatic payment consents
+          type: string
+          example: 'Minha recorrência'
+          pattern: '[\w\W\s]*'
+          maxLength: 140
+        tppName:
+          type: string
+          example: "Guia Seguros"
+    ConsentHistoryStatus:
+      type: object
+      properties:
+        consentStatus:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+        authorizationStatus:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+        authorizerName:
+          type: string
+        operatorUsername:
+          type: string
+        updatedOn:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+    ConsentSummary:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/UUID'
+        type:
+          $ref: '#/components/schemas/ConsentTypesEnum'
+        paymentType:
+          $ref: '#/components/schemas/PaymentTypeEnum'
+        status:
+          $ref: '#/components/schemas/ConsentAuthorizationStatusEnum'
+        createdOn:
+          format: date-time
+          type: string
+        expiresOn:
+          format: date-time
+          type: string
+        brandId:
+          type: string
+          example: BANCO
+        modalityPayment:
+          $ref: '#/components/schemas/ModalityPaymentEnum'
+        creditorName:
+          type: string
+          example: Marco Antonio de Brito
+        amount:
+          deprecated: true
+          type: string
+          example: "22.00"
+        scheduleDate:
+          type: string
+          deprecated: true
+          example: 2022-07-06
+        orgName:
+          type: string
+          example: "Guia Seguros S.A."
+        tppName:
+          type: string
+          example: "Guia Seguros"
+        tppLogo:
+          type: string
+          example: "http://www.exemplo.com/logo.png"
+    ConsentExtends:
+      type: object
+      properties:
+        expirationDateTime:
+          format: date-time
+          type: string
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        requestDateTime:
+          format: date-time
+          type: string
+    ConsentTypesEnum:
+      enum:
+      - DATA_SHARING
+      - PAYMENT
+      type: string
+    Creditor:
+      required:
+      - personType
+      - cpfCnpj
+      - name
+      type: object
+      properties:
+        personType:
+          allOf:
+          - $ref: '#/components/schemas/PaymentPersonTypeEnum'
+          - nullable: false
+        cpfCnpj:
+          type: string
+          example: "99999999999999"
+          nullable: false
+        name:
+          maxLength: 140
+          minLength: 1
+          type: string
+          example: Marco Antonio de Brito
+          nullable: false
+    CreditorAccount:
+      required:
+      - ispb
+      - number
+      - accountType
+      type: object
+      properties:
+        ispb:
+          type: string
+          example: "12345678"
+          nullable: false
+        issuer:
+          type: string
+          example: "1774"
+        number:
+          type: string
+          example: "1234567890"
+          nullable: false
+        accountType:
+          allOf:
+          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
+          - nullable: false
+    DebtorAccount:
+      required:
+      - ispb
+      - issuer
+      - number
+      - accountType
+      type: object
+      properties:
+        ispb:
+          type: string
+          example: "12345678"
+          nullable: false
+        issuer:
+          type: string
+          example: "1774"
+        number:
+          type: string
+          example: "1234567890"
+          nullable: false
+        accountType:
+          allOf:
+          - $ref: '#/components/schemas/AccountPaymentTypeEnum'
+          - nullable: false
+        ibgeTownCode:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '^\d{7}$'
+          example: '5300108'
+    Creditors:
+      type: array
+      minItems: 1
+      items:
+        type: object
+        description: Object containing creditor's data.
+        required:
+          - personType
+          - cpfCnpj
+          - name
+        properties:
+          personType:
+            $ref: '#/components/schemas/EnumPaymentPersonType'
+          cpfCnpj:
+            type: string
+            minLength: 11
+            maxLength: 14
+            pattern: '^\d{11}$|^\d{14}$'
+            example: '58764789000137'
+            description: |
+              Identification of the person involved in the transaction.  
+              Fill in with the CPF or CNPJ, according to the value chosen in the type field.  
+              CPF will be used with 11 digits and should be informed without dots or hyphens.  
+              CNPJ will be used with 14 digits and should be informed without dots or hyphens.
+          name:
+            type: string
+            pattern: ^([A-Za-zÀ-ÖØ-öø-ÿ,.@:&*+_<>()!?/\\$%\d' -]+)$
+            maxLength: 120
+            example: Marco Antonio de Brito
+            description: |
+              In case of an individual, the full name of the account holder should be provided.  
+              In case of a company, the corporate name or trade name of the account holder should be provided.
+    EnumPaymentPersonType:
+      type: string
+      enum:
+        - PESSOA_NATURAL
+        - PESSOA_JURIDICA
+      example: PESSOA_NATURAL
+      description: |
+        Holder, individual or legal entity to whom the creditor's data refers.
+    ErrorResponse:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApiError'
+        meta:
+          $ref: '#/components/schemas/Meta'
+    KeyValueObject:
+      type: object
+      properties:
+        key:
+          type: string
+        value:
+          type: string
+    Links:
+      type: object
+      properties:
+        self:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        first:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        prev:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        next:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+        last:
+          type: string
+          example: https://api.banco.com.br/open-banking/api/v1/resource
+    LocalInstrumentEnum:
+      enum:
+      - MANU
+      - DICT
+      - QRDN
+      - QRES
+      - INIC
+      type: string
+    LoggedUser:
+      required:
+      - document
+      type: object
+      properties:
+        document:
+          allOf:
+          - $ref: '#/components/schemas/LoggedUserDocument'
+          - nullable: false
+    LoggedUserDocument:
+      required:
+      - identification
+      - rel
+      type: object
+      properties:
+        identification:
+          type: string
+          example: "99999999999"
+          nullable: false
+        rel:
+          type: string
+          example: CPF
+          nullable: false
+    Meta:
+      type: object
+      properties:
+        totalRecords:
+          format: int32
+          type: integer
+          example: 2
+        totalPages:
+          format: int32
+          type: integer
+          example: 1
+        requestDateTime:
+          format: date-time
+          type: string
+    ModalityPaymentEnum:
+      enum:
+      - IMMEDIATE
+      - SCHEDULED
+      - SWEEPING
+      type: string
+    OrderTypeEnum:
+      enum:
+      - ASC
+      - DESC
+      type: string
+    ResponsePaymentsDetailSchema:
+      type: object
+      properties:
+        data:
+          description: Service execution response
+          type: array
+          items:
+            allOf:
+            - $ref: '#/components/schemas/ResponseRecurringPaymentsDataRead'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - description: Meta records information
+    ResponseRecurringPaymentsDataRead:
+      type: object
+      properties:
+        legacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueObject'
+        paymentId:
+          type: string
+          minLength: 1
+          maxLength: 100
+          pattern: '^[a-zA-Z0-9][a-zA-Z0-9\-]{0,99}$'
+          example: TXpRMU9UQTROMWhZV2xSU1FUazJSMDl
+          description: |
+            Code or unique identifier provided by the account holder institution to represent the payment initiation. The `recurringPaymentId` must be different from the `endToEndId`. 
+            This is the identifier that should be used to check the status of the initiated payment.
+        consentId:
+          type: string
+          maxLength: 256
+          pattern: '^urn:[a-zA-Z0-9][a-zA-Z0-9\-]{0,31}:[a-zA-Z0-9()+,\-.:=@;$_!*''%\/?#]+$'
+          example: 'urn:bancoex:C1DD33123'
+          description: |
+            Unique identifier of the consent created for the requested payment initiation. It should be a URN - Uniform Resource Name.
+            A URN, as defined in [RFC8141](https://tools.ietf.org/html/rfc8141), is a Uniform Resource
+            Identifier - URI - that is assigned under the URI scheme "urn" and a specific URN namespace, with the intention that the URN
+            be a persistent and location-independent resource identifier.
+            Considering the string urn:bancoex:C1DD33123 as an example for `recurringConsentId`, we have:
+            - the namespace (urn)
+            - the identifier associated with the namespace of the transmitting institution (bancoex)
+            - the specific identifier within the namespace (C1DD33123).
+            More detailed information on the construction of namespaces should be consulted in [RFC8141](https://tools.ietf.org/html/rfc8141).
+
+            [Restriction] This field is mandatory when the value of the authorisationFlow field is FIDO_FLOW.
+        endToEndId:
+          $ref: '#/components/schemas/EndToEndId'
+        date:
+          type: string
+          maxLength: 10
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          example: '2023-10-10'
+          description: Date the payment will be made.
+        creationDateTime:
+          type: string
+          format: date-time
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+          example: '2020-07-21T08:30:00Z'
+          description: |
+            Date and time the payment was created. 
+            A date and time string as per [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), 
+            always using the UTC timezone (UTC time format).
+        statusUpdateDateTime:
+          type: string
+          format: date-time
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+          example: '2020-07-21T08:30:00Z'
+          description: |
+            Date and time the payment status was updated. 
+            A date and time string as per [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), 
+            always using the UTC timezone (UTC time format).
+        ibgeTownCode:
+          type: string
+          minLength: 7
+          maxLength: 7
+          pattern: '^\d{7}$'
+          example: '5300108'
+          description: |
+            The ibgeTownCode field in the Pix arrangement has the same behavior as the codMun field described in item 1.6.6 of the Pix manual.
+
+            1. If the information regarding the municipality is not sent, the recipient's PSP will assume that there are no state and municipal holidays during the period in question;
+        status:
+          $ref: '#/components/schemas/EnumPaymentStatusType'
+        localInstrument:
+          allOf:
+          - $ref: '#/components/schemas/LocalInstrumentEnum'
+          - nullable: false
+        rejectionReason:
+          $ref: '#/components/schemas/RejectionReason'
+        cnpjInitiator:
+          type: string
+          pattern: '^\d{14}$'
+          maxLength: 14
+          example: '50685362000135'
+          description: CNPJ of the Payment Initiator duly enabled to provide the Initiation Service in Pix.
+        payment:
+          $ref: '#/components/schemas/PaymentPix'
+        remittanceInformation:
+          type: string
+          maxLength: 140
+          pattern: '[\w\W\s]*'
+          example: Payment of invoice RSTO035-002.
+          description: |
+            Should always be filled when the payer inserts additional information in a payment, to be sent to the recipient.
+        creditorAccount:
+          $ref: '#/components/schemas/CreditorAccount'
+        debtorAccount:
+            $ref: '#/components/schemas/DebtorAccount'
+        cancellation:
+          $ref: '#/components/schemas/PixPaymentCancellation'
+        authorisationFlow:
+          type: string
+          enum:
+            - HYBRID_FLOW
+            - CIBA_FLOW
+            - FIDO_FLOW
+          example: HYBRID_FLOW
+          description: |
+            Conditional field used to identify the authorization flow in which the payment was requested.
+            
+            [Restriction] If CIBA or FIDO, mandatory field. If the field is not present in the payload, it is implied that the authorization flow used is HYBRID_FLOW.
+        transactionIdentification:
+          type: string
+          pattern: ^[a-zA-Z0-9]{1,35}$
+          maxLength: 35
+          example: 'E00038166201907261559y6j6'
+          description: |
+            It is a transaction identifier that must be retransmitted intact by the payer's PSP when generating the payment order. 
+            This information will allow the recipient to identify and correlate the transfer, when received, with the instructions provided to the payer. 
+            The characters allowed in the context of Pix for the txid field (EMV 62-05) are: Lowercase letters from 'a' to 'z', Uppercase letters from 'A' to 'Z', Decimal digits from '0' to '9'.
+        document:
+          type: object
+          description: Information of the identifying document.
+          required:
+            - identification
+            - rel
+          properties:
+            identification:
+              type: string
+              pattern: ^(?:\d{11}|\d{14})$
+              minLength: 11
+              maxLength: 14
+              example: '11111111111111'
+              description: Official identification document number of the individual or legal entity holder.
+            rel:
+              type: string
+              enum:
+                - CPF
+                - CNPJ
+              example: 'CNPJ'
+              description: Type of official identification document of the individual or legal entity holder.
+    EndToEndId:
+      type: string
+      minLength: 32
+      maxLength: 32
+      pattern: '^([E])([0-9]{8})([0-9]{4})(0[1-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])(2[0-3]|[01][0-9])([0-5][0-9])([a-zA-Z0-9]{11})$'
+      example: E9040088820210128000800123873170
+      description: |
+        It is a unique identifier, generated at the payment initiating institution and received at the account holding institution, permeating the entire Pix payment journey.
+
+        [Restriction] The holder must return the field with the same value received from the initiator.
+    PaymentPix:
+      type: object
+      description: Object containing payment information.
+      required:
+        - amount
+        - currency
+      properties:
+        amount:
+          type: string
+          minLength: 4
+          maxLength: 19
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          example: '100000.12'
+          description: |
+            Transaction amount with 2 decimal places.
+        currency:
+          type: string
+          maxLength: 3
+          pattern: '^([A-Z]{3})$'
+          example: BRL
+          description: |
+            Code of the national currency according to the ISO-4217 model, i.e., 'BRL'. All monetary values ​​provided are represented in the current currency of Brazil.
+    EnumPaymentStatusType:
+      type: string
+      enum:
+        - RCVD
+        - CANC
+        - ACCP
+        - ACPD
+        - RJCT
+        - ACSC
+        - PDNG
+        - SCHD
+      example: PDNG
+      description: |
+        Current payment status. The status evolves in the following order:
+        - RCVD (Received) - Indicates that the payment request has been successfully received by the holder, but there are still validations to be done before being submitted for settlement.
+        - CANC (Cancelled) - Indicates that the pending Pix transaction has been successfully canceled by the user before it was confirmed (ACCP) or rejected (RJCT) by the holder.
+        - ACCP (Accepted Customer Profile) - Indicates that all necessary checks have been performed by the holder and the transaction is ready to be sent for settlement (in SPI if it is a Pix for another institution or internally if it is for another account at the same institution).
+        - ACPD (Accepted Clearing Processed) - Indicates that the holder has already submitted the transaction for settlement but has not yet received confirmation whether it was settled or rejected.
+        - RJCT (Rejected) Indicates that the transaction was rejected by the holder or by the SPI.
+        - ACSC (Accepted Settlement Completed Debtor Account) - Indicates that the transaction has been completed by the holder or by the SPI.
+        - PDNG (Pending) - Indicates that the holder has temporarily held the Pix transaction for analysis.
+        - SCHD (Scheduled) - Indicates that the Pix transaction has been successfully scheduled by the holder.  
+        In case of failure:
+        - RJCT (REJECTED) - Payment instruction rejected.
+    PixPaymentCancellation:
+      type: object
+      description: |
+        Object containing data related to the payer who requested the cancellation, the channel used by them, and the reason.  
+
+        [Restriction] The cancellation object will only be mandatory when the status field value is CANC. 
+      required:
+        - cancelledAt
+        - cancelledBy
+        - reason
+        - cancelledFrom
+      properties:
+        reason:
+          $ref: '#/components/schemas/EnumPaymentCancellationReasonType'
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumPaymentCancellationFromType'
+        cancelledAt:
+          type: string
+          description: 'Date and time the cancellation was made, as per [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), UTC format.'
+          format: date-time
+          maxLength: 20
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+          example: '2021-05-21T08:30:00Z'
+        cancelledBy:
+          type: object
+          description: Information related to the payer who requested the payment cancellation.
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Object consolidating the document data of the payer who requested the cancellation.
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: Document number of the payer responsible for the payment cancellation.
+                  example: '11111111111'
+                  pattern: '^\d{11}$'
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Document type of the payer responsible for the payment cancellation.
+                  example: CPF
+                  pattern: '^[A-Z]{3}$'
+    EnumPaymentCancellationFromType:
+      type: string
+      enum:
+        - INICIADORA
+        - DETENTORA
+      example: INICIADORA
+      description: |
+        Field used to inform the means by which the cancellation was made.
+
+        Possible values:
+
+        INICIADORA - Payment canceled by the payer through the initiator's channels
+
+        DETENTORA - Payment canceled by the payer through the holder's channels
+    EnumPaymentCancellationReasonType:
+      type: string
+      enum:
+        - CANCELADO_PENDENCIA
+        - CANCELADO_AGENDAMENTO
+        - CANCELADO_MULTIPLAS_ALCADAS
+      example: CANCELADO_PENDENCIA
+      description: |
+        The completion of this field for return must be made by the account holder based on the payment status at the time of the cancellation request (e.g., Payment status = PDNG, the field must be filled with enum CANCELADO_PENDENCIA)
+
+        Possible values:
+
+        CANCELADO_PENDENCIA - Payment canceled while it was in the PDNG status
+
+        CANCELADO_AGENDAMENTO - Payment canceled while it was in the SCHD status
+
+        CANCELADO_MULTIPLAS_ALCADAS - Payment canceled while it was in the PATC status
+    PaymentConsent:
+      required:
+      - type
+      - currency
+      - amount
+      type: object
+      properties:
+        type:
+          allOf:
+          - $ref: '#/components/schemas/PaymentTypeEnum'
+          - nullable: false
+        date:
+          type: string
+          example: 2021-12-01
+        currency:
+          type: string
+          example: BRL
+          nullable: false
+        amount:
+          type: string
+          example: "100000.12"
+          nullable: false
+        ibgeTownCode:
+          type: string
+          example: "5300108"
+        details:
+          $ref: '#/components/schemas/PaymentDetails'
+        creditorAccount:
+          $ref: '#/components/schemas/CreditorAccount'
+        schedule:
+          $ref: '#/components/schemas/SchedulePayment'
+    PaymentData:
+      type: object
+      properties:
+        creditor:
+          $ref: '#/components/schemas/Creditor'
+        creditors:
+          $ref: '#/components/schemas/Creditors'
+        payment:
+          $ref: '#/components/schemas/PaymentConsent'
+        debtorAccount:
+          $ref: '#/components/schemas/DebtorAccount'
+        recurringConfiguration:
+          $ref: '#/components/schemas/RecurringConfiguration'
+        riskSignals:
+          $ref: '#/components/schemas/RiskSignalsConsents'
+    PaymentDetails:
+      required:
+      - localInstrument
+      - creditorAccount
+      type: object
+      properties:
+        localInstrument:
+          allOf:
+          - $ref: '#/components/schemas/LocalInstrumentEnum'
+          - nullable: false
+        qrCode:
+          maxLength: 512
+          type: string
+          example: "00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012\
+            \  \nBR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062\
+            \  \n530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB\
+            \  \nCD81390012BR.COM.OUTRO01190123.ABCD.3456.WXYZ6304EB76\n"
+        proxy:
+          maxLength: 77
+          type: string
+          example: "12345678901"
+        creditorAccount:
+          allOf:
+          - $ref: '#/components/schemas/CreditorAccount'
+          - nullable: false
+    RiskSignalsConsents:
+      type: object
+      required:
+        - deviceId
+        - isRootedDevice
+        - screenBrightness
+        - elapsedTimeSinceBoot
+        - osVersion
+        - userTimeZoneOffset
+        - language
+        - screenDimensions
+        - accountTenure
+      description: |
+        Risk signals for automatic payment initiation
+
+        [Restriction] Must be sent when consent is for the Pix Automatic product (The object "/data/recurringConfiguration/automatic" used in oneOf). Will only be present after the first long-term consent edit.
+      properties:
+        deviceId:
+          type: string
+          description: Unique device ID generated by the platform.
+          example: 00000000-54b3-e7c7-0000-000046bffd97
+        isRootedDevice:
+          type: boolean
+          description: Indicates whether the device is currently rooted.
+          example: false
+        screenBrightness:
+          type: number
+          format: double
+          description: |
+            Indicates the screen brightness level of the device.  
+            On Android devices, the value is an integer between 0 and 255, inclusive;  
+            On iOS devices, the value is a floating point between 0.0 and 1.0.
+        elapsedTimeSinceBoot:
+          type: integer
+          format: int64
+          description: Indicates how long (in milliseconds) the device has been on.
+        osVersion:
+          type: string
+          description: Operating system version.
+        userTimeZoneOffset:
+          type: string
+          description: |
+            Indicates the user's device timezone setting, in UTC offset format: ±hh[:mm]
+        language:
+          type: string
+          description: Indicates the device language in ISO 639-1 format.
+        screenDimensions:
+          type: object
+          description: Device screen dimensions
+          required:
+            - height
+            - width
+          properties:
+            height:
+              type: integer
+              format: int64
+              description: Screen height, in pixels.
+            width:
+              type: integer
+              format: int64
+              description: Screen width, in pixels.
+        accountTenure:
+          type: string
+          format: date
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          description: Customer registration date at the initiator.
+        geolocation:
+          type: object
+          description: Geolocation data of the customer while logged into the initiator
+          properties:
+            latitude:
+              type: number
+              format: double
+              description: Latitudinal coordinate of the customer while logged into the initiator
+            longitude:
+              type: number
+              format: double
+              description: Longitudinal coordinate of the customer while logged into the initiator
+            type:
+              type: string
+              description: |
+                Type of mechanism used in generating the geolocation
+              enum:
+                - COARSE
+                - FINE
+                - INFERRED
+        isCallInProgress:
+          type: boolean
+          description: |
+            Indicates an active call at the time of binding.
+
+            [Restriction] If the risk signal is available (customer allowed it to be collected), it must be sent
+        isDevModeEnabled:
+          type: boolean
+          description: Indicates whether the device is in developer mode.
+        isMockGPS:
+          type: boolean
+          description: Indicates whether the device is using a fake GPS.
+        isEmulated:
+          type: boolean
+          description: Indicates whether the device is emulated or real.
+        isMonkeyRunner:
+          type: boolean
+          description: Indicates the use of MonkeyRunner.
+        isCharging:
+          type: boolean
+          description: Indicates whether the device battery is being charged.
+        antennaInformation:
+          type: string
+          description: Indicates which antenna the device is connected to.
+        isUsbConnected:
+          type: boolean
+          description: Indicates whether the device is connected to another device via USB.
+        integrity:
+          type: object
+          description: |
+            Reports the integrity of the device and app.  
+            On Android, as per the Play API Integrity documentation - [Android](https://developer.android.com/google/play/integrity/overview?hl=pt-br).  
+            On iOS, as per the App Attest documentation [iOS](https://developer.apple.com/documentation/devicecheck/establishing_your_app_s_integrity)
+          properties:
+            appRecognitionVerdict:
+              type: string
+              description: Reports app integrity
+            deviceRecognitionVerdict:
+              type: string
+              description: Reports device integrity
+    RecurringConfiguration:
+      type: object
+      description: Field intended for configuring the different recurring payment products.
+      oneOf:
+        - $ref: '#/components/schemas/Sweeping'
+    Sweeping:
+      type: object
+      required:
+        - sweeping
+      properties:
+        sweeping:
+          type: object
+          description: Definition of the sweeping configuration for automatic funds transfers.
+          properties:
+            totalAllowedAmount:
+              type: string
+              minLength: 4
+              maxLength: 19
+              pattern: '^((\d{1,16}\.\d{2}))$'
+              example: '100000.12'
+              description: Maximum amount to be reached by the sum of all transactions using the consent authorized by the customer. If the amount is exceeded, the account holder must deny the transaction requested by the initiator.
+            transactionLimit:
+              type: string
+              pattern: '^((\d{1,16}\.\d{2}))$'
+              minLength: 4
+              maxLength: 19
+              example: '1000000.12'
+              description: Maximum amount for each payment transaction associated with this consent. If the payment amount exceeds this limit, the account holder must reject the payment transaction.
+            periodicLimits:
+              $ref: "#/components/schemas/PeriodicLimits"
+    PeriodicLimits:
+      type: object
+      description: Transaction limits per period determined by the payer.
+      properties:
+        day:
+          $ref: '#/components/schemas/Day'
+        week:
+          $ref: '#/components/schemas/Week'
+        month:
+          $ref: '#/components/schemas/Month'
+        year:
+          $ref: '#/components/schemas/Year'
+    Day:
+      type: object
+      description: |
+        Set daily transaction limit determined by the payer.
+        
+        [Restriction] If the object is sent, at least one of the fields (`quantityLimit` or `transactionLimit`) must be filled in.
+      properties:
+        quantityLimit:
+          type: integer
+          example: 2
+          description: Maximum number of transactions allowed to occur during a day.
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Maximum amount to be transacted daily.
+    Week:
+      type: object
+      description: |
+        Set weekly transaction limit determined by the payer.
+        
+        [Restriction] If the object is sent, at least one of the fields (`quantityLimit` or `transactionLimit`) must be filled in
+      properties:
+        quantityLimit:
+          type: integer
+          example: 10
+          description: Maximum number of transactions allowed to occur during a week.
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Maximum amount to be transacted weekly.
+    Month:
+      type: object
+      description: |
+        Set monthly transaction limit determined by the payer.
+        
+        [Restriction] If the object is sent, at least one of the fields (`quantityLimit` or `transactionLimit`) must be filled in
+      properties:
+        quantityLimit:
+          type: integer
+          example: 30
+          description: Maximum number of transactions allowed to occur during a month.
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Maximum amount to be transacted monthly.
+    Year:
+      type: object
+      description: |
+        Set annual transaction limit determined by the payer.
+        
+        [Restriction] If the object is sent, at least one of the fields (`quantityLimit` or `transactionLimit`) must be filled in
+      properties:
+        quantityLimit:
+          type: integer
+          example: 100
+          description: Maximum number of transactions allowed to occur during a year. 
+        transactionLimit:
+          type: string
+          pattern: '^((\d{1,16}\.\d{2}))$'
+          minLength: 4
+          maxLength: 19
+          example: '100000.12'
+          description: Maximum amount to be transacted annually, from the date defined in the field `/data/startDateTime`.
+    PaymentPersonTypeEnum:
+      enum:
+      - PESSOA_NATURAL
+      - PESSOA_JURIDICA
+      type: string
+    PaymentTypeEnum:
+      enum:
+      - PIX
+      type: string
+    Permission:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Permission's name
+        title:
+          type: string
+          example: Intelligible name for the permission
+        description:
+          type: string
+          example: Description for what this permission allows
+    RequestRevokeOobConsent:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokeConsentData'
+          - nullable: false
+        applicationName:
+          description: Client application name
+          type: string
+    RequestRevokeOobPaymentConsent:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokePaymentConsentData'
+          - nullable: false
+        applicationName:
+          description: Client application name
+          type: string
+    RequestRevokeOobPaymentPayment:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RevokePaymentPaymentData'
+        applicationName:
+          description: Client application name
+          type: string
+    RequestPaymentConsentAuthorisation:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/RequestPaymentConsentAuthorisationData'
+    RequestPaymentStatusChangeNotification:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/PaymentStatusChangeData'
+          - description: Payment status change notification data
+            nullable: false
+    PaymentIdLegacy:
+      required:
+      - key
+      type: object
+      description: Key/Value pair for the payment id found on the legacy system
+      properties:
+        key:
+          type: string
+          example: internalPaymentId
+          nullable: false
+        value:
+          type: string
+          example: b5abdcde-7186-453a-a676-7f3955cef167
+    Resource:
+      type: object
+      properties:
+        resourceId:
+          type: string
+        type:
+          $ref: '#/components/schemas/ResourceTypeEnum'
+        status:
+          $ref: '#/components/schemas/StatusResourceEnum'
+        legacyId:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueObject'
+    ResourcePaymentId:
+      required:
+      - externalId
+      type: object
+      properties:
+        externalId:
+          type: string
+          nullable: false
+        legacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueObject'
+    ResourceTypeEnum:
+      enum:
+      - CUSTOMER
+      - CREDIT_CARD_ACCOUNT
+      - ACCOUNT
+      - LOAN
+      - FINANCING
+      - UNARRANGED_ACCOUNT_OVERDRAFT
+      - INVOICE_FINANCING
+      - PAYMENT
+      type: string
+    ResponseConsentDetailSchema:
+      type: object
+      description: Service execution response
+      properties:
+        data:
+          $ref: '#/components/schemas/ConsentDetail'
+    ResponseConsentExtendsSchema:
+      type: object
+      properties:
+        data:
+          description: Service execution response
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentExtends'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+          - description: Meta records information
+    ResponseConsentSummaryPaginationSchema:
+      type: object
+      properties:
+        data:
+          description: Service execution response
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentSummary'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+    ConsentRevocation:
+      oneOf:
+        - $ref: '#/components/schemas/Revocation'
+        - $ref: '#/components/schemas/RevocationPaymentOob'
+    ConsentRejection:
+      oneOf:
+        - $ref: '#/components/schemas/Rejection'
+        - $ref: '#/components/schemas/RejectionPaymentOob'
+    Revocation:
+      description: Data Sharing consent revocation information
+      required:
+      - revokedBy
+      - reason
+      type: object
+      properties:
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        revokedBy:
+          allOf:
+          - $ref: '#/components/schemas/RevokedByEnum'
+          - example: TPP
+            nullable: false
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/RevocationReason'
+          - nullable: false
+    Rejection:
+      description: Data Sharing consent rejection information
+      required:
+      - reason
+      - rejectedBy
+      type: object
+      properties:
+        loggedUser:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          allOf:
+          - $ref: '#/components/schemas/RejectedReason'
+          - nullable: false
+        rejectedBy:
+          allOf:
+          - $ref: '#/components/schemas/RejectedByEnum'
+          - example: USER
+            nullable: false
+    RevocationReason:
+      required:
+      - code
+      type: object
+      properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Fraud risk identified
+        code:
+          allOf:
+          - $ref: '#/components/schemas/RevocationReasonCodeEnum'
+          - example: FRAUD
+            nullable: false
+    RejectedReason:
+      required:
+      - code
+      type: object
+      properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Fraud risk identified
+        code:
+          allOf:
+          - $ref: '#/components/schemas/RejectedReasonCodeEnum'
+          - example: CONSENT_EXPIRED
+            nullable: false
+    RevocationReasonCodeEnum:
+      enum:
+      - FRAUD
+      - ACCOUNT_CLOSURE
+      - OTHER
+      type: string
+    RevokePaymentConsentData:
+      type: object
+      properties:
+        rejection:
+          $ref: '#/components/schemas/RejectionPaymentOob'
+        revocation:
+          $ref: '#/components/schemas/RevocationPaymentOob'
+    RevokePaymentPaymentData:
+      type: object
+      required:
+        - legacyId
+      properties:
+        legacyId:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyValueObject'
+      allOf:
+        - $ref: '#/components/schemas/RevokePaymentConsentData'
+    RequestPaymentConsentAuthorisationData:
+      type: object
+      required:
+        - authorised
+      properties:
+        authorised:
+          type: boolean
+          example: true
+    RejectedReasonCodeEnum:
+      enum:
+      - CONSENT_EXPIRED
+      - CUSTOMER_MANUALLY_REJECTED
+      - CUSTOMER_MANUALLY_REVOKED
+      - CONSENT_MAX_DATE_REACHED
+      - CONSENT_TECHNICAL_ISSUE
+      - INTERNAL_SECURITY_REASON
+      type: string
+    RevocationPaymentOob:
+      type: object
+      properties:
+        revokedFrom:
+          $ref: '#/components/schemas/RecurringConsentRejectedFromEnum'
+        reason:
+          $ref: '#/components/schemas/RecurringConsentRevocationReason'
+        revokedAt:
+          format: date-time
+          type: string
+        revokedBy:
+          $ref: '#/components/schemas/RevokedByAutomaticPaymentEnum'
+    RevokedByAutomaticPaymentEnum:
+      enum:
+      - INICIADORA
+      - USUARIO
+      - DETENTORA 
+      type: string
+    RejectionPaymentOob:
+      type: object
+      properties:
+        rejectedFrom:
+          $ref: '#/components/schemas/RecurringConsentRejectedFromEnum'
+        reason:
+          $ref: '#/components/schemas/RejectionReason'
+        rejectedAt:
+          format: date-time
+          type: string
+        rejectedBy:
+          $ref: '#/components/schemas/RejectedByAutomaticPaymentEnum'
+    RejectedByAutomaticPaymentEnum:
+      enum:
+      - INICIADORA
+      - USUARIO
+      - DETENTORA 
+      type: string
+    RecurringConsentRevocationReason:
+      type: object
+      properties:
+        code:
+          $ref: '#/components/schemas/ConsentRevocationReasonCodeEnum'
+        detail:
+          type: string
+    RejectionReason:
+      required:
+      - code
+      - detail
+      type: object
+      properties:
+        code:
+          allOf:
+          - $ref: '#/components/schemas/ConsentRejectionReasonCodeEnum'
+          - example: CONTAS_ORIGEM_DESTINO_IGUAIS
+        detail:
+          type: string
+    RecurringConsentRejectedFromEnum:
+      enum:
+      - INICIADORA
+      - DETENTORA
+      type: string
+    ConsentRevocationReasonCodeEnum:
+      enum:
+      - NAO_INFORMADO
+      - REVOGADO_USUARIO
+      - REVOGADO_RECEBEDOR
+      type: string
+    ConsentRejectionReasonCodeEnum:
+      enum:
+      - VALOR_INVALIDO
+      - NAO_INFORMADO
+      - FALHA_INFRAESTRUTURA
+      - TEMPO_EXPIRADO_AUTORIZACAO
+      - TEMPO_EXPIRADO_CONSUMO
+      - REJEITADO_USUARIO
+      - CONTAS_ORIGEM_DESTINO_IGUAIS
+      - CONTA_NAO_PERMITE_PAGAMENTO
+      - SALDO_INSUFICIENTE
+      - VALOR_ACIMA_LIMITE
+      - QRCODE_INVALIDO
+      - CONTA_DIVERGENTE_DA_SOLICITADA
+      type: string
+    PaymentStatusEnum:
+      enum:
+      - RCVD
+      - ACCP
+      - ACPD
+      - ACSC
+      - PATC
+      - SCHD
+      - CANC
+      - PDNG
+      - RJCT
+      type: string
+    StatusUpdateDateTime:
+      type: string
+      format: date-time
+      pattern: >-
+        ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+      example: '2020-07-21T08:30:00Z'
+      description: >
+        Date and time of the last payment initiation update.
+        A string with date and time as per RFC-3339 specification, always using the UTC time format.
+    RevokeConsentData:
+      required:
+      - status
+      - revocation
+      type: object
+      properties:
+        revocation:
+          allOf:
+          - $ref: '#/components/schemas/Revocation'
+          - nullable: false
+        status:
+          allOf:
+          - $ref: '#/components/schemas/StatusEnum'
+          - example: REVOKED
+            nullable: false
+    PaymentStatusChangeData:
+      required:
+      - legacyId
+      - paymentStatus
+      - paymentStatusUpdateDateTime
+      type: object
+      properties:
+        legacyId:
+          description: Payment legacy id
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentIdLegacy'
+          nullable: false
+        paymentStatus:
+          allOf:
+          - $ref: '#/components/schemas/PaymentStatusEnum'
+          - example: CANC
+          - nullable: false
+        paymentStatusUpdateDateTime:
+          allOf:
+          - $ref: '#/components/schemas/StatusUpdateDateTime'
+        rejectionReason:
+          $ref: '#/components/schemas/PaymentRejection'
+    MetadataData:
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          type: string
+    PaymentRejection:
+      type: object
+      description: "Reason for payment rejection. Additional information about the reason for the status. Must be sent when the field /data/paymentStatus is equal to RJCT (REJECTED)."
+      properties:
+        code:
+          $ref: '#/components/schemas/PaymentRejectionReasonEnum'
+        detail:
+          example: "The selected account does not have sufficient balance to make the payment."
+          type: string
+    PaymentRejectionReasonEnum:
+      type: string
+      enum:
+      - SALDO_INSUFICIENTE
+      - VALOR_ACIMA_LIMITE
+      - VALOR_INVALIDO
+      - COBRANCA_INVALIDA
+      - NAO_INFORMADO
+      - PAGAMENTO_DIVERGENTE_CONSENTIMENTO
+      - DETALHE_PAGAMENTO_INVALIDO
+      - PAGAMENTO_RECUSADO_DETENTORA
+      - PAGAMENTO_RECUSADO_SPI
+      - FALHA_INFRAESTRUTURA
+      - FALHA_INFRAESTRUTURA_SPI
+      - FALHA_INFRAESTRUTURA_DICT
+      - FALHA_INFRAESTRUTURA_ICP
+      - FALHA_INFRAESTRUTURA_PSP_RECEBEDOR
+      - FALHA_INFRAESTRUTURA_DETENTORA
+      - CONTAS_ORIGEM_DESTINO_IGUAIS
+      - FALHA_AGENDAMENTO_PAGAMENTOS
+      - TITULARIDADE_INCONSISTENTE
+    ResponseConsentListSchema:
+      type: object
+      properties:
+        data:
+          description: Service execution response
+          type: array
+          items:
+            $ref: '#/components/schemas/ActiveConsent'
+        links:
+          allOf:
+          - $ref: '#/components/schemas/Links'
+          - description: Service links
+        meta:
+          allOf:
+          - $ref: '#/components/schemas/Meta'
+    ActiveConsent:
+      type: object
+      properties:
+        externalId:
+          description: The consentId is the consent's unique identifier and must be
+            a URN - Uniform Resource Name
+          type: string
+          example: urn:amazingbank:899dd8b2-34d1-4c75-b8de-f0ffa51ca720
+        personDocumentType:
+          type: string
+          example: CPF
+        personDocumentNumber:
+          type: string
+          example: "77721813700"
+        businessDocumentType:
+          type: string
+          example: CNPJ
+        businessDocumentNumber:
+          type: string
+          example: "33273542000197"
+        creationDateTime:
+          format: date-time
+          type: string
+          example: 2022-01-30T17:31:28Z
+        status:
+          $ref: '#/components/schemas/StatusEnum'
+        expirationDateTime:
+          format: date-time
+          type: string
+    RevokeDataSharingConsentData:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          required:
+          - rejection
+          type: object
+          properties:
+            rejection:
+              allOf:
+              - $ref: '#/components/schemas/Rejection'
+              - nullable: false
+        applicationName:
+          description: Client application name
+          type: string
+    RevokedByEnum:
+      enum:
+      - USER
+      - ASPSP
+      - TPP
+      type: string
+    RejectedByEnum:
+      enum:
+      - ASPSP
+      - USER
+      - TPP
+      type: string
+    SchedulePayment:
+      required:
+      - single
+      type: object
+      oneOf:
+        - $ref: '#/components/schemas/ScheduleSingle'
+        - $ref: '#/components/schemas/ScheduleDaily'
+        - $ref: '#/components/schemas/ScheduleWeekly'
+        - $ref: '#/components/schemas/ScheduleMonthly'
+        - $ref: '#/components/schemas/ScheduleCustom'
+    ScheduleSingle:
+      type: object
+      required:
+        - single
+      properties:
+        single:
+          type: object
+          description: Define the single scheduling policy.
+          required:
+            - date
+          properties:
+            date:
+              type: string
+              format: date
+              maxLength: 10
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              example: '2023-08-23'
+              description: |
+                Defines the target date of payment settlement.
+                Brasília time zone should be used to create and rationalize the data in this field.
+
+                [Restriction] This field must always be at least D+1 calendar day, i.e., the day immediately following the date of consent considering the Brasília time zone and must be at most D+730 calendar days from the date of consent, also considering the Brasília time zone.
+    ScheduleDaily:
+      type: object
+      required:
+        - daily
+      properties:
+        daily:
+          type: object
+          required:
+            - startDate
+            - quantity
+          properties:
+            startDate:
+              description: Defines the start of the recurrence term.
+              type: string
+              format: date
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              maxLength: 10
+              example: '2023-08-23'
+            quantity:
+              description: Defines the number of payments to be sent for settlement.
+              type: integer
+              format: int32
+              minimum: 2
+              maximum: 60
+              example: 3
+    ScheduleWeekly:
+      type: object
+      required:
+        - weekly
+      properties:
+        weekly:
+          type: object
+          required:
+            - dayOfWeek
+            - startDate
+            - quantity
+          properties:
+            dayOfWeek:
+              description: Defines the day of the week planned for settlement occurrences.
+              type: string
+              enum:
+                - SEGUNDA_FEIRA
+                - TERCA_FEIRA
+                - QUARTA_FEIRA
+                - QUINTA_FEIRA
+                - SEXTA_FEIRA
+                - SABADO
+                - DOMINGO
+              example: QUINTA_FEIRA
+            startDate:
+              description: Defines the start of the recurrence term.
+              type: string
+              format: date
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              maxLength: 10
+              example: '2023-08-23'
+            quantity:
+              description: Defines the number of payments to be sent for settlement.
+              type: integer
+              format: int32
+              minimum: 2
+              maximum: 60
+              example: 10
+    ScheduleMonthly:
+      type: object
+      required:
+        - monthly
+      properties:
+        monthly:
+          type: object
+          required:
+            - dayOfMonth
+            - startDate
+            - quantity
+          properties:
+            dayOfMonth:
+              description: Defines the day of the month planned for settlement occurrences.
+              type: integer
+              minimum: 1
+              maximum: 31
+              example: 10
+            startDate:
+              description: Defines the start of the recurrence term.
+              type: string
+              format: date
+              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+              maxLength: 10
+              example: '2023-08-23'
+            quantity:
+              description: Defines the number of payments to be sent for settlement.
+              type: integer
+              format: int32
+              minimum: 2
+              maximum: 24
+              example: 24
+    ScheduleCustom:
+      type: object
+      required:
+        - custom
+      properties:
+        custom:
+          type: object
+          description: |
+            [Restriction] The dates sent in the list of dates (array “dates”) cannot be repeated. 
+            If repeated dates are sent, the holder must reject the creation of the consent, informing the error PARAMETRO_INVALIDO.
+          required:
+            - dates
+            - additionalInformation
+          properties:
+            dates:
+              description: Defines the days on which settlement occurrences are planned.
+              type: array
+              maxItems: 60
+              minItems: 2
+              example: ['2023-08-23', '2023-09-26']
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: '2023-08-23'
+            additionalInformation:
+              type: string
+              description: |
+                Free text for Initiator to fill in a way that is understandable to the approving/paying user. 
+                The text can be used by the holder to display the transaction summary during the approval of the approving/paying user.
+              pattern: '[\w\W\s]*'
+              maxLength: 255
+              example: Every Thursday and Sunday for 6 months
+    StatusEnum:
+      enum:
+      - AUTHORISED
+      - AWAITING_AUTHORISATION
+      - REJECTED
+      - CONSUMED
+      - REVOKED
+      type: string
+    StatusResourceEnum:
+      enum:
+      - AVAILABLE
+      - UNAVAILABLE
+      - NON_SELECTED
+      type: string
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
+    ResponseMapItpLegacyIds:
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/PaymentLegacyIdsByItp'
+          - description: Service execution response
+    PaymentLegacyIdsByItp:
+      type: object
+      properties:
+        itpLegacyIds:
+          type: array
+          items:
+            $ref: '#/components/schemas/ItpLegacyIds'
+    ItpLegacyIds:
+      type: object
+      properties:
+        orgName:
+          type: string
+        legacyIds:
+          type: array
+          items:
+            type: string
+  securitySchemes:
+    jwt:
+      type: http
+      description: JWT token
+      scheme: bearer
+      bearerFormat: jwt

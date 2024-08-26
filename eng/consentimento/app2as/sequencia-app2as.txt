@@ -1,0 +1,99 @@
+title APP2AS Command Loop
+
+participant "TPP" as tpp
+participant "Device" as device
+participant "Institution App" as app
+participant "Institution BFF" as bff
+participant "Institution IDP" as idp
+participant "API-AS-OOB" as as
+
+entryspacing 0.6
+
+tpp->device:GET /auth/auth
+device->app:GET /auth/auth
+
+group start 
+
+app->as:GET /auth/auth
+
+end 
+
+loop Command Loop
+
+as-->app:RESPONSE\n(see cases below)
+
+alt case Request Authentication
+
+as-->app: Command authenticate
+app->app:Requests credentials from user
+
+alt case Success
+app->bff: Authenticate user
+bff->idp: Authenticate user
+
+idp-->bff:Authenticated
+note over bff:The JWT generation to be sent to the\nOOB AS must be done on the backend to\navoid exposing the signing keys
+bff->bff:Generates signed\nauthentication JWT
+
+bff-->app:Signed JWT
+app->as:PUT /app/command/{id}/authentication
+
+else case Abort
+
+app->as: PUT /app/command/{id}/authentication {refused: true}
+
+end 
+
+else case Request Consent
+
+app<--as:Command consent
+note over app:Attention to the requested consent
+app->app:Displays and confirms consent,\n selects products
+
+alt case Success
+
+app->as:PUT /app/command/{id}/consent
+
+else case Abort
+
+app->as:PUT /app/command/{id}/consent {refused: true}
+
+end 
+
+else case Inform Error
+
+as-->app: Command error
+
+app->app:Transition screen\nwith error message\nfor TPP (display logo)
+
+alt case Traditional Hybrid-Flow (Redirect)
+
+app->device:Opens the <URL> for redirect
+device->tpp:<URL>
+
+end 
+
+destroyafter app
+
+else case Inform Success
+
+as-->app: Command completed
+
+alt case Hand-Off
+
+app->app: Informs the user to continue\nthe process on the original device
+
+else case Traditional Hybrid-Flow (Redirect)
+
+app->app:Transition screen\nfor TPP (display logo)
+
+app->device:Opens the <URL>
+device->tpp:<URL>
+
+end 
+
+destroyafter app
+
+end
+
+end

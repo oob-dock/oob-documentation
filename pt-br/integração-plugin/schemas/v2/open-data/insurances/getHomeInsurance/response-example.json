@@ -1,0 +1,367 @@
+{
+  "data": [
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "IMOVEL_BASICA",
+          "detail": "aliquip",
+          "attributes": {
+            "insuredMandatoryParticipationPercentage": "0.000002",
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "minDeductibleAmount": {
+              "amount": "1.1000",
+              "currency": "BRL"
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            }
+          },
+          "permissionSeparateAcquisition": true
+        },
+        {
+          "type": "IMOVEL_BASICA",
+          "detail": "eiusmod amet sint ut",
+          "permissionSeparateAcquisition": true,
+          "attributes": {
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "minDeductibleAmount": {
+              "amount": "1.1000",
+              "currency": "BRL"
+            },
+            "insuredMandatoryParticipationPercentage": "0.000002",
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            }
+          }
+        },
+        {
+          "type": "IMOVEL_BASICA",
+          "permissionSeparateAcquisition": true,
+          "attributes": {
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "minDeductibleAmount": {
+              "amount": "1.1000",
+              "currency": "BRL"
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "insuredMandatoryParticipationPercentage": "0.000002"
+          },
+          "detail": "eu cillum anim officia Ut"
+        },
+        {
+          "type": "IMOVEL_BASICA",
+          "permissionSeparateAcquisition": true,
+          "detail": "in exercitation sint aute esse",
+          "attributes": {
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "insuredMandatoryParticipationPercentage": "0.000002",
+            "minDeductibleAmount": {
+              "amount": "1.1000",
+              "currency": "BRL"
+            }
+          }
+        },
+        {
+          "type": "IMOVEL_BASICA",
+          "attributes": {
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            },
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "insuredMandatoryParticipationPercentage": "0.000002",
+            "minDeductibleAmount": {
+              "amount": "1.1000",
+              "currency": "BRL"
+            }
+          },
+          "detail": "enim proident amet sit",
+          "permissionSeparateAcquisition": true
+        }
+      ],
+      "propertyCharacteristics": [
+        {
+          "type": "CASA",
+          "buildTypes": [
+            "ALVENARIA",
+            "ALVENARIA",
+            "ALVENARIA",
+            "ALVENARIA"
+          ],
+          "usageTypes": [
+            "HABITUAL"
+          ],
+          "importanceInsureds": [
+            "PREDIO"
+          ]
+        },
+        {
+          "type": "CASA",
+          "buildTypes": [
+            "ALVENARIA",
+            "ALVENARIA",
+            "ALVENARIA",
+            "ALVENARIA"
+          ],
+          "usageTypes": [
+            "HABITUAL"
+          ],
+          "importanceInsureds": [
+            "PREDIO"
+          ]
+        }
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "ANUAL",
+        "ANUAL",
+        "ANUAL",
+        "ANUAL",
+        "ANUAL"
+      ],
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "propertyPostalCode": "13110000",
+      "additionalInfo": "Detalhar os serviços, benefícios e outros",
+      "additionals": [
+        "SORTEIO_GRATUITO"
+      ],
+      "protective": false,
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO"
+        ],
+        "paymentType": "A_VISTA",
+        "paymentMethodsAdditionalInfo": "Descritivo"
+      },
+      "termsAdditionalInfo": "aute ullamco Lorem esse",
+      "customerService": "REDE_REFERENCIADA",
+      "assistanceServices": [
+        {
+          "chargeType": "GRATUITA",
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "package": "ATE_10_SERVICOS"
+        },
+        {
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "chargeType": "GRATUITA",
+          "package": "ATE_10_SERVICOS"
+        }
+      ]
+    },
+    {
+      "participant": {
+        "brand": "Organização",
+        "name": "Organização A1",
+        "cnpjNumber": "13456789000112",
+        "urlComplementaryList": "https://empresaa1.com/companies"
+      },
+      "society": {
+        "name": "Society A1",
+        "cnpjNumber": "13456789000112"
+      },
+      "name": "Produto A",
+      "code": "0001",
+      "coverages": [
+        {
+          "type": "IMOVEL_BASICA",
+          "detail": "dolor",
+          "permissionSeparateAcquisition": true,
+          "attributes": {
+            "maxLMI": {
+              "amount": "1000000.01",
+              "currency": "BRL"
+            },
+            "insuredMandatoryParticipationPercentage": "0.000002",
+            "minDeductibleAmount": {
+              "amount": "1.1000",
+              "currency": "BRL"
+            },
+            "minLMI": {
+              "amount": "0.01",
+              "currency": "BRL"
+            }
+          }
+        }
+      ],
+      "propertyCharacteristics": [
+        {
+          "type": "CASA",
+          "buildTypes": [
+            "ALVENARIA",
+            "ALVENARIA"
+          ],
+          "usageTypes": [
+            "HABITUAL"
+          ],
+          "importanceInsureds": [
+            "PREDIO"
+          ]
+        },
+        {
+          "type": "CASA",
+          "buildTypes": [
+            "ALVENARIA",
+            "ALVENARIA",
+            "ALVENARIA"
+          ],
+          "usageTypes": [
+            "HABITUAL"
+          ],
+          "importanceInsureds": [
+            "PREDIO"
+          ]
+        },
+        {
+          "type": "CASA",
+          "buildTypes": [
+            "ALVENARIA"
+          ],
+          "usageTypes": [
+            "HABITUAL"
+          ],
+          "importanceInsureds": [
+            "PREDIO"
+          ]
+        },
+        {
+          "type": "CASA",
+          "buildTypes": [
+            "ALVENARIA"
+          ],
+          "usageTypes": [
+            "HABITUAL"
+          ],
+          "importanceInsureds": [
+            "PREDIO"
+          ]
+        }
+      ],
+      "termsAndConditions": [
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        },
+        {
+          "susepProcessNumber": "15414.622222/2222-22",
+          "detail": "https://openinsurance.com.br/aaa"
+        }
+      ],
+      "terms": [
+        "ANUAL"
+      ],
+      "minimumRequirement": {
+        "contractType": "COLETIVO",
+        "contractingMinRequirement": "https://openinsurance.com.br/aaa"
+      },
+      "targetAudience": "PESSOA_NATURAL",
+      "customerService": "REDE_REFERENCIADA",
+      "propertyPostalCode": "13110000",
+      "premiumPayment": {
+        "paymentMethods": [
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO",
+          "CARTAO_CREDITO"
+        ],
+        "paymentType": "A_VISTA",
+        "paymentMethodsAdditionalInfo": "Descritivo"
+      },
+      "additionalInfo": "Detalhar os serviços, benefícios e outros",
+      "protective": true,
+      "additionals": [
+        "SORTEIO_GRATUITO"
+      ],
+      "assistanceServices": [
+        {
+          "package": "ATE_10_SERVICOS",
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "chargeType": "GRATUITA"
+        },
+        {
+          "package": "ATE_10_SERVICOS",
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "chargeType": "GRATUITA"
+        },
+        {
+          "package": "ATE_10_SERVICOS",
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "chargeType": "GRATUITA"
+        },
+        {
+          "package": "ATE_10_SERVICOS",
+          "detail": "Plano 1 - Cobertura de Assistência 24h com os serviços de - reboque pane seca - reboque pane mecanica - chaveiro - remoção médica - acompanhante hospital Inclui serviços residenciais gratuitos - Serviços à Residência",
+          "chargeType": "GRATUITA"
+        }
+      ],
+      "termsAdditionalInfo": "incididunt"
+    }
+  ]
+}

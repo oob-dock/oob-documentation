@@ -1,0 +1,14 @@
+{
+  "data": [
+    {
+      "warrantyType": "CESSAO_DIREITOS_CREDITORIOS",
+      "warrantySubType": "NOTAS_PROMISSORIAS_OUTROS_DIREITOS_CREDITO",
+      "warrantyAmount": "1000.0400",
+      "currency": "BRL"
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

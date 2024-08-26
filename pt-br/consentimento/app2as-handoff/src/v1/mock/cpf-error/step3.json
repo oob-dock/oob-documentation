@@ -1,0 +1,19 @@
+{
+    "events": [
+        {
+            "type": "error",
+            "args": {
+                "tpp": {
+                    "name": "Opus GuiaBolsa",
+                    "logoUrl": "https://upload.wikimedia.org/wikipedia/commons/4/4f/SVG_Logo.svg"
+                },
+                "errorCommand": {
+                    "type": "CPF_MISMATCH",
+                    "redirect": {
+                        "redirectTo": "https://www.opus-software.com.br/"
+                    }
+                }
+            }
+        }
+    ]
+}

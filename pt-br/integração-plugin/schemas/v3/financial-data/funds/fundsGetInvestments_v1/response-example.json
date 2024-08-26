@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "investmentId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "anbimaCategory": "RENDA_FIXA",
+      "anbimaSubclass": "A9sQN",
+      "anbimaClass": "PV=AM&>"
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

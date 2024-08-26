@@ -1,0 +1,71 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema",
+    "$defs": {
+        "ConsentPayment": {
+            "description": "Consentimento de pagamento",
+            "type": "object",
+            "required": [
+                "brandId",
+                "creationDateTime",
+                "tpp",
+                "externalId",
+                "loggedUser",
+                "expirationDateTime",
+                "creditor",
+                "payment"
+            ],
+            "properties": {
+                "brandId": {
+                    "$ref": "../common-schema.json#/$defs/BrandId"
+                },
+                "creationDateTime": {
+                    "$ref": "./common-consent-schema.json#/$defs/CreationDateTime"
+                },
+                "tpp": {
+                    "$ref": "./common-consent-schema.json#/$defs/TPP"
+                },
+                "externalId": {
+                    "$ref": "./common-consent-schema.json#/$defs/ExternalId"
+                },
+                "loggedUser": {
+                    "$ref": "./common-consent-schema.json#/$defs/LoggedUser"
+                },
+                "businessDocumentType": {
+                    "$ref": "./common-consent-schema.json#/$defs/BusinessEntity"
+                },
+                "resources": {
+                    "$ref": "./common-consent-schema.json#/$defs/AcceptedResources"
+                },
+                "version": {
+                    "$ref": "./common-consent-schema.json#/$defs/Version"
+                },
+                "expirationDateTime": {
+                    "$ref": "./common-consent-schema.json#/$defs/ExpirationDateTime"
+                },
+                "creditor": {
+                    "$ref": "../common-payment-schema.json#/$defs/Identification"
+                },
+                "payment": {
+                    "oneOf": [
+                        {
+                            "$ref": "./common-consent-schema.json#/$defs/PixPaymentConsent"
+                        },
+                        {
+                            "$ref": "./common-consent-schema.json#/$defs/TedTefPaymentConsent"
+                        }
+                    ]
+                },
+                "debtorAccount": {
+                    "$ref": "../common-payment-schema.json#/$defs/DebtorAccount"
+                },
+                "authExtraData": {
+                    "$ref": "./common-consent-schema.json#/$defs/AuthExtraData"
+                },
+                "consentOwner": {
+                    "$ref": "./common-consent-schema.json#/$defs/ConsentOwner"
+                }
+            },
+            "additionalProperties": false
+        }
+    }
+}

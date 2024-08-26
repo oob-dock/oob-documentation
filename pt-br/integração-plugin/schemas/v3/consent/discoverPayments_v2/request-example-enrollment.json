@@ -1,0 +1,47 @@
+{
+    "requestMeta": {
+        "correlationId": "localID:bb7365d9-0344-4b5c-8897-8bae12e2a2c6",
+        "brandId": "cbanco"
+    },
+    "consent": {
+        "brandId": "cbanco",
+        "creationDateTime": "2024-08-19T13:26:16Z",
+        "tpp": {
+            "name": "OOB Client Um"
+        },
+        "externalId": "urn:amazingbank:d1ce9426-a5fa-4fbb-b6d6-184e843765bc",
+        "loggedUser": {
+            "document": {
+                "identification": "12312312387",
+                "rel": "CPF"
+            }
+        },
+        "businessDocumentType": {
+            "document": {
+                "identification": "11111678912329",
+                "rel": "CNPJ"
+            }
+        },
+        "expirationDateTime": "2025-08-19T13:26:16Z",
+        "consentOwner": [
+            {
+                "key": "cnpj",
+                "value": "11111678912329"
+            },
+            {
+                "key": "cpf",
+                "value": "12312312387"
+            }
+        ],
+        "debtorAccount": {
+            "ispb": "12345678",
+            "issuer": "1774",
+            "number": "1234567890",
+            "accountType": "CACC"
+        },
+        "permissions": [
+            "PAYMENTS_INITIATE"
+        ]
+    },
+    "paymentType": "PAYMENT_ENROLLMENT_CONSENT"
+}

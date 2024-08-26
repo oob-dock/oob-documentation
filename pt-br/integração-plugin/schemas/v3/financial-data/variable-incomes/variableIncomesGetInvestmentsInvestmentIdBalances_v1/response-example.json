@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "referenceDate": "2023-01-07",
+      "priceFactor": "100.0005",
+      "grossAmount": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "blockedBalance": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "quantity": "1000.00000004",
+      "closingPrice": {
+        "amount": "1000.0004",
+        "currency": "BRL"
+      }
+    }
+  ],
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}

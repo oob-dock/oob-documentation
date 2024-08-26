@@ -1,0 +1,31 @@
+{
+  "data": {
+    "dueInstalments": 57,
+    "pastDueInstalments": 73,
+    "typeContractRemaining": "SEMANA",
+    "typeNumberOfInstalments": "MES",
+    "paidInstalments": 73,
+    "balloonPayments": [
+      {
+        "dueDate": "2020-01-10",
+        "amount": {
+          "amount": "100000.0400",
+          "currency": "BRL"
+        }
+      },
+      {
+        "dueDate": "2020-01-10",
+        "amount": {
+          "amount": "100000.0400",
+          "currency": "BRL"
+        }
+      }
+    ],
+    "totalNumberOfInstalments": 130632,
+    "contractRemainingNumber": 80
+  },
+  "meta": {
+    "totalRecords": 1,
+    "totalPages": 1
+  }
+}
