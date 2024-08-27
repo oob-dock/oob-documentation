@@ -794,6 +794,8 @@ components:
         tppLogo:
           type: string
           example: "http://www.exemplo.com/logo.png"
+        enrollmentData:
+          $ref: '#/components/schemas/EnrollmentData'
     ConsentExtends:
       type: object
       properties:
@@ -2341,6 +2343,111 @@ components:
           type: array
           items:
             type: string
+    EnrollmentData:
+      type: object
+      properties:
+        debtorAccount:
+          $ref: '#/components/schemas/DebtorAccount'
+        riskSignals:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentManualRiskSignal'
+    PaymentManualRiskSignal:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: Unique identifier of the device.
+        isRootedDevice:
+          type: boolean
+          description: Indicates whether the device is rooted.
+        screenBrightness:
+          type: number
+          format: double
+          description: Brightness level of the device screen.
+        elapsedTimeSinceBoot:
+          type: integer
+          format: int64
+          description: Time elapsed since the device last booted.
+        osVersion:
+          type: string
+          description: Operating system version of the device.
+        userTimeZoneOffset:
+          type: string
+          description: Time zone offset of the user.
+        language:
+          type: string
+          description: Language used by the device.
+        screenDimensions:
+          $ref: '#/components/schemas/ScreenDimensions'
+        accountTenure:
+          type: string
+          description: Time the account has been active.
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        callInProgress:
+          type: boolean
+          description: Indicates whether a call is currently in progress.
+        devModeEnabled:
+          type: boolean
+          description: Indicates whether developer mode is enabled on the device.
+        mockGPS:
+          type: boolean
+          description: Indicates whether the device is using a mock GPS location.
+        emulated:
+          type: boolean
+          description: Indicates whether the device is emulated.
+        monkeyRunner:
+          type: boolean
+          description: Indicates whether the device is using the MonkeyRunner tool.
+        charging:
+          type: boolean
+          description: Indicates whether the device is currently charging.
+        antennaInformation:
+          type: string
+          description: Information about the device's antenna.
+        usbConnected:
+          type: boolean
+          description: Indicates whether the device is connected to a USB port.
+        integrity:
+          $ref: '#/components/schemas/Integrity'
+        rootedDevice:
+          type: boolean
+          description: Indicates whether the device is rooted.
+    ScreenDimensions:
+      type: object
+      properties:
+        height:
+          type: integer
+          format: int64
+          description: Height of the device screen in pixels.
+        width:
+          type: integer
+          format: int64
+          description: Width of the device screen in pixels.
+    Geolocation:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          description: Latitude coordinate of the device's location.
+        longitude:
+          type: number
+          format: double
+          description: Longitude coordinate of the device's location.
+        type:
+          type: string
+          description: Type of geolocation data.
+    Integrity:
+      type: object
+      properties:
+        appRecognitionVerdict:
+          type: string
+          description: Verdict of the app recognition process.
+        deviceRecognitionVerdict:
+          type: string
+          description: Verdict of the device recognition process.
   securitySchemes:
     jwt:
       type: http
