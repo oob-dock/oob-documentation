@@ -60,6 +60,12 @@ Caminho base para acessar o servidor de autorização
 
 **Ex:** "/auth/"
 
+## auth_server_nonfapi_base_path
+
+Caminho base para acessar o servidor de autorização nos endpoints não FAPI
+
+**Ex:** "/auth-nonfapi/"
+
 ## introspection_client_id
 
 Identificador do cliente para instrospection
