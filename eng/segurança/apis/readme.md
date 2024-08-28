@@ -577,11 +577,12 @@
 
 **Cliente API:** TPP
 
-| Operation | API                                    | Token Validated | Access Scope     | JWS Validated | consentId Validated | mTLS | Notes |
-| --------- | -------------------------------------- | --------------- | ---------------- | ------------- | ------------------- | ---- | ----- |
-| POST      | /v1/enrollments                        | Yes             | payments         | Yes           | No                  | Yes  |       |
-| POST      | /v1/enrollments/\{ID\}/risk-signals    | Yes             | payments         | Yes           | No                  | Yes  |       |
-| GET       | /v1/enrollments/\{ID\}                 | Yes             | payments         | No            | No                  | Yes  |       |
+| Operation | API                                   | Token Validated | Access Scope     | JWS Validated | consentId Validated | mTLS | Notes |
+| -------- | -------------------------------------- | --------------- | ---------------- | ------------- | ------------------- | ---- | ----- |
+| POST     | /v1/enrollments                        | Yes             | payments         | Yes           | No                  | Yes  |       |
+| POST     | /v1/enrollments/\{ID\}/risk-signals    | Yes             | payments         | Yes           | No                  | Yes  |       |
+| GET      | /v1/enrollments/\{ID\}                 | Yes             | payments         | No            | No                  | Yes  |       |
+| PATCH    | /v2/enrollments/\{ID\}                 | Yes             | payments         | Yes           | No                  | Yes  |       |
 
 ## Automatic Payments
 
