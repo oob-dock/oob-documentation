@@ -2393,35 +2393,32 @@ components:
           description: Tempo em que a conta está ativa.
         geolocation:
           $ref: '#/components/schemas/Geolocation'
-        callingProgress:
+        isCallingProgress:
           type: boolean
           description: Indica se uma chamada está em andamento.
-        devModeEnabled:
+        isDevModeEnabled:
           type: boolean
           description: Indica se o modo de desenvolvedor está ativado no dispositivo.
-        mockGPS:
+        isMockGPS:
           type: boolean
           description: Indica se o dispositivo está usando uma localização GPS simulada.
-        emulated:
+        isEmulated:
           type: boolean
           description: Indica se o dispositivo está emulado.
-        monkeyRunner:
+        isMonkeyRunner:
           type: boolean
           description: Indica se o dispositivo está usando a ferramenta MonkeyRunner.
-        charging:
+        isCharging:
           type: boolean
           description: Indica se o dispositivo está atualmente carregando.
         antennaInformation:
           type: string
           description: Informações sobre a antena do dispositivo.
-        usbConnected:
+        isUsbConnected:
           type: boolean
           description: Indica se o dispositivo está conectado a uma porta USB.
         integrity:
           $ref: '#/components/schemas/Integrity'
-        rootedDevice:
-          type: boolean
-          description: Indica se o dispositivo está com root.
     ScreenDimensions:
       type: object
       properties:
