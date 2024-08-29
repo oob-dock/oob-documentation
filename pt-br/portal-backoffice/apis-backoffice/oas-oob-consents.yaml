@@ -1467,7 +1467,7 @@ components:
                 - COARSE
                 - FINE
                 - INFERRED
-        isCallingProgress:
+        isCallInProgress:
           type: boolean
           description: |
             Indica chamada ativa no momento do vínculo.
@@ -2393,7 +2393,7 @@ components:
           description: Tempo em que a conta está ativa.
         geolocation:
           $ref: '#/components/schemas/Geolocation'
-        callInProgress:
+        isCallingProgress:
           type: boolean
           description: Indica se uma chamada está em andamento.
         devModeEnabled:
