@@ -659,6 +659,10 @@ components:
       - CONSUMED
       - TIMEOUT_AUTHORISATION
       - TIMEOUT_PAYMENT
+      - AWAITING_RISK_SIGNALS
+      - AWAITING_ACCOUNT_HOLDER_VALIDATION
+      - AWAITING_ENROLLMENT
+      - PARTIALLY_ACCEPTED
       type: string
     ConsentDetail:
       type: object
@@ -793,9 +797,7 @@ components:
           example: "Guia Seguros"
         tppLogo:
           type: string
-          example: "http://www.exemplo.com/logo.png"
-        enrollmentData:
-          $ref: '#/components/schemas/EnrollmentData'
+          example: "http://www.exemplo.com/logo.png"        
     ConsentExtends:
       type: object
       properties:
@@ -811,6 +813,7 @@ components:
       enum:
       - DATA_SHARING
       - PAYMENT
+      - ENROLLMENT
       type: string
     Creditor:
       required:
