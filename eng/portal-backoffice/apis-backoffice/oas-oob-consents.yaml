@@ -1467,7 +1467,7 @@ components:
                 - COARSE
                 - FINE
                 - INFERRED
-        isCallInProgress:
+        isCallingProgress:
           type: boolean
           description: |
             Indicates an active call at the time of binding.
