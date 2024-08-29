@@ -2388,7 +2388,7 @@ components:
           description: Time the account has been active.
         geolocation:
           $ref: '#/components/schemas/Geolocation'
-        isCallingProgress:
+        callingProgress:
           type: boolean
           description: Indicates whether a call is currently in progress.
         devModeEnabled:
