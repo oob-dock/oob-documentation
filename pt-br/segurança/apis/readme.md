@@ -578,12 +578,14 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                    | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | -------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| POST     | /v1/enrollments                        | Sim          | payments         | Sim        | Não              | Sim  |     |
-| POST     | /v1/enrollments/\{ID\}/risk-signals    | Sim          | payments         | Sim        | Não              | Sim  |     |
-| GET      | /v1/enrollments/\{ID\}                 | Sim          | payments         | Não        | Não              | Sim  |     |
-| PATCH    | /v2/enrollments/\{ID\}                 | Sim          | payments         | Sim        | Não              | Sim  |     |
+| Operação | API                                              | Valida token | Escopo de acesso | Valida JWS | Valida enrollmentId  | mTLS | Obs |
+| -------- | ------------------------------------------------ | ------------ | ---------------- | ---------- | -------------------- | ---- | --- |
+| POST     | /v1/enrollments                                  | Sim          | payments         | Sim        | Não                  | Sim  |     |
+| POST     | /v1/enrollments/\{ID\}/risk-signals              | Sim          | payments         | Sim        | Não                  | Sim  |     |
+| GET      | /v1/enrollments/\{ID\}                           | Sim          | payments         | Não        | Não                  | Sim  |     |
+| PATCH    | /v2/enrollments/\{ID\}                           | Sim          | payments         | Sim        | Não                  | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-registration-options | Sim          | payments         | Sim        | Sim                  | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-registration         | Sim          | payments         | Sim        | Sim                  | Sim  |     |
 
 ## Automatic Payments
 
