@@ -659,6 +659,10 @@ components:
       - CONSUMED
       - TIMEOUT_AUTHORISATION
       - TIMEOUT_PAYMENT
+      - AWAITING_RISK_SIGNALS
+      - AWAITING_ACCOUNT_HOLDER_VALIDATION
+      - AWAITING_ENROLLMENT
+      - PARTIALLY_ACCEPTED
       type: string
     ConsentDetail:
       type: object
@@ -793,7 +797,7 @@ components:
           example: "Guia Seguros"
         tppLogo:
           type: string
-          example: "http://www.exemplo.com/logo.png"
+          example: "http://www.exemplo.com/logo.png"        
     ConsentExtends:
       type: object
       properties:
@@ -809,6 +813,7 @@ components:
       enum:
       - DATA_SHARING
       - PAYMENT
+      - ENROLLMENT
       type: string
     Creditor:
       required:
@@ -2346,6 +2351,108 @@ components:
           type: array
           items:
             type: string
+    EnrollmentData:
+      type: object
+      properties:
+        debtorAccount:
+          $ref: '#/components/schemas/DebtorAccount'
+        riskSignals:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentManualRiskSignal'
+    PaymentManualRiskSignal:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: Identificador único do dispositivo.
+        isRootedDevice:
+          type: boolean
+          description: Indica se o dispositivo está com root.
+        screenBrightness:
+          type: number
+          format: double
+          description: Nível de brilho da tela do dispositivo.
+        elapsedTimeSinceBoot:
+          type: integer
+          format: int64
+          description: Tempo decorrido desde a última inicialização do dispositivo.
+        osVersion:
+          type: string
+          description: Versão do sistema operacional do dispositivo.
+        userTimeZoneOffset:
+          type: string
+          description: Deslocamento do fuso horário do usuário.
+        language:
+          type: string
+          description: Idioma usado pelo dispositivo.
+        screenDimensions:
+          $ref: '#/components/schemas/ScreenDimensions'
+        accountTenure:
+          type: string
+          description: Tempo em que a conta está ativa.
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        isCallingProgress:
+          type: boolean
+          description: Indica se uma chamada está em andamento.
+        isDevModeEnabled:
+          type: boolean
+          description: Indica se o modo de desenvolvedor está ativado no dispositivo.
+        isMockGPS:
+          type: boolean
+          description: Indica se o dispositivo está usando uma localização GPS simulada.
+        isEmulated:
+          type: boolean
+          description: Indica se o dispositivo está emulado.
+        isMonkeyRunner:
+          type: boolean
+          description: Indica se o dispositivo está usando a ferramenta MonkeyRunner.
+        isCharging:
+          type: boolean
+          description: Indica se o dispositivo está atualmente carregando.
+        antennaInformation:
+          type: string
+          description: Informações sobre a antena do dispositivo.
+        isUsbConnected:
+          type: boolean
+          description: Indica se o dispositivo está conectado a uma porta USB.
+        integrity:
+          $ref: '#/components/schemas/Integrity'
+    ScreenDimensions:
+      type: object
+      properties:
+        height:
+          type: integer
+          format: int64
+          description: Altura da tela do dispositivo em pixels.
+        width:
+          type: integer
+          format: int64
+          description: Largura da tela do dispositivo em pixels.
+    Geolocation:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          description: Coordenada de latitude da localização do dispositivo.
+        longitude:
+          type: number
+          format: double
+          description: Coordenada de longitude da localização do dispositivo.
+        type:
+          type: string
+          description: Tipo de dados de geolocalização.
+    Integrity:
+      type: object
+      properties:
+        appRecognitionVerdict:
+          type: string
+          description: Veredito do processo de reconhecimento do aplicativo.
+        deviceRecognitionVerdict:
+          type: string
+          description: Veredito do processo de reconhecimento do dispositivo.
   securitySchemes:
     jwt:
       type: http
