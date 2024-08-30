@@ -533,6 +533,21 @@ additionalVars:
     value: "true"
 ```
 
+#### SSL_CERTIFICATE_HEADER_NAME
+
+Defines the name of the header used to send the client mTLS
+certificate that made the request. In the JSR context, the
+certificate is used to validate the Rellying Party ID field
+using during FIDO Registration.
+
+**Default:** `X-SSL-Client-Cert`
+
+```yaml
+additionalVars:
+  - name: SSL_CERTIFICATE_HEADER_NAME
+    value: "X-SSL-Client-Cert"
+```
+
 ### feature/introspection/cache/enabled
 
 Enables or disables the cache for introspection in the service. It should be enabled **ONLY** if the functionality is correctly configured in the [Authorization Server](../oob-authorization-server/readme.md#state-store).
