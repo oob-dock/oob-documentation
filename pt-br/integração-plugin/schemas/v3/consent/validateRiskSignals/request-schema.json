@@ -117,7 +117,7 @@
                                 }
                             }
                         },
-                        "isCallingProgress": {
+                        "isCallInProgress": {
                             "type": "boolean",
                             "description": "Indica chamada ativa no momento do vínculo.\n\n[Restrição] Caso o sinal de risco esteja disponível (cliente permitiu que fosse coletado), o mesmo deverá ser enviado\n"
                         },
