@@ -586,6 +586,7 @@
 | PATCH    | /v2/enrollments/\{ID\}                           | Sim          | payments         | Sim        | Não                  | Sim  |     |
 | POST     | /v2/enrollments/\{ID\}/fido-registration-options | Sim          | payments         | Sim        | Sim                  | Sim  |     |
 | POST     | /v2/enrollments/\{ID\}/fido-registration         | Sim          | payments         | Sim        | Sim                  | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-sign-options         | Sim          | payments         | Sim        | Não                  | Sim  |     |
 
 ## Automatic Payments
 
