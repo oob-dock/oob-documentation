@@ -78,7 +78,7 @@ Segredo do cliente para instrospection
 
 **Ex:** "secret123"
 
-## Suporte a features do Opus Open Banking
+## Suporte a features do Opus Open Finance
 
 Com o objetivo de otimizar o uso de recursos, monitorar e expor endpoints
 suportados pela instituição, implementamos o suporte a features.
@@ -88,14 +88,15 @@ uma feature.
 
 ### Features suportadas
 
-Abaixo temos a lista de features suportadas pelo Opus Open Banking:
+Abaixo temos a lista de features suportadas pelo Opus Open Finance:
 
 | Feature        | Descrição                                                                            |
 | -------------- | ------------------------------------------------------------------------------------ |
-| core           | Funções básicas e obrigatórias do Opus Open Banking                                  |
-| open-data      | Compartilhamento de dados abertos (Fase 1 do Open Banking Brasil)                    |
-| financial-data | Compartilhamento de dados que requerem consentimento (Fase 2 do Open Banking Brasil) |
-| payments       | Pagamentos (Fase 3 do Open Banking Brasil)                                           |
+| core           | Funções básicas e obrigatórias do Opus Open Finance                                  |
+| open-data      | Compartilhamento de dados abertos (Fase 1 do Open Finance Brasil)                    |
+| financial-data | Compartilhamento de dados que requerem consentimento (Fase 2 do Open Finance Brasil) |
+| payments       | Pagamentos (Fase 3 do Open Finance Brasil)                                           |
+| jsr            | Jornada sem redirecionamento (Fase 3 do Open Finance Brasil)                         |
 
 ### Features x Scopes
 
@@ -107,6 +108,7 @@ Cada feature definida na tabela acima suporta os seguintes escopos:
 | open-data      | openid                                                                                                                                       |
 | financial-data | openid, resources                                                                                                                            |
 | payments       | openid, payments, consents, resources                                                                                                        |
+| jsr            | openid, payments, consents, nrp-consents                                                                                                     |
 
 **IMPORTANTE**: Para a feature financial-data não é necessário utilizar os
 seguintes escopos de acesso: accounts, credit-cards-accounts, customers, invoice-financings,
