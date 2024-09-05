@@ -154,8 +154,8 @@ Os produtos selecionáveis devem ter seus conectores respeitando os seguintes sc
 
 | Tipo     | JSON Schema                                                                                                         |
 | -------- | ------------------------------------------------------------------------------------------------------------------- |
-| Request  | [discovery-resource-request.json](../schemas/v2/consent/discoveryDataSharing/discovery-resource-request.json)                          |
-| Response | [discovery-selectable-resource-response.json](../schemas/v2/consent/discoveryDataSharing/discovery-selectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-resource-request.json)                          |
+| Response | [discovery-selectable-resource-response.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-selectable-resource-response.json) |
 
 Exemplo de response para um produto selecionável:
 
@@ -208,8 +208,8 @@ schemas:
 
 | Tipo     | JSON Schema                                                                                                              |
 | -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Request  | [discovery-resource-request.json](../schemas/v2/consent/discoveryDataSharing/discovery-resource-request.json)                               |
-| Response | [discovery-nonselectable-resource-response.json](../schemas/v2/consent/discoveryDataSharing/discovery-nonselectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-resource-request.json)                               |
+| Response | [discovery-nonselectable-resource-response.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-nonselectable-resource-response.json) |
 
 *[DRAFT: O schema do consentimento dentro do request
 está em revisão]*
@@ -256,7 +256,7 @@ de pagamento, como por exemplo:
 - Validar dados de conta
 
 A rota camel escuta chamadas realizadas em `direct:validatePaymentData` e um exemplo
-de [request](../schemas/v3/consent/validatePaymentData/request-example.json).
+de [request](../schemas/schemas_v3/consent/validatePaymentData/request-example.json).
 
 **Importante**: A partir da versão 4 do consentimento, caso múltiplos erros sejam
 identificados durante a validação, deve-se retornar o erro de maior prioridade.
@@ -283,12 +283,12 @@ A tabela a seguir lista os pontos de integração para a verificação de corren
 | Todos                 | ```direct:checkAccountHolderStatus```         |
 
 Definições:
-- [request-schema](../schemas/v3/consent/checkAccountHolderStatus/request-schema.json)
-- [response-schema](../schemas/v3/consent/checkAccountHolderStatus/response-schema.json)
+- [request-schema](../schemas/schemas_v3/consent/checkAccountHolderStatus/request-schema.json)
+- [response-schema](../schemas/schemas_v3/consent/checkAccountHolderStatus/response-schema.json)
 
 Exemplos:
-- [request-example](../schemas/v3/consent/checkAccountHolderStatus/request-example.json)
-- [response-example](../schemas/v3/consent/checkAccountHolderStatus/response-example.json)
+- [request-example](../schemas/schemas_v3/consent/checkAccountHolderStatus/request-example.json)
+- [response-example](../schemas/schemas_v3/consent/checkAccountHolderStatus/response-example.json)
 
 **Observação**
 
@@ -308,8 +308,8 @@ a rota `direct:validateRiskSignals`.
 **Importante**: A implementação da rota não é obrigatória, mas é recomendada.
 
 Definições:
-- [request-schema](../schemas/v3/consent/validateRiskSignals/request-schema.json)
-- [response-schema](../schemas/v3/consent/validateRiskSignals/response-schema.json)
+- [request-schema](../schemas/schemas_v3/consent/validateRiskSignals/request-schema.json)
+- [response-schema](../schemas/schemas_v3/consent/validateRiskSignals/response-schema.json)
 
 ### Tratamentos adicionais
 
@@ -423,7 +423,7 @@ O retorno desses pontos de integração devem ser:
   negado. Essa mensagem possui também o campo opcional *restrictionType* informando
   o tipo de restrição que reprovou o consentimento;
 - Uma mensagem de erro genérica, definida pelo schema
-  [response-error-schema.json](../schemas/v2/common/response-error-schema.json)
+  [response-error-schema.json](../schemas/schemas_v2/common/response-error-schema.json)
   quando um erro técnico impedir que a solicitação possa ser avaliada, como um
   erro de rede ou um sistema inoperante.
 
@@ -431,8 +431,8 @@ A tabela a seguir corresponde aos schemas do Request e do Response do conector:
 
 | Tipo     | JSON Schema                                                                                                        |
 | -------- | ------------------------------------------------------------------------------------------------------------------ |
-| Request  | [approvePaymentConsent-request.json](../schemas/v3/consent/approvePaymentConsentCreation_v3/request-schema.json)   |
-| Response | [approvePaymentConsent-response.json](../schemas/v3/consent/approvePaymentConsentCreation_v3/response-schema.json) |
+| Request  | [approvePaymentConsent-request.json](../schemas/schemas_v3/consent/approvePaymentConsentCreation_v3/request-schema.json)   |
+| Response | [approvePaymentConsent-response.json](../schemas/schemas_v3/consent/approvePaymentConsentCreation_v3/response-schema.json) |
 
 Exemplo de Request:
 
@@ -487,7 +487,7 @@ Exemplo de Request:
 ```
 
 Mais exemplos de request e de response para a rota "approvePaymentConsentCreation"
-podem ser encontradas [aqui](../schemas/v3/consent/approvePaymentConsentCreation_v3).
+podem ser encontradas [aqui](../schemas/schemas_v3/consent/approvePaymentConsentCreation_v3).
 
 Exemplo de comando utilizado no `Dockerfile` para adicionar o arquivo das rotas
 `approvePaymentConsentCreation`, `approvePaymentConsentCreation_v2` e `approvePaymentConsentCreation_v3`:
