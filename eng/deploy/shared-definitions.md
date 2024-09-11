@@ -86,7 +86,7 @@ Below is the list of features supported by Opus Open Banking:
 | open-data      | Open data sharing (Phase 1 of Open Finance Brazil)                                     |
 | financial-data | Data sharing requiring consent (Phase 2 of Open Finance Brazil)                        |
 | payments       | Payments (Phase 3 of Open Finance Brazil)                                              |
-| jsr            | No Redirect Journey (Phase 3 of Open Finance Brazil)                                   |
+| enrollments    | No Redirect Journey (Phase 3 of Open Finance Brazil)                                   |
 
 ### Features x Scopes
 
@@ -98,7 +98,7 @@ Each feature defined in the table above supports the following scopes:
 | open-data      | openid                                                                                                                                       |
 | financial-data | openid, resources                                                                                                                            |
 | payments       | openid, payments, consents, resources                                                                                                        |
-| jsr            | openid, payments, consents, nrp-consents                                                                                                     |
+| enrollments    | openid, payments, consents, nrp-consents                                                                                                     |
 
 **IMPORTANT**: For the financial-data feature, it is not necessary to use the following access scopes: accounts, credit-cards-accounts, customers, invoice-financings, financings, loans, unarranged-accounts-overdraft.
 

@@ -96,7 +96,7 @@ Abaixo temos a lista de features suportadas pelo Opus Open Finance:
 | open-data      | Compartilhamento de dados abertos (Fase 1 do Open Finance Brasil)                    |
 | financial-data | Compartilhamento de dados que requerem consentimento (Fase 2 do Open Finance Brasil) |
 | payments       | Pagamentos (Fase 3 do Open Finance Brasil)                                           |
-| jsr            | Jornada sem redirecionamento (Fase 3 do Open Finance Brasil)                         |
+| enrollments    | Jornada sem redirecionamento (Fase 3 do Open Finance Brasil)                         |
 
 ### Features x Scopes
 
@@ -108,7 +108,7 @@ Cada feature definida na tabela acima suporta os seguintes escopos:
 | open-data      | openid                                                                                                                                       |
 | financial-data | openid, resources                                                                                                                            |
 | payments       | openid, payments, consents, resources                                                                                                        |
-| jsr            | openid, payments, consents, nrp-consents                                                                                                     |
+| enrollments    | openid, payments, consents, nrp-consents                                                                                                     |
 
 **IMPORTANTE**: Para a feature financial-data não é necessário utilizar os
 seguintes escopos de acesso: accounts, credit-cards-accounts, customers, invoice-financings,
