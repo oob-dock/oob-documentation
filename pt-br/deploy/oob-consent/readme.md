@@ -626,6 +626,21 @@ additionalVars:
     value: "true"
 ```
 
+#### SSL_CERTIFICATE_HEADER_NAME
+
+Define qual será o nome do header utilizado que será enviado o certificado
+mTLS do client que fez o request. No contexto de JSR, esse certificado
+é utilizado para validar o campo Rellying Party ID enviado durante o
+registro FIDO.
+
+**Default:** `X-SSL-Client-Cert`
+
+```yaml
+additionalVars:
+  - name: SSL_CERTIFICATE_HEADER_NAME
+    value: "X-SSL-Client-Cert"
+```
+
 ### feature/introspection/cache/enabled
 
 Habilita ou desabilita o cache para introspection no serviço.
