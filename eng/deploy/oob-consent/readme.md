@@ -536,9 +536,9 @@ additionalVars:
 #### SSL_CERTIFICATE_HEADER_NAME
 
 Defines the name of the header used to send the client mTLS
-certificate that made the request. In the JSR context, the
-certificate is used to validate the Rellying Party ID field
-using during FIDO Registration.
+certificate that made the request. In the No Redirect Journey
+context, the certificate is used to validate the Rellying Party
+ID field during FIDO Registration.
 
 **Default:** `X-SSL-Client-Cert`
 

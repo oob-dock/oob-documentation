@@ -585,6 +585,7 @@
 | PATCH    | /v2/enrollments/\{ID\}                           | Yes             | payments         | Yes           | No                     | Yes  |       |
 | POST     | /v2/enrollments/\{ID\}/fido-registration-options | Yes             | payments         | Yes           | Yes                    | Yes  |       |
 | POST     | /v2/enrollments/\{ID\}/fido-registration         | Yes             | payments         | Yes           | Yes                    | Yes  |       |
+| POST     | /v2/enrollments/\{ID\}/fido-sign-options         | Yes             | payments         | Yes           | No                     | Yes  |       |
 
 ## Automatic Payments
 

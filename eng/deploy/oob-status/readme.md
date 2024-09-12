@@ -55,7 +55,7 @@ Configuration of the base addresses of externally accessible services, with or w
 
 ### features
 
-See the [definition](../shared-definitions.md#suporte-a-features-do-opus-open-banking).
+See the [definition](../shared-definitions.md#supported-features-of-opus-open-finance).
 
 ### plugins/metrics/brandId
 

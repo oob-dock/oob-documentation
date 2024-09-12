@@ -223,7 +223,7 @@ Optional parameter for including an internal FQDN where open banking Backoffice 
 
 #### supported_features
 
-See the [definition](../shared-definitions.md#supported-features-of-opus-open-banking)
+See the [definition](../shared-definitions.md#supported-features-of-opus-open-finance)
 
 **Example:** ["core", "open-data", "financial-data", "payments"]
 

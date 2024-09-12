@@ -60,7 +60,7 @@ Configuração dos endereços base dos serviços acessíveis externamente mtls o
 
 ### features
 
-Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-banking)
+Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-finance)
 
 ### plugins/metrics/brandId
 
