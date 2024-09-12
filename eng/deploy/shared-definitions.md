@@ -97,8 +97,8 @@ Each feature defined in the table above supports the following scopes:
 | core           | openid, oob_customer, oob_consents:read, oob_opendata:read, oob_opendata:write, oob_outages:read, oob_outages:write, profile, offline_access |
 | open-data      | openid                                                                                                                                       |
 | financial-data | openid, resources                                                                                                                            |
-| payments       | openid, payments, consents, resources                                                                                                        |
-| enrollments    | openid, payments, consents, nrp-consents                                                                                                     |
+| payments       | openid, payments, recurring-payments                                                                                                         |
+| enrollments    | openid, payments, nrp-consents                                                                                                               |
 
 **IMPORTANT**: For the financial-data feature, it is not necessary to use the following access scopes: accounts, credit-cards-accounts, customers, invoice-financings, financings, loans, unarranged-accounts-overdraft.
 
