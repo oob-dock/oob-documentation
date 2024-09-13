@@ -107,8 +107,8 @@ Selectable products must have their connectors adhere to the following schemas:
 
 | Type     | JSON Schema                                                                                                        |
 | -------- | ----------------------------------------------------------------------------------------------------------------- |
-| Request  | [discovery-resource-request.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-resource-request.json)      |
-| Response | [discovery-selectable-resource-response.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-selectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/v2/consent/discoveryDataSharing/discovery-resource-request.json)      |
+| Response | [discovery-selectable-resource-response.json](../schemas/v2/consent/discoveryDataSharing/discovery-selectable-resource-response.json) |
 
 Example response for a selectable product:
 
@@ -160,8 +160,8 @@ Non-selectable products must have their connectors adhere to the following schem
 
 | Type     | JSON Schema                                                                                                              |
 | -------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Request  | [discovery-resource-request.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-resource-request.json)             |
-| Response | [discovery-nonselectable-resource-response.json](../schemas/schemas_v2/consent/discoveryDataSharing/discovery-nonselectable-resource-response.json) |
+| Request  | [discovery-resource-request.json](../schemas/v2/consent/discoveryDataSharing/discovery-resource-request.json)             |
+| Response | [discovery-nonselectable-resource-response.json](../schemas/v2/consent/discoveryDataSharing/discovery-nonselectable-resource-response.json) |
 
 *[DRAFT: The consent schema within the request is under review]*
 
@@ -203,7 +203,7 @@ The payment validation connector is implemented in Apache Camel, like the other 
 - Validate QR Code (QRND/QRES)
 - Validate account data
 
-The Camel route listens for calls made to `direct:validatePaymentData`, and an example can be found in [request](../schemas/schemas_v3/consent/validatePaymentData/request-example.json).
+The Camel route listens for calls made to `direct:validatePaymentData`, and an example can be found in [request](../schemas/v3/consent/validatePaymentData/request-example.json).
 
 **Important**: Starting from version 4 of the consent, if multiple errors are identified during validation, the error with the highest priority must be returned. The priority table can be found in the *Technical Information* of the [Payments API](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/17375943/SV+API+-+Pagamentos).
 
@@ -224,12 +224,12 @@ The following table lists the integration points for the account holder verifica
 | All                    | ```direct:checkAccountHolderStatus```        |
 
 Definitions:
-- [request-schema](../schemas/schemas_v3/consent/checkAccountHolderStatus/request-schema.json)
-- [response-schema](../schemas/schemas_v3/consent/checkAccountHolderStatus/response-schema.json)
+- [request-schema](../schemas/v3/consent/checkAccountHolderStatus/request-schema.json)
+- [response-schema](../schemas/v3/consent/checkAccountHolderStatus/response-schema.json)
 
 Examples:
-- [request-example](../schemas/schemas_v3/consent/checkAccountHolderStatus/request-example.json)
-- [response-example](../schemas/schemas_v3/consent/checkAccountHolderStatus/response-example.json)
+- [request-example](../schemas/v3/consent/checkAccountHolderStatus/request-example.json)
+- [response-example](../schemas/v3/consent/checkAccountHolderStatus/response-example.json)
 
 **Note**
 
@@ -248,8 +248,8 @@ the `direct:validateRiskSignals` route.
 
 Definitions:
 
-- [request-schema](../schemas/schemas_v3/consent/validateRiskSignals/request-schema.json)
-- [response-schema](../schemas/schemas_v3/consent/validateRiskSignals/response-schema.json)
+- [request-schema](../schemas/v3/consent/validateRiskSignals/request-schema.json)
+- [response-schema](../schemas/v3/consent/validateRiskSignals/response-schema.json)
 
 ### Additional Processing
 
@@ -303,14 +303,14 @@ The return of these integration points should be:
 
 - A success message (usually an empty object) when the consent can be created;
 - A business error message, described in the integration schema with a specific enum in the *code* field, defining the reason for which the consent was denied. This message also has an optional *restrictionType* field informing the type of restriction that disapproved the consent;
-- A generic error message, defined by the schema [response-error-schema.json](../schemas/schemas_v2/common/response-error-schema.json) when a technical error prevents the request from being evaluated, such as a network error or an inoperative system.
+- A generic error message, defined by the schema [response-error-schema.json](../schemas/v2/common/response-error-schema.json) when a technical error prevents the request from being evaluated, such as a network error or an inoperative system.
 
 The following table corresponds to the Request and Response schemas for the connector:
 
 | Type     | JSON Schema                                                                                                        |
 | -------- | ----------------------------------------------------------------------------------------------------------------- |
-| Request  | [approvePaymentConsent-request.json](../schemas/schemas_v3/consent/approvePaymentConsentCreation_v3/request-schema.json)   |
-| Response | [approvePaymentConsent-response.json](../schemas/schemas_v3/consent/approvePaymentConsentCreation_v3/response-schema.json) |
+| Request  | [approvePaymentConsent-request.json](../schemas/v3/consent/approvePaymentConsentCreation_v3/request-schema.json)   |
+| Response | [approvePaymentConsent-response.json](../schemas/v3/consent/approvePaymentConsentCreation_v3/response-schema.json) |
 
 Example of a Request:
 
@@ -364,7 +364,7 @@ Example of a Request:
 }
 ```
 
-More examples of request and response for the "approvePaymentConsentCreation" route can be found [here](../schemas/schemas_v3/consent/approvePaymentConsentCreation_v3).
+More examples of request and response for the "approvePaymentConsentCreation" route can be found [here](../schemas/v3/consent/approvePaymentConsentCreation_v3).
 
 Example of a command used in the `Dockerfile` to add the route files `approvePaymentConsentCreation`, `approvePaymentConsentCreation_v2`, and `approvePaymentConsentCreation_v3`:
 

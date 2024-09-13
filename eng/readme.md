@@ -58,7 +58,7 @@ The module also sends mandatory reports to the Metrics Collection Platform.
 
 ![Sequence Diagram for PISP and Data Reception with and without OPUS Open Finance](./imagens/diag-seq-itp.png)
 
-### Payment Initiation Service Provider Module
+### Payment Initiation Service Provider Module (OPUS PISP)
 
 A Payment Initiation Service Provider (PISP) is a client application that consumes services from an Account Holder. The PISP module of the OPUS Open Finance platform acts as middleware that facilitates payment initiation via Open Finance, abstracting operational flows.
 
@@ -68,7 +68,7 @@ Additionally, the module can also perform DCR (Dynamic Client Registration) and 
 
 Thus, the module enables the development of applications that benefit from payment initiation via Open Finance without the need to implement various security protocols and other requirements.
 
-### Data Reception Module
+### Data Reception Module (OPUS PISP)
 
 The Data Reception Module is middleware for consuming Data Transmitter services, allowing the creation of consents for sharing registration and transactional data and their subsequent use.
 
