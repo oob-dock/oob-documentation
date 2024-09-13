@@ -82,7 +82,7 @@ The *automatic_payment* parameter indicates whether the query should include onl
 SELECT * FROM payment_consent_payment_id('2022-01-02','2022-10-08', false);
 ```
 
-**Important**: The counts of scheduled and completed payments returned by the query should only be used if the institution correctly implements the [Payment Status Change Notification API](../../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento).
+**Important**: The counts of scheduled and completed payments returned by the query should only be used if the institution correctly implements the [Payment Status Change Notification API](../../../backoffice-portal/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento).
 
 ## API - Holder Funnel
 
@@ -99,7 +99,7 @@ The API receives two query parameters as input to define the range:
 
 The account holder should check the status of each of the returned payments to determine how many of them were completed.
 
-More information about the API can be found in [apis-backoffice](../../../portal-backoffice/apis-backoffice/readme.md).
+More information about the API can be found in [apis-backoffice](../../../backoffice-portal/apis-backoffice/readme.md).
 
 ## Scripts - Synchronous Validations
 
