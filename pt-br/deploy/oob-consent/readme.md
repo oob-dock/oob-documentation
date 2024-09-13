@@ -502,13 +502,6 @@ Utilizado para definir o charset usado na criptografia dos campos na base de dad
 
 Valor default: `UTF-8`
 
-### Conectores
-
-Existem additionalVars para utilização do conector de aprovação de consentimento
-desenvolvido pela Opus, que estão listadas em
-[consent](../../integração-plugin/consent/readme.md) na seção
-`Arquivo de rota implementado pela OPUS`
-
 ### ENROLLMENT_PERMISSIONS
 
 Utilizado para definir a lista de permissões de vínculo de dispositivo suportadas pela instituição.
@@ -524,6 +517,28 @@ additionalVars:
   - name: ENROLLMENT_PERMISSIONS
     value: PAYMENTS_INITIATE
 ```
+
+#### SSL_CERTIFICATE_HEADER_NAME
+
+Define qual será o nome do header utilizado que será enviado o certificado
+mTLS do client que fez o request. No contexto de JSR, esse certificado
+é utilizado para validar o campo Rellying Party ID enviado durante o
+registro FIDO.
+
+**Default:** `X-SSL-Client-Cert`
+
+```yaml
+additionalVars:
+  - name: SSL_CERTIFICATE_HEADER_NAME
+    value: "X-SSL-Client-Cert"
+```
+
+### Conectores
+
+Existem additionalVars para utilização do conector de aprovação de consentimento
+desenvolvido pela Opus, que estão listadas em
+[consent](../../integração-plugin/consent/readme.md) na seção
+`Arquivo de rota implementado pela OPUS`
 
 ## additionalVarsDaemon
 
@@ -624,21 +639,6 @@ Valor default: `true`
 additionalVars:
   - name: FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
     value: "true"
-```
-
-#### SSL_CERTIFICATE_HEADER_NAME
-
-Define qual será o nome do header utilizado que será enviado o certificado
-mTLS do client que fez o request. No contexto de JSR, esse certificado
-é utilizado para validar o campo Rellying Party ID enviado durante o
-registro FIDO.
-
-**Default:** `X-SSL-Client-Cert`
-
-```yaml
-additionalVars:
-  - name: SSL_CERTIFICATE_HEADER_NAME
-    value: "X-SSL-Client-Cert"
 ```
 
 ### feature/introspection/cache/enabled
