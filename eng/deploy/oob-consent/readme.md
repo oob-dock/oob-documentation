@@ -455,6 +455,21 @@ additionalVars:
     value: PAYMENTS_INITIATE
 ```
 
+#### SSL_CERTIFICATE_HEADER_NAME
+
+Defines the name of the header used to send the client mTLS
+certificate that made the request. In the No Redirect Journey
+context, the certificate is used to validate the Rellying Party
+ID field during FIDO Registration.
+
+**Default:** `X-SSL-Client-Cert`
+
+```yaml
+additionalVars:
+  - name: SSL_CERTIFICATE_HEADER_NAME
+    value: "X-SSL-Client-Cert"
+```
+
 ### Connectors
 
 There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integração-plugin/consent/readme.md) in the `File route implemented by OPUS` section.
@@ -531,21 +546,6 @@ Default value: `true`
 additionalVars:
   - name: FEATURE_CONSENTUSAGEPERSISTENCE_ENABLED
     value: "true"
-```
-
-#### SSL_CERTIFICATE_HEADER_NAME
-
-Defines the name of the header used to send the client mTLS
-certificate that made the request. In the No Redirect Journey
-context, the certificate is used to validate the Rellying Party
-ID field during FIDO Registration.
-
-**Default:** `X-SSL-Client-Cert`
-
-```yaml
-additionalVars:
-  - name: SSL_CERTIFICATE_HEADER_NAME
-    value: "X-SSL-Client-Cert"
 ```
 
 ### feature/introspection/cache/enabled
