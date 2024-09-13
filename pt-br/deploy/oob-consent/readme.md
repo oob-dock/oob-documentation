@@ -525,6 +525,25 @@ additionalVars:
     value: PAYMENTS_INITIATE
 ```
 
+### ENROLLMENT_NAME_TEMPLATE
+
+Modelo de texto utilizado para definir o nome do usuário do vínculo a ser apresentado durante
+o uso da chave.
+
+Valor default: `%1$s`
+
+Valores reservados:
+
+| Valor       | Substituído por                       |
+| ----------- | ------------------------------------- |
+| %1$s        | Nome do cliente que criou o vínculo   |
+
+**Ex:**
+
+additionalVars:
+  - name: ENROLLMENT_NAME_TEMPLATE
+  - value: "Open Finance: %1$s"
+
 ## additionalVarsDaemon
 
 Utilizado para definir configurações opcionais da instância de daemons
