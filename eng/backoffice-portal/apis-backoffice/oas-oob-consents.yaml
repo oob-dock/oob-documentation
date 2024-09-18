@@ -741,6 +741,8 @@ components:
         tppName:
           type: string
           example: "Guia Seguros"
+        enrollmentData:
+          $ref: '#/components/schemas/EnrollmentData'
     ConsentHistoryStatus:
       type: object
       properties:
