@@ -70,7 +70,7 @@ Client secret for introspection.
 
 **Example:** "secret123"
 
-## Support for Opus Open Banking Features
+## Support for Opus Open Finance Features
 
 To optimize resource usage, monitor, and expose supported endpoints by the institution, we implemented feature support.
 
@@ -82,10 +82,11 @@ Below is the list of features supported by Opus Open Banking:
 
 | Feature        | Description                                                                            |
 | -------------- | -------------------------------------------------------------------------------------- |
-| core           | Basic and mandatory functions of Opus Open Banking                                     |
-| open-data      | Open data sharing (Phase 1 of Open Banking Brazil)                                     |
-| financial-data | Data sharing requiring consent (Phase 2 of Open Banking Brazil)                        |
-| payments       | Payments (Phase 3 of Open Banking Brazil)                                              |
+| core           | Basic and mandatory functions of Opus Open Finance                                     |
+| open-data      | Open data sharing (Phase 1 of Open Finance Brazil)                                     |
+| financial-data | Data sharing requiring consent (Phase 2 of Open Finance Brazil)                        |
+| payments       | Payments (Phase 3 of Open Finance Brazil)                                              |
+| enrollments    | No Redirect Journey (Phase 3 of Open Finance Brazil)                                   |
 
 ### Features x Scopes
 
@@ -96,7 +97,8 @@ Each feature defined in the table above supports the following scopes:
 | core           | openid, oob_customer, oob_consents:read, oob_opendata:read, oob_opendata:write, oob_outages:read, oob_outages:write, profile, offline_access |
 | open-data      | openid                                                                                                                                       |
 | financial-data | openid, resources                                                                                                                            |
-| payments       | openid, payments, consents, resources                                                                                                        |
+| payments       | openid, payments, recurring-payments                                                                                                         |
+| enrollments    | openid, payments, nrp-consents                                                                                                               |
 
 **IMPORTANT**: For the financial-data feature, it is not necessary to use the following access scopes: accounts, credit-cards-accounts, customers, invoice-financings, financings, loans, unarranged-accounts-overdraft.
 

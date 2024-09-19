@@ -232,7 +232,7 @@ do open banking podem ser acessadas
 
 #### supported_features
 
-Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-banking)
+Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-finance)
 
 **Ex:** ["core", "open-data", "financial-data", "payments"]
 

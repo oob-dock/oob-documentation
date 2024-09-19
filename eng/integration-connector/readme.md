@@ -1,6 +1,7 @@
 # Development of Connectors
 
-This documentation aims to guide the development of connector to integrate the OPUS Open Finance Platform to Financial Institution's business backend systems.
+This documentation aims to guide the development of connector to integrate the
+OPUS Open Finance Platform to Financial Institution's business backend systems.
 &nbsp;
 
 Index:
@@ -8,7 +9,7 @@ Index:
 
 - [Development of Connectors](#development-of-connectors)
   - [Introduction](#introduction)
-    - [What is a Connector](#what-is-a-Connector)
+    - [What is a Connector](#what-is-a-connector)
     - [How the OPUS Open Finance Platform Loads the Connector](#how-the-opus-open-finance-platform-loads-the-connector)
     - [Processing Responsibility](#processing-responsibility)
       - [Opus Open Finance Platform](#opus-open-finance-platform)
@@ -17,21 +18,21 @@ Index:
   - [Connector Examples and Docker Image Extension](#connector-examples-and-docker-image-extension)
       - [Using Simple Proxy](#using-simple-proxy)
       - [Using Mock](#using-mock)
-    - [Adding the Connector to an Existing Image](#adding-the-connector-to-an-existing-image)
-      - [Dockerfile for Simple Proxy Connector](#dockerfile-for-simple-proxy-connector)
-      - [Dockerfile for Mock Connector](#dockerfile-for-mock-connector)
+      - [Adding the Connector to an Existing Image](#adding-the-connector-to-an-existing-image)
+        - [Dockerfile for Simple Proxy Connector](#dockerfile-for-the-simple-proxy-connector)
+        - [Dockerfile for Mock Connector](#dockerfile-for-the-mock-connector)
   - [Injecting Environment Variables](#injecting-environment-variables)
       - [Injecting Via Dockerfile](#injecting-via-dockerfile)
       - [Examples](#examples)
       - [Injecting Variables at Build Time](#injecting-variables-at-build-time)
-      - [Injecting Variables at Container Execution](#injecting-variables-at-container-execution)
+      - [Injecting Variables at Container Runtime](#injecting-variables-at-container-runtime)
   - [Consuming Environment Variables via Camel](#consuming-environment-variables-via-camel)
       - [Example with Simple Proxy](#example-with-simple-proxy)
       - [Example with Mock](#example-with-mock)
   - [Error Handling](#error-handling)
   - [Timeout Configuration](#timeout-configuration)
   - [Header Handling](#header-handling)
-  - [Utility Class `camelHelper`](#utility-class-camelHelper)
+  - [`camelHelper` Utility Class](#camelhelper-utility-class)
   - [Supported Components](#supported-components)
       - [ACTIVEMQ](#activemq)
       - [AMQP](#amqp)
@@ -72,25 +73,30 @@ Index:
       - [XPATH](#xpath)
       - [XQUERY](#xquery)
   - [Deprecated - Documentation for Previous Versions of Integrations](#deprecated---documentation-for-previous-versions-of-integrations)
-    - [Consuming the Consent Object **(only for schemas v1)**](#consuming-the-consent-object-only-for-schemas-v1)
+    - [Consuming the Consent Object - only for v1 schemas](#consuming-the-consent-object---only-for-v1-schemas)
       - [Simple Proxy Example](#simple-proxy-example)
       - [Obtaining through Camel XML](#obtaining-through-camel-xml)
 
 &nbsp;
 
 ## Introduction
+
 ### What is a Connector
+
 OPUS Open Finance platform implements a series of APIs that are called by financial institution in the Open Finance Brazil ecosystem to (i) perform an electronic payment or (ii) request customer data. After verifying the consent and validating the request, the platform needs to trigger the backend system responsible for processing the payment or returning the requested data. The set of connectors is precisely responsible for the communication between the platform and the financial institution's backend systems. A different connector is triggered for each type of atomic interaction with the backend systems.
 
 **Note:** The only electronic payment method currently suportted by Open Finance Brazil is *Pix*, which is a hugely popular official instant payment platform created and managed by Brazilian Central Bank (BACEN - Banco Central do Brasil). To more information, [read this](https://en.wikipedia.org/wiki/Pix_(payment_system)).  
 &nbsp;
+
 ### How the OPUS Open Finance Platform Loads the Connector
+
 Each connector is loaded at runtime by redirecting calls to OPUS Open Finance Platform (OOF) to the routes implemented in the connector.
 
-By default, the OOF platform looks for route files in the `/work` directory of the image. However, this path can be modified in the extended image created by the connector, provided that the environment variable `camel.main.routes-include-pattern` (see [Supported Configuration Variables](#supported-configuration-variables)) reflects this change, as well as any other files that may be copied to the image and their references (see [Adding the connector to an existing image](#adding-the-connector-to-an-existing-image)).
+By default, the OOF platform looks for route files in the `/work` directory of the image. However, this path can be modified in the extended image created by the connector, provided that the environment variable `camel.main.routes-include-pattern` reflects this change, as well as any other files that may be copied to the image and their references (see [Adding the connector to an existing image](#adding-the-connector-to-an-existing-image)).
 &nbsp;
 
 ### Processing Responsibility
+
 The purpose of this section is to explain the distribuition of responsibility between the platform and a connector when procesing a request.
 
 #### Opus Open Finance Platform
@@ -187,7 +193,7 @@ From the images above, we can see that when this connector is added, the `direct
 
 &nbsp;
 
-With the route files created, it is necessary to extend the image to add the connector by following the steps presented in this [Section](#dding-the-connector-to-an-existing-image).
+With the route files created, it is necessary to extend the image to add the connector by following the steps presented in this [Section](#adding-the-connector-to-an-existing-image).
 
 &nbsp;
 
@@ -302,9 +308,10 @@ Camel route files
     </route>
 </routes>
 ```
+
 &nbsp;
 
-With these files created, it is necessary to extend the image to add the connector. The steps required to perform this extension can be found in this [Section](#dding-the-connector-to-an-existing-image).
+With these files created, it is necessary to extend the image to add the connector. The steps required to perform this extension can be found in this [Section](#adding-the-connector-to-an-existing-image).
 
 &nbsp;
 
@@ -558,7 +565,7 @@ To do this, we first need to modify the `business_qualifications_route.xml` file
 
 &nbsp;
 
-After this, simply inject the environment variable `routes.customers.uri-legado` using one of the approaches mentioned earlier in this same [section](#injetando-variáveis-de-ambiente).
+After this, simply inject the environment variable `routes.customers.uri-legado` using one of the approaches mentioned earlier in this same [section](#injecting-environment-variables).
 
 For example, we could inject the value at runtime via the `run` command:
 
@@ -612,7 +619,7 @@ To do this, we first need to modify the `personal_qualifications_route.xml` file
 
 &nbsp;
 
-After this, simply inject the environment variable `routes.customers.personal-identifications` using one of the approaches mentioned earlier in this same [section](#injetando-variáveis-de-ambiente).
+After this, simply inject the environment variable `routes.customers.personal-identifications` using one of the approaches mentioned earlier in this same [section](#injecting-environment-variables).
 
 For example, we could inject the value via `Dockerfile`, by editing the lines below:
 
@@ -958,6 +965,7 @@ Example calls in Camel:
 ```
 
 ## Supported Components
+
 The supported software components are listed below.
 
 &nbsp;
@@ -969,6 +977,7 @@ Send messages to (or consume from) Apache ActiveMQ. This component is an extensi
 
 Usage and documentation: https://camel.apache.org/camel-quarkus/latest/reference/extensions/activemq.html
 ```
+
 &nbsp;
 
 ### AMQP
@@ -982,6 +991,7 @@ To properly use AMQP, you may need to add configurations to application.properti
 - https://quarkus.io/guides/jms
 - https://github.com/amqphub/quarkus-qpid-jms#configuration
 ```
+
 &nbsp;
 
 ### ATLASMAP
@@ -1174,7 +1184,7 @@ Usage and documentation: https://camel.apache.org/camel-quarkus/latest/reference
 
 &nbsp;
 
-## Data Formats Suportados
+## Supported Data Formats
 
 ### Jackson
 
@@ -1334,7 +1344,7 @@ The use of headers to send the consent object was removed starting from version 
 
 &nbsp;
 
-### Consuming the Consent Object **(Only for v1 Schemas)**
+### Consuming the Consent Object - Only for v1 Schemas
 
 &nbsp;
 
@@ -1393,4 +1403,3 @@ Content of the "consent" header logged in the console.
 New header with the key "consentNewHeader", containing the same content as the "consent" header.
 
 &nbsp;
-
