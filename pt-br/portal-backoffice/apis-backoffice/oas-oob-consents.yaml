@@ -231,6 +231,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentListSchema'
+  /open-banking/oob-consents/enrollments/v1/enrollments/{enrollmentId}:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revogar consentimento de vínculo
+      parameters:
+      - name: enrollmentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          nullable: false
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobEnrollmentConsent'
+      responses:
+        default:
+          description: Resposta padrão de erro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
   /open-banking/oob-consents/payments/v1/consents/{consentId}:
     patch:
       tags:
@@ -2453,6 +2492,67 @@ components:
         deviceRecognitionVerdict:
           type: string
           description: Veredito do processo de reconhecimento do dispositivo.
+    RequestRevokeOobEnrollmentConsent:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentDataPatch'
+          - nullable: false
+        applicationName:
+          description: Nome da aplicação cliente
+          type: string
+    EnrollmentDataPatch:
+      required:
+      - cancellation
+      type: object
+      properties:
+        cancellation:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentCancellationPatch'
+          - nullable: false
+    EnrollmentCancellationPatch:
+      type: object
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/ConsentPatchLoggedUser'
+        reason:
+          $ref: '#/components/schemas/EnrollmentReason'
+        additionalInformation:
+          maxLength: 2048
+          type: string
+    ConsentPatchLoggedUser:
+      required:
+      - document
+      type: object
+      properties:
+        document:
+          allOf:
+          - $ref: '#/components/schemas/ConsentPatchDocument'
+          - nullable: false
+    ConsentPatchDocument:
+      required:
+      - identification
+      - rel
+      type: object
+      properties:
+        identification:
+          type: string
+          example: "52847808507"
+          nullable: false
+        rel:
+          type: string
+          example: CPF
+          nullable: false
+    EnrollmentReason:
+      type: object
+      properties:
+        rejectionReason:
+          $ref: '#/components/schemas/RejectedReasonCodeEnum'
+        revocationReason:
+          $ref: '#/components/schemas/RevocationReasonCodeEnum'
   securitySchemes:
     jwt:
       type: http
