@@ -162,6 +162,11 @@
                                     "description": "Informa a integridade do dispositivo"
                                 }
                             }
+                        },
+                        "authorisedDeviceName": {
+                            "type": "string",
+                            "description": "Nome do dispositivo autorizado pelo cliente para a vinculação de dispositivo sem redirecionamento. Enviado quando vínculo é autorizado.",
+                            "example": "Meu Telefone"
                         }
                     }
                 }
