@@ -11,6 +11,8 @@ tags:
   description: Consents opus open banking services
 - name: Payments
   description: Consents opus open banking services
+- name: Enrollments
+  description: Enrollments opus open banking services
 paths:
   /open-banking/oob-consents/v1/consents:
     get:
@@ -234,7 +236,7 @@ paths:
   /open-banking/oob-consents/enrollments/v1/enrollments/{enrollmentId}:
     patch:
       tags:
-      - Consents Opus Open Banking
+      - Enrollments
       description: Revogar consentimento de vínculo
       parameters:
       - name: enrollmentId
@@ -242,12 +244,6 @@ paths:
         required: true
         schema:
           $ref: '#/components/schemas/UUID'
-      - name: X-Brand-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          nullable: false
       - name: X-Correlation-ID
         in: header
         schema:
@@ -1825,10 +1821,12 @@ components:
       oneOf:
         - $ref: '#/components/schemas/Revocation'
         - $ref: '#/components/schemas/RevocationPaymentOob'
+        - $ref: '#/components/schemas/RevocationEnrollment'
     ConsentRejection:
       oneOf:
         - $ref: '#/components/schemas/Rejection'
         - $ref: '#/components/schemas/RejectionPaymentOob'
+        - $ref: '#/components/schemas/RejectionEnrollment'
     Revocation:
       description: Data Sharing consent revocation information
       required:
@@ -1879,6 +1877,56 @@ components:
           - $ref: '#/components/schemas/RevocationReasonCodeEnum'
           - example: FRAUD
             nullable: false
+    RevocationEnrollment:
+      type: object
+      required:
+        - cancelledFrom
+        - reason
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          type: object
+          required:
+            - revocationReason
+          description: Motivo da revogação do vínculo de conta.
+          properties:
+            revocationReason:
+              $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
+        additionalInformation:
+          type: string
+          pattern: '[\w\W\s]*'
+          example: Contrato entre iniciadora e detentora interrompido
+          maxLength: 2048
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumEnrollmentCancelledFrom'
+        rejectedAt:
+          $ref: '#/components/schemas/EnrollmentRejectedAt'
+    RejectionEnrollment:
+      type: object
+      required:
+        - cancelledFrom
+        - reason
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          type: object
+          required:
+            - rejectionReason
+          description: Motivo da revogação do vínculo de conta.
+          properties:
+            rejectionReason:
+              $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+        additionalInformation:
+          type: string
+          pattern: '[\w\W\s]*'
+          example: Contrato entre iniciadora e detentora interrompido
+          maxLength: 2048
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumEnrollmentCancelledFrom'
+        rejectedAt:
+          $ref: '#/components/schemas/EnrollmentRejectedAt'
     RejectedReason:
       required:
       - code
@@ -1898,6 +1946,14 @@ components:
       - FRAUD
       - ACCOUNT_CLOSURE
       - OTHER
+      type: string
+    EnrollmentRevocationReasonCodeEnum:
+      enum:
+      - REVOGADO_VALIDADE_EXPIRADA
+      - REVOGADO_MANUALMENTE
+      - REVOGADO_FALHA_INFRAESTRUTURA
+      - REVOGADO_SEGURANCA_INTERNA
+      - REVOGADO_OUTRO
       type: string
     RevokePaymentConsentData:
       type: object
@@ -1934,6 +1990,20 @@ components:
       - CONSENT_TECHNICAL_ISSUE
       - INTERNAL_SECURITY_REASON
       type: string
+    EnrollmentRejectedReasonCodeEnum:
+      enum:
+      - REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS,
+      - REJEITADO_TEMPO_EXPIRADO_ACCOUNT_HOLDER_VALIDATION,
+      - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT,
+      - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO,
+      - REJEITADO_MANUALMENTE,
+      - REJEITADO_DISPOSITIVO_INCOMPATIVEL,
+      - REJEITADO_FALHA_INFRAESTRUTURA,
+      - REJEITADO_SEGURANCA_INTERNA,
+      - REJEITADO_FALHA_HYBRID_FLOW,
+      - REJEITADO_FALHA_FIDO,
+      - REJEITADO_OUTRO
+      type: string
     RevocationPaymentOob:
       type: object
       properties:
@@ -1963,7 +2033,7 @@ components:
           format: date-time
           type: string
         rejectedBy:
-          $ref: '#/components/schemas/RejectedByAutomaticPaymentEnum'
+          $ref: '#/components/schemas/RejectedByAutomaticPaymentEnum'    
     RejectedByAutomaticPaymentEnum:
       enum:
       - INICIADORA
@@ -1989,6 +2059,20 @@ components:
           - example: CONTAS_ORIGEM_DESTINO_IGUAIS
         detail:
           type: string
+    EnrollmentRejectedReason:
+      required:
+      - code
+      type: object
+      properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Reason when code REJEITADO_OUTRO
+        code:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+          - example: REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS
+            nullable: false
     RecurringConsentRejectedFromEnum:
       enum:
       - INICIADORA
@@ -2550,9 +2634,27 @@ components:
       type: object
       properties:
         rejectionReason:
-          $ref: '#/components/schemas/RejectedReasonCodeEnum'
+          $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
         revocationReason:
-          $ref: '#/components/schemas/RevocationReasonCodeEnum'
+          $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
+    EnumEnrollmentCancelledFrom:
+      type: string
+      enum:
+        - INICIADORA
+        - DETENTORA
+      description: |
+        Campo utilizado para informar o meio pelo qual foi realizado o cancelamento do vínculo de conta. Valores possíveis:
+
+          INICIADORA - Vínculo de conta nos canais da iniciadora.
+
+          DETENTORA - Vínculo de conta nos canais da detentora.
+    EnrollmentRejectedAt:
+          type: string
+          format: date-time
+          example: '2023-07-12T08:30:00Z'
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+          description: Instante de rejeição do vínculo de conta no ambiente da detentora.
   securitySchemes:
     jwt:
       type: http
