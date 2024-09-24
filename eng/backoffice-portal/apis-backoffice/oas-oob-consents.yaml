@@ -776,6 +776,8 @@ components:
         tppName:
           type: string
           example: "Guia Seguros"
+        enrollmentData:
+          $ref: '#/components/schemas/EnrollmentData'
     ConsentHistoryStatus:
       type: object
       properties:
@@ -2478,6 +2480,14 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentManualRiskSignal'
+        dailyLimit:
+          format: double
+          type: number
+          example: 1000.00
+        transactionLimit:
+          format: double
+          type: number
+          example: 100.00
     PaymentManualRiskSignal:
       type: object
       properties:
