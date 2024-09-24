@@ -1925,21 +1925,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/RevocationReasonCodeEnum'
           - example: FRAUD
-            nullable: false
-    EnrollmentRevocationReason:
-      required:
-      - code
-      type: object
-      properties:
-        additionalInformation:
-          maxLength: 140
-          type: string
-          example: Reason when code REVOGADO_OUTRO
-        code:
-          allOf:
-          - $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
-          - example: REVOGADO_MANUALMENTE
-            nullable: false
+            nullable: false    
     RejectedReason:
       required:
       - code
