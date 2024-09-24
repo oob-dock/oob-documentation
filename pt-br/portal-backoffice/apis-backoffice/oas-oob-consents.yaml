@@ -2362,7 +2362,7 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentManualRiskSignal'
-        authorisedDeviceName:
+        enrollmentName:
           type: string
           description: Nome do dispositivo autorizado pelo cliente para o vínculo de dispositivo da JSR.
           example: "Meu Celular"

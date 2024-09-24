@@ -163,7 +163,7 @@
                                 }
                             }
                         },
-                        "authorisedDeviceName": {
+                        "enrollmentName": {
                             "type": "string",
                             "description": "Name of the device authorized by the customer for the No Redirect Journey device binding. Sent when enrollment is authorized.",
                             "example": "My Phone"
