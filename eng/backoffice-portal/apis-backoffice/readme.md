@@ -129,6 +129,54 @@ Responsible for notifying the OOB of a payment status change.
 This API is responsible for listing all extensions of a consent.
 The query is made through the internal identifier in UUID format.
 
+## Full Authorization of Multiple Requirer Payment Consent
+
+        POST /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation
+
+This API is responsible for fully authorizing a payment consent by signaling the approval of multiple requirers for this consent.
+
+## Post Search Key
+
+        POST /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}
+
+This API is responsible for adding a search key related to a consent, allowing consents to be listed based on this search key later.
+
+## Delete Search Key
+
+        DELETE /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}
+
+This API is responsible for deleting a search key related to a consent.
+
+## Put Consent Metadata
+
+        PUT /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+This API is responsible for adding a JSON metadata linked to a consent, replacing any value previously in this metadata field. It can be used to add extra information to the consent, for example, to add relevant information to app screen.
+
+## Get Consent Metadata
+
+        GET /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+This API is responsible for retrieving the JSON metadata information previously sent.
+
+## Patch Consent Metadata
+
+        PATCH /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+This API is responsible for updating the JSON metadata linked to a consent, adding information to the existing metadata.
+
+## Delete Consent Metadata
+
+        DELETE /open-banking/oob-consents/consents/v1/consents/{consentId}/meta-data
+
+This API is responsible for deleting the metadata information related to a consent.
+
+## Enrollment Revocation
+
+        PATCH /open-banking/oob-consents/enrollments/v1/enrollments/{enrollmentId}
+
+This API is responsible for revoking an enrollment, returning its details and the history of status changes made. The revocation is done through the internal identifier of the enrollment in UUID format.
+
 ## Authentication
 
 To access the endpoints listed here, a token generated from the *Client Credentials* flow in the non-regulatory base path of the Authorization Server must be used.

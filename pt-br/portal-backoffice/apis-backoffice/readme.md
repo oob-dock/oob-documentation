@@ -193,6 +193,12 @@ adicionando informação ao metadata já existente.
 Esta API é responsável por apagar as informações de metadata relacionada
 a um consentimento.
 
+## Revogação de vínculo
+
+        PATCH /open-banking/oob-consents/enrollments/v1/enrollments/{enrollmentId}
+
+Esta API é responsável por revogar um vínculo, retornando os detalhes do mesmo e o histórico de mudanças de status realizadas. A revogação é feita através do identificador interno do vínculo formato UUID.
+
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir
