@@ -2480,6 +2480,10 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/PaymentManualRiskSignal'
+        enrollmentName:
+          type: string
+          description: Name of the device authorized by the customer for the No Redirect Journey device binding.
+          example: "My Phone"
         dailyLimit:
           format: double
           type: number
