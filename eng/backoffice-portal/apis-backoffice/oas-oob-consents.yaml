@@ -11,6 +11,8 @@ tags:
   description: Consents opus open banking services
 - name: Payments
   description: Consents opus open banking services
+- name: Enrollments
+  description: Enrollments opus open banking services
 paths:
   /open-banking/oob-consents/v1/consents:
     get:
@@ -231,6 +233,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentListSchema'
+  /open-banking/oob-consents/enrollments/v1/enrollments/{enrollmentId}:
+    patch:
+      tags:
+      - Enrollments
+      description: Revoke enrollment consent
+      parameters:
+      - name: enrollmentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobEnrollmentConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
   /open-banking/oob-consents/payments/v1/consents/{consentId}:
     patch:
       tags:
@@ -1787,10 +1822,12 @@ components:
       oneOf:
         - $ref: '#/components/schemas/Revocation'
         - $ref: '#/components/schemas/RevocationPaymentOob'
+        - $ref: '#/components/schemas/RevocationEnrollment'
     ConsentRejection:
       oneOf:
         - $ref: '#/components/schemas/Rejection'
         - $ref: '#/components/schemas/RejectionPaymentOob'
+        - $ref: '#/components/schemas/RejectionEnrollment'
     Revocation:
       description: Data Sharing consent revocation information
       required:
@@ -1809,6 +1846,56 @@ components:
           allOf:
           - $ref: '#/components/schemas/RevocationReason'
           - nullable: false
+    RevocationEnrollment:
+      type: object
+      required:
+        - cancelledFrom
+        - reason
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          type: object
+          required:
+            - revocationReason
+          description: Reason for enrollment revocation.
+          properties:
+            revocationReason:
+              $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
+        additionalInformation:
+          type: string
+          pattern: '[\w\W\s]*'
+          example: Contract between initiator and account holder interrupted
+          maxLength: 2048
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumEnrollmentCancelledFrom'
+        rejectedAt:
+          $ref: '#/components/schemas/EnrollmentRejectedAt'
+    RejectionEnrollment:
+      type: object
+      required:
+        - cancelledFrom
+        - reason
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          type: object
+          required:
+            - rejectionReason
+          description: Reason for enrollment rejection.
+          properties:
+            rejectionReason:
+              $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+        additionalInformation:
+          type: string
+          pattern: '[\w\W\s]*'
+          example: Contract between initiator and account holder interrupted
+          maxLength: 2048
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumEnrollmentCancelledFrom'
+        rejectedAt:
+          $ref: '#/components/schemas/EnrollmentRejectedAt'
     Rejection:
       description: Data Sharing consent rejection information
       required:
@@ -1826,7 +1913,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/RejectedByEnum'
           - example: USER
-            nullable: false
+            nullable: false    
     RevocationReason:
       required:
       - code
@@ -1840,7 +1927,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/RevocationReasonCodeEnum'
           - example: FRAUD
-            nullable: false
+            nullable: false    
     RejectedReason:
       required:
       - code
@@ -1855,11 +1942,33 @@ components:
           - $ref: '#/components/schemas/RejectedReasonCodeEnum'
           - example: CONSENT_EXPIRED
             nullable: false
+    EnrollmentRejectedReason:
+      required:
+      - code
+      type: object
+      properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Reason when code REJEITADO_OUTRO
+        code:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+          - example: REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS
+            nullable: false
     RevocationReasonCodeEnum:
       enum:
       - FRAUD
       - ACCOUNT_CLOSURE
       - OTHER
+      type: string
+    EnrollmentRevocationReasonCodeEnum:
+      enum:
+      - REVOGADO_VALIDADE_EXPIRADA
+      - REVOGADO_MANUALMENTE
+      - REVOGADO_FALHA_INFRAESTRUTURA
+      - REVOGADO_SEGURANCA_INTERNA
+      - REVOGADO_OUTRO
       type: string
     RevokePaymentConsentData:
       type: object
@@ -1895,6 +2004,20 @@ components:
       - CONSENT_MAX_DATE_REACHED
       - CONSENT_TECHNICAL_ISSUE
       - INTERNAL_SECURITY_REASON
+      type: string
+    EnrollmentRejectedReasonCodeEnum:
+      enum:
+      - REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS,
+      - REJEITADO_TEMPO_EXPIRADO_ACCOUNT_HOLDER_VALIDATION,
+      - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT,
+      - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO,
+      - REJEITADO_MANUALMENTE,
+      - REJEITADO_DISPOSITIVO_INCOMPATIVEL,
+      - REJEITADO_FALHA_INFRAESTRUTURA,
+      - REJEITADO_SEGURANCA_INTERNA,
+      - REJEITADO_FALHA_HYBRID_FLOW,
+      - REJEITADO_FALHA_FIDO,
+      - REJEITADO_OUTRO
       type: string
     RevocationPaymentOob:
       type: object
@@ -2361,6 +2484,14 @@ components:
           type: string
           description: Name of the device authorized by the customer for the No Redirect Journey device binding.
           example: "My Phone"
+        dailyLimit:
+          format: double
+          type: number
+          example: 1000.00
+        transactionLimit:
+          format: double
+          type: number
+          example: 100.00
     PaymentManualRiskSignal:
       type: object
       properties:
@@ -2454,6 +2585,85 @@ components:
         deviceRecognitionVerdict:
           type: string
           description: Verdict of the device recognition process.
+    RequestRevokeOobEnrollmentConsent:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentDataPatch'
+          - nullable: false
+        applicationName:
+          description: Client application name
+          type: string
+    EnrollmentDataPatch:
+      required:
+      - cancellation
+      type: object
+      properties:
+        cancellation:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentCancellationPatch'
+          - nullable: false
+    EnrollmentCancellationPatch:
+      type: object
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/ConsentPatchLoggedUser'
+        reason:
+          $ref: '#/components/schemas/EnrollmentReason'
+        additionalInformation:
+          maxLength: 2048
+          type: string
+    ConsentPatchLoggedUser:
+      required:
+      - document
+      type: object
+      properties:
+        document:
+          allOf:
+          - $ref: '#/components/schemas/ConsentPatchDocument'
+          - nullable: false
+    ConsentPatchDocument:
+      required:
+      - identification
+      - rel
+      type: object
+      properties:
+        identification:
+          type: string
+          example: "52847808507"
+          nullable: false
+        rel:
+          type: string
+          example: CPF
+          nullable: false
+    EnrollmentReason:
+      type: object
+      properties:
+        rejectionReason:
+          $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+        revocationReason:
+          $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
+    EnumEnrollmentCancelledFrom:
+      type: string
+      enum:
+        - INICIADORA
+        - DETENTORA
+      description: |
+        Field used to inform the means by which the Enrollment cancellation was carried out. Possible values:
+
+              INICIADORA - Enrollment in the initiator's channels.
+
+              DETENTORA - Enrollment in the account holder's channels.
+    EnrollmentRejectedAt:
+          type: string
+          format: date-time
+          example: '2023-07-12T08:30:00Z'
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+          description: Rejection timestamp of the enrollment in the account holder's environment.
   securitySchemes:
     jwt:
       type: http
