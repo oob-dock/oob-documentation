@@ -68,7 +68,7 @@ additionalVars:
 
 ### OOB_CONNECTOR_SERVICEURI
 
-Defines the address of the open data service to be called via the standard GET route when the connector is not implemented. The service URI should be provided without `query parameters`. The variable should end with the name of the [route](../../integração-plugin/open-data/readme.md) you want to associate the service with. The following example defines a URI for the `getFundsInvestments` and `getExchangeOnlineRate` routes:
+Defines the address of the open data service to be called via the standard GET route when the connector is not implemented. The service URI should be provided without `query parameters`. The variable should end with the name of the [route](../../integration-connector/open-data/readme.md) you want to associate the service with. The following example defines a URI for the `getFundsInvestments` and `getExchangeOnlineRate` routes:
 
 **Example:**
 

@@ -664,6 +664,7 @@
 | *PATCH   | /consents/v1/consents/\{ID\}          | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *GET     | /consents/v1/consents/\{ID\}/payments | Sim          | oob_consents:read, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /consents/v1/consents/\{ID\}/payments | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /enrollments/v1/enrollments/\{ID\}    | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *GET     | /v1/tpps/payment-legacy-ids           | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 | POST     | /v1/payment-status-notification       | Sim          | oob_payments:write               | Não        | Não              | Não  |                    |
 | *GET     | /v1/consents/\{ID\}/extends           | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |

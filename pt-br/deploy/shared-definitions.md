@@ -96,7 +96,7 @@ Abaixo temos a lista de features suportadas pelo Opus Open Finance:
 | open-data      | Compartilhamento de dados abertos (Fase 1 do Open Finance Brasil)                    |
 | financial-data | Compartilhamento de dados que requerem consentimento (Fase 2 do Open Finance Brasil) |
 | payments       | Pagamentos (Fase 3 do Open Finance Brasil)                                           |
-| jsr            | Jornada sem redirecionamento (Fase 3 do Open Finance Brasil)                         |
+| enrollments    | Jornada sem redirecionamento (Fase 3 do Open Finance Brasil)                         |
 
 ### Features x Scopes
 
@@ -107,8 +107,8 @@ Cada feature definida na tabela acima suporta os seguintes escopos:
 | core           | openid, oob_customer, oob_consents:read, oob_opendata:read, oob_opendata:write, oob_outages:read, oob_outages:write, profile, offline_access |
 | open-data      | openid                                                                                                                                       |
 | financial-data | openid, resources                                                                                                                            |
-| payments       | openid, payments, consents, resources                                                                                                        |
-| jsr            | openid, payments, consents, nrp-consents                                                                                                     |
+| payments       | openid, payments, recurring-payments                                                                                                         |
+| enrollments    | openid, payments, nrp-consents                                                                                                               |
 
 **IMPORTANTE**: Para a feature financial-data não é necessário utilizar os
 seguintes escopos de acesso: accounts, credit-cards-accounts, customers, invoice-financings,
