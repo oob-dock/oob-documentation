@@ -1127,6 +1127,26 @@ Exemplos de chamada no camel:
 </setProperty>
 ```
 
+### convertFieldToKeyValue
+
+Esta função tem como objetivo transformar um campo de um objeto cujo caminho é informado em um objeto de chave valor. O objeto resultante sempre será um par `key` com valor **id** e um `value` que terá como valor o antigo valor do campo em questão.
+
+public static Map<String, Object> convertFieldToKeyValue(Map<String, Object> jsonMap, String path)
+
+onde:
+
+**jsonMap** -> é o objeto JSON onde esta o campo a ser alterado;
+
+**path** -> é o caminho no objeto do campo que deve ser alterado;
+
+Exemplos de chamada no camel:
+
+```xml
+<setProperty name="legacyResponse">
+    <simple>${bean:camelHelper.convertFieldToKeyValue(${body}, "data[-].accountId")}</simple>
+</setProperty>
+```
+
 ## Componentes Suportados
 
 ### ACTIVEMQ

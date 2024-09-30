@@ -964,6 +964,26 @@ Example calls in Camel:
 </setProperty>
 ```
 
+### convertFieldToKeyValue
+
+This function aims to transform a field of an object, whose path is provided, into a key-value object. The resulting object will always be a pair with a `key` having the value **id** and a `value` that will hold the previous value of the field in question.
+
+public static Map<String, Object> convertFieldToKeyValue(Map<String, Object> jsonMap, String path)
+
+where:
+
+**jsonMap** -> is the JSON object where the field to be modified is located;
+
+**path** -> is the path in the object of the field that should be modified;
+
+Example of usage in Camel:
+
+```xml
+<setProperty name="legacyResponse">
+    <simple>${bean:camelHelper.convertFieldToKeyValue(${body}, "data[-].accountId")}</simple>
+</setProperty>
+```
+
 ## Supported Components
 
 The supported software components are listed below.
