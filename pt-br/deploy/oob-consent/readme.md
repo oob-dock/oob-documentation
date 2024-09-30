@@ -533,6 +533,25 @@ additionalVars:
     value: "X-SSL-Client-Cert"
 ```
 
+### ENROLLMENT_NAME_TEMPLATE
+
+Modelo de texto utilizado para definir o nome do usuário do vínculo a ser apresentado durante
+o uso da chave.
+
+Valor default: `%1$s`
+
+Valores reservados:
+
+| Valor       | Substituído por                       |
+| ----------- | ------------------------------------- |
+| %1$s        | Nome do cliente que criou o vínculo   |
+
+**Ex:**
+
+additionalVars:
+  - name: ENROLLMENT_NAME_TEMPLATE
+  - value: "Open Finance: %1$s"
+
 ### Conectores
 
 Existem additionalVars para utilização do conector de aprovação de consentimento
