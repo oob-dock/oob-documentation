@@ -39,9 +39,10 @@
                 "correlationId": {
                     "type": "string",
                     "description": "UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros",
-                    "format": "uuid",
+                    "pattern": "^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
                     "examples": [
-                        "97623ed1-4732-4bf2-8d4b-ae7aced5443b"
+                        "97623ed1-4732-4bf2-8d4b-ae7aced5443b",
+                        "localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b"
                     ]
                 },
                 "brandId": {
@@ -167,7 +168,7 @@
         "pagination-key": {
             "type": "string",
             "maxLength": 2048,
-            "description": "Data final de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).",
+            "description": "Identificador de rechamada, utilizado para evitar a contagem de chamadas ao endpoint durante a paginação.",
             "pattern": "[\\w\\W\\s]*"
         }
     }

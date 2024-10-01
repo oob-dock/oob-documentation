@@ -167,7 +167,7 @@
         "pagination-key": {
             "type": "string",
             "maxLength": 2048,
-            "description": "Data final de filtragem. O período máximo utilizado no filtro é de 7 dias inclusive (D-6).",
+            "description": "Identificador de rechamada, utilizado para evitar a contagem de chamadas ao endpoint durante a paginação.",
             "pattern": "[\\w\\W\\s]*"
         }
     }
