@@ -3,6 +3,9 @@
     "title": "Resource Discovery Request",
     "type": "object",
     "properties": {
+        "requestMeta": {
+            "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+        },
         "consent": {
             "description": "Consentimento responsável pelo discovery",
             "$ref": "discovery-consent-schema.json"
