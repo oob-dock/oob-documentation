@@ -661,7 +661,8 @@
                         }
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "ContractDebtor": {
             "type": "object",
@@ -780,7 +781,8 @@
                         }
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "PeriodicLimits": {
             "type": "object",
@@ -930,7 +932,8 @@
                         }
                     }
                 }
-            }
+            },
+            "additionalProperties": false
         },
         "PaymentType": {
             "type": "string",
