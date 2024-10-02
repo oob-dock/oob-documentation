@@ -964,24 +964,93 @@ Example calls in Camel:
 </setProperty>
 ```
 
-### convertFieldToKeyValue
+### convertFieldToListOfKeyValue
 
-This function aims to transform a field of an object, whose path is provided, into a key-value object. The resulting object will always be a pair with a `key` having the value **id** and a `value` that will hold the previous value of the field in question.
+This function aims to transform a field of an object, whose path is provided, into a list with a key-value object. The result of the function always transforms the field into a **list** with a **single** object. This resulting object will always be a pair with a `key` having the value **id** and a `value` that will hold the previous value of the field in question.
 
-public static Map<String, Object> convertFieldToKeyValue(Map<String, Object> jsonMap, String path)
+public static Map<String, Object> convertFieldToListOfKeyValue(Map<String, Object> jsonMap, String path)
 
 where:
 
-**jsonMap** -> is the JSON object where the field to be modified is located;
+jsonMap -> is the JSON object transformed into a Java Map where the field to be modified is located. It needs to be a type that implements the java.Util.Map interface (usually coming from an unmarshal done in Camel);
 
-**path** -> is the path in the object of the field that should be modified;
+path -> is the path in the object of the field that should be modified. The path supports list representation (for example, data[-] or data[0]). You can use a number to indicate which object in the list should be modified or `-` to indicate the change in all objects in the list;
 
-Example of usage in Camel:
+Examples of usage in Camel:
 
 ```xml
-<setProperty name="legacyResponse">
-    <simple>${bean:camelHelper.convertFieldToKeyValue(${body}, "data[-].accountId")}</simple>
-</setProperty>
+<unmarshal>
+    <json library="Jackson" />
+</unmarshal>
+
+<setBody>
+    <simple>${bean:camelHelper.convertFieldToListOfKeyValue(${body}, "data[-].accountId")}</simple>
+</setBody>
+
+<marshal>
+    <json library="Jackson" />
+</marshal>
+```
+
+Example of input and output of the function:
+
+- input
+
+```json
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252576"
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252577"
+    }
+  ]
+}
+```
+
+- output
+
+```json
+
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252576"}]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252577"}]
+    }
+  ]
+}
 ```
 
 ## Supported Components
