@@ -994,7 +994,7 @@ Examples of usage in Camel:
 
 Example of input and output of the function:
 
-- input
+- input before unmarshal
 
 ```json
 {
@@ -1002,7 +1002,7 @@ Example of input and output of the function:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088392",
@@ -1012,7 +1012,7 @@ Example of input and output of the function:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088393",
@@ -1023,7 +1023,7 @@ Example of input and output of the function:
 }
 ```
 
-- output
+- output after marshal
 
 ```json
 
@@ -1032,7 +1032,7 @@ Example of input and output of the function:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088392",
@@ -1042,7 +1042,7 @@ Example of input and output of the function:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088393",

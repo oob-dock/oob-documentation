@@ -1157,7 +1157,7 @@ Exemplos de chamada no camel:
 
 Exemplo de entrada e saída da função:
 
-- entrada
+- entrada antes do unmarshal
 
 ```json
 {
@@ -1165,7 +1165,7 @@ Exemplo de entrada e saída da função:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088392",
@@ -1175,7 +1175,7 @@ Exemplo de entrada e saída da função:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088393",
@@ -1186,7 +1186,7 @@ Exemplo de entrada e saída da função:
 }
 ```
 
-- saída
+- saída depois do marshal
 
 ```json
 
@@ -1195,7 +1195,7 @@ Exemplo de entrada e saída da função:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088392",
@@ -1205,7 +1205,7 @@ Exemplo de entrada e saída da função:
     {
       "brandName": "Organização A",
       "companyCnpj": "21128159000166",
-      "type": "{{oneOf (array 'CONTA_DEPOSITO_A_VISTA' 'CONTA_POUPANCA' 'CONTA_PAGAMENTO_PRE_PAGA')}}",
+      "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "branchCode": "6272",
       "number": "94088393",
