@@ -533,6 +533,24 @@ additionalVars:
     value: "X-SSL-Client-Cert"
 ```
 
+### ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+
+Pode ser ativada (valor `true`) caso a detentora deseje que os limites dos
+pagamentos agendados sejam validados no momento de sua iniciação. Não deve
+estar ativada para execução da certificação.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+    value: "true"
+```
+
 ### ENROLLMENT_NAME_TEMPLATE
 
 Modelo de texto utilizado para definir o nome do usuário do vínculo a ser apresentado durante

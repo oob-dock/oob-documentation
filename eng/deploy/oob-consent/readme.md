@@ -470,6 +470,25 @@ additionalVars:
     value: "X-SSL-Client-Cert"
 ```
 
+### ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+
+It can be activated (value `true`) if the holder wishes
+the limits of scheduled payments to be validated at the
+time of their initiation. It should not be activated
+for certification execution.
+
+**Format:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+    value: "true"
+```
+
 ### ENROLLMENT_NAME_TEMPLATE
 
 Text template used to define the name of the user associated with the key to be
