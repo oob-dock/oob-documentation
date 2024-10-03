@@ -489,6 +489,25 @@ additionalVars:
     value: "true"
 ```
 
+### ENROLLMENT_NAME_TEMPLATE
+
+Text template used to define the name of the user associated with the key to be
+displayed during usage.
+
+Default value: `%1$s`
+
+Reserved values:
+
+| Value       | Replaced by                             |
+| ----------- | --------------------------------------- |
+| %1$s        | Name of the client who created the link |
+
+**Ex:**
+
+additionalVars:
+  - name: ENROLLMENT_NAME_TEMPLATE
+  - value: "Open Finance: %1$s"
+
 ### Connectors
 
 There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.

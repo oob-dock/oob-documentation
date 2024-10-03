@@ -96,7 +96,7 @@
         "Date": {
             "type": "string",
             "description": "Data em que o recurso foi criado. Uma string com a utilização de timezone UTC(UTC time format).",
-            "format": "date-time",
+            "format": "date",
             "maxLength": 10,
             "examples": [
                 "2021-01-01"

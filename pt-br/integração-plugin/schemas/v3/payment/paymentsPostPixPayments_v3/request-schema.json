@@ -19,7 +19,7 @@
         }
       ]
     },
-    "IdempotencyKey": {
+    "idempotencyKey": {
       "type": "string",
       "description": "Identificador de solicitação exclusivo para suportar a idempotência.",
       "maxLength": 40,

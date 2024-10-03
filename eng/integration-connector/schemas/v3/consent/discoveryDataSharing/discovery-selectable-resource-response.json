@@ -3,6 +3,11 @@
     "title": "Selectable Resource Discovery Response",
     "type": "object",
     "properties": {
+        "data": {
+            "$ref": "#/$defs/resources"
+        }
+    },
+    "$defs": {
         "resources": {
             "description": "Lista de recursos relacionados ao discovery",
             "type": "array",
@@ -100,7 +105,7 @@
         }
     },
     "required": [
-        "resources"
+        "data"
     ],
     "additionalItems": false
 }
