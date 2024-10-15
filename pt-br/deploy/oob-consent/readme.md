@@ -539,6 +539,8 @@ Pode ser ativada (valor `true`) caso a detentora deseje que os limites dos
 pagamentos agendados sejam validados no momento de sua iniciação. Não deve
 estar ativada para execução da certificação.
 
+Se falso, o daemon que avalia os limites para pagamentos agendados será executado.
+
 **Formato:** `true` ou `false`
 
 Valor default: `false`
@@ -657,6 +659,22 @@ Valor default: `false`
 additionalVarsDaemon:
   - name: DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
     value: "true"
+```
+
+### DAEMON_ENROLLMENT_EXECUTION_HOUR
+
+Configuração do horário no qual o daemon será executado.
+
+**Formato:** Número de 0-23
+
+Valor default: `23`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
+    value: "23"
 ```
 
 ## FEATURE FLAGS
