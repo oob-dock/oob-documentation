@@ -290,7 +290,7 @@ components:
           description: "Consent permissions description. Exclusive to data sharing consent and enrollment consent."
         resourceTypes:
           allOf:
-            - $ref: '#/components/schemas/ResponseDomainResourceSchema'      
+            - $ref: '#/components/schemas/ResponseDomainResourceSchema'
           description: "Consent resource types. Exclusive to data sharing consent."
 
     ResponseDomainPermissionSchema:
@@ -389,6 +389,11 @@ components:
           type: string
           description: Command ID to be used in the response
           maxLength: 40
+        type:
+          type: string
+          enum:
+            - DATA_SHARING
+            - PAYMENT
         tpp:
           type: object
           description: TPP information
@@ -443,7 +448,7 @@ components:
         startDateTime:
           description: Date and time when the consent should become valid. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
 
-            [Restriction] Mandatory when payment consent becomes valid on a future date (day and time).
+            [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
           type: string
           format: date-time
           example:
@@ -586,9 +591,9 @@ components:
                 description: Object indicating the reason for resource rejection
                 type: object
                 required:
-                - code
+                  - code
                 properties:
-                  code: 
+                  code:
                     description: Code determining the reason for the resource being denied
                     type: string
                     enum:
@@ -810,7 +815,7 @@ components:
               type: array
               maxItems: 60
               minItems: 2
-              example: ['2023-08-23', '2023-09-26']
+              example: [ '2023-08-23', '2023-09-26' ]
               items:
                 type: string
                 format: date
@@ -976,15 +981,15 @@ components:
                 [Restriction] This field must always be at least D+1 calendar days, i.e., the day immediately following the consent date considering the Brasília time zone and must be at most D+730 calendar days from the consent date, also considering the Brasília time zone.
     ScheduleTypeEnum:
       enum:
-      - SINGLE
-      - CUSTOM
-      - DAILY
-      - WEEKLY
-      - MONTHLY
+        - SINGLE
+        - CUSTOM
+        - DAILY
+        - WEEKLY
+        - MONTHLY
       type: string
     AutomaticPayment:
       type: object
-      description: 	Field for configuring different recurring payment products.
+      description: Field for configuring different recurring payment products.
       oneOf:
         - $ref: '#/components/schemas/Sweeping'
     Sweeping:
@@ -1088,7 +1093,7 @@ components:
         quantityLimit:
           type: integer
           example: 100
-          description: Limit on the number of transactions allowed to occur during a year. 
+          description: Limit on the number of transactions allowed to occur during a year.
         transactionLimit:
           type: string
           pattern: '^((\d{1,16}\.\d{2}))$'
