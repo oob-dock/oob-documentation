@@ -1,6 +1,6 @@
 # Configurations using Terraform
 
-- [Configurations using Terraform](#terraform-configurations)
+- [Configurations using Terraform](#configurations-using-terraform)
   - [Kong Routes Configuration](#kong-routes-configuration)
     - [Configuration](#configuration)
       - [kong\_admin\_uri](#kong_admin_uri)
@@ -36,6 +36,7 @@
       - [pubsub\_id](#pubsub_id)
       - [route\_block\_enabled](#route_block_enabled)
       - [mqd\_event\_enabled](#mqd_event_enabled)
+      - [opentelemetry\_tracer\_exporter\_url\_http](#opentelemetry_tracer_exporter_url_http)
   - [Grafana Configuration](#grafana-configuration)
     - [Configuration](#configuration-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -46,7 +47,7 @@
   - [Running Terraform Scripts](#running-terraform-scripts)
     - [main.tf](#maintf)
     - [variables.tf](#variablestf)
-    - [ambiente.tfvars](#ambientetfvars)
+    - [environment.tfvars](#environmenttfvars)
 
 The configuration of external systems to OOB is done via Terraform, with two base modules available for use:
 
@@ -246,6 +247,29 @@ Defines whether Kong routes should be blocked according to regulatory dates. Thi
 Defines whether the installation should send event calls from endpoints linked to the Data Quality Engine (MQD). If the variable is set to `true`, each route's configuration will be considered to decide whether the event will be sent or not. If the variable is set to `false`, each route's configuration will be ignored, and no event will be generated.
 
 **Possible values:** `true` or `false`
+
+#### opentelemetry_tracer_exporter_url_http
+
+Address of the distributed tracing analysis tool. **Important:** This variable
+must be filled with the **HTTP** address provided by the tool to receive the
+tracing information.
+
+**Attention:** The variable above works in conjunction with two other Kong
+environment variables: `KONG_TRACING_INSTRUMENTATIONS` and
+`KONG_TRACING_SAMPLING_RATE`.
+
+- `KONG_TRACING_INSTRUMENTATIONS`: Defines the level of instrumentation that
+will be applied to Kong's requests. **Recommended value:** `all`. The complete
+list of possible values can be found at [this link](https://docs.konghq.com/gateway/latest/production/tracing/).
+- `KONG_TRACING_SAMPLING_RATE`: Defines the sampling rate for distributed
+tracing, i.e., the proportion of requests that will be collected and sent for
+analysis. Possible values: `0` to `1`. For example, a value of `0.5` means that
+50% of the requests will be sampled. Important: If you wish to completely
+disable the sending of traces to the receiving tool, simply set this variable
+to `0`.
+
+It is necessary to set these environment variables **directly in Kong** with
+the appropriate values for the desired instrumentation to function properly.
 
 ## Grafana Configuration
 

@@ -119,6 +119,41 @@ Exemplo:
       participantDirectory: 240M
 ```
 
+## opentelemetry
+
+Este módulo é instrumentado via [Open Telemetry](https://opentelemetry.io/),
+logando informações de trace (quando disponíveis) e as exportando para uma
+ferramenta como o [Jaeger](https://www.jaegertracing.io/), que é utilizado na
+visualização e análise de rastreamento distribuído dos requests realizados.
+
+Configurações:
+
+* `opentelemetry.tracer.exporter.enabled`: Habilita o envio das informações de
+rastreamento para a ferramenta de análise. Possíveis valores: `true` ou
+`false`. **Default:** `false`.
+* `opentelemetry.tracer.exporter.url.grpc`: Endereço da ferramenta de
+análise. **Importante:** Esta variável deverá estar preenchida com o valor
+do endereço **GRPC** disponibilizado pela ferramenta para receber as
+informações de rastreamento.
+* `opentelemetry.sample.rate`: Define a taxa de amostragem (sampling rate)
+para o rastreamento distribuído, ou seja, a proporção de solicitações que
+serão coletadas e enviadas para análise. Possíveis valores: `0` a `1`. Por
+exemplo, um valor de `0.5` significa que 50% dos requests serão amostrados.
+
+Exemplo:
+
+```yaml
+env:
+  opentelemetry:
+    tracer:
+      exporter:
+        enabled: "false"
+        url:
+          grpc: "http://127.0.0.1:4317"
+    sample:
+      rate: "1"
+```
+
 ## additionalVars
 
 Utilizado para definir configurações opcionais na aplicação. Essa configuração
