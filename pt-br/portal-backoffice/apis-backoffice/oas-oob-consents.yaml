@@ -1890,10 +1890,10 @@ components:
         reason:
           type: object
           required:
-            - revocationReason
+            - code
           description: Motivo da revogação do vínculo de conta.
           properties:
-            revocationReason:
+            code:
               $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
         additionalInformation:
           type: string
@@ -1915,10 +1915,10 @@ components:
         reason:
           type: object
           required:
-            - rejectionReason
+            - code
           description: Motivo da revogação do vínculo de conta.
           properties:
-            rejectionReason:
+            code:
               $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
         additionalInformation:
           type: string
