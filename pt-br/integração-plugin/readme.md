@@ -1127,6 +1127,117 @@ Exemplos de chamada no camel:
 </setProperty>
 ```
 
+### convertFieldToListOfKeyValue
+
+Esta função tem como objetivo transformar um campo de um objeto cujo caminho é informado em uma lista com um objeto de chave-valor. O resultado da função sempre transforma o campo em uma **lista** com um **único** objeto. Esse objeto resultante sempre será um par `key` com valor **id** e um `value` que terá como valor o antigo valor do campo em questão.
+
+public static Map<String, Object> convertFieldToListOfKeyValue(Map<String, Object> jsonMap, String path)
+
+onde:
+
+**jsonMap** -> é o objeto JSON depois da transformação para objeto Java onde esta o campo a ser alterado. Precisa ser um tipo que implementa a interface `java.Util.Map` (geralmente vinda de um `unmarshal` feito no camel);
+
+**path** -> é o caminho no objeto do campo que deve ser alterado. O caminho tem suporte para representação de listas (como por exemplo data[-] ou data[0]). Pode-se usar um número para indicar que objeto da lista deve ser modificado ou `-` para indicar a mudança em todos os objetos da lista;
+
+Exemplos de chamada no camel:
+
+```xml
+<unmarshal>
+    <json library="Jackson" />
+</unmarshal>
+
+<setBody>
+    <simple>${bean:camelHelper.convertFieldToListOfKeyValue(${body}, "data[-].accountId")}</simple>
+</setBody>
+
+<marshal>
+    <json library="Jackson" />
+</marshal>
+```
+
+Exemplo de entrada e saída da função:
+
+- entrada antes do unmarshal
+
+```json
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252576"
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252577"
+    }
+  ]
+}
+```
+
+- saída depois do marshal
+
+```json
+
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252576"}]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252577"}]
+    }
+  ]
+}
+```
+
+### generateUrlEncodedOrDecodedValue
+
+Esta função tem como objetivo retornar uma string que codifica/decodifica a string informada como parâmetro.
+
+public String generateUrlEncodedOrDecodedValue(String value, String operation)
+
+onde:
+
+**value** -> string original;
+
+**operation** -> operação a ser executada (ENCODE ou DECODE);
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="encodedString">
+    <simple>${bean:camelHelper.generateUrlEncodedOrDecodedValue("testl!encode*sf13", "ENCODE")}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: testl%21encode%2Asf13
+
 ## Componentes Suportados
 
 ### ACTIVEMQ

@@ -11,6 +11,8 @@ tags:
   description: Consents opus open banking services
 - name: Payments
   description: Consents opus open banking services
+- name: Enrollments
+  description: Enrollments opus open banking services
 paths:
   /open-banking/oob-consents/v1/consents:
     get:
@@ -231,6 +233,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentListSchema'
+  /open-banking/oob-consents/enrollments/v1/enrollments/{enrollmentId}:
+    patch:
+      tags:
+      - Enrollments
+      description: Revogar consentimento de vínculo
+      parameters:
+      - name: enrollmentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestRevokeOobEnrollmentConsent'
+      responses:
+        default:
+          description: Resposta padrão de erro
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
   /open-banking/oob-consents/payments/v1/consents/{consentId}:
     patch:
       tags:
@@ -659,6 +694,10 @@ components:
       - CONSUMED
       - TIMEOUT_AUTHORISATION
       - TIMEOUT_PAYMENT
+      - AWAITING_RISK_SIGNALS
+      - AWAITING_ACCOUNT_HOLDER_VALIDATION
+      - AWAITING_ENROLLMENT
+      - PARTIALLY_ACCEPTED
       type: string
     ConsentDetail:
       type: object
@@ -737,6 +776,8 @@ components:
         tppName:
           type: string
           example: "Guia Seguros"
+        enrollmentData:
+          $ref: '#/components/schemas/EnrollmentData'
     ConsentHistoryStatus:
       type: object
       properties:
@@ -793,7 +834,7 @@ components:
           example: "Guia Seguros"
         tppLogo:
           type: string
-          example: "http://www.exemplo.com/logo.png"
+          example: "http://www.exemplo.com/logo.png"        
     ConsentExtends:
       type: object
       properties:
@@ -809,6 +850,7 @@ components:
       enum:
       - DATA_SHARING
       - PAYMENT
+      - ENROLLMENT
       type: string
     Creditor:
       required:
@@ -1781,10 +1823,12 @@ components:
       oneOf:
         - $ref: '#/components/schemas/Revocation'
         - $ref: '#/components/schemas/RevocationPaymentOob'
+        - $ref: '#/components/schemas/RevocationEnrollment'
     ConsentRejection:
       oneOf:
         - $ref: '#/components/schemas/Rejection'
         - $ref: '#/components/schemas/RejectionPaymentOob'
+        - $ref: '#/components/schemas/RejectionEnrollment'
     Revocation:
       description: Data Sharing consent revocation information
       required:
@@ -1835,6 +1879,56 @@ components:
           - $ref: '#/components/schemas/RevocationReasonCodeEnum'
           - example: FRAUD
             nullable: false
+    RevocationEnrollment:
+      type: object
+      required:
+        - cancelledFrom
+        - reason
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          type: object
+          required:
+            - code
+          description: Motivo da revogação do vínculo de conta.
+          properties:
+            code:
+              $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
+        additionalInformation:
+          type: string
+          pattern: '[\w\W\s]*'
+          example: Contrato entre iniciadora e detentora interrompido
+          maxLength: 2048
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumEnrollmentCancelledFrom'
+        rejectedAt:
+          $ref: '#/components/schemas/EnrollmentRejectedAt'
+    RejectionEnrollment:
+      type: object
+      required:
+        - cancelledFrom
+        - reason
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/LoggedUser'
+        reason:
+          type: object
+          required:
+            - code
+          description: Motivo da revogação do vínculo de conta.
+          properties:
+            code:
+              $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+        additionalInformation:
+          type: string
+          pattern: '[\w\W\s]*'
+          example: Contrato entre iniciadora e detentora interrompido
+          maxLength: 2048
+        cancelledFrom:
+          $ref: '#/components/schemas/EnumEnrollmentCancelledFrom'
+        rejectedAt:
+          $ref: '#/components/schemas/EnrollmentRejectedAt'
     RejectedReason:
       required:
       - code
@@ -1854,6 +1948,14 @@ components:
       - FRAUD
       - ACCOUNT_CLOSURE
       - OTHER
+      type: string
+    EnrollmentRevocationReasonCodeEnum:
+      enum:
+      - REVOGADO_VALIDADE_EXPIRADA
+      - REVOGADO_MANUALMENTE
+      - REVOGADO_FALHA_INFRAESTRUTURA
+      - REVOGADO_SEGURANCA_INTERNA
+      - REVOGADO_OUTRO
       type: string
     RevokePaymentConsentData:
       type: object
@@ -1890,6 +1992,20 @@ components:
       - CONSENT_TECHNICAL_ISSUE
       - INTERNAL_SECURITY_REASON
       type: string
+    EnrollmentRejectedReasonCodeEnum:
+      enum:
+      - REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS,
+      - REJEITADO_TEMPO_EXPIRADO_ACCOUNT_HOLDER_VALIDATION,
+      - REJEITADO_TEMPO_EXPIRADO_ENROLLMENT,
+      - REJEITADO_MAXIMO_CHALLENGES_ATINGIDO,
+      - REJEITADO_MANUALMENTE,
+      - REJEITADO_DISPOSITIVO_INCOMPATIVEL,
+      - REJEITADO_FALHA_INFRAESTRUTURA,
+      - REJEITADO_SEGURANCA_INTERNA,
+      - REJEITADO_FALHA_HYBRID_FLOW,
+      - REJEITADO_FALHA_FIDO,
+      - REJEITADO_OUTRO
+      type: string
     RevocationPaymentOob:
       type: object
       properties:
@@ -1919,7 +2035,7 @@ components:
           format: date-time
           type: string
         rejectedBy:
-          $ref: '#/components/schemas/RejectedByAutomaticPaymentEnum'
+          $ref: '#/components/schemas/RejectedByAutomaticPaymentEnum'    
     RejectedByAutomaticPaymentEnum:
       enum:
       - INICIADORA
@@ -1945,6 +2061,20 @@ components:
           - example: CONTAS_ORIGEM_DESTINO_IGUAIS
         detail:
           type: string
+    EnrollmentRejectedReason:
+      required:
+      - code
+      type: object
+      properties:
+        additionalInformation:
+          maxLength: 140
+          type: string
+          example: Reason when code REJEITADO_OUTRO
+        code:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+          - example: REJEITADO_TEMPO_EXPIRADO_RISK_SIGNALS
+            nullable: false
     RecurringConsentRejectedFromEnum:
       enum:
       - INICIADORA
@@ -2346,6 +2476,199 @@ components:
           type: array
           items:
             type: string
+    EnrollmentData:
+      type: object
+      properties:
+        debtorAccount:
+          $ref: '#/components/schemas/DebtorAccount'
+        riskSignals:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentManualRiskSignal'
+        enrollmentName:
+          type: string
+          description: Nome do dispositivo autorizado pelo cliente para o vínculo de dispositivo da JSR.
+          example: "Meu Celular"
+        dailyLimit:
+          format: double
+          type: number
+          example: 1000.00
+        transactionLimit:
+          format: double
+          type: number
+          example: 100.00
+    PaymentManualRiskSignal:
+      type: object
+      properties:
+        deviceId:
+          type: string
+          description: Identificador único do dispositivo.
+        isRootedDevice:
+          type: boolean
+          description: Indica se o dispositivo está com root.
+        screenBrightness:
+          type: number
+          format: double
+          description: Nível de brilho da tela do dispositivo.
+        elapsedTimeSinceBoot:
+          type: integer
+          format: int64
+          description: Tempo decorrido desde a última inicialização do dispositivo.
+        osVersion:
+          type: string
+          description: Versão do sistema operacional do dispositivo.
+        userTimeZoneOffset:
+          type: string
+          description: Deslocamento do fuso horário do usuário.
+        language:
+          type: string
+          description: Idioma usado pelo dispositivo.
+        screenDimensions:
+          $ref: '#/components/schemas/ScreenDimensions'
+        accountTenure:
+          type: string
+          description: Tempo em que a conta está ativa.
+        geolocation:
+          $ref: '#/components/schemas/Geolocation'
+        isCallingProgress:
+          type: boolean
+          description: Indica se uma chamada está em andamento.
+        isDevModeEnabled:
+          type: boolean
+          description: Indica se o modo de desenvolvedor está ativado no dispositivo.
+        isMockGPS:
+          type: boolean
+          description: Indica se o dispositivo está usando uma localização GPS simulada.
+        isEmulated:
+          type: boolean
+          description: Indica se o dispositivo está emulado.
+        isMonkeyRunner:
+          type: boolean
+          description: Indica se o dispositivo está usando a ferramenta MonkeyRunner.
+        isCharging:
+          type: boolean
+          description: Indica se o dispositivo está atualmente carregando.
+        antennaInformation:
+          type: string
+          description: Informações sobre a antena do dispositivo.
+        isUsbConnected:
+          type: boolean
+          description: Indica se o dispositivo está conectado a uma porta USB.
+        integrity:
+          $ref: '#/components/schemas/Integrity'
+    ScreenDimensions:
+      type: object
+      properties:
+        height:
+          type: integer
+          format: int64
+          description: Altura da tela do dispositivo em pixels.
+        width:
+          type: integer
+          format: int64
+          description: Largura da tela do dispositivo em pixels.
+    Geolocation:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          description: Coordenada de latitude da localização do dispositivo.
+        longitude:
+          type: number
+          format: double
+          description: Coordenada de longitude da localização do dispositivo.
+        type:
+          type: string
+          description: Tipo de dados de geolocalização.
+    Integrity:
+      type: object
+      properties:
+        appRecognitionVerdict:
+          type: string
+          description: Veredito do processo de reconhecimento do aplicativo.
+        deviceRecognitionVerdict:
+          type: string
+          description: Veredito do processo de reconhecimento do dispositivo.
+    RequestRevokeOobEnrollmentConsent:
+      required:
+      - data
+      type: object
+      properties:
+        data:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentDataPatch'
+          - nullable: false
+        applicationName:
+          description: Nome da aplicação cliente
+          type: string
+    EnrollmentDataPatch:
+      required:
+      - cancellation
+      type: object
+      properties:
+        cancellation:
+          allOf:
+          - $ref: '#/components/schemas/EnrollmentCancellationPatch'
+          - nullable: false
+    EnrollmentCancellationPatch:
+      type: object
+      properties:
+        cancelledBy:
+          $ref: '#/components/schemas/ConsentPatchLoggedUser'
+        reason:
+          $ref: '#/components/schemas/EnrollmentReason'
+        additionalInformation:
+          maxLength: 2048
+          type: string
+    ConsentPatchLoggedUser:
+      required:
+      - document
+      type: object
+      properties:
+        document:
+          allOf:
+          - $ref: '#/components/schemas/ConsentPatchDocument'
+          - nullable: false
+    ConsentPatchDocument:
+      required:
+      - identification
+      - rel
+      type: object
+      properties:
+        identification:
+          type: string
+          example: "52847808507"
+          nullable: false
+        rel:
+          type: string
+          example: CPF
+          nullable: false
+    EnrollmentReason:
+      type: object
+      properties:
+        rejectionReason:
+          $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
+        revocationReason:
+          $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
+    EnumEnrollmentCancelledFrom:
+      type: string
+      enum:
+        - INICIADORA
+        - DETENTORA
+      description: |
+        Campo utilizado para informar o meio pelo qual foi realizado o cancelamento do vínculo de conta. Valores possíveis:
+
+          INICIADORA - Vínculo de conta nos canais da iniciadora.
+
+          DETENTORA - Vínculo de conta nos canais da detentora.
+    EnrollmentRejectedAt:
+          type: string
+          format: date-time
+          example: '2023-07-12T08:30:00Z'
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+          description: Instante de rejeição do vínculo de conta no ambiente da detentora.
   securitySchemes:
     jwt:
       type: http

@@ -537,13 +537,6 @@ Utilizado para definir o charset usado na criptografia dos campos na base de dad
 
 Valor default: `UTF-8`
 
-### Conectores
-
-Existem additionalVars para utilização do conector de aprovação de consentimento
-desenvolvido pela Opus, que estão listadas em
-[consent](../../integração-plugin/consent/readme.md) na seção
-`Arquivo de rota implementado pela OPUS`
-
 ### ENROLLMENT_PERMISSIONS
 
 Utilizado para definir a lista de permissões de vínculo de dispositivo suportadas pela instituição.
@@ -559,6 +552,65 @@ additionalVars:
   - name: ENROLLMENT_PERMISSIONS
     value: PAYMENTS_INITIATE
 ```
+
+#### SSL_CERTIFICATE_HEADER_NAME
+
+Define qual será o nome do header utilizado que será enviado o certificado
+mTLS do client que fez o request. No contexto de JSR, esse certificado
+é utilizado para validar o campo Rellying Party ID enviado durante o
+registro FIDO.
+
+**Default:** `X-SSL-Client-Cert`
+
+```yaml
+additionalVars:
+  - name: SSL_CERTIFICATE_HEADER_NAME
+    value: "X-SSL-Client-Cert"
+```
+
+### ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+
+Pode ser ativada (valor `true`) caso a detentora deseje que os limites dos
+pagamentos agendados sejam validados no momento de sua iniciação. Não deve
+estar ativada para execução da certificação.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+    value: "true"
+```
+
+### ENROLLMENT_NAME_TEMPLATE
+
+Modelo de texto utilizado para definir o nome do usuário do vínculo a ser apresentado durante
+o uso da chave.
+
+Valor default: `%1$s`
+
+Valores reservados:
+
+| Valor       | Substituído por                       |
+| ----------- | ------------------------------------- |
+| %1$s        | Nome do cliente que criou o vínculo   |
+
+**Ex:**
+
+additionalVars:
+  - name: ENROLLMENT_NAME_TEMPLATE
+  - value: "Open Finance: %1$s"
+
+### Conectores
+
+Existem additionalVars para utilização do conector de aprovação de consentimento
+desenvolvido pela Opus, que estão listadas em
+[consent](../../integração-plugin/consent/readme.md) na seção
+`Arquivo de rota implementado pela OPUS`
 
 ## additionalVarsDaemon
 

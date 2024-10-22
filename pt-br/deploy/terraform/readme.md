@@ -13,6 +13,8 @@
       - [oob\_status\_api\_port](#oob_status_api_port)
       - [oob\_consent\_api\_host](#oob_consent_api_host)
       - [oob\_consent\_api\_port](#oob_consent_api_port)
+      - [oob\_authorization\_server\_host](#oob_authorization_server_host)
+      - [oob\_authorization\_server\_port](#oob_authorization_server_port)
       - [cors\_origins](#cors_origins)
       - [transaction\_limit\_global\_per\_second](#transaction_limit_global_per_second)
       - [transaction\_limit\_per\_ip\_per\_minute](#transaction_limit_per_ip_per_minute)
@@ -25,6 +27,7 @@
       - [introspection\_client\_secret](#introspection_client_secret)
       - [auth\_server\_url](#auth_server_url)
       - [auth\_server\_base\_path](#auth_server_base_path)
+      - [auth\_server\_nonfapi\_base\_path](#auth_server_nonfapi_base_path)
       - [public\_fqdn](#public_fqdn)
       - [public\_fqdn\_mtls](#public_fqdn_mtls)
       - [internal\_fqdn](#internal_fqdn)
@@ -126,6 +129,18 @@ Porta da API de consentimento
 
 **Ex:** "80"
 
+#### oob_authorization_server_host
+
+Host da API do servidor de autorização
+
+**Ex:** "oob-authorization-server"
+
+#### oob_authorization_server_port
+
+Porta da API do servidor de autorização
+
+**Ex:** "80"
+
 #### cors_origins
 
 Indica origens permitidas nos cabeçalhos do CORS
@@ -193,6 +208,10 @@ Vide a [definição](../shared-definitions.md#auth_server_url)
 
 Vide a [definição](../shared-definitions.md#auth_server_base_path)
 
+#### auth_server_nonfapi_base_path
+
+Vide a [definição](../shared-definitions.md#auth_server_nonfapi_base_path)
+
 #### public_fqdn
 
 FQDN público onde as APIs do open banking podem ser acessadas
@@ -214,7 +233,7 @@ do open banking podem ser acessadas
 
 #### supported_features
 
-Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-banking)
+Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-finance)
 
 **Ex:** ["core", "open-data", "financial-data", "payments"]
 

@@ -24,9 +24,6 @@
                     "description": "Sinais de risco para iniciação do vínculo de dispositivo",
                     "required": [
                         "deviceId",
-                        "isRootedDevice",
-                        "screenBrightness",
-                        "elapsedTimeSinceBoot",
                         "osVersion",
                         "userTimeZoneOffset",
                         "language",
@@ -41,18 +38,18 @@
                         },
                         "isRootedDevice": {
                             "type": "boolean",
-                            "description": "Indica se o dispositivo atualmente está com permissão de “root”.",
+                            "description": "Indica se o dispositivo atualmente está com permissão de “root”. \n[Restrição] Campos de envio obrigatório quando o sistema operacional utilizado pelo usuário durante a vinculação de conta ou realização do pagamento for Android ou iOS.",
                             "example": false
                         },
                         "screenBrightness": {
                             "type": "number",
                             "format": "double",
-                            "description": "Indica o nível de brilho da tela do dispositivo.  \nEm dispositivos Android o valor é um inteiro, entre 0 e 255, inclusive;  \nEm dispositivos iOS o valor é um ponto flutuante entre 0.0 e 1.0.\n"
+                            "description": "Indica o nível de brilho da tela do dispositivo.  \nEm dispositivos Android o valor é um inteiro, entre 0 e 255, inclusive;  \nEm dispositivos iOS o valor é um ponto flutuante entre 0.0 e 1.0.\n [Restrição] Campos de envio obrigatório quando o sistema operacional utilizado pelo usuário durante a vinculação de conta ou realização do pagamento for Android ou iOS."
                         },
                         "elapsedTimeSinceBoot": {
                             "type": "integer",
                             "format": "int64",
-                            "description": "Indica por quanto tempo (em milissegundos) o dispositivo está ligado."
+                            "description": "Indica por quanto tempo (em milissegundos) o dispositivo está ligado.\n [Restrição] Campos de envio obrigatório quando o sistema operacional utilizado pelo usuário durante a vinculação de conta ou realização do pagamento for Android ou iOS."
                         },
                         "osVersion": {
                             "type": "string",
@@ -162,6 +159,11 @@
                                     "description": "Informa a integridade do dispositivo"
                                 }
                             }
+                        },
+                        "enrollmentName": {
+                            "type": "string",
+                            "description": "Nome do dispositivo autorizado pelo cliente para a vinculação de dispositivo sem redirecionamento. Enviado quando vínculo é autorizado.",
+                            "example": "Meu Telefone"
                         }
                     }
                 }

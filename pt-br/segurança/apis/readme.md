@@ -578,11 +578,16 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                    | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | -------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| POST     | /v1/enrollments                        | Sim          | payments         | Sim        | Não              | Sim  |     |
-| POST     | /v1/enrollments/\{ID\}/risk-signals    | Sim          | payments         | Sim        | Não              | Sim  |     |
-| GET      | /v1/enrollments/\{ID\}                 | Sim          | payments         | Não        | Não              | Sim  |     |
+| Operação | API                                              | Valida token | Escopos de acesso      | Valida JWS | Valida enrollmentId  | mTLS | Obs |
+| -------- | ------------------------------------------------ | ------------ | ---------------------- | ---------- | -------------------- | ---- | --- |
+| POST     | /v2/enrollments                                  | Sim          | payments               | Sim        | Não                  | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/risk-signals              | Sim          | payments               | Sim        | Não                  | Sim  |     |
+| GET      | /v2/enrollments/\{ID\}                           | Sim          | payments               | Não        | Não                  | Sim  |     |
+| PATCH    | /v2/enrollments/\{ID\}                           | Sim          | payments               | Sim        | Não                  | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-registration-options | Sim          | payments               | Sim        | Sim                  | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-registration         | Sim          | payments               | Sim        | Sim                  | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-sign-options         | Sim          | payments               | Sim        | Não                  | Sim  |     |
+| POST     | /v2/consents/\{ID\}/authorise                    | Sim          | payments, nrp-consents | Sim        | Sim                  | Sim  |     |
 
 ## Automatic Payments
 
@@ -659,6 +664,7 @@
 | *PATCH   | /consents/v1/consents/\{ID\}          | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *GET     | /consents/v1/consents/\{ID\}/payments | Sim          | oob_consents:read, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *PATCH   | /consents/v1/consents/\{ID\}/payments | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /enrollments/v1/enrollments/\{ID\}    | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
 | *GET     | /v1/tpps/payment-legacy-ids           | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 | POST     | /v1/payment-status-notification       | Sim          | oob_payments:write               | Não        | Não              | Não  |                    |
 | *GET     | /v1/consents/\{ID\}/extends           | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |

@@ -79,6 +79,6 @@ O acesso ao handoff neste caso seria `<host>/handoff`
 
 **[Configuração do AS pro handoff](../oob-authorization-server/readme.md#HANDOFF\_RESOURCE\_URL)**
 
-**[Fluxo do handoff](../../consentimento/app2as-handoff/readme.md)**
+**[Fluxo do handoff](../../consent/app2as-handoff/readme.md)**
 
-**[Configuração do conteúdo da página de handoff](../../consentimento/app2as-handoff/custom-handoff-config/readme.md)**
+**[Configuração do conteúdo da página de handoff](../../consent/app2as-handoff/custom-handoff-config/readme.md)**

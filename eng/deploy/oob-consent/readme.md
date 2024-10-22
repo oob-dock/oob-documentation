@@ -489,9 +489,62 @@ additionalVars:
     value: PAYMENTS_INITIATE
 ```
 
+#### SSL_CERTIFICATE_HEADER_NAME
+
+Defines the name of the header used to send the client mTLS
+certificate that made the request. In the No Redirect Journey
+context, the certificate is used to validate the Rellying Party
+ID field during FIDO Registration.
+
+**Default:** `X-SSL-Client-Cert`
+
+```yaml
+additionalVars:
+  - name: SSL_CERTIFICATE_HEADER_NAME
+    value: "X-SSL-Client-Cert"
+```
+
+### ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+
+It can be activated (value `true`) if the holder wishes
+the limits of scheduled payments to be validated at the
+time of their initiation. It should not be activated
+for certification execution.
+
+**Format:** `true` ou `false`
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
+    value: "true"
+```
+
+### ENROLLMENT_NAME_TEMPLATE
+
+Text template used to define the name of the user associated with the key to be
+displayed during usage.
+
+Default value: `%1$s`
+
+Reserved values:
+
+| Value       | Replaced by                             |
+| ----------- | --------------------------------------- |
+| %1$s        | Name of the client who created the link |
+
+**Ex:**
+
+additionalVars:
+  - name: ENROLLMENT_NAME_TEMPLATE
+  - value: "Open Finance: %1$s"
+
 ### Connectors
 
-There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integração-plugin/consent/readme.md) in the `File route implemented by OPUS` section.
+There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
 
 ## additionalVarsDaemon
 
@@ -513,7 +566,7 @@ additionalVarsDaemon:
     value: "true"
 ```
 
-**IMPORTANT**: Activating the daemon is part of the temporary webhook solution and should only be enabled while the holder does not implement the [Payment Status Change Notification API](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento). The daemon is disabled by default, but if the holder chooses to use it, the recommended interval value is `1s`, to meet the regulatory expected time.
+**IMPORTANT**: Activating the daemon is part of the temporary webhook solution and should only be enabled while the holder does not implement the [Payment Status Change Notification API](../../backoffice-portal/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento). The daemon is disabled by default, but if the holder chooses to use it, the recommended interval value is `1s`, to meet the regulatory expected time.
 
 Default value: `disabled`
 
