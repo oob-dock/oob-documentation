@@ -457,8 +457,8 @@ visualização e análise de rastreamento distribuído dos requests realizados.
 Configurações:
 
 * `opentelemetry.tracer.exporter.enabled`: Habilita o envio das informações de
-rastreamento para a ferramenta de análise. Possíveis valores: `true` ou
-`false`. **Default:** `false`.
+rastreamento para a ferramenta de análise. Possíveis valores: `1` (habilitado)
+ou `0` (desabilitado). **Default:** `0`.
 * `opentelemetry.tracer.exporter.url.grpc`: Endereço da ferramenta de
 análise. **Importante:** Esta variável deverá estar preenchida com o valor
 do endereço **GRPC** disponibilizado pela ferramenta para receber as
@@ -475,7 +475,7 @@ env:
   opentelemetry:
     tracer:
       exporter:
-        enabled: "false"
+        enabled: "0"
         url:
           grpc: "http://127.0.0.1:4317"
     sample:

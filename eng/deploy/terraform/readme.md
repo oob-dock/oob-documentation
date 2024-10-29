@@ -283,7 +283,7 @@ list of possible values can be found at [this link](https://docs.konghq.com/gate
 - `KONG_TRACING_SAMPLING_RATE`: Defines the sampling rate for distributed
 tracing, i.e., the proportion of requests that will be collected and sent for
 analysis. Possible values: `0` to `1`. For example, a value of `0.5` means that
-50% of the requests will be sampled. Important: If you wish to completely
+50% of the requests will be sampled. **Important**: If you wish to completely
 disable the sending of traces to the receiving tool, simply set this variable
 to `0`.
 

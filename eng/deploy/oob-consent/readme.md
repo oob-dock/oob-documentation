@@ -222,16 +222,15 @@ analyzing distributed tracing of the performed requests.
 
 Configurations:
 
-* `opentelemetry.tracer.exporter.enabled`: Enables the sending of tracing
-information to the analysis tool. Possible values: `true` or `false`.
-**Default**: false.
 * `opentelemetry.tracer.exporter.url.grpc`: Address of the analysis tool.
 **Important:** This variable must be filled with the **GRPC** address provided
 by the tool to receive the tracing information.
 * `opentelemetry.sample.rate`: Defines the sampling rate for distributed
 tracing, i.e., the proportion of requests that will be collected and sent for
 analysis. Possible values: `0` to `1`. For example, a value of `0.5` means that
-50% of the requests will be sampled.
+50% of the requests will be sampled. **Important**: If you wish to completely
+disable the sending of traces to the receiving tool, simply set this variable
+to `0`.
 
 Example:
 
@@ -240,11 +239,10 @@ env:
   opentelemetry:
     tracer:
       exporter:
-        enabled: "false"
         url:
           grpc: "http://127.0.0.1:4317"
     sample:
-      rate: "1"
+      rate: 1
 ```
 
 ## additionalVars
