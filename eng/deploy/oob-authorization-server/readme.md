@@ -393,9 +393,6 @@ analyzing distributed tracing of the performed requests.
 
 Configurations:
 
-* `opentelemetry.tracer.exporter.enabled`: Enables the sending of tracing
-information to the analysis tool. Possible values: `1` (enabled) or `0`
-(disabled). **Default**: `0`.
 * `opentelemetry.tracer.exporter.url.grpc`: Address of the analysis tool.
 **Important:** This variable must be filled with the **GRPC** address provided
 by the tool to receive the tracing information.
@@ -411,11 +408,10 @@ env:
   opentelemetry:
     tracer:
       exporter:
-        enabled: "0"
         url:
           grpc: "http://127.0.0.1:4317"
     sample:
-      rate: "1"
+      rate: 1
 ```
 
 ## additionalVars
