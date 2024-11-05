@@ -1,4 +1,4 @@
-create or replace function percentile_p95(dt_start date, dt_end date)
+create or replace function percentile_p95(dt_start date, dt_end date, organization_id uuid default null, brand_id_val varchar default null)
 returns table (
     brand_id                varchar,
     metric_date             date,
@@ -36,7 +36,10 @@ begin
                 r.brand_id										  			as brand_id,
                 r.event_data#>>'{processTimespan}'				  			as processTimespan
             from report r
-                where r.event_timestamp between dt_start_utc and dt_end_utc and r.event_role = 'SERVER'
+                where r.event_role = 'SERVER'
+                and (r.server_org_id = organization_id or organization_id is null)
+                and (r.brand_id  = brand_id_val or brand_id_val is null)
+                and r.event_timestamp between dt_start_utc and dt_end_utc
                 and r.event_data#>>'{endpoint}' not like '/open-banking/payments%'
                 and r.event_data#>>'{endpoint}' not like '/open-banking/automatic-payments%'
                 and r.event_data#>>'{endpoint}' not like '/open-banking/opendata%'
@@ -51,8 +54,13 @@ begin
             percentile_disc(0.95) within group (order by (el.processTimespan)::int) as p95_process_time_ms
         from endpoint_list el
         group by
+            el.brand_id,
             el.endpoint_uri,
             el.http_method,
-            el.metric_date,
-            el.brand_id;
+            el.metric_date
+        order by
+            el.brand_id,
+            el.endpoint_uri,
+            el.http_method,
+            el.metric_date;
 end;$function$;

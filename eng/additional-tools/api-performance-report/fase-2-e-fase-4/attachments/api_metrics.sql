@@ -30,5 +30,6 @@ begin
 		    dme.peak_tps 										as peak_tps
 		from daily_metric_endpoint dme 
 		inner join endpoint e on dme.id_endpoint = e.id 
-		where e.feature = 3 and dme.metric_date between dt_start and dt_end;
+		where e.feature = 3 and dme.metric_date between dt_start and dt_end
+		order by '/open-banking' || e.endpoint_url , (regexp_match(e.endpoint_name, '_([^-]+)'))[1], dme.metric_date;
 end;$function$;
