@@ -107,7 +107,7 @@ Example:
 
 This module is instrumented via [Open Telemetry](https://opentelemetry.io/),
 logging trace information (when available) and exporting it to a tool like
-[Jaeger](https://www.jaegertracing.io/), which is used for visualizing and
+[Tempo](https://grafana.com/oss/tempo/), which is used for visualizing and
 analyzing distributed tracing of the performed requests.
 
 Configurations:
