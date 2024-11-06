@@ -1306,6 +1306,28 @@ Exemplo de entrada e saída da função:
 
 ```
 
+### generateUrlEncodedOrDecodedValue
+
+Esta função tem como objetivo retornar uma string que codifica/decodifica a string informada como parâmetro.
+
+public String generateUrlEncodedOrDecodedValue(String value, String operation)
+
+onde:
+
+**value** -> string original;
+
+**operation** -> operação a ser executada (ENCODE ou DECODE);
+
+Exemplo de chamada no camel:
+
+```xml
+<setProperty name="encodedString">
+    <simple>${bean:camelHelper.generateUrlEncodedOrDecodedValue("testl!encode*sf13", "ENCODE")}</simple>
+</setProperty>
+```
+
+O resultado desta chamada seria: testl%21encode%2Asf13
+
 ## Componentes Suportados
 
 ### ACTIVEMQ

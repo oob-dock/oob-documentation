@@ -1857,10 +1857,10 @@ components:
         reason:
           type: object
           required:
-            - revocationReason
+            - code
           description: Reason for enrollment revocation.
           properties:
-            revocationReason:
+            code:
               $ref: '#/components/schemas/EnrollmentRevocationReasonCodeEnum'
         additionalInformation:
           type: string
@@ -1882,10 +1882,10 @@ components:
         reason:
           type: object
           required:
-            - rejectionReason
+            - code
           description: Reason for enrollment rejection.
           properties:
-            rejectionReason:
+            code:
               $ref: '#/components/schemas/EnrollmentRejectedReasonCodeEnum'
         additionalInformation:
           type: string

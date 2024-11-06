@@ -250,8 +250,7 @@ components:
         selectedExpirationDate:
           type: string
           maxLength: 20
-          description: Data de expiração selecionada pelo cliente para o vínculo de dispositivo da JSR.
-            [Restrição]  Preenchimento obrigatório para os consentimentos de tipo ENROLLMENT
+          description: Data de expiração selecionada pelo cliente para o vínculo de dispositivo da JSR. If it is not sent, the enrollment will remain valid until canceled by the client.
           format: date-time
           example:
             - "2021-05-21T08:30:00Z"
@@ -299,7 +298,7 @@ components:
           description: "Descrição das permissões do consentimento. Para consentimento de compartilhamento de dados ou vínculo de dispositivo para JSR."
         resourceTypes:
           allOf:
-            - $ref: '#/components/schemas/ResponseDomainResourceSchema'      
+            - $ref: '#/components/schemas/ResponseDomainResourceSchema'
           description: "Tipos de recursos do consentimento. Exclusivo de consentimento de compartilhamento de dados."
 
     ResponseDomainPermissionSchema:
@@ -399,6 +398,11 @@ components:
           type: string
           description: ID do comando a ser utilizado na resposta
           maxLength: 40
+        type:
+          type: string
+          enum:
+            - DATA_SHARING
+            - PAYMENT
         tpp:
           type: object
           description: Informações sobre o TPP
@@ -453,7 +457,7 @@ components:
         startDateTime:
           description: Data e hora em que o consentimento deve passar a ser válido. Uma string com data e hora conforme especificação RFC-3339, sempre com a utilização de timezone UTC(UTC time format).
 
-            [Restrição] Preenchimento obrigatório quando o consentimento de pagamento passa a valer em data (dia e hora) futura.
+            [ Restrição ] Preenchimento obrigatório quando o consentimento de pagamento passa a valer em data (dia e hora) futura.
           type: string
           format: date-time
           example:
@@ -596,9 +600,9 @@ components:
                 description: Objeto que indica o motivo de rejeição do recurso
                 type: object
                 required:
-                - code
+                  - code
                 properties:
-                  code: 
+                  code:
                     description: Código que determina o motivo do recurso ter sido negado
                     type: string
                     enum:
@@ -820,7 +824,7 @@ components:
               type: array
               maxItems: 60
               minItems: 2
-              example: ['2023-08-23', '2023-09-26']
+              example: [ '2023-08-23', '2023-09-26' ]
               items:
                 type: string
                 format: date
@@ -988,15 +992,15 @@ components:
                 partir da data do consentimento, também considerando o fuso horário de Brasília.
     ScheduleTypeEnum:
       enum:
-      - SINGLE
-      - CUSTOM
-      - DAILY
-      - WEEKLY
-      - MONTHLY
+        - SINGLE
+        - CUSTOM
+        - DAILY
+        - WEEKLY
+        - MONTHLY
       type: string
     AutomaticPayment:
       type: object
-      description: 	Campo destinado a configuração dos diferentes produtos de pagamentos recorrentes.
+      description: Campo destinado a configuração dos diferentes produtos de pagamentos recorrentes.
       oneOf:
         - $ref: '#/components/schemas/Sweeping'
     Sweeping:
@@ -1100,7 +1104,7 @@ components:
         quantityLimit:
           type: integer
           example: 100
-          description: Quantidade limite de transações permitidas para ocorrer durante um ano. 
+          description: Quantidade limite de transações permitidas para ocorrer durante um ano.
         transactionLimit:
           type: string
           pattern: '^((\d{1,16}\.\d{2}))$'

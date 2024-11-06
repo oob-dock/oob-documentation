@@ -39,6 +39,7 @@
       - [pubsub\_id](#pubsub_id)
       - [route\_block\_enabled](#route_block_enabled)
       - [mqd\_event\_enabled](#mqd_event_enabled)
+      - [opentelemetry\_tracer\_exporter\_url\_http](#opentelemetry_tracer_exporter_url_http)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -288,6 +289,29 @@ valor `false` a configuração de cada rota será ignorada e nenhum evento será
 gerado.
 
 **Valores possíveis:** `true` ou `false`
+
+#### opentelemetry_tracer_exporter_url_http
+
+Endereço da ferramenta de análise de rastreamento distribuído. **Importante:**
+Esta variável deverá estar preenchida com o valor do endereço **HTTP**
+disponibilizado pela ferramenta para receber as informações de rastreamento.
+
+**Atenção:** A variável acima trabalha em conjunto com duas outras variáveis de
+ambiente do kong: `KONG_TRACING_INSTRUMENTATIONS` e `KONG_TRACING_SAMPLING_RATE`.
+
+- `KONG_TRACING_INSTRUMENTATIONS`: Define qual o nível de instrumentação será
+aplicado aos requests do Kong. **Valor recomendado:** `all`. A lista completa
+de valores possíveis pode ser conferida [neste link](https://docs.konghq.com/gateway/latest/production/tracing/).
+- `KONG_TRACING_SAMPLING_RAGE`: Define a taxa de amostragem (sampling rate)
+para o rastreamento distribuído, ou seja, a proporção de solicitações que
+serão coletadas e enviadas para análise. Possíveis valores: `0` a `1`. Por
+exemplo, um valor de `0.5` significa que 50% dos requests serão amostrados.
+**Importante:** Caso deseje desabilitar totalmente o envio de traces para a
+ferramenta receptora basta definir o valor desta variável como `0`.
+
+Necessário definir estas variáveis de ambiente **diretamente no Kong** com os
+valores apropriados para que o funcionamento desejado da instrumentação
+aconteça.
 
 ## Configuração do Grafana
 

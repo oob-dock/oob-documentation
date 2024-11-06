@@ -1143,6 +1143,28 @@ Example of input and output of the function:
 
 ```
 
+### generateUrlEncodedOrDecodedValue
+
+This function aims to return a string that has encoded/decoded the passed string as parameter.
+
+public String generateUrlEncodedOrDecodedValue(String value, String operation)
+
+where:
+
+**value** -> original string;
+
+**operation** -> operation to be executed (ENCODE or DECODE);
+
+Example of a call in Camel:
+
+```xml
+<setProperty name="encodedString">
+    <simple>${bean:camelHelper.generateUrlEncodedOrDecodedValue("testl!encode*sf13", "ENCODE")}</simple>
+</setProperty>
+```
+
+The result of this call would be: testl%21encode%2Asf13
+
 ## Supported Components
 
 The supported software components are listed below.

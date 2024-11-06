@@ -389,13 +389,14 @@ Auxiliary services were created in Java to facilitate the implementation of the 
 
 The services and their respective functionalities are:
 
-| Service Name       | Description                                                                                          | Call Command in the .xml File                                                                                  |
-| ------------------ | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| getDayOfTheWeek    | Get the current day of the week in English in the `EEE` format (e.g., "Fri" - Friday)                 | `${bean:camelUtils.getDayOfTheWeek}`                                                                           |
-| concatenateStrings | Get a string that is the concatenation of the two strings passed as parameters                        | `${bean:camelUtils.concatenateStrings("ab", "cd")}`                                                            |
-| hmacCalculator     | Get the hash calculation of data based on a specific algorithm with a provided secret key            | `${bean:camelUtils.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}`               |
-| makePostCall       | Used for post calls with mtls                                                                        | `${bean:camelUtils.makePostCall(${authorization}, ${transactionHash}, ${contentType},  ${endpoint}, ${body})}` |
-| makeGetCall        | Used for get calls with mtls                                                                         | `${bean:camelUtils.makeGetCall(${authorization}, ${transactionHash}, ${contentType}, ${endpoint})}`            |
+| Service Name                     | Description                                                                                          | Call Command in the .xml File                                                                                  |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| getDayOfTheWeek                  | Get the current day of the week in English in the `EEE` format (e.g., "Fri" - Friday)                | `${bean:camelUtils.getDayOfTheWeek}`                                                                           |
+| concatenateStrings               | Get a string that is the concatenation of the two strings passed as parameters                       | `${bean:camelUtils.concatenateStrings("ab", "cd")}`                                                            |
+| hmacCalculator                   | Get the hash calculation of data based on a specific algorithm with a provided secret key            | `${bean:camelUtils.hmacCalculator("HmacSHA256", "abcd", "bc19bec7-339f-452f-8548-3daa889e6f79)}`               |
+| makePostCall                     | Used for post calls with mtls                                                                        | `${bean:camelUtils.makePostCall(${authorization}, ${transactionHash}, ${contentType},  ${endpoint}, ${body})}` |
+| makeGetCall                      | Used for get calls with mtls                                                                         | `${bean:camelUtils.makeGetCall(${authorization}, ${transactionHash}, ${contentType}, ${endpoint})}`            |
+| generateUrlEncodedOrDecodedValue | Used to encode or decode a string to/from a URL format                                               | `${bean:camelUtils.generateUrlEncodedOrDecodedValue("testl!encode*sf13", "ENCODE"}`                            |
 
 **Example of calling the getDayOfTheWeek service:**
 
@@ -432,4 +433,12 @@ HmacSHA224
 HmacSHA256
 HmacSHA384
 HmacSHA512
+```
+
+**Example of calling the generateUrlEncodedOrDecodedValue service:**
+
+```xml
+<setProperty name="encodedString">
+  <simple>${bean:camelUtils.generateUrlEncodedOrDecodedValue("testl!encode*sf1", "ENCODE")}</simple>
+</setProperty>
 ```
