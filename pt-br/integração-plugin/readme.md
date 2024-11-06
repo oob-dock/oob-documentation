@@ -1216,6 +1216,96 @@ Exemplo de entrada e saída da função:
 }
 ```
 
+### convertListOfKeyValueToField
+
+Esta função tem como objetivo transformar o campo de um objeto cujo caminho é informado onde se esperar ter uma **lista** com um **único** objeto que possui um par de `key` e `value` e substitui essa lista pelo valor que esta em `value`. A função sempre vai tratar o que está em `value` como uma string e esse sempre será o valor retornado caso o caminho esteja correto.
+
+public static Map<String, Object> convertListOfKeyValueToField(Map<String, Object> jsonMap, String path)
+
+onde:
+
+**jsonMap** -> é o objeto JSON depois da transformação para objeto Java onde esta o campo a ser alterado. Precisa ser um tipo que implementa a interface `java.Util.Map` (geralmente vinda de um `unmarshal` feito no camel);
+
+**path** -> é o caminho no objeto do campo que deve ser alterado, lembrando que aqui se espera que o campo contenha uma lista com um único objeto de par `key` e `value`. O caminho tem suporte para representação de listas (como por exemplo data[-] ou data[0]). Pode-se usar um número para indicar que objeto da lista deve ser modificado ou `-` para indicar a mudança em todos os objetos da lista;
+
+Exemplos de chamada no camel:
+
+```xml
+<unmarshal>
+    <json library="Jackson" />
+</unmarshal>
+
+<setBody>
+    <simple>${bean:camelHelper.convertListOfKeyValueToField(${body}, "data[-].accountId")}</simple>
+</setBody>
+
+<marshal>
+    <json library="Jackson" />
+</marshal>
+```
+
+Exemplo de entrada e saída da função:
+
+- entrada antes do unmarshal
+
+```json
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252576"}]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252577"}]
+    }
+  ]
+}
+
+```
+
+- saída depois do marshal
+
+```json
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252576"
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252577"
+    }
+  ]
+}
+
+```
+
 ## Componentes Suportados
 
 ### ACTIVEMQ
