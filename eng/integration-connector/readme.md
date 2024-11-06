@@ -1053,6 +1053,96 @@ Example of input and output of the function:
 }
 ```
 
+### convertListOfKeyValueToField
+
+This function aims to transform the field of an object whose path is provided, where it is expected to have a **list** with a **single** object containing a pair of `key` and `value`, and replaces this list with the content found in `value`. The function will always treat the content in value as a string, and this will always be the returned value if the path is correct.
+
+public static Map<String, Object> convertListOfKeyValueToField(Map<String, Object> jsonMap, String path)
+
+where:
+
+**jsonMap** -> This is the JSON object after being transformed into a Java object, where the field to be modified is located. It needs to be a type that implements the `java.util.Map` interface (usually coming from an `unmarshal` operation done in Camel);
+
+**path** -> This is the path to the field in the object that should be modified. It is expected that the field contains a list with a single object of `key` and `value` pair. The path supports list representation (for example, data[-] or data[0]). You can use a number to indicate which object in the list should be modified, or - to indicate that the change should apply to all objects in the list.
+
+Examples of usage in Camel:
+
+```xml
+<unmarshal>
+    <json library="Jackson" />
+</unmarshal>
+
+<setBody>
+    <simple>${bean:camelHelper.convertListOfKeyValueToField(${body}, "data[-].accountId")}</simple>
+</setBody>
+
+<marshal>
+    <json library="Jackson" />
+</marshal>
+```
+
+Example of input and output of the function:
+
+- input before unmarshal
+
+```json
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252576"}]
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": [{"key": "id", "value": "92792126019929279212650822221989319252577"}]
+    }
+  ]
+}
+
+```
+
+- output after marshal
+
+```json
+{
+  "data": [
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088392",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252576"
+    },
+    {
+      "brandName": "Organização A",
+      "companyCnpj": "21128159000166",
+      "type": "CONTA_DEPOSITO_A_VISTA",
+      "compeCode": "001",
+      "branchCode": "6272",
+      "number": "94088393",
+      "checkDigit": "4",
+      "accountId": "92792126019929279212650822221989319252577"
+    }
+  ]
+}
+
+```
+
 ### generateUrlEncodedOrDecodedValue
 
 This function aims to return a string that has encoded/decoded the passed string as parameter.
