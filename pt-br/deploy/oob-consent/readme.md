@@ -176,6 +176,13 @@ Deve ser formado pelo protocolo e host seguido do path `/open-banking`.
 
 Valor default: `http://oob-payment/open-banking`
 
+### fidoServer/basePath
+
+Utilizado para definir a uri base do Fido Server.
+Deve ser formado pelo protocolo e host.
+
+Valor default: `http://oof-fido-server`
+
 ### dapr/enabled
 
 Habilita o Dapr na aplicação para realizar o envio de eventos.
@@ -735,3 +742,12 @@ Ex: `1`
 
 **Importante**: Depende da configuração do nome da state store a ser realizada
 conforme item [accountHolder state store](#daprstatestoreaccountholder)
+
+### feature/fido/enabled
+
+Habilita ou desabilita o registro de uma RP no Fido Server durante o DCR.
+
+Deve ser habilitada **APENAS** se a funcionalidade a Jornada Sem Redirecionamento
+estiver habilitada.
+
+Ex: `1`
