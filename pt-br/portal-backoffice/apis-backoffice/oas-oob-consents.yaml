@@ -30,6 +30,11 @@ paths:
           schema:
             type: string
             example: "99999999999"
+        - name: cnpj
+          in: query
+          schema:
+            type: string
+            example: "11199999999999"
         - name: createdOnBegin
           in: query
           schema:
