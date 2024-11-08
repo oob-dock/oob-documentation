@@ -51,6 +51,34 @@
             },
             "additionalProperties": false
         },
+        "RequestMetaPayment": {
+            "type": "object",
+            "description": "Objeto que contém dados referentes ao contexto no qual o request for recebido",
+            "required": [
+                "correlationId",
+                "brandId"
+            ],
+            "properties": {
+                "correlationId": {
+                    "type": "string",
+                    "description": "UUID que identifica o correlation ID da requisição realizada. Deve ser propagado para todas as chamadas feitas entre sistemas e logado sempre que possível para facilitar o trace de erros",
+                    "pattern": "^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "examples": [
+                        "97623ed1-4732-4bf2-8d4b-ae7aced5443b",
+                        "localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b"
+                    ]
+                },
+                "brandId": {
+                    "$ref": "#/$defs/BrandId"
+                },
+                "nfcHeader": {
+                    "type": "string",
+                    "description": "O campo representa uma transação iniciada via NFC. O envio desse campo é obrigatório nesse cenário. As detentoras devem armazenar a informação e correlacioná-la com o consentimento e o pagamento originado.",
+                    "example": "true"
+                }
+            },
+            "additionalProperties": false
+        },
         "LegacyId": {
             "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
             "type": "array",
