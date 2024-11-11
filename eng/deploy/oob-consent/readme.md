@@ -141,6 +141,12 @@ Used to define the base URI of the payment service. It should consist of the pro
 
 Default value: `http://oob-payment/open-banking`
 
+### fidoServer/basePath
+
+Used to define the base URI of the fido server. It should consist of the protocol and host.
+
+Default value: `http://oof-fido-server`
+
 ### dapr/enabled
 
 Enables Dapr in the application to send events.
@@ -651,3 +657,9 @@ Enables or disables the cache for account holder verification. It should be enab
 Example: `1`
 
 **Important**: Depends on configuring the state store name as described in [accountHolder state store](#daprstatestoreaccountholder).
+
+### feature/fido/enabled
+
+Enables or disables RP registration in fido server during DCR. It should be enabled **ONLY** if No Redirect Journey is enabled.
+
+Example: `1`
