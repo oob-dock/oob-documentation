@@ -509,6 +509,8 @@ the limits of scheduled payments to be validated at the
 time of their initiation. It should not be activated
 for certification execution.
 
+If false the daemon that evaluates the limits for scheduled payments will run.
+
 **Format:** `true` ou `false`
 
 Valor default: `false`
@@ -598,6 +600,22 @@ Default value: `false`
 additionalVarsDaemon:
   - name: DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
     value: "true"
+```
+
+### DAEMON_ENROLLMENT_EXECUTION_HOUR
+
+Configuration of the hour at which the daemon will be executed.
+
+**Format:** Number from 0-23
+
+Default value: `23`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
+    value: "23"
 ```
 
 ## FEATURE FLAGS
