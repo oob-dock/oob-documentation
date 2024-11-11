@@ -110,7 +110,7 @@ Default value: "-65535,-257,-258,-259,-7,-35,-36,-8"
 
 ## Additional Vars
 
-### Customização para um RP específica
+### RP Customization
 
 If it is necessary to change a FIDO configuration for a single
 RP, you must add its identifier (CN from the BRCAC certificate)
