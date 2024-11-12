@@ -745,6 +745,33 @@ additionalVars:
     value: "2023-07-18"
 ```
 
+### FEATURE_MULTIPLE_REQUIRER
+
+Enables multiple authority flow in the authorization process
+of consent.
+
+The default value is '0' as per specification.
+
+**Formato:** `0` or `1`
+
+**Default:** `0`
+
+```yaml
+additionalVars:
+  - name: FEATURE_MULTIPLE_REQUIRER
+    value: "1"
+```
+
+### OVERRIDE_AUTHORIZATION_ENDPOINT
+
+Replaces the authorization_endpoint exposed in .well-know.
+
+```yaml
+additionalVars:
+  - name: OVERRIDE_AUTHORIZATION_ENDPOINT
+    value: "https://sharedconsent.com.br/auth"
+```
+
 ### UNIQUE_PROFILE_START_DATE
 
 Enables validation for the adaptation period of the unique FAPI profile of Open Finance Brazil.
