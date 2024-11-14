@@ -11,7 +11,7 @@ DECLARE dt_end_utc timestamptz;
 DECLARE consent_uuids uuid[] = cast(consent_list as uuid[]);
 BEGIN
     SELECT dt_end + INTERVAL '1 day' INTO dt_end_interval;
-    SELECT dt_end_interval::date::timestamp AT TIME ZONE 'UTC' INTO dt_end_utc;
+    SELECT dt_end_interval::date::timestamp AT TIME ZONE 'America/Sao_Paulo' INTO dt_end_utc;
 
     RETURN QUERY
 	    select  tpp.org_name            AS org_name,
