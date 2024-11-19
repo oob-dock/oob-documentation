@@ -588,7 +588,7 @@ Valor default: `false`
 **Ex:**
 
 ```yaml
-additionalVarsDaemon:
+additionalVars:
   - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
     value: "true"
 ```
@@ -608,9 +608,28 @@ Valores reservados:
 
 **Ex:**
 
+```yaml
 additionalVars:
   - name: ENROLLMENT_NAME_TEMPLATE
   - value: "Open Finance: %1$s"
+```
+
+### CONSENT_DATA_SHARING_V31_DATE
+
+Define a data em que as modificações necessárias para a Fase 2 v3.1
+devem ser ativadas. Deve ser configurada uma vez que a data oficial
+seja definida pelo BACEN.
+
+**Formato:**: "YYYY-MM-DD"
+
+**Ex:** Para que as modificações sejam ativadas dia 25/12/2024, basta
+configurar conforme a seguir:
+
+```yaml
+additionalVars:
+  - name: CONSENT_DATA_SHARING_V31_DATE
+  - value: "2024-12-25"
+```
 
 ### Conectores
 
