@@ -10,8 +10,8 @@ DECLARE dt_end_interval date;
 DECLARE dt_end_utc timestamptz;
 BEGIN
     SELECT dt_end + INTERVAL '1 day' INTO dt_end_interval;
-    SELECT dt_start::date::timestamp AT TIME ZONE 'UTC' INTO dt_start_utc;
-    SELECT dt_end_interval::date::timestamp AT TIME ZONE 'UTC' INTO dt_end_utc;
+    SELECT dt_start::date::timestamp AT TIME ZONE 'America/Sao_Paulo' INTO dt_start_utc;
+    SELECT dt_end_interval::date::timestamp AT TIME ZONE 'America/Sao_Paulo' INTO dt_end_utc;
 
     RETURN QUERY
         SELECT t.org_name,

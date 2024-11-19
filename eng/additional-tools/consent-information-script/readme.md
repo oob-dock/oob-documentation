@@ -47,7 +47,7 @@ SELECT * FROM CONSENT_USAGE_REPORT('2022-10-02','2022-10-08');
 
 The `<offset?>` and `<size?>` parameters are optional, used for pagination, and indicate how many rows should be skipped and captured, respectively.
 
-The obtained data should be filled in the "Consentimento_transmissor" tab, columns C and D ("Geração do consent ID - Não Clientes" e "Geração do consent ID   -  Clientes").
+The obtained data should be filled in the "Consentimento_transmissor" tab, columns C or D ("Geração do consent ID - Não Clientes" or "Geração do consent ID   -  Clientes").
 
 ![Transmitting Consent Fill-in 1](attachments/img/img_consent_usage_report.png)
 

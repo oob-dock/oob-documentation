@@ -54,7 +54,7 @@ SELECT * FROM CONSENT_USAGE_REPORT('2022-10-02','2022-10-08');
 Os parâmetros `<offset?>` e `<size?>` são opcionais, servem para paginação e indicam quantas linhas devem
 ser puladas e capturadas, respectivamente.
 
-Os dados obtidos devem ser preenchidos na aba "Consentimento_transmissor", colunas C e D ("Geração do consent ID - Não Clientes" e ""Geração do consent ID   -  Clientes)
+Os dados obtidos devem ser preenchidos na aba "Consentimento_transmissor", colunas C ou D ("Geração do consent ID - Não Clientes" ou "Geração do consent ID   -  Clientes")
 
 
 ![Preenchimento Consentimento_transmissor 1](attachments/img/img_consent_usage_report.png)
