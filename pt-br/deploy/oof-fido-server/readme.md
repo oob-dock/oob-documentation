@@ -126,3 +126,21 @@ ser substituídos por ***_***.
 
 Isso irá mudar apenas a configuração de *attestation* para essa RP. Todas
 as demais configurações utilizarão o valor padrão.
+
+### Alterar nível de logs
+
+Deve ser utilizada para alterar a quantidade de informação apresentada nos logs.
+Os níveis disponíveis são: `ERROR`, `WARN`, `INFO`, `DEBUG` ou `TRACE`.
+
+Por exemplo, para habilitar os logs de requisição e resposta deve-se alterar
+o nível para `DEBUG`.
+
+Valor padrão: `INFO`
+
+Exemplo:
+
+```yaml
+additionalVars:
+    - name: logging_level_software_opus_oof
+      value: DEBUG
+```
