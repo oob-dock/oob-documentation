@@ -873,6 +873,16 @@ additionalVars:
     value: "1"
 ```
 
+### OVERRIDE_AUTHORIZATION_ENDPOINT
+
+Substitui o authorization_endpoint exposto no .well-know.
+
+```yaml
+additionalVars:
+  - name: OVERRIDE_AUTHORIZATION_ENDPOINT
+    value: "https://consentimentocompartilhado.com.br/auth"
+```
+
 ### UNIQUE_PROFILE_START_DATE
 
 Habilita a validação para o período de adaptação do perfil único FAPI

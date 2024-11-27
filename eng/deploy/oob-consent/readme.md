@@ -141,6 +141,12 @@ Used to define the base URI of the payment service. It should consist of the pro
 
 Default value: `http://oob-payment/open-banking`
 
+### fidoServer/basePath
+
+Used to define the base URI of the fido server. It should consist of the protocol and host.
+
+Default value: `http://oof-fido-server`
+
 ### dapr/enabled
 
 Enables Dapr in the application to send events.
@@ -509,6 +515,8 @@ the limits of scheduled payments to be validated at the
 time of their initiation. It should not be activated
 for certification execution.
 
+If false the daemon that evaluates the limits for scheduled payments will run.
+
 **Format:** `true` ou `false`
 
 Valor default: `false`
@@ -535,10 +543,27 @@ Reserved values:
 | %1$s        | Name of the client who created the link |
 
 **Ex:**
-
+```yaml
 additionalVars:
   - name: ENROLLMENT_NAME_TEMPLATE
   - value: "Open Finance: %1$s"
+```
+
+### CONSENT_DATA_SHARING_V31_DATE
+
+Defines the date when the necessary modifications for Phase 2 v3.1 should be activated.
+It must be configured once the official date is announced by BACEN.
+
+**Format:** "YYYY-MM-DD"
+
+**Example:** To activate the modifications on 12/25/2024, configure
+as follows:
+
+```yaml
+additionalVars:
+  - name: CONSENT_DATA_SHARING_V31_DATE
+  - value: "2024-12-25"
+```
 
 ### Connectors
 
@@ -600,6 +625,22 @@ additionalVarsDaemon:
     value: "true"
 ```
 
+### DAEMON_ENROLLMENT_EXECUTION_HOUR
+
+Configuration of the hour at which the daemon will be executed.
+
+**Format:** Number from 0-23
+
+Default value: `23`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
+    value: "23"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled
@@ -633,3 +674,9 @@ Enables or disables the cache for account holder verification. It should be enab
 Example: `1`
 
 **Important**: Depends on configuring the state store name as described in [accountHolder state store](#daprstatestoreaccountholder).
+
+### feature/fido/enabled
+
+Enables or disables RP registration in fido server during DCR. It should be enabled **ONLY** if No Redirect Journey is enabled.
+
+Example: `1`

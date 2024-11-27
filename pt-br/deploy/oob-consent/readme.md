@@ -176,6 +176,13 @@ Deve ser formado pelo protocolo e host seguido do path `/open-banking`.
 
 Valor default: `http://oob-payment/open-banking`
 
+### fidoServer/basePath
+
+Utilizado para definir a uri base do Fido Server.
+Deve ser formado pelo protocolo e host.
+
+Valor default: `http://oof-fido-server`
+
 ### dapr/enabled
 
 Habilita o Dapr na aplicação para realizar o envio de eventos.
@@ -572,6 +579,8 @@ Pode ser ativada (valor `true`) caso a detentora deseje que os limites dos
 pagamentos agendados sejam validados no momento de sua iniciação. Não deve
 estar ativada para execução da certificação.
 
+Se falso, o daemon que avalia os limites para pagamentos agendados será executado.
+
 **Formato:** `true` ou `false`
 
 Valor default: `false`
@@ -579,7 +588,7 @@ Valor default: `false`
 **Ex:**
 
 ```yaml
-additionalVarsDaemon:
+additionalVars:
   - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
     value: "true"
 ```
@@ -599,9 +608,28 @@ Valores reservados:
 
 **Ex:**
 
+```yaml
 additionalVars:
   - name: ENROLLMENT_NAME_TEMPLATE
   - value: "Open Finance: %1$s"
+```
+
+### CONSENT_DATA_SHARING_V31_DATE
+
+Define a data em que as modificações necessárias para a Fase 2 v3.1
+devem ser ativadas. Deve ser configurada uma vez que a data oficial
+seja definida pelo BACEN.
+
+**Formato:**: "YYYY-MM-DD"
+
+**Ex:** Para que as modificações sejam ativadas dia 25/12/2024, basta
+configurar conforme a seguir:
+
+```yaml
+additionalVars:
+  - name: CONSENT_DATA_SHARING_V31_DATE
+  - value: "2024-12-25"
+```
 
 ### Conectores
 
@@ -692,6 +720,22 @@ additionalVarsDaemon:
     value: "true"
 ```
 
+### DAEMON_ENROLLMENT_EXECUTION_HOUR
+
+Configuração do horário no qual o daemon será executado.
+
+**Formato:** Número de 0-23
+
+Valor default: `23`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
+    value: "23"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled
@@ -735,3 +779,12 @@ Ex: `1`
 
 **Importante**: Depende da configuração do nome da state store a ser realizada
 conforme item [accountHolder state store](#daprstatestoreaccountholder)
+
+### feature/fido/enabled
+
+Habilita ou desabilita o registro de uma RP no Fido Server durante o DCR.
+
+Deve ser habilitada **APENAS** se a funcionalidade a Jornada Sem Redirecionamento
+estiver habilitada.
+
+Ex: `1`

@@ -28,7 +28,6 @@ Among the features offered by the OPUS Open Finance Platform, we highlight:
 1. Metrics Collection Platform, which sends information regarding operations to the Open Finance Brazil governance group according to regulatory specifications;
 1. Log management using a distributed log file model based on Elastic, but which can be replaced by any log tool already used by the financial institution;
 1. Integration with the financial institution's backend systems through **connectors**, which are software components that isolate platform complexity and ensure product standardization;
-1. Support components to accelerate product validation and deployment, such as the White-label Consent Generation Portal, White-label Handoff Screen, consent screen source code for integration into the financial institution's mobile application, ecosystem simulator for installation validation, and connector validation tester.
 
 To perform Payment Initiation operations via Open Finance or data reception requests, the OPUS Open Finance Platform offers modules that implement security and authentication protocols. These modules are accessible through REST interfaces, greatly simplifying application development.
 
@@ -206,14 +205,6 @@ The Backoffice Portal offers a graphical interface for registering scheduled una
 Through integration with the status service, the portal provides a dashboard for visualizing detected partial and total unavailability by the platform's self-diagnosis component.
 
 ### Auxiliary Tools
-
-#### White-label Consent Generation Portal
-
-The consent generation portal implements mandatory functionalities that allow final customers to view and approve (or reject) payment initiation and registration and transactional data sharing consents.
-
-The portal can be customized through logo and color palette changes and can be used as a tool to accelerate the implementation of the complete cycle of mandatory Open Finance Brazil functionalities.
-
-![OPUS Open Finance Consent Generation Portal](./images/portal-consentimento.png)
 
 #### White-label Handoff Screen
 

@@ -51,6 +51,34 @@
             },
             "additionalProperties": false
         },
+        "RequestMetaPayment": {
+            "type": "object",
+            "description": "Object containing data related to the context in which the request was received",
+            "required": [
+                "correlationId",
+                "brandId"
+            ],
+            "properties": {
+                "correlationId": {
+                    "type": "string",
+                    "description": "UUID that identifies the correlation ID of the request made. It should be propagated to all calls made between systems and logged whenever possible to facilitate error tracing",
+                    "pattern": "^(localID:)?[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+                    "examples": [
+                    "97623ed1-4732-4bf2-8d4b-ae7aced5443b",
+                    "localID:97623ed1-4732-4bf2-8d4b-ae7aced5443b"
+                    ]
+                },
+                "brandId": {
+                    "$ref": "#/$defs/BrandId"
+                },
+                "nfcHeader": {
+                    "type": "string",
+                    "description": "The field represents a transaction initiated via NFC. The sending of this field is mandatory in this scenario. The holders must store the information and correlate it with the consent and the originated payment.",
+                    "example": "true"
+                }
+            },
+            "additionalProperties": false
+        },
         "LegacyId": {
             "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
             "type": "array",
