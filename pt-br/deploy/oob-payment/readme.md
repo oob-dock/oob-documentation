@@ -123,7 +123,7 @@ Exemplo:
 
 Este módulo é instrumentado via [Open Telemetry](https://opentelemetry.io/),
 logando informações de trace (quando disponíveis) e as exportando para uma
-ferramenta como o [Jaeger](https://www.jaegertracing.io/), que é utilizado na
+ferramenta como o [Tempo](https://grafana.com/oss/tempo/), que é utilizado na
 visualização e análise de rastreamento distribuído dos requests realizados.
 
 Configurações:
