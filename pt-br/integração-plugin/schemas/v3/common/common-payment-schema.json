@@ -567,100 +567,201 @@
             "pattern": "[\\w\\W\\s]*",
             "maxLength": 140
         },
-        "Automatic": {
+       "Automatic": {
             "type": "object",
+            "required": [
+                "automatic"
+            ],
             "properties": {
                 "automatic": {
-                    "type": "object",
-                    "description": "Definição da configuração de recorrência para pagamentos automáticos",
-                    "required": [
-                        "contractId",
-                        "period",
-                        "contractDebtor"
-                    ],
-                    "properties": {
-                        "contractId": {
-                            "type": "string",
-                            "pattern": "^[a-zA-Z0-9]{1,35}$",
-                            "minLength": 1,
-                            "maxLength": 35,
-                            "example": "XE00038166201907261559y6j6",
-                            "description": "Identificador do contrato de transação"
+                    "oneOf": [
+                        {
+                            "$ref": "#/$defs/AutomaticV1"
                         },
-                        "amount": {
-                            "type": "string",
-                            "pattern": "^((\\d{1,16}\\.\\d{2}))$",
-                            "minLength": 4,
-                            "maxLength": 19,
-                            "example": "100000.12",
-                            "description": "Valor da transação com 2 casas decimais."
-                        },
-                        "transactionLimit": {
-                            "type": "string",
-                            "pattern": "^((\\d{1,16}\\.\\d{2}))$",
-                            "minLength": 4,
-                            "maxLength": 19,
-                            "example": "1000000.12",
-                            "description": "Valor da transação com 2 casas decimais."
-                        },
-                        "period": {
-                            "type": "string",
-                            "enum": [
-                                "DIARIO",
-                                "SEMANAL",
-                                "MENSAL",
-                                "ANUAL"
-                            ],
-                            "example": "DIARIO",
-                            "description": "Define a periodicidade permitida para realização de transações\n- DIARIO\n- SEMANAL\n- MENSAL\n- ANUAL\n"
-                        },
-                        "dayOfMonth": {
-                            "type": "integer",
-                            "format": "int32",
-                            "minimum": 1,
-                            "maximum": 31,
-                            "example": 10,
-                            "description": "Dia fixo do mês que está prevista a transação.\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a MENSAL ou ANUAL.\n"
-                        },
-                        "dayOfWeek": {
-                            "type": "string",
-                            "enum": [
-                                "SEGUNDA_FEIRA",
-                                "TERCA_FEIRA",
-                                "QUARTA_FEIRA",
-                                "QUINTA_FEIRA",
-                                "SEXTA_FEIRA"
-                            ],
-                            "example": "SEGUNDA_FEIRA",
-                            "description": "Dia da semana que está prevista a transação.\n- SEGUNDA_FEIRA\n- TERCA_FEIRA\n- QUARTA_FEIRA\n- QUINTA_FEIRA\n- SEXTA_FEIRA\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a SEMANAL.\n"
-                        },
-                        "month": {
-                            "type": "string",
-                            "enum": [
-                                "JANEIRO",
-                                "FEVEREIRO",
-                                "MARCO",
-                                "ABRIL",
-                                "MAIO",
-                                "JUNHO",
-                                "JULHO",
-                                "AGOSTO",
-                                "SETEMBRO",
-                                "OUTUBRO",
-                                "NOVEMBRO",
-                                "DEZEMBRO"
-                            ],
-                            "example": "JANEIRO",
-                            "description": "Mês previstos para ocorrer transações.\n- JANEIRO\n- FEVEREIRO\n- MARCO\n- ABRIL\n- MAIO\n- JUNHO\n- JULHO\n- AGOSTO\n- SETEMBRO\n- OUTUBRO\n- NOVEMBRO\n- DEZEMBRO\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a ANUAL\n"
-                        },
-                        "contractDebtor": {
-                            "$ref": "#/$defs/ContractDebtor"
-                        },
-                        "immediatePayment": {
-                            "$ref": "#/$defs/ImmediatePayment"
+                        {
+                            "$ref": "#/$defs/AutomaticV2"
                         }
-                    }
+                    ]
                 }
+            },
+            "additionalProperties": false
+        },
+        "AutomaticV1": {
+            "type": "object",
+            "description": "Definição da configuração de recorrência para pagamentos automáticos",
+            "required": [
+                "contractId",
+                "period",
+                "contractDebtor"
+            ],
+            "properties": {
+                "contractId": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9]{1,35}$",
+                    "minLength": 1,
+                    "maxLength": 35,
+                    "example": "XE00038166201907261559y6j6",
+                    "description": "Identificador do contrato de transação"
+                },
+                "amount": {
+                    "type": "string",
+                    "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+                    "minLength": 4,
+                    "maxLength": 19,
+                    "example": "100000.12",
+                    "description": "Valor da transação com 2 casas decimais."
+                },
+                "transactionLimit": {
+                    "type": "string",
+                    "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+                    "minLength": 4,
+                    "maxLength": 19,
+                    "example": "1000000.12",
+                    "description": "Valor da transação com 2 casas decimais."
+                },
+                "period": {
+                    "type": "string",
+                    "enum": [
+                        "DIARIO",
+                        "SEMANAL",
+                        "MENSAL",
+                        "ANUAL"
+                    ],
+                    "example": "DIARIO",
+                    "description": "Define a periodicidade permitida para realização de transações\n- DIARIO\n- SEMANAL\n- MENSAL\n- ANUAL\n"
+                },
+                "dayOfMonth": {
+                    "type": "integer",
+                    "format": "int32",
+                    "minimum": 1,
+                    "maximum": 31,
+                    "example": 10,
+                    "description": "Dia fixo do mês que está prevista a transação.\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a MENSAL ou ANUAL.\n"
+                },
+                "dayOfWeek": {
+                    "type": "string",
+                    "enum": [
+                        "SEGUNDA_FEIRA",
+                        "TERCA_FEIRA",
+                        "QUARTA_FEIRA",
+                        "QUINTA_FEIRA",
+                        "SEXTA_FEIRA"
+                    ],
+                    "example": "SEGUNDA_FEIRA",
+                    "description": "Dia da semana que está prevista a transação.\n- SEGUNDA_FEIRA\n- TERCA_FEIRA\n- QUARTA_FEIRA\n- QUINTA_FEIRA\n- SEXTA_FEIRA\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a SEMANAL.\n"
+                },
+                "month": {
+                    "type": "string",
+                    "enum": [
+                        "JANEIRO",
+                        "FEVEREIRO",
+                        "MARCO",
+                        "ABRIL",
+                        "MAIO",
+                        "JUNHO",
+                        "JULHO",
+                        "AGOSTO",
+                        "SETEMBRO",
+                        "OUTUBRO",
+                        "NOVEMBRO",
+                        "DEZEMBRO"
+                    ],
+                    "example": "JANEIRO",
+                    "description": "Mês previstos para ocorrer transações.\n- JANEIRO\n- FEVEREIRO\n- MARCO\n- ABRIL\n- MAIO\n- JUNHO\n- JULHO\n- AGOSTO\n- SETEMBRO\n- OUTUBRO\n- NOVEMBRO\n- DEZEMBRO\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a ANUAL\n"
+                },
+                "contractDebtor": {
+                    "$ref": "#/$defs/ContractDebtor"
+                },
+                "immediatePayment": {
+                    "$ref": "#/$defs/ImmediatePayment"
+                }
+            },
+            "additionalProperties": false        
+        },
+        "AutomaticV2": {
+            "type": "object",
+            "description": "Definição da configuração de recorrência para pagamentos automáticos",
+            "required": [
+                "contractId",
+                "period",
+                "contractDebtor",
+                "isRetryAccepted"
+            ],
+            "properties": {
+                "contractId": {
+                    "type": "string",
+                    "pattern": "^[a-zA-Z0-9]{1,35}$",
+                    "minLength": 1,
+                    "maxLength": 35,
+                    "example": "XE00038166201907261559y6j6",
+                    "description": "Identificador do contrato de transação"
+                },
+                "fixedAmount": {
+                    "type": "string",
+                    "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+                    "minLength": 4,
+                    "maxLength": 19,
+                    "example": "100000.12",
+                    "description": "Valor fixo de cobrança, caso preenchido, representa um consentimento para pagamentos de valores fixos, ou não sujeitos a alteração durante a vigência do consentimento. \n\n[Restrição] Excludente com o campo “/data/recurringConfiguration/automatic/maximumVariableAmount”\n"
+                },
+                "maximumVariableAmount": {
+                    "type": "string",
+                    "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+                    "minLength": 4,
+                    "maxLength": 19,
+                    "example": "1000000.12",
+                    "description": "Valor máximo permitido por cobrança, caso preenchido, representa um consentimento para pagamentos de valores variáveis. \n\n[Restrição] Excludente com o campo “/data/recurringConfiguration/automatic/fixedAmount”\n"
+                },
+                "period": {
+                    "type": "string",
+                    "enum": [
+                    "SEMANAL",
+                    "MENSAL",
+                    "ANUAL",
+                    "SEMESTRAL",
+                    "TRIMESTRAL"
+                    ],
+                    "example": "SEMANAL",
+                    "description": "Define a periodicidade permitida para realização de transações\n- SEMANAL\n- MENSAL\n- ANUAL\n- SEMESTRAL\n- TRIMESTRAL\n"
+                },
+                "month": {
+                    "type": "string",
+                    "enum": [
+                    "JANEIRO",
+                    "FEVEREIRO",
+                    "MARCO",
+                    "ABRIL",
+                    "MAIO",
+                    "JUNHO",
+                    "JULHO",
+                    "AGOSTO",
+                    "SETEMBRO",
+                    "OUTUBRO",
+                    "NOVEMBRO",
+                    "DEZEMBRO"
+                    ],
+                    "example": "JANEIRO",
+                    "description": "Mês previstos para ocorrer transações. Caso consentimento seja para pagamentos trimestrais ou semestrais, o campo representa o mês da primeira cobrança.\n- JANEIRO\n- FEVEREIRO\n- MARCO\n- ABRIL\n- MAIO\n- JUNHO\n- JULHO\n- AGOSTO\n- SETEMBRO\n- OUTUBRO\n- NOVEMBRO\n- DEZEMBRO\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a TRIMESTRAL, SEMESTRAL ou ANUAL\n"
+                },
+                "contractDebtor": {
+                    "$ref": "#/$defs/ContractDebtor"
+                },
+                "firstPayment": {
+                    "$ref": "#/$defs/ImmediatePayment"
+                },
+                "minimumVariableAmount": {
+                    "type": "string",
+                    "pattern": "^((\\d{1,16}\\.\\d{2}))$",
+                    "minLength": 4,
+                    "maxLength": 19,
+                    "example": "100000.12",
+                    "description": "Valor definido pelo usuário recebedor. \nSe o usuário pagador atribuir um valor máximo para os pagamentos daquela autorização, ele não poderá ser inferior ao valor mínimo (piso) definido pelo usuário recebedor. \nNão pode ser preenchido nas autorizações de valor fixo.\n"
+                },
+                "isRetryAccepted": {
+                    "type": "boolean",
+                    "description": "Indica se é permitido pelo cliente recebedor fazer tentativas de pagamento (extradia), conforme as regras estabelecidas no arranjo Pix.",
+                    "example": false
+                }           
             },
             "additionalProperties": false
         },

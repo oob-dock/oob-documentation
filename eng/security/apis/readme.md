@@ -594,15 +594,20 @@
 
 **Client API:** TPP
 
-| Operation | API                              | Token Validated | Access Scope         | JWS Validated | consentId Validated | mTLS | Notes |
-| --------- | -------------------------------- | --------------- | -------------------- | ------------- | ------------------- | ---- | ----- |
-| POST      | /v1/recurring-consents           | Yes             | recurring-payments   | Yes           | No                  | Yes  |       |
-| GET       | /v1/recurring-consents/\{ID\}    | Yes             | recurring-payments   | Yes           | No                  | Yes  |       |
-| PATCH     | /v1/recurring-consents/\{ID\}    | Yes             | recurring-payments   | Yes           | No                  | Yes  |       |
-| POST      | /v1/pix/recurring-payments       | Yes             | recurring-payments   | Yes           | Yes                 | Yes  |       |
-| GET       | /v1/pix/recurring-payments       | Yes             | recurring-payments   | No            | No                  | Yes  |       |
-| GET       | /v1/pix/recurring-payments/\{ID\}| Yes             | recurring-payments   | No            | No                  | Yes  |       |
-| PATCH     | /v1/pix/recurring-payments/\{ID\}| Yes             | recurring-payments   | No            | No                  | Yes  |       |
+| Operation | API                               | Token Validated | Access Scope       | JWS Validated | consentId Validated | mTLS | Notes |
+| --------- | --------------------------------- | --------------- | ------------------ | ------------- | ------------------- | ---- | ----- |
+| POST      | /v1/recurring-consents            | Yes             | recurring-payments | Yes           | No                  | Yes  |       |
+| GET       | /v1/recurring-consents/\{ID\}     | Yes             | recurring-payments | Yes           | No                  | Yes  |       |
+| PATCH     | /v1/recurring-consents/\{ID\}     | Yes             | recurring-payments | Yes           | No                  | Yes  |       |
+| POST      | /v1/pix/recurring-payments        | Yes             | recurring-payments | Yes           | Yes                 | Yes  |       |
+| GET       | /v1/pix/recurring-payments        | Yes             | recurring-payments | No            | No                  | Yes  |       |
+| GET       | /v1/pix/recurring-payments/\{ID\} | Yes             | recurring-payments | No            | No                  | Yes  |       |
+| PATCH     | /v1/pix/recurring-payments/\{ID\} | Yes             | recurring-payments | No            | No                  | Yes  |       |
+| POST      | /v2/recurring-consents            | Yes             | recurring-payments | Yes           | No                  | Yes  |       |
+| GET       | /v2/recurring-consents/\{ID\}     | Yes             | recurring-payments | Yes           | No                  | Yes  |       |
+| POST      | /v2/pix/recurring-payments        | Yes             | recurring-payments | Yes           | Yes                 | Yes  |       |
+| GET       | /v2/pix/recurring-payments        | Yes             | recurring-payments | No            | No                  | Yes  |       |
+| GET       | /v2/pix/recurring-payments/\{ID\} | Yes             | recurring-payments | No            | No                  | Yes  |       |
 
 ## Consent
 
