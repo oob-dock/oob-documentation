@@ -345,7 +345,7 @@
           ]
         },
         "lastRetryRecurringPaymentIds": {
-            "$ref": "../common/common-schema.json#/$defs/LastRetryRecurringPaymentIds"
+          "$ref": "../../common/common-payment-schema.json#/$defs/LastRetryRecurringPaymentIds"
         } 
       }
     },

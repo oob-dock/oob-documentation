@@ -74,6 +74,9 @@
                 },
                 "consentOwner": {
                     "$ref": "./common-consent-schema.json#/$defs/ConsentOwner"
+                },
+                "lastRetryRecurringPaymentIds": {
+                    "$ref": "../common-payment-schema.json#/$defs/LastRetryRecurringPaymentIds"
                 }
             },
             "additionalProperties": false
