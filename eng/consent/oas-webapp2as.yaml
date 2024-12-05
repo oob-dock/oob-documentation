@@ -29,7 +29,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseCommand"
+                $ref: "#/components/schemas/ResponseCommandAuth"
         default:
           description: Unexpected error.
           content:
@@ -53,7 +53,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseCommand"
+                $ref: "#/components/schemas/ResponseCommandAuth"
         "404":
           description: Command not found
         default:
@@ -78,7 +78,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseCommand"
+                $ref: "#/components/schemas/ResponseCommandAuth"
         "404":
           description: Command not found
         default:
@@ -138,7 +138,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/ResponseCommand"
+                $ref: "#/components/schemas/ResponseCommandConsent"
         default:
           description: Unexpected error.
           content:
@@ -170,12 +170,17 @@ components:
       type: object
       required:
         - iat
+        - exp
         - jti
         - cpf
       properties:
         iat:
           type: integer
           description: epoch of JWT issuance
+          example: 1618664738
+        exp:
+          type: integer
+          description: epoch of JWT validity
           example: 1618664738
         jti:
           type: string
@@ -256,7 +261,6 @@ components:
           type: string
           description: Level required in authentication
           enum:
-            - urn:brasil:openbanking:loa3
             - urn:brasil:openbanking:loa2
         jti:
           type: string
@@ -282,7 +286,9 @@ components:
               type: string
               description: URL of the institution brand logo
         consent:
-          $ref: '#/components/schemas/ConsentCustomerAcceptance'
+          oneOf:
+            - $ref: '#/components/schemas/ConsentCustomerDataSharing'
+            - $ref: '#/components/schemas/ConsentCustomerPayment'
         permissions:
           allOf:
             - $ref: '#/components/schemas/ResponseDomainPermissionSchema'
@@ -333,8 +339,6 @@ components:
       allOf:
         - $ref: "#/components/schemas/Redirect"
       properties:
-        consent:
-          $ref: '#/components/schemas/ConsentCustomerAcceptance'
         type:
           type: string
           description: Error type
@@ -351,6 +355,8 @@ components:
             - INVALID_PAYMENT_DATA
             - INVALID_ENROLLMENT_INFORMATION
             - GENERIC_ERROR
+            - OIDC_ERROR
+            - HANDOFF_ABORTED
         message:
           type: string
           description: Error message to be displayed on the screen before the final redirect
@@ -374,8 +380,13 @@ components:
       type: object
       allOf:
         - $ref: "#/components/schemas/Redirect"
-    ResponseCommand:
+    ResponseCommandAuth:
       type: object
+      required:
+        - command
+        - commandId
+        - tpp
+        - type
       properties:
         command:
           type: string
@@ -388,11 +399,6 @@ components:
           type: string
           description: Command ID to be used in the response
           maxLength: 40
-        type:
-          type: string
-          enum:
-            - DATA_SHARING
-            - PAYMENT
         tpp:
           type: object
           description: TPP information
@@ -403,6 +409,82 @@ components:
             logoUrl:
               type: string
               description: URL of the logo (SVG)
+        type:
+          type: string
+          enum:
+            - DATA_SHARING
+            - PAYMENT
+            - ENROLLMENT
+        authenticateCommand:
+          $ref: '#/components/schemas/AuthenticateCommand'
+        errorCommand:
+          $ref: '#/components/schemas/ErrorCommand'
+    ResponseCommandConsent:
+      type: object
+      required:
+        - command
+        - commandId
+        - tpp
+      properties:
+        command:
+          type: string
+          enum:
+            - authenticate
+            - consent
+            - error
+            - completed
+        commandId:
+          type: string
+          description: Command ID to be used in the response
+          maxLength: 40
+        tpp:
+          type: object
+          description: TPP information
+          properties:
+            name:
+              type: string
+              description: "TPP name"
+            logoUrl:
+              type: string
+              description: URL of the logo (SVG)
+        errorCommand:
+          $ref: '#/components/schemas/ErrorCommand'
+        completedCommand:
+          $ref: '#/components/schemas/CompletedCommand'
+    ResponseCommand:
+      type: object
+      required:
+        - command
+        - commandId
+        - tpp
+      properties:
+        command:
+          type: string
+          enum:
+            - authenticate
+            - consent
+            - error
+            - completed
+        commandId:
+          type: string
+          description: Command ID to be used in the response
+          maxLength: 40
+        tpp:
+          type: object
+          description: TPP information
+          properties:
+            name:
+              type: string
+              description: "TPP name"
+            logoUrl:
+              type: string
+              description: URL of the logo (SVG)
+        type:
+          type: string
+          enum:
+            - DATA_SHARING
+            - PAYMENT
+            - ENROLLMENT
         authenticateCommand:
           $ref: '#/components/schemas/AuthenticateCommand'
         consentCommand:
@@ -411,6 +493,569 @@ components:
           $ref: '#/components/schemas/ErrorCommand'
         completedCommand:
           $ref: '#/components/schemas/CompletedCommand'
+    ConsentCustomerDataSharing:
+      description: Consent data sharing details
+      type: object
+      required:
+        - type
+        - brandId
+        - creationDateTime
+        - tpp
+        - externalId
+        - loggedUser
+      properties:
+        type:
+          description: Consent type
+          type: string
+          enum:
+            - DATA_SHARING
+        brandId:
+          type: string
+          description: Identifier of the brand reported by the Open Banking participant
+          example:
+            - cbanco
+          minLength: 1
+          maxLength: 50
+        creationDateTime:
+          description: Date and time when the consent was created. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          format: date-time
+          example:
+            - "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        startDateTime:
+          description: Date and time when the consent should become valid. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+
+            [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
+          type: string
+          format: date-time
+          example:
+            - "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        tpp:
+          type: object
+          description: Details of the TPP that requested the consent
+          additionalProperties: false
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Name of the TPP that requested the consent
+              example:
+                - GuiaBolsa
+              maxLength: 100
+        externalId:
+          type: string
+          description: Consent identifier used outside the OOB platform
+          example:
+            - urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          maxLength: 100
+        loggedUser:
+          type: object
+          description: User (natural person) logged into the Payment Initiating institution.
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: User's official identification document.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: User's official identification document number.
+                  example:
+                    - "11111111111"
+                  pattern: ^\d{11}$
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Type of user's official identification document.
+                  example:
+                    - CPF
+                  pattern: ^[A-Z]{3}$
+        businessDocumentType:
+          type: object
+          description: User (legal entity) logged into the Payment Initiating institution. [Restriction] Mandatory if the logged user at the Payment Initiating institution is a CNPJ (legal entity).
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official identification document of the legal entity holder.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 14
+                  description: Official identification document number of the legal entity holder.
+                  example:
+                    - "11111111111111"
+                  pattern: ^\d{14}$
+                rel:
+                  type: string
+                  maxLength: 4
+                  description: Type of official identification document of the legal entity holder.
+                  example:
+                    - CNPJ
+                  pattern: ^[A-Z]{4}$
+        resources:
+          description: List of resources that can be selected by the customer to be used in the consent. Object used in consent acceptance interfaces
+          type: array
+          items:
+            type: object
+            description: Resource selectable by the customer
+            properties:
+              id:
+                type: string
+                description: field in GUID format
+                example:
+                  - 49fe29f1-95a9-4521-8f48-a9700e392b48
+                pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
+                maxLength: 36
+              type:
+                description: Resource type
+                type: string
+                enum:
+                  - ACCOUNT
+                  - CREDIT_CARD_ACCOUNT
+                example:
+                  - ACCOUNT
+              name:
+                type: array
+                description: "Array of key-value pairs with the resource name, this data will be presented in the frontends in the format: 'Key1: Value1 Key2: Value2 ...'"
+                items:
+                  type: object
+                  required:
+                    - key
+                  properties:
+                    key:
+                      type: string
+                      example:
+                        - Credit card
+                    value:
+                      type: string
+                      example:
+                        - 2134 XXXX XXXX 3123
+                minItems: 1
+                maxItems: 10
+              balanceCurrency:
+                description: Resource balance currency.
+                type: string
+                example:
+                  - BRL
+              balanceAmount:
+                description: Resource balance amount.
+                type: number
+                example:
+                  - 3192.32
+              hasMultipleAuthorisers:
+                type: boolean
+                example:
+                  - "false"
+              rejectionReason:
+                description: Object indicating the reason for resource rejection
+                type: object
+                required:
+                  - code
+                properties:
+                  code:
+                    description: Code determining the reason for the resource being denied
+                    type: string
+                    enum:
+                      - VALOR_INVALIDO
+                      - NAO_INFORMADO
+                      - FALHA_INFRAESTRUTURA
+                      - CONTAS_ORIGEM_DESTINO_IGUAIS
+                      - CONTA_NAO_PERMITE_PAGAMENTO
+                      - SALDO_INSUFICIENTE
+                      - VALOR_ACIMA_LIMITE
+                      - CONTA_DIVERGENTE_DA_SOLICITADA
+                      - QRCODE_INVALIDO
+                  detail:
+                    type: string
+                    description: Description of the resource rejection reason. It will be filled only if a rejection reason is sent by the connector.
+            additionalProperties: false
+          maxItems: 1000
+        expirationDateTime:
+          description: Permission expiration date and time. Mandatory field, reflects the consent's expiration date. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          maxLength: 20
+          format: date-time
+          example:
+            - "2021-05-21T08:30:00Z"
+        permissions:
+          type: array
+          items:
+            description: Only for data sharing consents. Specifies the types of access permissions to the APIs within the scope of Open Banking Brazil - Phase 2, according to the consent blocks provided by the user and necessary for accessing each API endpoint.
+            type: string
+            enum:
+              - ACCOUNTS_READ
+              - ACCOUNTS_BALANCES_READ
+              - ACCOUNTS_TRANSACTIONS_READ
+              - ACCOUNTS_OVERDRAFT_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ
+              - CREDIT_CARDS_ACCOUNTS_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ
+              - CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ
+              - CUSTOMERS_PERSONAL_ADITTIONALINFO_READ
+              - CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ
+              - CUSTOMERS_BUSINESS_ADITTIONALINFO_READ
+              - FINANCINGS_READ
+              - FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - FINANCINGS_PAYMENTS_READ
+              - FINANCINGS_WARRANTIES_READ
+              - INVOICE_FINANCINGS_READ
+              - INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - INVOICE_FINANCINGS_PAYMENTS_READ
+              - INVOICE_FINANCINGS_WARRANTIES_READ
+              - LOANS_READ
+              - LOANS_SCHEDULED_INSTALMENTS_READ
+              - LOANS_PAYMENTS_READ
+              - LOANS_WARRANTIES_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ
+              - RESOURCES_READ
+          minItems: 1
+          maxItems: 30
+          example:
+            - - ACCOUNTS_READ
+              - ACCOUNTS_OVERDRAFT_LIMITS_READ
+              - RESOURCES_READ
+        failingResources:
+          type: array
+          items:
+            description: Optional list of resources that failed in discovery
+            type: string
+            enum:
+              - CREDIT_CARD_ACCOUNT
+              - ACCOUNT
+          maxItems: 1000
+          example:
+            - PAYMENT
+      additionalProperties: false
+    ConsentCustomerPayment:
+      description: Consent payment details
+      type: object
+      required:
+        - type
+        - brandId
+        - creationDateTime
+        - tpp
+        - externalId
+        - loggedUser
+      properties:
+        type:
+          description: Consent type
+          type: string
+          enum:
+            - PAYMENT
+            - ENROLLMENT
+        brandId:
+          type: string
+          description: Identifier of the brand reported by the Open Banking participant
+          example:
+            - cbanco
+          minLength: 1
+          maxLength: 50
+        creationDateTime:
+          description: Date and time when the consent was created. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          format: date-time
+          example:
+            - "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        startDateTime:
+          description: Date and time when the consent should become valid. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+
+            [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
+          type: string
+          format: date-time
+          example:
+            - "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        tpp:
+          type: object
+          description: Details of the TPP that requested the consent
+          additionalProperties: false
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Name of the TPP that requested the consent
+              example:
+                - GuiaBolsa
+              maxLength: 100
+        externalId:
+          type: string
+          description: Consent identifier used outside the OOB platform
+          example:
+            - urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          maxLength: 100
+        loggedUser:
+          type: object
+          description: User (natural person) logged into the Payment Initiating institution.
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: User's official identification document.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: User's official identification document number.
+                  example:
+                    - "11111111111"
+                  pattern: ^\d{11}$
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Type of user's official identification document.
+                  example:
+                    - CPF
+                  pattern: ^[A-Z]{3}$
+        businessDocumentType:
+          type: object
+          description: User (legal entity) logged into the Payment Initiating institution. [Restriction] Mandatory if the logged user at the Payment Initiating institution is a CNPJ (legal entity).
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official identification document of the legal entity holder.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 14
+                  description: Official identification document number of the legal entity holder.
+                  example:
+                    - "11111111111111"
+                  pattern: ^\d{14}$
+                rel:
+                  type: string
+                  maxLength: 4
+                  description: Type of official identification document of the legal entity holder.
+                  example:
+                    - CNPJ
+                  pattern: ^[A-Z]{4}$
+        resources:
+          description: List of resources that can be selected by the customer to be used in the consent. Object used in consent acceptance interfaces
+          type: array
+          items:
+            type: object
+            description: Resource selectable by the customer
+            properties:
+              id:
+                type: string
+                description: field in GUID format
+                example:
+                  - 49fe29f1-95a9-4521-8f48-a9700e392b48
+                pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
+                maxLength: 36
+              type:
+                description: Resource type
+                type: string
+                enum:
+                  - PAYMENT
+                example:
+                  - PAYMENT
+              name:
+                type: array
+                description: "Array of key-value pairs with the resource name, this data will be presented in the frontends in the format: 'Key1: Value1 Key2: Value2 ...'"
+                items:
+                  type: object
+                  required:
+                    - key
+                  properties:
+                    key:
+                      type: string
+                      example:
+                        - Credit card
+                    value:
+                      type: string
+                      example:
+                        - 2134 XXXX XXXX 3123
+                minItems: 1
+                maxItems: 10
+              balanceCurrency:
+                description: Resource balance currency.
+                type: string
+                example:
+                  - BRL
+              balanceAmount:
+                description: Resource balance amount.
+                type: number
+                example:
+                  - 3192.32
+              hasMultipleAuthorisers:
+                type: boolean
+                example:
+                  - "false"
+              rejectionReason:
+                description: Object indicating the reason for resource rejection
+                type: object
+                required:
+                  - code
+                properties:
+                  code:
+                    description: Code determining the reason for the resource being denied
+                    type: string
+                    enum:
+                      - VALOR_INVALIDO
+                      - NAO_INFORMADO
+                      - FALHA_INFRAESTRUTURA
+                      - CONTAS_ORIGEM_DESTINO_IGUAIS
+                      - CONTA_NAO_PERMITE_PAGAMENTO
+                      - SALDO_INSUFICIENTE
+                      - VALOR_ACIMA_LIMITE
+                      - CONTA_DIVERGENTE_DA_SOLICITADA
+                      - QRCODE_INVALIDO
+                  detail:
+                    type: string
+                    description: Description of the resource rejection reason. It will be filled only if a rejection reason is sent by the connector.
+            additionalProperties: false
+          maxItems: 1000
+        expirationDateTime:
+          description: Permission expiration date and time. Mandatory field, reflects the consent's expiration date. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          maxLength: 20
+          format: date-time
+          example:
+            - "2021-05-21T08:30:00Z"
+        additionalInformation:
+          description: Additional information entered by the paying user in Automatic Payment consents
+          type: string
+          example: 'My recurrence'
+          pattern: '[\w\W\s]*'
+          maxLength: 140
+        creditors:
+          type: array
+          description: List of possible payment recipients
+          items:
+            allOf:
+              - $ref: '#/components/schemas/Creditor'
+        creditor:
+          deprecated: true
+          description: Will be replaced in the future by the creditors object with the list of possible payment recipients.
+          allOf:
+            - $ref: '#/components/schemas/Creditor'
+        payment:
+          $ref: '#/components/schemas/PixPaymentConsent'
+        recurringConfiguration:
+          $ref: '#/components/schemas/AutomaticPayment'
+        debtorAccount:
+          type: object
+          description: |
+            Only for payment consents and enrollment consents. Object containing the identification of the payer's source account.
+            The payer's source account information can be brought in the consent to the holder if the initiator has collected this information from the customer. Otherwise, it will be collected by the holder and brought to the initiator in response to the payment creation.
+          required:
+            - ispb
+            - number
+            - accountType
+          properties:
+            ispb:
+              type: string
+              minLength: 8
+              maxLength: 8
+              pattern: ^[0-9]{8}$
+              example:
+                - "12345678"
+              description: |
+                Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payment System) participant using only numbers.
+            issuer:
+              type: string
+              maxLength: 4
+              pattern: ^\d{4}$
+              example:
+                - "1774"
+              description: |
+                Agency code issuing the account without digit.
+                (The agency is the branch intended for serving customers, the general public, and credit union members,
+                in the institution's activities, and cannot be mobile or transitory).
+                [Restriction] Mandatory for the following account types: CACC (CURRENT_ACCOUNT), SVGS (SAVINGS_ACCOUNT), and SLRY (SALARY_ACCOUNT).
+            number:
+              type: string
+              minLength: 3
+              maxLength: 20
+              pattern: ^\d{3,20}$
+              example:
+                - "1234567890"
+              description: |
+                Must be filled with the payer's transactional account number, with a check digit (if it exists),
+                if there is an alphanumeric value, it should be converted to 0.
+            accountType:
+              type: string
+              maxLength: 4
+              enum:
+                - CACC
+                - SLRY
+                - SVGS
+                - TRAN
+              example:
+                - CACC
+              description: |
+                Types of accounts used for payment.
+                Traditional modalities provided by Resolution 4.753, not including linked accounts,
+                accounts of residents abroad, foreign currency accounts, and corresponding electronic money accounts.
+                Here is a description of each ENUM value.
+                CACC - Current - Current Account.
+                SLRY - Salary - Salary Account.
+                SVGS - Savings - Savings Account.
+                TRAN - TransactingAccount - Prepaid Payment Account.
+          additionalProperties: false
+        permissions:
+          type: array
+          items:
+            description: Only for enrollment consents. Specifies the types of access permissions to the APIs within the scope of Open Banking Brazil - Phase 3, according to the consent blocks provided by the user and necessary for accessing each API endpoint.
+            type: string
+            enum:
+              - PAYMENTS_INITIATE
+          minItems: 1
+          maxItems: 30
+          example:
+            - - PAYMENTS_INITIATE
+        failingResources:
+          type: array
+          items:
+            description: Optional list of resources that failed in discovery
+            type: string
+            enum:
+              - PAYMENT
+          maxItems: 1000
+          example:
+            - PAYMENT
+      additionalProperties: false
     ConsentCustomerAcceptance:
       description: Consent details
       type: object
@@ -797,187 +1442,161 @@ components:
       additionalProperties: false
     ScheduleCustom:
       type: object
+      description: |
+        [Restriction] The dates sent in the dates list (array “dates”) cannot be repeated. 
+        If repeated dates are sent, the holder must reject the consent creation, informing the error INVALID_PARAMETER.
       required:
-        - custom
+        - dates
+        - additionalInformation
       properties:
-        custom:
-          type: object
+        dates:
+          description: Defines the days on which settlements are planned to occur.
+          type: array
+          maxItems: 60
+          minItems: 2
+          example: [ '2023-08-23', '2023-09-26' ]
+          items:
+            type: string
+            format: date
+            pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+            maxLength: 10
+            example: '2023-08-23'
+        additionalInformation:
+          type: string
           description: |
-            [Restriction] The dates sent in the dates list (array “dates”) cannot be repeated. 
-            If repeated dates are sent, the holder must reject the consent creation, informing the error INVALID_PARAMETER.
-          required:
-            - dates
-            - additionalInformation
-          properties:
-            dates:
-              description: Defines the days on which settlements are planned to occur.
-              type: array
-              maxItems: 60
-              minItems: 2
-              example: [ '2023-08-23', '2023-09-26' ]
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: '2023-08-23'
-            additionalInformation:
-              type: string
-              description: |
-                Free text for the Initiator to fill out in a way that is understandable to the approving/paying user. 
-                The text can be used by the holder to display the transaction summary during the approval of the approving/paying user.
-              pattern: '[\w\W\s]*'
-              maxLength: 255
-              example: Every Thursday and Sunday for 6 months
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: '2023-08-23'
+            Free text for the Initiator to fill out in a way that is understandable to the approving/paying user. 
+            The text can be used by the holder to display the transaction summary during the approval of the approving/paying user.
+          pattern: '[\w\W\s]*'
+          maxLength: 255
+          example: Every Thursday and Sunday for 6 months
+        scheduleDates:
+          type: array
+          items:
+            type: string
+            format: date
+            pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+            maxLength: 10
+            example: '2023-08-23'
     ScheduleMonthly:
       type: object
       required:
-        - monthly
+        - dayOfMonth
+        - startDate
+        - quantity
       properties:
-        monthly:
-          type: object
-          required:
-            - dayOfMonth
-            - startDate
-            - quantity
-          properties:
-            dayOfMonth:
-              description: Defines the day of the month planned for the settlements to occur.
-              type: integer
-              minimum: 1
-              maximum: 31
-              example: 10
-            startDate:
-              description: Defines the start date of the recurrence.
-              type: string
-              format: date
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              maxLength: 10
-              example: '2023-08-23'
-            quantity:
-              description: Defines the number of payments that will be sent for settlement.
-              type: integer
-              format: int32
-              minimum: 2
-              maximum: 24
-              example: 24
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: '2023-08-23'
+        dayOfMonth:
+          description: Defines the day of the month planned for the settlements to occur.
+          type: integer
+          minimum: 1
+          maximum: 31
+          example: 10
+        startDate:
+          description: Defines the start date of the recurrence.
+          type: string
+          format: date
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          maxLength: 10
+          example: '2023-08-23'
+        quantity:
+          description: Defines the number of payments that will be sent for settlement.
+          type: integer
+          format: int32
+          minimum: 2
+          maximum: 24
+          example: 24
+        scheduleDates:
+          type: array
+          items:
+            type: string
+            format: date
+            pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+            maxLength: 10
+            example: '2023-08-23'
     ScheduleDaily:
       type: object
       required:
-        - daily
+        - startDate
+        - quantity
       properties:
-        daily:
-          type: object
-          required:
-            - startDate
-            - quantity
-          properties:
-            startDate:
-              description: Defines the start date of the recurrence.
-              type: string
-              format: date
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              maxLength: 10
-              example: '2023-08-23'
-            quantity:
-              description: Defines the number of payments that will be sent for settlement.
-              type: integer
-              format: int32
-              minimum: 2
-              maximum: 60
-              example: 3
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: '2023-08-23'
+        startDate:
+          description: Defines the start date of the recurrence.
+          type: string
+          format: date
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          maxLength: 10
+          example: '2023-08-23'
+        quantity:
+          description: Defines the number of payments that will be sent for settlement.
+          type: integer
+          format: int32
+          minimum: 2
+          maximum: 60
+          example: 3
+        scheduleDates:
+          type: array
+          items:
+            type: string
+            format: date
+            pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+            maxLength: 10
+            example: '2023-08-23'
     ScheduleWeekly:
       type: object
       required:
-        - weekly
+        - dayOfWeek
+        - startDate
+        - quantity
       properties:
-        weekly:
-          type: object
-          required:
-            - dayOfWeek
-            - startDate
-            - quantity
-          properties:
-            dayOfWeek:
-              description: Defines the day of the week planned for the settlements to occur.
-              type: string
-              enum:
-                - SEGUNDA_FEIRA
-                - TERCA_FEIRA
-                - QUARTA_FEIRA
-                - QUINTA_FEIRA
-                - SEXTA-FEIRA
-                - SABADO
-                - DOMINGO
-              example: QUINTA_FEIRA
-            startDate:
-              description: Defines the start date of the recurrence.
-              type: string
-              format: date
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              maxLength: 10
-              example: '2023-08-23'
-            quantity:
-              description: Defines the number of payments that will be sent for settlement.
-              type: integer
-              format: int32
-              minimum: 2
-              maximum: 60
-              example: 10
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: '2023-08-23'
+        dayOfWeek:
+          description: Defines the day of the week planned for the settlements to occur.
+          type: string
+          enum:
+            - SEGUNDA_FEIRA
+            - TERCA_FEIRA
+            - QUARTA_FEIRA
+            - QUINTA_FEIRA
+            - SEXTA-FEIRA
+            - SABADO
+            - DOMINGO
+          example: QUINTA_FEIRA
+        startDate:
+          description: Defines the start date of the recurrence.
+          type: string
+          format: date
+          pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+          maxLength: 10
+          example: '2023-08-23'
+        quantity:
+          description: Defines the number of payments that will be sent for settlement.
+          type: integer
+          format: int32
+          minimum: 2
+          maximum: 60
+          example: 10
+        scheduleDates:
+          type: array
+          items:
+            type: string
+            format: date
+            pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+            maxLength: 10
+            example: '2023-08-23'
     ScheduleSingle:
       type: object
       required:
-        - single
+        - date
       properties:
-        single:
-          type: object
-          description: Defines the single scheduling policy.
-          required:
-            - date
-          properties:
-            date:
-              type: string
-              format: date
-              maxLength: 10
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              example: '2023-08-23'
-              description: |
-                Defines the target date for payment settlement.
-                The Brasília time zone should be used to create and rationalize the data in this field.
+          date:
+            type: string
+            format: date
+            maxLength: 10
+            pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+            example: '2023-08-23'
+            description: |
+              Defines the target date for payment settlement.
+              The Brasília time zone should be used to create and rationalize the data in this field.
 
-                [Restriction] This field must always be at least D+1 calendar days, i.e., the day immediately following the consent date considering the Brasília time zone and must be at most D+730 calendar days from the consent date, also considering the Brasília time zone.
+              [Restriction] This field must always be at least D+1 calendar days, i.e., the day immediately following the consent date considering the Brasília time zone and must be at most D+730 calendar days from the consent date, also considering the Brasília time zone.
     ScheduleTypeEnum:
       enum:
         - SINGLE
@@ -1134,6 +1753,8 @@ components:
             The maximum term for consent should be two years from the consent creation date returned in its creation (field /data/creationDateTime). 
             Single payment scheduling should exclusively use the "single" object.
           properties:
+            type:
+              $ref: '#/components/schemas/ScheduleTypeEnum'
             single:
               $ref: '#/components/schemas/ScheduleSingle'
             daily:
@@ -1144,8 +1765,6 @@ components:
               $ref: '#/components/schemas/ScheduleMonthly'
             custom:
               $ref: '#/components/schemas/ScheduleCustom'
-            type:
-              $ref: '#/components/schemas/ScheduleTypeEnum'
           additionalProperties: false
         currency:
           type: string
