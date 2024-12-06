@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2024-12-03 - v4.4.0
+
+- Inclusão do campo lastRetryRecurringPaymentIds para POST paymentV3
+- Inclusão de Pix Automático V2 no campo automatic de recurringConsent
+
 ### 2024-08-19 - v4.3.0
 
 - Incluisão do consentimento de JSR para pagamento na rota discoverPayments_v2

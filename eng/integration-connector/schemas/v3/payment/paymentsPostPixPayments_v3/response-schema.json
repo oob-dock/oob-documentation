@@ -343,7 +343,10 @@
           "examples": [
               "2021-01-01"
           ]
-        }
+        },
+        "lastRetryRecurringPaymentIds": {
+          "$ref": "../../common/common-payment-schema.json#/$defs/LastRetryRecurringPaymentIds"
+        } 
       }
     },
     "meta": {

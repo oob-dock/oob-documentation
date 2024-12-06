@@ -605,6 +605,9 @@
 | PATCH     | /v1/pix/recurring-payments/\{ID\}| Yes             | recurring-payments   | No            | No                  | Yes  |       |
 | POST      | /v2/recurring-consents           | Yes             | recurring-payments   | Yes           | No                  | Yes  |       |
 | GET       | /v2/recurring-consents/\{ID\}    | Yes             | recurring-payments   | Yes           | No                  | Yes  |       |
+| POST      | /v2/pix/recurring-payments        | Yes             | recurring-payments | Yes           | Yes                 | Yes  |       |
+| GET       | /v2/pix/recurring-payments        | Yes             | recurring-payments | No            | No                  | Yes  |       |
+| GET       | /v2/pix/recurring-payments/\{ID\} | Yes             | recurring-payments | No            | No                  | Yes  |       |
 
 ## Consent
 
