@@ -53,6 +53,9 @@
                             "$ref": "../common-payment-schema.json#/$defs/Automatic"
                         },
                         {
+                            "$ref": "../common-payment-schema.json#/$defs/AutomaticV2"
+                        },
+                        {
                             "$ref": "../common-payment-schema.json#/$defs/PostSweeping"
                         },
                         {

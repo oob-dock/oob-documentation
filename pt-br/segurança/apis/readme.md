@@ -604,6 +604,8 @@
 | GET      | /v1/pix/recurring-payments       | Sim          | recurring-payments | Não        | Não              | Sim  |     |
 | GET      | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
 | PATCH    | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| POST     | /v2/recurring-consents           | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| GET      | /v2/recurring-consents/\{ID\}    | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
 
 ## Consent
 
