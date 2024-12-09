@@ -1002,7 +1002,115 @@ components:
       type: object
       description: Campo destinado a configuração dos diferentes produtos de pagamentos recorrentes.
       oneOf:
+        - $ref: '#/components/schemas/Automatic'
         - $ref: '#/components/schemas/Sweeping'
+    Automatic:
+      type: object
+      required:
+        - automatic
+      properties:
+        automatic:
+          type: object
+          description: Definição da configuração de recorrência para pagamentos automáticos
+          required:
+            - contractId
+            - period
+            - contractDebtor
+            - isRetryAccepted
+          properties:
+            contractId:
+              type: string
+              pattern: ^[a-zA-Z0-9]{1,35}$
+              minLength: 1
+              maxLength: 35
+              example: XE00038166201907261559y6j6
+              description: Identificador do contrato de transação
+            fixedAmount:
+              type: string
+              pattern: ^((\d{1,16}\.\d{2}))$
+              minLength: 4
+              maxLength: 19
+              example: "100000.12"
+              description: |
+                Valor fixo de cobrança, caso preenchido, representa um consentimento para pagamentos de valores fixos, ou não sujeitos a alteração durante a vigência do consentimento. 
+
+                [Restrição] Excludente com o campo “/data/recurringConfiguration/automatic/maximumVariableAmount”
+            maximumVariableAmount:
+              type: string
+              pattern: ^((\d{1,16}\.\d{2}))$
+              minLength: 4
+              maxLength: 19
+              example: "1000000.12"
+              description: |
+                Valor máximo permitido por cobrança, caso preenchido, representa um consentimento para pagamentos de valores variáveis. 
+
+                [Restrição] Excludente com o campo “/data/recurringConfiguration/automatic/fixedAmount”
+            period:
+              type: string
+              enum:
+                - SEMANAL
+                - MENSAL
+                - ANUAL
+                - SEMESTRAL
+                - TRIMESTRAL
+              example: SEMANAL
+              description: |
+                Define a periodicidade permitida para realização de transações
+                - SEMANAL
+                - MENSAL
+                - ANUAL
+                - SEMESTRAL
+                - TRIMESTRAL
+            month:
+              type: string
+              enum:
+                - JANEIRO
+                - FEVEREIRO
+                - MARCO
+                - ABRIL
+                - MAIO
+                - JUNHO
+                - JULHO
+                - AGOSTO
+                - SETEMBRO
+                - OUTUBRO
+                - NOVEMBRO
+                - DEZEMBRO
+              example: JANEIRO
+              description: |
+                Mês previstos para ocorrer transações. Caso consentimento seja para pagamentos trimestrais ou semestrais, o campo representa o mês da primeira cobrança.
+                - JANEIRO
+                - FEVEREIRO
+                - MARCO
+                - ABRIL
+                - MAIO
+                - JUNHO
+                - JULHO
+                - AGOSTO
+                - SETEMBRO
+                - OUTUBRO
+                - NOVEMBRO
+                - DEZEMBRO
+
+                [Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a TRIMESTRAL, SEMESTRAL ou ANUAL
+            contractDebtor:
+              $ref: "#/components/schemas/ContractDebtor"
+            firstPayment:
+              $ref: "#/components/schemas/FirstPayment"
+            minimumVariableAmount:
+              type: string
+              pattern: ^((\d{1,16}\.\d{2}))$
+              minLength: 4
+              maxLength: 19
+              example: "100000.12"
+              description: |
+                Valor definido pelo usuário recebedor. 
+                Se o usuário pagador atribuir um valor máximo para os pagamentos daquela autorização, ele não poderá ser inferior ao valor mínimo (piso) definido pelo usuário recebedor. 
+                Não pode ser preenchido nas autorizações de valor fixo.
+            isRetryAccepted:
+              type: boolean
+              description: Indica se é permitido pelo cliente recebedor fazer tentativas de pagamento (extradia), conforme as regras estabelecidas no arranjo Pix.
+              example: false
     Sweeping:
       type: object
       required:
@@ -1311,6 +1419,152 @@ components:
               additionalProperties: false
           additionalProperties: false
       additionalProperties: false
+    ContractDebtor:
+      type: object
+      description: Informações sobre o cliente devedor do contrato.
+      required:
+        - name
+        - document
+      properties:
+        name:
+          type: string
+          pattern: ^([A-Za-zÀ-ÖØ-öø-ÿ,.@:&*+_<>()!?/\\$%\d' -]+)$
+          maxLength: 120
+          example: Policarpo Quaresma
+          description: Em caso de pessoa natural deve ser informado o nome completo do titular devedor do contrato.
+        document:
+          type: object
+          required:
+            - identification
+            - rel
+          properties:
+            identification:
+              type: string
+              maxLength: 14
+              description: Número do documento de identificação oficial do cliente devedor do contrato.
+              example: "11111111111111"
+              pattern: ^\d{14}$
+            rel:
+              type: string
+              maxLength: 4
+              description: Tipo do documento de identificação oficial do cliente devedor do contrato.
+              example: CNPJ
+              pattern: ^[A-Z]{4}$
+    FirstPayment:
+      type: object
+      description: |
+        Definições para o primeiro pagamento. É considerado como o pagamento da adesão ao serviço pelo usuário pagador.
+
+        - A conta de crédito informada deve pertencer ao mesmo CNPJ informado no campo “/data/creditors/cpfCnpj”
+        - A conta de crédito informada no momento do primeiro pagamento deve ser a mesma informada dentro deste objeto. 
+        Caso não respeitado, o detentor deve rejeitar o pagamento com o motivo DETALHE_PAGAMENTO_INVALIDO, sincronamente (HTTP 422) ou assincronamente (HTTP 200)
+      required:
+        - type
+        - date
+        - currency
+        - amount
+        - creditorAccount
+      properties:
+        type:
+          $ref: "#/components/schemas/EnumPaymentType"
+        date:
+          type: string
+          format: date
+          maxLength: 10
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
+          example: 2021-01-01
+          description: |
+            Define a data alvo da liquidação do pagamento.
+            O fuso horário de Brasília deve ser utilizado para criação e racionalização sobre os dados deste campo.
+        currency:
+          type: string
+          maxLength: 3
+          pattern: ^([A-Z]{3})$
+          example: BRL
+          description: |
+            Código da moeda nacional segundo modelo ISO-4217, ou seja, 'BRL'.
+            Todos os valores monetários informados estão representados com a moeda vigente do Brasil.
+        amount:
+          type: string
+          minLength: 4
+          maxLength: 19
+          pattern: ^((\d{1,16}\.\d{2}))$
+          example: "100000.12"
+          description: |
+            Valor da transação com 2 casas decimais.
+        remittanceInformation:
+          type: string
+          maxLength: 140
+          pattern: "[\\w\\W\\s]*"
+          example: Pagamento da nota RSTO035-002
+          description: |
+            Deve ser preenchido sempre que o usuário pagador inserir alguma informação adicional em um pagamento, a ser enviada ao recebedor.
+        creditorAccount:
+          $ref: "#/components/schemas/PostCreditorAccount"
+    PostCreditorAccount:
+      type: object
+      description: |
+        Recebe os dados de conta do usuário recebedor. 
+      required:
+        - ispb
+        - issuer
+        - number
+        - accountType
+      properties:
+        ispb:
+          type: string
+          minLength: 8
+          maxLength: 8
+          pattern: ^[0-9]{8}$
+          example: "12345678"
+          description: |
+            Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.
+        issuer:
+          type: string
+          minLength: 1
+          maxLength: 4
+          pattern: ^[0-9]{1,4}$
+          example: "1774"
+          description: |
+            Código da Agência emissora da conta sem dígito. 
+            (Agência é a dependência destinada ao atendimento aos clientes, ao público em geral e aos associados de cooperativas de crédito, 
+            no exercício de atividades da instituição, não podendo ser móvel ou transitória).
+
+            [Restrição] Preenchimento obrigatório para os seguintes tipos de conta: CACC (CONTA_DEPOSITO_A_VISTA) e SVGS (CONTA_POUPANCA).
+        number:
+          type: string
+          minLength: 1
+          maxLength: 20
+          pattern: ^[0-9]{1,20}$
+          example: "1234567890"
+          description: |
+            Deve ser preenchido com o número da conta transacional do usuário pagador, com dígito verificador (se este existir), 
+            se houver valor alfanumérico, este deve ser convertido para 0.
+        accountType:
+          $ref: "#/components/schemas/EnumAccountTypeConsents"
+    EnumAccountTypeConsents:
+      type: string
+      enum:
+        - CACC
+        - SVGS
+        - TRAN
+      example: CACC
+      description: |
+        Tipos de contas usadas para pagamento. 
+        Modalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, 
+        conta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.  
+        Segue descrição de cada valor do ENUM.
+
+        - CACC - Current - Conta Corrente.
+        - SVGS - Savings - Conta de Poupança.
+        - TRAN - TransactingAccount - Conta de Pagamento pré-paga.
+    EnumPaymentType:
+      type: string
+      enum:
+        - PIX
+      example: PIX
+      description: |
+        Este campo define o tipo de pagamento que será iniciado após a autorização do consentimento.
   parameters:
     CommandId:
       name: id

@@ -990,7 +990,112 @@ components:
       type: object
       description: Field for configuring different recurring payment products.
       oneOf:
+        - $ref: '#/components/schemas/Automatic'
         - $ref: '#/components/schemas/Sweeping'
+    Automatic:
+      type: object
+      required:
+        - automatic
+      properties:
+        automatic:
+          type: object
+          description: Definition of the recurrence configuration for automatic payments
+          required:
+            - contractId
+            - period
+            - contractDebtor
+            - isRetryAccepted
+          properties:
+            contractId:
+              type: string
+              pattern: ^[a-zA-Z0-9]{1,35}$
+              minLength: 1
+              maxLength: 35
+              example: XE00038166201907261559y6j6
+              description: Transaction contract identifier
+            fixedAmount:
+              type: string
+              pattern: ^((\d{1,16}\.\d{2}))$
+              minLength: 4
+              maxLength: 19
+              example: "100000.12"
+              description: |
+                Fixed charge amount, if filled, represents consent for fixed payments, or not subject to change during the consent period.
+                [Restriction] Exclusive with the field “/data/recurringConfiguration/automatic/maximumVariableAmount”
+            maximumVariableAmount:
+              type: string
+              pattern: ^((\d{1,16}\.\d{2}))$
+              minLength: 4
+              maxLength: 19
+              example: "1000000.12"
+              description: |
+                Maximum amount allowed per charge, if filled, represents consent for variable payments.
+                [Restriction] Exclusive with the field “/data/recurringConfiguration/automatic/fixedAmount”
+            period:
+              type: string
+              enum:
+              - SEMANAL
+              - MENSAL
+              - ANUAL
+              - SEMESTRAL
+              - TRIMESTRAL
+              example: SEMANAL
+              description: |
+                Defines the allowed periodicity for transactions
+                - SEMANAL
+                - MENSAL
+                - ANUAL
+                - SEMESTRAL
+                - TRIMESTRAL
+            month:
+              type: string
+              enum:
+              - JANEIRO
+              - FEVEREIRO
+              - MARCO
+              - ABRIL
+              - MAIO
+              - JUNHO
+              - JULHO
+              - AGOSTO
+              - SETEMBRO
+              - OUTUBRO
+              - NOVEMBRO
+              - DEZEMBRO
+              example: JANEIRO
+              description: |
+                Month expected for transactions. If consent is for quarterly or semi-annual payments, the field represents the month of the first charge.
+                - JANEIRO
+                - FEVEREIRO
+                - MARCO
+                - ABRIL
+                - MAIO
+                - JUNHO
+                - JULHO
+                - AGOSTO
+                - SETEMBRO
+                - OUTUBRO
+                - NOVEMBRO
+                - DEZEMBRO
+                [Restriction] Field must be sent when the field `/data/recurringConfiguration/automatic/period` is equal to TRIMESTRAL, SEMESTRAL or ANUAL
+            contractDebtor:
+              $ref: "#/components/schemas/ContractDebtor"
+            firstPayment:
+              $ref: "#/components/schemas/FirstPayment"
+            minimumVariableAmount:
+              type: string
+              pattern: ^((\d{1,16}\.\d{2}))$
+              minLength: 4
+              maxLength: 19
+              example: "100000.12"
+              description: |
+                Amount defined by the receiving user.
+                If the paying user assigns a maximum amount for payments of that authorization, it cannot be less than the minimum amount (floor) defined by the receiving user.
+                Cannot be filled in fixed amount authorizations.
+            isRetryAccepted:
+              type: boolean
+              description: Indicates whether the receiving customer is allowed to make payment attempts (extraday), according to the rules established in the Pix arrangement.
+              example: false     
     Sweeping:
       type: object
       required:
@@ -1299,6 +1404,150 @@ components:
               additionalProperties: false
           additionalProperties: false
       additionalProperties: false
+    ContractDebtor:
+      type: object
+      description: Information about the contract debtor client.
+      required:
+        - name
+        - document
+      properties:
+        name:
+          type: string
+          pattern: ^([A-Za-zÀ-ÖØ-öø-ÿ,.@:&*+_<>()!?/\\$%\d' -]+)$
+          maxLength: 120
+          example: Policarpo Quaresma
+          description: In case of a natural person, the full name of the contract debtor must be provided.
+        document:
+          type: object
+          required:
+            - identification
+            - rel
+          properties:
+            identification:
+              type: string
+              maxLength: 14
+              description: Official identification document number of the contract debtor.
+              example: "11111111111111"
+              pattern: ^\d{14}$
+            rel:
+              type: string
+              maxLength: 4
+              description: Type of official identification document of the contract debtor.
+              example: CNPJ
+              pattern: ^[A-Z]{4}$
+    FirstPayment:
+      type: object
+      description: |
+        Definitions for the first payment. It is considered as the payment of the service subscription by the paying user.
+        - The credit account informed must belong to the same CNPJ informed in the field “/data/creditors/cpfCnpj”
+        - The credit account informed at the time of the first payment must be the same as the one informed within this object. 
+        If not respected, the holder must reject the payment with the reason DETALHE_PAGAMENTO_INVALIDO, synchronously (HTTP 422) or asynchronously (HTTP 200)
+      required:
+        - type
+        - date
+        - currency
+        - amount
+        - creditorAccount
+      properties:
+        type:
+          $ref: "#/components/schemas/EnumPaymentType"
+        date:
+          type: string
+          format: date
+          maxLength: 10
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$
+          example: 2021-01-01
+          description: |
+            Defines the target date for payment settlement.
+            The Brasília time zone should be used to create and rationalize the data in this field.
+        currency:
+          type: string
+          maxLength: 3
+          pattern: ^([A-Z]{3})$
+          example: BRL
+          description: |
+            National currency code according to the ISO-4217 model, i.e., 'BRL'.
+            All monetary values reported are represented with the current currency of Brazil.
+        amount:
+          type: string
+          minLength: 4
+          maxLength: 19
+          pattern: ^((\d{1,16}\.\d{2}))$
+          example: "100000.12"
+          description: |
+            Transaction amount with 2 decimal places.
+        remittanceInformation:
+          type: string
+          maxLength: 140
+          pattern: "[\\w\\W\\s]*"
+          example: Payment of invoice RSTO035-002
+          description: |
+            Must be filled in whenever the paying user inserts any additional information in a payment, to be sent to the recipient.
+        creditorAccount:
+          $ref: "#/components/schemas/PostCreditorAccount"
+    PostCreditorAccount:
+      type: object
+      description: |
+        Receives the account data of the receiving user.
+      required:
+        - ispb
+        - issuer
+        - number
+        - accountType
+      properties:
+        ispb:
+          type: string
+          minLength: 8
+          maxLength: 8
+          pattern: ^[0-9]{8}$
+          example: "12345678"
+          description: |
+            Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payment System) participant using only numbers.
+        issuer:
+          type: string
+          minLength: 1
+          maxLength: 4
+          pattern: ^[0-9]{1,4}$
+          example: "1774"
+          description: |
+            Agency code issuing the account without digit.
+            (The agency is the branch intended for serving customers, the general public, and credit union members,
+            in the institution's activities, and cannot be mobile or transitory).
+
+            [Restriction] Mandatory for the following account types: CACC (CURRENT_ACCOUNT) and SVGS (SAVINGS_ACCOUNT).
+        number:
+          type: string
+          minLength: 1
+          maxLength: 20
+          pattern: ^[0-9]{1,20}$
+          example: "1234567890"
+          description: |
+            Must be filled with the payer's transactional account number, with a check digit (if it exists), 
+            if there is an alphanumeric value, it should be converted to 0.
+        accountType:
+          $ref: "#/components/schemas/EnumAccountTypeConsents"
+    EnumAccountTypeConsents:
+      type: string
+      enum:
+        - CACC
+        - SVGS
+        - TRAN
+      example: CACC
+      description: |
+        Types of accounts used for payment.
+        Traditional modalities provided by Resolution 4.753, not including linked accounts,
+        accounts of residents abroad, foreign currency accounts, and corresponding electronic money accounts.
+        Here is a description of each ENUM value.
+        - CACC - Current - Current Account.
+        - SVGS - Savings - Savings Account.
+        - TRAN - TransactingAccount - Prepaid Payment Account.
+    EnumPaymentType:
+      type: string
+      enum:
+        - PIX
+      example: PIX
+      description: |
+        This field defines the type of payment to be initiated after consent authorization.
   parameters:
     CommandId:
       name: id
