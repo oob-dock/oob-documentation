@@ -311,6 +311,13 @@ Definições:
 - [request-schema](../schemas/v3/consent/validateRiskSignals/request-schema.json)
 - [response-schema](../schemas/v3/consent/validateRiskSignals/response-schema.json)
 
+Cenários nos quais a implementação seria recomendada:
+
+- análise de risco caso o cliente esteja em uma área considerada de risco, podendo diminuir temporariamente o limite, ou
+adicionando alguma validação para realizar o pagamento;
+- caso o dispositivo tenha sido "rooteado", pode-se adicionar validações de análise de risco da operação, pois haveria
+possibiilidade do dispositito estar comprometido.
+
 ### Tratamentos adicionais
 
 #### Filtro de contas
