@@ -63,8 +63,8 @@
                 "riskSignals": {
                     "$ref": "#/$defs/RiskSignalsPayments"
                 },
-                "lastRetryRecurringPaymentIds": {
-                    "$ref": "#/$defs/LastRetryRecurringPaymentIds"
+                "originalRecurringPaymentId": {
+                    "$ref": "../../common/common-schema.json#/$defs/LegacyId"
                 } 
             },
             "additionalProperties": false
@@ -689,15 +689,6 @@
             ],
             "example": "REJECTED",
             "description": "Estado para qual o pagamento deverá transitar\n"
-        },
-        "LastRetryRecurringPaymentIds": {
-            "type": "array",
-            "minItems": 0,
-            "maxItems": 4,
-            "description": "Conjunto de recurringPaymentIds correspondentes às tentativas de pagamentos anteriores.\n\n[Restrições]\nEste campo é de preenchimento obrigatório pela detentora quando for uma tentativa de pagamento com erro ou falha.\nEste campo é de envio obrigatório pela iniciadora quando for uma tentativa de pagamento que falhou anteriormente.\n",
-            "items": {
-                "$ref": "../../common/common-schema.json#/$defs/LegacyId"
-            }
-      }
+        }
     }
 }

@@ -30,7 +30,7 @@ Where:
 
 ### 2024-12-03 - v4.4.0
 
-- Inclusion of the lastRetryRecurringPaymentIds field for POST paymentV3
+- Inclusion of the originalRecurringPaymentId field for POST paymentV3
 - Inclusion of Pix Automatic V2 in the automatic field of recurringConsent
 
 ### 2024-08-19 - v4.3.0

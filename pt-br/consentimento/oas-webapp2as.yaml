@@ -1017,6 +1017,7 @@ components:
             - period
             - contractDebtor
             - isRetryAccepted
+            - referenceStartDateTime
           properties:
             contractId:
               type: string
@@ -1045,7 +1046,7 @@ components:
                 Valor máximo permitido por cobrança, caso preenchido, representa um consentimento para pagamentos de valores variáveis. 
 
                 [Restrição] Excludente com o campo “/data/recurringConfiguration/automatic/fixedAmount”
-            period:
+            interval:
               type: string
               enum:
                 - SEMANAL
@@ -1061,38 +1062,6 @@ components:
                 - ANUAL
                 - SEMESTRAL
                 - TRIMESTRAL
-            month:
-              type: string
-              enum:
-                - JANEIRO
-                - FEVEREIRO
-                - MARCO
-                - ABRIL
-                - MAIO
-                - JUNHO
-                - JULHO
-                - AGOSTO
-                - SETEMBRO
-                - OUTUBRO
-                - NOVEMBRO
-                - DEZEMBRO
-              example: JANEIRO
-              description: |
-                Mês previstos para ocorrer transações. Caso consentimento seja para pagamentos trimestrais ou semestrais, o campo representa o mês da primeira cobrança.
-                - JANEIRO
-                - FEVEREIRO
-                - MARCO
-                - ABRIL
-                - MAIO
-                - JUNHO
-                - JULHO
-                - AGOSTO
-                - SETEMBRO
-                - OUTUBRO
-                - NOVEMBRO
-                - DEZEMBRO
-
-                [Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a TRIMESTRAL, SEMESTRAL ou ANUAL
             contractDebtor:
               $ref: "#/components/schemas/ContractDebtor"
             firstPayment:
@@ -1111,6 +1080,14 @@ components:
               type: boolean
               description: Indica se é permitido pelo cliente recebedor fazer tentativas de pagamento (extradia), conforme as regras estabelecidas no arranjo Pix.
               example: false
+            referenceStartDateTime:
+              type: string
+              format: date-time
+              pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+              description: |
+                Representa a data prevista para a primeira ocorrência de um pagamento associado a recorrência. 
+                Uma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC(UTC time format).
+              example: 2023-05-21T08:30:00Z
     Sweeping:
       type: object
       required:
@@ -1118,24 +1095,36 @@ components:
       properties:
         sweeping:
           type: object
+          required:
+            - startDateTime
           description: Definição da configuração de recorrência para transferências automáticas de fundos.
           properties:
             totalAllowedAmount:
               type: string
               minLength: 4
               maxLength: 19
-              pattern: '^((\d{1,16}\.\d{2}))$'
-              example: '100000.12'
+              pattern: ^((\d{1,16}\.\d{2}))$
+              example: "100000.12"
               description: Valor máximo a ser atingido pelo somatório de todas as transações que utilizam o consentimento autorizado pelo cliente. Caso o valor seja superado, a detentora de conta deve negar a transação solicitada pela iniciadora.
             transactionLimit:
               type: string
-              pattern: '^((\d{1,16}\.\d{2}))$'
+              pattern: ^((\d{1,16}\.\d{2}))$
               minLength: 4
               maxLength: 19
-              example: '1000000.12'
+              example: "1000000.12"
               description: Valor máximo para cada transação de pagamento associada a esse consentimento. Caso valor do pagamento seja maior que esse limite, a detentora de contas deve rejeitar a transação de pagamento.
             periodicLimits:
               $ref: "#/components/schemas/PeriodicLimits"
+            startDateTime:
+              type: string
+              format: date-time
+              pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+              description: |
+                Description: Data e hora em que o consentimento deve passar a ser válido. 
+                Uma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC(UTC time format).
+
+                [Restrição] Caso esse campo não seja enviado pelo iniciador na requisição, o detentor deve preencher esse campo com o mesmo valor atribuído ao campo /data/creationDateTime.
+              example: 2023-05-21T08:30:00Z
     PeriodicLimits:
       type: object
       description: Limites transacionais por período determinado pelo usuário pagador.

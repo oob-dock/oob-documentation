@@ -50,7 +50,7 @@ Onde:
 
 ### 2024-12-03 - v4.4.0
 
-- Inclusão do campo lastRetryRecurringPaymentIds para POST paymentV3
+- Inclusão do campo originalRecurringPaymentId para POST paymentV3
 - Inclusão de Pix Automático V2 no campo automatic de recurringConsent
 
 ### 2024-08-19 - v4.3.0

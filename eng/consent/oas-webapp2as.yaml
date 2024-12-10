@@ -1005,6 +1005,7 @@ components:
             - period
             - contractDebtor
             - isRetryAccepted
+            - referenceStartDateTime
           properties:
             contractId:
               type: string
@@ -1020,8 +1021,9 @@ components:
               maxLength: 19
               example: "100000.12"
               description: |
-                Fixed charge amount, if filled, represents consent for fixed payments, or not subject to change during the consent period.
-                [Restriction] Exclusive with the field “/data/recurringConfiguration/automatic/maximumVariableAmount”
+                Fixed charge amount, if filled, represents a consent for fixed payments, or not subject to change during the consent period.
+
+                [Restriction] Excluding with the field “/data/recurringConfiguration/automatic/maximumVariableAmount”
             maximumVariableAmount:
               type: string
               pattern: ^((\d{1,16}\.\d{2}))$
@@ -1029,9 +1031,10 @@ components:
               maxLength: 19
               example: "1000000.12"
               description: |
-                Maximum amount allowed per charge, if filled, represents consent for variable payments.
-                [Restriction] Exclusive with the field “/data/recurringConfiguration/automatic/fixedAmount”
-            period:
+                Maximum amount allowed per charge, if filled, represents a consent for variable payments.
+
+                [Restriction] Excluding with the field “/data/recurringConfiguration/automatic/fixedAmount”
+            interval:
               type: string
               enum:
               - SEMANAL
@@ -1047,37 +1050,6 @@ components:
                 - ANUAL
                 - SEMESTRAL
                 - TRIMESTRAL
-            month:
-              type: string
-              enum:
-              - JANEIRO
-              - FEVEREIRO
-              - MARCO
-              - ABRIL
-              - MAIO
-              - JUNHO
-              - JULHO
-              - AGOSTO
-              - SETEMBRO
-              - OUTUBRO
-              - NOVEMBRO
-              - DEZEMBRO
-              example: JANEIRO
-              description: |
-                Month expected for transactions. If consent is for quarterly or semi-annual payments, the field represents the month of the first charge.
-                - JANEIRO
-                - FEVEREIRO
-                - MARCO
-                - ABRIL
-                - MAIO
-                - JUNHO
-                - JULHO
-                - AGOSTO
-                - SETEMBRO
-                - OUTUBRO
-                - NOVEMBRO
-                - DEZEMBRO
-                [Restriction] Field must be sent when the field `/data/recurringConfiguration/automatic/period` is equal to TRIMESTRAL, SEMESTRAL or ANUAL
             contractDebtor:
               $ref: "#/components/schemas/ContractDebtor"
             firstPayment:
@@ -1094,8 +1066,15 @@ components:
                 Cannot be filled in fixed amount authorizations.
             isRetryAccepted:
               type: boolean
-              description: Indicates whether the receiving customer is allowed to make payment attempts (extraday), according to the rules established in the Pix arrangement.
-              example: false     
+              description: Indicates whether the receiving customer is allowed to make payment attempts (extra day), according to the rules established in the Pix arrangement.
+              example: false
+            referenceStartDateTime:
+              type: string
+              format: date-time
+              pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+              description: |
+                Represents the expected date for the first occurrence of a payment associated with the recurrence.
+                A string with date and time according to [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339) specification, always using UTC timezone (UTC time format).
     Sweeping:
       type: object
       required:
@@ -1103,24 +1082,36 @@ components:
       properties:
         sweeping:
           type: object
-          description: Defines the recurrence configuration for automatic fund transfers.
+          required:
+            - startDateTime
+          description: Definition of the recurrence configuration for automatic fund transfers.
           properties:
             totalAllowedAmount:
               type: string
               minLength: 4
               maxLength: 19
-              pattern: '^((\d{1,16}\.\d{2}))$'
-              example: '100000.12'
-              description: Maximum amount to be reached by the sum of all transactions using the consent authorized by the customer. If the amount is exceeded, the account holder must deny the transaction requested by the initiator.
+              pattern: ^((\d{1,16}\.\d{2}))$
+              example: "100000.12"
+              description: Maximum amount to be reached by the sum of all transactions using the consent authorized by the customer. If the amount is exceeded, the account holder must deny the requested transaction.
             transactionLimit:
               type: string
-              pattern: '^((\d{1,16}\.\d{2}))$'
+              pattern: ^((\d{1,16}\.\d{2}))$
               minLength: 4
               maxLength: 19
-              example: '1000000.12'
+              example: "1000000.12"
               description: Maximum amount for each payment transaction associated with this consent. If the payment amount is greater than this limit, the account holder must reject the payment transaction.
             periodicLimits:
               $ref: "#/components/schemas/PeriodicLimits"
+            startDateTime:
+              type: string
+              format: date-time
+              pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+              description: |
+                Date and time when the consent should become valid.
+                A string with date and time according to [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339) specification, always using UTC timezone (UTC time format).
+
+                [Restriction] If this field is not sent by the initiator in the request, the holder must fill this field with the same value assigned to the field /data/creationDateTime.
+                example: 2023-05-21T08:30:00Z
     PeriodicLimits:
       type: object
       description: Transaction limits for a period determined by the paying user.
