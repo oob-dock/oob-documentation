@@ -16,7 +16,7 @@ BEGIN
 
     RETURN QUERY
         SELECT t.org_name   		 as itp,
-            COUNT(distinct c.id) as qty_client_authentication,
+            COUNT(distinct c.id) FILTER(WHERE c.id_enrollment is null) as qty_client_authentication,
             COUNT(distinct c.id) as qty_client_authorization
         FROM consent c
         INNER JOIN tpp t ON c.id_tpp = t.id 

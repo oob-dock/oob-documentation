@@ -295,6 +295,10 @@ gerado.
 Endereço da ferramenta de análise de rastreamento distribuído. **Importante:**
 Esta variável deverá estar preenchida com o valor do endereço **HTTP**
 disponibilizado pela ferramenta para receber as informações de rastreamento.
+Geralmente, para HTTP, o endpoint de envio das informações de rastreamento é o
+caminho `<protocolo>://<host>:<porta>/v1/traces`, no entanto é recomendado
+confirmar se a ferramenta escolhida de fato utiliza esse endereço ou
+disponibiliza outro para esta finalidade.
 
 **Atenção:** A variável acima trabalha em conjunto com duas outras variáveis de
 ambiente do kong: `KONG_TRACING_INSTRUMENTATIONS` e `KONG_TRACING_SAMPLING_RATE`.

@@ -190,6 +190,12 @@
                                     "description": "Tipos de contas usadas para pagamento.\nModalidades tradicionais previstas pela Resolução 4.753, não contemplando contas vinculadas, \nconta de domiciliados no exterior, contas em moedas estrangeiras e conta correspondente moeda eletrônica.\nSegue descrição de cada valor do ENUM.\n\n- CACC - Current - Conta Corrente.\n- SVGS - Savings - Conta de Poupança.\n- TRAN - TransactingAccount - Conta de Pagamento pré-paga.\n"
                                   }
                                 }
+                            },
+                            "useOverdraftLimit": {
+                                "type": "boolean",
+                                "default": true,
+                                "example": true,
+                                "description": "Indica se o usuário pagador autorizou a utilização de limite pré-aprovado (cheque especial) na sua conta para realização de pagamentos, caso o cliente possua o produto."
                             }
                         },
                         "additionalItems": false

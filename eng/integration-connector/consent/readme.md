@@ -251,6 +251,11 @@ Definitions:
 - [request-schema](../schemas/v3/consent/validateRiskSignals/request-schema.json)
 - [response-schema](../schemas/v3/consent/validateRiskSignals/response-schema.json)
 
+Scenarios where implementation would be recommended:
+
+- Risk analysis if the customer is in an area considered risky, potentially temporarily lowering the limit or adding some validation to complete the payment;
+- If the device has been "rooted," risk analysis validations of the operation can be added, as there would be a possibility that the device is compromised.
+
 ### Additional Processing
 
 #### Account Filter

@@ -344,7 +344,10 @@
           ],
           "example": "HYBRID_FLOW",
           "description": "Campo condicional utilizado para identificar o fluxo de autorização em que o pagamento foi solicitado.\n\n[Restrição] Se CIBA ou FIDO, preenchimento obrigatório. Caso o campo não esteja presente no payload, subentende-se que o fluxo de autorização utilizado é o HYBRID_FLOW.\n"
-        }
+        },
+        "originalRecurringPaymentId": {
+            "$ref": "../../common/common-schema.json#/$defs/LegacyId"
+        } 
       }
     },
     "meta": {
