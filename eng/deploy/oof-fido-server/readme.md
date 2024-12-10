@@ -129,3 +129,20 @@ additionalVars:
 
 This will only change the *attestation* configuration
 for this RP. All other configurations will use the default value.
+
+### Change log level
+
+It should be used to change the amount of information displayed in the logs.
+The available levels are: `ERROR`, `WARN`, `INFO`, `DEBUG` ou `TRACE`.
+
+For example, to enable request and response logs, the level should be set to `DEBUG`.
+
+Default value: `INFO`
+
+Example:
+
+```yaml
+additionalVars:
+    - name: logging_level_software_opus_oof
+      value: DEBUG
+```

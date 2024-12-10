@@ -46,8 +46,7 @@ Elastic, mas que pode ser substituído por qualquer ferramenta de logs
 já utilizada pela instituição financeira;
 1. Integração com os sistemas de retaguarda da instituição financeira através de
 conectores que isolam a complexidade da plataforma e garantem a padronização do produto;
-1. Componentes de apoio para acelerar a validação e implantação do produto,
-tais comoPortal de Geração de Consentimentos White-label,
+
 Tela de Handoff White-label, código fonte das telas de consentimento para
 integração ao aplicativo móvel da instituição financeira, simulador do ecossistema
 para validação da instalação, e testador para validação dos conectores.
@@ -420,19 +419,6 @@ o portal oferece um dashboard de visualização das insdisponibilidades
 parciais e totais detectadas pelo componente de auto-diagnóstico da plataforma.
 
 ### Ferramentas auxiliares
-
-#### Portal de geração de consentimentos White-label
-
-O portal de geração de consentimentos implementa as funcionalidades obrigatórias
-que permitem que os clientes finais visualizem e aprovem (ou rejeitem)
-consentimentos de iniciação de pagamentos e compartilhamento de dados cadastrais
-e transacionais.
-
-O portal pode ser customizado através de mudanças de logo e paletas de cores,
-podendo ser utilizado como ferramenta para acelerar a implementação
-do ciclo completo de funcionalidades obrigatórias do Open Finance Brasil.
-
-![Portal de geração de consentimentos OPUS Open Finance](./imagens/portal-consentimento.png)
 
 #### Tela de handoff White-label
 

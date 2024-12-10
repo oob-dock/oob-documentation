@@ -271,7 +271,10 @@ Defines whether the installation should send event calls from endpoints linked t
 
 Address of the distributed tracing analysis tool. **Important:** This variable
 must be filled with the **HTTP** address provided by the tool to receive the
-tracing information.
+tracing information. Generally, for HTTP, the endpoint for sending tracking
+information is the path `<protocol>://<host>:<port>/v1/traces`. However, it is
+recommended to confirm whether the chosen tool actually uses this address or
+provides another one for this purpose.
 
 **Attention:** The variable above works in conjunction with two other Kong
 environment variables: `KONG_TRACING_INSTRUMENTATIONS` and

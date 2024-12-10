@@ -62,7 +62,10 @@
                 },
                 "riskSignals": {
                     "$ref": "#/$defs/RiskSignalsPayments"
-                }
+                },
+                "originalRecurringPaymentId": {
+                    "$ref": "../../common/common-schema.json#/$defs/LegacyId"
+                } 
             },
             "additionalProperties": false
         },

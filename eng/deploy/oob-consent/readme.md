@@ -223,7 +223,7 @@ env:
 
 This module is instrumented via [Open Telemetry](https://opentelemetry.io/),
 logging trace information (when available) and exporting it to a tool like
-[Jaeger](https://www.jaegertracing.io/), which is used for visualizing and
+[Tempo](https://grafana.com/oss/tempo/), which is used for visualizing and
 analyzing distributed tracing of the performed requests.
 
 Configurations:
@@ -543,10 +543,27 @@ Reserved values:
 | %1$s        | Name of the client who created the link |
 
 **Ex:**
-
+```yaml
 additionalVars:
   - name: ENROLLMENT_NAME_TEMPLATE
   - value: "Open Finance: %1$s"
+```
+
+### CONSENT_DATA_SHARING_V31_DATE
+
+Defines the date when the necessary modifications for Phase 2 v3.1 should be activated.
+It must be configured once the official date is announced by BACEN.
+
+**Format:** "YYYY-MM-DD"
+
+**Example:** To activate the modifications on 12/25/2024, configure
+as follows:
+
+```yaml
+additionalVars:
+  - name: CONSENT_DATA_SHARING_V31_DATE
+  - value: "2024-12-25"
+```
 
 ### Connectors
 

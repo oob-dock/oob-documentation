@@ -1,0 +1,135 @@
+{
+    "requestMeta": {
+        "correlationId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+        "brandId": "string"
+    },
+    "paymentId": [
+        {
+            "key": "string",
+            "value": "string"
+        }
+    ],
+    "consent": {
+        "brandId": "string",
+        "creationDateTime": "5300-11-17T01:10:09Z",
+        "tpp": {
+            "name": "string"
+        },
+        "externalId": "string",
+        "loggedUser": {
+            "document": {
+                "identification": "69016963014",
+                "rel": "YHE"
+            }
+        },
+        "businessDocumentType": {
+            "document": {
+                "identification": "55760980010742",
+                "rel": "TRGH"
+            }
+        },
+        "resources": [
+            {
+                "type": "ACCOUNT",
+                "resourceLegacyId": [
+                    {
+                        "key": "string",
+                        "value": "string"
+                    }
+                ],
+                "authorizers": [
+                    {
+                        "cpf": "31290607435",
+                        "name": "string"
+                    }
+                ],
+                "hasMultipleAuthorisers": true
+            }
+        ],
+        "version": "V1",
+        "expirationDateTime": "7335-12-17T09:09:29Z",
+        "additionalInformation": "Minha recorrência",
+        "creditors": [
+            {
+                "personType": "PESSOA_NATURAL",
+                "cpfCnpj": "58764789000137",
+                "name": "Marco Antonio de Brito"
+            }
+        ],
+        "recurringConfiguration": {
+            "automatic": {
+                "contractId": "XE00038166201907261559y6j6",
+                "fixedAmount": "100000.12",
+                "maximumVariableAmount": "1000000.12",
+                "interval": "SEMANAL",
+                "contractDebtor": {
+                    "name": "Policarpo Quaresma",
+                    "document": {
+                        "identification": "11111111111111",
+                        "rel": "CPF"
+                    }
+                },
+                "firstPayment": {
+                    "type": "PIX",
+                    "date": "2021-01-01",
+                    "currency": "BRL",
+                    "amount": "100000.12",
+                    "remittanceInformation": "Pagamento da nota RSTO035-002",
+                    "creditorAccount": {
+                        "ispb": "12345678",
+                        "issuer": "1774",
+                        "number": "1234567890",
+                        "accountType": "CACC"
+                    }
+                },
+                "minimumVariableAmount": "100000.12",
+                "isRetryAccepted": false,
+                "referenceStartDateTime": "2023-05-21T08:30:00Z",
+                "useOverdraftLimit": true
+            }
+        },
+        "cancellation": {
+            "reason": "CANCELADO_PENDENCIA",
+            "cancelledFrom": "INICIADORA",
+            "cancelledAt": "2021-05-21T08:30:00Z",
+            "cancelledBy": {
+                "document": {
+                    "identification": "11111111111",
+                    "rel": "CPF"
+                }
+            }
+        },
+        "debtorAccount": {
+            "ispb": "21758661",
+            "issuer": "9610",
+            "number": "832",
+            "accountType": "CACC"
+        },
+        "authExtraData": [
+            {
+                "key": "string",
+                "value": "string"
+            }
+        ],
+        "consentOwner": [
+            {
+                "key": "string",
+                "value": "string"
+            }
+        ]
+    },
+    "paymentType": "PAYMENT_RECURRING_CONSENT",
+    "requestBody": {
+        "data": {
+            "status": "REJECTED",
+            "cancellation": {
+                "cancelledBy": {
+                    "document": {
+                        "identification": "11111111111",
+                        "rel": "CPF"
+                    }
+                }
+            }
+        }
+    }
+}
