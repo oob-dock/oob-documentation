@@ -685,7 +685,9 @@
                 "contractId",
                 "period",
                 "contractDebtor",
-                "isRetryAccepted"
+                "isRetryAccepted",
+                "useOverdraftLimit",
+                "referenceStartDateTime"
             ],
             "properties": {
                 "contractId": {
@@ -712,36 +714,17 @@
                     "example": "1000000.12",
                     "description": "Valor máximo permitido por cobrança, caso preenchido, representa um consentimento para pagamentos de valores variáveis. \n\n[Restrição] Excludente com o campo “/data/recurringConfiguration/automatic/fixedAmount”\n"
                 },
-                "period": {
+                "interval": {
                     "type": "string",
                     "enum": [
-                    "SEMANAL",
-                    "MENSAL",
-                    "ANUAL",
-                    "SEMESTRAL",
-                    "TRIMESTRAL"
+                        "SEMANAL",
+                        "MENSAL",
+                        "ANUAL",
+                        "SEMESTRAL",
+                        "TRIMESTRAL"
                     ],
                     "example": "SEMANAL",
                     "description": "Define a periodicidade permitida para realização de transações\n- SEMANAL\n- MENSAL\n- ANUAL\n- SEMESTRAL\n- TRIMESTRAL\n"
-                },
-                "month": {
-                    "type": "string",
-                    "enum": [
-                    "JANEIRO",
-                    "FEVEREIRO",
-                    "MARCO",
-                    "ABRIL",
-                    "MAIO",
-                    "JUNHO",
-                    "JULHO",
-                    "AGOSTO",
-                    "SETEMBRO",
-                    "OUTUBRO",
-                    "NOVEMBRO",
-                    "DEZEMBRO"
-                    ],
-                    "example": "JANEIRO",
-                    "description": "Mês previstos para ocorrer transações. Caso consentimento seja para pagamentos trimestrais ou semestrais, o campo representa o mês da primeira cobrança.\n- JANEIRO\n- FEVEREIRO\n- MARCO\n- ABRIL\n- MAIO\n- JUNHO\n- JULHO\n- AGOSTO\n- SETEMBRO\n- OUTUBRO\n- NOVEMBRO\n- DEZEMBRO\n\n[Restrição] Campo deve ser enviado quando o campo `/data/recurringConfiguration/automatic/period` for igual a TRIMESTRAL, SEMESTRAL ou ANUAL\n"
                 },
                 "contractDebtor": {
                     "$ref": "#/$defs/ContractDebtor"
@@ -761,7 +744,20 @@
                     "type": "boolean",
                     "description": "Indica se é permitido pelo cliente recebedor fazer tentativas de pagamento (extradia), conforme as regras estabelecidas no arranjo Pix.",
                     "example": false
-                }           
+                },
+                "useOverdraftLimit": {
+                    "type": "boolean",
+                    "default": true,
+                    "example": true,
+                    "description": "Indica se o usuário pagador autorizou a utilização de limite pré-aprovado (cheque especial) na sua conta para realização de pagamentos, caso o cliente possua o produto."
+                },
+                "referenceStartDateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+                    "description": "Representa a data prevista para a primeira ocorrência de um pagamento associado a recorrência. \nUma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC(UTC time format).\n",
+                    "example": "2023-05-21T08:30:00Z"
+                }
             },
             "additionalProperties": false
         },

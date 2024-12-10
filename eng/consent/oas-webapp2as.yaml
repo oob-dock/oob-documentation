@@ -1006,6 +1006,7 @@ components:
             - contractDebtor
             - isRetryAccepted
             - referenceStartDateTime
+            - useOverdraftLimit
           properties:
             contractId:
               type: string
@@ -1075,15 +1076,21 @@ components:
               description: |
                 Represents the expected date for the first occurrence of a payment associated with the recurrence.
                 A string with date and time according to [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339) specification, always using UTC timezone (UTC time format).
+            useOverdraftLimit:
+              type: boolean
+              default: true
+              example: true
+              description: Indicates whether the paying user authorized the use of a pre-approved limit (overdraft) in their account for making payments, if the customer has the product.
     Sweeping:
       type: object
       required:
-        - sweeping
+        - sweeping        
       properties:
         sweeping:
           type: object
           required:
             - startDateTime
+            - useOverdraftLimit
           description: Definition of the recurrence configuration for automatic fund transfers.
           properties:
             totalAllowedAmount:
@@ -1112,6 +1119,11 @@ components:
 
                 [Restriction] If this field is not sent by the initiator in the request, the holder must fill this field with the same value assigned to the field /data/creationDateTime.
                 example: 2023-05-21T08:30:00Z
+            useOverdraftLimit:
+              type: boolean
+              default: true
+              example: true
+              description: Indicates whether the paying user authorized the use of a pre-approved limit (overdraft) in their account for making payments, if the customer has the product.
     PeriodicLimits:
       type: object
       description: Transaction limits for a period determined by the paying user.
@@ -1482,7 +1494,6 @@ components:
         Receives the account data of the receiving user.
       required:
         - ispb
-        - issuer
         - number
         - accountType
       properties:

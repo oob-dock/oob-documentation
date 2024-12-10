@@ -35,31 +35,33 @@
         "recurringConfiguration": {
             "automatic": {
                 "contractId": "XE00038166201907261559y6j6",
-                "maximumVariableAmount": "1000.12",
-                "period": "SEMANAL",
-                "month": "JANEIRO",
+                "fixedAmount": "100000.12",
+                "maximumVariableAmount": "1000000.12",
+                "interval": "SEMANAL",
                 "contractDebtor": {
                     "name": "Policarpo Quaresma",
                     "document": {
-                        "identification": "11111678912329",
-                        "rel": "CNPJ"
+                        "identification": "11111111111111",
+                        "rel": "CPF"
                     }
                 },
                 "firstPayment": {
                     "type": "PIX",
-                    "date": "2025-01-28",
+                    "date": "2021-01-01",
                     "currency": "BRL",
-                    "amount": "100.12",
+                    "amount": "100000.12",
                     "remittanceInformation": "Pagamento da nota RSTO035-002",
                     "creditorAccount": {
                         "ispb": "12345678",
                         "issuer": "1774",
-                        "number": "1234567899",
+                        "number": "1234567890",
                         "accountType": "CACC"
                     }
                 },
-                "minimumVariableAmount": "1.12",
-                "isRetryAccepted": false
+                "minimumVariableAmount": "100000.12",
+                "isRetryAccepted": false,
+                "referenceStartDateTime": "2023-05-21T08:30:00Z",
+                "useOverdraftLimit": true
             }
         },
         "resources": [

@@ -84,7 +84,8 @@
         },
         "minimumVariableAmount": "100000.12",
         "isRetryAccepted": false,
-        "referenceStartDateTime": "2023-05-21T08:30:00Z"
+        "referenceStartDateTime": "2023-05-21T08:30:00Z",
+        "useOverdraftLimit": true
       }
     },
     "cancellation": {
