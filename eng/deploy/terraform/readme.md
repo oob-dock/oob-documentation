@@ -40,6 +40,8 @@
       - [route\_block\_enabled](#route_block_enabled)
       - [mqd\_event\_enabled](#mqd_event_enabled)
       - [opentelemetry\_tracer\_exporter\_url\_http](#opentelemetry_tracer_exporter_url_http)
+      - [log\_request\_response\_enabled](#log_request_response_enabled)
+      - [log\_request\_response\_collector\_url\_http](#log_request_response_collector_url_http)
   - [Grafana Configuration](#grafana-configuration)
     - [Configuration](#configuration-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -292,6 +294,28 @@ to `0`.
 
 It is necessary to set these environment variables **directly in Kong** with
 the appropriate values for the desired instrumentation to function properly.
+
+#### log_request_response_enabled
+
+Defines whether the installation should log regulatory requests and responses
+made in the product. If the variable is set to `true`, the configuration of
+each route will be taken into account to decide whether the request and
+response will be logged or not. If the variable is set to `false`, the
+configuration of each route will be ignored, and no regulatory requests or
+responses will be logged.
+
+**Possible values:** `true` or `false`
+
+#### log_request_response_collector_url_http
+
+Address of the log collector tool responsible for receiving the logs of
+regulatory requests and responses. Due to the size and nature of the requests
+and responses, it is not possible to use Kong's standard logging, as it has a
+size limitation. Therefore, a log collector is necessary to ensure that no
+information from the request/response set is lost.
+
+This variable is mandatory if the variable `log_request_response_enabled` is
+set to `true`.
 
 ## Grafana Configuration
 
