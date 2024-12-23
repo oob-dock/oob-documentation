@@ -234,6 +234,10 @@ ser seguido como descrito no `error`.
 
 ## Changelog
 
+### 2024-12-23 - v1.3.0
+
+- Novo parâmetro useOverdraftLimit para utilização de cheque especial na conta do cliente.
+
 ### 2023-07-27 - v1.2.2
 
 - Adição do novo command error INVALID_STATUS_CONFIRMATION.

@@ -37,6 +37,7 @@ The application must ensure the [minimum security requirement](https://openfinan
         "jti": "94a328c2-c72a-4cab-84a2-2df2b106b2af"
     }
 }
+```
 
 The *ACR* can have the following values:
 
@@ -103,6 +104,7 @@ An example of the JSON content to be used in the JWT token:
         }
     ]
 }
+```
 
 ## Command *consent*
 
@@ -178,6 +180,10 @@ Indicates the successful completion of the consent generation flow.
 The treatment is the same as the `error` command, but the message to be displayed to the user is the success of the consent. The return to the TPP should be handled as described in the `error`.
 
 ## Changelog
+
+### 2024-12-23 - v1.3.0
+
+- Novo parâmetro useOverdraftLimit para utilização de cheque especial na conta do cliente.
 
 ### 2023-07-27 - v1.2.2
 
