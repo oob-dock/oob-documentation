@@ -122,6 +122,28 @@ The selected resources and consequently the consent acceptance must be sent to t
 
 Unlike other products, non-selectable products are shared based on the permissions provided in the data-sharing consent. Therefore, during consent approval, they are not selected.
 
+### Multiple Consents
+
+Two optional parameters have been added to the consent command request to specify if the consent requires multiple consents:
+
+| Name                | Default | Description                                      |
+| ------------------- | ------- | ------------------------------------------------ |
+| isMultipleRequirer  | false   | Indicates if the consent requires multiple consents |
+| isConsentAuthorized | true    | Indicates if the consent has been fully approved |
+
+The default values ensure that if these parameters are not sent, the consent does not require multiple consents, and therefore the consent command guarantees full authorization.
+
+### Use of OverdraftLimit for Automatic Recurring Payment
+
+An optional parameter has been introduced to the consent command request to specify if
+the customer opts for the use of overdraft limit:
+
+| Name                | Default | Description                                      |
+| ------------------- | ------- | ------------------------------------------------ |
+| useOverdraftLimit   | true    | Indicates if the use of overdraft is accepted    |
+
+The default value assumes that the customer opts for the use of overdraft limit.
+
 ## Command *error*
 
 Indicates the occurrence of an error during the OIDC authentication flow. The error is described in the command and can be known errors of the Open Finance Brazil process or unexpected errors as seen in the table below.

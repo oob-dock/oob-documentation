@@ -254,6 +254,19 @@ components:
           type: string
           description: Name of the device authorized by the customer for the No Redirect Journey device binding.
           example: "My Phone"
+        isMultipleRequirer:
+          type: boolean
+          description: Defines if multiple consents are being used (if not sent, the default is false)
+          example: false
+        isConsentAuthorized:
+          type: boolean
+          description: Defines if the consents were fully authorized (if not sent, the default is true)
+          example: true
+        useOverdraftLimit:
+          type: boolean
+          default: true
+          example: true
+          description: Indicates whether the paying user authorized the use of a pre-approved limit (overdraft) in their account for making payments, if the customer has the product.        
     AuthenticateCommand:
       type: object
       properties:
