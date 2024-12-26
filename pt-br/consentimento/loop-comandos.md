@@ -160,7 +160,7 @@ não é feita a seleção deles.
 ### Multipla alçada
 
 Dois parâmetros opcionais foram adicionados ao request do comando de
-consentimento como forma de especificar se o consetimento é de múltipla
+consentimento como forma de especificar se o consentimento é de múltipla
 alçada:
 
 | Nome                  | Default | Descrição                                               |
@@ -171,6 +171,18 @@ alçada:
 Os valores default garantem que o não envio desses parâmetros sinalize que o
 consentimento não é de múltipla alçada e portanto o comando consent garante
 uma autorização completa.
+
+### Uso de cheque especial para pagamento recorrente automático
+
+Um parâmetro opcional foi introduzido ao request de comando de
+consentimento como forma de especificar se o cliente opta pelo uso 
+de cheque especial:
+
+| Nome                  | Default | Descrição                                               |
+| --------------------- | ------- | ------------------------------------------------------- |
+| useOverdraftLimit     | true    | Indica se o aceite do uso de cheque especial            |
+
+O valor default assume que o cliente opta pelo uso do cheque especial.
 
 ## Comando *error*
 
@@ -221,6 +233,10 @@ usuário é do sucesso do consentimento. O tratamento de retorno ao TPP deve
 ser seguido como descrito no `error`.
 
 ## Changelog
+
+### 2024-12-23 - v1.3.0
+
+- Novo parâmetro useOverdraftLimit para utilização de cheque especial na conta do cliente.
 
 ### 2023-07-27 - v1.2.2
 

@@ -343,10 +343,7 @@
           "examples": [
               "2021-01-01"
           ]
-        },
-        "originalRecurringPaymentId": {
-            "$ref": "../../common/common-schema.json#/$defs/LegacyId"
-        } 
+        }
       }
     },
     "meta": {

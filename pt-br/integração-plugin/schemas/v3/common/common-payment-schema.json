@@ -683,7 +683,7 @@
             "description": "Definição da configuração de recorrência para pagamentos automáticos",
             "required": [
                 "contractId",
-                "period",
+                "interval",
                 "contractDebtor",
                 "isRetryAccepted",
                 "useOverdraftLimit",

@@ -263,6 +263,11 @@ components:
           type: string
           description: Nome do dispositivo autorizado pelo cliente para o vínculo de dispositivo da JSR.
           example: "Meu Celular"
+        useOverdraftLimit:
+          type: boolean
+          default: true
+          example: true
+          description: Indica se o usuário pagador autorizou a utilização de limite pré-aprovado (cheque especial) na sua conta para realização de pagamentos, caso o cliente possua o produto.
     AuthenticateCommand:
       type: object
       properties:
