@@ -132,7 +132,8 @@ O header `x-request-start-time` deverá ser preenchido no formato Unix epoch,
 
 - Milissegundos sem casas decimais. Exemplo: `1671373873945`
 - Milissegundos com casas decimais. Exemplo: `1671373873.945`
-- Microssegundos ou mais preciso. Exemplo `1671373873945345`. Neste caso o valor será truncado para milissegundos (13 caracteres).
+- Microssegundos ou mais preciso. Exemplo `1671373873945345`. Neste caso o
+valor será truncado para milissegundos (13 caracteres).
 
 **Atenção!**
 
