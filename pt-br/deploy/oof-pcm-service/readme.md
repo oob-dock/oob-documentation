@@ -103,6 +103,50 @@ metadata:
 type: Opaque
 ```
 
+## Configuração adicional
+
+### Header `x-request-start-time`
+
+O OOF PCM Service possui uma funcionalidade extra que permite o uso do header
+HTTP `x-request-start-time` para auxiliar no cálculo do tempo de processamento
+total de uma requisição. Essa funcionalidade é útil para que possamos ser ainda
+mais assertivos no cálculo do tempo total de processamento da requisição a ser
+reportada via PCM.
+
+#### Onde definir o header?
+
+Idealmente este header deve ser definido na primeira barreira de entrada de
+uma nova requisição no produto. Um bom candidato é um WAF (*Web Application
+Firewall*), por exemplo.
+
+O preenchimento e injeção deste header no request **é opcional**. Quando
+definido, no momento do cálculo do tempo de processamento do request este
+valor será utilizado como o início da requisição. Caso este header não tenha
+sido preenchido, o momento da chegada da requisição no API Gateway será utilizado
+para o cálculo em questão.
+
+#### Formato
+
+O header `x-request-start-time` deverá ser preenchido no formato Unix epoch,
+**preferencialmente em milissegundos**. Os seguintes formatos serão aceitos:
+
+- Milissegundos sem casas decimais. Exemplo: `1671373873945`
+- Milissegundos com casas decimais. Exemplo: `1671373873.945`
+- Microssegundos ou mais preciso. Exemplo `1671373873945345`. Neste caso o valor será truncado para milissegundos (13 caracteres).
+
+**Atenção!**
+
+**Não é recomendado enviar o valor em segundos** (10 caracteres) - embora seja
+aceito pelo plugin. Neste cenário, caso o evento seja informado em segundos,
+no momento do cálculo do tempo de processamento total do request podemos
+adicionar até 1 segundo a mais no tempo de resposta informado no evento por
+conta do arredondamento da unidade de medida de tempo.
+
+**Garantir que o formato enviado está na lista de formatos aceitos acima!**
+Caso seja informado em algum outro formato haverá problema na criação do evento
+e portanto a requisição não será reportada à PCM. Isso acarretará em
+descumprimento das regras junto à governança do Open Finance Brasil.
+
 ## Instalação
 
 A instalação do módulo é feita via Helm Chart.
@@ -323,3 +367,4 @@ ambiente.
 additionalVars:
   - name: DAPR_ACTOR_TYPE
     value: "Qa"
+```

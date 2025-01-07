@@ -85,6 +85,50 @@ metadata:
 type: Opaque
 ```
 
+## Additional Configuration
+
+### Header `x-request-start-time`
+
+The OOF PCM Service includes an extra feature that allows the use of the HTTP
+header `x-request-start-time` to assist in calculating the total processing
+time of a request. This functionality is useful for achieving greater accuracy
+in calculating the total processing time of the request to be reported via PCM.
+
+#### Where to Define the Header?
+
+Ideally, this header should be defined at the first entry point of a new
+request in the product. A good candidate for this is a WAF (Web
+Application Firewall), for example.
+
+The inclusion and injection of this header into the request **is optional**.
+When defined, this value will be used as the start time of the request during
+the calculation of the total processing time. If this header is not provided,
+the time of arrival of the request at the API Gateway will be used for the
+calculation.
+
+#### Format
+
+The `x-request-start-time` header must be provided in Unix epoch format,
+preferably in milliseconds. The following formats are accepted:
+
+- Milliseconds without decimals. Example: `1671373873945`
+- Milliseconds with decimals. Example: `1671373873.945`
+- Microseconds or higher precision. Example: `1671373873945345`. In this case,
+the value will be truncated to milliseconds (13 characters).
+
+**Attention!**
+
+**It is not recommended to send the value in seconds** (10 characters) -
+although it is accepted by the plugin. In this scenario, if the event is
+provided in seconds, up to 1 additional second may be added to the total
+request processing time due to rounding of the time unit.
+
+**Ensure that the format sent is one of the accepted formats listed above!**
+If the value is provided in any other format, there will be an issue with the
+creation of the event, and the request will not be reported to PCM. This will
+result in non-compliance with the rules established by the Open Finance Brazil
+governance.
+
 ## Installation
 
 The module installation is done via Helm Chart.
