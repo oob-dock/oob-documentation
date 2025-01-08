@@ -591,28 +591,6 @@ Valor default: `false`
 additionalVars:
   - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
     value: "true"
-```
-
-### ENROLLMENT_NAME_TEMPLATE
-
-Modelo de texto utilizado para definir o nome do usuário do vínculo a ser apresentado durante
-o uso da chave.
-
-Valor default: `%1$s`
-
-Valores reservados:
-
-| Valor       | Substituído por                       |
-| ----------- | ------------------------------------- |
-| %1$s        | Nome do cliente que criou o vínculo   |
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: ENROLLMENT_NAME_TEMPLATE
-  - value: "Open Finance: %1$s"
-```
 
 ### CONSENT_DATA_SHARING_V31_DATE
 
@@ -629,6 +607,23 @@ configurar conforme a seguir:
 additionalVars:
   - name: CONSENT_DATA_SHARING_V31_DATE
   - value: "2024-12-25"
+```
+
+### ENROLLMENT_V21_DATE
+
+Define a data em que as modificações necessárias para JSR v2.1
+devem ser ativadas. Deve ser configurada uma vez que a data oficial
+seja definida pelo BACEN.
+
+**Formato:**: "YYYY-MM-DD"
+
+**Ex:** Para que as modificações sejam ativadas dia 10/01/2025, basta
+configurar conforme a seguir:
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_V21_DATE
+  - value: "2025-01-10"
 ```
 
 ### Conectores
