@@ -94,7 +94,7 @@ header `x-request-start-time` to assist in calculating the total processing
 time of a request. This functionality is useful for achieving greater accuracy
 in calculating the total processing time of the request to be reported via PCM.
 
-#### Where to Define the Header?
+#### Where to define the Header?
 
 Ideally, this header should be defined at the first entry point of a new
 request in the product. A good candidate for this is a WAF (Web
