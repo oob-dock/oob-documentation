@@ -37,6 +37,7 @@ The application must ensure the [minimum security requirement](https://openfinan
         "jti": "94a328c2-c72a-4cab-84a2-2df2b106b2af"
     }
 }
+```
 
 The *ACR* can have the following values:
 
@@ -103,6 +104,7 @@ An example of the JSON content to be used in the JWT token:
         }
     ]
 }
+```
 
 ## Command *consent*
 
@@ -121,6 +123,28 @@ The selected resources and consequently the consent acceptance must be sent to t
 ### Non-selectable Products
 
 Unlike other products, non-selectable products are shared based on the permissions provided in the data-sharing consent. Therefore, during consent approval, they are not selected.
+
+### Multiple Consents
+
+Two optional parameters have been added to the consent command request to specify if the consent requires multiple consents:
+
+| Name                | Default | Description                                      |
+| ------------------- | ------- | ------------------------------------------------ |
+| isMultipleRequirer  | false   | Indicates if the consent requires multiple consents |
+| isConsentAuthorized | true    | Indicates if the consent has been fully approved |
+
+The default values ensure that if these parameters are not sent, the consent does not require multiple consents, and therefore the consent command guarantees full authorization.
+
+### Use of OverdraftLimit for Automatic Recurring Payment
+
+An optional parameter has been introduced to the consent command request to specify if
+the customer opts for the use of overdraft limit:
+
+| Name                | Default | Description                                      |
+| ------------------- | ------- | ------------------------------------------------ |
+| useOverdraftLimit   | true    | Indicates if the use of overdraft is accepted    |
+
+The default value assumes that the customer opts for the use of overdraft limit.
 
 ## Command *error*
 
@@ -156,6 +180,10 @@ Indicates the successful completion of the consent generation flow.
 The treatment is the same as the `error` command, but the message to be displayed to the user is the success of the consent. The return to the TPP should be handled as described in the `error`.
 
 ## Changelog
+
+### 2024-12-23 - v1.3.0
+
+- Novo parâmetro useOverdraftLimit para utilização de cheque especial na conta do cliente.
 
 ### 2023-07-27 - v1.2.2
 
