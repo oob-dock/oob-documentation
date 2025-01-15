@@ -6,7 +6,7 @@ CREATE OR REPLACE FUNCTION payment_consent_payment_id(start_date DATE, end_date 
                 quantity_payment_id             BIGINT,
                 quantity_completed_payment_id	BIGINT,
                 quantity_schedule_payment_id    BIGINT,
-                product							TEXT,
+                product                         TEXT,
                 authorisation_flow              TEXT
             )
 AS
