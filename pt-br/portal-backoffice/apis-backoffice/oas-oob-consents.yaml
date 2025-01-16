@@ -497,8 +497,8 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseConsentExtendsSchema"
-  ? /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}
-  : post:
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}:
+    post:
       tags:
         - Consents
       description: Post search key to consent
@@ -691,6 +691,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MetadataData"
+  /open-banking/oob-consents/automatic-payments/v1/recurring-consents/{recurringConsentId}:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Revoke automatic payment consent
+      parameters:
+      - name: recurringConsentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          nullable: false
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomaticPaymentConsentEdition'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'              
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -2712,6 +2751,20 @@ components:
       pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
       maxLength: 20
       description: Instante de rejeição do vínculo de conta no ambiente da detentora.
+    AutomaticPaymentConsentEdition:
+      type: object
+      properties:
+        maximumVariableAmount:
+          description: Definição da configuração de recorrência para pagamentos automáticos.
+          maxLength: 19
+          minLength: 4
+          type: string
+          example: "1000000.12"
+        useOverdraftLimit:
+          description: Indica se o consentimento permite a utilização do limite de
+            cheque especial.
+          type: boolean
+          example: true
   securitySchemes:
     jwt:
       type: http
