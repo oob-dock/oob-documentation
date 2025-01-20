@@ -680,3 +680,8 @@ Example: `1`
 Enables or disables RP registration in fido server during DCR. It should be enabled **ONLY** if No Redirect Journey is enabled.
 
 Example: `1`
+
+### feature/cpfCnpjSearchKey/enabled
+Enable or disable the creation of CPF and CNPJ search keys at the time a consent is created.
+
+Ex: `1`
