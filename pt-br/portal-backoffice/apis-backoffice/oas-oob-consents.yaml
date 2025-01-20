@@ -2413,6 +2413,14 @@ components:
               minimum: 2
               maximum: 60
               example: 3
+            scheduleDates:
+                type: array
+                items:
+                    type: string
+                    format: date
+                    pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                    maxLength: 10
+                    example: "2023-08-23"
     ScheduleWeekly:
       type: object
       required:
@@ -2451,6 +2459,14 @@ components:
               minimum: 2
               maximum: 60
               example: 10
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleMonthly:
       type: object
       required:
@@ -2483,6 +2499,14 @@ components:
               minimum: 2
               maximum: 24
               example: 24
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleCustom:
       type: object
       required:
@@ -2517,6 +2541,14 @@ components:
               pattern: '[\w\W\s]*'
               maxLength: 255
               example: Todas quintas e domingos por 6 meses
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     StatusEnum:
       enum:
         - AUTHORISED
