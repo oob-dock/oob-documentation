@@ -541,7 +541,7 @@ paths:
     delete:
       tags:
         - Consents
-      description: Delete search key to consent
+      description: Delete multiple search keys in a consent
       parameters:
         - name: consentId
           in: path
