@@ -497,11 +497,11 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseConsentExtendsSchema"
-  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}:
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-keys:
     post:
       tags:
         - Consents
-      description: Post search key to consent
+      description: Post multiple search keys to consent
       parameters:
         - name: consentId
           in: path
@@ -522,6 +522,13 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
       responses:
         "204":
           description: Search key added successfully
@@ -534,7 +541,7 @@ paths:
     delete:
       tags:
         - Consents
-      description: Delete search key to consent
+      description: Delete multiple search keys in a consent
       parameters:
         - name: consentId
           in: path
@@ -555,6 +562,13 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
       responses:
         "204":
           description: Search key deleted successfully

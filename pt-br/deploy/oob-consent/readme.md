@@ -783,3 +783,8 @@ Deve ser habilitada **APENAS** se a funcionalidade a Jornada Sem Redirecionament
 estiver habilitada.
 
 Ex: `1`
+
+### feature/cpfCnpjSearchKey/enabled
+Habilita ou desabilita a criação de chaves de busca de CPF e CNPJ no momento em que um consentimento é criado.
+
+Ex: `1`
