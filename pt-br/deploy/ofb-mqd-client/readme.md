@@ -323,6 +323,54 @@ segura com o servidor.
 
 Valores: `URL válida`
 
+### enableHttps
+
+Indica se o HTTPS deve ser habilitado.
+
+Valores: `true` ou `false`
+
+### resultEnabled
+
+Indica se os resultados devem ser salvos localmente.
+
+Valores: `true` ou `false`
+
+### resultFilesPerDay
+
+Indica o número de arquivos que devem ser criados a cada dia.
+
+Valores: `Número inteiro positivo`
+
+### resultDaysToStore
+
+Indica o número de dias que os resultados serão armazenados pela aplicação.
+
+Valores: `Número inteiro positivo`
+
+### resultSamplesPerError
+
+Indica o número de resultados que serão salvos para cada tipo de erro.
+
+Valores: `Número inteiro positivo`
+
+### resultMaskPrivateContent
+
+Indica se informações privilegiadas devem ser mascaradas antes de gravar os dados de log.
+
+Valores: `true` ou `false`
+
+### resultVolumeMetadata
+
+Indica a configuração de volume do Kubernetes que está sendo usada para armazenar dados de log.
+
+Valores: 
+
+```yaml
+resultVolumeMetadata:
+  - name: data-logs
+    emptyDir: {}
+```
+
 **Exemplo:**
 
 ```yaml
@@ -335,4 +383,13 @@ env:
   loggingLevel: "DEBUG"
   applicationMode: "TRANSMITTER"
   proxyUrl: "http://nginx-mqd"
+  enableHttps: "false"
+  resultEnabled: "false"
+  resultFilesPerDay: "10"
+  resultDaysToStore: "30"
+  resultSamplesPerError: "5"
+  resultMaskPrivateContent: "false"
+  resultVolumeMetadata:
+    - name: data-logs
+      emptyDir: {}
 ```
