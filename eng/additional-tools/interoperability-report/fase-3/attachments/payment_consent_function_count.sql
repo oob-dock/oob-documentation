@@ -18,11 +18,11 @@ BEGIN
     SELECT end_date_interval::date::timestamp AT TIME ZONE 'UTC' into end_date_utc;
 
                 RETURN QUERY 
-                  SELECT t.org_name::TEXT                                itp,
-                    count(c.id)                                          quantity_request,
-                    count(c.id) FILTER(WHERE c.account_holder_status<>2) quantity_consent_client,
-                    count(c.id) FILTER(WHERE c.account_holder_status=2)  quantity_consent_non_client,
-                    t.org_id::TEXT 							         itp_org_id
+                  SELECT t.org_name::TEXT                                                                   itp,
+                    count(c.id)                                                                             quantity_request,
+                    count(c.id) FILTER(WHERE c.account_holder_status=1  or c.account_holder_status is null) quantity_consent_client,
+                    count(c.id) FILTER(WHERE c.account_holder_status=2)                                     quantity_consent_non_client,
+                    t.org_id::TEXT                                                                          itp_org_id
                   FROM consent c
                     INNER JOIN tpp t ON c.id_tpp = t.id
                   WHERE c.dt_creation BETWEEN start_date_utc AND end_date_utc
