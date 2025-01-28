@@ -73,6 +73,11 @@ paths:
           schema:
             type: string
           in: query
+        - name: searchKeys
+          schema:
+            type: string
+          in: query
+          description: Comma-separated list of search keys.
         - name: status
           in: query
           schema:

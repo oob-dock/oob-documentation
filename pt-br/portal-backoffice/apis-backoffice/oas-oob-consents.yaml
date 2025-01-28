@@ -73,6 +73,11 @@ paths:
           schema:
             type: string
           in: query
+        - name: searchKeys
+          schema:
+            type: string
+          in: query
+          description: Lista de chaves de busca separadas por vírgula.
         - name: status
           in: query
           schema:
