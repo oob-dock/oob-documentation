@@ -171,6 +171,36 @@ As chaves devem ser geradas no diretório de participantes:
 * BRSEAL=chave de assinatura
 * BRCAC=chave de encriptação
 
+#### Chave interna de assinatura
+
+Por padrão, o OOB Authorization Server utiliza uma chave de assinatura interna
+de assinatura, necessária para comunicação das informações do token entre os
+serviços.
+
+É necessário que uma chave tipo ECDSA (ES256, ES384 e ES512) seja gerada
+pela instituição e configurada junto com as demais chaves, conforme exemplo a seguir:
+
+```yaml
+  privateKeys:
+      [...]
+    - certSecretName: "oob-as-keys"
+      certSecretKey: "internal-sig.key"
+      kid: "7f38a01e-6bd5-4423-bd22-0e8284dbb9a8"
+      alg: "ES256"
+      use: "sig"
+      internal: "true"
+```
+
+Conforme exemplo acima, a chave deve ter o `use` igual a `sign` e o campo
+`internal` deve ser preenchido com o valor `true`.
+
+*Observação*: As propriedades `passphraseSecretName` e `passphraseSecretKey` estão
+também disponíveis para configuração dessa chave.
+
+***Importante***: A configuração dessa chave é obrigatória caso a variável
+[```FEATURE_SUPPORT_JWT_INTROSPECTION```](#feature_support_jwt_introspection)
+esteja habilitada.
+
 ### clients
 
 Configura os clientes estáticos (não registrados dinamicamente) no authorization
@@ -881,6 +911,22 @@ Substitui o authorization_endpoint exposto no .well-know.
 additionalVars:
   - name: OVERRIDE_AUTHORIZATION_ENDPOINT
     value: "https://consentimentocompartilhado.com.br/auth"
+```
+
+### FEATURE_SUPPORT_JWT_INTROSPECTION
+
+Indica se a resposta para introspection interno deve suportar JWT.
+Caso essa funcionalidade esteja habilitada, este serviço deve ser
+configurado com uma chave de assinatura de uso interno do tipo ES256,
+ES384 ou ES512, conforme explicado [anteriormente](#chave-interna-de-assinatura).
+
+Essa funcionalidade está habilitada por padrão. Para desabilitá-la, siga
+o exemplo abaixo:
+
+```yaml
+additionalVars:
+  - name: FEATURE_SUPPORT_JWT_INTROSPECTION
+    value: "0"
 ```
 
 ### UNIQUE_PROFILE_START_DATE
