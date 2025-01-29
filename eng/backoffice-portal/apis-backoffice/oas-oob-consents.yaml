@@ -70,8 +70,14 @@ paths:
           schema:
             $ref: "#/components/schemas/OrderTypeEnum"
         - name: searchKey
-          type: string
+          schema:
+            type: string
           in: query
+        - name: searchKeys
+          schema:
+            type: string
+          in: query
+          description: Comma-separated list of search keys.
         - name: status
           in: query
           schema:
@@ -508,11 +514,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
-        - name: searchKey
-          in: path
-          required: true
-          schema:
-            type: string
         - name: X-Correlation-ID
           in: header
           schema:
@@ -548,11 +549,13 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
-        - name: searchKey
-          in: path
+        - name: searchKeys
+          in: query
           required: true
           schema:
-            type: string
+            type: array
+            items:
+              type: string
         - name: X-Correlation-ID
           in: header
           schema:
@@ -562,13 +565,6 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: string
       responses:
         "204":
           description: Search key deleted successfully
@@ -708,24 +704,24 @@ paths:
   /open-banking/oob-consents/automatic-payments/v1/recurring-consents/{recurringConsentId}:
     patch:
       tags:
-      - Consents Opus Open Banking
+        - Consents Opus Open Banking
       description: Revoke automatic payment consent
       parameters:
-      - name: recurringConsentId
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/UUID'
-      - name: X-Brand-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          nullable: false
-      - name: X-Correlation-ID
-        in: header
-        schema:
-          type: string
+        - name: recurringConsentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+            nullable: false
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
       requestBody:
         content:
           application/json:

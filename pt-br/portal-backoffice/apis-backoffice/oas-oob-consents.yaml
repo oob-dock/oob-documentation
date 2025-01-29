@@ -70,8 +70,14 @@ paths:
           schema:
             $ref: "#/components/schemas/OrderTypeEnum"
         - name: searchKey
-          type: string
+          schema:
+            type: string
           in: query
+        - name: searchKeys
+          schema:
+            type: string
+          in: query
+          description: Lista de chaves de busca separadas por vírgula.
         - name: status
           in: query
           schema:
@@ -508,11 +514,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
-        - name: searchKey
-          in: path
-          required: true
-          schema:
-            type: string
         - name: X-Correlation-ID
           in: header
           schema:
@@ -548,11 +549,6 @@ paths:
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
-        - name: searchKey
-          in: path
-          required: true
-          schema:
-            type: string
         - name: X-Correlation-ID
           in: header
           schema:
@@ -562,13 +558,13 @@ paths:
           required: true
           schema:
             type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: array
-              items:
-                type: string
+        - name: searchKeys
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          required: true
       responses:
         "204":
           description: Search key deleted successfully
@@ -775,24 +771,24 @@ paths:
   /open-banking/oob-consents/automatic-payments/v1/recurring-consents/{recurringConsentId}:
     patch:
       tags:
-      - Consents Opus Open Banking
+        - Consents Opus Open Banking
       description: Revoke automatic payment consent
       parameters:
-      - name: recurringConsentId
-        in: path
-        required: true
-        schema:
-          $ref: '#/components/schemas/UUID'
-      - name: X-Brand-ID
-        in: header
-        required: true
-        schema:
-          type: string
-          nullable: false
-      - name: X-Correlation-ID
-        in: header
-        schema:
-          type: string
+        - name: recurringConsentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+            nullable: false
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -810,7 +806,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ResponseConsentDetailSchema'              
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -2495,13 +2491,13 @@ components:
               maximum: 60
               example: 3
             scheduleDates:
-                type: array
-                items:
-                    type: string
-                    format: date
-                    pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                    maxLength: 10
-                    example: "2023-08-23"
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleWeekly:
       type: object
       required:
