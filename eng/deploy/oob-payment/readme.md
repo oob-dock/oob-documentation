@@ -16,17 +16,21 @@ Base address of the consent service. An internal Kubernetes address can be used.
 
 Authentication token validation configuration
 
-* host: Base address of the authorization server. An internal Kubernetes address can be used.
+  - **host**: Base address of the authorization server. An internal Kubernetes address can be used.
 
-**Example:** `http://oob-authorization-server`
+    > **Example:** `http://oob-authorization-server`
 
-* path: Introspection endpoint path
+  - **path**: Introspection endpoint path
 
-**Example:** /auth/token/introspection
+    > **Example:** /auth/token/introspection
 
-* clientId: Client created in the oob-authorization-server configuration
+  - **clientId**: Client created in the oob-authorization-server configuration
 
-* clientSecret: Secret of the client created in the oob-authorization-server configuration
+  - **clientSecret**: Secret of the client created in the oob-authorization-server configuration
+
+  - **jwksPath**: Non-regulatory Authorization Server JWKS endpoint path - [NON FAPI](../oob-authorization-server/readme.md#authnonfapibasepath)
+
+    > **Example:** `/auth-nonFapi/jwks`
 
 ### signature
 

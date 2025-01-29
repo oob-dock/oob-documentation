@@ -17,18 +17,22 @@ no Kubernetes
 
 Configuração de validação do token de autenticação
 
-* host: Endereço base do authorization server. Pode ser utilizado um apontamento
+  - **host**: Endereço base do authorization server. Pode ser utilizado um apontamento
 interno no Kubernetes
 
-**Ex:** `http://oob-authorization-server`
+    > **Ex:** `http://oob-authorization-server`
 
-* path: Caminho do endpoint de introspection
+  - **path**: Caminho do endpoint de introspection
 
-**Ex:** /auth/token/introspection
+    > **Ex:** /auth/token/introspection
 
-* clientId: Client criado na configuração do oob-authorization-server
+  - **clientId**: Client criado na configuração do oob-authorization-server
 
-* clientSecret: Secret do client criado na configuração do oob-authorization-server
+  - **clientSecret**: Secret do client criado na configuração do oob-authorization-server
+
+  - **jwksPath**: Non-regulatory Authorization Server JWKS endpoint path - [NON FAPI](../oob-authorization-server/readme.md#authnonfapibasepath)
+
+    > **Ex:** `/auth-nonFapi/jwks`
 
 ### signature
 
