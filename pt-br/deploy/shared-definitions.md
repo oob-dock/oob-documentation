@@ -49,7 +49,7 @@ Exemplo:
     introspectionPath: "/auth/token/introspection"
     clientId: "oob-internal-client"
     clientSecret: "oob-internal-client"
-    jwksPath: /auth-nonFapi/jwks
+    jwksPath: /auth-nonfapi/jwks
 ```
 
 ## auth_server_url

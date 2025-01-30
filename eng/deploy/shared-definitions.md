@@ -30,6 +30,8 @@ Security configuration to validate access tokens received in requests.
 * introspectionPath: Path of the introspection endpoint.
 * clientId: Client created in the configuration of the oob-authorization-server.
 * clientSecret: Client access secret.
+* jwksPath: Path to the NON-FAPI JWKS endpoint. It should be formed by concatenating
+the [auth_server_nonfapi_base_path](#auth_server_nonfapi_base_path) with `jwks`.
 
 Example:
 
@@ -38,6 +40,7 @@ authServerUrl: "http://oob-authorization-server"
 introspectionPath: "/auth/token/introspection"
 clientId: "oob-internal-client"
 clientSecret: "oob-internal-client"
+jwksPath: "/auth-nonFapi/jwks"
 ```
 
 ## auth_server_url

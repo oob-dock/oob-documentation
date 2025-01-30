@@ -65,7 +65,7 @@
 
     - **jwksPath**: Caminho do endpoint de jwks do Authorization Server não regulatório - [NON FAPI](../oob-authorization-server/readme.md#authnonfapibasepath)
 
-        > **Ex:** `/auth-nonFapi/jwks`
+        > **Ex:** `/auth-nonfapi/jwks`
 
 4. ### additionalVars
 

@@ -30,7 +30,7 @@ Authentication token validation configuration
 
   - **jwksPath**: Non-regulatory Authorization Server JWKS endpoint path - [NON FAPI](../oob-authorization-server/readme.md#authnonfapibasepath)
 
-    > **Example:** `/auth-nonFapi/jwks`
+    > **Example:** `/auth-nonfapi/jwks`
 
 ### signature
 
