@@ -240,7 +240,7 @@ components:
         selectedDailyLimit:
           type: number
           description: Daily transaction limit selected by the customer for payments linked to the No Redirect Journey device binding.
-            [Restriction] Mandatory for ENROLLMENT type consents
+            [Restriction] Mandatory for ENROLLMENT type consents until 01/30/2025. After this date, it will be optional.
           example: 100000.12
           minimum: 0.01
         selectedExpirationDate:

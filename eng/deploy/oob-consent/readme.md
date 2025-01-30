@@ -529,26 +529,6 @@ additionalVars:
     value: "true"
 ```
 
-### ENROLLMENT_NAME_TEMPLATE
-
-Text template used to define the name of the user associated with the key to be
-displayed during usage.
-
-Default value: `%1$s`
-
-Reserved values:
-
-| Value       | Replaced by                             |
-| ----------- | --------------------------------------- |
-| %1$s        | Name of the client who created the link |
-
-**Ex:**
-```yaml
-additionalVars:
-  - name: ENROLLMENT_NAME_TEMPLATE
-  - value: "Open Finance: %1$s"
-```
-
 ### CONSENT_DATA_SHARING_V31_DATE
 
 Defines the date when the necessary modifications for Phase 2 v3.1 should be activated.
@@ -563,6 +543,23 @@ as follows:
 additionalVars:
   - name: CONSENT_DATA_SHARING_V31_DATE
   - value: "2024-12-25"
+```
+
+### ENROLLMENT_V21_DATE
+
+Defines the date when the necessary modifications for No Redirect Journey
+v2.1 should be activated.
+It must be configured once the official date is announced by BACEN.
+
+**Format:** "YYYY-MM-DD"
+
+**Example:** To activate the modifications on 01/10/2025, configure
+as follows:
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_V21_DATE
+  - value: "2025-01-10"
 ```
 
 ### Connectors
@@ -680,3 +677,8 @@ Example: `1`
 Enables or disables RP registration in fido server during DCR. It should be enabled **ONLY** if No Redirect Journey is enabled.
 
 Example: `1`
+
+### feature/cpfCnpjSearchKey/enabled
+Enable or disable the creation of CPF and CNPJ search keys at the time a consent is created.
+
+Ex: `1`

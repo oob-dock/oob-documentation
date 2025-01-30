@@ -70,8 +70,14 @@ paths:
           schema:
             $ref: "#/components/schemas/OrderTypeEnum"
         - name: searchKey
-          type: string
+          schema:
+            type: string
           in: query
+        - name: searchKeys
+          schema:
+            type: string
+          in: query
+          description: Lista de chaves de busca separadas por vírgula.
         - name: status
           in: query
           schema:
@@ -497,8 +503,79 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseConsentExtendsSchema"
-  ? /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}
-  : post:
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-keys:
+    post:
+      tags:
+        - Consents
+      description: Post multiple search keys to a consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
+      responses:
+        "204":
+          description: Search key added successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - Consents
+      description: Delete multiple search keys in a consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+        - name: searchKeys
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+          required: true
+      responses:
+        "204":
+          description: Search key deleted successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}:
+    post:
       tags:
         - Consents
       description: Post search key to consent
@@ -691,6 +768,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MetadataData"
+  /open-banking/oob-consents/automatic-payments/v1/recurring-consents/{recurringConsentId}:
+    patch:
+      tags:
+        - Consents Opus Open Banking
+      description: Revoke automatic payment consent
+      parameters:
+        - name: recurringConsentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+            nullable: false
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomaticPaymentConsentEdition'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -2374,6 +2490,14 @@ components:
               minimum: 2
               maximum: 60
               example: 3
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleWeekly:
       type: object
       required:
@@ -2412,6 +2536,14 @@ components:
               minimum: 2
               maximum: 60
               example: 10
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleMonthly:
       type: object
       required:
@@ -2444,6 +2576,14 @@ components:
               minimum: 2
               maximum: 24
               example: 24
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleCustom:
       type: object
       required:
@@ -2478,6 +2618,14 @@ components:
               pattern: '[\w\W\s]*'
               maxLength: 255
               example: Todas quintas e domingos por 6 meses
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     StatusEnum:
       enum:
         - AUTHORISED
@@ -2712,6 +2860,20 @@ components:
       pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
       maxLength: 20
       description: Instante de rejeição do vínculo de conta no ambiente da detentora.
+    AutomaticPaymentConsentEdition:
+      type: object
+      properties:
+        maximumVariableAmount:
+          description: Definição da configuração de recorrência para pagamentos automáticos.
+          maxLength: 19
+          minLength: 4
+          type: string
+          example: "1000000.12"
+        useOverdraftLimit:
+          description: Indica se o consentimento permite a utilização do limite de
+            cheque especial.
+          type: boolean
+          example: true
   securitySchemes:
     jwt:
       type: http

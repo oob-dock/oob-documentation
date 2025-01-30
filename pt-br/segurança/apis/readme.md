@@ -1,48 +1,48 @@
 # Controles de segurança por API
 
 - [Controles de segurança por API](#controles-de-segurança-por-api)
-  - [Channels catalog](#channels-catalog)
-  - [Channels catalog maintance](#channels-catalog-maintance)
-  - [Products and services catalog](#products-and-services-catalog)
-  - [Products and services catalog maintance](#products-and-services-catalog-maintance)
-  - [Accounts catalog](#accounts-catalog)
-  - [Credit cards catalog](#credit-cards-catalog)
-  - [Invoice financings catalog](#invoice-financings-catalog)
-  - [Loans catalog](#loans-catalog)
-  - [Financings catalog](#financings-catalog)
-  - [Unarranged account overdraft catalog](#unarranged-account-overdraft-catalog)
-  - [Status](#status)
-    - [Status](#status-1)
-    - [Admin](#admin)
-  - [Outages maintance](#outages-maintance)
-  - [Financial data](#financial-data)
-    - [Customers](#customers)
-    - [Credit cards accounts](#credit-cards-accounts)
-    - [Accounts](#accounts)
-    - [Loans](#loans)
-    - [Financings](#financings)
-    - [Unarranged accounts overdraft](#unarranged-accounts-overdraft)
-    - [Invoice financings](#invoice-financings)
-    - [Bank fixed incomes](#bank-fixed-incomes)
-    - [Credit fixed incomes](#credit-fixed-incomes)
-    - [Variable incomes](#variable-incomes)
-    - [Treasure titles](#treasure-titles)
-    - [Funds](#funds)
-    - [Exchanges](#exchanges)
-  - [Payments](#payments)
-  - [JSR](#jsr)
-  - [Automatic Payments](#automatic-payments)
-  - [Consent](#consent)
-    - [Consents](#consents)
-    - [Resources](#resources)
-    - [OOB consents](#oob-consents)
-  - [Capitalization bonds catalog](#capitalization-bonds-catalog)
-  - [Investments catalog](#investments-catalog)
-  - [Exchange catalog](#exchange-catalog)
-  - [Acquiring services catalog](#acquiring-services-catalog)
-  - [Pension catalog](#pension-catalog)
-  - [Insurance catalog](#insurance-catalog)
-  - [Observações](#observações)
+    - [Channels catalog](#channels-catalog)
+    - [Channels catalog maintance](#channels-catalog-maintance)
+    - [Products and services catalog](#products-and-services-catalog)
+    - [Products and services catalog maintance](#products-and-services-catalog-maintance)
+    - [Accounts catalog](#accounts-catalog)
+    - [Credit cards catalog](#credit-cards-catalog)
+    - [Invoice financings catalog](#invoice-financings-catalog)
+    - [Loans catalog](#loans-catalog)
+    - [Financings catalog](#financings-catalog)
+    - [Unarranged account overdraft catalog](#unarranged-account-overdraft-catalog)
+    - [Status](#status)
+        - [Status](#status-1)
+        - [Admin](#admin)
+    - [Outages maintance](#outages-maintance)
+    - [Financial data](#financial-data)
+        - [Customers](#customers)
+        - [Credit cards accounts](#credit-cards-accounts)
+        - [Accounts](#accounts)
+        - [Loans](#loans)
+        - [Financings](#financings)
+        - [Unarranged accounts overdraft](#unarranged-accounts-overdraft)
+        - [Invoice financings](#invoice-financings)
+        - [Bank fixed incomes](#bank-fixed-incomes)
+        - [Credit fixed incomes](#credit-fixed-incomes)
+        - [Variable incomes](#variable-incomes)
+        - [Treasure titles](#treasure-titles)
+        - [Funds](#funds)
+        - [Exchanges](#exchanges)
+    - [Payments](#payments)
+    - [JSR](#jsr)
+    - [Automatic Payments](#automatic-payments)
+    - [Consent](#consent)
+        - [Consents](#consents)
+        - [Resources](#resources)
+        - [OOB consents](#oob-consents)
+    - [Capitalization bonds catalog](#capitalization-bonds-catalog)
+    - [Investments catalog](#investments-catalog)
+    - [Exchange catalog](#exchange-catalog)
+    - [Acquiring services catalog](#acquiring-services-catalog)
+    - [Pension catalog](#pension-catalog)
+    - [Insurance catalog](#insurance-catalog)
+    - [Observações](#observações)
 
 ## Channels catalog
 
@@ -51,7 +51,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API                                  | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------------ | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|--------------------------------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/branches                         | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/electronic-channels              | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/phone-channels                   | Não          |                  | Não        | Não              | Não  |     |
@@ -73,7 +73,7 @@
 - Sistema interno banco
 
 | Operação | API                                                         | Valida token | Escopo de acesso   | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------------------------- | ------------ | ------------------ | ---------- | ---------------- | ---- | --- |
+|----------|-------------------------------------------------------------|--------------|--------------------|------------|------------------|------|-----|
 | GET      | /v1/brand                                                   | Sim          | oob_opendata:read  | Não        | Não              | Não  |     |
 | PUT      | /v1/brand                                                   | Sim          | oob_opendata:write | Não        | Não              | Não  |     |
 | GET      | /v1/banking-agents-contractors                              | Sim          | oob_opendata:read  | Não        | Não              | Não  |     |
@@ -132,7 +132,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|-------------------------------------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/personal-accounts                     | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/business-accounts                     | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/personal-loans                        | Não          |                  | Não        | Não              | Não  |     |
@@ -156,7 +156,7 @@
 - Sistema interno banco
 
 | Operação | API                                                        | Valida token | Escopo de acesso   | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ---------------------------------------------------------- | ------------ | ------------------ | ---------- | ---------------- | ---- | --- |
+|----------|------------------------------------------------------------|--------------|--------------------|------------|------------------|------|-----|
 | GET      | /v1/brand                                                  | Sim          | oob_opendata:read  | Não        | Não              | Não  |     |
 | PUT      | /v1/brand                                                  | Sim          | oob_opendata:write | Não        | Não              | Não  |     |
 | GET      | /v1/companies                                              | Sim          | oob_opendata:read  | Não        | Não              | Não  |     |
@@ -209,10 +209,10 @@
 
 **Cliente API:** Qualquer um (Aberto na internet)
 
-| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/personal-accounts                     | Não          |                  | Não        | Não              | Não  |     |
-| GET      | /v1/business-accounts                     | Não          |                  | Não        | Não              | Não  |     |
+| Operação | API                   | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+|----------|-----------------------|--------------|------------------|------------|------------------|------|-----|
+| GET      | /v1/personal-accounts | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-accounts | Não          |                  | Não        | Não              | Não  |     |
 
 ## Credit cards catalog
 
@@ -220,10 +220,10 @@
 
 **Cliente API:** Qualquer um (Aberto na internet)
 
-| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/personal-credit-cards                 | Não          |                  | Não        | Não              | Não  |     |
-| GET      | /v1/business-credit-cards                 | Não          |                  | Não        | Não              | Não  |     |
+| Operação | API                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+|----------|---------------------------|--------------|------------------|------------|------------------|------|-----|
+| GET      | /v1/personal-credit-cards | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-credit-cards | Não          |                  | Não        | Não              | Não  |     |
 
 ## Invoice financings catalog
 
@@ -231,10 +231,10 @@
 
 **Cliente API:** Qualquer um (Aberto na internet)
 
-| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/personal-invoice-financings           | Não          |                  | Não        | Não              | Não  |     |
-| GET      | /v1/business-invoice-financings           | Não          |                  | Não        | Não              | Não  |     |
+| Operação | API                             | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+|----------|---------------------------------|--------------|------------------|------------|------------------|------|-----|
+| GET      | /v1/personal-invoice-financings | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-invoice-financings | Não          |                  | Não        | Não              | Não  |     |
 
 ## Loans catalog
 
@@ -242,10 +242,10 @@
 
 **Cliente API:** Qualquer um (Aberto na internet)
 
-| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/personal-loans                        | Não          |                  | Não        | Não              | Não  |     |
-| GET      | /v1/business-loans                        | Não          |                  | Não        | Não              | Não  |     |
+| Operação | API                | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+|----------|--------------------|--------------|------------------|------------|------------------|------|-----|
+| GET      | /v1/personal-loans | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-loans | Não          |                  | Não        | Não              | Não  |     |
 
 ## Financings catalog
 
@@ -253,10 +253,10 @@
 
 **Cliente API:** Qualquer um (Aberto na internet)
 
-| Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/personal-financings                   | Não          |                  | Não        | Não              | Não  |     |
-| GET      | /v1/business-financings                   | Não          |                  | Não        | Não              | Não  |     |
+| Operação | API                     | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+|----------|-------------------------|--------------|------------------|------------|------------------|------|-----|
+| GET      | /v1/personal-financings | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/business-financings | Não          |                  | Não        | Não              | Não  |     |
 
 ## Unarranged account overdraft catalog
 
@@ -265,7 +265,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API                                       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|-------------------------------------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/personal-unarranged-account-overdraft | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/business-unarranged-account-overdraft | Não          |                  | Não        | Não              | Não  |     |
 
@@ -278,7 +278,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API         | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|-------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/status  | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/outages | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v2/status  | Não          |                  | Não        | Não              | Não  |     |
@@ -291,7 +291,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API         | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|-------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/metrics | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v2/metrics | Não          |                  | Não        | Não              | Não  |     |
 
@@ -305,7 +305,7 @@
 - Sistema interno banco
 
 | Operação | API                      | Valida token | Escopo de acesso  | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ------------------------ | ------------ | ----------------- | ---------- | ---------------- | ---- | --- |
+|----------|--------------------------|--------------|-------------------|------------|------------------|------|-----|
 | GET      | /v1/domains/failure-type | Sim          | oob_outages:read  | Não        | Não              | Não  |     |
 | GET      | /v1/endpoints            | Sim          | oob_outages:read  | Não        | Não              | Não  |     |
 | GET      | /v1/outages              | Sim          | oob_outages:read  | Não        | Não              | Não  |     |
@@ -327,7 +327,7 @@
 **Cliente API:** TPP
 
 | Operação | API                              | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                       | Valida consentId | mTLS | Obs |
-| -------- | -------------------------------- | ------------ | ---------------- | ---------- | --------------------------------------- | ---------------- | ---- | --- |
+|----------|----------------------------------|--------------|------------------|------------|-----------------------------------------|------------------|------|-----|
 | GET      | /v1/business/identifications     | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ | Sim              | Sim  |     |
 | GET      | /v1/business/financial-relations | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              | Sim  |     |
 | GET      | /v1/business/qualifications      | Sim          | customers        | Não        | CUSTOMERS_BUSINESS_ADITTIONALINFO_READ  | Sim              | Sim  |     |
@@ -348,7 +348,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                                 | Valida token | Escopo de acesso      | Valida JWS | ConsentPermission                             | Valida consentId | mTLS | Obs |
-| -------- | --------------------------------------------------- | ------------ | --------------------- | ---------- | --------------------------------------------- | ---------------- | ---- | --- |
+|----------|-----------------------------------------------------|--------------|-----------------------|------------|-----------------------------------------------|------------------|------|-----|
 | GET      | /v1/accounts                                        | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              | Sim  |     |
 | GET      | /v1/accounts/\{ID\}                                 | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_READ                    | Sim              | Sim  |     |
 | GET      | /v1/accounts/\{ID\}/bills                           | Sim          | credit-cards-accounts | Não        | CREDIT_CARDS_ACCOUNTS_BILLS_READ              | Sim              | Sim  |     |
@@ -369,19 +369,19 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                          | Valida token | Escopo de acesso | Valida JWS | ConsentPermission              | Valida consentId | mTLS | Obs |
-| -------- | -------------------------------------------- | ------------ | ---------------- | ---------- | ------------------------------ | ---------------- | ---- | --- |
-| GET      | /v1/accounts                                 | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}                          | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}/overdraft-limits         | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}/balances                 | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
-| GET      | /v1/accounts/\{ID\}/transactions             | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
-| GET      | /v2/accounts                                 | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
-| GET      | /v2/accounts/\{ID\}                          | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
-| GET      | /v2/accounts/\{ID\}/overdraft-limits         | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
-| GET      | /v2/accounts/\{ID\}/balances                 | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
-| GET      | /v2/accounts/\{ID\}/transactions             | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
-| GET      | /v2/accounts/\{ID\}/transactions-current     | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| Operação | API                                      | Valida token | Escopo de acesso | Valida JWS | ConsentPermission              | Valida consentId | mTLS | Obs |
+|----------|------------------------------------------|--------------|------------------|------------|--------------------------------|------------------|------|-----|
+| GET      | /v1/accounts                             | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}                      | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}/overdraft-limits     | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}/balances             | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
+| GET      | /v1/accounts/\{ID\}/transactions         | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| GET      | /v2/accounts                             | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}                      | Sim          | accounts         | Não        | ACCOUNTS_READ                  | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/overdraft-limits     | Sim          | accounts         | Não        | ACCOUNTS_OVERDRAFT_LIMITS_READ | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/balances             | Sim          | accounts         | Não        | ACCOUNTS_BALANCES_READ         | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions         | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
+| GET      | /v2/accounts/\{ID\}/transactions-current | Sim          | accounts         | Não        | ACCOUNTS_TRANSACTIONS_READ     | Sim              | Sim  |     |
 
 ### Loans
 
@@ -390,7 +390,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                        | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------------------ | ------------ | ---------------- | ---------- | -------------------------------- | ---------------- | ---- | --- |
+|----------|--------------------------------------------|--------------|------------------|------------|----------------------------------|------------------|------|-----|
 | GET      | /v1/contracts                              | Sim          | loans            | Não        | LOANS_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}                       | Sim          | loans            | Não        | LOANS_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | loans            | Não        | LOANS_PAYMENTS_READ              | Sim              | Sim  |     |
@@ -409,7 +409,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                        | Valida token | Escopo de acesso | Valida JWS | ConsentPermission                     | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------------------ | ------------ | ---------------- | ---------- | ------------------------------------- | ---------------- | ---- | --- |
+|----------|--------------------------------------------|--------------|------------------|------------|---------------------------------------|------------------|------|-----|
 | GET      | /v1/contracts                              | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}                       | Sim          | financings       | Não        | FINANCINGS_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | financings       | Não        | FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
@@ -428,7 +428,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                        | Valida token | Escopo de acesso              | Valida JWS | ConsentPermission                                        | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------------------ | ------------ | ----------------------------- | ---------- | -------------------------------------------------------- | ---------------- | ---- | --- |
+|----------|--------------------------------------------|--------------|-------------------------------|------------|----------------------------------------------------------|------------------|------|-----|
 | GET      | /v1/contracts                              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}                       | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | unarranged-accounts-overdraft | Não        | UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ              | Sim              | Sim  |     |
@@ -447,7 +447,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                        | Valida token | Escopo de acesso   | Valida JWS | ConsentPermission                             | Valida consentId | mTLS | Obs |
-| -------- | ------------------------------------------ | ------------ | ------------------ | ---------- | --------------------------------------------- | ---------------- | ---- | --- |
+|----------|--------------------------------------------|--------------|--------------------|------------|-----------------------------------------------|------------------|------|-----|
 | GET      | /v1/contracts                              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}                       | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_READ                       | Sim              | Sim  |     |
 | GET      | /v1/contracts/\{ID\}/payments              | Sim          | invoice-financings | Não        | INVOICE_FINANCINGS_PAYMENTS_READ              | Sim              | Sim  |     |
@@ -466,7 +466,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                                 | Valida token | Escopo de acesso   | Valida JWS | ConsentPermission       | Valida consentId | mTLS | Obs |
-| -------- | --------------------------------------------------- | ------------ | ------------------ | ---------- | ----------------------- | ---------------- | ---- | --- |
+|----------|-----------------------------------------------------|--------------|--------------------|------------|-------------------------|------------------|------|-----|
 | GET      | /v1/investments                                     | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}                      | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/balances             | Sim          | bank-fixed-incomes | Não        | BANK_FIXED_INCOMES_READ | Sim              | Sim  |     |
@@ -480,7 +480,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                                 | Valida token | Escopo de acesso     | Valida JWS | ConsentPermission         | Valida consentId | mTLS | Obs |
-| -------- | --------------------------------------------------- | ------------ | -------------------- | ---------- | ------------------------- | ---------------- | ---- | --- |
+|----------|-----------------------------------------------------|--------------|----------------------|------------|---------------------------|------------------|------|-----|
 | GET      | /v1/investments                                     | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}                      | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/balances             | Sim          | credit-fixed-incomes | Não        | CREDIT_FIXED_INCOMES_READ | Sim              | Sim  |     |
@@ -494,7 +494,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission     | Valida consentId | mTLS | Obs |
-| -------- | --------------------------------------------------- | ------------ | ---------------- | ---------- | --------------------- | ---------------- | ---- | --- |
+|----------|-----------------------------------------------------|--------------|------------------|------------|-----------------------|------------------|------|-----|
 | GET      | /v1/investments                                     | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}                      | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/balances             | Sim          | variable-incomes | Não        | VARIABLE_INCOMES_READ | Sim              | Sim  |     |
@@ -509,7 +509,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission    | Valida consentId | mTLS | Obs |
-| -------- | --------------------------------------------------- | ------------ | ---------------- | ---------- | -------------------- | ---------------- | ---- | --- |
+|----------|-----------------------------------------------------|--------------|------------------|------------|----------------------|------------------|------|-----|
 | GET      | /v1/investments                                     | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}                      | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/balances             | Sim          | treasure-titles  | Não        | TREASURE_TITLES_READ | Sim              | Sim  |     |
@@ -523,7 +523,7 @@
 **Cliente API:** TPP
 
 | Operação | API                                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission | Valida consentId | mTLS | Obs |
-| -------- | --------------------------------------------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
+|----------|-----------------------------------------------------|--------------|------------------|------------|-------------------|------------------|------|-----|
 | GET      | /v1/investments                                     | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}                      | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
 | GET      | /v1/investments/{investmentId}/balances             | Sim          | funds            | Não        | FUNDS_READ        | Sim              | Sim  |     |
@@ -537,11 +537,10 @@
 **Cliente API:** TPP
 
 | Operação | API                                 | Valida token | Escopo de acesso | Valida JWS | ConsentPermission | Valida consentId | mTLS | Obs |
-| -------- | ----------------------------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
+|----------|-------------------------------------|--------------|------------------|------------|-------------------|------------------|------|-----|
 | GET      | /v1/operations                      | Sim          | exchanges        | Não        | EXCHANGES_READ    | Sim              | Sim  |     |
 | GET      | /v1/operations/{operationId}        | Sim          | exchanges        | Não        | EXCHANGES_READ    | Sim              | Sim  |     |
 | GET      | /v1/operations/{operationId}/events | Sim          | exchanges        | Não        | EXCHANGES_READ    | Sim              | Sim  |     |
-
 
 ## Payments
 
@@ -550,7 +549,7 @@
 **Cliente API:** TPP
 
 | Operação | API                              | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | -------------------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|----------------------------------|--------------|------------------|------------|------------------|------|-----|
 | POST     | /v1/consents                     | Sim          | payments         | Sim        | Não              | Sim  |     |
 | GET      | /v1/consents/\{ID\}              | Sim          | payments         | Não        | Não              | Sim  |     |
 | POST     | /v2/consents                     | Sim          | payments         | Sim        | Não              | Sim  |     |
@@ -578,16 +577,16 @@
 
 **Cliente API:** TPP
 
-| Operação | API                                              | Valida token | Escopos de acesso      | Valida JWS | Valida enrollmentId  | mTLS | Obs |
-| -------- | ------------------------------------------------ | ------------ | ---------------------- | ---------- | -------------------- | ---- | --- |
-| POST     | /v2/enrollments                                  | Sim          | payments               | Sim        | Não                  | Sim  |     |
-| POST     | /v2/enrollments/\{ID\}/risk-signals              | Sim          | payments               | Sim        | Não                  | Sim  |     |
-| GET      | /v2/enrollments/\{ID\}                           | Sim          | payments               | Não        | Não                  | Sim  |     |
-| PATCH    | /v2/enrollments/\{ID\}                           | Sim          | payments               | Sim        | Não                  | Sim  |     |
-| POST     | /v2/enrollments/\{ID\}/fido-registration-options | Sim          | payments               | Sim        | Sim                  | Sim  |     |
-| POST     | /v2/enrollments/\{ID\}/fido-registration         | Sim          | payments               | Sim        | Sim                  | Sim  |     |
-| POST     | /v2/enrollments/\{ID\}/fido-sign-options         | Sim          | payments               | Sim        | Não                  | Sim  |     |
-| POST     | /v2/consents/\{ID\}/authorise                    | Sim          | payments, nrp-consents | Sim        | Sim                  | Sim  |     |
+| Operação | API                                              | Valida token | Escopos de acesso      | Valida JWS | Valida enrollmentId | mTLS | Obs |
+|----------|--------------------------------------------------|--------------|------------------------|------------|---------------------|------|-----|
+| POST     | /v2/enrollments                                  | Sim          | payments               | Sim        | Não                 | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/risk-signals              | Sim          | payments               | Sim        | Não                 | Sim  |     |
+| GET      | /v2/enrollments/\{ID\}                           | Sim          | payments               | Não        | Não                 | Sim  |     |
+| PATCH    | /v2/enrollments/\{ID\}                           | Sim          | payments               | Sim        | Não                 | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-registration-options | Sim          | payments               | Sim        | Sim                 | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-registration         | Sim          | payments               | Sim        | Sim                 | Sim  |     |
+| POST     | /v2/enrollments/\{ID\}/fido-sign-options         | Sim          | payments               | Sim        | Não                 | Sim  |     |
+| POST     | /v2/consents/\{ID\}/authorise                    | Sim          | payments, nrp-consents | Sim        | Sim                 | Sim  |     |
 
 ## Automatic Payments
 
@@ -595,20 +594,20 @@
 
 **Cliente API:** TPP
 
-| Operação | API                              | Valida token | Escopo de acesso   | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | -------------------------------- | ------------ | ------------------ | ---------- | ---------------- | ---- | --- |
-| POST     | /v1/recurring-consents           | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
-| GET      | /v1/recurring-consents/\{ID\}    | Sim          | recurring-payments | Não        | Não              | Sim  |     |
-| PATCH    | /v1/recurring-consents/\{ID\}    | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
-| POST     | /v1/pix/recurring-payments       | Sim          | recurring-payments | Sim        | Sim              | Sim  |     |
-| GET      | /v1/pix/recurring-payments       | Sim          | recurring-payments | Não        | Não              | Sim  |     |
-| GET      | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
-| PATCH    | /v1/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
-| POST     | /v2/recurring-consents           | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
-| GET      | /v2/recurring-consents/\{ID\}    | Sim          | recurring-payments | Não        | Não              | Sim  |     |
-| POST     | /v2/pix/recurring-payments       | Sim          | recurring-payments | Sim        | Sim              | Sim  |     |
-| GET      | /v2/pix/recurring-payments       | Sim          | recurring-payments | Não        | Não              | Sim  |     |
-| GET      | /v2/pix/recurring-payments/\{ID\}| Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| Operação | API                               | Valida token | Escopo de acesso   | Valida JWS | Valida consentId | mTLS | Obs |
+|----------|-----------------------------------|--------------|--------------------|------------|------------------|------|-----|
+| POST     | /v1/recurring-consents            | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| GET      | /v1/recurring-consents/\{ID\}     | Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| PATCH    | /v1/recurring-consents/\{ID\}     | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| POST     | /v1/pix/recurring-payments        | Sim          | recurring-payments | Sim        | Sim              | Sim  |     |
+| GET      | /v1/pix/recurring-payments        | Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| GET      | /v1/pix/recurring-payments/\{ID\} | Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| PATCH    | /v1/pix/recurring-payments/\{ID\} | Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| POST     | /v2/recurring-consents            | Sim          | recurring-payments | Sim        | Não              | Sim  |     |
+| GET      | /v2/recurring-consents/\{ID\}     | Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| POST     | /v2/pix/recurring-payments        | Sim          | recurring-payments | Sim        | Sim              | Sim  |     |
+| GET      | /v2/pix/recurring-payments        | Sim          | recurring-payments | Não        | Não              | Sim  |     |
+| GET      | /v2/pix/recurring-payments/\{ID\} | Sim          | recurring-payments | Não        | Não              | Sim  |     |
 
 ## Consent
 
@@ -619,7 +618,7 @@
 **Cliente API:** TPP
 
 | Operação | API                            | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs                |
-| -------- | ------------------------------ | ------------ | ---------------- | ---------- | ---------------- | ---- | ------------------ |
+|----------|--------------------------------|--------------|------------------|------------|------------------|------|--------------------|
 | POST     | /v1/consents                   | Sim          | consents         | Não        | Não              | Sim  |                    |
 | GET      | /v1/consents/\{ID\}            | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
 | DELETE   | /v1/consents/\{ID\}            | Sim          | consents         | Não        | Não              | Sim  | [*1](#observações) |
@@ -641,7 +640,7 @@
 **Cliente API:** TPP
 
 | Operação | API           | Valida token | Escopo de acesso | Valida JWS | ConsentPermission | Valida consentId | mTLS | Obs |
-| -------- | ------------- | ------------ | ---------------- | ---------- | ----------------- | ---------------- | ---- | --- |
+|----------|---------------|--------------|------------------|------------|-------------------|------------------|------|-----|
 | GET      | /v1/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 | GET      | /v2/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
 | GET      | /v3/resources | Sim          | resources        | Não        | RESOURCES_READ    | Sim              | Sim  |     |
@@ -655,24 +654,28 @@
 - Portal gestão consentimento (backoffice)
 - Portal gestão consentimento (cliente)
 
-| Operação | API                                   | Valida token | Escopo de acesso                 | Valida JWS | Valida consentId | mTLS | Obs                |
-| -------- | ------------------------------------- | ------------ | -------------------------------- | ---------- | ---------------- | ---- | ------------------ |
-| GET      | /v1/domains/permission                | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
-| GET      | /v1/domains/consent-type              | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
-| GET      | /v1/domains/consent-status            | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
-| *GET     | /v1/domains/resource-type             | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
-| *DELETE  | /v1/authorisations/\{ID\}             | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
-| *PUT     | /v1/authorisations/\{ID\}/accept      | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
-| *GET     | /v1/consents                          | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
-| *GET     | /v1/consents/\{ID\}                   | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
-| *PATCH   | /v1/consents/\{ID\}                   | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
-| *PATCH   | /consents/v1/consents/\{ID\}          | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
-| *GET     | /consents/v1/consents/\{ID\}/payments | Sim          | oob_consents:read, oob_customer | Não        | Não              | Não  | [*2](#observações) |
-| *PATCH   | /consents/v1/consents/\{ID\}/payments | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
-| *PATCH   | /enrollments/v1/enrollments/\{ID\}    | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
-| *GET     | /v1/tpps/payment-legacy-ids           | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
-| POST     | /v1/payment-status-notification       | Sim          | oob_payments:write               | Não        | Não              | Não  |                    |
-| *GET     | /v1/consents/\{ID\}/extends           | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
+| Operação | API                                                      | Valida token | Escopo de acesso                 | Valida JWS | Valida consentId | mTLS | Obs                |
+|----------|----------------------------------------------------------|--------------|----------------------------------|------------|------------------|------|--------------------|
+| GET      | /v1/domains/permission                                   | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
+| GET      | /v1/domains/consent-type                                 | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
+| GET      | /v1/domains/consent-status                               | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
+| *GET     | /v1/domains/resource-type                                | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
+| *DELETE  | /v1/authorisations/\{ID\}                                | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *PUT     | /v1/authorisations/\{ID\}/accept                         | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *GET     | /v1/consents                                             | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  |                    |
+| *GET     | /v1/consents/\{ID\}                                      | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /v1/consents/\{ID\}                                      | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /consents/v1/consents/\{ID\}                             | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *GET     | /consents/v1/consents/\{ID\}/payments                    | Sim          | oob_consents:read, oob_customer  | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /consents/v1/consents/\{ID\}/payments                    | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *PATCH   | /enrollments/v1/enrollments/\{ID\}                       | Sim          | oob_consents:write, oob_customer | Não        | Não              | Não  | [*2](#observações) |
+| *GET     | /v1/tpps/payment-legacy-ids                              | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
+| POST     | /v1/payment-status-notification                          | Sim          | oob_payments:write               | Não        | Não              | Não  |                    |
+| *GET     | /v1/consents/\{ID\}/extends                              | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
+| *POST    | /consents/v1/consents/{consentId}/search-key/{searchKey} | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
+| *DELETE  | /consents/v1/consents/{consentId}/search-key/{searchKey} | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
+| *POST    | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
+| *DELETE  | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
 
 ## Capitalization bonds catalog
 
@@ -681,7 +684,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API       | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | --------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|-----------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/bonds | Não          |                  | Não        | Não              | Não  |     |
 
 ## Investments catalog
@@ -691,7 +694,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API                      | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | -----------------------  | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|--------------------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/funds                | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/bank-fixed-incomes   | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/credit-fixed-incomes | Não          |                  | Não        | Não              | Não  |     |
@@ -704,10 +707,10 @@
 
 **Cliente API:** Qualquer um (Aberto na internet)
 
-| Operação | API               | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ----------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
-| GET      | /v1/online-rates  | Não          |                  | Não        | Não              | Não  |     |
-| GET      | /v1/vet-values    | Não          |                  | Não        | Não              | Não  |     |
+| Operação | API              | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
+|----------|------------------|--------------|------------------|------------|------------------|------|-----|
+| GET      | /v1/online-rates | Não          |                  | Não        | Não              | Não  |     |
+| GET      | /v1/vet-values   | Não          |                  | Não        | Não              | Não  |     |
 
 ## Acquiring services catalog
 
@@ -716,7 +719,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API            | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | -------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|----------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/personals  | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/businesses | Não          |                  | Não        | Não              | Não  |     |
 
@@ -727,7 +730,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API                    | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | ---------------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|------------------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/risk-coverages     | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/survival-coverages | Não          |                  | Não        | Não              | Não  |     |
 
@@ -738,7 +741,7 @@
 **Cliente API:** Qualquer um (Aberto na internet)
 
 | Operação | API             | Valida token | Escopo de acesso | Valida JWS | Valida consentId | mTLS | Obs |
-| -------- | --------------- | ------------ | ---------------- | ---------- | ---------------- | ---- | --- |
+|----------|-----------------|--------------|------------------|------------|------------------|------|-----|
 | GET      | /v1/automotives | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/homes       | Não          |                  | Não        | Não              | Não  |     |
 | GET      | /v1/personals   | Não          |                  | Não        | Não              | Não  |     |

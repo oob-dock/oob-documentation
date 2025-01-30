@@ -1,10 +1,11 @@
 CREATE OR REPLACE FUNCTION payment_consent_count(start_date DATE, end_date DATE, is_automatic boolean)
     RETURNS TABLE
             (
-                itp                   	   TEXT,
-                quantity_request           BIGINT,
-                quantity_consent           BIGINT,
-                itp_org_id					       TEXT
+                itp                   	     TEXT,
+                quantity_request             BIGINT,
+                quantity_consent_client      BIGINT,
+                quantity_consent_non_client  BIGINT,
+                itp_org_id					         TEXT
             )
 AS
 $function$
@@ -17,10 +18,11 @@ BEGIN
     SELECT end_date_interval::date::timestamp AT TIME ZONE 'UTC' into end_date_utc;
 
                 RETURN QUERY 
-                  SELECT t.org_name::TEXT                itp,
-                    count(c.id)                          quantity_request,
-                    count(c.id)                          quantity_consent,
-                    t.org_id::TEXT 							         itp_org_id
+                  SELECT t.org_name::TEXT                                                                   itp,
+                    count(c.id)                                                                             quantity_request,
+                    count(c.id) FILTER(WHERE c.account_holder_status=1  or c.account_holder_status is null) quantity_consent_client,
+                    count(c.id) FILTER(WHERE c.account_holder_status=2)                                     quantity_consent_non_client,
+                    t.org_id::TEXT                                                                          itp_org_id
                   FROM consent c
                     INNER JOIN tpp t ON c.id_tpp = t.id
                   WHERE c.dt_creation BETWEEN start_date_utc AND end_date_utc

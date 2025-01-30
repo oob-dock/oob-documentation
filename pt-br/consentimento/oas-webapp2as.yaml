@@ -249,7 +249,7 @@ components:
         selectedDailyLimit:
           type: number
           description: Limite de transação diário selecionado pelo cliente para os pagamentos atrelados ao vínculo de dispositivo da JSR.
-            [Restrição]  Preenchimento obrigatório para os consentimentos de tipo ENROLLMENT
+            [Restrição]  Preenchimento obrigatório para os consentimentos de tipo ENROLLMENT até o dia 30/01/2025. Após essa data, o campo se tornará opcional.
           example: 100000.12
           minimum: 0.01
         selectedExpirationDate:

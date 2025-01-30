@@ -70,8 +70,14 @@ paths:
           schema:
             $ref: "#/components/schemas/OrderTypeEnum"
         - name: searchKey
-          type: string
+          schema:
+            type: string
           in: query
+        - name: searchKeys
+          schema:
+            type: string
+          in: query
+          description: Comma-separated list of search keys.
         - name: status
           in: query
           schema:
@@ -497,22 +503,17 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseConsentExtendsSchema"
-  ? /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}
-  : post:
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-keys:
+    post:
       tags:
         - Consents
-      description: Post search key to consent
+      description: Post multiple search keys to consent
       parameters:
         - name: consentId
           in: path
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
-        - name: searchKey
-          in: path
-          required: true
-          schema:
-            type: string
         - name: X-Correlation-ID
           in: header
           schema:
@@ -522,6 +523,13 @@ paths:
           required: true
           schema:
             type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                type: string
       responses:
         "204":
           description: Search key added successfully
@@ -534,18 +542,20 @@ paths:
     delete:
       tags:
         - Consents
-      description: Delete search key to consent
+      description: Delete multiple search keys in a consent
       parameters:
         - name: consentId
           in: path
           required: true
           schema:
             $ref: "#/components/schemas/UUID"
-        - name: searchKey
-          in: path
+        - name: searchKeys
+          in: query
           required: true
           schema:
-            type: string
+            type: array
+            items:
+              type: string
         - name: X-Correlation-ID
           in: header
           schema:
@@ -691,6 +701,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/MetadataData"
+  /open-banking/oob-consents/automatic-payments/v1/recurring-consents/{recurringConsentId}:
+    patch:
+      tags:
+        - Consents Opus Open Banking
+      description: Revoke automatic payment consent
+      parameters:
+        - name: recurringConsentId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/UUID'
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+            nullable: false
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AutomaticPaymentConsentEdition'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -2369,6 +2418,14 @@ components:
               minimum: 2
               maximum: 60
               example: 3
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleWeekly:
       type: object
       required:
@@ -2407,6 +2464,14 @@ components:
               minimum: 2
               maximum: 60
               example: 10
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleMonthly:
       type: object
       required:
@@ -2439,6 +2504,14 @@ components:
               minimum: 2
               maximum: 24
               example: 24
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     ScheduleCustom:
       type: object
       required:
@@ -2473,6 +2546,14 @@ components:
               pattern: '[\w\W\s]*'
               maxLength: 255
               example: Every Thursday and Sunday for 6 months
+            scheduleDates:
+              type: array
+              items:
+                type: string
+                format: date
+                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
+                maxLength: 10
+                example: "2023-08-23"
     StatusEnum:
       enum:
         - AUTHORISED
@@ -2707,6 +2788,19 @@ components:
       pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
       maxLength: 20
       description: Rejection timestamp of the enrollment in the account holder's environment.
+    AutomaticPaymentConsentEdition:
+      type: object
+      properties:
+        maximumVariableAmount:
+          description: Definition of the sweeping configuration for automatic funds transfers.
+          maxLength: 19
+          minLength: 4
+          type: string
+          example: "1000000.12"
+        useOverdraftLimit:
+          description: Indicates whether the consent allows the use of the overdraft limit.
+          type: boolean
+          example: true
   securitySchemes:
     jwt:
       type: http
