@@ -40,6 +40,8 @@
       - [route\_block\_enabled](#route_block_enabled)
       - [mqd\_event\_enabled](#mqd_event_enabled)
       - [opentelemetry\_tracer\_exporter\_url\_http](#opentelemetry_tracer_exporter_url_http)
+      - [log\_request\_response\_enabled](#log_request_response_enabled)
+      - [log\_request\_response\_collector\_url\_http](#log_request_response_collector_url_http)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -316,6 +318,28 @@ ferramenta receptora basta definir o valor desta variável como `0`.
 Necessário definir estas variáveis de ambiente **diretamente no Kong** com os
 valores apropriados para que o funcionamento desejado da instrumentação
 aconteça.
+
+#### log_request_response_enabled
+
+Define se a instalação deverá ou não logar as requisições e respostas
+regulatórias chamadas no produto. Caso a variável seja definida com o valor
+`true` a configuração de cada rota será levada em conta para decidir se a
+requisição e resposta serão logadas ou não. Caso a variável seja definida com o
+valor `false` a configuração de cada rota será ignorada e nenhuma requisição e
+resposta regulatória será logada.
+
+**Valores possíveis:** `true` ou `false`
+
+#### log_request_response_collector_url_http
+
+Endereço da ferramenta coletora de logs que será responsável por receber os
+logs das requisições e respostas regulatórias. Pelo tamanho e característica
+das requisições e respostas não é possível utilizar o log padrão do Kong, pois
+ele possui uma limitação de tamanho. Sendo assim, o coletor de log é necessário
+para que nenhuma informação do conjunto requisição/resposta seja perdida.
+
+Essa variável é de preenchimento obrigatório caso a variável
+`log_request_response_enabled` esteja definida como `true`.
 
 ## Configuração do Grafana
 
