@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -47,25 +46,25 @@
         },
         "contractRemainingNumber": {
           "type": "number",
-          "maximum": 999,
+          "maximum": 999999,
           "description": "Prazo Remanescente segundo o tipo (dia, semana, mês, ano) referente à Modalidade de Crédito informada.\n\n[Restrição] Obrigatoriamente deve ser preenchido caso o typeContractRemaining seja diferente de SEM_PRAZO_REMANESCENTE.\n",
           "example": 80
         },
         "paidInstalments": {
           "type": "number",
           "description": "Quantidade de prestações pagas. (No caso de modalidades que não possuam parcelas, o número de prestações é igual a zero)",
-          "maximum": 999,
+          "maximum": 999999,
           "example": 73
         },
         "dueInstalments": {
           "type": "number",
-          "maximum": 999,
+          "maximum": 999999,
           "description": "Quantidade de prestações a vencer.(No caso de modalidades que não possuam parcelas, o número de prestações é igual a zero)",
           "example": 57
         },
         "pastDueInstalments": {
           "type": "number",
-          "maximum": 999,
+          "maximum": 999999,
           "description": "Quantidade de prestações vencidas. (No caso de modalidades que não possuam parcelas, o número de prestações é igual a zero)",
           "example": 73
         },
