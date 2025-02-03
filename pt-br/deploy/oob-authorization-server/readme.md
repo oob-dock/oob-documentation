@@ -173,8 +173,8 @@ As chaves devem ser geradas no diretório de participantes:
 
 #### Chave interna de assinatura
 
-Por padrão, o OOB Authorization Server utiliza uma chave de assinatura interna
-de assinatura, necessária para comunicação das informações do token entre os
+Por padrão, o OOB Authorization Server utiliza uma chave de assinatura
+interna para comunicação das informações do token entre os
 serviços.
 
 É necessário que uma chave tipo ECDSA (ES256, ES384 e ES512) seja gerada
