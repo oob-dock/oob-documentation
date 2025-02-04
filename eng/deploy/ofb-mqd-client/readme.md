@@ -297,6 +297,54 @@ Indicates the URL where the Proxy that establishes a secure connection with the 
 
 Values: `Valid URL`
 
+### enableHttps
+
+Indicates if HTTPS should be enabled.
+
+Values: `true` or `false`
+
+### resultEnabled
+
+Indicates whether to save results locally
+
+Values: `true` or `false`
+
+### resultFilesPerDay
+
+Indicates the number of files that should be created each day
+
+Values: `Positive integer`
+
+### resultDaysToStore
+
+Indicates the number of days that will be stored by the application
+
+Values: `Positive integer`
+
+### resultSamplesPerError
+
+Indicates the number of results that will be saved for each type of error
+
+Values: `Positive integer`
+
+### resultMaskPrivateContent
+
+Indicates if privileged information should be masked before writing log data
+
+Values: `true` or `false`
+
+### resultVolumeMetadata
+
+Metadadata for volume kubernetes configuration being used for storing log data
+
+Values: 
+
+```yaml
+resultVolumeMetadata:
+  - name: data-logs
+    emptyDir: {}
+```
+
 **Example:**
 
 ```yaml
@@ -309,4 +357,13 @@ env:
   loggingLevel: "DEBUG"
   applicationMode: "TRANSMITTER"
   proxyUrl: "http://nginx-mqd"
+  enableHttps: "false"
+  resultEnabled: "false"
+  resultFilesPerDay: "10"
+  resultDaysToStore: "30"
+  resultSamplesPerError: "5"
+  resultMaskPrivateContent: "false"
+  resultVolumeMetadata:
+    - name: data-logs
+      emptyDir: {}
 ```
