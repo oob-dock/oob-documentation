@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -159,14 +158,14 @@
                           "type": "string",
                           "description": "Denominação da Tarifa pactuada.\n",
                           "maxLength": 140,
-                          "pattern": "[\\w\\W\\s]*",
+                          "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
                           "example": "Saque a descoberto"
                         },
                         "feeCode": {
                           "type": "string",
                           "description": "Sigla identificadora da tarifa pactuada.\n",
                           "maxLength": 140,
-                          "pattern": "[\\w\\W\\s]*",
+                          "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
                           "example": "Saque descoberto"
                         },
                         "feeAmount": {
@@ -208,7 +207,7 @@
                         },
                         "chargeAdditionalInfo": {
                           "type": "string",
-                          "pattern": "[\\w\\W\\s]*",
+                          "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
                           "maxLength": 140,
                           "example": "Informações adicionais",
                           "description": "Campo livre para preenchimento das informações adicionais referente ao encargo.\n[Restrição] Obrigatório quando chargeType for igual 'OUTROS'.\n"
