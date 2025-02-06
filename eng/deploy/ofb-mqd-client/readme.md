@@ -299,43 +299,43 @@ Values: `Valid URL`
 
 ### enableHttps
 
-Indicates if HTTPS should be enabled.
+Indicates if HTTPS should be enabled. If enabled, a volume will be mounted with the secret containing certificates to be used, called **mqd-server-secret**. The keys of this secret should be named: **server.crt** and **server.key**.
 
 Values: `true` or `false`
 
 ### resultEnabled
 
-Indicates whether to save results locally
+Indicates if the results should be saved locally. If enabled, a volume will be mounted according to [resultVolumeMetadata](#resultVolumeMetadata) and the configurations with the prefix result will be taken into account.
 
 Values: `true` or `false`
 
 ### resultFilesPerDay
 
-Indicates the number of files that should be created each day
+Indicates the number of files that should be created each day.
 
 Values: `Positive integer`
 
 ### resultDaysToStore
 
-Indicates the number of days that will be stored by the application
+Indicates the number of days that will be stored by the application.
 
 Values: `Positive integer`
 
 ### resultSamplesPerError
 
-Indicates the number of results that will be saved for each type of error
+Indicates the number of results that will be saved for each type of error.
 
 Values: `Positive integer`
 
 ### resultMaskPrivateContent
 
-Indicates if privileged information should be masked before writing log data
+Indicates if privileged information should be masked before writing log data.
 
 Values: `true` or `false`
 
 ### resultVolumeMetadata
 
-Metadadata for volume kubernetes configuration being used for storing log data
+Metadadata for volume kubernetes configuration being used for storing log data.
 
 Values: 
 

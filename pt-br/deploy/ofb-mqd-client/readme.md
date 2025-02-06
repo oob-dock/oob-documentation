@@ -325,13 +325,15 @@ Valores: `URL válida`
 
 ### enableHttps
 
-Indica se o HTTPS deve ser habilitado.
+Indica se o HTTPS deve ser habilitado. Se habilitado, será montado um volume com o
+secret contendo os certificados a serem usados, chamado **mqd-server-secret**. As chaves desse secret devem chamar:
+**server.crt** e **server.key**.
 
 Valores: `true` ou `false`
 
 ### resultEnabled
 
-Indica se os resultados devem ser salvos localmente.
+Indica se os resultados devem ser salvos localmente. Se habilitado, será montado um volume conforme [resultVolumeMetadata](#resultVolumeMetadata) e será levado em conta as configurações com o prefixo result.
 
 Valores: `true` ou `false`
 
