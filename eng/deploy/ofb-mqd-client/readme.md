@@ -299,13 +299,17 @@ Values: `Valid URL`
 
 ### enableHttps
 
-Indicates if HTTPS should be enabled. If enabled, a volume will be mounted with the secret containing certificates to be used, called **mqd-server-secret**. The keys of this secret should be named: **server.crt** and **server.key**.
+Indicates if HTTPS should be enabled. If enabled, a volume will be mounted with the secret containing
+the certificates to be used, called **mqd-server-secret**.
+The keys of this secret should be named: **server.crt** and **server.key**.
 
 Values: `true` or `false`
 
 ### resultEnabled
 
-Indicates if the results should be saved locally. If enabled, a volume will be mounted according to [resultVolumeMetadata](#resultVolumeMetadata) and the configurations with the prefix result will be taken into account.
+Indicates if the results should be saved locally. If enabled, a volume will be mounted
+according to [resultVolumeMetadata](#resultVolumeMetadata) and the configurations
+with the prefix result will be taken into account.
 
 Values: `true` or `false`
 
