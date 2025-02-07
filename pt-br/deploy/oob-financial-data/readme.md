@@ -63,6 +63,10 @@
   
     - **clientSecret:** *Secret* do cliente criado na configuração do obb-authorization-server
 
+    - **jwksPath**: Caminho do endpoint de jwks do Authorization Server não regulatório - [NON FAPI](../oob-authorization-server/readme.md#authnonfapibasepath)
+
+        > **Ex:** `/auth-nonfapi/jwks`
+
 4. ### additionalVars
 
     Utilizado para definir configurações opcionais na aplicação. Essa configuração

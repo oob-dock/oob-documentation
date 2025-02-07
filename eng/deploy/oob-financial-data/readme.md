@@ -60,6 +60,10 @@
   
     - **clientSecret:** Client secret created in the oob-authorization-server configuration
 
+    - **jwksPath**: Non-regulatory Authorization Server JWKS endpoint path - [NON FAPI](../oob-authorization-server/readme.md#authnonfapibasepath)
+
+        > **Ex:** `/auth-nonFapi/jwks`
+
 4. ### additionalVars
 
     Used to define optional configurations in the application. This configuration allows defining a list of properties to be passed to the application in the following format:

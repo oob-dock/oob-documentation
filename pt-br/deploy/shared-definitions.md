@@ -38,6 +38,9 @@ apontamento interno no K8s
 * introspectionPath: Caminho do endpoint de introspection
 * clientId: Cliente criado na configuração do oob-authorization-server
 * clientSecret: Secret de acesso do cliente
+* jwksPath: Caminho para o endpoint de jwks NON FAPI. Deve ser formado pela
+concatenação do [auth_server_nonfapi_base_path](#auth_server_nonfapi_base_path)
+com `jwks`
 
 Exemplo:
 
@@ -45,7 +48,8 @@ Exemplo:
     authServerUrl: "http://oob-authorization-server"
     introspectionPath: "/auth/token/introspection"
     clientId: "oob-internal-client"
-    clientSecret: "oob-internal-client" 
+    clientSecret: "oob-internal-client"
+    jwksPath: /auth-nonfapi/jwks
 ```
 
 ## auth_server_url
