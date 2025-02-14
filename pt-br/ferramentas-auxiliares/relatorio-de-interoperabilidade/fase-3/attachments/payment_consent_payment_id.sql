@@ -42,6 +42,6 @@ BEGIN
                     AND c.tp_consent = 2
                     AND ((is_automatic is false AND c.tp_modality_payment IN (1,2)) OR (is_automatic is true AND c.tp_modality_payment IN (3,4,5)))
                   GROUP BY t.org_name, c.tp_modality_payment, authorisation_flow
-                  ORDER BY t.org_name ASC, quantity_request DESC;
+                  ORDER BY t.org_name ASC, product ASC, quantity_request DESC;
 END;
 $function$ LANGUAGE plpgsql;
