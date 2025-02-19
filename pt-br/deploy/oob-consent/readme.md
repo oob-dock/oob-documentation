@@ -626,6 +626,22 @@ additionalVars:
   - value: "2025-01-10"
 ```
 
+### APPLICATION_CONSENT_RECURRING_APPROVAL_DUE_DATE_DAYS
+
+Utilizado para definir o número de dias máximo para a aprovação de consentimentos com multipla aprovação.
+
+**Formato:** Número inteiro
+
+Valor default: `5`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_CONSENT_RECURRING_APPROVAL_DUE_DATE_DAYS
+    value: "5"
+```
+
 ### Conectores
 
 Existem additionalVars para utilização do conector de aprovação de consentimento

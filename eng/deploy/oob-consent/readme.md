@@ -562,6 +562,22 @@ additionalVars:
   - value: "2025-01-10"
 ```
 
+### APPLICATION_CONSENT_RECURRING_APPROVAL_DUE_DATE_DAYS
+
+Used to define the maximum number of days for the approval of consents with multiple approvals.
+
+**Format:** Integer
+
+Default value: `5`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_CONSENT_RECURRING_APPROVAL_DUE_DATE_DAYS
+    value: "5"
+```
+
 ### Connectors
 
 There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
