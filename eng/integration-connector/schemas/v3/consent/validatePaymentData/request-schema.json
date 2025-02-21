@@ -93,7 +93,7 @@
             "required": [
                 "tpp",
                 "loggedUser",
-                "creditor",
+                "creditors",
                 "payment"
             ],
             "properties": {
