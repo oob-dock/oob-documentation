@@ -24,5 +24,6 @@ BEGIN
             AND c.tp_consent = 2
             AND ((is_automatic is false AND c.tp_modality_payment IN (1,2)) OR (is_automatic is true AND c.tp_modality_payment IN (3,4,5)))
             AND exists (select 1 from history_status hs where hs.id_consent = c.id and hs.status_consent = 1 and hs.updated_on between dt_start_utc and dt_end_utc)
-        GROUP BY t.org_name;
+        GROUP BY t.org_name
+        order by t.org_name ASC;
 END;$function$;

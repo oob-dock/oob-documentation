@@ -46,6 +46,7 @@ case
 	else '/open-banking' || r.endpoint_uri::text || '/{paymentId}'
 end	as endpoint_uri,
 r.method::text, r.rejection_reason::text, count(*) as qty from rejections r
-group by r.itp, r.itp_id, r.api, r.endpoint, r.endpoint_uri, r.method, r.rejection_reason;
+group by r.itp, r.itp_id, r.api, r.endpoint, r.endpoint_uri, r.method, r.rejection_reason
+order by r.itp asc;
 
 end;$function$;
