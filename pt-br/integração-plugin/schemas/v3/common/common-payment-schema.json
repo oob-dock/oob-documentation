@@ -852,6 +852,9 @@
         },
         "PostSweeping": {
             "type": "object",
+            "required": [
+                "sweeping"
+            ],
             "properties": {
                 "sweeping": {
                     "type": "object",
@@ -977,6 +980,9 @@
         },
         "Vrp": {
             "type": "object",
+            "required": [
+                "vrp"
+            ],
             "properties": {
                 "vrp": {
                     "type": "object",
