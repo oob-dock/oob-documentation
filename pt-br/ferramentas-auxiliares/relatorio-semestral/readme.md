@@ -117,23 +117,6 @@ Endpoints - Fase 1 Dados Abertos
 
 | Endpoint                                                      | Categoria                        |
 | ------------------------------------------------------------- | -------------------------------- |
-| /channels/v1/branches                                         | CANAIS DE ATENDIMENTO            |
-| /channels/v1/electronic-channels                              | CANAIS DE ATENDIMENTO            |
-| /channels/v1/phone-channels                                   | CANAIS DE ATENDIMENTO            |
-| /channels/v1/banking-agents                                   | CANAIS DE ATENDIMENTO            |
-| /channels/v1/shared-automated-teller-machines                 | CANAIS DE ATENDIMENTO            |
-| /products-services/v1/personal-accounts                       | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/business-accounts                       | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/personal-loans                          | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/business-loans                          | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/personal-financings                     | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/business-financings                     | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/personal-invoice-financings             | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/business-invoice-financings             | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/personal-credit-cards                   | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/business-credit-cards                   | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/personal-unarranged-account-overdraft   | PRODUTOS E SERVIÇOS              |
-| /products-services/v1/business-unarranged-account-overdraft   | PRODUTOS E SERVIÇOS              |
 | /channels/v2/banking-agents                                   | CANAIS DE ATENDIMENTO            |
 | /channels/v2/branches                                         | CANAIS DE ATENDIMENTO            |
 | /channels/v2/electronic-channels                              | CANAIS DE ATENDIMENTO            |
@@ -264,6 +247,7 @@ Endpoints - Fase 4B Investimentos
 | /variable-incomes/v1/investments/\{investmentId\}/balances                 | RENDA VARIÁVEL            |
 | /variable-incomes/v1/investments/\{investmentId\}/transactions             | RENDA VARIÁVEL            |
 | /variable-incomes/v1/investments/\{investmentId\}/transactions-current     | RENDA VARIÁVEL            |
+| /variable-incomes/v1/broker-notes/\{brokerNoteId\}                         | RENDA VARIÁVEL            |
 | /treasure-titles/v1/investments                                            | TÍTULOS DO TESOURO DIRETO |
 | /treasure-titles/v1/investments/\{investmentId\}                           | TÍTULOS DO TESOURO DIRETO |
 | /treasure-titles/v1/investments/\{investmentId\}/balances                  | TÍTULOS DO TESOURO DIRETO |

@@ -8,7 +8,7 @@ Opus is providing some SQL scripts that will assist clients in collecting data t
 
 ### Scripts - Response Time
 
-**Important**: The SQL script provided in this section should be executed in the metrics collection service database for PCM.
+**Important**: The SQL script provided in this section should be executed in the metrics collection service database for **PCM**.
 
 You need to create the *payments_response_time* function by executing the following [script](attachments/payments_response_time.sql).
 
@@ -30,7 +30,7 @@ select * from payments_response_time('2023-08-18');
 
 ## Scripts - Availability
 
-**Important**: The SQL script provided in this section should be executed in the *OOB-Status* service database.
+**Important**: The SQL script provided in this section should be executed in the **OOB-Status** service database.
 
 You need to create the *status_function_availability* function by executing the following [script](attachments/status_function_availability.sql).
 
@@ -59,3 +59,17 @@ select * from status_function_availability('2023-08-18');
 ```text
 86400 - <total unavailability in seconds> / 86400
 ```
+
+## Execution of Reports with Data Consolidation by Organization
+
+If the organization has two or more brands, for queries that need to be performed on the **OOB-Status** service database, it is necessary to use scripts with the prefix "organization_". In addition to the original parameters (start date and/or end date), a connection string must be provided to enable communication with the databases of the other brands.
+
+For this purpose, the "dblink" component must be installed in the main databases using the following command:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "dblink";
+```
+
+The connection string should be formatted as follows:
+
+host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}

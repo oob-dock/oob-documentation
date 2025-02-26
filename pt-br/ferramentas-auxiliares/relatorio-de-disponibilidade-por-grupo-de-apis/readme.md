@@ -58,13 +58,13 @@ pela entidade parceira.
 Exemplo para obtenção dos serviços da fase 1 - Produtos e Serviços:
 
 ```sql
-@set endpoints_services = array ['/products-services/v1/personal-accounts', '/products-services/v1/business-accounts', '/products-services/v1/personal-loans', '/products-services/v1/business-loans', '/products-services/v1/personal-financings', '/products-services/v1/business-financings', '/products-services/v1/personal-invoice-financings', '/products-services/v1/business-invoice-financings', '/products-services/v1/personal-credit-cards', '/products-services/v1/business-credit-cards', '/products-services/v1/personal-unarranged-account-overdraft', '/products-services/v1/business-unarranged-account-overdraft']
+@set endpoints_services = array ['/opendata-accounts/v1/business-accounts', '/opendata-accounts/v1/personal-accounts', '/opendata-creditcards/v1/business-credit-cards', '/opendata-creditcards/v1/personal-credit-cards', '/opendata-financings/v1/business-financings', '/opendata-financings/v1/personal-financings', '/opendata-invoicefinancings/v1/business-invoice-financings', '/opendata-invoicefinancings/v1/personal-invoice-financings', '/opendata-loans/v1/business-loans', '/opendata-loans/v1/personal-loans', '/opendata-unarranged/v1/business-unarranged-account-overdraft', '/opendata-unarranged/v1/personal-unarranged-account-overdraft']
 ```
 
 Exemplo para obtenção dos serviços da fase 1 - Canais:
 
 ```sql
-@set endpoints_services = array ['/channels/v1/branches', '/channels/v1/electronic-channels', '/channels/v1/phone-channels', '/channels/v1/banking-agents', '/channels/v1/shared-automated-teller-machines']
+@set endpoints_services = array ['/channels/v2/branches', '/channels/v2/electronic-channels', '/channels/v2/phone-channels', '/channels/v2/banking-agents', '/channels/v2/shared-automated-teller-machines']
 ```
 
 Logo abaixo são apresentadas tabelas com todos os endpoints divididos em subgrupos
@@ -72,30 +72,30 @@ a fim de facilitar a listagem das URLs dos serviços disponibilizados.
 
 Endpoints - Fase 1 Produtos e Serviços
 
-| Endpoint                                                    | Categoria             |
-| ----------------------------------------------------------- | --------------------- |
-| /products-services/v1/personal-accounts                     | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/business-accounts                     | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/personal-loans                        | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/business-loans                        | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/personal-financings                   | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/business-financings                   | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/personal-invoice-financings           | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/business-invoice-financings           | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/personal-credit-cards                 | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/business-credit-cards                 | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/personal-unarranged-account-overdraft | PRODUTOS E SERVIÇOS   |
-| /products-services/v1/business-unarranged-account-overdraft | PRODUTOS E SERVIÇOS   |
+| Endpoint                                                      | Categoria                        |
+| /opendata-accounts/v1/business-accounts                       | CONTAS                           |
+| /opendata-accounts/v1/personal-accounts                       | CONTAS                           |
+| /opendata-creditcards/v1/business-credit-cards                | CARTÃO DE CRÉDITO                |
+| /opendata-creditcards/v1/personal-credit-cards                | CARTÃO DE CRÉDITO                |
+| /opendata-financings/v1/business-financings                   | FINANCIAMENTO                    |
+| /opendata-financings/v1/personal-financings                   | FINANCIAMENTO                    |
+| /opendata-invoicefinancings/v1/business-invoice-financings    | DIREITOS CREDITÓRIOS DESCONTADOS |
+| /opendata-invoicefinancings/v1/personal-invoice-financings    | DIREITOS CREDITÓRIOS DESCONTADOS |
+| /opendata-loans/v1/business-loans                             | EMPRÉSTIMO                       |
+| /opendata-loans/v1/personal-loans                             | EMPRÉSTIMO                       |
+| /opendata-unarranged/v1/business-unarranged-account-overdraft | ADIANTAMENTO A DEPOSITANTES      |
+| /opendata-unarranged/v1/personal-unarranged-account-overdraft | ADIANTAMENTO A DEPOSITANTES      |
+
 
 Endpoints - Fase 1 Canais
 
 | Endpoint                                                    | Categoria             |
 | ----------------------------------------------------------- | --------------------- |
-| /channels/v1/branches                                       | CANAIS DE ATENDIMENTO |
-| /channels/v1/electronic-channels                            | CANAIS DE ATENDIMENTO |
-| /channels/v1/phone-channels                                 | CANAIS DE ATENDIMENTO |
-| /channels/v1/banking-agents                                 | CANAIS DE ATENDIMENTO |
-| /channels/v1/shared-automated-teller-machines               | CANAIS DE ATENDIMENTO |
+| /channels/v2/branches                                       | CANAIS DE ATENDIMENTO |
+| /channels/v2/electronic-channels                            | CANAIS DE ATENDIMENTO |
+| /channels/v2/phone-channels                                 | CANAIS DE ATENDIMENTO |
+| /channels/v2/banking-agents                                 | CANAIS DE ATENDIMENTO |
+| /channels/v2/shared-automated-teller-machines               | CANAIS DE ATENDIMENTO |
 
 ## Scripts - Uso de APIs por agrupamento
 
@@ -139,4 +139,109 @@ LEFT JOIN "endpoint" edp on dme.id_endpoint = edp.id
 WHERE
   dme.metric_date BETWEEN :initial_date AND :final_date
   AND edp.endpoint_url = ANY(:endpoints_services);
+```
+
+## Execução de relatórios com consolidação de dados por organização
+
+Caso a organização possua duas ou mais marcas, para as consultas que devem ser realizadas na base de dados do serviço **OOB-Status** é necessário utilizar o script abaixo, no qual além dos parâmetros originais (data de início e/ou data final), é preciso informar uma string de conexão para que a comunicação com as bases das outras marcas seja realizada.
+Para tal, é necessário que o componente "dblink" seja instalado nas bases principais, por meio do comando:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "dblink";
+```
+
+a string de conexão deve ser formatada da seguinte maneira:
+
+host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}
+
+### Quantidade de chamadas do grupo de APIs - organização
+
+```sql
+@set initial_date = '<data_inicial>'
+@set final_date = '<data_final>'
+@set endpoints_services = array ['<services_urls>']
+@set dblink_conn = 'host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}'
+
+select 
+  :initial_date as initial_date,
+  :final_date as final_date,
+  SUM(tb1.qty_requests) as qty_requests
+ from (
+ 	SELECT
+	  :initial_date as initial_date,
+	  :final_date as final_date,
+	  SUM(qty_requests) as qty_requests
+	FROM
+	  endpoint_metric edm 
+	LEFT JOIN "endpoint" edp on edp.id = edm.id_endpoint
+	WHERE TO_CHAR(edm."date", 'YYYY-MM-DD') between :initial_date and :final_date AND edp.endpoint_url = ANY(:endpoints_services)
+	
+	union all
+	
+		SELECT * 
+        FROM dblink(
+            :dblink_conn,
+            FORMAT(
+            'SELECT %L as initial_date, %L as final_date, SUM(qty_requests) as qty_requests FROM endpoint_metric edm LEFT JOIN "endpoint" edp on edp.id = edm.id_endpoint WHERE TO_CHAR(edm."date", ''YYYY-MM-DD'') between %L and %L AND edp.endpoint_url = ANY(%L)',
+            :initial_date,
+            :final_date,
+            :initial_date,
+            :final_date,
+            :endpoints_services
+            )
+            ) AS t(
+                initial_date TEXT,
+                final_date TEXT,
+                qty_requests BIGINT
+            )
+ ) tb1;
+```
+
+### Disponibilidade média do grupo de APIs  - organização
+
+```sql
+@set initial_date = '<data_inicial>';
+@set final_date = '<data_final>';
+@set endpoints_services = array ['<services_urls>'];
+@set dblink_conn = 'host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}'
+
+select 
+  :initial_date as initial_date,
+  :final_date as final_date,
+  MAX(tb1.perc_online) as qty_requests
+ from (
+ 	SELECT
+	  :initial_date as initial_date,
+	  :final_date as final_date,
+	  ((86386 * (:final_date::date - :initial_date::date + 1)) - (sum (seconds_downtime))) / (86386 * (:final_date::date - :initial_date::date + 1))::decimal as perc_online
+	FROM
+	  daily_metric_endpoint dme
+	LEFT JOIN "endpoint" edp on dme.id_endpoint = edp.id
+	WHERE
+	  dme.metric_date BETWEEN :initial_date AND :final_date
+	  AND edp.endpoint_url = ANY(:endpoints_services)
+	
+	union all
+	
+		SELECT * 
+        FROM dblink(
+            :dblink_conn,
+            FORMAT(
+            'select %L as initial_date, %L as final_date, ((86386 * (%L::date - %L::date + 1)) - (sum (seconds_downtime))) / (86386 * (%L::date - %L::date + 1))::decimal as perc_online from daily_metric_endpoint dme LEFT JOIN "endpoint" edp on dme.id_endpoint = edp.id where dme.metric_date BETWEEN %L AND %L AND edp.endpoint_url = ANY(%L)',
+            :initial_date,
+            :final_date,
+            :final_date,
+            :initial_date,
+            :final_date,
+            :initial_date,
+            :initial_date,
+            :final_date,
+            :endpoints_services
+            )
+            ) AS t(
+                initial_date TEXT,
+                final_date TEXT,
+                perc_online NUMERIC
+            )
+ ) tb1;
 ```
