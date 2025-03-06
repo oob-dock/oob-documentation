@@ -349,6 +349,23 @@ additionalVars:
     value: "INFO"
 ```
 
+### QUARKUS_LOG_INITIALIZATION_LEVEL
+
+Define o nível do log das mensagens de inicialização do serviço.
+Em produção é aconselhável ser level = `WARN`.
+
+**Valores possíveis:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
+
+Valor default: `WARN`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: QUARKUS_LOG_INITIALIZATION_LEVEL
+    value: "WARN"
+```
+
 ### QUARKUS_LOG_CONSOLE_JSON
 
 Utilizado para definir se o log deve ser no formato JSON.

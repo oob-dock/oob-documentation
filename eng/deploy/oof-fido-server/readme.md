@@ -130,19 +130,38 @@ additionalVars:
 This will only change the *attestation* configuration
 for this RP. All other configurations will use the default value.
 
-### Change log level
+### LOGGING_LEVEL_ROOT
 
-It should be used to change the amount of information displayed in the logs.
-The available levels are: `ERROR`, `WARN`, `INFO`, `DEBUG` ou `TRACE`.
+Defines the log detail level of the application. 
+It is recommended to activate DEBUG level only in development/testing environments
+or to facilitate error analysis in production.
+In production, it is advisable to use the INFO level.
 
-For example, to enable request and response logs, the level should be set to `DEBUG`.
+**Format:** `DEBUG`, `INFO`, `TRACE`, `WARNING`, or `ERROR`
 
-Default value: `INFO`
+**Default:** `INFO`
 
-Example:
+**Example:**
 
 ```yaml
 additionalVars:
-    - name: logging_level_software_opus_oof
-      value: DEBUG
+  - name: LOGGING_LEVEL_ROOT
+    value: "DEBUG"
+```
+
+### LOGGING_LEVEL_INITIALIZATION
+
+Defines the log level for service startup messages.
+In production, it is recommended to set the level to `WARN`.
+
+**Possible values:** `DEBUG`, `INFO`, `TRACE`, `WARNING` or `ERROR`
+
+Default value: `WARN`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: LOGGING_LEVEL_INITIALIZATION
+    value: "WARN"
 ```
