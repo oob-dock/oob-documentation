@@ -3,7 +3,7 @@ info:
   title: Consent BackOffice Services
   version: 1.0.0
 security:
-  - jwt: []
+  - jwt: [ ]
 tags:
   - name: General
     description: opus open banking services
@@ -539,6 +539,55 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
+    get:
+      tags:
+        - Consents
+      description: Check the existence of multiple search keys in a consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: searchKeys
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Search key deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        searchKey:
+                          type: string
+                        exists:
+                          type: boolean
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
     delete:
       tags:
         - Consents
@@ -556,6 +605,118 @@ paths:
             type: array
             items:
               type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Search key deleted successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /open-banking/oob-consents/consents/v1/consents/{consentId}/search-key/{searchKey}:
+    post:
+      tags:
+        - Consents
+      description: Post search key to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: searchKey
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "204":
+          description: Search key added successfully
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    get:
+      tags:
+        - Consents
+      description: Check the existence of a search key in a consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: searchKey
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: X-Correlation-ID
+          in: header
+          schema:
+            type: string
+        - name: X-Brand-ID
+          in: header
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Search key deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      searchKey:
+                        type: string
+                      exists:
+                        type: boolean
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      tags:
+        - Consents
+      description: Delete search key to consent
+      parameters:
+        - name: consentId
+          in: path
+          required: true
+          schema:
+            $ref: "#/components/schemas/UUID"
+        - name: searchKey
+          in: path
+          required: true
+          schema:
+            type: string
         - name: X-Correlation-ID
           in: header
           schema:
@@ -1672,7 +1833,7 @@ components:
               example: '100000.12'
               description: |
                 Fixed charge amount, if filled, represents consent for fixed payments, or not subject to change during the term of the consent.
-            
+                
                 [Restriction] Exclusive with the field “/data/recurringConfiguration/automatic/maximumVariableAmount”
             maximumVariableAmount:
               type: string
@@ -1682,7 +1843,7 @@ components:
               example: '1000000.12'
               description: |
                 Maximum amount allowed per charge, if filled, represents consent for variable payments.
-            
+                
                 [Restriction] Exclusive with the field “/data/recurringConfiguration/automatic/fixedAmount”
             interval:
               type: string
@@ -1734,7 +1895,7 @@ components:
     ContractDebtor:
       type: object
       description: Information about the contract debtor customer.
-      required: 
+      required:
         - name
         - document
       properties:
@@ -1745,23 +1906,23 @@ components:
           example: Policarpo Quaresma
           description: In case of an individual, the full name of the contract debtor must be provided.
         document:
-            type: object
-            required:
-              - identification
-              - rel
-            properties:
-              identification:
-                type: string
-                maxLength: 14
-                description: Official identification document number of the contract debtor customer.
-                example: '11111111111111'
-                pattern: '^(?:\d{11}|\d{14})$'
-              rel:
-                type: string
-                description: Type of official identification document of the contract debtor customer.
-                enum:
-                  - CPF
-                  - CNPJ
+          type: object
+          required:
+            - identification
+            - rel
+          properties:
+            identification:
+              type: string
+              maxLength: 14
+              description: Official identification document number of the contract debtor customer.
+              example: '11111111111111'
+              pattern: '^(?:\d{11}|\d{14})$'
+            rel:
+              type: string
+              description: Type of official identification document of the contract debtor customer.
+              enum:
+                - CPF
+                - CNPJ
     FirstPayment:
       type: object
       description: |
@@ -1781,7 +1942,7 @@ components:
           maxLength: 10
           pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
           example: '2021-01-01'
-          description: |  
+          description: |
             Defines the target date for payment settlement.
             Brasília time zone should be used for creation and rationalization of the data in this field.
         currency:
@@ -2814,7 +2975,7 @@ components:
               type: array
               maxItems: 60
               minItems: 2
-              example: ["2023-08-23", "2023-09-26"]
+              example: [ "2023-08-23", "2023-09-26" ]
               items:
                 type: string
                 format: date

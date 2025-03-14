@@ -672,8 +672,10 @@
 | *GET     | /v1/tpps/payment-legacy-ids                              | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 | POST     | /v1/payment-status-notification                          | Sim          | oob_payments:write               | Não        | Não              | Não  |                    |
 | *GET     | /v1/consents/\{ID\}/extends                              | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
+| *GET     | /consents/v1/consents/{consentId}/search-key/{searchKey} | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 | *POST    | /consents/v1/consents/{consentId}/search-key/{searchKey} | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
 | *DELETE  | /consents/v1/consents/{consentId}/search-key/{searchKey} | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
+| *GET     | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 | *POST    | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
 | *DELETE  | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
 
