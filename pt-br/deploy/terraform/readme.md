@@ -42,6 +42,8 @@
       - [opentelemetry\_tracer\_exporter\_url\_http](#opentelemetry_tracer_exporter_url_http)
       - [log\_request\_response\_enabled](#log_request_response_enabled)
       - [log\_request\_response\_collector\_url\_http](#log_request_response_collector_url_http)
+      - [ocsp\_validation\_enabled](#ocsp_validation_enabled)
+      - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -340,6 +342,24 @@ para que nenhuma informação do conjunto requisição/resposta seja perdida.
 
 Essa variável é de preenchimento obrigatório caso a variável
 `log_request_response_enabled` esteja definida como `true`.
+
+#### ocsp_validation_enabled
+
+Define se a instalação deverá ou não realizar a validação de OCSP. Quando
+habilitado um plugin no Kong será criado e vinculado aos serviços de rotas
+e para todo request que tiver um certificado de cliente atrelado à requisição
+será realizada a verificação de OCSP.
+
+**Valores possíveis:** `true` ou `false`
+
+**Default:** `false`
+
+#### ocsp_cache_ms_duration
+
+Define a duração em milissegundos do cache da validação de OCSP feita pelo
+plugin do Kong customizado `oob-ocsp-validation`.
+
+**Default:** `600000`
 
 ## Configuração do Grafana
 
