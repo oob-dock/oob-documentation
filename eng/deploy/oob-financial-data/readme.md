@@ -94,6 +94,23 @@
         >     value: "DEBUG"
         > \```
 
+   - **QUARKUS_LOG_INITIALIZATION_LEVEL**
+
+        Defines the log level for service startup messages.
+        In production, it is recommended to set the level to `WARN`.
+
+        > **Format:** `DEBUG`, `INFO`, `TRACE`, `WARNING` or `ERROR`
+        >
+        > **Default:** `INFO`
+        >
+        > **Example:**
+        >
+        > \```yaml
+        > additionalVars:
+        >   - name: QUARKUS_LOG_INITIALIZATION_LEVEL
+        >     value: "DEBUG"
+        > \```
+
    - **APIS_VALIDATION_JSON-SCHEMA**
 
         Enables validation of request/response objects sent/received by the plugin with the defined specs (affects performance). It is advisable to disable it in production.

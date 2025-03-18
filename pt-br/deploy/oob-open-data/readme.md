@@ -70,6 +70,23 @@ additionalVars:
     value: "DEBUG"
 ```
 
+### QUARKUS_LOG_INITIALIZATION_LEVEL
+
+Utilizado para definir o nível do log das mensagens de inicialização do serviço. Em produção é aconselhável
+ser level = `WARN`.
+
+**Formato:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
+
+Valor default: `WARN`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: QUARKUS_LOG_INITIALIZATION_LEVEL
+    value: "WARN"
+```
+
 ### APIS_VALIDATION_OPENAPI_ENABLED-REQUEST
 
 Habilita a validação dos objetos de request recebidos pela API com a especificação

@@ -85,7 +85,7 @@ additionalVars:
 
 As configurações que podem ser definidas neste formato estão listadas abaixo:
 
-### QUARKUS_LOG_LEVEL
+### LOGGING_LEVEL_ROOT
 
 Define o nível de detalhe do log da aplicação. É recomendável ativar o nível DEBUG
 somente em ambientes de desenvolvimento/homologação, ou para facilitar a análise
@@ -99,8 +99,25 @@ de erros em produção. Em produção é aconselhável utilizar o nível INFO.
 
 ```yaml
 additionalVars:
-  - name: QUARKUS_LOG_LEVEL
+  - name: LOGGING_LEVEL_ROOT
     value: "DEBUG"
+```
+
+### LOGGING_LEVEL_INITIALIZATION
+
+Define o nível do log das mensagens de inicialização do serviço.
+Em produção é aconselhável ser level = `WARN`.
+
+**Valores possíveis:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
+
+Valor default: `WARN`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: LOGGING_LEVEL_INITIALIZATION
+    value: "WARN"
 ```
 
 ### DAEMON_INCIDENT_ENABLED

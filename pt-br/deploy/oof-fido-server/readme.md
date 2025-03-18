@@ -127,20 +127,37 @@ ser substituídos por ***_***.
 Isso irá mudar apenas a configuração de *attestation* para essa RP. Todas
 as demais configurações utilizarão o valor padrão.
 
-### Alterar nível de logs
+### LOGGING_LEVEL_ROOT
 
-Deve ser utilizada para alterar a quantidade de informação apresentada nos logs.
-Os níveis disponíveis são: `ERROR`, `WARN`, `INFO`, `DEBUG` ou `TRACE`.
+Define o nível de detalhe do log da aplicação. É recomendável ativar o nível `DEBUG`
+somente em ambientes de desenvolvimento/homologação, ou para facilitar a análise
+de erros em produção. Em produção é aconselhável utilizar o nível INFO.
 
-Por exemplo, para habilitar os logs de requisição e resposta deve-se alterar
-o nível para `DEBUG`.
+**Formato:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
 
-Valor padrão: `INFO`
+**Default:** `INFO`
 
-Exemplo:
+**Ex:**
 
 ```yaml
 additionalVars:
-    - name: logging_level_software_opus_oof
-      value: DEBUG
+  - name: LOGGING_LEVEL_ROOT
+    value: "DEBUG"
+```
+
+### LOGGING_LEVEL_INITIALIZATION
+
+Define o nível do log das mensagens de inicialização do serviço.
+Em produção é aconselhável ser level = `WARN`.
+
+**Valores possíveis:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
+
+Valor default: `WARN`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: LOGGING_LEVEL_INITIALIZATION
+    value: "WARN"
 ```

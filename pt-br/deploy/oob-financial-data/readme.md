@@ -102,6 +102,23 @@
         >     value: "DEBUG"
         > ```
 
+   - **QUARKUS_LOG_INITIALIZATION_LEVEL**
+
+        Define o nível do log das mensagens de inicialização do serviço.
+        Em produção é aconselhável ser level = `WARN`.
+
+        > **Formato:** `DEBUG`, `INFO`, `TRACE`, `WARNING` ou `ERROR`
+        >
+        > **Default:** `WARN`
+        >
+        > **Ex:**
+        >
+        > ```yaml
+        > additionalVars:
+        >   - name: QUARKUS_LOG_INITIALIZATION_LEVEL
+        >     value: "WARN"
+        > ```
+
    - **APIS_VALIDATION_JSON-SCHEMA**
 
         Habilita a validação dos objetos de request/response envidados/recebidos

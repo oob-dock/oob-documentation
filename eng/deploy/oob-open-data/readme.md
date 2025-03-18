@@ -66,6 +66,23 @@ additionalVars:
     value: "DEBUG"
 ```
 
+### QUARKUS_LOG_INITIALIZATION_LEVEL
+
+Defines the log level for service startup messages.
+In production, it is recommended to set the level to `WARN`.
+
+**Possible values:** `DEBUG`, `INFO`, `TRACE`, `WARNING` or `ERROR`
+
+Default value: `WARN`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: QUARKUS_LOG_INITIALIZATION_LEVEL
+    value: "WARN"
+```
+
 ### APIS_VALIDATION_OPENAPI_ENABLED-REQUEST
 
 Enables validation of request objects received by the API with the Open Finance Brasil specification. It is advisable to always keep it active.
