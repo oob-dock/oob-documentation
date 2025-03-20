@@ -20,7 +20,7 @@ BEGIN
     SELECT end_date_interval::date::timestamp AT TIME ZONE 'UTC' into end_date_utc;
 
                 RETURN QUERY 
-                  SELECT t.org_name::TEXT                                                                   itp,
+                  SELECT get_conglomerate_name(t.org_name::TEXT)                                            itp,
                     count(c.id)                                                                             quantity_request,
                     count(c.id) FILTER(WHERE c.account_holder_status=1  or c.account_holder_status is null) quantity_consent_client,
                     count(c.id) FILTER(WHERE c.account_holder_status=2)                                     quantity_consent_non_client,
@@ -39,7 +39,7 @@ BEGIN
                   WHERE c.dt_creation BETWEEN start_date_utc AND end_date_utc
                     AND c.tp_consent = 2
                     AND ((is_automatic is false AND c.tp_modality_payment IN (1,2)) OR (is_automatic is true AND c.tp_modality_payment IN (3,4,5)))
-                  GROUP BY t.org_name, t.org_id, c.tp_modality_payment, authorisation_flow
-                  ORDER BY t.org_name ASC, product ASC, quantity_request DESC;
+                  GROUP BY itp, t.org_id, c.tp_modality_payment, authorisation_flow
+                  ORDER BY itp ASC, product ASC, quantity_request DESC;
 END;
 $function$ LANGUAGE plpgsql;

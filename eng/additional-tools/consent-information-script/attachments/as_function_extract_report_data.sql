@@ -70,12 +70,12 @@ begin
             and     g.data#>>'{openid,scope}' not like '%payments%'
             group by g.data#>>'{clientId}'
 )
-   select   convert_from(decode_base64url(regexp_replace(c.data#>>'{software_statement}', '^(.*?)\.(.*?)\.(.*?)$', '\2')), 'UTF-8')::json#>>'{org_name}' Organisation_Name,
+   select   get_conglomerate_name(convert_from(decode_base64url(regexp_replace(c.data#>>'{software_statement}', '^(.*?)\.(.*?)\.(.*?)$', '\2')), 'UTF-8')::json#>>'{org_name}') as Organisation_Name,
             CAST(sum(t1.Qtd_Auth_Nao_Iniciada+t1.Qtd_Auth_Codes) AS integer) as Qtd_Auth_Nao_Iniciada,
             CAST(sum(t1.Qtd_Auth_Codes) AS integer) as Qtd_Auth_Codes,
             CAST(sum(t1.Qtd_Redirects) AS integer) as Qtd_Redirects,
             CAST(sum(t1.Qtd_Redirects_Receptor) AS integer) as Qtd_Redirects_Receptor
     from  "Clients" c, t1
 where c.id = t1.id
-group by convert_from(decode_base64url(regexp_replace(c.data#>>'{software_statement}', '^(.*?)\.(.*?)\.(.*?)$', '\2')), 'UTF-8')::json#>>'{org_name}';
+group by Organisation_Name;
 END;$function$;

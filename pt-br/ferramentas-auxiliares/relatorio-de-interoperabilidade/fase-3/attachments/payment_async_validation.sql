@@ -22,17 +22,17 @@ begin
 	return query 
 		with rejections as (
 			select 
-				t.org_name 							as itp,
-				t.org_id 							as itp_id,
-				'Pagamentos'						as api,
+				get_conglomerate_name(t.org_name)::varchar as itp,
+				t.org_id 							       as itp_id,
+				'Pagamentos'						       as api,
 				case
 					when p.rejection_reason#>>'{method}' = 'POST' then 'Pix - Criar iniciação de pagamento'
 					when p.rejection_reason#>>'{method}' = 'PATCH' then 'Pix - Cancelar iniciação de pagamento'
 					else 'Pix - Consultar iniciação de pagamento'
-				end									as endpoint,
-				p.rejection_reason->>'uri'			as endpoint_uri,
-				p.rejection_reason->>'method'		as method,
-				p.rejection_reason->>'code'			as rejection_reason
+				end									       as endpoint,
+				p.rejection_reason->>'uri'			       as endpoint_uri,
+				p.rejection_reason->>'method'		       as method,
+				p.rejection_reason->>'code'			       as rejection_reason
 			from payment p
 			inner join payment_request pr on p.id_payment_request = pr.id 
 			inner join consent c on c.id = pr.id_consent 
