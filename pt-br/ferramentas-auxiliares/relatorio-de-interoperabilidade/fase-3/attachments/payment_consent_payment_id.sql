@@ -38,7 +38,7 @@ BEGIN
                   LEFT JOIN tpp t ON c.id_tpp = t.id  
                   LEFT JOIN payment_request pr ON c.id = pr.id_consent  
                   LEFT JOIN payment p ON pr.id = p.id_payment_request  
-                 WHERE (((c.dt_creation BETWEEN start_date_utc AND end_date_utc) and C.status in (4,5,6)) OR (pr.dt_payment_request BETWEEN start_date_utc AND end_date_utc))
+                 WHERE ((c.dt_creation BETWEEN start_date_utc AND end_date_utc) OR (pr.dt_payment_request BETWEEN start_date_utc AND end_date_utc))
                     AND c.tp_consent = 2
                     AND ((is_automatic is false AND c.tp_modality_payment IN (1,2)) OR (is_automatic is true AND c.tp_modality_payment IN (3,4,5)))
                   GROUP BY t.org_name, c.tp_modality_payment, authorisation_flow

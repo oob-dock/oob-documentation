@@ -12,7 +12,7 @@ rodar os scripts e formatar as informações da forma e no período exigido pelo
 ### Scripts - Tempo de resposta
 
 **Importante**: O script SQL fornecido nessa seção deve ser executado no banco de
-dados do serviço de coleta de métricas para PCM.
+dados do serviço de coleta de métricas para **PCM**.
 
 É necessário criar a função payments_response_time executando o seguinte script [script](attachments/payments_response_time.sql).
 
@@ -73,3 +73,16 @@ de segundos de instabilidade do serviço, considerando retornos de erro no servi
 ```text
 86400 - <total de indisponibilidade em segundos> / 86400
 ```
+
+## Execução de relatórios com consolidação de dados por organização
+
+Caso a organização possua duas ou mais marcas, para as consultas que devem ser realizadas na base de dados do serviço **OOB-Status** é necessário utilizar os scrips com prefixo "organization_", nas quais além dos parâmetros originais (data de início e/ou data final), é preciso informar uma string de conexão para que a comunicação com as bases das outras marcas seja realizada.
+Para tal, é necessário que o componente "dblink" seja instalado nas bases principais, por meio do comando:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "dblink";
+```
+
+a string de conexão deve ser formatada da seguinte maneira:
+
+host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}

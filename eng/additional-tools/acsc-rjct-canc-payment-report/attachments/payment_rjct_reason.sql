@@ -43,5 +43,6 @@ BEGIN
 				INNER JOIN consent c		  	ON c.id = pr.id_consent
 				INNER JOIN tpp t				ON t.id = c.id_tpp
 		WHERE p.dt_payment_status_update BETWEEN dt_start_utc AND dt_end_utc AND p.payment_status = 6
-		GROUP BY (1,2,3,4,5,6);
+		GROUP BY (1,2,3,4,5,6)
+		order by 1;
 END;$function$;

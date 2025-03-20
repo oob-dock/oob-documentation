@@ -1,6 +1,5 @@
-create or replace function percentile_p95(dt_start date, dt_end date, organization_id uuid default null, brand_id_val varchar default null)
+create or replace function percentile_p95(dt_start date, dt_end date, organization_id uuid default null)
 returns table (
-    brand_id                varchar,
     metric_date             date,
     endpoint_uri            TEXT,
     http_method             TEXT,
@@ -28,39 +27,37 @@ begin
                     WHEN r.event_data#>>'{endpoint}' LIKE '%/investments/%' then (REGEXP_REPLACE(r.event_data#>>'{endpoint}', '/investments/[^/]+', '/investments/{investmentId}'))
                     WHEN r.event_data#>>'{endpoint}' LIKE '%accounts/v%/accounts/%' then (REGEXP_REPLACE(r.event_data#>>'{endpoint}', 'v(.*)/accounts/[^/]+', 'v\1/accounts/{accountId}'))
                     WHEN r.event_data#>>'{endpoint}' LIKE '%/contracts/%' then (REGEXP_REPLACE(r.event_data#>>'{endpoint}', 'v(.*)/contracts/[^/]+', 'v\1/contracts/{contractId}'))
+                    WHEN r.event_data#>>'{endpoint}' LIKE '%/operations/%' then (REGEXP_REPLACE(r.event_data#>>'{endpoint}', '/operations/[^/]+', '/operations/{operationId}'))
+                    WHEN r.event_data#>>'{endpoint}' LIKE '%/broker-notes/%' then (REGEXP_REPLACE(r.event_data#>>'{endpoint}', '/broker-notes/[^/]+', '/broker-notes/{brokerNoteId}'))
                     else (r.event_data#>>'{endpoint}')
             end 			                                      			as endpoint_uri,
                 -- using timestamp to avoid error due to database timezone configuration
                 (r.event_timestamp::timestamp - interval '3 hour')::date    as metric_date,
                 r.event_data#>>'{httpMethod}' 					  			as http_method,
-                r.brand_id										  			as brand_id,
                 r.event_data#>>'{processTimespan}'				  			as processTimespan
             from report r
                 where r.event_role = 'SERVER'
                 and (r.server_org_id = organization_id or organization_id is null)
-                and (r.brand_id  = brand_id_val or brand_id_val is null)
                 and r.event_timestamp between dt_start_utc and dt_end_utc
                 and r.event_data#>>'{endpoint}' not like '/open-banking/payments%'
                 and r.event_data#>>'{endpoint}' not like '/open-banking/automatic-payments%'
+                and r.event_data#>>'{endpoint}' not like '/open-banking/enrollments%'
                 and r.event_data#>>'{endpoint}' not like '/open-banking/opendata%'
                 and r.event_data#>>'{endpoint}' not like '/open-banking/products-services%'
                 and r.event_data#>>'{endpoint}' not like '/open-banking/channels%'
         )
         select
-            el.brand_id,
             el.metric_date,
             el.endpoint_uri,
             el.http_method,
             percentile_disc(0.95) within group (order by (el.processTimespan)::int) as p95_process_time_ms
         from endpoint_list el
         group by
-            el.brand_id,
             el.endpoint_uri,
-            el.http_method,
-            el.metric_date
+            el.metric_date,
+            el.http_method
         order by
-            el.brand_id,
+            el.metric_date,
             el.endpoint_uri,
-            el.http_method,
-            el.metric_date;
+            el.http_method;
 end;$function$;

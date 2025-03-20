@@ -42,3 +42,16 @@ por exemplo:
 ```sql
 SELECT * FROM payment_rjct_reason('2024-11-04','2024-11-10');
 ```
+
+## Execução de relatórios com consolidação de dados por organização
+
+Caso a organização possua duas ou mais marcas, para as consultas que devem ser realizadas na base de dados do serviço **OOB-Consent** é necessário utilizar os scrips com prefixo "organization_", nas quais além dos parâmetros originais (data de início e/ou data final), é preciso informar uma string de conexão para que a comunicação com as bases das outras marcas seja realizada.
+Para tal, é necessário que o componente "dblink" seja instalado nas bases principais, por meio do comando:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "dblink";
+```
+
+a string de conexão deve ser formatada da seguinte maneira:
+
+host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}

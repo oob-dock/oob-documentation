@@ -109,23 +109,6 @@ Endpoints - Phase 1 Open Data
 
 | Endpoint                                                      | Category              |
 | ------------------------------------------------------------- | --------------------- |
-| /channels/v1/branches                                         | SERVICE CHANNELS      |
-| /channels/v1/electronic-channels                              | SERVICE CHANNELS      |
-| /channels/v1/phone-channels                                   | SERVICE CHANNELS      |
-| /channels/v1/banking-agents                                   | SERVICE CHANNELS      |
-| /channels/v1/shared-automated-teller-machines                 | SERVICE CHANNELS      |
-| /products-services/v1/personal-accounts                       | PRODUCTS AND SERVICES |
-| /products-services/v1/business-accounts                       | PRODUCTS AND SERVICES |
-| /products-services/v1/personal-loans                          | PRODUCTS AND SERVICES |
-| /products-services/v1/business-loans                          | PRODUCTS AND SERVICES |
-| /products-services/v1/personal-financings                     | PRODUCTS AND SERVICES |
-| /products-services/v1/business-financings                     | PRODUCTS AND SERVICES |
-| /products-services/v1/personal-invoice-financings             | PRODUCTS AND SERVICES |
-| /products-services/v1/business-invoice-financings             | PRODUCTS AND SERVICES |
-| /products-services/v1/personal-credit-cards                   | PRODUCTS AND SERVICES |
-| /products-services/v1/business-credit-cards                   | PRODUCTS AND SERVICES |
-| /products-services/v1/personal-unarranged-account-overdraft   | PRODUCTS AND SERVICES |
-| /products-services/v1/business-unarranged-account-overdraft   | PRODUCTS AND SERVICES |
 | /channels/v2/banking-agents                                   | SERVICE CHANNELS      |
 | /channels/v2/branches                                         | SERVICE CHANNELS      |
 | /channels/v2/electronic-channels                              | SERVICE CHANNELS      |
@@ -251,11 +234,12 @@ Endpoints - Phase 4B Investments
 | /credit-fixed-incomes/v1/investments/\{investmentId\}/balances             | CREDIT FIXED INCOME |
 | /credit-fixed-incomes/v1/investments/\{investmentId\}/transactions         | CREDIT FIXED INCOME |
 | /credit-fixed-incomes/v1/investments/\{investmentId\}/transactions-current | CREDIT FIXED INCOME |
-| /variable-incomes/v1/investments                                           | VARTABLE INCOME     |
-| /variable-incomes/v1/investments/\{investmentId\}                          | VARTABLE INCOME     |
-| /variable-incomes/v1/investments/\{investmentId\}/balances                 | VARTABLE INCOME     |
-| /variable-incomes/v1/investments/\{investmentId\}/transactions             | VARTABLE INCOME     |
-| /variable-incomes/v1/investments/\{investmentId\}/transactions-current     | VARTABLE INCOME     |
+| /variable-incomes/v1/investments                                           | VARIABLE INCOME     |
+| /variable-incomes/v1/investments/\{investmentId\}                          | VARIABLE INCOME     |
+| /variable-incomes/v1/investments/\{investmentId\}/balances                 | VARIABLE INCOME     |
+| /variable-incomes/v1/investments/\{investmentId\}/transactions             | VARIABLE INCOME     |
+| /variable-incomes/v1/investments/\{investmentId\}/transactions-current     | VARIABLE INCOME     |
+| /variable-incomes/v1/broker-notes/\{brokerNoteId\}                         | VARIABLE INCOME     |
 | /treasure-titles/v1/investments                                            | TREASURE TITLE      |
 | /treasure-titles/v1/investments/\{investmentId\}                           | TREASURE TITLE      |
 | /treasure-titles/v1/investments/\{investmentId\}/balances                  | TREASURE TITLE      |

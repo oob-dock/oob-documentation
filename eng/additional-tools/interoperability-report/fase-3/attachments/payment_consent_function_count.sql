@@ -5,7 +5,9 @@ CREATE OR REPLACE FUNCTION payment_consent_count(start_date DATE, end_date DATE,
                 quantity_request             BIGINT,
                 quantity_consent_client      BIGINT,
                 quantity_consent_non_client  BIGINT,
-                itp_org_id					         TEXT
+                itp_org_id					         TEXT,
+                product                      TEXT,
+                authorisation_flow           TEXT
             )
 AS
 $function$

@@ -218,3 +218,16 @@ Os dados obtidos devem ser preenchidos na aba "Estoque_Consentimentos", Visão T
 Transmissor")
 
 ![Preenchimento Estoque_Consentimentos 3](attachments/img/img_getParentOrganization.png)
+
+## Execução de relatórios com consolidação de dados por organização
+
+Caso a organização possua duas ou mais marcas, para as consultas que devem ser realizadas nas bases de dados dos serviços **OOB-Authorization-Server** e **OOB-Consent** é necessário utilizar os scrips com prefixo "organization_", nas quais além dos parâmetros originais (data de início e/ou data final), é preciso informar uma string de conexão para que a comunicação com as bases das outras marcas seja realizada.
+Para tal, é necessário que o componente "dblink" seja instalado nas bases principais, por meio do comando:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "dblink";
+```
+
+a string de conexão deve ser formatada da seguinte maneira:
+
+host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}

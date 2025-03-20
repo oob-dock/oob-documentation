@@ -48,3 +48,16 @@ SELECT * FROM percentile_p95('2023-01-02','2023-01-08');
 
 **OBS:**: Para montar o relatório final, será necessário agrupar os resultados de ambas as consultas com base no
 dia, metódo e *endpoint* retornados pelas duas consultas.
+
+## Execução de relatórios com consolidação de dados por organização
+
+Caso a organização possua duas ou mais marcas, para as consultas que devem ser realizadas na base de dados do serviço **OOB-Status** é necessário utilizar os scrips com prefixo "organization_", nas quais além dos parâmetros originais (data de início e/ou data final), é preciso informar uma string de conexão para que a comunicação com as bases das outras marcas seja realizada.
+Para tal, é necessário que o componente "dblink" seja instalado nas bases principais, por meio do comando:
+
+```sql
+CREATE EXTENSION IF NOT EXISTS "dblink";
+```
+
+a string de conexão deve ser formatada da seguinte maneira:
+
+host={db_target_host} dbname={db_target_dbname} user={db_target_user} password={db_target_password}
