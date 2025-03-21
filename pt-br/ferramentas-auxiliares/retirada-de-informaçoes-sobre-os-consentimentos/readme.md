@@ -64,10 +64,13 @@ Os dados obtidos devem ser preenchidos na aba "Consentimento_transmissor", colun
 Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Authorization-Server**
 
-Primeiramente é necessário criar a function decode_base64url executando o
+Primeiramente, é necessário criar a function get_conglomerate_name executando o
+seguinte [script](../commons/attachments/function_get_conglomerate_name.sql).
+
+Depois, é necessário criar a function decode_base64url executando o
 seguinte [script](attachments/as_function_decode_base64url.sql).
 
-Depois, deve ser criada a function extract_report_data executando o seguinte [script](attachments/as_function_extract_report_data.sql).
+Por fim, deve ser criada a function extract_report_data executando o seguinte [script](attachments/as_function_extract_report_data.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
@@ -87,7 +90,10 @@ Os dados obtidos devem ser preenchidos na aba "Consentimento_transmissor", colun
 
 ### Consentimento transmissor - Autorização do Cliente
 
-Primeiramente é necessário criar a function consent_authorization_client
+Primeiramente, é necessário criar a function get_conglomerate_name executando o
+seguinte [script](../commons/attachments/function_get_conglomerate_name.sql).
+
+Depois, é necessário criar a function consent_authorization_client
 executando o seguinte [script](attachments/consent_function_authorization_client.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:

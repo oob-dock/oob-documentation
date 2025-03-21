@@ -17,7 +17,7 @@ BEGIN
     SELECT start_date::date::timestamp AT TIME ZONE 'America/Sao_Paulo' into start_date_utc;
     SELECT end_date_interval::date::timestamp AT TIME ZONE 'America/Sao_Paulo' into end_date_utc;
 
-    RETURN QUERY SELECT t.org_name::TEXT                                                                       receptor,
+    RETURN QUERY SELECT get_conglomerate_name(t.org_name::TEXT)                                                receptor,
                         count(c.id) FILTER(WHERE c.account_holder_status=1 or c.account_holder_status is null) quantity_client,
                         count(c.id) FILTER(WHERE c.account_holder_status=2)                                    quantity_non_client,
                         t.org_id::TEXT                                                                         receptor_org_id

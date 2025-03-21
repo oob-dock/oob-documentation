@@ -70,12 +70,12 @@ begin
                 or  (is_automatic is true and g.data#>>'{openid,scope}' like '%recurring-consent%'))
             group by g.data#>>'{clientId}'
 )
-   select   convert_from(decode_base64url(regexp_replace(c.data#>>'{software_statement}', '^(.*?)\.(.*?)\.(.*?)$', '\2')), 'UTF-8')::json#>>'{org_name}' itp,
-            CAST(sum(t1.Qtd_Auth_Nao_Iniciada+t1.Qtd_Auth_Codes) AS integer) as qty_auth_initiated,
-            CAST(sum(t1.Qtd_Auth_Codes) AS integer) as qty_auth_codes,
-            CAST(sum(t1.Qtd_Redirects) AS integer) as qty_auth_redirects,
-            CAST(sum(t1.Qtd_Redirects_Receptor) AS integer) as qty_access_token
+   select   get_conglomerate_name(convert_from(decode_base64url(regexp_replace(c.data#>>'{software_statement}', '^(.*?)\.(.*?)\.(.*?)$', '\2')), 'UTF-8')::json#>>'{org_name}') as itp,
+            CAST(sum(t1.Qtd_Auth_Nao_Iniciada+t1.Qtd_Auth_Codes) AS integer)                                                                                                    as qty_auth_initiated,
+            CAST(sum(t1.Qtd_Auth_Codes) AS integer)                                                                                                                             as qty_auth_codes,
+            CAST(sum(t1.Qtd_Redirects) AS integer)                                                                                                                              as qty_auth_redirects,
+            CAST(sum(t1.Qtd_Redirects_Receptor) AS integer)                                                                                                                     as qty_access_token
     from  "Clients" c, t1
 where c.id = t1.id
-group by convert_from(decode_base64url(regexp_replace(c.data#>>'{software_statement}', '^(.*?)\.(.*?)\.(.*?)$', '\2')), 'UTF-8')::json#>>'{org_name}';
+group by itp;
 END;$function$;

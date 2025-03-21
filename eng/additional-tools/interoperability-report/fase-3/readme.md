@@ -10,7 +10,9 @@ Opus is providing some SQL scripts that will assist clients in collecting data t
 
 **Important:** The SQL scripts provided in this section should be operated in the **OOB-Consent database**.
 
-You need to create the *payment_consent_count* function by executing the following [script](attachments/payment_consent_function_count.sql).
+First, the *get_conglomerate_name* function must be created by executing the following [script](../../commons/attachments/function_get_conglomerate_name.sql).
+
+Then, create the *payment_consent_count* function by executing the following [script](attachments/payment_consent_function_count.sql).
 
 To retrieve the data, execute the function with the following command:
 
@@ -30,9 +32,11 @@ After execution, refer to the ParentOrganization Reference by following the step
 
 **Important:** The SQL scripts provided in this section should be operated in the **OOB-Authorization-Server database**.
 
-During the first execution, you must create the *decode_base64url* function by running the following [script](attachments/as_function_decode_base64url.sql).
+First, the *get_conglomerate_name* function must be created by executing the following [script](../../commons/attachments/function_get_conglomerate_name.sql).
 
-Next, create the *payment_consent_extract_authorization_data* function by running the following [script](attachments/payment_consent_extract_authorization_data.sql).
+Then, you must create the *decode_base64url* function by running the following [script](attachments/as_function_decode_base64url.sql).
+
+At last, create the *payment_consent_extract_authorization_data* function by running the following [script](attachments/payment_consent_extract_authorization_data.sql).
 
 To retrieve the data, execute the function using the following command:
 

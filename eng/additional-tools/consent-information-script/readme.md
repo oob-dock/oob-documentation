@@ -31,7 +31,9 @@ The SQL scripts provided in this section should be operated in the **OOB-Consent
 
 The SQL scripts provided in this section should be operated in the **OOB-Consent database**.
 
-First, the *CONSENT_USAGE_REPORT* function must be created by executing the following [script](attachments/consent_function_extract_usage_report.sql).
+First, the *get_conglomerate_name* function must be created by executing the following [script](../commons/attachments/function_get_conglomerate_name.sql).
+
+Then, the *CONSENT_USAGE_REPORT* function must be created by executing the following [script](attachments/consent_function_extract_usage_report.sql).
 
 To obtain the data, you must call the function using the following command:
 
@@ -55,9 +57,11 @@ The obtained data should be filled in the "Consentimento_transmissor" tab, colum
 
 The SQL scripts provided in this section should be operated in the **OOB-Authorization-Server database**.
 
-First, the *decode_base64url* function must be created by executing the following [script](attachments/as_function_decode_base64url.sql).
+First, the *get_conglomerate_name* function must be created by executing the following [script](../commons/attachments/function_get_conglomerate_name.sql).
 
-Then, the *extract_report_data* function must be created by executing the following [script](attachments/as_function_extract_report_data.sql).
+Then, the *decode_base64url* function must be created by executing the following [script](attachments/as_function_decode_base64url.sql).
+
+At last, the *extract_report_data* function must be created by executing the following [script](attachments/as_function_extract_report_data.sql).
 
 To obtain the data, you must call the function using the following command:
 

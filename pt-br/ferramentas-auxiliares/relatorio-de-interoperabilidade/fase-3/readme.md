@@ -14,7 +14,10 @@ rodar os scripts e formatar as informações da forma e no período exigido pelo
 **Importante:** Os scripts SQL fornecidos nessa seção devem ser
 operados no **banco de dados do OOB-Consent**.
 
-É necessário criar a função *payment_consent_count* executando o seguinte [script](attachments/payment_consent_function_count.sql).
+Primeiramente, é necessário criar a function get_conglomerate_name executando o
+seguinte [script](../../commons/attachments/function_get_conglomerate_name.sql).
+
+Depois, criar a função *payment_consent_count* executando o seguinte [script](attachments/payment_consent_function_count.sql).
 
 Para obter os dados, execute função com o seguinte comando:
 
@@ -38,10 +41,13 @@ descritos em [ParentOrg Iniciador](#parentorg-iniciador).
 **Importante:** Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Authorization-Server**
 
-Na primeira execução deve-se criar a função *decode_base64url* executando o
+Primeiramente é necessário criar a function get_conglomerate_name executando o
+seguinte [script](../../commons/attachments/function_get_conglomerate_name.sql).
+
+Depois, criar a função *decode_base64url* executando o
 seguinte [script](attachments/as_function_decode_base64url.sql).
 
-Depois, deve-se criar a função *payment_consent_extract_authorization_data* executando
+Por fim, deve-se criar a função *payment_consent_extract_authorization_data* executando
 o seguinte [script](attachments/payment_consent_extract_authorization_data.sql).
 
 Para obter os dados, execute a função usando o seguinte comando:
