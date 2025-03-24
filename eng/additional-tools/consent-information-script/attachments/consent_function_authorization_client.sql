@@ -14,7 +14,7 @@ BEGIN
     SELECT dt_end_interval::date::timestamp AT TIME ZONE 'America/Sao_Paulo' INTO dt_end_utc;
 
     RETURN QUERY
-        SELECT get_conglomerate_name(t.org_name) org_name,
+        SELECT get_conglomerate_name(t.org_name)::varchar org_name,
             COUNT(c.id) Qtd_Auth_Cliente
         FROM consent c,
             tpp t
@@ -22,5 +22,5 @@ BEGIN
             AND c.status IN (1, 4, 5)
             AND c.tp_consent = 1
             AND c.id_tpp = t.id
-        GROUP BY org_name;
+        GROUP BY get_conglomerate_name(t.org_name);
 END;$function$;
