@@ -22,7 +22,7 @@ BEGIN
                 RETURN QUERY
                   SELECT  get_conglomerate_name(t.org_name::TEXT)                                       itp,
 	                        count(distinct pr.id)                                      	                  quantity_request,
-                          count(distinct p.dt_legacy_done) FILTER (where p.payment_status not in (7,9)) quantity_payment_id,
+                          count(distinct p.dt_legacy_done)                                              quantity_payment_id,
                           count(distinct p.dt_legacy_done) FILTER (where p.payment_status = 7)          quantity_completed_payment_id,
                           count(distinct p.dt_legacy_done) FILTER (where p.payment_status = 9)          quantity_schedule_payment_id,
                           case 
