@@ -23,7 +23,6 @@
                             "UNARRANGED_ACCOUNT_OVERDRAFT",
                             "INVOICE_FINANCING",
                             "PAYMENT",
-                            "INVOICE_FINANCING",
                             "BANK_FIXED_INCOME",
                             "CREDIT_FIXED_INCOME",
                             "VARIABLE_INCOME",
