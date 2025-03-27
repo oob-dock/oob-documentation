@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -593,9 +592,9 @@
                     },
                     "email": {
                       "type": "string",
+                      "format": "email",
                       "description": "Endereço de email",
                       "maxLength": 320,
-                      "pattern": "^[a-z0-9.!#$&'*+\\/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$",
                       "example": "karinafernandes-81@br.inter.net"
                     }
                   }

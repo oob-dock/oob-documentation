@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -158,7 +157,7 @@
     "meta": {
       "type": "object",
       "description": "Meta informações referente à API requisitada.",
-      "required": [
+      "required": [        
         "requestDateTime"
       ],
       "properties": {
