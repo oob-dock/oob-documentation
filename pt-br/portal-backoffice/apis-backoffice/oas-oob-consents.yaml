@@ -3243,9 +3243,11 @@ components:
       type: object
       properties:
         maximumVariableAmount:
-          description: Definição da configuração de recorrência para pagamentos automáticos.
+          description: Definição da configuração de recorrência para pagamentos automáticos, se não enviado
+            será considerado como indefinido (sem limite).
           maxLength: 19
           minLength: 4
+          nullable: true
           type: string
           example: "1000000.12"
         useOverdraftLimit:
