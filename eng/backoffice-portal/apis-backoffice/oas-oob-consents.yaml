@@ -3236,9 +3236,11 @@ components:
       type: object
       properties:
         maximumVariableAmount:
-          description: Definition of the sweeping configuration for automatic funds transfers.
+          description: Definition of the sweeping configuration for automatic funds transfers, if not sent
+            will be considered as undefined (no limit).
           maxLength: 19
           minLength: 4
+          nullable: true
           type: string
           example: "1000000.12"
         useOverdraftLimit:
