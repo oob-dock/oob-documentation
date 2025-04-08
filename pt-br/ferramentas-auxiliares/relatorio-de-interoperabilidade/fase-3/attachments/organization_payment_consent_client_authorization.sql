@@ -7,7 +7,10 @@ CREATE OR REPLACE FUNCTION organization_payment_consent_client_authorization(
 RETURNS TABLE(
         itp VARCHAR,
         qty_client_authentication BIGINT,
-        qty_client_authorization  BIGINT)
+        qty_client_authorization  BIGINT,
+        product                   TEXT,
+        authorisation_flow        TEXT
+        )
 AS $$
 BEGIN
   -- Return the aggregated payment consent summary
@@ -15,7 +18,9 @@ BEGIN
     SELECT 
         tb1.itp, 
         CAST(SUM(tb1.qty_client_authentication) AS bigint) AS qty_client_authentication, 
-        CAST(SUM(tb1.qty_client_authorization) AS bigint) AS qty_client_authorization
+        CAST(SUM(tb1.qty_client_authorization) AS bigint) AS qty_client_authorization,
+        tb1.product,
+        tb1.authorisation_flow
     FROM (
     -- Fetch data from local payment_consent_client_authorization function
         SELECT * 
@@ -36,12 +41,14 @@ BEGIN
             ) AS t(
                 itp VARCHAR,
                 qty_client_authentication BIGINT,
-                qty_client_authorization  BIGINT
+                qty_client_authorization  BIGINT,
+                product                   TEXT,
+                authorisation_flow        TEXT
             )
         ) AS tb1
     GROUP BY 
-        tb1.itp
+        tb1.itp, tb1.product, tb1.authorisation_flow
     ORDER BY 
-        tb1.itp asc;
+        tb1.itp asc, tb1.product asc, tb1.authorisation_flow asc;
 END;
 $$ LANGUAGE plpgsql;
