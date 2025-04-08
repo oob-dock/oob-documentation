@@ -36,6 +36,8 @@ First, the *get_conglomerate_name* function must be created by executing the fol
 
 Then, you must create the *decode_base64url* function by running the following [script](attachments/as_function_decode_base64url.sql).
 
+After, you must create the *get_consent_product_flow* function by running the following [script](attachments/as_get_consent_product_flow.sql).
+
 At last, create the *payment_consent_extract_authorization_data* function by running the following [script](attachments/payment_consent_extract_authorization_data.sql).
 
 To retrieve the data, execute the function using the following command:
