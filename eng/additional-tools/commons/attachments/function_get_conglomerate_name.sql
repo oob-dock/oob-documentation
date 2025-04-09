@@ -1,7 +1,9 @@
 CREATE OR REPLACE FUNCTION get_conglomerate_name(org_name TEXT)
 RETURNS TEXT AS $$
 BEGIN
-    IF org_name ILIKE '%Banrisul%' OR 
+    IF org_name ILIKE '%ACESSO%' THEN
+        RETURN 'Acesso Soluções';
+    ELSIF org_name ILIKE '%Banrisul%' OR 
        org_name ILIKE '%RIO GRANDE DO SUL%' OR 
        org_name ILIKE '%ESTADO DO RS%' THEN
         RETURN 'Banrisul';
@@ -25,18 +27,21 @@ BEGIN
         RETURN 'BV';
     ELSIF org_name ILIKE '%CAIXA%' THEN
         RETURN 'Caixa';
-    ELSIF org_name ILIKE '%ITAU%' OR 
-          org_name ILIKE '%ITAUCARD%' OR 
+    ELSIF org_name ILIKE '%ITAUCARD%' OR 
           org_name ILIKE '%ITAUBANK%' OR 
-          org_name ILIKE '%LUIZACRED%' OR 
+          org_name ILIKE '%ITAU%' OR 
+          org_name ILIKE '%ITAÚ%' OR
+          org_name ILIKE '%LUIZA%' OR 
           org_name ILIKE '%HIPERCARD%' OR 
           org_name ILIKE '%UNIBANCO%' OR 
           org_name ILIKE '%REDECARD%' OR 
           org_name ILIKE '%INTRAG DTVM%' OR 
+          org_name ILIKE '%INTRAG%' OR 
           org_name ILIKE '%MICROINVEST%' OR 
           org_name ILIKE '%BBA%' OR 
-          org_name ILIKE '%ITAÚ%' THEN
-        RETURN 'Itau';
+          org_name ILIKE '%INVESTCRED%' OR 
+           THEN
+        RETURN 'Itaú';
     ELSIF org_name ILIKE '%MERCADO PAGO%' THEN
         RETURN 'Mecado Pago';
     ELSIF org_name ILIKE '%ORIGINAL%' THEN
@@ -50,6 +55,7 @@ BEGIN
           org_name ILIKE '%RCI%' OR 
           org_name ILIKE '%AYMORE%' OR 
           org_name ILIKE '%TORO CTVM%' OR 
+          org_name ILIKE '%TORO%' OR 
           org_name ILIKE '%HYUNDAI%' OR 
           org_name ILIKE '%BCO PSA FINANCE%' OR 
           org_name ILIKE '%S3 CACEIS%' OR 
@@ -143,6 +149,10 @@ BEGIN
         RETURN 'Parati';
     ELSIF org_name ILIKE '%U4C%' THEN
         RETURN 'U4C';
+    ELSIF org_name ILIKE '%EMBRACED%' THEN
+        RETURN 'Embraced';
+    ELSIF org_name ILIKE '%KLAVI%' THEN
+        RETURN 'Klavi';
     ELSE
         RETURN 'Outros';
     END IF;
