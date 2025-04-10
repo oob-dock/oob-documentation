@@ -79,6 +79,10 @@ adicionar a configuração da seguinte forma:
     value: 110
 ```
 
+### Execução de scripts DDL
+
+Vide a [definição](../shared-definitions.md#scripts-ddl)
+
 ### liquibase/contexts
 
 Vide a [definição](../shared-definitions.md#liquibase-contexts)

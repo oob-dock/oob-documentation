@@ -28,6 +28,10 @@ env:
     port: 5432
 ```
 
+### DDL Script Execution
+
+See the [definition](../shared-definitions.md#ddl-scripts)
+
 ### liquibase/contexts
 
 See the [definição](../shared-definitions.md#liquibase-contexts).

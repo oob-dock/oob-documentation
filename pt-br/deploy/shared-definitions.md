@@ -18,6 +18,23 @@ errada entre em contato com a Opus.
 
 Ex: `cbanco`
 
+## Scripts DDL
+
+Os scripts DDL serão aplicados em um processo separado da execução do serviço.
+Para configurar a execução destes scripts será necessário ajustar os valores
+das seguintes propriedades:
+
+```yaml
+  db:
+    ddl:
+      username: "ddl-username"
+      password: "ddl-password"
+      logLevel: "info"
+```
+
+**Observação**: a configuração de `logLevel` pode assumir um
+dos seguintes valores: `emerg`, `error`, `warn`, `info` ou `debug`.
+
 ## Liquibase Contexts
 
 Contexto que deve ser utilizado para criar a base de dados.

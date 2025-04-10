@@ -15,6 +15,10 @@ Configuração de acesso ao banco
 * password: Senha do usuário de acesso ao banco
 * host: Host do banco
 
+### Execução de scripts DDL
+
+Vide a [definição](../shared-definitions.md#scripts-ddl)
+
 ### liquibase/contexts
 
 Vide a [definição](../shared-definitions.md#liquibase-contexts)

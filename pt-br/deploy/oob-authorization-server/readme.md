@@ -105,6 +105,10 @@ deve ter seu valor alterado para "1", conforme exemplo:
       enabled: "1"
 ```
 
+### Execução de scripts DDL
+
+Vide a [definição](../shared-definitions.md#scripts-ddl)
+
 ### api/baseUrlOobConsents
 
 - Endereço base do serviço de consentimento

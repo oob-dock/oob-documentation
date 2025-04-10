@@ -12,6 +12,23 @@ Simplified name of the brand, only containing lowercase letters and hyphens (-).
 
 Example: `cbanco`
 
+## DDL Scripts
+
+The DDL scripts will be applied in a process separate from the service execution.
+To configure the execution of these scripts, it is necessary to set the values
+of the following properties:
+
+```yaml
+  db:
+    ddl:
+      username: "ddl-username"
+      password: "ddl-password"
+      logLevel: "info"
+```
+
+**Note**: the `logLevel` configuration can take one of the following values:
+`emerg`, `error`, `warn`, `info` or `debug`.
+
 ## Liquibase Contexts
 
 Context to be used to create the database.
