@@ -17,28 +17,36 @@
             ],
             "properties": {
                 "data": {
-                    "loggedUserDocument": {
-                        "type": "string",
-                        "maxLength": 11,
-                        "description": "Número do CPF do usuário.",
-                        "examples": [
-                            "11111111111"
-                        ],
-                        "pattern": "^\\d{11}$"
-                    },
-                    "businessEntityDocument": {
-                        "type": "string",
-                        "maxLength": 14,
-                        "description": "Número do CNPJ da empresa.",
-                        "examples": [
-                            "11111111111111"
-                        ],
-                        "pattern": "^\\d{14}$"
+                    "type": "object",
+                    "description": "Payload para verificação de correntista",
+                    "required": [
+                        "loggedUserDocument"
+                    ],
+                    "properties": {
+                        "loggedUserDocument": {
+                            "type": "string",
+                            "maxLength": 11,
+                            "description": "Número do CPF do usuário.",
+                            "examples": [
+                                "11111111111"
+                            ],
+                            "pattern": "^\\d{11}$"
+                        },
+                        "businessEntityDocument": {
+                            "type": "string",
+                            "maxLength": 14,
+                            "description": "Número do CNPJ da empresa.",
+                            "examples": [
+                                "11111111111111"
+                            ],
+                            "pattern": "^\\d{14}$"
+                        }
                     }
-                }
+                },
+                "additionalProperties": false
             },
             "additionalProperties": false
-        }
-    },
-    "additionalProperties": false
+        },
+        "additionalProperties": false
+    }
 }
