@@ -35,7 +35,7 @@ If the `debtorAccount` field in the consent is filled with a valid account for p
 
 **What should be validated in the `validatePaymentData` route (for "Connector"-type integrations) or in the `/payment-validation` endpoint call (for "Integration Layer"-type integrations)?**
 
-Check the [mandatory payment validations](eng/integration-connector/recommendations/payment-validations/readme.md).
+Check the [mandatory payment validations](/eng/integration-connector/recommendations/payment-validations/readme.md).
 
 ## About Payment Creation Requests
 
@@ -45,10 +45,10 @@ After the payment consent approval, the `consent.resources` list will always con
 The `consent.debtorAccount` field will also always be filled with the information of the chosen account.
 
 **Where can I find the payment date for each scenario or payment type?**
-Check [how to identify the payment date](eng/integration-connector/recommendations/payment-scenarios/readme.md#How%20to%20Identify%20the%20Payment%20Date).
+Check [how to identify the payment date](/eng/integration-connector/recommendations/payment-scenarios/readme.md#How%20to%20Identify%20the%20Payment%20Date).
 
 **Does the institution’s back-end need to handle recurring scheduled payments?**
 
 No. The product will make a separate request for each recurrence date.
 
-For example, when receiving a recurring scheduling request for 5 months (one debit per month), the product will submit 5 independent scheduling requests to the institution’s back-end. The date for each scheduled payment must be determined as described in [how to identify the payment date](eng/integration-connector/recommendations/payment-scenarios/readme.md#How%20to%20Identify%20the%20Payment%20Date).
+For example, when receiving a recurring scheduling request for 5 months (one debit per month), the product will submit 5 independent scheduling requests to the institution’s back-end. The date for each scheduled payment must be determined as described in [how to identify the payment date](/eng/integration-connector/recommendations/payment-scenarios/readme.md#How%20to%20Identify%20the%20Payment%20Date).
