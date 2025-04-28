@@ -58,6 +58,6 @@ BEGIN
     ORDER BY 
         tb1.itp ASC,
         tb1.product ASC,
-        SUM(tb1.quantity_request) DESC;
+        tb1.authorisation_flow ASC;
 END;
 $$ LANGUAGE plpgsql;

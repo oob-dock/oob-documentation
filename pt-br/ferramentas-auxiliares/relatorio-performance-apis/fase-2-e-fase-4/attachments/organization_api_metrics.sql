@@ -24,7 +24,7 @@ BEGIN
         tb1.method,
         tb1.uri,
         cast(max(tb1.availability_rate) as numeric) as availability_rate,
-        cast(sum(tb1.downtime_seconds) as integer) as downtime_seconds,
+        cast(max(tb1.downtime_seconds) as integer) as downtime_seconds,
         cast(max(tb1.planned_downtime) as integer) as planned_downtime,
         CAST(SUM(tb1.total_requests) AS integer) AS total_requests,
         CAST(SUM(tb1.total_error) AS integer) AS total_error,

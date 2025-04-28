@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -33,10 +32,8 @@
               "code": {
                 "type": "string",
                 "pattern": "^\\d{7}$",
-                "maxLength": 7,
-                "minLength": 2,
-                "description": "Traz o código do ramo da atividade principal da empresa consultada, segundo padrão CNAE (Classificação Nacional de Atividades Econômicas)\n",
-                "example": "8599604"
+                "description": "Traz o código do ramo da atividade principal da empresa consultada, segundo padrão CNAE (Classificação Nacional de Atividades Econômicas)\n\n[Observação] O campo sempre deve ser enviado com 7 caracteres, seguindo a classificação “CNAE-Subclasse 2.3”. Em casos em que o valor inicie com zeros, ele deve conter todos os caracteres, incluindo os zeros.\n",
+                "example": "0600001"
               },
               "isMain": {
                 "type": "boolean",

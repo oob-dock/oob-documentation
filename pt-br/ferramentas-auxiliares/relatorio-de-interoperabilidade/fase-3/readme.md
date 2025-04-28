@@ -47,6 +47,9 @@ seguinte [script](../../commons/attachments/function_get_conglomerate_name.sql).
 Depois, criar a função *decode_base64url* executando o
 seguinte [script](attachments/as_function_decode_base64url.sql).
 
+Em seguida, criar a função *get_consent_product_flow* executando o
+seguinte [script](attachments/as_get_consent_product_flow.sql).
+
 Por fim, deve-se criar a função *payment_consent_extract_authorization_data* executando
 o seguinte [script](attachments/payment_consent_extract_authorization_data.sql).
 
