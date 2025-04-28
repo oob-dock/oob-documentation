@@ -45,10 +45,10 @@ Após a aprovação do consentimento de pagamento, a lista `consent.resources` s
 O campo `consent.debtorAccount` estará também sempre preenchido com as informações da conta escolhida.
 
 **Onde encontrar a data do pagamento para cada cenário ou tipo de pagamento?**
-Conferir [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como%20Identificar%20a%20Data%20do%20Pagamento).
+Conferir [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-do-Pagamento).
 
 **A retaguarda precisa se preocupar com Agendamentos Recorrentes?**
 
 Não. O produto realizará uma requisição separada para cada data de recorrência.
 
-Por exemplo, ao receber uma requisição de agendamento recorrente por 5 meses, um débito por mês, o produto solicitará para a retaguarda 5 agendamento independentes. A data de cada agendamento deve ser determinada conforme descrito em [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como%20Identificar%20a%20Data%20do%20Pagamento).
+Por exemplo, ao receber uma requisição de agendamento recorrente por 5 meses, um débito por mês, o produto solicitará para a retaguarda 5 agendamento independentes. A data de cada agendamento deve ser determinada conforme descrito em [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-do-Pagamento).
