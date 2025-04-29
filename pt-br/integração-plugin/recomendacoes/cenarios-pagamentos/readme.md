@@ -1,4 +1,4 @@
-# Cenários de Pagamentos
+# Cenários de Pagamentos a Serem Cobertos pela Integração
 
 Na implementação da integração de pagamentos, é necessário cobrir a criação e a consulta de pagamentos em cada um dos cenários a seguir.
 
@@ -7,14 +7,14 @@ Para pagamentos retidos para análise (status "PDNG" no Open Finance) ou agendad
 ## Cenários por Tipo de Usuário Logado
 
 - **Pessoa Física (PF)**
-- **Pessoa Jurídica (PJ)** *(quando suportado pela retaguarda)*
+- **Pessoa Jurídica (PJ)** *(quando suportado pela retaguarda da instituição financeira)*
 
-## Cenários por Data
+## Cenários por Data de Efetivação do Pagamento
 
 - **Instantâneo**: Pagamentos a serem efetivados no mesmo dia da solicitação.
 - **Agendado**: Pagamentos a serem efetivados em data futura.
 
-## Cenários por Forma de Iniciação
+## Cenários por Forma de Iniciação do Pagamento
 
 - **MANU**: Iniciado por inserção manual dos dados bancários.
 - **INIC**: Iniciado pelo recebedor (*creditor*).
@@ -22,20 +22,23 @@ Para pagamentos retidos para análise (status "PDNG" no Open Finance) ou agendad
 - **QRES**: Iniciado por QR Code Estático.
 - **QRDN**: Iniciado por QR Code Dinâmico.
 
-## Cenários por Tipo de Tentativa
+## Cenários por Tipo de Tentativa de Pagamento
 
-- **Solicitação Original**
-- **Retentativa Extradia** *(quando aplicável. Ex.: Pix automático)*
+O Arranjo Pix possibilita rententativas para pagamentos específicos, como o Pix automático.
+Ao realizar um Pix pelo Open Finance, a integração deve tratar adequadamente as seguintes tentativas de pagamento:
 
-**⚠️ Importante:** A retentativa intradia (quando aplicável) deve ser tratada pelo sistema de retaguarda.
+- **Solicitação Original:** A primeira tentativa de execução do pagamento, que acontece para todos os pagamento.
+- **Retentativa Extradia:** Nova tentativa realizada em um dia diferente da tentativa original. Apenas suportada para pagamentos específicos (ex.: Pix automático).
+
+**⚠️ Importante:** A retentativa intradia (realizada no mesmo dia), quando aplicável, deve ser identificada e tratada pelo sistema de retaguarda da instituição financeira.
 
 ---
 
 ## Como Identificar os Cenários
 
-A seguir, são apresentadas as regras para identificar os cenários de pagamentos descritos anteriormente.
+A seguir, é apresentada uma visão mais técnica das regras de identificação os cenários de pagamentos descritos anteriormente.
 
-A análise de campos abaixo é feita para o payload de solicitação de criação de pagamentos. Ela é válida tanto para integrações intermediadas por uma "Camada de Integração" quanto por um "Conector".
+A análise de campos abaixo é feita para o payload da requisição de criação de pagamentos.
 
 ### Como Identificar o Tipo de Usuário Logado
 
@@ -46,7 +49,7 @@ A análise de campos abaixo é feita para o payload de solicitação de criaçã
 
 **ℹ️ Observação:** Independentemente do tipo de usuário, o CPF dele estará disponível no campo `consent.loggedUser.document.identification`.
 
-### Como Identificar a Data do Pagamento
+### Como Identificar a Data de Efetivação do Pagamento
 
 O campo que define a data do pagamento varia conforme o tipo de pagamento (campo `paymentType`):
 
@@ -67,15 +70,20 @@ O campo que define a data do pagamento varia conforme o tipo de pagamento (campo
 
 ### Como Identificar a Forma de Iniciação e o Recebedor (creditor)
 
-| Forma de Iniciação (`localInstrument`) | Identificação do Recebedor (creditor)                                 |
-| :------------------------------------: | --------------------------------------------------------------------- |
-|                  MANU                  | `creditorAccount`                                                     |
-|                  INIC                  | Chave Pix (`proxy`)                                                   |
-|                  DICT                  | Chave Pix (`proxy`) + `creditorAccount`                               |
-|                  QRES                  | Chave Pix (`proxy`) + `creditorAccount` + dados do QR Code (`qrCode`) |
-|                  QRDN                  | Chave Pix (`proxy`) + `creditorAccount` + dados do QR Code (`qrCode`) |
+A **forma de iniciação** do pagamento é determinada pelo valor do campo `requestBody.data.localInstrument`.
+A forma de identificação do **recebedor (creditor)** varia conforme o tipo de iniciação informado.
+A tabela abaixo resume os campos para a identificação cada cenário:
+
+| Forma de Iniciação | Campos utilizados para identificar o recebedor                     |
+| :----------------: | ------------------------------------------------------------------ |
+|        MANU        | `creditorAccount` (objeto com informações bancárias)               |
+|        INIC        | `proxy` (Chave Pix)                                                |
+|        DICT        | `proxy` + `creditorAccount`                                        |
+|        QRES        | `proxy` + `creditorAccount` + `qrCode` (String com o QR Code lido) |
+|        QRDN        | `proxy` + `creditorAccount` + `qrCode`                             |
 
 **⚠️ Importante:** Quando houver mais de uma forma de identificação, deve-se validar a consistência entre elas.
+Exemplo: a chave Pix deve se referir à mesma conta indicada no campo creditorAccount.
 
 **ℹ️ Observação:** Todos os campos mencionados na tabela acima estão localizados dentro de `requestBody.data`.
 

@@ -33,9 +33,9 @@ For payments held for analysis (status "PDNG" in Open Finance) or scheduled paym
 
 ## How to Identify the Scenarios
 
-Below are the rules for identifying the payment scenarios described above.
+Below is a more technical view of the rules for identifying the payment scenarios described earlier.
 
-The field analysis below refers to the payload of the payment creation request. It applies both to integrations intermediated by an "Integration Layer" and those made through a "Connector."
+The field analysis below refers to the payload of the payment creation request.
 
 ### How to Identify the Logged User Type
 

@@ -1,10 +1,16 @@
 # Integração - Dúvidas Frequentes
 
-## Sobre Descoberta de Contas
+## Sobre Descoberta de Recursos
+
+Dúvidas referentes ao [discovery de recursos no Opus Open Finance](/pt-br/integração-plugin/consent/readme.md#Discovery-de-recursos-no-Opus-Open-Banking).
+
+**O que é um "recurso"?**
+No Open Finance, "recursos" são componentes de dados ou serviço que pode ser consumido por APIs, respeitando os critérios de segurança e consentimento.
+Na prática, um "recurso" pode ser uma conta transacional, um cartão, um investimento, entre outros.
 
 **O que devo retornar nos campos `key` de `resourceLegacyId` e `resourceName`?**
 
-Os campos `resourceLegacyId` e `resourceName` funcionam como identificadores internos na retaguarda e devem ser definidos para uso nessa camada. Ambos são estruturados como listas de pares *key-value* para oferecer suporte a identificadores compostos.
+Os campos `resourceLegacyId` e `resourceName` funcionam como identificadores internos na retaguarda da instituição financeira e devem ser definidos para uso nessa camada. Ambos são estruturados como listas de pares *key-value* para oferecer suporte a identificadores compostos.
 
 Para o `resourceLegacyId`, caso o ID seja simples, é suficiente retornar algo como:
 
@@ -18,14 +24,14 @@ Já para o `resourceName`, é importante retornar valores que ajudem o usuário 
 
 ```json
 "resourceName": [
-    { "key": "Agencia", "value": "<número da agência>" },
-    { "key": "Conta", "value": "<número da conta>" }
+    { "key": "agencia", "value": "<número da agência>" },
+    { "key": "conta", "value": "<número da conta>" }
 ]
 ```
 
 **O usuário não possui contas a serem retornadas. Devo retornar erro ou lista vazia?**
 
-Caso o usuário não possua contas, o retorno deve ser sucesso (HTTP 200) com uma lista vazia de recursos.
+Caso o usuário não possua contas, o retorno deve ser sucesso (HTTP 200) com uma lista vazia de recursos (`{ "data": { "resources": [] } }`).
 
 **Na descoberta de contas do fluxo de pagamentos, qual conta deve vir como "selecionada por padrão"?**
 
@@ -41,14 +47,14 @@ Conferir as [validações obrigatórias para pagamentos](/pt-br/integração-plu
 
 **Como identificar a conta escolhida pelo portador para realizar o débito?**
 
-Após a aprovação do consentimento de pagamento, a lista `consent.resources` sempre contém apenas um único recurso, representando a conta selecionada.
+Após a aprovação do consentimento de pagamento, a lista `consent.resources` enviada no payload da requisição de pagamento sempre conterá apenas um único recurso, representando a conta selecionada.
 O campo `consent.debtorAccount` estará também sempre preenchido com as informações da conta escolhida.
 
 **Onde encontrar a data do pagamento para cada cenário ou tipo de pagamento?**
-Conferir [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-do-Pagamento).
+Conferir [como identificar a data do pagamento](pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-de-Efetivação-do-Pagamento)
 
-**A retaguarda precisa se preocupar com Agendamentos Recorrentes?**
+**A retaguarda da instituição financeira precisa suportar Agendamentos Recorrentes?**
 
 Não. O produto realizará uma requisição separada para cada data de recorrência.
 
-Por exemplo, ao receber uma requisição de agendamento recorrente por 5 meses, um débito por mês, o produto solicitará para a retaguarda 5 agendamento independentes. A data de cada agendamento deve ser determinada conforme descrito em [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-do-Pagamento).
+Por exemplo, ao receber uma requisição de agendamento recorrente por 5 meses, um débito por mês, o produto solicitará para a retaguarda da instituição financeira 5 agendamento independentes. A data de cada agendamento deve ser determinada conforme descrito em [como identificar a data do pagamento](pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-de-Efetivação-do-Pagamento).
