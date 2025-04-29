@@ -1,25 +1,23 @@
 # Mandatory Payment Validations
 
-The following validations must be implemented in the `validatePaymentData` route (for "Connector"-type integrations) or in the `/payment-validation` endpoint call (for "Integration Layer"-type integrations).
+The following validations must be implemented on the specific endpoint for payment data validation.
 
-The fields mentioned here are independent of the type of integration adopted.
+For each validation, the error returned by the integration must include the corresponding code in the `code` field, as indicated.
 
-For each validation, the error response must use the corresponding error code as indicated.
-
-## Payment Maximum Amount Validation
+## Maximum Payment Amount Validation
 
 **ℹ️ Notes:**
 
-- Validation is performed for payments of type `PAYMENT_CONSENT` (value of the `requestBody.paymentType` field).
-- All other fields mentioned below are located within `requestBody.data.payment`.
+- Validation applies to payments of type `PAYMENT_CONSENT` (value of the `requestBody.paymentType` field).
+- All other fields below are located within `requestBody.data.payment`.
 
 ### Rule
 
-The transaction amount (`amount` field) must be below:
+The transaction amount (`amount` field) must be less than:
 
 - The limit established by the Account-Holding Institution (if such a limit exists).
 - The absolute maximum amount, in BRL, of `999999999.99` (i.e., up to 9 digits before the decimal point and 2 digits after).
-    - The value **cannot** be equal to the maximum limit.
+    - The value **must not** be equal to the maximum limit.
 
 **Error code:** `VALOR_ACIMA_LIMITE`
 
@@ -27,8 +25,8 @@ The transaction amount (`amount` field) must be below:
 
 **ℹ️ Notes:**
 
-- Validations are performed for payments of type `PAYMENT_CONSENT` (value of the `requestBody.paymentType` field).
-- All other fields mentioned below are located within `requestBody.data.payment`.
+- Validations apply to payments of type `PAYMENT_CONSENT` (value of the `requestBody.paymentType` field).
+- All other fields below are located within `requestBody.data.payment`.
 
 ### General Rules
 

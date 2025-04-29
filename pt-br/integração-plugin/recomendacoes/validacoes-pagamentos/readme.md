@@ -2,8 +2,6 @@
 
 As validações a seguir devem ser implementadas na rota específica para a validação de dados do pagamento.
 
-Os campos mencionados aqui independem do tipo de integração adotado.
-
 Para cada validação, o erro listado na resposta da integração deve apresentar no campo `code` o código correspondente, conforme indicado.
 
 ## Validação do Valor Máximo do Pagamento

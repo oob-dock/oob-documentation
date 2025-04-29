@@ -1,4 +1,4 @@
-# Payment Scenarios
+# Payment Scenarios to be Covered by the Integration
 
 When implementing the payment integration, it is necessary to cover the creation and consultation of payments in each of the following scenarios.
 
@@ -7,14 +7,14 @@ For payments held for analysis (status "PDNG" in Open Finance) or scheduled paym
 ## Scenarios by Logged User Type
 
 - **Individual (PF)**
-- **Legal Entity (PJ)** *(when supported by the institution’s back-end)*
+- **Legal Entity (PJ)** *(when supported by the financial institution's back-end)*
 
-## Scenarios by Date
+## Scenarios by Payment Settlement Date
 
-- **Instant**: Payments to be completed on the same day as the request.
-- **Scheduled**: Payments to be completed on a future date.
+- **Instant**: Payments to be settled on the same day as requested.
+- **Scheduled**: Payments to be settled on a future date.
 
-## Scenarios by Initiation Method
+## Scenarios by Payment Initiation Method
 
 - **MANU**: Initiated by manually entering the bank details.
 - **INIC**: Initiated by the payee (*creditor*).
@@ -22,12 +22,15 @@ For payments held for analysis (status "PDNG" in Open Finance) or scheduled paym
 - **QRES**: Initiated via Static QR Code.
 - **QRDN**: Initiated via Dynamic QR Code.
 
-## Scenarios by Attempt Type
+## Scenarios by Type of Payment Attempt
 
-- **Original Request**
-- **Extra-Day Retry** *(when applicable. E.g.: automatic Pix)*
+The Pix Arrangement allows retry attempts for specific types of payments, such as automatic Pix.
+When making a Pix through Open Finance, the integration must properly handle the following payment attempts:
 
-**⚠️ Important:** Intra-day retries (when applicable) must be handled by the institution’s back-end system.
+- **Original Request:** The first attempt to execute the payment, applicable to all payments.
+- **Extra-Day Retry:** A new attempt made on a day different from the original attempt. Only supported for specific payments (e.g., automatic Pix).
+
+**⚠️ Important:** Intra-day retry (performed on the same day), when applicable, must be identified and handled by the financial institution's back-end system.
 
 ---
 
@@ -44,9 +47,9 @@ The field analysis below refers to the payload of the payment creation request.
 | Absent                                                       | Individual (PF)   |
 | Present                                                      | Legal Entity (PJ) |
 
-**ℹ️ Note:** Regardless of the user type, the user's CPF (Individual Taxpayer Registry) will be available in the `consent.loggedUser.document.identification` field.
+**ℹ️ Note:** Regardless of the user type, their CPF will be available in the `consent.loggedUser.document.identification` field.
 
-### How to Identify the Payment Date
+### How to Identify the Payment Settlement Date
 
 The field that defines the payment date varies depending on the payment type (`paymentType` field):
 
@@ -65,17 +68,22 @@ The field that defines the payment date varies depending on the payment type (`p
 | Is the **current** date       | Instant   | Current date            |
 | Is a **future** date          | Scheduled | `requestBody.data.date` |
 
-### How to Identify the Initiation Method and Payee (creditor)
+### How to Identify the Payment Initiation Method and Payee (creditor)
 
-| Initiation Method (`localInstrument`) | Payee (creditor) Identification                                 |
-| :-----------------------------------: | --------------------------------------------------------------- |
-|                 MANU                  | `creditorAccount`                                               |
-|                 INIC                  | Pix Key (`proxy`)                                               |
-|                 DICT                  | Pix Key (`proxy`) + `creditorAccount`                           |
-|                 QRES                  | Pix Key (`proxy`) + `creditorAccount` + QR Code data (`qrCode`) |
-|                 QRDN                  | Pix Key (`proxy`) + `creditorAccount` + QR Code data (`qrCode`) |
+The **payment initiation method** is defined by the value of the field `requestBody.data.localInstrument`.
+The method to identify the **creditor** varies according to the initiation method.
+The table below summarizes the fields used to identify each scenario:
+
+| Initiation Method | Fields used to identify the creditor                         |
+| :---------------: | ------------------------------------------------------------ |
+|       MANU        | `creditorAccount` (object with bank account information)     |
+|       INIC        | `proxy` (Pix Key)                                            |
+|       DICT        | `proxy` + `creditorAccount`                                  |
+|       QRES        | `proxy` + `creditorAccount` + `qrCode` (String with QR Code) |
+|       QRDN        | `proxy` + `creditorAccount` + `qrCode`                       |
 
 **⚠️ Important:** When there is more than one identification method, consistency between them must be validated.
+Example: the Pix key must refer to the same account indicated in the `creditorAccount` field.
 
 **ℹ️ Note:** All fields mentioned in the table above are located inside `requestBody.data`.
 

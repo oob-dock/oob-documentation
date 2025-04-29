@@ -39,7 +39,7 @@ Se o campo `debtorAccount` do consentimento estiver preenchido com uma conta vá
 
 ## Sobre Validação dos Dados de Pagamento
 
-**O que deve ser validado na rota `validatePaymentData` (para integrações do tipo "Conector") ou na chamada ao endpoint `/payment-validation` (para integrações do tipo "Camada de Integração")?**
+**O que deve ser validado na rota específica para a validação de dados do pagamento?**
 
 Conferir as [validações obrigatórias para pagamentos](/pt-br/integração-plugin/recomendacoes/validacoes-pagamentos/readme.md).
 
@@ -51,10 +51,10 @@ Após a aprovação do consentimento de pagamento, a lista `consent.resources` e
 O campo `consent.debtorAccount` estará também sempre preenchido com as informações da conta escolhida.
 
 **Onde encontrar a data do pagamento para cada cenário ou tipo de pagamento?**
-Conferir [como identificar a data do pagamento](pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-de-Efetivação-do-Pagamento)
+Conferir [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-de-Efetivação-do-Pagamento)
 
 **A retaguarda da instituição financeira precisa suportar Agendamentos Recorrentes?**
 
 Não. O produto realizará uma requisição separada para cada data de recorrência.
 
-Por exemplo, ao receber uma requisição de agendamento recorrente por 5 meses, um débito por mês, o produto solicitará para a retaguarda da instituição financeira 5 agendamento independentes. A data de cada agendamento deve ser determinada conforme descrito em [como identificar a data do pagamento](pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-de-Efetivação-do-Pagamento).
+Por exemplo, ao receber uma requisição de agendamento recorrente por 5 meses, um débito por mês, o produto solicitará para a retaguarda da instituição financeira 5 agendamento independentes. A data de cada agendamento deve ser determinada conforme descrito em [como identificar a data do pagamento](/pt-br/integração-plugin/recomendacoes/cenarios-pagamentos/readme.md#Como-Identificar-a-Data-de-Efetivação-do-Pagamento).
