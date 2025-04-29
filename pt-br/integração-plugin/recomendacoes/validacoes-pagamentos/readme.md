@@ -1,6 +1,6 @@
 # Validações Obrigatórias para Pagamentos
 
-As validações a seguir devem ser implementadas na rota `validatePaymentData` (para integrações do tipo "Conector") ou na chamada ao endpoint `/payment-validation` (para integrações do tipo "Camada de Integração").
+As validações a seguir devem ser implementadas na rota específica para a validação de dados do pagamento.
 
 Os campos mencionados aqui independem do tipo de integração adotado.
 
