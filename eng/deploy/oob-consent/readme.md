@@ -70,7 +70,7 @@ To activate the use of the read replica, change the feature/readReplica/enabled 
 
 ### DDL Script Execution
 
-Vide a [definição](../shared-definitions.md#ddl-scripts)
+See the [definição](../shared-definitions.md#ddl-scripts)
 
 ### liquibase/contexts
 

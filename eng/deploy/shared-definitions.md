@@ -29,6 +29,10 @@ of the following properties:
 **Note**: the `logLevel` configuration can take one of the following values:
 `emerg`, `error`, `warn`, `info` or `debug`.
 
+**Important**: Using the `debug` log level is **NOT** recommended because it
+can produce a large amount of unnecessary information. This may make logs difficult
+to read and obscure important messages in the noise.
+
 ## Liquibase Contexts
 
 Context to be used to create the database.
