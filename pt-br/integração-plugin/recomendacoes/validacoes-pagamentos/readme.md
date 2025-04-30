@@ -25,7 +25,7 @@ O valor da transação (campo `amount`) deve estar abaixo:
 
 **ℹ️ Observações:**
 
-- Validações realizada para pagamentos do tipo `PAYMENT_CONSENT` (valor do campo `requestBody.paymentType`).
+- Validações realizadas para pagamentos do tipo `PAYMENT_CONSENT` (valor do campo `requestBody.paymentType`).
 - Todos os demais campos abaixo estão localizados dentro de `requestBody.data.payment`.
 
 ### Regras Gerais

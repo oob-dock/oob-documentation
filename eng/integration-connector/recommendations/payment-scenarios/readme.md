@@ -24,11 +24,11 @@ For payments held for analysis (status "PDNG" in Open Finance) or scheduled paym
 
 ## Scenarios by Type of Payment Attempt
 
-The Pix Arrangement allows retry attempts for specific types of payments, such as automatic Pix.
+The Pix Arrangement allows retry attempts for specific types of payments, such as automatic Pix.  
 When making a Pix through Open Finance, the integration must properly handle the following payment attempts:
 
 - **Original Request:** The first attempt to execute the payment, applicable to all payments.
-- **Extra-Day Retry:** A new attempt made on a day different from the original attempt. Only supported for specific payments (e.g., automatic Pix).
+- **Extra-Day Retry:**  Only supported for specific payments (e.g., automatic Pix). It is a new attempt made on a day different from the original attempt.
 
 **⚠️ Important:** Intra-day retry (performed on the same day), when applicable, must be identified and handled by the financial institution's back-end system.
 
@@ -70,8 +70,9 @@ The field that defines the payment date varies depending on the payment type (`p
 
 ### How to Identify the Payment Initiation Method and Payee (creditor)
 
-The **payment initiation method** is defined by the value of the field `requestBody.data.localInstrument`.
+The **payment initiation method** is defined by the value of the field `requestBody.data.localInstrument`.  
 The method to identify the **creditor** varies according to the initiation method.
+
 The table below summarizes the fields used to identify each scenario:
 
 | Initiation Method | Fields used to identify the creditor                         |

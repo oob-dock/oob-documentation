@@ -24,11 +24,11 @@ Para pagamentos retidos para análise (status "PDNG" no Open Finance) ou agendad
 
 ## Cenários por Tipo de Tentativa de Pagamento
 
-O Arranjo Pix possibilita rententativas para pagamentos específicos, como o Pix automático.
+O Arranjo Pix possibilita rententativas para pagamentos específicos, como o Pix automático.  
 Ao realizar um Pix pelo Open Finance, a integração deve tratar adequadamente as seguintes tentativas de pagamento:
 
-- **Solicitação Original:** A primeira tentativa de execução do pagamento, que acontece para todos os pagamento.
-- **Retentativa Extradia:** Nova tentativa realizada em um dia diferente da tentativa original. Apenas suportada para pagamentos específicos (ex.: Pix automático).
+- **Solicitação Original:** A primeira tentativa de execução do pagamento, que acontece para todos os pagamentos.
+- **Retentativa Extradia:** Apenas suportada para pagamentos específicos (ex.: Pix automático). É uma nova tentativa realizada em um dia diferente da tentativa original.
 
 **⚠️ Importante:** A retentativa intradia (realizada no mesmo dia), quando aplicável, deve ser identificada e tratada pelo sistema de retaguarda da instituição financeira.
 
@@ -47,7 +47,7 @@ A análise de campos abaixo é feita para o payload da requisição de criação
 | Ausente                                                      | Usuário PF    |
 | Preenchido                                                   | Usuário PJ    |
 
-**ℹ️ Observação:** Independentemente do tipo de usuário, o CPF dele estará disponível no campo `consent.loggedUser.document.identification`.
+**ℹ️ Observação:** Independentemente do tipo de usuário, seu CPF estará disponível no campo `consent.loggedUser.document.identification`.
 
 ### Como Identificar a Data de Efetivação do Pagamento
 
@@ -70,8 +70,9 @@ O campo que define a data do pagamento varia conforme o tipo de pagamento (campo
 
 ### Como Identificar a Forma de Iniciação e o Recebedor (creditor)
 
-A **forma de iniciação** do pagamento é determinada pelo valor do campo `requestBody.data.localInstrument`.
+A **forma de iniciação** do pagamento é determinada pelo valor do campo `requestBody.data.localInstrument`.  
 A forma de identificação do **recebedor (creditor)** varia conforme o tipo de iniciação informado.
+
 A tabela abaixo resume os campos para a identificação cada cenário:
 
 | Forma de Iniciação | Campos utilizados para identificar o recebedor                     |
