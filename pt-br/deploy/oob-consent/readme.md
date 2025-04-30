@@ -214,14 +214,6 @@ Caso não seja preenchido, utilizará o nome padrão "oob-consent".
 
 Ex: `oob-consent-cbanco`
 
-### dapr/job/pcm/schedule
-
-String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento do relatório de estoque de consentimentos PCM.
-
-Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/), desativado se a string for 'disabled' (padrão).
-
-Exemplo (recomendado): `0 4 * * *`
-
 ### brandId
 
 Deve ser obrigatoriamente preenchida com a marca associada a instância do serviço.
@@ -770,6 +762,22 @@ Valor default: `23`
 additionalVarsDaemon:
   - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
     value: "23"
+```
+
+### DAPR_JOB_PCM_SCHEDULE
+
+Define o agendamento do relatório de estoque de consentimentos PCM.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `disabled` (desativado).
+
+**Exemplo:** Para agendar a execução do relatório diariamente às 1h da manhã se utc (recomendado):
+
+```yaml
+additionalVarsDaemon:
+  - name: DAPR_JOB_PCM_SCHEDULE
+    value: "0 4 * * *"
 ```
 
 ## FEATURE FLAGS

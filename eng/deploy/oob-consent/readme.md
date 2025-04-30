@@ -173,14 +173,6 @@ Identifier of the service to be used if there is more than one instance for diff
 
 Example: `oob-consent-cbanco`
 
-### dapr/job/pcm/schedule
-
-Cron like string (ignoring seconds, just 5 fields) or expression for scheduling pcm consent stock report.
-
-Based on [dapr jobs api](https://docs.dapr.io/reference/api/jobs_api/), disabled if string 'disabled' (default)
-
-Example (recommended): `0 4 * * *`
-
 ### brandId
 
 Must be filled with the brand associated with the service instance. For more details, see the [definition](../shared-definitions.md#brand-id).
@@ -677,6 +669,22 @@ Default value: `23`
 additionalVarsDaemon:
   - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
     value: "23"
+```
+
+### DAPR_JOB_PCM_SCHEDULE
+
+Used to define the schedule for the PCM consent stock report job.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value**: `disabled`
+
+**Example:** To schedule the job to run daily at 1 AM if utc (recommended):
+
+```yaml
+additionalVars:
+  - name: DAPR_JOB_PCM_SCHEDULE
+    value: "0 4 * * *"
 ```
 
 ## FEATURE FLAGS
