@@ -173,6 +173,14 @@ Identifier of the service to be used if there is more than one instance for diff
 
 Example: `oob-consent-cbanco`
 
+### dapr/job/pcm/schedule
+
+Cron like string (ignoring seconds, just 5 fields) or expression for scheduling pcm consent stock report.
+
+Based on [dapr jobs api](https://docs.dapr.io/reference/api/jobs_api/), disabled if string 'disabled' (default)
+
+Example (recommended): `0 4 * * *`
+
 ### brandId
 
 Must be filled with the brand associated with the service instance. For more details, see the [definition](../shared-definitions.md#brand-id).

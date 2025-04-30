@@ -214,6 +214,14 @@ Caso não seja preenchido, utilizará o nome padrão "oob-consent".
 
 Ex: `oob-consent-cbanco`
 
+### dapr/job/pcm/schedule
+
+String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento do relatório de estoque de consentimentos PCM.
+
+Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/), desativado se a string for 'disabled' (padrão).
+
+Exemplo (recomendado): `0 4 * * *`
+
 ### brandId
 
 Deve ser obrigatoriamente preenchida com a marca associada a instância do serviço.
