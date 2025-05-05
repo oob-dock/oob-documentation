@@ -44,6 +44,8 @@
       - [log\_request\_response\_collector\_url\_http](#log_request_response_collector_url_http)
       - [ocsp\_validation\_enabled](#ocsp_validation_enabled)
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
+      - [operational\_limits\_enabled](#operational_limits_enabled)
+      - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -360,6 +362,32 @@ Define a duração em milissegundos do cache da validação de OCSP feita pelo
 plugin do Kong customizado `oob-ocsp-validation`.
 
 **Default:** `600000`
+
+#### operational_limits_enabled
+
+Define se a instalação fará ou não a validação de limites operacionais. Quando
+habilitada, esta configuração trabalha em conjunto com a configuração
+`has_operational_limits` definida na rota do API Gateway. Se ambas as variáveis
+forem `true` cria um plugin de rota no Kong que será o responsável por acionar
+o serviço de limites operacionais no momento do request para validar se esta
+chamada está dentro dos limites definidos pela iniciativa.
+
+**Valores possíveis:** `true` ou `false`
+
+**Default:** `false`
+
+#### operational_limits_allow_when_over_limit
+
+Variável utilizada pelo plugin de limites operacionais no Kong, quando a
+validação de limites operacionais estiver ativa na instalação. Se esta variável
+estiver definida como `true` ainda que o limite operacional de uma chamada
+tenha sido atingido o plugin irá permitir que a requisição realizada prossiga.
+Caso ela esteja definida como `false` e o limite operacional tenha sido
+atingido, o plugin bloqueará a resposta da requisição retornando o status HTTP `423`.
+
+**Valores possíveis:** `true` ou `false`
+
+**Default:** `false`
 
 ## Configuração do Grafana
 
