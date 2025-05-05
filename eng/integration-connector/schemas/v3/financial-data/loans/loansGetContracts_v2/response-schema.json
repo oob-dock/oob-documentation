@@ -17,7 +17,8 @@
           "companyCnpj",
           "productType",
           "productSubType",
-          "ipocCode"
+          "ipocCode",
+          "productSubTypeCategory"
         ],
         "properties": {
           "contractId": {
@@ -90,6 +91,16 @@
               "CAPITAL_GIRO_PRAZO_VENCIMENTO_SUPERIOR_365_DIAS"
             ],
             "example": "CREDITO_PESSOAL_COM_CONSIGNACAO"
+          },
+          "productSubTypeCategory": {
+            "type": "string",
+            "description": "Categoria para classificação específica relacionada com a submodalidade do produto. Atenção: o preenchimento com o enum CREDITO_PESSOAL_CLEAN, quando aplicável, será obrigatório à partir da publicação da versão 2.5.0 da API Empréstimos, já o enum CONSIGNADO_SIAPE passará a ser de envio obrigatório em data posterior. Demais submodalidades devem ser classificadas na opção OUTROS\n",
+            "enum": [
+              "CREDITO_PESSOAL_CLEAN",
+              "CONSIGNADO_SIAPE",
+              "OUTRO"
+            ],
+            "example": "CREDITO_PESSOAL_CLEAN"
           },
           "ipocCode": {
             "type": "string",
