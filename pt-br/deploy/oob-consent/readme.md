@@ -266,6 +266,19 @@ env:
 
 **Importante:** Para habilitar o uso de cache, deve-se ativar a *feature flag* [accountHolder](#featureaccountholdercacheenabled)
 
+## dapr/schedulerHostAddress
+
+Essa configuração deve apontar para o serviço de agendamento do Dapr para habilitar a funcionalidade da API de Jobs do Dapr.  
+Para mais detalhes, consulte a [documentação do Dapr](https://docs.dapr.io/reference/arguments-annotations-overview/).
+
+**Exemplo:**
+
+```yaml
+env:
+  dapr:
+    schedulerHostAddress: dapr-scheduler-server.oob.svc.cluster.local:50006
+```
+
 ## opentelemetry
 
 Este módulo é instrumentado via [Open Telemetry](https://opentelemetry.io/),
