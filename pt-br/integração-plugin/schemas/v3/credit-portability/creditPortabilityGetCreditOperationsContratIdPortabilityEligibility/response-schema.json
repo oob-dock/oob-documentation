@@ -1,0 +1,126 @@
+{
+    "type": "object",
+    "required": [
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "type": "object",
+        "description": "Conjunto de informações de contratos de empréstimos/financiamentos mantidos pelo cliente na instituição credora e para os quais ele tenha fornecido consentimento",
+        "required": [
+          "contractId",
+          "portability"
+        ],
+        "properties": {
+          "contractId": {
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "key": {
+                  "description": "Nome do campo do identificador no sistema de origem",
+                  "type": "string"
+                },
+                "value": {
+                  "description": "Valor do campo do identificador no sistema de origem",
+                  "type": "string"
+                }
+              },
+              "required": [
+                "key"
+              ],
+              "additionalItems": false
+            },
+            "examples": [
+              [
+                {
+                  "key": "pk_CampoUm",
+                  "value": "ABC"
+                },
+                {
+                  "key": "pk_CampoDois",
+                  "value": "123"
+                }
+              ]
+            ]
+          },
+          "portability": {
+            "type": "object",
+            "required": [
+              "isEligible"
+            ],
+            "properties": {
+              "isEligible": {
+                "type": "boolean",
+                "description": "Sinaliza se as características do contrato é elegível para pedido de portabilidade de crédito via OFB (sem considerar a disponibilidade da portabilidade de crédito)"
+              },
+              "ineligible": {
+                "type": "object",
+                "required": [
+                  "reasonType"
+                ],
+                "description": "Objeto para auxiliar a Instituição Proponente a entender o porque um contrato está inelegivel para pedido de portabilidade de crédito\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `isEligible` for igual a `FALSE`\n",
+                "properties": {
+                  "reasonType": {
+                    "type": "string",
+                    "example": "CLIENTE_COM_ACAO_JUDICIAL",
+                    "enum": [
+                      "CONTRATO_LIQUIDADO",
+                      "CLIENTE_COM_ACAO_JUDICIAL",
+                      "MODALIDADE_OPERACAO_INCOMPATIVEL",
+                      "OUTROS"
+                    ],
+                    "description": "Informação sobre a disponibilidade ou não de um contrato para a portabilidade de crédito\nInformação sobre o motivo de inelegibilidade\n-`CONTRATO_LIQUIDADO`: Contrato liquidado pelo cliente.\n-`CLIENTE_COM_ACAO_JUDICIAL`: Cliente possui ação judicial\n-`MODALIDADE_OPERACAO_INCOMPATIVEL`: Caso o contrato tenha uma modalidade diferente do praticado no escopo de modalidades disponiveis para portabilidade de crédito\n-`OUTROS`: Caso exista algum motivo de recusa que não se encaixa nas opções disponiveis de `reasonType`, o campo `reasonTypeAdditionalInfo` deverá ser preenchido com o motivo da inelegibilidade.\n"
+                  },
+                  "reasonTypeAdditionalInfo": {
+                    "description": "Informação sobre a disponibilidade ou não de um contrato para a portabilidade de crédito. Deve ser preenchido como uma proposta para inclusão nas definições, exemplo `MOTIVO_NAO_MAPEADO`: descrição de usar esse motivo específico. Ao utilizar essa opção, é obrigatório enviar um ticket para a estrutura open finance para mapeamento em futuras versões.\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `reasonType` for igual a `OUTROS`.\n",
+                    "type": "string"
+                  }
+                }
+              },
+              "status": {
+                "type": "string",
+                "description": "Informação sobre a disponibilidade ou não de um contrato para a portabilidade de crédito\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `isEligible` for igual a `TRUE`\n",
+                "enum": [
+                  "DISPONIVEL",
+                  "EM_ANDAMENTO"
+                ]
+              },
+              "statusUpdateDateTime": {
+                "type": "string",
+                "maxLength": 20,
+                "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+                "example": "2020-07-21T08:30:00Z",
+                "description": "Data e hora em que o contrato teve o status atualizado. Uma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC(UTC time format).\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `isEligible` for igual a `TRUE`\n"
+              },
+              "channel": {
+                "type": "string",
+                "description": "Informação sobre a disponibilidade ou não de um contrato para a portabilidade de crédito\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `status` for igual a `EM_ANDAMENTO`\n",
+                "enum": [
+                  "OFB",
+                  "REGISTRADORA"
+                ]
+              },
+              "companyName": {
+                "type": "string",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "maxLength": 80,
+                "example": "Empresa da Organização A",
+                "description": "Nome da Instituição Proponente responsável pelo pedido de portabilidade de credito anterior a atual consulta p.ex.Empresa A.\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `status` for igual a `EM_ANDAMENTO`         \n"
+              },
+              "companyCnpj": {
+                "type": "string",
+                "pattern": "\\d{14}$",
+                "maxLength": 14,
+                "minLength": 14,
+                "example": "21128159000166",
+                "description": "Número completo do CNPJ da instituição\nO CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica.\nDeve-se ter apenas números do CNPJ, sem máscara\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `status` for igual a `EM_ANDAMENTO`\n"
+              }
+            }
+          }
+        }
+      }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#"
+  }

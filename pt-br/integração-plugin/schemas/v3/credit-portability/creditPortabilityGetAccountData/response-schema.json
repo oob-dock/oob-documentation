@@ -1,0 +1,64 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Dados para realização do pagamento da operação via TED",
+      "required": [
+        "strCode"
+      ],
+      "properties": {
+        "strCode": {
+          "type": "object",
+          "required": [
+            "ispb",
+            "branchCode",
+            "hasFinancialAgent"
+          ],
+          "properties": {
+            "ispb": {
+              "type": "number",
+              "description": "Número do ISPB da Instituição credora a ser usada na STR para pagamento de portabilidade de crédito exclusiva para o OFB.",
+              "example": 22896431
+            },
+            "name": {
+              "type": "string",
+              "description": "Nome do proprietário da conta a ser usada na STR para pagamento de portabilidade de crédito exclusiva para o OFB.\n\n[RESTRIÇÃO] campo de preenchimento obrigatório quando campo `hasFinancialAgent` for igual a true\n",
+              "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+              "maxLength": 80,
+              "minLength": 1,
+              "example": "Instituicao Credora"
+            },
+            "companyCnpj": {
+              "type": "string",
+              "description": "CNPJ do proprietário da conta a ser usada na STR para pagamento de portabilidade de crédito exclusiva para o OFB.\n\n[RESTRIÇÃO] campo de preenchimento obrigatório quando campo `hasFinancialAgent` for igual a true\n",
+              "pattern": "\\d{14}$",
+              "maxLength": 14,
+              "minLength": 14,
+              "example": "21128159000166"
+            },
+            "branchCode": {
+              "type": "number",
+              "description": "Número da Agência creditada a ser usada na STR para pagamento de portabilidade de crédito exclusiva para o OFB.",
+              "example": 1
+            },
+            "hasFinancialAgent": {
+              "type": "boolean",
+              "description": "Instituição trabalha com agente financeiro ao invés da conta reserva?",
+              "example": true
+            },
+            "accountNumber": {
+              "type": "number",
+              "description": "Número da conta bancária da credora a ser usada na STR para pagamento de portabilidade de crédito exclusiva para o OFB.\n\n[RESTRIÇÃO] campo de preenchimento obrigatório quando campo `hasFinancialAgent` for igual a true\n",
+              "example": 12345678
+            }
+          }
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}
