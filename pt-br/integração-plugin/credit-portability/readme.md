@@ -67,6 +67,27 @@ definida no plugin como:
 
 &nbsp;
 
-| Método | Versão | Endpoint                                                  | Rota do Camel                                                                                         |
-| ------ | ------ | --------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| GET    | v1     | /credit-operations/\{contractId\}/portability-elegibility | ```direct:creditPortabilityGetCreditOperationsContratIdPortabilityEligibility```              |
+| Método | Versão | Endpoint                                                  | Rota do Camel                                                                    |
+| ------ | ------ | --------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| GET    | v1     | /credit-operations/\{contractId\}/portability-elegibility | ```direct:creditPortabilityGetCreditOperationsContratIdPortabilityEligibility``` |
+
+&nbsp;
+
+### Credit Portability
+
+&nbsp;
+
+| Método   | Versão | Endpoint                                | Rota do Camel                                                       |
+| -------- | ------ | --------------------------------------- | ------------------------------------------------------------------- |
+| POST     | v1     | /portabilities                          | ```direct:creditPortabilityPostPortabilities```                     |
+| PATCH    | v1     | /portabilities/\{portabilityId\}/cancel | ```direct:creditPortabilityPatchPortabilitiesPortabilityIdCancel``` |
+
+&nbsp;
+
+### Payments
+
+&nbsp;
+
+| Método   | Versão | Endpoint                                 | Rota do Camel                                                       |
+| -------- | ------ | ---------------------------------------- | ------------------------------------------------------------------- |
+| POST     | v1     | /portabilities/\{portabilityId\}/payment | ```direct:creditPortabilityPostPortabilitiesPortabilityIdPayment``` |
