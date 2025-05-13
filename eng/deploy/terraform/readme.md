@@ -44,6 +44,8 @@
       - [log\_request\_response\_collector\_url\_http](#log_request_response_collector_url_http)
       - [ocsp\_validation\_enabled](#ocsp_validation_enabled)
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
+      - [operational\_limits\_enabled](#operational_limits_enabled)
+      - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
   - [Grafana Configuration](#grafana-configuration)
     - [Configuration](#configuration-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -336,6 +338,37 @@ Defines the cache duration in milliseconds for the OCSP validation performed
 by the custom Kong plugin `oob-ocsp-validation`.
 
 **Default:** `600000`
+
+#### operational_limits_enabled
+
+Defines whether the installation will perform operational limits validation or
+not. When enabled, the validation of operational limits will track the calls
+made, checking whether these calls are within the limits defined by the
+initiative. It will also add some custom headers in the response with
+information about the validation, which are:
+
+- `x-operational-limits`: indicates how many calls have been made out of the
+total allowed (for example: `2/4`);
+- `x-operational-limits-result`: populated when it's necessary to indicate any
+validation/processing error during the call tracking process;
+- `Retry-After`: in case the operational limit is reached, indicates the date
+when the call can be performed again.
+
+**Possible values**: `true` or `false`
+
+**Default**: `false`
+
+#### operational_limits_allow_when_over_limit
+
+Variable used by the product when operational limits validation is active in
+the installation. If this variable is set to `true`, even when the operational
+limit for a request has been reached, the product will allow the request to
+proceed. If it is set to `false` and the operational limit has been reached,
+the product will block the request and return HTTP status `423`.
+
+**Possible values**: `true` or `false`
+
+**Default**: `false`
 
 ## Grafana Configuration
 
