@@ -366,11 +366,18 @@ plugin do Kong customizado `oob-ocsp-validation`.
 #### operational_limits_enabled
 
 Define se a instalação fará ou não a validação de limites operacionais. Quando
-habilitada, esta configuração trabalha em conjunto com a configuração
-`has_operational_limits` definida na rota do API Gateway. Se ambas as variáveis
-forem `true` cria um plugin de rota no Kong que será o responsável por acionar
-o serviço de limites operacionais no momento do request para validar se esta
-chamada está dentro dos limites definidos pela iniciativa.
+habilitada, a validação de limites operacionais contabilizará as chamadas
+realizadas validando se essas chamadas estão dentro dos limites definidos pela
+iniciativa. Adicionará também alguns cabeçalhos customizados na resposta com
+algumas informações sobre a validação, sendo eles:
+
+- `x-operational-limits`: indicando quantas chamadas foram realizadas dentro do
+total permitido (por exemplo: `2/4`);
+- `x-operational-limits-result`: preenchida quando é necessário indicar algum
+erro de validação/processamento durante o processo de contabilização da
+chamada;
+- `Retry-After`: em caso de limite operacional atingido indica a data na qual a
+chamada poderá ser realizada novamente.
 
 **Valores possíveis:** `true` ou `false`
 
@@ -378,12 +385,12 @@ chamada está dentro dos limites definidos pela iniciativa.
 
 #### operational_limits_allow_when_over_limit
 
-Variável utilizada pelo plugin de limites operacionais no Kong, quando a
-validação de limites operacionais estiver ativa na instalação. Se esta variável
-estiver definida como `true` ainda que o limite operacional de uma chamada
-tenha sido atingido o plugin irá permitir que a requisição realizada prossiga.
-Caso ela esteja definida como `false` e o limite operacional tenha sido
-atingido, o plugin bloqueará a resposta da requisição retornando o status HTTP `423`.
+Variável utilizada pelo produto quando a validação de limites operacionais
+estiver ativa na instalação. Se esta variável estiver definida como `true`
+ainda que o limite operacional de uma chamada tenha sido atingido o produto
+irá permitir que a requisição realizada prossiga. Caso ela esteja definida como
+`false` e o limite operacional tenha sido atingido, o produto bloqueará a
+resposta da requisição retornando o status HTTP `423`.
 
 **Valores possíveis:** `true` ou `false`
 

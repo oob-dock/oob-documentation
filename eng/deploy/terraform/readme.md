@@ -341,12 +341,18 @@ by the custom Kong plugin `oob-ocsp-validation`.
 
 #### operational_limits_enabled
 
-Determines whether the installation will perform operational limits validation.
-When enabled, this setting works in conjunction with the
-`has_operational_limits` configuration defined in the API Gateway route. If
-both variables are set to `true`, a route plugin is created in Kong, which is
-responsible for triggering the operational limits service during the request to
-validate whether the call is within the initiative's defined limits.
+Defines whether the installation will perform operational limits validation or
+not. When enabled, the validation of operational limits will track the calls
+made, checking whether these calls are within the limits defined by the
+initiative. It will also add some custom headers in the response with
+information about the validation, which are:
+
+- `x-operational-limits`: indicates how many calls have been made out of the
+total allowed (for example: `2/4`);
+- `x-operational-limits-result`: populated when it's necessary to indicate any
+validation/processing error during the call tracking process;
+- `Retry-After`: in case the operational limit is reached, indicates the date
+when the call can be performed again.
 
 **Possible values**: `true` or `false`
 
@@ -354,12 +360,11 @@ validate whether the call is within the initiative's defined limits.
 
 #### operational_limits_allow_when_over_limit
 
-Variable used by the operational limits plugin in Kong when operational limits
-validation is active in the installation. If this variable is set to `true`,
-even when the operational limit for a request has been reached, the plugin will
-allow the request to proceed. If it is set to `false` and the operational limit
-has been reached, the plugin will block the request and return HTTP status
-`423`.
+Variable used by the product when operational limits validation is active in
+the installation. If this variable is set to `true`, even when the operational
+limit for a request has been reached, the product will allow the request to
+proceed. If it is set to `false` and the operational limit has been reached,
+the product will block the request and return HTTP status `423`.
 
 **Possible values**: `true` or `false`
 
