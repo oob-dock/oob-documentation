@@ -44,6 +44,8 @@
       - [log\_request\_response\_collector\_url\_http](#log_request_response_collector_url_http)
       - [ocsp\_validation\_enabled](#ocsp_validation_enabled)
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
+      - [operational\_limits\_enabled](#operational_limits_enabled)
+      - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -360,6 +362,39 @@ Define a duração em milissegundos do cache da validação de OCSP feita pelo
 plugin do Kong customizado `oob-ocsp-validation`.
 
 **Default:** `600000`
+
+#### operational_limits_enabled
+
+Define se a instalação fará ou não a validação de limites operacionais. Quando
+habilitada, a validação de limites operacionais contabilizará as chamadas
+realizadas validando se essas chamadas estão dentro dos limites definidos pela
+iniciativa. Adicionará também alguns cabeçalhos customizados na resposta com
+algumas informações sobre a validação, sendo eles:
+
+- `x-operational-limits`: indicando quantas chamadas foram realizadas dentro do
+total permitido (por exemplo: `2/4`);
+- `x-operational-limits-result`: preenchida quando é necessário indicar algum
+erro de validação/processamento durante o processo de contabilização da
+chamada;
+- `Retry-After`: em caso de limite operacional atingido indica a data na qual a
+chamada poderá ser realizada novamente.
+
+**Valores possíveis:** `true` ou `false`
+
+**Default:** `false`
+
+#### operational_limits_allow_when_over_limit
+
+Variável utilizada pelo produto quando a validação de limites operacionais
+estiver ativa na instalação. Se esta variável estiver definida como `true`
+ainda que o limite operacional de uma chamada tenha sido atingido o produto
+irá permitir que a requisição realizada prossiga. Caso ela esteja definida como
+`false` e o limite operacional tenha sido atingido, o produto bloqueará a
+resposta da requisição retornando o status HTTP `423`.
+
+**Valores possíveis:** `true` ou `false`
+
+**Default:** `false`
 
 ## Configuração do Grafana
 
