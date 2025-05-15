@@ -46,6 +46,7 @@
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
       - [operational\_limits\_enabled](#operational_limits_enabled)
       - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
+      - [operational\_limits\_check\_limit\_timeout\_ms](#operational_limits_check_limit_timeout_ms)
   - [Configuração do Grafana](#configuração-do-grafana)
     - [Configuração](#configuração-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -395,6 +396,15 @@ resposta da requisição retornando o status HTTP `423`.
 **Valores possíveis:** `true` ou `false`
 
 **Default:** `false`
+
+#### operational_limits_check_limit_timeout_ms
+
+Variável utilizada pelo produto quando a validação de limites operacionais
+estiver ativa na instalação. Define quantos milissegundos o produto esperará,
+no máximo, pela resposta da chamada feita ao serviço de limites operacionais
+para realizar a contabilização da requisição.
+
+**Default:** `100`
 
 ## Configuração do Grafana
 

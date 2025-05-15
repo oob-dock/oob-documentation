@@ -46,6 +46,7 @@
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
       - [operational\_limits\_enabled](#operational_limits_enabled)
       - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
+      - [operational\_limits\_check\_limit\_timeout\_ms](#operational_limits_check_limit_timeout_ms)
   - [Grafana Configuration](#grafana-configuration)
     - [Configuration](#configuration-1)
       - [configure\_kong\_grafana\_dashboard](#configure_kong_grafana_dashboard)
@@ -369,6 +370,15 @@ the product will block the request and return HTTP status `423`.
 **Possible values**: `true` or `false`
 
 **Default**: `false`
+
+#### operational_limits_check_limit_timeout_ms
+
+Variable used by the product when operational limits validation is active in
+the installation. It defines the maximum number of milliseconds the product
+will wait for a response from the call made to the operational limits service
+to perform the request accounting.
+
+**Default:** `100`
 
 ## Grafana Configuration
 
