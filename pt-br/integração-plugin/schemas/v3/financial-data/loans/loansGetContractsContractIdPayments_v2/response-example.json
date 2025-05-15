@@ -17,18 +17,18 @@
         "paidDate": "2021-05-21",
         "currency": "BRL",
         "paidAmount": "1000.0400",
-        "instalmentId": [
-          {
-            "key": "pk_CampoUm",
-            "value": "ABC"
-          },
-          {
-            "key": "pk_CampoDois",
-            "value": "123"
-          }
-        ],
         "overParcel": {
           "fees": [
+            {
+              "feeName": "Reavaliação periódica do bem",
+              "feeCode": "aval_bem",
+              "feeAmount": "100000.0400"
+            },
+            {
+              "feeName": "Reavaliação periódica do bem",
+              "feeCode": "aval_bem",
+              "feeAmount": "100000.0400"
+            },
             {
               "feeName": "Reavaliação periódica do bem",
               "feeCode": "aval_bem",
@@ -41,135 +41,6 @@
             }
           ],
           "charges": [
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            }
-          ]
-        }
-      },
-      {
-        "paymentId": [
-          {
-            "key": "pk_CampoUm",
-            "value": "ABC"
-          },
-          {
-            "key": "pk_CampoDois",
-            "value": "123"
-          }
-        ],
-        "isOverParcelPayment": true,
-        "paidDate": "2021-05-21",
-        "currency": "BRL",
-        "paidAmount": "1000.0400",
-        "instalmentId": [
-          {
-            "key": "pk_CampoUm",
-            "value": "ABC"
-          },
-          {
-            "key": "pk_CampoDois",
-            "value": "123"
-          }
-        ],
-        "overParcel": {
-          "fees": [],
-          "charges": [
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            }
-          ]
-        }
-      },
-      {
-        "paymentId": [
-          {
-            "key": "pk_CampoUm",
-            "value": "ABC"
-          },
-          {
-            "key": "pk_CampoDois",
-            "value": "123"
-          }
-        ],
-        "isOverParcelPayment": true,
-        "paidDate": "2021-05-21",
-        "currency": "BRL",
-        "paidAmount": "1000.0400",
-        "instalmentId": [
-          {
-            "key": "pk_CampoUm",
-            "value": "ABC"
-          },
-          {
-            "key": "pk_CampoDois",
-            "value": "123"
-          }
-        ],
-        "overParcel": {
-          "fees": [],
-          "charges": [
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            }
-          ]
-        }
-      },
-      {
-        "paymentId": [
-          {
-            "key": "pk_CampoUm",
-            "value": "ABC"
-          },
-          {
-            "key": "pk_CampoDois",
-            "value": "123"
-          }
-        ],
-        "isOverParcelPayment": true,
-        "paidDate": "2021-05-21",
-        "currency": "BRL",
-        "paidAmount": "1000.0400",
-        "overParcel": {
-          "fees": [
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "100000.0400"
-            }
-          ],
-          "charges": [
-            {
-              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
-              "chargeAmount": "1000.0400",
-              "chargeAdditionalInfo": "Informações adicionais"
-            },
             {
               "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
               "chargeAmount": "1000.0400",
@@ -218,6 +89,27 @@
         "paidDate": "2021-05-21",
         "currency": "BRL",
         "paidAmount": "1000.0400",
+        "overParcel": {
+          "fees": [
+            {
+              "feeName": "Reavaliação periódica do bem",
+              "feeCode": "aval_bem",
+              "feeAmount": "100000.0400"
+            }
+          ],
+          "charges": [
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            },
+            {
+              "chargeType": "JUROS_REMUNERATORIOS_POR_ATRASO",
+              "chargeAmount": "1000.0400",
+              "chargeAdditionalInfo": "Informações adicionais"
+            }
+          ]
+        },
         "instalmentId": [
           {
             "key": "pk_CampoUm",
@@ -227,40 +119,12 @@
             "key": "pk_CampoDois",
             "value": "123"
           }
-        ],
-        "overParcel": {
-          "fees": [
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "100000.0400"
-            },
-            {
-              "feeName": "Reavaliação periódica do bem",
-              "feeCode": "aval_bem",
-              "feeAmount": "100000.0400"
-            }
-          ],
-          "charges": []
-        }
+        ]
       }
     ],
-    "paidInstalments": 73
+    "paidInstalments": 73,
+    "totalRemainingAmount": "1000.0400",
+    "lastUpdatedcontractOutstandingBalanceDateTime": "2021-05-21T08:30:00Z"
   },
   "meta": {
     "totalRecords": 1,
