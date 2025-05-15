@@ -793,6 +793,22 @@ additionalVarsDaemon:
     value: "0 4 * * *"
 ```
 
+### DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
+
+Utilizado para definir o agendamento da busca de consentimentos ativos no authorization server.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento, baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `disabled` (desativado)
+
+**Exemplo:** Para agendar a execução do job a cada 30 minutos:
+
+```yaml
+additionalVars:
+  - name: DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
+    value: "@every 30m"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled

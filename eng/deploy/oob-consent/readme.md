@@ -700,6 +700,22 @@ additionalVars:
     value: "0 4 * * *"
 ```
 
+### DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
+
+Used to define the schedule for the active consents fetching os authorization server.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value**: `disabled`
+
+**Example:** To schedule the job to run every 30 minutes.
+
+```yaml
+additionalVars:
+  - name: DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
+    value: "@every 30m"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled
