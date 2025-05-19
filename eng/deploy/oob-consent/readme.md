@@ -219,6 +219,19 @@ env:
 
 **Important:** To enable cache usage, activate the *feature flag* [accountHolder](#featureaccountholdercacheenabled).
 
+## dapr/schedulerHostAddress
+
+This configuration must point to the Dapr scheduler service to enable the Dapr Jobs API functionality.
+For more details, refer to the [Dapr documentation](https://docs.dapr.io/reference/arguments-annotations-overview/).
+
+**Example:**
+
+```yaml
+env:
+  dapr:
+    schedulerHostAddress: dapr-scheduler-server.oob.svc.cluster.local:50006
+```
+
 ## opentelemetry
 
 This module is instrumented via [Open Telemetry](https://opentelemetry.io/),
@@ -669,6 +682,22 @@ Default value: `23`
 additionalVarsDaemon:
   - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
     value: "23"
+```
+
+### DAPR_JOB_PCM_SCHEDULE
+
+Used to define the schedule for the PCM consent stock report job.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value**: `disabled`
+
+**Example:** To schedule the job to run daily at 1 AM if utc (recommended):
+
+```yaml
+additionalVars:
+  - name: DAPR_JOB_PCM_SCHEDULE
+    value: "0 4 * * *"
 ```
 
 ## FEATURE FLAGS

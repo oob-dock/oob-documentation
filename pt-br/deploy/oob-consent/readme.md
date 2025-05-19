@@ -266,6 +266,19 @@ env:
 
 **Importante:** Para habilitar o uso de cache, deve-se ativar a *feature flag* [accountHolder](#featureaccountholdercacheenabled)
 
+## dapr/schedulerHostAddress
+
+Essa configuração deve apontar para o serviço de agendamento do Dapr para habilitar a funcionalidade da API de Jobs do Dapr.  
+Para mais detalhes, consulte a [documentação do Dapr](https://docs.dapr.io/reference/arguments-annotations-overview/).
+
+**Exemplo:**
+
+```yaml
+env:
+  dapr:
+    schedulerHostAddress: dapr-scheduler-server.oob.svc.cluster.local:50006
+```
+
 ## opentelemetry
 
 Este módulo é instrumentado via [Open Telemetry](https://opentelemetry.io/),
@@ -762,6 +775,22 @@ Valor default: `23`
 additionalVarsDaemon:
   - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
     value: "23"
+```
+
+### DAPR_JOB_PCM_SCHEDULE
+
+Define o agendamento do relatório de estoque de consentimentos PCM.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `disabled` (desativado).
+
+**Exemplo:** Para agendar a execução do relatório diariamente às 1h da manhã se utc (recomendado):
+
+```yaml
+additionalVarsDaemon:
+  - name: DAPR_JOB_PCM_SCHEDULE
+    value: "0 4 * * *"
 ```
 
 ## FEATURE FLAGS
