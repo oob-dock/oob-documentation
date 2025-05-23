@@ -13,6 +13,8 @@ tags:
     description: Consents opus open banking services
   - name: Enrollments
     description: Enrollments opus open banking services
+  - name: Portabilities
+    description: Portabilities opus open banking services
 paths:
   /open-banking/oob-consents/v1/consents:
     get:
@@ -901,6 +903,39 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ResponseConsentDetailSchema'
+  /open-banking/oob-consents/v1/portabilities/{portabilityId}/status:
+    patch:
+      tags:
+        - Portabilities
+      summary: Update portability status
+      description: >
+        Updates the status of a portability process
+      parameters:
+        - name: portabilityId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestPortabilityStatusUpdate'
+      responses:
+        '200':
+          description: Portability status updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponsePortabilityStatusUpdate'
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -2776,480 +2811,271 @@ components:
         expirationDateTime:
           format: date-time
           type: string
-    RevokeDataSharingConsentData:
-      required:
-        - data
+    RequestPortabilityStatusUpdate:
       type: object
       properties:
         data:
-          required:
-            - rejection
           type: object
+          required:
+            - status
           properties:
+            status:
+                type: string
+                description: |
+                  Informação sobre o status de um pedido de portabilidade de crédito, onde:
+                  
+                  - `RECEIVED`: Estado inicial. Indica que o pedido de portabilidade foi solicitado junto a instituição credora. O pedido deve permanecer neste estado até que o próximo dia útil (D+1) aonde começará a contar o prazo de 3 dias úteis para a etapa de contraproposta e o pedido de portabilidade deverá ser movido para PENDING
+                  - `PENDING`: Indica que o pedido de portabilidade de crédito está na fase de contraproposta, onde a instituição credora poderá enviar uma contraproposta ou não para o cliente por qualquer canal (email, telefone, etc.) porém o aceite só deverá ser valido se o cliente aprovar no canal digital da instituição credora
+                  - `ACCEPTED_SETTLEMENT_IN_PROCESS`: Indica que a contraproposta não foi aceita pelo cliente e a instituição proponente terá que quitar o valor do contrato no mesmo dia em que o estado foi ativado
+                  - `ACCEPTED_SETTLEMENT_COMPLETED`: Indica que a instituição proponente já liquidou o contrato e comunicou a respeito a credora que está validando os dados do contratos bem como valores recebidos para a quitação do mesmo (nesta etapa a instituição credora tem 2 dias úteis para fornecer a confirmação e o recibo de quitação do contrato de empréstimo)
+                  - `PORTABILITY_COMPLETED`: Indica que o pedido de portabilidade foi concluído com sucesso
+                  - `REJECTED`: Indica que o pedido de portabilidade de crédito foi rejeitado, seja porque o cliente aceitou a contraproposta, ou porque a proponente rejeitou a liquidação que excedeu em 15% o valor do contrato original, entre outras possibilidades
+                  - `CANCELLED`: Indica que o cliente cancelou o pedido de portabilidade de crédito
+                  - `PAYMENT_ISSUE`: Indica que a Instituição Credora encontrou alguma inconsistência na liquidação efetuada e que a Instituição Proponente deverá realizar ajustes conforme sugerido pela Instituição Credora para solucionar a pendencia antes do cancelamento do pedido de portabilidade de crédito
+                enum:
+                  - RECEIVED
+                  - PENDING
+                  - ACCEPTED_SETTLEMENT_IN_PROCESS
+                  - ACCEPTED_SETTLEMENT_COMPLETED
+                  - PORTABILITY_COMPLETED
+                  - REJECTED
+                  - CANCELLED
+                  - PAYMENT_ISSUE
+            statusReason:
+              type: object
+              required:
+                - reasonType
+              properties:
+                reasonType:
+                    description: |
+                      Motivo de recusa do pedido de portabilidade, onde:
+                      
+                      `CANCELADO_PELO_CLIENTE` - Cliente desiste do pedido da portabilidade 
+                      
+                      `SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE` - Saldo devedor atualizado divergente (superior a 15%) do informado inicialmente 
+                      
+                      `POLITICA_DE_CREDITO` - Proponente desiste da oferta ao cliente por políticas internas 
+                      
+                      `RETENCAO_DO_CLIENTE` - Cliente aceitou contraproposta da instituição credora (dentro do prazo)
+                      
+                      `CONTRATO_JA_LIQUIDADO` - Contrato liquidado pelo cliente. 
+                      
+                      `DIVERGENCIA_DE_PAGAMENTO_EFETUADO` - Proponente realizou a liquidação com valor divergente 
+
+                      `DECURSO_DO_PRAZO_PARA_PAGAMENTO` - Proponente realizou a liquidação fora do prazo 
+                      
+                      `PORTABILIDADE_CANCELADA_POR_FALTA_DE_LIQUIDACAO` - Proponente não realizou a liquidação do contrato 
+                      
+                      `PORTABILIDADE_EM_ANDAMENTO` - Posteriormente à efetivação do pedido de portabilidade, a IF credora identificou que o cliente já possui outro pedido de portabilidade em andamento para o mesmo contrato. 
+                      
+                      `CLIENTE_COM_ACAO_JUDICIAL` - Possui ação judicial 
+
+                      `MODALIDADE_DA_OPERACAO_INCOMPATIVEL` - Modalidade divergente da indicada pela instituição proponente
+
+                      `OUTROS` - Motivo da rejeição não se encaixa nas opções disponíveis
+                    type: string
+                    enum:
+                      - CANCELADO_PELO_CLIENTE
+                      - SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE
+                      - POLITICA_DE_CREDITO
+                      - RETENCAO_DO_CLIENTE
+                      - CONTRATO_JA_LIQUIDADO
+                      - DIVERGENCIA_DE_PAGAMENTO_EFETUADO
+                      - DECURSO_DO_PRAZO_PARA_PAGAMENTO
+                      - PORTABILIDADE_CANCELADA_POR_FALTA_DE_LIQUIDACAO
+                      - PORTABILIDADE_EM_ANDAMENTO
+                      - CLIENTE_COM_ACAO_JUDICIAL
+                      - MODALIDADE_DA_OPERACAO_INCOMPATIVEL
+                      - OUTROS
+                reasonTypeAdditionalInfo: 
+                  description: |
+                    Informação sobre a disponibilidade ou não de um contrato para a portabilidade de crédito.
+                    Ao utilizar essa opção, é fortemente recomendável enviar um ticket como sugestão da estrutura Open Finance 
+                    para discussão e mapeamento em futuras versões.
+
+                    [RESTRIÇÃO] Campo de preenchimento obrigatório quando campo `reasonType` for igual `OUTROS`
+                digitalSignatureProof:
+                    type: object
+                    required:
+                      - documentId
+                      - signatureDateTime
+                    description: |
+                      Comprovante de assinatura da contraproposta
+                      
+                      [RESTRIÇÃO] Objeto de preenchimento obrigatório quando campo `reasonType` for igual a `RETENCAO_DO_CLIENTE`
+                    properties:
+                      documentId:
+                        type: string
+                        pattern: ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
+                        maxLength: 100
+                        minLength: 1
+                        example: "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6"
+                        description: "Código identificador do Documento assinado na instituição proponente."
+                      signatureDateTime:
+                        type: string
+                        maxLength: 20
+                        pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+                        example: "2020-07-21T08:30:00Z"
+                        description: |
+                          Data e hora em que o contrato foi assinado pelo cliente  no canal digital da Instituição Proponente
+                paymentIssueDetail:
+                    type: string
+                    description: |
+                      Detalhes da inconsistência encontrada pela Instituição Credora na etapa de validação da liquidação do pedido de portabilidade de crédito. Devem ser mensagens claras, detalhadas, para compreensão entre Proponente e Credora, principalmente em casos que demandam ação por uma das partes.
+                      
+                      [RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `status` for igual `PAYMENT_ISSUE`
             rejection:
-              allOf:
-                - $ref: "#/components/schemas/Rejection"
-                - nullable: false
-        applicationName:
-          description: Client application name
-          type: string
-    RevokedByEnum:
-      enum:
-        - USER
-        - ASPSP
-        - TPP
-      type: string
-    RejectedByEnum:
-      enum:
-        - ASPSP
-        - USER
-        - TPP
-      type: string
-    SchedulePayment:
-      required:
-        - single
-      type: object
-      oneOf:
-        - $ref: "#/components/schemas/ScheduleSingle"
-        - $ref: "#/components/schemas/ScheduleDaily"
-        - $ref: "#/components/schemas/ScheduleWeekly"
-        - $ref: "#/components/schemas/ScheduleMonthly"
-        - $ref: "#/components/schemas/ScheduleCustom"
-    ScheduleSingle:
-      type: object
-      required:
-        - single
-      properties:
-        single:
-          type: object
-          description: Define the single scheduling policy.
-          required:
-            - date
-          properties:
-            date:
-              type: string
-              format: date
-              maxLength: 10
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              example: "2023-08-23"
-              description: |
-                Defines the target date of payment settlement.
-                Brasília time zone should be used to create and rationalize the data in this field.
+                type: object
+                description: |
+                  Objeto contendo detalhes do cancelamento do pedido de portabilidade de crédito junto a Instituição Credora.
 
-                [Restriction] This field must always be at least D+1 calendar day, i.e., the day immediately following the date of consent considering the Brasília time zone and must be at most D+730 calendar days from the date of consent, also considering the Brasília time zone.
-    ScheduleDaily:
-      type: object
-      required:
-        - daily
-      properties:
-        daily:
-          type: object
-          required:
-            - startDate
-            - quantity
-          properties:
-            startDate:
-              description: Defines the start of the recurrence term.
-              type: string
-              format: date
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              maxLength: 10
-              example: "2023-08-23"
-            quantity:
-              description: Defines the number of payments to be sent for settlement.
-              type: integer
-              format: int32
-              minimum: 2
-              maximum: 60
-              example: 3
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: "2023-08-23"
-    ScheduleWeekly:
-      type: object
-      required:
-        - weekly
-      properties:
-        weekly:
-          type: object
-          required:
-            - dayOfWeek
-            - startDate
-            - quantity
-          properties:
-            dayOfWeek:
-              description: Defines the day of the week planned for settlement occurrences.
-              type: string
-              enum:
-                - SEGUNDA_FEIRA
-                - TERCA_FEIRA
-                - QUARTA_FEIRA
-                - QUINTA_FEIRA
-                - SEXTA_FEIRA
-                - SABADO
-                - DOMINGO
-              example: QUINTA_FEIRA
-            startDate:
-              description: Defines the start of the recurrence term.
-              type: string
-              format: date
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              maxLength: 10
-              example: "2023-08-23"
-            quantity:
-              description: Defines the number of payments to be sent for settlement.
-              type: integer
-              format: int32
-              minimum: 2
-              maximum: 60
-              example: 10
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: "2023-08-23"
-    ScheduleMonthly:
-      type: object
-      required:
-        - monthly
-      properties:
-        monthly:
-          type: object
-          required:
-            - dayOfMonth
-            - startDate
-            - quantity
-          properties:
-            dayOfMonth:
-              description: Defines the day of the month planned for settlement occurrences.
-              type: integer
-              minimum: 1
-              maximum: 31
-              example: 10
-            startDate:
-              description: Defines the start of the recurrence term.
-              type: string
-              format: date
-              pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-              maxLength: 10
-              example: "2023-08-23"
-            quantity:
-              description: Defines the number of payments to be sent for settlement.
-              type: integer
-              format: int32
-              minimum: 2
-              maximum: 24
-              example: 24
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: "2023-08-23"
-    ScheduleCustom:
-      type: object
-      required:
-        - custom
-      properties:
-        custom:
-          type: object
-          description: |
-            [Restriction] The dates sent in the list of dates (array “dates”) cannot be repeated. 
-            If repeated dates are sent, the holder must reject the creation of the consent, informing the error PARAMETRO_INVALIDO.
-          required:
-            - dates
-            - additionalInformation
-          properties:
-            dates:
-              description: Defines the days on which settlement occurrences are planned.
-              type: array
-              maxItems: 60
-              minItems: 2
-              example: [ "2023-08-23", "2023-09-26" ]
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: "2023-08-23"
-            additionalInformation:
-              type: string
-              description: |
-                Free text for Initiator to fill in a way that is understandable to the approving/paying user. 
-                The text can be used by the holder to display the transaction summary during the approval of the approving/paying user.
-              pattern: '[\w\W\s]*'
-              maxLength: 255
-              example: Every Thursday and Sunday for 6 months
-            scheduleDates:
-              type: array
-              items:
-                type: string
-                format: date
-                pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$'
-                maxLength: 10
-                example: "2023-08-23"
-    StatusEnum:
-      enum:
-        - AUTHORISED
-        - AWAITING_AUTHORISATION
-        - REJECTED
-        - CONSUMED
-        - REVOKED
-      type: string
-    StatusResourceEnum:
-      enum:
-        - AVAILABLE
-        - UNAVAILABLE
-        - NON_SELECTED
-      type: string
-    UUID:
-      format: uuid
-      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
-      type: string
-    ResponseMapItpLegacyIds:
+                  [RESTRIÇÃO] Campo de preenchimento obrigatório quando `status` for igual a `REJECTED` ou `CANCELLED`
+                required:
+                  - rejectedBy
+                  - reason
+                properties:
+                  rejectedBy:
+                    type: string
+                    description: |
+                      Informar usuário responsável pela rejeição da proposta, onde:
+                      PROPONENTE - Indica que o pedido de portabilidade de crédito foi rejeitado pela proponente, seja porque a
+                      proponente rejeitou a liquidação que excedeu em 15% o valor do contrato original, entre outras possibilidades.
+                      USUARIO - Indica que o cliente cancelou o pedido de portabilidade de crédito.
+                      CREDORA- Indica que a Instituição Credora cancelou o contrato por retenção do cliente ou outros motivos
+                      conforme motivo de recusa.
+                    example: PROPONENTE
+                    enum:
+                      - PROPONENTE
+                      - USUARIO
+                      - CREDORA
+                  reason:
+                    type: object
+                    description: Motivo de recusa do pedido de portabilidade de crédito.
+                    required:
+                      - type
+                    properties:
+                      type:
+                        type: string
+                        description: |
+                          Motivo de recusa do pedido de portabilidade, onde:
+                          CANCELADO_PELO_CLIENTE - Cliente desiste do pedido da portabilidade;   
+                          SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE - Saldo devedor atualizado divergente (superior a 15%) do informado inicialmente;   
+                          POLITICA_DE_CREDITO - Proponente desiste da oferta ao cliente por políticas internas;   
+                          RETENCAO_DO_CLIENTE - Cliente aceitou contraproposta da instituição credora (dentro do prazo);   
+                          CONTRATO_JA_LIQUIDADO - Contrato liquidado pelo cliente;   
+                          DIVERGENCIA_DE_PAGAMENTO_EFETUADO - Proponente realizou a liquidação com valor divergente;   
+                          DECURSO_DO_PRAZO_PARA_PAGAMENTO - Proponente realizou a liquidação fora do prazo;   
+                          PORTABILIDADE_CANCELADA_POR_FALTA_DE_LIQUIDACAO - Proponente não realizou a liquidação da Portabilidade;   
+                          PORTABILIDADE_EM_ANDAMENTO - Posteriormente à efetivação do pedido de portabilidade, a IF credora identificou que o cliente já possui outro pedido de portabilidade em andamento para o mesmo contrato;   
+                          CLIENTE_COM_ACAO_JUDICIAL - Possui ação judicial;   
+                          MODALIDADE_DA_OPERACAO_INCOMPATIVEL - Modalidade divergente da indicada pela instituição proponente;  
+                          OUTROS - Motivo da rejeição não se encaixa nas opções disponíveis.  
+                        enum:
+                        - CANCELADO_PELO_CLIENTE
+                        - SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE
+                        - POLITICA_DE_CREDITO
+                        - RETENCAO_DO_CLIENTE
+                        - CONTRATO_JA_LIQUIDADO
+                        - DIVERGENCIA_DE_PAGAMENTO_EFETUADO
+                        - DECURSO_DO_PRAZO_PARA_PAGAMENTO 
+                        - PORTABILIDADE_CANCELADA_POR_FALTA_DE_LIQUIDACAO
+                        - PORTABILIDADE_EM_ANDAMENTO
+                        - CLIENTE_COM_ACAO_JUDICIAL
+                        - MODALIDADE_DA_OPERACAO_INCOMPATIVEL
+                        - OUTROS
+                        example: CANCELADO_PELO_CLIENTE
+                      typeAdditionalInfo:
+                        type: string
+                        description: |
+                          Informação sobre a disponibilidade ou não de um contrato para a portabilidade de crédito. 
+                          Ao utilizar essa opção, é fortemente recomendável enviar um ticket como sugestão da estrutura Open Finance para discussão e mapeamento em futuras versões.
+                          
+                          [RESTRIÇÃO] Campo de preenchimento obrigatório quando campo type for igual a OUTROS.
+                        maxLength: 144
+                        pattern: '^(?!\s)[\w\W\s]*[^\s]$'
+                        example: Informações Adicionais
+            receipt:
+                type: object
+                description: |
+                  Objeto contendo o recibo de quitação do contrato original de empréstimo após finalizado o
+                  pedido de portabilidade de crédito com sucesso junto a Instituição Credora.
+
+                  [RESTRIÇÃO] Campo de preenchimento obrigatório quando `status` for igual a `PORTABILITY_COMPLETED`
+                required:
+                  - settlementDateTime
+                  - settlementAmount
+                  - transactionId
+                properties:
+                  settlementDateTime:
+                    type: string
+                    description: Data e hora em que a instituição credora realizou a quitação do contrato de empréstimo.
+                    maxLength: 20
+                    minLength: 20
+                    pattern: '^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$'
+                    example: '2020-07-21T08:30:00Z'
+                  settlementAmount:
+                    type: object
+                    minItems: 1
+                    description: Objeto para representar o valor pago para liquidação do contrato de empréstimo.
+                    required:
+                      - amount
+                      - currency
+                    properties:
+                      amount:
+                        type: string
+                        format: double
+                        maxLength: 20
+                        minLength: 4
+                        pattern: '^\d{1,15}\.\d{2,4}$'
+                        example: '1000.0400'
+                        description: Valor pago para liquidação do contrato de empréstimo.
+                      currency:
+                        type: string
+                        maxLength: 3
+                        minLength: 3
+                        pattern: '^(\w{3}){1}$'
+                        example: 'BRL'
+                        description: Moeda referenciada ao campo `amount`, segundo modelo ISO-4217.
+                  transactionId:
+                    type: string
+                    description: Identificador da transação utilizado para liquidar o contrato de empréstimo. No contexto de STR0047, utilizar o valor do campo de retorno NumCtrlSTR (Número de Controle da STR).
+                    maxLength: 20
+                    minLength: 1
+                    pattern: '^[a-zA-Z0-9][a-zA-Z0-9-]{1,20}$'
+                    example: 'STR20181108000000013'
+    ResponsePortabilityStatusUpdate:
       type: object
       properties:
         data:
-          allOf:
-            - $ref: "#/components/schemas/PaymentLegacyIdsByItp"
-            - description: Service execution response
-    PaymentLegacyIdsByItp:
-      type: object
-      properties:
-        itpLegacyIds:
-          type: array
-          items:
-            $ref: "#/components/schemas/ItpLegacyIds"
-    ItpLegacyIds:
-      type: object
-      properties:
-        orgName:
-          type: string
-        legacyIds:
-          type: array
-          items:
-            type: string
-    EnrollmentData:
-      type: object
-      properties:
-        debtorAccount:
-          $ref: "#/components/schemas/DebtorAccount"
-        riskSignals:
-          type: array
-          items:
-            $ref: "#/components/schemas/PaymentManualRiskSignal"
-        enrollmentName:
-          type: string
-          description: Name of the device authorized by the customer for the No Redirect Journey device binding.
-          example: "My Phone"
-        dailyLimit:
-          format: double
-          type: number
-          example: 1000.00
-        transactionLimit:
-          format: double
-          type: number
-          example: 100.00
-    PaymentManualRiskSignal:
-      type: object
-      properties:
-        deviceId:
-          type: string
-          description: Unique identifier of the device.
-        isRootedDevice:
-          type: boolean
-          description: Indicates whether the device is rooted.
-        screenBrightness:
-          type: number
-          format: double
-          description: Brightness level of the device screen.
-        elapsedTimeSinceBoot:
-          type: integer
-          format: int64
-          description: Time elapsed since the device last booted.
-        osVersion:
-          type: string
-          description: Operating system version of the device.
-        userTimeZoneOffset:
-          type: string
-          description: Time zone offset of the user.
-        language:
-          type: string
-          description: Language used by the device.
-        screenDimensions:
-          $ref: "#/components/schemas/ScreenDimensions"
-        accountTenure:
-          type: string
-          description: Time the account has been active.
-        geolocation:
-          $ref: "#/components/schemas/Geolocation"
-        isCallingProgress:
-          type: boolean
-          description: Indicates whether a call is currently in progress.
-        isDevModeEnabled:
-          type: boolean
-          description: Indicates whether developer mode is enabled on the device.
-        isMockGPS:
-          type: boolean
-          description: Indicates whether the device is using a mock GPS location.
-        isEmulated:
-          type: boolean
-          description: Indicates whether the device is emulated.
-        isMonkeyRunner:
-          type: boolean
-          description: Indicates whether the device is using the MonkeyRunner tool.
-        isCharging:
-          type: boolean
-          description: Indicates whether the device is currently charging.
-        antennaInformation:
-          type: string
-          description: Information about the device's antenna.
-        isUsbConnected:
-          type: boolean
-          description: Indicates whether the device is connected to a USB port.
-        integrity:
-          $ref: "#/components/schemas/Integrity"
-    ScreenDimensions:
-      type: object
-      properties:
-        height:
-          type: integer
-          format: int64
-          description: Height of the device screen in pixels.
-        width:
-          type: integer
-          format: int64
-          description: Width of the device screen in pixels.
-    Geolocation:
-      type: object
-      properties:
-        latitude:
-          type: number
-          format: double
-          description: Latitude coordinate of the device's location.
-        longitude:
-          type: number
-          format: double
-          description: Longitude coordinate of the device's location.
-        type:
-          type: string
-          description: Type of geolocation data.
-    Integrity:
-      type: object
-      properties:
-        appRecognitionVerdict:
-          type: string
-          description: Verdict of the app recognition process.
-        deviceRecognitionVerdict:
-          type: string
-          description: Verdict of the device recognition process.
-    RequestRevokeOobEnrollmentConsent:
-      required:
-        - data
-      type: object
-      properties:
-        data:
-          allOf:
-            - $ref: "#/components/schemas/EnrollmentDataPatch"
-            - nullable: false
-        applicationName:
-          description: Client application name
-          type: string
-    EnrollmentDataPatch:
-      required:
-        - cancellation
-      type: object
-      properties:
-        cancellation:
-          allOf:
-            - $ref: "#/components/schemas/EnrollmentCancellationPatch"
-            - nullable: false
-    EnrollmentCancellationPatch:
-      type: object
-      properties:
-        cancelledBy:
-          $ref: "#/components/schemas/ConsentPatchLoggedUser"
-        reason:
-          $ref: "#/components/schemas/EnrollmentReason"
-        additionalInformation:
-          maxLength: 2048
-          type: string
-    ConsentPatchLoggedUser:
-      required:
-        - document
-      type: object
-      properties:
-        document:
-          allOf:
-            - $ref: "#/components/schemas/ConsentPatchDocument"
-            - nullable: false
-    ConsentPatchDocument:
-      required:
-        - identification
-        - rel
-      type: object
-      properties:
-        identification:
-          type: string
-          example: "52847808507"
-          nullable: false
-        rel:
-          type: string
-          example: CPF
-          nullable: false
-    EnrollmentReason:
-      type: object
-      properties:
-        rejectionReason:
-          $ref: "#/components/schemas/EnrollmentRejectedReasonCodeEnum"
-        revocationReason:
-          $ref: "#/components/schemas/EnrollmentRevocationReasonCodeEnum"
-    EnumEnrollmentCancelledFrom:
-      type: string
-      enum:
-        - INICIADORA
-        - DETENTORA
-      description: |
-        Field used to inform the means by which the Enrollment cancellation was carried out. Possible values:
-
-              INICIADORA - Enrollment in the initiator's channels.
-
-              DETENTORA - Enrollment in the account holder's channels.
-    EnrollmentRejectedAt:
-      type: string
-      format: date-time
-      example: "2023-07-12T08:30:00Z"
-      pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
-      maxLength: 20
-      description: Rejection timestamp of the enrollment in the account holder's environment.
-    AutomaticPaymentConsentEdition:
-      type: object
-      properties:
-        maximumVariableAmount:
-          description: Definition of the sweeping configuration for automatic funds transfers, if not sent
-            will be considered as undefined (no limit).
-          maxLength: 19
-          minLength: 4
-          nullable: true
-          type: string
-          example: "1000000.12"
-        useOverdraftLimit:
-          description: Indicates whether the consent allows the use of the overdraft limit.
-          type: boolean
-          example: true
-  securitySchemes:
-    jwt:
-      type: http
-      description: JWT token
-      scheme: bearer
-      bearerFormat: jwt
+          type: object
+          required:
+            - status
+            - portabilityId
+          properties:
+            portabilityId:
+              type: string
+              description: Identificador do pedido de portabilidade
+              format: uuid
+              example: 54d5348c-1a3f-4ff4-a8a8-d0724fb806c6
+            status:
+                type: string
+                description: |
+                  Informação sobre o status de um pedido de portabilidade de crédito, onde:
+                  
+                  - `RECEIVED`: Estado inicial. Indica que o pedido de portabilidade foi solicitado junto a instituição credora. O pedido deve permanecer neste estado até que o próximo dia útil (D+1) aonde começará a contar o prazo de 3 dias úteis para a etapa de contraproposta e o pedido de portabilidade deverá ser movido para PENDING
+                  - `PENDING`: Indica que o pedido de portabilidade de crédito está na fase de contraproposta, onde a instituição credora poderá enviar uma contraproposta ou não para o cliente por qualquer canal (email, telefone, etc.) porém o aceite só deverá ser valido se o cliente aprovar no canal digital da instituição credora
+                  - `ACCEPTED_SETTLEMENT_IN_PROCESS`: Indica que a contraproposta não foi aceita pelo cliente e a instituição proponente terá que quitar o valor do contrato no mesmo dia em que o estado foi ativado
+                  - `ACCEPTED_SETTLEMENT_COMPLETED`: Indica que a instituição proponente já liquidou o contrato e comunicou a respeito a credora que está validando os dados do contratos bem como valores recebidos para a quitação do mesmo (nesta etapa a instituição credora tem 2 dias úteis para fornecer a confirmação e o recibo de quitação do contrato de empréstimo)
+                  - `PORTABILITY_COMPLETED`: Indica que o pedido de portabilidade foi concluído com sucesso
+                  - `REJECTED`: Indica que o pedido de portabilidade de crédito foi rejeitado, seja porque o cliente aceitou a contraproposta, ou porque a proponente rejeitou a liquidação que excedeu em 15% o valor do contrato original, entre outras possibilidades
+                  - `CANCELLED`: Indica que o cliente cancelou o pedido de portabilidade de crédito
+                  - `PAYMENT_ISSUE`: Indica que a Instituição Credora encontrou alguma inconsistência na liquidação efetuada e que a Instituição Proponente deverá realizar ajustes conforme sugerido pela Instituição Credora para solucionar a pendencia antes do cancelamento do pedido de portabilidade de crédito
+                enum:
+                  - RECEIVED
+                  - PENDING
+                  - ACCEPTED_SETTLEMENT_IN_PROCESS
+                  - ACCEPTED_SETTLEMENT_COMPLETED
+                  - PORTABILITY_COMPLETED
+                  - REJECTED
+                  - CANCELLED
+                  - PAYMENT_ISSUE
