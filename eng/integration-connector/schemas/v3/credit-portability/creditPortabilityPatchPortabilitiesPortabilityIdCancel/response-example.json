@@ -1,0 +1,9 @@
+{
+  "data": {
+    "reason": {
+      "type": "SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE",
+      "typeAdditionalInfo": "Informações Adicionais"
+    },
+    "rejectedBy": "PROPONENTE"
+  }
+}

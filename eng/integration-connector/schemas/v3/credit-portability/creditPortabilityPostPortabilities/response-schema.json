@@ -1,0 +1,42 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "minItems": 0,
+      "description": "Conjunto de informações de contratos de empréstimos/financiamentos mantidos pelo cliente na instituição credora e para os quais ele tenha fornecido consentimento",
+      "required": [
+        "creationDateTime"
+      ],
+      "properties": {
+        "portabilityId": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+          "maxLength": 100,
+          "minLength": 1,
+          "example": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6",
+          "description": "Código identificador do pedido de portabilidade realizado."
+        },
+        "status": {
+          "type": "string",
+          "description": "Informação sobre a disponibilidade ou não de um contrato para a portabilidade de crédito",
+          "enum": [
+            "RECEIVED",
+            "TECHNICAL_VALIDATION_IN_PROCESS",
+            "PENDING",
+            "ACCEPTED_SETTLEMENT_IN_PROCESS",
+            "ACCEPTED_SETTLEMENT_COMPLETED",
+            "PORTABILITY_COMPLETED",
+            "REJECTED",
+            "ACCEPTED_WITH_CHANGE",
+            "CANCELLED"
+          ]
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}
