@@ -34,14 +34,6 @@
             "ACCEPTED_WITH_CHANGE",
             "CANCELLED"
           ]
-        },
-        "creationDateTime": {
-          "type": "string",
-          "description": "Data e hora em que a Proponente registrou a presente proposta (chamada ao POST /portabilities).\nUma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC-0 (UTC time format).\n",
-          "maxLength": 20,
-          "minLength": 20,
-          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
-          "example": "2020-07-21T08:30:00Z"
         }
       }
     }

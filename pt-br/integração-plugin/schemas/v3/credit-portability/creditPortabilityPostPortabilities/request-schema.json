@@ -10,6 +10,9 @@
     "requestMeta": {
       "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
     },
+    "portabilityId": {
+      "$ref": "../common/common-schema.json#/$defs/PortabilityId"
+    },
     "consent": {
       "$ref": "../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
     },
