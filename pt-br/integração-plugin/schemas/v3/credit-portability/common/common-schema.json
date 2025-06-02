@@ -1,0 +1,666 @@
+{
+    "$defs": {
+      "RequestCreditPortabilityData": {
+        "type": "object",
+        "description": "Conjunto de informações referentes à Proposta de Portabilidade de Crédito da Proponente para a Credora",
+        "required": [
+          "customerContact",
+          "institution",
+          "contractIdentification",
+          "proposedContract",
+          "creationDateTime"
+        ],
+        "properties": {
+          "customerContact": {
+            "type": "array",
+            "minItems": 0,
+            "description": "Dados de contato do cliente",
+            "items": {
+              "type": "object",
+              "required": [
+                "type",
+                "value"
+              ],
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "TELEFONE",
+                    "EMAIL"
+                  ],
+                  "description": "Tipo do contato do cliente."
+                },
+                "value": {
+                  "type": "string",
+                  "pattern": "^([1-9]{2}(?:[2-8]|9[0-9])[0-9]{3}[0-9]{4})|([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,})$",
+                  "example": "11999999999"
+                }
+              }
+            }
+          },
+          "institution": {
+            "type": "object",
+            "description": "Informações sobre proponente e credora participantes do presente pedido de portabilidade de crédito",
+            "required": [
+              "creditor",
+              "proposing"
+            ],
+            "properties": {
+              "creditor": {
+                "type": "object",
+                "description": "Informações sobre a instituição credora",
+                "required": [
+                  "companyName",
+                  "companyCnpj"
+                ],
+                "properties": {
+                  "companyName": {
+                    "type": "string",
+                    "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                    "maxLength": 80,
+                    "example": "Instituição Credora",
+                    "description": "Nome da Instituição Credora."
+                  },
+                  "companyCnpj": {
+                    "type": "string",
+                    "pattern": "\\d{14}$",
+                    "maxLength": 14,
+                    "example": "21128159000166",
+                    "description": "Número completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara."
+                  }
+                }
+              },
+              "proposing": {
+                "type": "object",
+                "description": "Informações sobre a instituição proponente",
+                "required": [
+                  "companyName",
+                  "companyCnpj"
+                ],
+                "properties": {
+                  "companyName": {
+                    "type": "string",
+                    "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                    "maxLength": 80,
+                    "example": "Instituição Proponente",
+                    "description": "Nome da Instituição Proponente"
+                  },
+                  "companyCnpj": {
+                    "type": "string",
+                    "pattern": "\\d{14}$",
+                    "maxLength": 14,
+                    "example": "21128159000166",
+                    "description": "Número completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara."
+                  },
+                  "contact": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "type": {
+                          "type": "string",
+                          "enum": [
+                            "EMAIL",
+                            "TELEFONE"
+                          ],
+                          "description": "Tipo do contato da Instituição Proponente."
+                        },
+                        "value": {
+                          "type": "string",
+                          "pattern": "^([1-9]{2}(?:[2-8]|9[0-9])[0-9]{3}[0-9]{4})|([a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,})$",
+                          "example": "contato@instituicaoproponente.com.br"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "contractIdentification": {
+            "type": "object",
+            "required": [
+              "contractId",
+              "contractNumber",
+              "ipocCode"
+            ],
+            "properties": {
+              "contractId": {
+                "$ref": "../../common/common-schema.json#/$defs/LegacyId"
+              },
+              "contractNumber": {
+                "type": "string",
+                "pattern": "^[\\w\\W]{1,100}$",
+                "maxLength": 100,
+                "minLength": 1,
+                "example": "1324926521496",
+                "description": "Número do contrato dado pela instituição contratante."
+              },
+              "ipocCode": {
+                "type": "string",
+                "pattern": "^[\\w\\W]{22,67}$",
+                "maxLength": 67,
+                "minLength": 22,
+                "example": "92792126019929279212650822221989319252576",
+                "description": "Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n\n\nCNPJ da instituição: 8 (oito) posições iniciais;\nModalidade da operação: 4 (quatro) posições;\nTipo do cliente: 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica\n\n– CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n\n- Código do cliente: O número de posições varia conforme o tipo do cliente:\nPara clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\nPara clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\nPara os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n\n- Código do contrato: 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\n"
+              }
+            }
+          },
+          "proposedContract": {
+            "type": "object",
+            "minItems": 1,
+            "description": "Proposta da Proponente para Portabilidade de Crédito",
+            "required": [
+              "interestRates",
+              "contractedFees",
+              "contractedFinanceCharges",
+              "digitalSignatureProof",
+              "CET",
+              "amortizationScheduled",
+              "installmentPeriodicity",
+              "totalNumberOfInstallments",
+              "installmentAmount"
+            ],
+            "properties": {
+              "interestRates": {
+                "type": "array",
+                "description": "Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito.  \nCaso o contrato não possua taxas de juros, deve ser compartilhada uma lista vazia. Caso o contrato possua uma taxa de juros com valor 0, deve ser compartilhado um objeto com o valor 0 de forma explícita.\n",
+                "minItems": 0,
+                "items": {
+                  "$ref": "#/components/schemas/LoansContractInterestRate"
+                }
+              },
+              "contractedFees": {
+                "type": "array",
+                "description": "Lista que traz as informações das tarifas pactuadas no contrato.",
+                "minItems": 0,
+                "items": {
+                  "type": "object",
+                  "description": "Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito",
+                  "required": [
+                    "feeName",
+                    "feeCode",
+                    "feeChargeType",
+                    "feeCharge"
+                  ],
+                  "properties": {
+                    "feeName": {
+                      "type": "string",
+                      "maxLength": 140,
+                      "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                      "description": "Denominação da Tarifa pactuada",
+                      "example": "Renovação de cadastro"
+                    },
+                    "feeCode": {
+                      "type": "string",
+                      "maxLength": 140,
+                      "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                      "description": "Sigla identificadora da tarifa pactuada",
+                      "example": "CADASTRO"
+                    },
+                    "feeChargeType": {
+                      "type": "string",
+                      "description": "Tipo de cobrança para a tarifa pactuada no contrato.",
+                      "enum": [
+                        "UNICA",
+                        "POR_PARCELA"
+                      ],
+                      "example": "UNICA"
+                    },
+                    "feeCharge": {
+                      "type": "string",
+                      "description": "\"Forma de cobrança relativa a tarifa pactuada no contrato. (Vide Enum)\n- Mínimo\n- Máximo\n- Fixo\n- Percentual\"\n",
+                      "enum": [
+                        "MINIMO",
+                        "MAXIMO",
+                        "FIXO",
+                        "PERCENTUAL"
+                      ],
+                      "example": "MINIMO"
+                    },
+                    "feeAmount": {
+                      "type": "object",
+                      "minItems": 1,
+                      "description": "Objeto para representar o valor monetário da tarifa pactuada no contrato.\n\n[Restrição] Preenchimento obrigatório quando a forma de cobrança for diferente de Percentual.\n",
+                      "required": [
+                        "amount",
+                        "currency"
+                      ],
+                      "properties": {
+                        "amount": {
+                          "type": "string",
+                          "format": "double",
+                          "maxLength": 20,
+                          "minLength": 4,
+                          "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                          "example": "1000.0400",
+                          "description": "Valor monetário da tarifa pactuada no contrato."
+                        },
+                        "currency": {
+                          "type": "string",
+                          "maxLength": 3,
+                          "minLength": 3,
+                          "pattern": "^(\\w{3}){1}$",
+                          "example": "BRL",
+                          "description": "Moeda referenciada ao campo `amount`, segundo modelo ISO-4217."
+                        }
+                      }
+                    },
+                    "feeRate": {
+                      "type": "string",
+                      "pattern": "^\\d{1}\\.\\d{6}$",
+                      "format": "double",
+                      "maxLength": 8,
+                      "minLength": 8,
+                      "description": "É o valor da tarifa em percentual pactuada no contrato.\n\n[Restrição] Preenchimento obrigatório quando a forma de cobrança for Percentual.\n",
+                      "example": "0.062000"
+                    }
+                  }
+                }
+              },
+              "contractedFinanceCharges": {
+                "type": "array",
+                "description": "Lista que traz os encargos pactuados no contrato",
+                "minItems": 0,
+                "items": {
+                  "type": "object",
+                  "description": "Conjunto de informações referentes à identificação da operação de crédito",
+                  "required": [
+                    "chargeType",
+                    "chargeRate"
+                  ],
+                  "properties": {
+                    "chargeType": {
+                      "type": "string",
+                      "description": "Tipo de encargo pactuado no contrato.",
+                      "enum": [
+                        "JUROS_REMUNERATORIOS_POR_ATRASO",
+                        "MULTA_ATRASO_PAGAMENTO",
+                        "JUROS_MORA_ATRASO",
+                        "IOF_CONTRATACAO",
+                        "IOF_POR_ATRASO",
+                        "SEM_ENCARGO",
+                        "OUTROS"
+                      ],
+                      "example": "JUROS_REMUNERATORIOS_POR_ATRASO"
+                    },
+                    "chargeAdditionalInfo": {
+                      "type": "string",
+                      "maxLength": 140,
+                      "description": "Campo para informações adicionais.\n\n[Restrição] Obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.\n",
+                      "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                      "example": "Informações adicionais sobre encargos."
+                    },
+                    "chargeRate": {
+                      "type": "string",
+                      "pattern": "^\\d{1}\\.\\d{6}$",
+                      "format": "double",
+                      "maxLength": 8,
+                      "minLength": 8,
+                      "description": "Representa o valor do encargo em percentual pactuado no contrato.\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\n",
+                      "example": "0.070000"
+                    }
+                  }
+                }
+              },
+              "digitalSignatureProof": {
+                "type": "object",
+                "required": [
+                  "documentId",
+                  "signatureDateTime"
+                ],
+                "properties": {
+                  "documentId": {
+                    "type": "string",
+                    "pattern": "^[0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}$",
+                    "maxLength": 100,
+                    "minLength": 1,
+                    "example": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6",
+                    "description": "Código identificador do Documento assinado na instituição proponente."
+                  },
+                  "signatureDateTime": {
+                    "type": "string",
+                    "maxLength": 20,
+                    "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+                    "example": "2020-07-21T08:30:00Z",
+                    "description": "Data e hora em que o contrato foi assinado pelo cliente  no canal digital da Instituição Proponente\n"
+                  }
+                }
+              },
+              "CET": {
+                "type": "string",
+                "pattern": "^\\d{1,6}\\.\\d{6}$",
+                "maxLength": 13,
+                "minLength": 8,
+                "example": "0.290000",
+                "description": "CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas). O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). Para o público PF (pessoa física) o campo é de envio obrigatório para contratos firmados a partir de 2008, conforme Resolução CMN 3.517. Para o público PJ (pessoa jurídica) o campo é de envio obrigatório para contratos firmados a partir de 2011, conforme Resolução CMN 3.909. O campo poderá ser preenchido com 0.00 em cenários nos quais a casa não tenha a informação de CET (Custo efetivo total) apenas para as exceções listadas abaixo:\n\n  - Em contratos anteriores a 2008 (para o público PF);\n\n  - Em contratos anteriores a 2011 (para o público PJ);\n\n  - Público PJ de médio ou grande porte.\n"
+              },
+              "amortizationScheduled": {
+                "type": "string",
+                "enum": [
+                  "SAC",
+                  "PRICE",
+                  "SAM",
+                  "SEM_SISTEMA_AMORTIZACAO",
+                  "OUTROS"
+                ],
+                "example": "SAC",
+                "description": "Sistema de amortização (Vide Enum):\n\n- SAC (Sistema de Amortização Constante): É aquele em que o valor da amortização permanece igual até o final. Os juros cobrados sobre o parcelamento não entram nesta conta.\n\n- PRICE (Sistema Francês de Amortização): As parcelas são fixas do início ao fim do contrato. Ou seja, todas as parcelas terão o mesmo valor, desde a primeira até a última. Nos primeiros pagamentos, a maior parte do valor da prestação corresponde aos juros. Ao longo do tempo, a taxa de juros vai decrescendo. Como o valor da prestação é fixo, com o passar das parcelas, o valor de amortização vai aumentando.\n\n- SAM (Sistema de Amortização Misto): Cada prestação (pagamento) é a média aritmética das prestações\nrespectivas no Sistemas Price e no Sistema de Amortização Constante (SAC).\n\n- SEM SISTEMA DE AMORTIZAÇÃO\n"
+              },
+              "amortizationScheduledAdditionalInfo": {
+                "type": "string",
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "maxLength": 200,
+                "example": "Informações complementares relativa à amortização do tipo `OUTROS`",
+                "description": "Informação relativa ao complemento da amortização\n\n[Restrição] Campo de preenchimento obrigatório quando o campo amortizationScheduled for igual `OUTROS`\n"
+              },
+              "installmentPeriodicity": {
+                "type": "string",
+                "description": "Informação relativa à periodicidade regular das parcelas. (Vide Enum) sem periodicidade regular, diário, semanal, quinzenal, mensal, bimestral, trimestral, semestral, anual.",
+                "example": "SEM_PERIODICIDADE_REGULAR",
+                "enum": [
+                  "SEM_PERIODICIDADE_REGULAR",
+                  "DIARIO",
+                  "SEMANAL",
+                  "QUINZENAL",
+                  "MENSAL",
+                  "BIMESTRAL",
+                  "TRIMESTRAL",
+                  "SEMESTRAL",
+                  "ANUAL"
+                ]
+              },
+              "totalNumberOfInstallments": {
+                "type": "number",
+                "description": "Total de parcelas, segundo a periodicidade regular das parcelas referente à Modalidade de Crédito informada.",
+                "maximum": 999999999,
+                "example": 30
+              },
+              "installmentAmount": {
+                "type": "object",
+                "minItems": 1,
+                "description": "Objeto para representar o Valor da parcela regular da operação após portabilidade.",
+                "required": [
+                  "amount",
+                  "currency"
+                ],
+                "properties": {
+                  "amount": {
+                    "type": "string",
+                    "format": "double",
+                    "maxLength": 20,
+                    "minLength": 4,
+                    "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                    "example": "1000.0400",
+                    "description": "Valor da parcela regular da operação após portabilidade. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais."
+                  },
+                  "currency": {
+                    "type": "string",
+                    "maxLength": 3,
+                    "minLength": 3,
+                    "pattern": "^(\\w{3}){1}$",
+                    "example": "BRL",
+                    "description": "Moeda referenciada ao campo `amount`, segundo modelo ISO-4217."
+                  }
+                }
+              }
+            }
+          },
+          "creationDateTime": {
+            "type": "string",
+            "description": "Data e hora em que a Proponente registrou a presente proposta (chamada ao POST /portabilities).\nUma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC-0 (UTC time format).\n",
+            "maxLength": 20,
+            "minLength": 20,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+            "example": "2020-07-21T08:30:00Z"
+          }
+        }
+      },
+      "RequestCreditPortabilityCancelData": {
+        "type": "object",
+        "description": "Objeto para notificar a respeito da liquidação efetuada pela proponente a Credora.",
+        "required": [
+          "reason"
+        ],
+        "properties": {
+          "rejectedBy": {
+            "type": "string",
+            "description": "Informar usuário responsável pela rejeição da proposta, onde:\n\n`PROPONENTE ` - Indica que o pedido de portabilidade de crédito foi rejeitado pela proponente, seja porque a proponente rejeitou a liquidação que excedeu em 15% o valor do contrato original, entre outras possibilidades.\n\n`USUARIO` - Indica que o cliente cancelou o pedido de portabilidade de crédito.\n",
+            "enum": [
+              "PROPONENTE",
+              "USUARIO"
+            ]
+          },
+          "reason": {
+            "type": "object",
+            "description": "Motivo de recusa do pedido de portabilidade",
+            "required": [
+              "type"
+            ],
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Motivo de recusa do pedido de portabilidade, onde:\n\n`CANCELADO_PELO_CLIENTE` - Cliente desiste do pedido da portabilidade\n\n`SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE` - Saldo devedor atualizado divergente (superior a 15%) do informado inicialmente\n\n`POLITICA_DE_CREDITO` - Proponente desiste da oferta ao cliente por políticas internas\n\n`OUTROS` - Motivo da rejeição não se encaixa nas opções disponíveis\n",
+                "enum": [
+                  "CANCELADO_PELO_CLIENTE",
+                  "SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE",
+                  "POLITICA_DE_CREDITO",
+                  "OUTROS"
+                ]
+              },
+              "typeAdditionalInfo": {
+                "type": "string",
+                "maxLength": 144,
+                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "example": "Informações Adicionais",
+                "description": "Informação adicional sobre rejeição de portabilidade de crédito. \nAo utilizar essa opção, é fortemente recomendável enviar um ticket para o GT de Portabilidade de Crédito como sugestão para estrutura Open Finance para discussão e mapeamento em futuras versões.\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando campo `type` for igual a `OUTROS`.\n"
+              }
+            }
+          }
+        }
+      },
+      "RequestCreditPortabilityPaymentData": {
+        "type": "object",
+        "description": "Objeto para notificar a respeito da liquidação efetuada pela proponente a credora",
+        "required": [
+          "portabilityId",
+          "paymentDateTime",
+          "paymentAmount",
+          "transactionId"
+        ],
+        "properties": {
+          "portabilityId": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 100,
+            "minLength": 1,
+            "example": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6",
+            "description": "Código identificador do pedido de portabilidade realizado."
+          },
+          "paymentDateTime": {
+            "type": "string",
+            "maxLength": 20,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$",
+            "example": "2020-07-21T08:30:00Z",
+            "description": "Data e hora em que o pagamento à instituição credora foi realizado pela instituição proponente. \nUma string com data e hora conforme especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339), sempre com a utilização de timezone UTC-0 (UTC time format)\n"
+          },
+          "paymentAmount": {
+            "type": "object",
+            "minItems": 1,
+            "description": "Objeto para representar o valor pago para liquidação do contrato de empréstimo.",
+            "required": [
+              "amount",
+              "currency"
+            ],
+            "properties": {
+              "amount": {
+                "type": "string",
+                "format": "double",
+                "maxLength": 20,
+                "minLength": 4,
+                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "example": "1000.0400",
+                "description": "Valor pago para liquidação do contrato de empréstimo."
+              },
+              "currency": {
+                "type": "string",
+                "maxLength": 3,
+                "minLength": 3,
+                "pattern": "^(\\w{3}){1}$",
+                "example": "BRL",
+                "description": "Moeda referenciada ao campo `amount`, segundo modelo ISO-4217."
+              }
+            }
+          },
+          "transactionId": {
+            "type": "string",
+            "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+            "maxLength": 20,
+            "minLength": 1,
+            "example": "STR20181108000000013",
+            "description": "Identificador da transação utilizada para Proponente liquidar portabilidade de crédito com a Credora.\n\nNo contexto de STR0047, utilizar o valor do campo de retorno NumCtrlSTR (Numero de Controle da STR)\".\n"
+          }
+        }
+      },
+      "PortabilityId": {
+        "type": "string",
+        "maxLength": 100,
+        "minLength": 1,
+        "description": "Código identificador do pedido de portabilidade realizado.",
+        "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+        "example": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6"
+      }
+    },
+    "components": {
+      "schemas": {
+        "LoansContractInterestRate": {
+          "type": "object",
+          "description": "Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito",
+          "required": [
+            "taxType",
+            "interestRateType",
+            "taxPeriodicity",
+            "calculation",
+            "referentialRateIndexerType",
+            "preFixedRate",
+            "postFixedRate"
+          ],
+          "properties": {
+            "taxType": {
+              "type": "string",
+              "description": "\"Tipo de Taxa (vide  Enum)\n- NOMINAL (taxa nominal é uma taxa de juros em que a unidade referencial não coincide com a unidade de tempo da capitalização. Ela é sempre fornecida em termos anuais, e seus períodos de capitalização podem ser diários, mensais, trimestrais ou semestrais. p.ex. Uma taxa de 12% ao ano com capitalização mensal)\n- EFETIVA (É a taxa de juros em que a unidade referencial coincide com a unidade de tempo da capitalização. Como as unidades de medida de tempo da taxa de juros e dos períodos de capitalização são iguais, usa-se exemplos simples como 1% ao mês, 60% ao ano)\"\n",
+              "enum": [
+                "NOMINAL",
+                "EFETIVA"
+              ],
+              "example": "EFETIVA"
+            },
+            "interestRateType": {
+              "type": "string",
+              "description": "\"Tipo de Juros  (vide  Enum)\n- SIMPLES (aplicada/cobrada sempre sobre o capital inicial, que é o valor emprestado/investido. Não há cobrança de juros sobre juros acumulados no(s) período(s) anterior(es). Exemplo: em um empréstimo de R$1.000, com taxa de juros simples de 8% a.a., com duração de 2 anos, o total de juros será R$80 no primeiro ano e R$ 80 no segundo ano. Ao final do contrato, o tomador irá devolver o principal e os juros simples de cada ano: R$1.000+R$80+R$80=R$1.160)\n- COMPOSTO (para cada período do contrato (diário, mensal, anual etc.), há um “novo capital” para a cobrança da taxa de juros contratada. Esse “novo capital” é a soma do capital e do juro cobrado no período anterior. Exemplo: em um empréstimo de R$1.000, com taxa de juros composta de 8% a.a., com duração de 2 anos, o total de juros será R$80 no primeiro ano. No segundo ano, os juros vão ser somados ao capital (R$1.000 + R$ 80 = R$ 1.080), resultando em juros de R$ 86 (8%de R$ 1.080))\"\n",
+              "enum": [
+                "SIMPLES",
+                "COMPOSTO"
+              ],
+              "example": "SIMPLES"
+            },
+            "referentialRateIndexerSubType": {
+              "$ref": "#/components/schemas/EnumReferentialRateIndexerSubType"
+            },
+            "taxPeriodicity": {
+              "type": "string",
+              "description": "\"Periodicidade da taxa . (Vide  Enum)\na.m - ao mês\na.a. - ao ano\"\n",
+              "enum": [
+                "AM",
+                "AA"
+              ],
+              "example": "AA"
+            },
+            "calculation": {
+              "type": "string",
+              "description": "Base de cálculo",
+              "enum": [
+                "21/252",
+                "30/360",
+                "30/365"
+              ],
+              "example": "21/252"
+            },
+            "referentialRateIndexerType": {
+              "type": "string",
+              "description": "\"Tipos de taxas referenciais ou indexadores, conforme Anexo 5: Taxa referencial ou Indexador (Indx), do Documento 3040\"\n",
+              "enum": [
+                "SEM_TIPO_INDEXADOR",
+                "PRE_FIXADO",
+                "POS_FIXADO",
+                "FLUTUANTES",
+                "INDICES_PRECOS",
+                "CREDITO_RURAL",
+                "OUTROS_INDEXADORES"
+              ],
+              "example": "PRE_FIXADO"
+            },
+            "referentialRateIndexerAdditionalInfo": {
+              "type": "string",
+              "description": "Campo livre para complementar a informação relativa ao Tipo de taxa referencial ou indexador.\n[Restrição] Obrigatório para complementar a informação relativa ao Tipo de taxa referencial ou indexador, quando selecionado o tipo ou subtipo `OUTRO`.\n",
+              "maxLength": 140,
+              "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+              "example": "Informações adicionais"
+            },
+            "preFixedRate": {
+              "type": "string",
+              "pattern": "^\\d{1,2}\\.\\d{6}$",
+              "format": "double",
+              "maxLength": 9,
+              "minLength": 8,
+              "example": "0.600000",
+              "description": "Taxa pré fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.014500. O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). Preencher o campo não aplicável ao contrato com zeros, seguindo o pattern (0.000000).\n"
+            },
+            "postFixedRate": {
+              "type": "string",
+              "pattern": "^\\d{1,2}\\.\\d{6}$",
+              "format": "double",
+              "maxLength": 9,
+              "minLength": 8,
+              "description": "Taxa pós fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.0045 .O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%). Preencher o campo não aplicável ao contrato com zeros, seguindo o pattern (0.000000)\n",
+              "example": "0.550000"
+            },
+            "additionalInfo": {
+              "type": "string",
+              "maxLength": 1200,
+              "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+              "example": "Informações adicionais",
+              "description": "Texto com informações adicionais sobre a composição das taxas de juros pactuadas. \n\n[Restrição] Caso a instituição possua a informação para compartilhamento, esta deverá ser informada.\n"
+            }
+          }
+        },
+        "EnumReferentialRateIndexerSubType": {
+          "type": "string",
+          "description": "\"Sub tipos de taxas referenciais ou indexadores, conforme Anexo 5: Taxa referencial ou Indexador (Indx), do Documento 3040\"\n",
+          "enum": [
+            "SEM_SUB_TIPO_INDEXADOR",
+            "PRE_FIXADO",
+            "TR_TBF",
+            "TJLP",
+            "LIBOR",
+            "TLP",
+            "OUTRAS_TAXAS_POS_FIXADAS",
+            "CDI",
+            "SELIC",
+            "OUTRAS_TAXAS_FLUTUANTES",
+            "IGPM",
+            "IPCA",
+            "IPCC",
+            "OUTROS_INDICES_PRECO",
+            "TCR_PRE",
+            "TCR_POS",
+            "TRFC_PRE",
+            "TRFC_POS",
+            "OUTROS_INDEXADORES"
+          ],
+          "example": "TJLP"
+        }
+      }
+    }
+  }

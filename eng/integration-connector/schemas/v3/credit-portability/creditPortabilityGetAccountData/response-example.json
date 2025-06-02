@@ -1,0 +1,12 @@
+{
+  "data": {
+    "strCode": {
+      "ispb": 22896431,
+      "branchCode": 1,
+      "hasFinancialAgent": true,
+      "companyCnpj": "21128159000166",
+      "accountNumber": 12345678,
+      "name": "Instituicao Credora"
+    }
+  }
+}

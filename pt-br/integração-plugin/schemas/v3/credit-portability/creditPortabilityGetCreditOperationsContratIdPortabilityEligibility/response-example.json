@@ -1,0 +1,26 @@
+{
+    "data": {
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "portability": {
+        "isEligible": false,
+        "companyName": "Empresa da Organização A",
+        "channel": "OFB",
+        "companyCnpj": "21128159000166",
+        "ineligible": {
+          "reasonType": "CLIENTE_COM_ACAO_JUDICIAL",
+          "reasonTypeAdditionalInfo": "Lorem"
+        },
+        "status": "EM_ANDAMENTO",
+        "statusUpdateDateTime": "2020-07-21T08:30:00Z"
+      }
+    }
+  }

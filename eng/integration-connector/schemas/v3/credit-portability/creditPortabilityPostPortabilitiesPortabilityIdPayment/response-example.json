@@ -1,0 +1,11 @@
+{
+  "data": {
+    "portabilityId": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6",
+    "paymentDateTime": "2020-07-21T08:30:00Z",
+    "paymentAmount": {
+      "amount": "1000.0400",
+      "currency": "BRL"
+    },
+    "transactionId": "STR20181108000000013"
+  }
+}
