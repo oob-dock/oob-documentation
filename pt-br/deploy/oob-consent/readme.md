@@ -311,8 +311,7 @@ Utilizado para definir o agendamento da busca de consentimentos ativos no author
 env:
   dapr:
     job:
-      pcm:
-        activeConsents: "@every 30m"
+      activeConsents: "@every 30m"
 ```
 
 ## opentelemetry

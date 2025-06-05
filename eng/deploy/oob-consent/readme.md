@@ -264,8 +264,7 @@ Used to define the schedule for the active consents fetching os authorization se
 env:
   dapr:
     job:
-      pcm:
-        activeConsents: "@every 30m"
+      activeConsents: "@every 30m"
 ```
 
 ## opentelemetry
