@@ -279,6 +279,42 @@ env:
     schedulerHostAddress: dapr-scheduler-server.oob.svc.cluster.local:50006
 ```
 
+## dapr/job/pcm/schedule
+
+Define o agendamento do relatório de estoque de consentimentos PCM.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `disabled` (desativado).
+
+**Exemplo:** Para agendar a execução do relatório diariamente às 1h da manhã se utc (recomendado):
+
+```yaml
+env:
+  dapr:
+    job:
+      pcm:
+        schedule: "0 4 * * *"
+```
+
+## dapr/job/active-consents/schedule
+
+Utilizado para definir o agendamento da busca de consentimentos ativos no authorization server.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento, baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `disabled` (desativado)
+
+**Exemplo:** Para agendar a execução do job a cada 30 minutos:
+
+```yaml
+env:
+  dapr:
+    job:
+      pcm:
+        active-consents: "@every 30m"
+```
+
 ## opentelemetry
 
 Este módulo é instrumentado via [Open Telemetry](https://opentelemetry.io/),
@@ -775,38 +811,6 @@ Valor default: `23`
 additionalVarsDaemon:
   - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
     value: "23"
-```
-
-### DAPR_JOB_PCM_SCHEDULE
-
-Define o agendamento do relatório de estoque de consentimentos PCM.
-
-**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
-
-**Valor default:** `disabled` (desativado).
-
-**Exemplo:** Para agendar a execução do relatório diariamente às 1h da manhã se utc (recomendado):
-
-```yaml
-additionalVarsDaemon:
-  - name: DAPR_JOB_PCM_SCHEDULE
-    value: "0 4 * * *"
-```
-
-### DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
-
-Utilizado para definir o agendamento da busca de consentimentos ativos no authorization server.
-
-**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento, baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
-
-**Valor default:** `disabled` (desativado)
-
-**Exemplo:** Para agendar a execução do job a cada 30 minutos:
-
-```yaml
-additionalVars:
-  - name: DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
-    value: "@every 30m"
 ```
 
 ## FEATURE FLAGS

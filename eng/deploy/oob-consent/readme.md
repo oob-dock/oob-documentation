@@ -232,6 +232,42 @@ env:
     schedulerHostAddress: dapr-scheduler-server.oob.svc.cluster.local:50006
 ```
 
+## dapr/job/pcm/schedule
+
+Used to define the schedule for the PCM consent stock report job.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value**: `disabled`
+
+**Example:** To schedule the job to run daily at 1 AM if utc (recommended):
+
+```yaml
+env:
+  dapr:
+    job:
+      pcm:
+        schedule: "0 4 * * *"
+```
+
+## dapr/job/active-consents/schedule
+
+Used to define the schedule for the active consents fetching os authorization server.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value**: `disabled`
+
+**Example:** To schedule the job to run every 30 minutes.
+
+```yaml
+env:
+  dapr:
+    job:
+      pcm:
+        active-consents: "@every 30m"
+```
+
 ## opentelemetry
 
 This module is instrumented via [Open Telemetry](https://opentelemetry.io/),
@@ -682,38 +718,6 @@ Default value: `23`
 additionalVarsDaemon:
   - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
     value: "23"
-```
-
-### DAPR_JOB_PCM_SCHEDULE
-
-Used to define the schedule for the PCM consent stock report job.
-
-**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
-
-**Default value**: `disabled`
-
-**Example:** To schedule the job to run daily at 1 AM if utc (recommended):
-
-```yaml
-additionalVars:
-  - name: DAPR_JOB_PCM_SCHEDULE
-    value: "0 4 * * *"
-```
-
-### DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
-
-Used to define the schedule for the active consents fetching os authorization server.
-
-**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
-
-**Default value**: `disabled`
-
-**Example:** To schedule the job to run every 30 minutes.
-
-```yaml
-additionalVars:
-  - name: DAPR_JOB_ACTIVE_CONSENTS_SCHEDULE
-    value: "@every 30m"
 ```
 
 ## FEATURE FLAGS
