@@ -297,7 +297,7 @@ env:
         schedule: "0 4 * * *"
 ```
 
-## dapr/job/active-consents/schedule
+## dapr/job/activeConsents/schedule
 
 Utilizado para definir o agendamento da busca de consentimentos ativos no authorization server.
 
@@ -312,7 +312,7 @@ env:
   dapr:
     job:
       pcm:
-        active-consents: "@every 30m"
+        activeConsents: "@every 30m"
 ```
 
 ## opentelemetry

@@ -250,7 +250,7 @@ env:
         schedule: "0 4 * * *"
 ```
 
-## dapr/job/active-consents/schedule
+## dapr/job/activeConsents/schedule
 
 Used to define the schedule for the active consents fetching os authorization server.
 
@@ -265,7 +265,7 @@ env:
   dapr:
     job:
       pcm:
-        active-consents: "@every 30m"
+        activeConsents: "@every 30m"
 ```
 
 ## opentelemetry
