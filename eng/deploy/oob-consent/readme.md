@@ -763,3 +763,22 @@ Example: `1`
 Enable or disable the creation of CPF and CNPJ search keys at the time a consent is created.
 
 Ex: `1`
+
+### feature/async-payment-status/enabled
+
+Enables or disables asynchronous requests to legacy endpoint to
+get payment status.
+
+This feature should not be enabled if the institution has
+implemented the [status change notification](../../backoffice-portal/apis-backoffice/readme.md#payment-status-change-notification)
+for ***ALL*** types of payments.
+
+**Format:** `true` ou `false`
+
+**Default value**: `false`
+
+```yaml
+additionalVars:
+  - name: FEATURE_ASYNC_PAYMENT_STATUS_ENABLED
+    value: "true"
+```

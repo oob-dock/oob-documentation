@@ -283,3 +283,21 @@ additionalVars:
   - name: CAMEL_CONNECTOR_MTLS_KEY
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
 ```
+
+### feature/requires-sync-status/enabled
+
+Enables or disables synchronous requests to legacy endpoint to
+get payment status.
+
+This feature must be enabled ***ONLY*** in the staging
+environments.
+
+**Format:** `true` ou `false`
+
+**Default**: `false`
+
+```yaml
+additionalVars:
+  - name: FEATURE_REQUIRES_SYNC_STATUS_ENABLED
+    value: "true"
+```
