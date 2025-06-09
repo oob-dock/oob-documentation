@@ -68,6 +68,10 @@ To activate the use of the read replica, change the feature/readReplica/enabled 
     value: 110
 ```
 
+### DDL Script Execution
+
+See the [definição](../shared-definitions.md#ddl-scripts)
+
 ### liquibase/contexts
 
 See the [definition](../shared-definitions.md#liquibase-contexts).

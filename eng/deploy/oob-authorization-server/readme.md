@@ -95,6 +95,10 @@ To activate the use of the read replica, the feature/readReplica/enabled propert
       enabled: "1"
 ```
 
+### DDL Script Execution
+
+See the [definition](../shared-definitions.md#ddl-scripts)
+
 ### api/baseUrlOobConsents
 
 - Base address of the consent service

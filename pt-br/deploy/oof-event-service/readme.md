@@ -130,6 +130,10 @@ Configuração de acesso ao banco.
     password: "oof_event_service"
 ```
 
+### Execução de scripts DDL
+
+Vide a [definição](../shared-definitions.md#scripts-ddl)
+
 ### dapr
 
 Configurações relacionadas ao Dapr.

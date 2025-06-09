@@ -15,6 +15,10 @@ Database access configuration:
 * password: Database access password
 * host: Database host
 
+### DDL Script Execution
+
+See the [definition](../shared-definitions.md#ddl-scripts)
+
 ### liquibase/contexts
 
 See the [definition](../shared-definitions.md#liquibase-contexts).

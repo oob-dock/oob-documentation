@@ -108,6 +108,10 @@ Database access configuration.
     password: "oof_event_service"
 ```
 
+### DDL Script Execution
+
+See the [definition](../shared-definitions.md#ddl-scripts)
+
 ### dapr
 
 Dapr-related configurations.
