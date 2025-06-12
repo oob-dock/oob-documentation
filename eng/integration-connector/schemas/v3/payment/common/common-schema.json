@@ -65,7 +65,10 @@
                 },
                 "originalRecurringPaymentId": {
                     "$ref": "../../common/common-schema.json#/$defs/LegacyId"
-                } 
+                },
+                "paymentReference": {
+                    "$ref": "../../common/common-payment-schema.json#/$defs/PaymentReference"
+                }
             },
             "additionalProperties": false
         },
