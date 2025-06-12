@@ -343,6 +343,14 @@
             ],
             "description": "Traz o código da cidade segundo o IBGE (Instituto Brasileiro de Geografia e Estatística).\nPara o preenchimento deste campo, o Iniciador de Pagamentos deve seguir a orientação do arranjo da forma de pagamento.\nO preenchimento do campo tanto em pix/payments quanto /consents deve ser igual. Caso haja divergência dos valores, a instituição deve retornar HTTP 422 com o código de erro PAGAMENTO_DIVERGENTE_DO_CONSENTIMENTO.\nEste campo faz referência ao campo CodMun do arranjo Pix.\n"
         },
+        "PaymentReference": {
+            "type": "string",
+            "maxLength": 10,
+            "examples": [
+                "zero"
+            ],
+            "description": "[Restrição] Campo de preenchimento obrigatório caso seja um pagamento de Pix automático, caso não respeitado, a instituição detentora deve retornar erro HTTP 422 com o código DETALHE_PAGAMENTO_INVALIDO.\n\nPrimeiro pagamento: Se for o pagamento inicial especificado em “/data/firstPayment”, preencha o campo com a string fixa “zero”.\n- Semanal: Preencha com W$numSemana-$ano, onde $numSemana representa o número da semana no ano. Exemplo: \"W50-2024\".\n- Mensal: Use M$mês-$ano, onde $mês representa o mês com dois dígitos. Exemplo: \"M09-2024\".\n- Trimestral: Utilize Q$trimestre-$ano, onde $trimestre indica o trimestre do ano (1 a 4).\n  - Janeiro a Março: Q1-$ano (ex.: \"Q1-2024\").\n  - Abril a Junho: Q2-$ano (ex.: \"Q2-2024\").\n  - Julho a Setembro: Q3-$ano (ex.: \"Q3-2024\").\n  - Outubro a Dezembro: Q4-$ano (ex.: \"Q4-2024\").\n- Semestral: Utilize $semestre-$ano, onde $semestre indica o semestre do ano (1 para janeiro a junho e 2 para julho a dezembro).\n  - Janeiro a Junho: S1-$ano (ex.: \"S1-2024\").\n  - Julho a Dezembro: S2-$ano (ex.: \"S2-2024\").\n- Anual: Use Y$ano, apenas com o ano. Exemplo: \"Y2024\".\n\nExemplo de Formatos:\nPrimeiro pagamento: \"zero\"\nSemanal: \"W50-2024\"\nMensal: \"M09-2024\"\nTrimestral: \"Q3-2024\"\nSemestral: \"S2-2024\"\nAnual: \"Y2024\""
+        },
         "QrCode": {
             "type": "string",
             "maxLength": 512,

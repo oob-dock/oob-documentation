@@ -159,6 +159,7 @@
                 "identification": "58764789000137",
                 "rel": "CNPJ"
             },
+            "paymentReference": "zero",
             "originalRecurringPaymentId": [{"key":"id","value":"efa6684f-6bd0-4a75-a170-d7f1fdd9689f"}]
         }
     }
