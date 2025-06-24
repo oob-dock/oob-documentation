@@ -109,6 +109,18 @@ deve ter seu valor alterado para "1", conforme exemplo:
 
 Vide a [definição](../shared-definitions.md#scripts-ddl)
 
+Este serviço também possui a opção de desativar os scripts de DDL. Essa configuração é
+necessária caso o serviço seja instalado em um ambiente com múltiplas instâncias de
+marcas diferentes que acessam a mesma base de dados.
+Nessa situação, os scripts de DDL devem permanecer ativados apenas para a marca principal
+(padrão), enquanto para as demais marcas deve-se configurar o seguinte valor:
+
+```yaml
+  db:
+    ddl:
+      enabled: "0"
+```
+
 ### api/baseUrlOobConsents
 
 - Endereço base do serviço de consentimento
