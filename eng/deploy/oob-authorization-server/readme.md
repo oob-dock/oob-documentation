@@ -99,6 +99,20 @@ To activate the use of the read replica, the feature/readReplica/enabled propert
 
 See the [definition](../shared-definitions.md#ddl-scripts)
 
+This service also provides the option to disable DDL scripts.
+This configuration is necessary when the service is installed in
+an environment with multiple instances of different brands
+accessing the same database.
+In this case, DDL scripts should remain enabled only for the
+main brand (default behavior), while for the other brands,
+the following value should be configured:
+
+```yaml
+  db:
+    ddl:
+      enabled: "0"
+```
+
 ### api/baseUrlOobConsents
 
 - Base address of the consent service
