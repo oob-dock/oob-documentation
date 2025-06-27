@@ -7,6 +7,9 @@
   "properties": {
     "requestMeta": {
       "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+    },
+    "portabilityId": {
+      "$ref": "../common/common-schema.json#/$defs/PortabilityId"
     }
   },
   "additionalProperties": false
