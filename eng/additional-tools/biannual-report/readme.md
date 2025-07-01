@@ -60,17 +60,13 @@ The 'endpoints_services' parameter is an array[string] type parameter, and you n
 Example for obtaining services from phase 1 - Open paymentData::
 
 ```sql
---UNTIL 2024 FIRST SEMESTER
-@set endpoints_services = array ['/products-services/v1/personal-accounts', '/products-services/v1/business-accounts', '/products-services/v1/personal-loans', '/products-services/v1/business-loans', '/products-services/v1/personal-financings', '/products-services/v1/business-financings', '/products-services/v1/personal-invoice-financings', '/products-services/v1/business-invoice-financings', '/products-services/v1/personal-credit-cards', '/products-services/v1/business-credit-cards', '/products-services/v1/personal-unarranged-account-overdraft', '/products-services/v1/business-unarranged-account-overdraft', '/channels/v1/branches', '/channels/v1/electronic-channels', '/channels/v1/phone-channels', '/channels/v1/banking-agents', '/channels/v1/shared-automated-teller-machines', '/channels/v2/banking-agents', '/channels/v2/branches', '/channels/v2/electronic-channels', '/channels/v2/phone-channels', '/channels/v2/shared-automated-teller-machines', '/opendata-accounts/v1/business-accounts', '/opendata-accounts/v1/personal-accounts', '/opendata-creditcards/v1/business-credit-cards', '/opendata-creditcards/v1/personal-credit-cards', '/opendata-financings/v1/business-financings', '/opendata-financings/v1/personal-financings', '/opendata-invoicefinancings/v1/business-invoice-financings', '/opendata-invoicefinancings/v1/personal-invoice-financings', '/opendata-loans/v1/business-loans', '/opendata-loans/v1/personal-loans', '/opendata-unarranged/v1/business-unarranged-account-overdraft', '/opendata-unarranged/v1/personal-unarranged-account-overdraft']
-
---AS OF 2024 SECOND SEMESTER
 @set endpoints_services = array ['/channels/v2/banking-agents', '/channels/v2/branches', '/channels/v2/electronic-channels', '/channels/v2/phone-channels', '/channels/v2/shared-automated-teller-machines', '/opendata-accounts/v1/business-accounts', '/opendata-accounts/v1/personal-accounts', '/opendata-creditcards/v1/business-credit-cards', '/opendata-creditcards/v1/personal-credit-cards', '/opendata-financings/v1/business-financings', '/opendata-financings/v1/personal-financings', '/opendata-invoicefinancings/v1/business-invoice-financings', '/opendata-invoicefinancings/v1/personal-invoice-financings', '/opendata-loans/v1/business-loans', '/opendata-loans/v1/personal-loans', '/opendata-unarranged/v1/business-unarranged-account-overdraft', '/opendata-unarranged/v1/personal-unarranged-account-overdraft']
 ```
 
 Example for obtaining services from phase 2 - Consent, Resources and Customer Data:
 
 ```sql
-@set endpoints_services = array ['/consents/v2/consents', '/consents/v2/consents/{consentId}','/resources/v2/resources', '/consents/v3/consents', '/consents/v3/consents/{consentId}','/resources/v3/resources', '/customers/v2/business/financial-relations','/customers/v2/business/identifications','/customers/v2/business/qualifications','/customers/v2/personal/financial-relations','/customers/v2/personal/identifications','/customers/v2/personal/qualifications']
+@set endpoints_services = array ['/consents/v3/consents', '/consents/v3/consents/{consentId}','/resources/v3/resources', '/customers/v2/business/financial-relations','/customers/v2/business/identifications','/customers/v2/business/qualifications','/customers/v2/personal/financial-relations','/customers/v2/personal/identifications','/customers/v2/personal/qualifications']
 ```
 
 Example for obtaining services from phase 2 - Transactional Data:
@@ -82,7 +78,7 @@ Example for obtaining services from phase 2 - Transactional Data:
 Example for obtaining services from phase 3 - Payment Initiation:
 
 ```sql
-@set endpoints_services = array ['/payments/v3/consents','/payments/v3/consents/{consentId}','/payments/v3/pix/payments','/payments/v3/pix/payments/{paymentId}','/payments/v4/consents','/payments/v4/consents/{consentId}','/payments/v4/pix/payments','/payments/v4/pix/payments/{paymentId}','/payments/v4/pix/payments/consents/{consentId}','/automatic-payments/v1/recurring-consents','/automatic-payments/v1/recurring-consents/{recurringConsentId}','/automatic-payments/v1/pix/recurring-payments','/automatic-payments/v1/pix/recurring-payments/{recurringPaymentId}']
+@set endpoints_services = array ['/payments/v4/consents','/payments/v4/consents/{consentId}','/payments/v4/pix/payments','/payments/v4/pix/payments/{paymentId}','/payments/v4/pix/payments/consents/{consentId}','/automatic-payments/v1/recurring-consents','/automatic-payments/v1/recurring-consents/{recurringConsentId}','/automatic-payments/v2/recurring-consents','/automatic-payments/v2/recurring-consents/{recurringConsentId}','/automatic-payments/v1/pix/recurring-payments','/automatic-payments/v1/pix/recurring-payments/{recurringPaymentId}','/automatic-payments/v2/pix/recurring-payments','/automatic-payments/v2/pix/recurring-payments/{recurringPaymentId}']
 ```
 
 Example for obtaining services from fase 4A - Open Data
@@ -131,8 +127,6 @@ Endpoints - Phase 2 Consent, Resources and Customer Data:
 
 | Endpoint                                   | Category        |
 | ------------------------------------------ | --------------- |
-| /consents/v2/consents                      | SHARING CONSENT |
-| /consents/v2/consents/\{consentId\}        | SHARING CONSENT |
 | /consents/v3/consents                      | SHARING CONSENT |
 | /consents/v3/consents/\{consentId\}        | SHARING CONSENT |
 | /customers/v2/personal/identifications     | CUSTOMER DATA   |
@@ -186,12 +180,12 @@ Endpoints - Phase 3 Payment Initiation
 
 | Endpoint                                                            | Category         |
 | ------------------------------------------------------------------- | ---------------- |
-| /payments/v3/consents                                               | PAYMENT CONSENT  |
-| /payments/v3/consents/\{consentId\}                                 | PAYMENT CONSENT  |
 | /payments/v4/consents                                               | PAYMENT CONSENT  |
 | /payments/v4/consents/\{consentId\}                                 | PAYMENT CONSENT  |
 | /automatic-payments/v1/recurring-consents                           | PAYMENT CONSENT  |
 | /automatic-payments/v1/recurring-consents/{recurringConsentId}      | PAYMENT CONSENT  |
+| /automatic-payments/v2/recurring-consents                           | PAYMENT CONSENT  |
+| /automatic-payments/v2/recurring-consents/{recurringConsentId}      | PAYMENT CONSENT  |
 | /payments/v3/pix/payments                                           | PIX PAYMENT      |
 | /payments/v3/pix/payments/\{paymentId\}                             | PIX PAYMENT      |
 | /payments/v4/pix/payments                                           | PIX PAYMENT      |
@@ -199,6 +193,8 @@ Endpoints - Phase 3 Payment Initiation
 | /payments/v4/pix/payments/consents/{consentId}                      | PIX PAYMENT      |
 | /automatic-payments/v1/pix/recurring-payments                       | PIX PAYMENT      |
 | /automatic-payments/v1/pix/recurring-payments/{recurringPaymentId}  | PIX PAYMENT      |
+| /automatic-payments/v2/pix/recurring-payments                       | PIX PAYMENT      |
+| /automatic-payments/v2/pix/recurring-payments/{recurringPaymentId}  | PIX PAYMENT      |
  
 Endpoints - Phase 4A Open Data
 

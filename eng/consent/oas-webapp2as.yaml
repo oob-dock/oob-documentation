@@ -524,16 +524,14 @@ components:
         brandId:
           type: string
           description: Identifier of the brand reported by the Open Banking participant
-          example:
-            - cbanco
+          example: cbanco
           minLength: 1
           maxLength: 50
         creationDateTime:
           description: Date and time when the consent was created. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
           type: string
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           maxLength: 20
         startDateTime:
@@ -542,8 +540,7 @@ components:
             [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
           type: string
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           maxLength: 20
         tpp:
@@ -556,14 +553,12 @@ components:
             name:
               type: string
               description: Name of the TPP that requested the consent
-              example:
-                - GuiaBolsa
+              example: GuiaBolsa
               maxLength: 100
         externalId:
           type: string
           description: Consent identifier used outside the OOB platform
-          example:
-            - urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
           maxLength: 100
         loggedUser:
           type: object
@@ -584,15 +579,13 @@ components:
                   type: string
                   maxLength: 11
                   description: User's official identification document number.
-                  example:
-                    - "11111111111"
+                  example: "11111111111"
                   pattern: ^\d{11}$
                 rel:
                   type: string
                   maxLength: 3
                   description: Type of user's official identification document.
-                  example:
-                    - CPF
+                  example: CPF
                   pattern: ^[A-Z]{3}$
         businessDocumentType:
           type: object
@@ -613,15 +606,13 @@ components:
                   type: string
                   maxLength: 14
                   description: Official identification document number of the legal entity holder.
-                  example:
-                    - "11111111111111"
+                  example: "11111111111111"
                   pattern: ^\d{14}$
                 rel:
                   type: string
                   maxLength: 4
                   description: Type of official identification document of the legal entity holder.
-                  example:
-                    - CNPJ
+                  example: CNPJ
                   pattern: ^[A-Z]{4}$
         resources:
           description: List of resources that can be selected by the customer to be used in the consent. Object used in consent acceptance interfaces
@@ -633,8 +624,7 @@ components:
               id:
                 type: string
                 description: field in GUID format
-                example:
-                  - 49fe29f1-95a9-4521-8f48-a9700e392b48
+                example: 49fe29f1-95a9-4521-8f48-a9700e392b48
                 pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
                 maxLength: 36
               type:
@@ -643,8 +633,7 @@ components:
                 enum:
                   - ACCOUNT
                   - CREDIT_CARD_ACCOUNT
-                example:
-                  - ACCOUNT
+                example: ACCOUNT
               name:
                 type: array
                 description: "Array of key-value pairs with the resource name, this data will be presented in the frontends in the format: 'Key1: Value1 Key2: Value2 ...'"
@@ -655,28 +644,23 @@ components:
                   properties:
                     key:
                       type: string
-                      example:
-                        - Credit card
+                      example: Credit card
                     value:
                       type: string
-                      example:
-                        - 2134 XXXX XXXX 3123
+                      example: 2134 XXXX XXXX 3123
                 minItems: 1
                 maxItems: 10
               balanceCurrency:
                 description: Resource balance currency.
                 type: string
-                example:
-                  - BRL
+                example: BRL
               balanceAmount:
                 description: Resource balance amount.
                 type: number
-                example:
-                  - 3192.32
+                example: 3192.32
               hasMultipleAuthorisers:
                 type: boolean
-                example:
-                  - "false"
+                example: "false"
               rejectionReason:
                 description: Object indicating the reason for resource rejection
                 type: object
@@ -706,8 +690,7 @@ components:
           type: string
           maxLength: 20
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
         permissions:
           type: array
           items:
@@ -747,9 +730,9 @@ components:
           minItems: 1
           maxItems: 30
           example:
-            - - ACCOUNTS_READ
-              - ACCOUNTS_OVERDRAFT_LIMITS_READ
-              - RESOURCES_READ
+            - ACCOUNTS_READ
+            - ACCOUNTS_OVERDRAFT_LIMITS_READ
+            - RESOURCES_READ
         failingResources:
           type: array
           items:
@@ -760,7 +743,8 @@ components:
               - ACCOUNT
           maxItems: 1000
           example:
-            - PAYMENT
+            - ACCOUNT
+            - CREDIT_CARD_ACCOUNT
       additionalProperties: false
     ConsentCustomerPayment:
       description: Consent payment details
@@ -782,16 +766,14 @@ components:
         brandId:
           type: string
           description: Identifier of the brand reported by the Open Banking participant
-          example:
-            - cbanco
+          example: cbanco
           minLength: 1
           maxLength: 50
         creationDateTime:
           description: Date and time when the consent was created. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
           type: string
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           maxLength: 20
         startDateTime:
@@ -800,8 +782,7 @@ components:
             [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
           type: string
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           maxLength: 20
         tpp:
@@ -814,14 +795,12 @@ components:
             name:
               type: string
               description: Name of the TPP that requested the consent
-              example:
-                - GuiaBolsa
+              example: GuiaBolsa
               maxLength: 100
         externalId:
           type: string
           description: Consent identifier used outside the OOB platform
-          example:
-            - urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
           maxLength: 100
         loggedUser:
           type: object
@@ -842,15 +821,13 @@ components:
                   type: string
                   maxLength: 11
                   description: User's official identification document number.
-                  example:
-                    - "11111111111"
+                  example: "11111111111"
                   pattern: ^\d{11}$
                 rel:
                   type: string
                   maxLength: 3
                   description: Type of user's official identification document.
-                  example:
-                    - CPF
+                  example: CPF
                   pattern: ^[A-Z]{3}$
         businessDocumentType:
           type: object
@@ -871,15 +848,13 @@ components:
                   type: string
                   maxLength: 14
                   description: Official identification document number of the legal entity holder.
-                  example:
-                    - "11111111111111"
+                  example: "11111111111111"
                   pattern: ^\d{14}$
                 rel:
                   type: string
                   maxLength: 4
                   description: Type of official identification document of the legal entity holder.
-                  example:
-                    - CNPJ
+                  example: CNPJ
                   pattern: ^[A-Z]{4}$
         resources:
           description: List of resources that can be selected by the customer to be used in the consent. Object used in consent acceptance interfaces
@@ -891,8 +866,7 @@ components:
               id:
                 type: string
                 description: field in GUID format
-                example:
-                  - 49fe29f1-95a9-4521-8f48-a9700e392b48
+                example: 49fe29f1-95a9-4521-8f48-a9700e392b48
                 pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
                 maxLength: 36
               type:
@@ -900,8 +874,7 @@ components:
                 type: string
                 enum:
                   - PAYMENT
-                example:
-                  - PAYMENT
+                example: PAYMENT
               name:
                 type: array
                 description: "Array of key-value pairs with the resource name, this data will be presented in the frontends in the format: 'Key1: Value1 Key2: Value2 ...'"
@@ -912,28 +885,23 @@ components:
                   properties:
                     key:
                       type: string
-                      example:
-                        - Credit card
+                      example: Credit card
                     value:
                       type: string
-                      example:
-                        - 2134 XXXX XXXX 3123
+                      example: 2134 XXXX XXXX 3123
                 minItems: 1
                 maxItems: 10
               balanceCurrency:
                 description: Resource balance currency.
                 type: string
-                example:
-                  - BRL
+                example: BRL
               balanceAmount:
                 description: Resource balance amount.
                 type: number
-                example:
-                  - 3192.32
+                example: 3192.32
               hasMultipleAuthorisers:
                 type: boolean
-                example:
-                  - "false"
+                example: "false"
               rejectionReason:
                 description: Object indicating the reason for resource rejection
                 type: object
@@ -963,8 +931,7 @@ components:
           type: string
           maxLength: 20
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
         additionalInformation:
           description: Additional information entered by the paying user in Automatic Payment consents
           type: string
@@ -1001,16 +968,14 @@ components:
               minLength: 8
               maxLength: 8
               pattern: ^[0-9]{8}$
-              example:
-                - "12345678"
+              example: "12345678"
               description: |
                 Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payment System) participant using only numbers.
             issuer:
               type: string
               maxLength: 4
               pattern: ^\d{4}$
-              example:
-                - "1774"
+              example: "1774"
               description: |
                 Agency code issuing the account without digit.
                 (The agency is the branch intended for serving customers, the general public, and credit union members,
@@ -1021,8 +986,7 @@ components:
               minLength: 3
               maxLength: 20
               pattern: ^\d{3,20}$
-              example:
-                - "1234567890"
+              example: "1234567890"
               description: |
                 Must be filled with the payer's transactional account number, with a check digit (if it exists),
                 if there is an alphanumeric value, it should be converted to 0.
@@ -1034,8 +998,7 @@ components:
                 - SLRY
                 - SVGS
                 - TRAN
-              example:
-                - CACC
+              example: CACC
               description: |
                 Types of accounts used for payment.
                 Traditional modalities provided by Resolution 4.753, not including linked accounts,
@@ -1056,7 +1019,7 @@ components:
           minItems: 1
           maxItems: 30
           example:
-            - - PAYMENTS_INITIATE
+             PAYMENTS_INITIATE
         failingResources:
           type: array
           items:
@@ -1089,26 +1052,22 @@ components:
         brandId:
           type: string
           description: Identifier of the brand reported by the Open Banking participant
-          example:
-            - cbanco
+          example: cbanco
           minLength: 1
           maxLength: 50
         creationDateTime:
           description: Date and time when the consent was created. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
           type: string
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           maxLength: 20
         startDateTime:
           description: Date and time when the consent should become valid. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
-
             [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
           type: string
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
           maxLength: 20
         tpp:
@@ -1121,14 +1080,12 @@ components:
             name:
               type: string
               description: Name of the TPP that requested the consent
-              example:
-                - GuiaBolsa
+              example: GuiaBolsa
               maxLength: 100
         externalId:
           type: string
           description: Consent identifier used outside the OOB platform
-          example:
-            - urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
           maxLength: 100
         loggedUser:
           type: object
@@ -1149,15 +1106,13 @@ components:
                   type: string
                   maxLength: 11
                   description: User's official identification document number.
-                  example:
-                    - "11111111111"
+                  example: "11111111111"
                   pattern: ^\d{11}$
                 rel:
                   type: string
                   maxLength: 3
                   description: Type of user's official identification document.
-                  example:
-                    - CPF
+                  example: CPF
                   pattern: ^[A-Z]{3}$
         businessDocumentType:
           type: object
@@ -1178,15 +1133,13 @@ components:
                   type: string
                   maxLength: 14
                   description: Official identification document number of the legal entity holder.
-                  example:
-                    - "11111111111111"
+                  example: "11111111111111"
                   pattern: ^\d{14}$
                 rel:
                   type: string
                   maxLength: 4
                   description: Type of official identification document of the legal entity holder.
-                  example:
-                    - CNPJ
+                  example: CNPJ
                   pattern: ^[A-Z]{4}$
         resources:
           description: List of resources that can be selected by the customer to be used in the consent. Object used in consent acceptance interfaces
@@ -1198,8 +1151,7 @@ components:
               id:
                 type: string
                 description: field in GUID format
-                example:
-                  - 49fe29f1-95a9-4521-8f48-a9700e392b48
+                example: 49fe29f1-95a9-4521-8f48-a9700e392b48
                 pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
                 maxLength: 36
               type:
@@ -1209,8 +1161,7 @@ components:
                   - ACCOUNT
                   - CREDIT_CARD_ACCOUNT
                   - PAYMENT
-                example:
-                  - PAYMENT
+                example: PAYMENT
               name:
                 type: array
                 description: "Array of key-value pairs with the resource name, this data will be presented in the frontends in the format: 'Key1: Value1 Key2: Value2 ...'"
@@ -1221,28 +1172,23 @@ components:
                   properties:
                     key:
                       type: string
-                      example:
-                        - Credit card
+                      example: Credit card
                     value:
                       type: string
-                      example:
-                        - 2134 XXXX XXXX 3123
+                      example: 2134 XXXX XXXX 3123
                 minItems: 1
                 maxItems: 10
               balanceCurrency:
                 description: Resource balance currency.
                 type: string
-                example:
-                  - BRL
+                example: BRL
               balanceAmount:
                 description: Resource balance amount.
                 type: number
-                example:
-                  - 3192.32
+                example: 3192.32
               hasMultipleAuthorisers:
                 type: boolean
-                example:
-                  - "false"
+                example: "false"
               rejectionReason:
                 description: Object indicating the reason for resource rejection
                 type: object
@@ -1272,8 +1218,7 @@ components:
           type: string
           maxLength: 20
           format: date-time
-          example:
-            - "2021-05-21T08:30:00Z"
+          example: "2021-05-21T08:30:00Z"
         additionalInformation:
           description: Additional information entered by the paying user in Automatic Payment consents
           type: string
@@ -1310,16 +1255,14 @@ components:
               minLength: 8
               maxLength: 8
               pattern: ^[0-9]{8}$
-              example:
-                - "12345678"
+              example: "12345678"
               description: |
                 Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payment System) participant using only numbers.
             issuer:
               type: string
               maxLength: 4
               pattern: ^\d{4}$
-              example:
-                - "1774"
+              example: "1774"
               description: |
                 Agency code issuing the account without digit.
                 (The agency is the branch intended for serving customers, the general public, and credit union members,
@@ -1330,8 +1273,7 @@ components:
               minLength: 3
               maxLength: 20
               pattern: ^\d{3,20}$
-              example:
-                - "1234567890"
+              example: "1234567890"
               description: |
                 Must be filled with the payer's transactional account number, with a check digit (if it exists),
                 if there is an alphanumeric value, it should be converted to 0.
@@ -1343,8 +1285,7 @@ components:
                 - SLRY
                 - SVGS
                 - TRAN
-              example:
-                - CACC
+              example: CACC
               description: |
                 Types of accounts used for payment.
                 Traditional modalities provided by Resolution 4.753, not including linked accounts,
@@ -1395,9 +1336,9 @@ components:
           minItems: 1
           maxItems: 30
           example:
-            - - ACCOUNTS_READ
-              - ACCOUNTS_OVERDRAFT_LIMITS_READ
-              - RESOURCES_READ
+            - ACCOUNTS_READ
+            - ACCOUNTS_OVERDRAFT_LIMITS_READ
+            - RESOURCES_READ
         failingResources:
           type: array
           items:
@@ -1428,15 +1369,13 @@ components:
             - PESSOA_JURIDICA
           description: |
             Holder, natural or legal person to whom the creditor data refers.
-          example:
-            - PESSOA_NATURAL
+          example: PESSOA_NATURAL
         cpfCnpj:
           type: string
           minLength: 11
           maxLength: 14
           pattern: ^\d{11}$|^\d{14}$
-          example:
-            - "11111111111"
+          example: "11111111111"
           description: |
             Identification of the person involved in the transaction.
             Fill in with the CPF or CNPJ, according to the value chosen in the type field.
@@ -1446,8 +1385,7 @@ components:
           type: string
           maxLength: 140
           pattern: '[\w\W\s]*'
-          example:
-            - Marco Antonio de Brito
+          example: Marco Antonio de Brito
           description: |
             In case of a natural person, the full name of the account holder must be provided.
             In case of a legal person, the corporate name or trade name of the account holder must be provided.
@@ -1853,8 +1791,7 @@ components:
           maxLength: 3
           enum:
             - PIX
-          example:
-            - PIX
+          example: PIX
           description: |
             This field defines the type of payment to be initiated after consent authorization.
         date:
@@ -1862,8 +1799,7 @@ components:
           format: date
           maxLength: 10
           pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9])$
-          example:
-            - "2021-01-01"
+          example: "2021-01-01"
           description: Payment date, according to RFC-3339 specification.
         schedule:
           description: |
@@ -1890,8 +1826,7 @@ components:
           type: string
           maxLength: 3
           pattern: ^([A-Z]{3})$
-          example:
-            - BRL
+          example: BRL
           description: |
             National currency code according to the ISO-4217 model, i.e., 'BRL'.
             All monetary values reported are represented with the current currency of Brazil.
@@ -1900,8 +1835,7 @@ components:
           minLength: 4
           maxLength: 19
           pattern: ^((\d{1,16}\.\d{2}))$
-          example:
-            - "100000.12"
+          example: "100000.12"
           description: |
             Transaction amount with 2 decimal places.
         ibgeTownCode:
@@ -1909,8 +1843,7 @@ components:
           minLength: 7
           maxLength: 7
           pattern: ^\d{7}$
-          example:
-            - "5300108"
+          example: "5300108"
           description: |
             Contains the city code according to the IBGE (Brazilian Institute of Geography and Statistics).
             For the filling of this field, the Payment Initiator must follow the payment arrangement guidance.
@@ -1933,8 +1866,7 @@ components:
                 - QRDN
                 - QRES
                 - INIC
-              example:
-                - DICT
+              example: DICT
               description: |
                 Specifies the form of payment initiation:
                 - MANU - Manual entry of transactional account data
@@ -1946,8 +1878,7 @@ components:
               type: string
               maxLength: 512
               pattern: '[\w\W\s]*'
-              example:
-                - |
+              example: |
                   00020104141234567890123426660014BR.GOV.BCB.PIX014466756C616E6F32303139406578616D706C652E636F6D27300012
                   BR.COM.OUTRO011001234567895204000053039865406123.455802BR5915NOMEDORECEBEDOR6008BRASILIA61087007490062
                   530515RP12345678-201950300017BR.GOV.BCB.BRCODE01051.0.080450014BR.GOV.BCB.PIX0123PADRAO.URL.PIX/0123AB
@@ -1963,8 +1894,7 @@ components:
               type: string
               maxLength: 77
               pattern: '[\w\W\s]*'
-              example:
-                - "12345678901"
+              example: "12345678901"
               description: |
                 Key registered in the DICT belonging to the creditor. Key types can be: phone, email, CPF/CNPJ, or random key.
                 For the phone number, it must be informed in the E.1641 standard.
@@ -1991,16 +1921,14 @@ components:
                   minLength: 8
                   maxLength: 8
                   pattern: ^[0-9]{8}$
-                  example:
-                    - "12345678"
+                  example: "12345678"
                   description: |
                     Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payment System) participant using only numbers.
                 issuer:
                   type: string
                   maxLength: 4
                   pattern: ^\d{4}$
-                  example:
-                    - "1774"
+                  example: "1774"
                   description: |
                     Agency code issuing the account without digit.
                     (The agency is the branch intended for serving customers, the general public, and credit union members,
@@ -2011,8 +1939,7 @@ components:
                   minLength: 3
                   maxLength: 20
                   pattern: ^\d{3,20}$
-                  example:
-                    - "1234567890"
+                  example: "1234567890"
                   description: |
                     Must be filled with the payee's account number, with a check digit (if it exists),
                     if there is an alphanumeric value, it should be converted to 0.
@@ -2024,8 +1951,7 @@ components:
                     - SLRY
                     - SVGS
                     - TRAN
-                  example:
-                    - CACC
+                  example: CACC
                   description: |
                     Types of accounts used for payment via Pix.
                     Traditional modalities provided by Resolution 4.753, not including linked accounts,
