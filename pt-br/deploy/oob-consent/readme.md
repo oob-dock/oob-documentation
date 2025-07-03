@@ -711,6 +711,23 @@ additionalVars:
     value: "5"
 ```
 
+### DAPR_JOB_DROPREASON_SCHEDULE
+
+Utilizado para definir o agendamento da publicação de evento de dropreason
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento, baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `@every 20m`
+
+**Exemplo:** Para agendar a execução do job a cada 20 minutos:
+
+```yaml
+env:
+  dapr:
+    job:
+      activeConsents: "@every 30m"
+```
+
 ### Conectores
 
 Existem additionalVars para utilização do conector de aprovação de consentimento
