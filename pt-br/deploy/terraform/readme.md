@@ -44,6 +44,7 @@
       - [log\_request\_response\_collector\_url\_http](#log_request_response_collector_url_http)
       - [ocsp\_validation\_enabled](#ocsp_validation_enabled)
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
+      - [ocsp\_server\_request\_ms\_timeout](#ocsp_server_request_ms_timeout)
       - [operational\_limits\_enabled](#operational_limits_enabled)
       - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
       - [operational\_limits\_check\_limit\_timeout\_ms](#operational_limits_check_limit_timeout_ms)
@@ -363,6 +364,15 @@ Define a duração em milissegundos do cache da validação de OCSP feita pelo
 plugin do Kong customizado `oob-ocsp-validation`.
 
 **Default:** `600000`
+
+#### ocsp_server_request_ms_timeout
+
+Define quantos milissegundos o produto esperará, no máximo, pela resposta da
+chamada feita ao servidor de OCSP para consultar o status do certificado.
+Quando definido como `0` o produto não realizará a consulta ao servidor de
+OCSP de maneira síncrona, apenas de maneira assíncrona.
+
+**Default:** `0`
 
 #### operational_limits_enabled
 
