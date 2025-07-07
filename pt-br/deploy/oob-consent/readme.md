@@ -873,3 +873,22 @@ Ex: `1`
 Habilita ou desabilita a criação de chaves de busca de CPF e CNPJ no momento em que um consentimento é criado.
 
 Ex: `1`
+
+### feature/async-payment-status/enabled
+
+Habilita ou desabilita as requisições assíncronas ao endpoint legado para
+obter o status do pagamento.
+
+Essa feature não deve ser habilitada caso a instituição tenha
+implementado a [notificação de alteração de status](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento)
+para ***TODOS*** os tipos de pagamento.
+
+**Formato:** `true` ou `false`
+
+**Valor default**: `false`
+
+```yaml
+additionalVars:
+  - name: FEATURE_ASYNC_PAYMENT_STATUS_ENABLED
+    value: "true"
+```

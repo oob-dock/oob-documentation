@@ -308,3 +308,21 @@ additionalVars:
   - name: CAMEL_CONNECTOR_MTLS_KEY
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
 ```
+
+### feature/requires-sync-status/enabled
+
+Habilita ou desabilita as requisições síncronas ao endpoint legado para
+obter o status do pagamento.
+
+Essa feature deve estar habilitada ***APENAS*** nos ambientes
+de homologação.
+
+**Formato:** `true` ou `false`
+
+**Valor default**: `false`
+
+```yaml
+additionalVars:
+  - name: FEATURE_REQUIRES_SYNC_STATUS_ENABLED
+    value: "true"
+```
