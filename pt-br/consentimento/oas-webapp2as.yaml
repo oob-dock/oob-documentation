@@ -642,6 +642,7 @@ components:
                 type: number
                 example: 3192.32
               hasMultipleAuthorisers:
+                deprecated: true
                 type: boolean
                 example: "false"
               rejectionReason:
@@ -881,6 +882,7 @@ components:
                 type: number
                 example: 3192.32
               hasMultipleAuthorisers:
+                deprecated: true
                 type: boolean
                 example: "false"
               rejectionReason:
@@ -1168,6 +1170,7 @@ components:
                 type: number
                 example: 3192.32
               hasMultipleAuthorisers:
+                deprecated: true
                 type: boolean
                 example: "false"
               rejectionReason:
