@@ -647,6 +647,24 @@ additionalVars:
     value: "5"
 ```
 
+### DAPR_JOB_DROPREASON_SCHEDULE
+
+Used to define the schedule for publishing the dropreason event.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value:** `@every 5m`
+
+**Example:** To schedule the job to run every 5 minutes:
+
+```yaml
+env:
+  dapr:
+    job:
+      dropreason:
+        schedule: "@every 5m"
+```
+
 ### Connectors
 
 There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
