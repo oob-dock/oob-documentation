@@ -271,6 +271,24 @@ env:
       activeConsents: "@every 30m"
 ```
 
+## dapr/job/dropreason/schedule
+
+Used to define the schedule for publishing the dropreason event.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value:** `disable`
+
+**Example:** To schedule the job to run every 5 minutes:
+
+```yaml
+env:
+  dapr:
+    job:
+      dropreason:
+        schedule: "@every 5m"
+```
+
 ## opentelemetry
 
 This module is instrumented via [Open Telemetry](https://opentelemetry.io/),
@@ -645,24 +663,6 @@ Default value: `5`
 additionalVars:
   - name: APPLICATION_CONSENT_RECURRING_APPROVAL_DUE_DATE_DAYS
     value: "5"
-```
-
-### DAPR_JOB_DROPREASON_SCHEDULE
-
-Used to define the schedule for publishing the dropreason event.
-
-**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
-
-**Default value:** `@every 5m`
-
-**Example:** To schedule the job to run every 5 minutes:
-
-```yaml
-env:
-  dapr:
-    job:
-      dropreason:
-        schedule: "@every 5m"
 ```
 
 ### Connectors
