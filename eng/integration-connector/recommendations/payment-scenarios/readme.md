@@ -53,7 +53,7 @@ The field analysis below refers to the payload of the payment creation request.
 
 The field that defines the payment date varies depending on the payment type (`paymentType` field):
 
-#### If `paymentType` is `PAYMENT_CONSENT`
+- If `paymentType` is `PAYMENT_CONSENT`
 
 | Field `consent.payment.schedule`       | Scenario  | Payment Date                           |
 | -------------------------------------- | --------- | -------------------------------------- |
@@ -61,7 +61,7 @@ The field that defines the payment date varies depending on the payment type (`p
 | Has `single` subfield                  | Scheduled | `consent.payment.schedule.single.date` |
 | Has a subfield **other than** `single` | Scheduled | `requestBody.data.date`                |
 
-#### If `paymentType` is `PAYMENT_RECURRING_CONSENT`
+- If `paymentType` is `PAYMENT_RECURRING_CONSENT`
 
 | Field `requestBody.data.date` | Scenario  | Payment Date            |
 | ----------------------------- | --------- | ----------------------- |
@@ -75,13 +75,13 @@ The method to identify the **creditor** varies according to the initiation metho
 
 The table below summarizes the fields used to identify each scenario:
 
-| Initiation Method | Fields used to identify the creditor                         |
-| :---------------: | ------------------------------------------------------------ |
-|       MANU        | `creditorAccount` (object with bank account information)     |
-|       INIC        | `proxy` (Pix Key)                                            |
-|       DICT        | `proxy` + `creditorAccount`                                  |
-|       QRES        | `proxy` + `creditorAccount` + `qrCode` (String with QR Code) |
-|       QRDN        | `proxy` + `creditorAccount` + `qrCode`                       |
+| Initiation Method  | Fields used to identify the creditor                               |
+| :----------------: | ------------------------------------------------------------------ |
+|        MANU        | `creditorAccount` (Object with bank account information)           |
+|        INIC        | `creditorAccount` + `proxy` (Pix Key)                              |
+|        DICT        | `creditorAccount` + `proxy`                                        |
+|        QRES        | `creditorAccount` + `proxy` + `qrCode` (String with QR Code)       |
+|        QRDN        | `creditorAccount` + `proxy` + `qrCode`                             |
 
 **⚠️ Important:** When there is more than one identification method, consistency between them must be validated.
 Example: the Pix key must refer to the same account indicated in the `creditorAccount` field.

@@ -47,13 +47,13 @@ A análise de campos abaixo é feita para o payload da requisição de criação
 | Ausente                                                      | Usuário PF    |
 | Preenchido                                                   | Usuário PJ    |
 
-**ℹ️ Observação:** Independentemente do tipo de usuário, seu CPF estará disponível no campo `consent.loggedUser.document.identification`.
+**ℹ️ Observação:** Independentemente do tipo de usuário, o CPF dele estará disponível no campo `consent.loggedUser.document.identification`.
 
 ### Como Identificar a Data de Efetivação do Pagamento
 
 O campo que define a data do pagamento varia conforme o tipo de pagamento (campo `paymentType`):
 
-#### Caso `paymentType` seja `PAYMENT_CONSENT`
+- Caso `paymentType` seja `PAYMENT_CONSENT`
 
 | Campo `consent.payment.schedule`          | Cenário     | Data de Pagamento                      |
 | ----------------------------------------- | ----------- | -------------------------------------- |
@@ -61,7 +61,7 @@ O campo que define a data do pagamento varia conforme o tipo de pagamento (campo
 | Possui subcampo `single`                  | Agendado    | `consent.payment.schedule.single.date` |
 | Possui subcampo **diferente** de `single` | Agendado    | `requestBody.data.date`                |
 
-#### Caso `paymentType` seja `PAYMENT_RECURRING_CONSENT`
+- Caso `paymentType` seja `PAYMENT_RECURRING_CONSENT`
 
 | Campo `requestBody.data.date` | Cenário     | Data de Pagamento       |
 | ----------------------------- | ----------- | ----------------------- |
@@ -77,11 +77,11 @@ A tabela abaixo resume os campos para a identificação cada cenário:
 
 | Forma de Iniciação | Campos utilizados para identificar o recebedor                     |
 | :----------------: | ------------------------------------------------------------------ |
-|        MANU        | `creditorAccount` (objeto com informações bancárias)               |
-|        INIC        | `proxy` (Chave Pix)                                                |
-|        DICT        | `proxy` + `creditorAccount`                                        |
-|        QRES        | `proxy` + `creditorAccount` + `qrCode` (String com o QR Code lido) |
-|        QRDN        | `proxy` + `creditorAccount` + `qrCode`                             |
+|        MANU        | `creditorAccount` (Objeto com informações bancárias)               |
+|        INIC        | `creditorAccount` + `proxy` (Chave Pix)                            |
+|        DICT        | `creditorAccount` + `proxy`                                        |
+|        QRES        | `creditorAccount` + `proxy` + `qrCode` (String com o QR Code lido) |
+|        QRDN        | `creditorAccount` + `proxy` + `qrCode`                             |
 
 **⚠️ Importante:** Quando houver mais de uma forma de identificação, deve-se validar a consistência entre elas.
 Exemplo: a chave Pix deve se referir à mesma conta indicada no campo creditorAccount.
