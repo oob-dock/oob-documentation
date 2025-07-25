@@ -360,6 +360,10 @@ With this variable, it is possible to define different wait times for different
 certificates. This variable should follow the following structure: `<certificateIdentifier>|<waitTime>`.
 You can specify multiple certificates by separating them with a semicolon (`;`),
 for example: `<certificateIdentifier>|<waitTime>;<certificateIdentifier2>|<waitTime2>`.
+This configuration takes precedence over the `ocsp_server_request_ms_timeout`
+variable. Therefore, if a certificate has this setting defined, this timeout
+will be used instead of the one specified in the
+`ocsp_server_request_ms_timeout` variable.
 
 Field Completion Instructions:
 

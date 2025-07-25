@@ -384,6 +384,10 @@ possível definir tempos de espera diferentes para certificados diferentes.
 Ela é composta seguindo a seguinte estrutura: `<identificadorDoCertificado>|<tempoDeEspera>`.
 A configuração aceita múltiplos certificados, que devem ser separados por `;`,
 por exemplo: `<identificadorDoCertificado>|<tempoDeEspera>;<identificadorDoCertificado2>|<tempoDeEspera2>`.
+Esta configuração tem prioridade em relação a variável
+`ocsp_server_request_ms_timeout`. Portanto se um certificado possui esta
+configuração definida este timeout será o considerado e não o timeout da
+variável `ocsp_server_request_ms_timeout`.
 
 Intruções para preenchimento dos campos:
 
