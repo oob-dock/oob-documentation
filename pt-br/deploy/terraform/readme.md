@@ -389,11 +389,11 @@ Esta configuração tem prioridade em relação a variável
 configuração definida este timeout será o considerado e não o timeout da
 variável `ocsp_server_request_ms_timeout`.
 
-Intruções para preenchimento dos campos:
+Instruções para preenchimento dos campos:
 
 - `<identificadorDoCertificado>`: Composto pelo ***Common Name (CN)*** do
 ***issuer*** (concatenado, sem espaços) + ***Serial Number*** do certificado no
-formado decimal. Por exemplo:
+formato decimal. Por exemplo:
     - *Common Name (CN) do Issuer*: `AC SOLUTI SSL EV G4`
     - *Serial Number*: `11:DE:25:02:26:7D:F0:B6:44:A1 (84378074129399197090977)`
     - **Configuração correta do identificador:** `ACSOLUTISSLEVG484378074129399197090977`
