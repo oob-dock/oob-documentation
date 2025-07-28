@@ -45,6 +45,7 @@
       - [ocsp\_validation\_enabled](#ocsp_validation_enabled)
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
       - [ocsp\_server\_request\_ms\_timeout](#ocsp_server_request_ms_timeout)
+      - [ocsp\_per\_cert\_server\_request\_ms\_timeout](#ocsp_per_cert_server_request_ms_timeout)
       - [operational\_limits\_enabled](#operational_limits_enabled)
       - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
       - [operational\_limits\_check\_limit\_timeout\_ms](#operational_limits_check_limit_timeout_ms)
@@ -367,12 +368,45 @@ plugin do Kong customizado `oob-ocsp-validation`.
 
 #### ocsp_server_request_ms_timeout
 
-Define quantos milissegundos o produto esperará, no máximo, pela resposta da
-chamada feita ao servidor de OCSP para consultar o status do certificado.
+Define quantos milissegundos o produto esperará, no máximo, pela resposta do
+servidor de OCSP para consultar o status do certificado.
 Quando definido como `0` o produto não realizará a consulta ao servidor de
 OCSP de maneira síncrona, apenas de maneira assíncrona.
 
 **Default:** `0`
+
+#### ocsp_per_cert_server_request_ms_timeout
+
+Similar à variável `ocsp_server_request_ms_timeout`, mas neste caso define o
+tempo de espera do produto, no máximo, pela resposta do servidor de OCSP
+para consultar o status de certificados específicos. Com esta variável é
+possível definir tempos de espera diferentes para certificados diferentes.
+Ela é composta seguindo a seguinte estrutura: `<identificadorDoCertificado>|<tempoDeEspera>`.
+A configuração aceita múltiplos certificados, que devem ser separados por `;`,
+por exemplo: `<identificadorDoCertificado>|<tempoDeEspera>;<identificadorDoCertificado2>|<tempoDeEspera2>`.
+Esta configuração tem prioridade em relação a variável
+`ocsp_server_request_ms_timeout`. Portanto se um certificado possui esta
+configuração definida este timeout será o considerado e não o timeout da
+variável `ocsp_server_request_ms_timeout`.
+
+Instruções para preenchimento dos campos:
+
+- `<identificadorDoCertificado>`: Composto pelo ***Common Name (CN)*** do
+***issuer*** (concatenado, sem espaços) + ***Serial Number*** do certificado no
+formato decimal. Por exemplo:
+    - *Common Name (CN) do Issuer*: `AC SOLUTI SSL EV G4`
+    - *Serial Number*: `11:DE:25:02:26:7D:F0:B6:44:A1 (84378074129399197090977)`
+    - **Configuração correta do identificador:** `ACSOLUTISSLEVG484378074129399197090977`
+- `<tempoDeEspera>`: O tempo de fato que o produto esperará, em milissegundos,
+pela chamada feita ao servidor de OCSP para consultar o status **deste certificado**.
+
+Sendo assim, por exemplo, as configurações abaixo são **exemplos** de
+configurações válidas:
+
+- `ACSOLUTISSLEVG484378074129399197090977|1000`
+- `ACSOLUTISSLEVG484378074129399197090977|1000;ACSOLUTISSLEVG484378074129399197090978|2000`
+
+Lembrando que o preenchimento desta variável é **opcional**.
 
 #### operational_limits_enabled
 

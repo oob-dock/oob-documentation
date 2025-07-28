@@ -45,6 +45,7 @@
       - [ocsp\_validation\_enabled](#ocsp_validation_enabled)
       - [ocsp\_cache\_ms\_duration](#ocsp_cache_ms_duration)
       - [ocsp\_server\_request\_ms\_timeout](#ocsp_server_request_ms_timeout)
+      - [ocsp\_per\_cert\_server\_request\_ms\_timeout](#ocsp_per_cert_server_request_ms_timeout)
       - [operational\_limits\_enabled](#operational_limits_enabled)
       - [operational\_limits\_allow\_when\_over\_limit](#operational_limits_allow_when_over_limit)
       - [operational\_limits\_check\_limit\_timeout\_ms](#operational_limits_check_limit_timeout_ms)
@@ -349,6 +350,38 @@ to `0`, the product will not perform a synchronous check to the OCSP server,
 only an asynchronous one.
 
 **Default:** `0`
+
+#### ocsp_per_cert_server_request_ms_timeout
+
+Similar to the `ocsp_server_request_ms_timeout` variable, but in this case, it
+defines the maximum wait time, in milliseconds, the product will wait for a
+response from the OCSP server when checking the status of specific certificates.
+With this variable, it is possible to define different wait times for different
+certificates. This variable should follow the following structure: `<certificateIdentifier>|<waitTime>`.
+You can specify multiple certificates by separating them with a semicolon (`;`),
+for example: `<certificateIdentifier>|<waitTime>;<certificateIdentifier2>|<waitTime2>`.
+This configuration takes precedence over the `ocsp_server_request_ms_timeout`
+variable. Therefore, if a certificate has this setting defined, this timeout
+will be used instead of the one specified in the
+`ocsp_server_request_ms_timeout` variable.
+
+Field Completion Instructions:
+
+- `<certificateIdentifier>`: Composed of the **Common Name (CN)** of the
+issuer (concatenated, no spaces) + the **Serial Number** of the certificate in
+decimal format. Example:
+  - Issuer Common Name (CN): `AC SOLUTI SSL EV G4`
+  - Serial Number: `11:DE:25:02:26:7D:F0:B6:44:A1 (84378074129399197090977)`
+  - **Correct identifier configuration**: `ACSOLUTISSLEVG484378074129399197090977`
+- `<waitTime>`: The amount of time (in milliseconds) the product should wait
+for the OCSP server response for **this specific certificate**.
+
+Some **examples** of valid configuration below:
+
+- `ACSOLUTISSLEVG484378074129399197090977|1000`
+- `ACSOLUTISSLEVG484378074129399197090977|1000;ACSOLUTISSLEVG484378074129399197090978|2000`
+
+**Note:** Filling in this variable is **optional**.
 
 #### operational_limits_enabled
 
