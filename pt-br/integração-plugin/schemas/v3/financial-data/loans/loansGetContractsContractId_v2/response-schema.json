@@ -43,7 +43,7 @@
         "productName": {
           "type": "string",
           "maxLength": 140,
-          "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+          "pattern": "^[^\\s](.*[^\\s])?$",
           "example": "Crédito Pessoal Consignado",
           "description": "Denominação/Identificação do nome da Modalidade da Operação de Crédito divulgado ao cliente\n"
         },
@@ -73,7 +73,7 @@
         },
         "productSubTypeCategory": {
           "type": "string",
-          "description": "Categoria para classificação específica relacionada com a submodalidade do produto. Atenção: o preenchimento com o enum CREDITO_PESSOAL_CLEAN, quando aplicável, será obrigatório à partir da publicação da versão 2.5.0 da API Empréstimos, já o enum CONSIGNADO_SIAPE passará a ser de envio obrigatório em data posterior. Demais submodalidades devem ser classificadas na opção OUTROS\n",
+          "description": "Categoria destinada à classificação específica relacionada à submodalidade do produto.\nAs orientações a seguir devem ser observadas para o correto preenchimento deste campo:\n* O preenchimento com o enum `CREDITO_PESSOAL_CLEAN` será obrigatório, a partir da publicação da versão 2.5.0 da API Empréstimos, **para contratos em aberto**, quando aplicável;\n* O enum `CONSIGNADO_SIAPE`, **que engloba todos os contratos consignados sob a regulamentação do Sistema Integrado de Administração de Recursos Humanos (Siape), apresentando informações de servidores estatutários, temporários, celetistas (CLT), entre outros**, será de envio obrigatório, a partir do início do piloto para crédito consignado;\n* Contratos liquidados até a entrada em produção (go live) da versão 2.5.0 poderão ser preenchidos com a opção OUTRO;\n* As demais submodalidades devem ser classificadas na opção `OUTRO`.\n",
           "enum": [
             "CREDITO_PESSOAL_CLEAN",
             "CONSIGNADO_SIAPE",
@@ -86,7 +86,7 @@
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2018-01-05",
-          "description": "Data de contratação da operação de crédito. Especificação RFC-3339"
+          "description": "Data de contratação da operação de crédito. Especificação RFC-3339. Para produtos rotativos, productSubType `CHEQUE_ESPECIAL` e `CONTA_GARANTIDA`, caso tenha-se múltiplas contratações do mesmo produto, deve-se enviar à última data disponível.\n"
         },
         "disbursementDates": {
           "type": "array",
@@ -105,7 +105,7 @@
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2018-01-15",
-          "description": "Data de liquidação da operação.\n"
+          "description": "Data de liquidação da operação. Data do cancelamento do contrato para casos em que não há saldo devedor restante. No caso de cancelamento com saldo devedor, a data só deve ser preenchida quando o mesmo for liquidado.\n"
         },
         "contractAmount": {
           "type": "string",
@@ -131,7 +131,7 @@
           "minLength": 2,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2028-01-15",
-          "description": "Data do último vencimento da operação, seguindo a especificação RFC-3339.\nInformação deve ser enviada caso ela exista. Especialmente para contratos repactuados, deve-se alterar a data para a do último vencimento.\n"
+          "description": "Data do último vencimento da operação, seguindo a especificação RFC-3339. Informação deve ser enviada caso ela exista. Especialmente para contratos repactuados, deve-se alterar a data para a do último vencimento. Para produtos rotativos, productSubType `CHEQUE_ESPECIAL` e `CONTA_GARANTIDA`, o campo representa a data fim da renovação para contratos ativos ou data do cancelamento para contratos cancelados ou vencidos.\n"
         },
         "instalmentPeriodicity": {
           "type": "string",
@@ -151,7 +151,7 @@
         },
         "instalmentPeriodicityAdditionalInfo": {
           "type": "string",
-          "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+          "pattern": "^[^\\s](.*[^\\s])?$",
           "maxLength": 50,
           "example": "Informações adicionais sobre periodicidade",
           "description": "Campo obrigatório para complementar a informação relativa à periodicidade de pagamento regular quando tiver a opção OUTROS.\n"
@@ -193,7 +193,7 @@
         },
         "amortizationScheduledAdditionalInfo": {
           "type": "string",
-          "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+          "pattern": "^[^\\s](.*[^\\s])?$",
           "maxLength": 200,
           "example": "Informações complementares relativa à amortização do tipo 'OUTROS'",
           "description": "Campo obrigatório para complementar a informação relativa à amortização quando selecionada a opção OUTROS.\n"
@@ -201,13 +201,13 @@
         "cnpjConsignee": {
           "type": "string",
           "maxLength": 14,
-          "pattern": "^\\d{14}$",
+          "pattern": "^[0-9A-Z]{12}[0-9]{2}$",
           "example": "60500998000135",
-          "description": "CNPJ do consignante (CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica). \n\nDeve-se ter apenas os números do CNPJ, sem máscara. \n\n[Restrição] Informação adicional específica para quando o productSubType for igual a CREDITO_PESSOAL_COM_CONSIGNACAO\n"
+          "description": "CNPJ do consignante (CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica). \n\nDeve-se ter apenas a representação alfanumérica do CNPJ, sem máscara.\n\n[Restrição] Informação adicional específica para quando o productSubType for igual a CREDITO_PESSOAL_COM_CONSIGNACAO\n"
         },
         "interestRates": {
           "type": "array",
-          "description": "Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito. \nCaso o contrato não possua taxas de juros, deve ser compartilhada uma lista vazia. Caso o contrato possua uma taxa de juros com valor 0, deve ser compartilhado um objeto com o valor 0 de forma explícita. \nPara contratos em renegociação a taxa de empréstimo compartilhada  deve se manter a taxa do contrato vigente, sendo alterada para a renegociada ao fim do processo de renegociação.\n",
+          "description": "Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito. \nCaso o contrato não possua taxas de juros, deve ser compartilhada uma lista vazia. Caso o contrato possua uma taxa de juros com valor 0, deve ser compartilhado um objeto com o valor 0 de forma explícita. \nPara contratos em renegociação, a taxa de empréstimo compartilhada deve se manter a taxa do contrato vigente, sendo alterada para a renegociada ao fim do processo de renegociação. \nPara o produto CPC (campo `productSubTypeCategory` preenchido com `CREDITO_PESSOAL_CLEAN`) deve-se obrigatoriamente conter a taxa nominal e a taxa efetiva (campo `taxPeriodicity`) com periodicidade a.a. (ao ano), podendo adicionalmente conter, além das taxas nominal e efetiva ao ano, outras com outra periodicidade.\n",
           "minItems": 0,
           "items": {
             "type": "object",
@@ -240,7 +240,7 @@
               },
               "taxPeriodicity": {
                 "type": "string",
-                "description": "\"Periodicidade da taxa . (Vide  Enum)\na.m - ao mês\na.a. - ao ano\"\n",
+                "description": "\"Periodicidade da taxa. (Vide  Enum)\na.m - ao mês\na.a. - ao ano\"\n",
                 "enum": [
                   "AM",
                   "AA"
@@ -301,7 +301,7 @@
                 "type": "string",
                 "description": "Campo livre para complementar a informação relativa ao Tipo de taxa referencial ou indexador.\n[Restrição] Obrigatório para complementar a informação relativa ao Tipo de taxa referencial ou indexador, quando selecionada o tipo ou subtipo OUTRO.\n",
                 "maxLength": 140,
-                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "example": "Informações adicionais"
               },
               "preFixedRate": {
@@ -321,7 +321,7 @@
                 "format": "double",
                 "maxLength": 9,
                 "minLength": 8,
-                "description": "Taxa pós fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.0045 .O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%). Para taxas pós fixadas necessário informar o indexador (campo referentialRateIndexerSubType).\n\n[Restrição] Este campo é de envio obrigatório caso não seja enviado o campo preFixedRate.\n",
+                "description": "Taxa pós fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.0045.O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%). Para taxas pós fixadas necessário informar o indexador (campo referentialRateIndexerSubType).\n\n[Restrição] Este campo é de envio obrigatório caso não seja enviado o campo preFixedRate.\n",
                 "example": "0.550000",
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
@@ -329,7 +329,7 @@
               "additionalInfo": {
                 "type": "string",
                 "maxLength": 1200,
-                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "example": "Informações adicionais",
                 "description": "Texto com informações adicionais sobre a composição das taxas de juros pactuadas. \n\n[Restrição] Caso a instituição possua a informação para compartilhamento, esta deverá ser informada.\n"
               }
@@ -353,14 +353,14 @@
               "feeName": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "description": "Denominação da Tarifa pactuada",
                 "example": "Renovação de cadastro"
               },
               "feeCode": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "description": "Sigla identificadora da tarifa pactuada",
                 "example": "CADASTRO"
               },
@@ -438,7 +438,7 @@
                 "type": "string",
                 "maxLength": 140,
                 "description": "Campo para informações adicionais.\n\n[Restrição] Obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.\n",
-                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "example": "Informações adicionais sobre encargos."
               },
               "chargeRate": {
@@ -462,35 +462,9 @@
           "maxLength": 20,
           "minLength": 4,
           "example": "1000.0400",
-          "description": "Informa o valor da próxima parcela à vencer. Para contratos liquidados, retornar zero, seguindo o pattern.   [Restrição]   O envio do campo será obrigatório para CPC (campo “productSubTypeCategory” preenchido com CREDITO_PESSOAL_CLEAN).\n",
+          "description": "Informa o valor de face (corresponde ao valor da parcela no vencimento). Para contratos liquidados, retornar zero, seguindo o pattern.\n[Restrição]  O envio do campo será obrigatório para CPC (campo “productSubTypeCategory” preenchido com `CREDITO_PESSOAL_CLEAN`).\n",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
-        }
-      }
-    },
-    "meta": {
-      "type": "object",
-      "description": "Meta informações referente à API requisitada.",
-      "required": [
-        "totalRecords",
-        "totalPages"
-      ],
-      "properties": {
-        "totalRecords": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
-        },
-        "totalPages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
         }
       }
     }
