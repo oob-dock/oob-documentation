@@ -2,9 +2,11 @@
   "data": {
     "dueInstalments": 57,
     "pastDueInstalments": 73,
-    "typeContractRemaining": "SEMANA",
+    "typeContractRemaining": "SEM_PRAZO_REMANESCENTE",
     "typeNumberOfInstalments": "MES",
     "paidInstalments": 73,
+    "totalNumberOfInstalments": 130632,
+    "contractRemainingNumber": 14600,
     "balloonPayments": [
       {
         "dueDate": "2021-05-21",
@@ -20,12 +22,6 @@
           "currency": "BRL"
         }
       }
-    ],
-    "totalNumberOfInstalments": 130632,
-    "contractRemainingNumber": 14600
-  },
-  "meta": {
-    "totalRecords": 1,
-    "totalPages": 1
+    ]
   }
 }
