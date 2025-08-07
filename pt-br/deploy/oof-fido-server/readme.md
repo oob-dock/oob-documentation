@@ -109,6 +109,31 @@ Atualmente, os algoritmos suportados são:
 
 Valor padrão: "-65535,-257,-258,-259,-7,-35,-36,-8"
 
+## opentelemetry
+
+Este módulo é instrumentado via [Open Telemetry](https://opentelemetry.io/),
+logando informações de trace (quando disponíveis) e as exportando para uma
+ferramenta como o [Tempo](https://grafana.com/oss/tempo/), que é utilizado na
+visualização e análise de rastreamento distribuído dos requests realizados.
+
+Configurações:
+
+* `env/opentelemetry/tracer/exporter/url/grpc`: Endereço da ferramenta de
+análise. **Importante:** Esta variável deverá estar preenchida com o valor
+do endereço **GRPC** disponibilizado pela ferramenta para receber as
+informações de rastreamento.
+
+Exemplo:
+
+```yaml
+env:
+  opentelemetry:
+    tracer:
+      exporter:
+        url:
+          grpc: "http://127.0.0.1:4317"
+```
+
 ## Variáveis adicionais
 
 ### Customização para um RP específica
