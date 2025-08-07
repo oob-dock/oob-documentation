@@ -957,6 +957,7 @@ components:
         typeError:
           type: string
     Authorization:
+      deprecated: true
       type: object
       properties:
         personDocumentNumber:
@@ -1019,6 +1020,7 @@ components:
           items:
             $ref: "#/components/schemas/Resource"
         authorizations:
+          deprecated: true
           type: array
           items:
             $ref: "#/components/schemas/Authorization"
@@ -1068,8 +1070,10 @@ components:
         consentStatus:
           $ref: "#/components/schemas/ConsentAuthorizationStatusEnum"
         authorizationStatus:
+          deprecated: true
           $ref: "#/components/schemas/ConsentAuthorizationStatusEnum"
         authorizerName:
+          deprecated: true
           type: string
         operatorUsername:
           type: string
