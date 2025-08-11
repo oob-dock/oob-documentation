@@ -969,6 +969,30 @@ de segurança, deve-se alterar para uma data no passado.
 
 **Default:** `2024-05-22`
 
+### SOFTWARE_STATEMENT_IDS_SYNC_CONSENT_CHECK
+
+Define uma lista de *software statement IDs* para os quais ocorrerá de maneira
+síncrona a obtenção de informações sobre os consentimentos que são utilizadas
+no processo de emissão de tokens por parte do Authorization Server.
+
+Por padrão essas informações são recebidas de maneira assíncrona via eventos
+consumidos pelo Authorization Server.
+
+**Formato:** Lista de *software statement IDs* separadas por vírgula: `<ssid1>,<ssid2>`.
+
+**Exemplos válidos:**
+
+* `60733381-b341-4a36-9219-e39c863b673e`
+* `7fd34c3e-6b6f-4941-a3ee-9f7ac23b1e25,38833feb-694a-4ca1-84b3-e7c0fb66844b,60733381-b341-4a36-9219-e39c863b673e`
+
+**Exemplo de preenchimento:**
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_IDS_SYNC_CONSENT_CHECK
+    value: "7fd34c3e-6b6f-4941-a3ee-9f7ac23b1e25,38833feb-694a-4ca1-84b3-e7c0fb66844b,60733381-b341-4a36-9219-e39c863b673e"
+```
+
 ## Exposição
 
 Como o acesso ao Authorization Server não é feito através do Kong, um ingress
