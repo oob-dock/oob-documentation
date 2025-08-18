@@ -101,7 +101,7 @@
         },
         "Date": {
             "type": "string",
-            "description": "Data em que o recurso foi criado. Uma string com a utilização de timezone UTC(UTC time format).",
+            "description": "Data em que o pagamento será realizado. Uma string com a utilização de timezone UTC-3 (UTC time format).",
             "format": "date",
             "maxLength": 10,
             "examples": [
