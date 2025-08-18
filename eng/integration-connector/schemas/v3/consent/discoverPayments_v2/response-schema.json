@@ -159,7 +159,7 @@
                                     "type": "string",
                                     "minLength": 8,
                                     "maxLength": 8,
-                                    "pattern": "^[0-9]{8}$",
+                                    "pattern": "^[0-9A-Z]{8}$",
                                     "example": "12345678",
                                     "description": "Deve ser preenchido com o ISPB (Identificador do Sistema de Pagamentos Brasileiros) do participante do SPI (Sistema de pagamentos instantâneos) somente com números.\n"
                                   },
@@ -195,7 +195,7 @@
                                 "type": "boolean",
                                 "default": true,
                                 "example": true,
-                                "description": "Indicates whether the payer has authorized the use of a pre-approved overdraft limit on their account for making payments, if the customer has the product."
+                                "description": "Indica se o usuário pagador autorizou a utilização de limite pré-aprovado (cheque especial) na sua conta para realização de pagamentos, caso o cliente possua o produto."
                             }
                         },
                         "additionalItems": false
