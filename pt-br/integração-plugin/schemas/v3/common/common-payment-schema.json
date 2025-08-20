@@ -55,12 +55,13 @@
                 "DICT",
                 "QRDN",
                 "QRES",
-                "INIC"
+                "INIC",
+                "AUTO"
             ],
             "examples": [
                 "DICT"
             ],
-            "description": "Especifica a forma de iniciação do pagamento:\n- MANU - Inserção manual de dados da conta transacional\n- DICT - Inserção manual de chave Pix\n- QRDN - QR code dinâmico\n- QRES - QR code estático\n- INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.\n[Restrição] Se /data/payment/schedule enviado com valor diferente de single durante a criação do consentimento, apenas os métodos MANU, DICT ou QRES são permitidos.\n"
+            "description": "Especifica a forma de iniciação do pagamento:\n- MANU - Inserção manual de dados da conta transacional\n- DICT - Inserção manual de chave Pix\n- QRDN - QR code dinâmico\n- QRES - QR code estático\n- INIC - Indica que o recebedor (creditor) contratou o Iniciador de Pagamentos especificamente para realizar iniciações de pagamento em que o beneficiário é previamente conhecido.\n AUTO - Indica o pagamento de uma recorrência de Pix automático, onde o consentimento foi previamente autorizado pelo pagador e o pagamento é realizado automaticamente pelo Iniciador de Pagamentos sob comando do recebedor\n[Restrição] Se /data/payment/schedule enviado com valor diferente de single durante a criação do consentimento, apenas os métodos MANU, DICT ou QRES são permitidos.\n"
         },
         "CreditorAccount": {
             "type": "object",
@@ -75,7 +76,7 @@
                     "type": "string",
                     "minLength": 8,
                     "maxLength": 8,
-                    "pattern": "^[0-9]{8}$",
+                    "pattern": "^[0-9A-Z]{8}$",
                     "examples": [
                         "12345678"
                     ],
@@ -130,7 +131,7 @@
                     "type": "string",
                     "minLength": 8,
                     "maxLength": 8,
-                    "pattern": "^[0-9]{8}$",
+                    "pattern": "^[0-9A-Z]{8}$",
                     "examples": [
                         "12345678"
                     ],
@@ -345,11 +346,11 @@
         },
         "PaymentReference": {
             "type": "string",
-            "maxLength": 10,
-            "examples": [
-                "zero"
-            ],
-            "description": "[Restrição] Campo de preenchimento obrigatório caso seja um pagamento de Pix automático, caso não respeitado, a instituição detentora deve retornar erro HTTP 422 com o código DETALHE_PAGAMENTO_INVALIDO.\n\nPrimeiro pagamento: Se for o pagamento inicial especificado em “/data/firstPayment”, preencha o campo com a string fixa “zero”.\n- Semanal: Preencha com W$numSemana-$ano, onde $numSemana representa o número da semana no ano. Exemplo: \"W50-2024\".\n- Mensal: Use M$mês-$ano, onde $mês representa o mês com dois dígitos. Exemplo: \"M09-2024\".\n- Trimestral: Utilize Q$trimestre-$ano, onde $trimestre indica o trimestre do ano (1 a 4).\n  - Janeiro a Março: Q1-$ano (ex.: \"Q1-2024\").\n  - Abril a Junho: Q2-$ano (ex.: \"Q2-2024\").\n  - Julho a Setembro: Q3-$ano (ex.: \"Q3-2024\").\n  - Outubro a Dezembro: Q4-$ano (ex.: \"Q4-2024\").\n- Semestral: Utilize $semestre-$ano, onde $semestre indica o semestre do ano (1 para janeiro a junho e 2 para julho a dezembro).\n  - Janeiro a Junho: S1-$ano (ex.: \"S1-2024\").\n  - Julho a Dezembro: S2-$ano (ex.: \"S2-2024\").\n- Anual: Use Y$ano, apenas com o ano. Exemplo: \"Y2024\".\n\nExemplo de Formatos:\nPrimeiro pagamento: \"zero\"\nSemanal: \"W50-2024\"\nMensal: \"M09-2024\"\nTrimestral: \"Q3-2024\"\nSemestral: \"S2-2024\"\nAnual: \"Y2024\""
+            "example": "23-07-2025/P1W",
+            "minLength": 4,
+            "maxLength": 14,
+            "pattern": "^zero$|^\\d{2}-\\d{2}-\\d{4}\/P(1W|1M|3M|6M|1Y)$|^W\\d{1,2}-\\d{4}$|^M\\d{2}-\\d{4}$|^Q\\d-\\d{4}$|^S\\d-\\d{4}$|^Y\\d{4}$",
+            "description": "[Restrição]Campo de preenchimento obrigatório caso seja um pagamento de Pix automático e deve ser enviado para critérios de coleta de métricas do ecossistema. Caso essa regra não seja respeitada, a instituição detentora da conta deve retornar um erro HTTP 422 com o código DETALHE_PAGAMENTO_INVALIDO.  \n- O preenchimento deve seguir a seguinte lógica:  \n  - Primeiro Pagamento: Caso se trate do pagamento inicial avulso, especificado no campo “/data/firstPayment”, o valor deste campo deve ser preenchido com a string fixa \"zero\".  \n  - Pagamentos Recorrentes (Subsequentes): Para todos os pagamentos recorrentes realizados após o pagamento inicial, o campo paymentReference deve ser preenchido com uma string de Intervalo ISO 8601 no formato ```<start>/<duration>```, que representa o ciclo exato ao qual o pagamento se refere.  \n    - O componente ```<start>``` deve indicar a data de início do ciclo específico ao qual o pagamento enviado se refere.  \n    - O componente ```<duration>``` deve corresponder ao código da periodicidade do consentimento (P1W para semanal, P1M para mensal, P3M para trimestral, P6M para semestral e P1Y para anual)  \n    - Exemplos:\n      - 1: Data de início do ciclo definido no consentimento: 23/07/25\n        - Periodicidade definida no consentimento: Semanal\n        - Preenchimento do paymentReference:\n        - Primeiro ciclo: 23-07-2025/P1W\n        - Segundo ciclo: 30-07-2025/P1W\n        - Terceiro ciclo: 06-07-2025/P1W\n      - 2: Data de início do ciclo definido no consentimento: 23/07/25\n        - Periodicidade definida no consentimento: Mensal\n        - Preenchimento do paymentReference:\n        - Primeiro ciclo: 23-07-2025/P1M\n        - Segundo ciclo: 23-08-2025/P1M\n        - Terceiro ciclo: 23-09-2025/P1M\n"
         },
         "QrCode": {
             "type": "string",
@@ -540,7 +541,7 @@
                         "type": "string",
                         "minLength": 11,
                         "maxLength": 14,
-                        "pattern": "^\\d{11}$|^\\d{14}$",
+                        "pattern": "^([0-9]{11})$|^([0-9A-Z]{12}[0-9]{2})$",
                         "example": "58764789000137",
                         "description": "Identificação da pessoa envolvida na transação.  \nPreencher com o CPF ou CNPJ, de acordo com o valor escolhido no campo type.  \nO CPF será utilizado com 11 números e deverá ser informado sem pontos ou traços.  \nO CNPJ será utilizado com 14 números e deverá ser informado sem pontos ou traços.\n"
                     },
@@ -796,7 +797,7 @@
                             "maxLength": 14,
                             "description": "Número do documento de identificação oficial do cliente devedor do contrato.",
                             "example": "11111111111111",
-                            "pattern": "^\\d{14}$"
+                            "pattern": "^([0-9]{11})$|^([0-9A-Z]{12}[0-9]{2})$"
                         },
                         "rel": {
                             "type": "string",
