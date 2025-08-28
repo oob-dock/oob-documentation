@@ -326,3 +326,22 @@ additionalVars:
   - name: FEATURE_REQUIRES_SYNC_STATUS_ENABLED
     value: "true"
 ```
+
+### feature/all-payments-async/enabled
+
+Se ativa, faz com que todos os pagamentos sejam processados de
+forma assíncrona a requisição da ITP.
+
+Essa funcionalidade deve ser habilitada APENAS quando o sistema
+da detentora for capaz de tratar o campo ***internalIdempotencyKey***
+durante a criação dos pagamentos.
+
+**Formato:** `true` ou `false`
+
+**Valor default**: `false`
+
+```yaml
+additionalVars:
+  - name: FEATURE_ALL_PAYMENTS_ASYNC_ENABLED
+    value: "true"
+```
