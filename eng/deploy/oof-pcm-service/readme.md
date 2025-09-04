@@ -329,3 +329,29 @@ additionalVars:
   - name: DAPR_ACTOR_TYPE
     value: "Qa"
 ```
+
+### SOFTWARE_STATEMENT_N_PROXY_URL
+
+**N** should correspond to the position of the software statement in the Helm configuration, with the first position being 0.
+
+Configures the URL used for communication with a proxy for mTLS endpoints (currently only for the token endpoint).
+
+It should be set with the query string that will be used by the proxy, leaving the value as **%s**. This will be replaced by the original URL, for example:
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_0_PROXY_URL
+    value: "https://proxy.exemplo.com?itproxy_url=%s"
+```
+
+### SOFTWARE_STATEMENT_N_PROXY_ORG
+ 
+**N** should correspond to the position of the software statement in the Helm configuration, with the first position being 0.
+
+Configures the organization of the software statement for use in the proxy if the certificate used does not contain the organization's identification.
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_0_PROXY_ORG
+    value: "afab9837-1128-4b96-81e8-87f1c6f11597"
+```
