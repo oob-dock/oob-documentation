@@ -335,6 +335,7 @@ additionalVars:
 **N** should correspond to the position of the software statement in the Helm configuration, with the first position being 0.
 
 Configures the URL used for communication with a proxy for mTLS endpoints (currently only for the token endpoint).
+It is optional; the presence of this variable will enable the use of the proxy.
 
 It should be set with the query string that will be used by the proxy, leaving the value as **%s**. This will be replaced by the original URL, for example:
 

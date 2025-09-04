@@ -376,6 +376,7 @@ O **N** deve corresponder a posição do software statement feita na configuraç
 sendo a primeira posição de valor 0.
 
 Configura a url usada pra comunicação com um proxy para endpoints mtls (no momento apenas o de token).
+É opcional, a presença dessa variável habilitará o uso do proxy.
 
 Deve ser configurada já com a query string que será usada pelo proxy, deixando o valor como **%s**,
 este será substituído pela url orginal, exemplo:
