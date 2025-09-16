@@ -180,6 +180,8 @@ que contém o certificado BRCAC.
 chave privada do certificado.
 * `privateKeys.softwareStatements.brcacSecretKey`:  Nome da propriedade do secret
 que contém a chave privada do certificado.
+* `privateKeys.softwareStatements.notificationUrl`: Configuração opcional para envio de
+notificações para o webhook do backoffice da instituição da instalação.
 
 **Exemplo 1:**
 
@@ -198,6 +200,7 @@ que contém a chave privada do certificado.
           brcacSecretKey: "tls.crt"
           brcacKeySecretName: "webhook-certificates2"
           brcacKeySecretKey: "tls.key"
+          notificationUrl: "http://amazingbank.com/notification"
 ```
 
 ## additionalVars

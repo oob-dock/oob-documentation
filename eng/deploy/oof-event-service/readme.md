@@ -151,6 +151,7 @@ Identifiers of organizations and their brands, containing their certificates for
 * `privateKeys.softwareStatements.brcacSecretKey`: Name of the secret property that contains the BRCAC certificate.
 * `privateKeys.softwareStatements.brcacSecretName`: Name of the secret that contains the private key of the certificate.
 * `privateKeys.softwareStatements.brcacSecretKey`: Name of the secret property that contains the private key of the certificate.
+* `privateKeys.softwareStatements.notificationUrl`: Optional configuration for sending notifications to the backoffice webhook of the institution where the module is installed.
 
 **Example 1:**
 
@@ -169,6 +170,7 @@ Identifiers of organizations and their brands, containing their certificates for
           brcacSecretKey: "tls.crt"
           brcacKeySecretName: "webhook-certificates2"
           brcacKeySecretKey: "tls.key"
+          notificationUrl: "http://amazingbank.com/notification"
 ```
 
 ## additionalVars
