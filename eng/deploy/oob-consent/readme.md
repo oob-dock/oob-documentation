@@ -665,6 +665,22 @@ additionalVars:
     value: "5"
 ```
 
+### APPLICATION_JWS_ISS
+
+Used to sign JWT payloads in requests.
+
+**IMPORTANT:** If not defined, the organisation ID will be used as the default value.
+
+**Type:** String
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_JWS_ISS
+    value: "https://obb.qa.oob.opus-software.com.br"
+```
+
 ### Connectors
 
 There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
