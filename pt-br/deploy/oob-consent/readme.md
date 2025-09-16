@@ -729,6 +729,22 @@ additionalVars:
     value: "5"
 ```
 
+### APPLICATION_JWS_ISS
+
+Utilizado para assinar os payloads JWT das requisições.
+
+**IMPORTANTE**: Se não for definido, o ID da organização será usado como valor padrão.
+
+**Formato:** String
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_JWS_ISS
+    value: "https://obb.qa.oob.opus-software.com.br"
+```
+
 ### Conectores
 
 Existem additionalVars para utilização do conector de aprovação de consentimento

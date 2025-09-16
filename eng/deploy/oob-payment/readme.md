@@ -284,6 +284,22 @@ additionalVars:
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
 ```
 
+### JWS_ISS
+
+Used to sign JWT payloads in requests.
+
+**IMPORTANT:** If not defined, the organisation ID will be used as the default value.
+
+**Type:** String
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: JWS_ISS
+    value: "https://obb.qa.oob.opus-software.com.br"
+```
+
 ### feature/requires-sync-status/enabled
 
 Enables or disables synchronous requests to legacy endpoint to
