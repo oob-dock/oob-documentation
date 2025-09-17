@@ -226,6 +226,10 @@ BRCAC.
 * `privateKeySecretKey`: Nome da propriedade do secret que contém a chave
 privada.
 * `clientId`: Identificador(es) do(s) cliente(s) no diretório de participantes.
+* `proxyUrl`: Url opcional para o caso de uso de proxy para endpoints mtls (token endpoint).
+O parametro **%s** será substituido pela url que seria chamada originalmente e portanto deve estar presente na configuração.
+* `proxyOrg`: Configuração opcional associado ao uso de proxy em caso do certificado não possuir
+orgId.
 
 **Exemplo:**
 
@@ -241,6 +245,8 @@ privada.
       privateKeySecretName: "pcm-organization-tls"
       privateKeySecretKey: "tls2.key"
       clientId: "1dfbae86-ce9b-41d9-bf29-832317f26b31"
+      proxyUrl: "https://proxyorg?originalUrl=%s"
+      proxyOrg: "e6d4b80f-edd2-4800-a94a-ff7a91bf2f4c"
 ```
 
 ### pcm
