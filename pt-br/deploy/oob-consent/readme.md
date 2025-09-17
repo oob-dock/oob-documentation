@@ -834,6 +834,24 @@ additionalVarsDaemon:
     value: "23"
 ```
 
+### APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+
+Configuração para habilitar envio de webhook para a retaguarda,
+que será efetivamente enviado pelo [oof-event-service](../oof-event-service/readme.md)
+(também possui configurações).
+
+**Formato:** boolean
+
+Valor default: `false`
+
+**Ex:**
+
+```yaml
+additionalVarsDaemon:
+  - name: APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+    value: "true"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled

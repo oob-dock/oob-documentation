@@ -173,6 +173,88 @@ Identifiers of organizations and their brands, containing their certificates for
           notificationUrl: "http://amazingbank.com/notification"
 ```
 
+> **Warning:** The backoffice webhook payload specification is provided below. Ensure you review and implement it according to your institution's requirements.
+
+### Backoffice Webhook Payload Specification
+
+The webhook payload sent to the backoffice will have the following structure:
+
+ Example:
+
+```json
+{
+  "consentVersion": 2,
+  "eventType": "CONSENT_AUTHORIZATION_EXPIRED",
+  "message": "Autorização expirou por falta de confirmação do usuário",
+  "status": "REJECTED",
+  "updateStatusTimestamp": "2025-09-17T12:41:11.001667-03:00",
+  "consentId": "urn:amazingbank:4136f4ae-ab4c-40e3-8d8d-608e10dad36b",
+  "brandId": "cbanco"
+}
+```
+
+#### OpenAPI Specification
+
+```yaml
+openapi: 3.0.3
+info:
+  title: Backoffice Webhook Payload
+  version: 1.0.0
+paths:
+  /:
+    post:
+      summary: Receives webhook payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackofficeWebhookPayload'
+      responses:
+        '200':
+          description: Webhook received
+components:
+  schemas:
+    BackofficeWebhookPayload:
+      type: object
+      properties:
+        consentVersion:
+          type: integer
+          example: 2
+        eventType:
+          type: string
+          enum:
+            - CONSENT_AUTHORIZATION_NOT_COMPLETED
+            - CONSENT_AUTHORIZATION_EXPIRED
+          example: CONSENT_AUTHORIZATION_EXPIRED
+        message:
+          type: string
+          example:
+           - Autorização iniciada não for concluída dentro do prazo regulatório falta de resposta da Iniciadora
+           - Autorização expirou por falta de confirmação do usuário
+        status:
+          type: string
+          example: REJECTED
+        updateStatusTimestamp:
+          type: string
+          format: date-time
+          example: "2025-09-17T12:41:11.001667-03:00"
+        consentId:
+          type: string
+          example: urn:amazingbank:4136f4ae-ab4c-40e3-8d8d-608e10dad36b
+        brandId:
+          type: string
+          example: cbanco
+      required:
+        - consentVersion
+        - eventType
+        - message
+        - status
+        - updateStatusTimestamp
+        - consentId
+        - brandId
+```
+
 ## additionalVars
 
 Used to define optional service configurations. This configuration allows defining a list of properties to be passed to the service in the format:
