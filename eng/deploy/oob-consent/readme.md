@@ -752,7 +752,7 @@ Default value: `false`
 **Ex:**
 
 ```yaml
-additionalVarsDaemon:
+additionalVars:
   - name: APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
     value: "true"
 ```
