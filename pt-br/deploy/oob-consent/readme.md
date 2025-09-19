@@ -287,7 +287,7 @@ env:
 
 Define o agendamento do relatório de estoque de consentimentos PCM.
 
-**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
 **Valor default:** `disabled` (desativado).
 
@@ -305,7 +305,7 @@ env:
 
 Utilizado para definir o agendamento da busca de consentimentos ativos no authorization server.
 
-**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento, baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento, baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
 **Valor default:** `disabled` (desativado)
 
@@ -322,7 +322,7 @@ env:
 
 Usado para definir o agendamento da publicação do evento dropreason.
 
-**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
 **Valor padrão:** `disable`
 
@@ -334,6 +334,92 @@ env:
     job:
       dropreason:
         schedule: "@every 5m"
+```
+
+## dapr/job/consentExpiration/schedule
+
+Usado para definir o agendamento da expiração dos consentimentos.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Valor padrão:** `@every 60s`
+
+**Exemplo:** Para agendar o job para rodar a cada 60 segundos:
+
+```yaml
+env:
+  dapr:
+    job:
+      consentExpiration:
+        schedule: "@every 60s"
+```
+
+## dapr/job/instantPaymentWebhook/schedule
+
+Utilizado para definir o intervalo de execução do job de consulta de status
+para envio do webhook de pagamentos instântaneos.
+Para ativar o job também é necessário ativar a funcionalidade de webhook
+na instância.
+
+**IMPORTANTE**: A ativação do job faz parte da solução paliativa do webhook e
+deve ser ativado apenas enquanto a detentora não implementar a
+[API de notificação de mudança de status de pagamento](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento).
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a cada 5 segundos:
+
+```yaml
+env:
+  dapr:
+    job:
+      instantPaymentWebhook:
+        schedule: "@every 5s"
+```
+
+## dapr/job/scheduledPaymentWebhook/schedule
+
+Utilizado para definir o intervalo de execução do job de consulta de status
+para envio do webhook de pagamentos em agendamento (SCHD).
+
+A configuração do job segue o mesmo padrão do anterior, sendo considerado também
+uma solução paliativa a ser usado enquanto a detentora não implementar a notificação
+do status do pagamento via API. Assim como o anterior, a ativação deste job
+depende da ativação da funcionalidade de webhook na instância.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a cada 60 segundos:
+
+```yaml
+env:
+  dapr:
+    job:
+      scheduledPaymentWebhook:
+        schedule: "@every 60s"
+```
+
+## dapr/job/scheduledEnrollment/schedule
+
+Usado para definir ativar a validação do limite de pagamentos diário para consentimentos JSR.
+É recomendado que este job fique desligado.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a cada 24 horas:
+
+```yaml
+env:
+  dapr:
+    job:
+      scheduledEnrollment:
+        schedule: "@every 24h"
 ```
 
 ## opentelemetry
@@ -660,25 +746,6 @@ additionalVars:
     value: "X-SSL-Client-Cert"
 ```
 
-### ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
-
-Pode ser ativada (valor `true`) caso a detentora deseje que os limites dos
-pagamentos agendados sejam validados no momento de sua iniciação. Não deve
-estar ativada para execução da certificação.
-
-Se falso, o daemon que avalia os limites para pagamentos agendados será executado.
-
-**Formato:** `true` ou `false`
-
-Valor default: `false`
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
-    value: "true"
-
 ### CONSENT_DATA_SHARING_V31_DATE
 
 Define a data em que as modificações necessárias para a Fase 2 v3.1
@@ -745,80 +812,9 @@ additionalVars:
     value: "https://obb.qa.oob.opus-software.com.br"
 ```
 
-### Conectores
+### APPLICATION_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
 
-Existem additionalVars para utilização do conector de aprovação de consentimento
-desenvolvido pela Opus, que estão listadas em
-[consent](../../integração-plugin/consent/readme.md) na seção
-`Arquivo de rota implementado pela OPUS`
-
-## additionalVarsDaemon
-
-Utilizado para definir configurações opcionais da instância de daemons
-
-### DAEMON_WEBHOOK_PAYMENT_INSTANT_INTERVAL
-
-Utilizado para definir o intervalo de execução do daemon de consulta de status
-para envio do webhook de pagamentos instântaneos.
-
-O valor dessa configuração deve ser formado por um valor inteiro seguido unidade
-de tempo expressa em `m` para minutos ou `s` para segundos.
-
-Para ativar o daemon também é necessário ativar a funcionalidade de webhook
-na instância.
-
-**Ex:**
-
-O exemplo a seguir mostra configuração para execução do daemon em intervalos de
-5 segundos:
-
-```yaml
-additionalVarsDaemon:
-  - name: DAEMON_WEBHOOK_PAYMENT_INSTANT_INTERVAL
-    value: "5s"
-  - name: APPLICATION_WEBHOOK_PAYMENT_ENABLED
-    value: "true"
-```
-
-**IMPORTANTE**: A ativação do daemon faz parte da solução paliativa do webhook e
-deve ser ativado apenas enquanto a detentora não implementar a
-[API de notificação de mudança de status de pagamento](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento).
-
-O daemon é desabilitado por padrão, mas caso a detentora opte por utilizá-lo,
-o valor recomendado para o interavalo é `1s`, a fim de atender o tempo esperado
-pelo regulatório.
-
-Valor default: `disabled`
-
-### DAEMON_WEBHOOK_PAYMENT_SCHEDULED_INTERVAL
-
-Utilizado para definir o intervalo de execução do daemon de consulta de status
-para envio do webhook de pagamentos em agendamento (SCHD).
-
-A configuração do daemon segue o mesmo padrão do anterior, sendo considerado também
-uma solução paliativa a ser usado enquanto a detentora não implementar a notificação
-do status do pagamento via API. Assim como o anterior, a ativação deste daemon
-depende da ativação da funcionalidade de webhook na instância.
-
-O daemon é desabilitado por padrão, mas caso a detentora opte por utilizá-lo,
-o valor recomendado para o interavalo é `1s`, a fim de atender o tempo esperado
-pelo regulatório.
-
-**Ex:**
-
-```yaml
-additionalVarsDaemon:
-  - name: DAEMON_WEBHOOK_PAYMENT_SCHEDULED_INTERVAL
-    value: "5s"
-  - name: APPLICATION_WEBHOOK_PAYMENT_ENABLED
-    value: "true"
-```
-
-Valor default: `disabled`
-
-### DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
-
-Para melhorar o desempenho dos daemons de consulta de status para envio do webhook,
+Para melhorar o desempenho dos jobs de consulta de status para envio do webhook,
 a detentora pode habilitar o paralelismo de execução permitindo múltiplas consultas
 de status a seu core bancário por vez.
 
@@ -829,26 +825,17 @@ Valor default: `false`
 **Ex:**
 
 ```yaml
-additionalVarsDaemon:
-  - name: DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
+additionalVars:
+  - name: APPLICATION_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
     value: "true"
 ```
 
-### DAEMON_ENROLLMENT_EXECUTION_HOUR
+### Conectores
 
-Configuração do horário no qual o daemon será executado.
-
-**Formato:** Número de 0-23
-
-Valor default: `23`
-
-**Ex:**
-
-```yaml
-additionalVarsDaemon:
-  - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
-    value: "23"
-```
+Existem additionalVars para utilização do conector de aprovação de consentimento
+desenvolvido pela Opus, que estão listadas em
+[consent](../../integração-plugin/consent/readme.md) na seção
+`Arquivo de rota implementado pela OPUS`
 
 ## FEATURE FLAGS
 
