@@ -741,20 +741,20 @@ additionalVarsDaemon:
     value: "23"
 ```
 
-### APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+### DAPR_JOB_CONSENTTOEXPIRE_DAYS
 
-Configuration to enable webhook sending to the backoffice, which will actually be sent by the [oof-event-service](../oof-event-service/readme.md) (additional configurations are also required).
+Configuration to set how many days before expiration the webhook must be sent to backoffice.
 
-**Format:** boolean
+**Format:** Integer
 
-Default value: `false`
+Default value: `1`
 
 **Ex:**
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
-    value: "true"
+  - name: DAPR_JOB_CONSENTTOEXPIRE_DAYS
+    value: "1"
 ```
 
 ## FEATURE FLAGS

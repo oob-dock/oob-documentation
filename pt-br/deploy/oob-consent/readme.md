@@ -834,22 +834,19 @@ additionalVarsDaemon:
     value: "23"
 ```
 
-### APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+### DAPR_JOB_CONSENTTOEXPIRE_DAYS
+Configuração para definir com quantos dias de antecedência ao vencimento o webhook deve ser enviado para o backoffice.
 
-Configuração para habilitar envio de webhook para a retaguarda,
-que será efetivamente enviado pelo [oof-event-service](../oof-event-service/readme.md)
-(também possui configurações).
+**Formato:** Número inteiro
 
-**Formato:** boolean
-
-Valor default: `false`
+Valor padrão: `1`
 
 **Ex:**
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
-    value: "true"
+  - name: DAPR_JOB_CONSENTTOEXPIRE_DAYS
+    value: "1"
 ```
 
 ## FEATURE FLAGS
