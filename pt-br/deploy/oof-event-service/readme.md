@@ -256,12 +256,14 @@ components:
           enum:
             - CONSENT_AUTHORIZATION_NOT_COMPLETED
             - CONSENT_AUTHORIZATION_EXPIRED
+            - CONSENT_AUTHORIZATION_ABOUT_TO_EXPIRE
           example: CONSENT_AUTHORIZATION_EXPIRED
         message:
           type: string
           example:
            - Autorização iniciada não for concluída dentro do prazo regulatório falta de resposta da Iniciadora
            - Autorização expirou por falta de confirmação do usuário
+           - Consentimento prestes a expirar
         status:
           type: string
           example: REJECTED
