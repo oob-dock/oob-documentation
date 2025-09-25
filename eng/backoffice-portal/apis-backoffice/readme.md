@@ -179,7 +179,7 @@ This API is responsible for revoking an enrollment, returning its details and th
 
 ## Resource change notification
 
-        POST /open-banking/oob-consents/v1/payment-status-notification
+        POST /open-banking/oob-consents/v1/resources-notification
 
 Responsible for notifying the OOF about the change of non-selectable resources by category.  
 Example: Loan, financing, etc.

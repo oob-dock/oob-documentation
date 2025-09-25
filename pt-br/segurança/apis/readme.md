@@ -679,6 +679,7 @@
 | *GET     | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:read                | Não        | Não              | Não  |                    |
 | *POST    | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
 | *DELETE  | /consents/v1/consents/{consentId}/search-keys            | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
+| *POST    | v1/resources-notification                                | Sim          | oob_consents:write               | Não        | Não              | Não  |                    |
 
 ## Capitalization bonds catalog
 
