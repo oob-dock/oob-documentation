@@ -422,6 +422,28 @@ env:
         schedule: "@every 24h"
 ```
 
+## dapr/job/resourceUpdate/schedule
+
+Usado para ativar o job de consulta de recursos para os consentimentos de compartilhamento de dados que ainda
+não finalizaram corretamente o discovery de todos os produtos.
+Deve ser ativado apenas se o [discovery de recursos assíncrono](./readme.md#featureresourcesasyncenabled).
+
+Recomenda-se execução diária.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a cada 24 horas:
+
+```yaml
+env:
+  dapr:
+    job:
+      resourceUpdate:
+        schedule: "@every 24h"
+```
+
 ## opentelemetry
 
 Este módulo é instrumentado via [Open Telemetry](https://opentelemetry.io/),
@@ -897,8 +919,8 @@ Ex: `1`
 
 ### feature/async-payment-status/enabled
 
-Habilita ou desabilita as requisições assíncronas ao endpoint legado para
-obter o status do pagamento.
+Habilita ou desabilita as requisições assíncronas ao endpoint da
+retaguarda para obter o status do pagamento.
 
 Essa feature não deve ser habilitada caso a instituição tenha
 implementado a [notificação de alteração de status](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento)
@@ -908,8 +930,15 @@ para ***TODOS*** os tipos de pagamento.
 
 **Valor default**: `false`
 
-```yaml
-additionalVars:
-  - name: FEATURE_ASYNC_PAYMENT_STATUS_ENABLED
-    value: "true"
-```
+### feature/resources/async/enabled
+
+Habilita ou desabilita as requisições assíncronas ao discovery
+do sistema de retaguarda para consultar alterações dos recursos.
+
+Essa feature deve ser habilitada **APENAS** se a instituição implementou
+a [notificação de alteração de recursos](../../portal-backoffice/apis-backoffice/readme.md#notificação-de-alteração-de-recursos)
+para todos os recursos não-selecionáveis.
+
+**Formato:** `0` ou `1`
+
+**Valor default**: `0`

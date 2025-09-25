@@ -199,6 +199,13 @@ a um consentimento.
 
 Esta API é responsável por revogar um vínculo, retornando os detalhes do mesmo e o histórico de mudanças de status realizadas. A revogação é feita através do identificador interno do vínculo formato UUID.
 
+## Notificação de alteração de recursos
+
+        POST /open-banking/oob-consents/v1/resources-notification
+
+Responsável por notificar ao OOF a alteração de recursos
+não-selecionáveis por categoria. Ex: Empréstimo, financiamento, etc.
+
 ## Autenticação
 
 Para acessar os endpoints listados aqui deve-se utilizar um token gerado a partir
