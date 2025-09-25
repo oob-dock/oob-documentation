@@ -443,13 +443,13 @@ paths:
               $ref: "#/components/schemas/RequestResourceUpdateNotification"
       responses:
         default:
-          description: Default error response
+          description: Erro padrão
           content:
             application/json:
               schema:
                 $ref: "#/components/schemas/ErrorResponse"
         "204":
-          description: Notification received successfully
+          description: Notificação recebida com sucesso
   /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation:
     post:
       tags:
@@ -2350,7 +2350,7 @@ components:
             description: Identificador do dono do recurso atualizado. Pode ser um CPF, CNPJ ou um SEARCH KEY
           type:
             $ref: "#/components/schemas/UnselectableResourceTypeEnum"
-            description: Tipo do recurso atualizado não-selecionável que foi alterado
+            description: Tipo do recurso não-selecionável que foi alterado
     UnselectableResourceTypeEnum:
       enum:
         - LOAN

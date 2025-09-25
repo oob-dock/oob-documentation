@@ -431,6 +431,25 @@ paths:
                 $ref: "#/components/schemas/ErrorResponse"
         "204":
           description: Notification received successfully
+  /open-banking/oob-consents/v1/resources-notification:
+    post:
+      tags:
+        - Consents
+      description: Inform change of non-selectable resources for a CPF, CNPJ, or SEARCH KEY
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RequestResourceUpdateNotification"
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "204":
+          description: Notification received successfully
   /open-banking/oob-consents/v1/payments/consents/{consentId}/authorisation:
     post:
       tags:
@@ -2306,6 +2325,43 @@ components:
             - $ref: "#/components/schemas/PaymentStatusChangeData"
             - description: Payment status change notification data
               nullable: false
+    RequestResourceUpdateNotification:
+      required:
+        - data
+      type: object
+      properties:
+        data:
+          allOf:
+            - $ref: "#/components/schemas/ResourceUpdateData"
+            - description: Updated non-selectable resource data
+              nullable: false
+    ResourceUpdateData:
+        required:
+          - key
+          - type
+        type: object
+        properties:
+          key:
+            type: string
+            example: 11111678912329
+            nullable: false
+            description: Resource owner identifier. It can be a CPF, CNPJ, or a SEARCH KEY.
+          type:
+            $ref: "#/components/schemas/UnselectableResourceTypeEnum"
+            description: Type of updated non-selectable resource
+    UnselectableResourceTypeEnum:
+      enum:
+        - LOAN
+        - FINANCING
+        - UNARRANGED_ACCOUNT_OVERDRAFT
+        - INVOICE_FINANCING
+        - BANK_FIXED_INCOME
+        - CREDIT_FIXED_INCOME
+        - VARIABLE_INCOME
+        - TREASURE_TITLE
+        - FUND
+        - EXCHANGE
+      type: string
     PaymentIdLegacy:
       required:
         - key
