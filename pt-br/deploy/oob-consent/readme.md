@@ -309,13 +309,13 @@ Utilizado para definir o agendamento da busca de consentimentos ativos no author
 
 **Valor default:** `disabled` (desativado)
 
-**Exemplo:** Para agendar a execução do job a cada 30 minutos:
+**Exemplo:** Para agendar a execução do job a cada 5 minutos (recomendado):
 
 ```yaml
 env:
   dapr:
     job:
-      activeConsents: "@every 30m"
+      activeConsents: "@every 5m"
 ```
 
 ## dapr/job/dropreason/schedule
@@ -334,6 +334,24 @@ env:
     job:
       dropreason:
         schedule: "@every 5m"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Usado para definir o agendamento da verificação de consentimentos prestes a expirar.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor padrão:** `disable`
+
+**Exemplo:** Para agendar o job para rodar a todo dia 10am (recomendado):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## opentelemetry
