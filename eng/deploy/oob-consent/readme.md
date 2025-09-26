@@ -757,6 +757,22 @@ additionalVarsDaemon:
     value: "23"
 ```
 
+### APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+
+Configuration to enable webhook sending to the backoffice, which will actually be sent by the [oof-event-service](../oof-event-service/readme.md) (additional configurations are also required).
+
+**Format:** boolean
+
+Default value: `false`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+    value: "true"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled

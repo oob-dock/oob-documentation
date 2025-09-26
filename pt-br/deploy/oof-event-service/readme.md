@@ -180,6 +180,8 @@ que contém o certificado BRCAC.
 chave privada do certificado.
 * `privateKeys.softwareStatements.brcacSecretKey`:  Nome da propriedade do secret
 que contém a chave privada do certificado.
+* `privateKeys.softwareStatements.notificationUrl`: Configuração opcional para envio de
+notificações para o webhook do backoffice da instituição da instalação.
 
 **Exemplo 1:**
 
@@ -198,6 +200,91 @@ que contém a chave privada do certificado.
           brcacSecretKey: "tls.crt"
           brcacKeySecretName: "webhook-certificates2"
           brcacKeySecretKey: "tls.key"
+          notificationUrl: "http://amazingbank.com/notification"
+```
+
+> **Atenção:** A especificação do payload do webhook para o retaguarda está apresentada abaixo. Certifique-se de revisar e implementar conforme os requisitos da sua instituição.
+
+### Especificação do Payload do Webhook para Retaguarda
+
+O payload do webhook enviado à retaguarda terá a seguinte estrutura:
+
+ Example:
+
+```json
+{
+  "consentVersion": 2,
+  "eventType": "CONSENT_AUTHORIZATION_EXPIRED",
+  "message": "Autorização expirou por falta de confirmação do usuário",
+  "status": "REJECTED",
+  "updateStatusTimestamp": "2025-09-17T12:41:11.001667-03:00",
+  "consentId": "urn:amazingbank:4136f4ae-ab4c-40e3-8d8d-608e10dad36b",
+  "brandId": "cbanco"
+}
+```
+
+#### OpenAPI Specification
+
+```yaml
+openapi: 3.0.3
+info:
+  title: Backoffice Webhook Payload
+  version: 1.0.0
+paths:
+  /:
+    post:
+      summary: Receives webhook payload
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackofficeWebhookPayload'
+      responses:
+        '200':
+          description: Webhook received
+components:
+  schemas:
+    BackofficeWebhookPayload:
+      type: object
+      properties:
+        consentVersion:
+          type: integer
+          example: 2
+        eventType:
+          type: string
+          enum:
+            - CONSENT_AUTHORIZATION_NOT_COMPLETED
+            - CONSENT_AUTHORIZATION_EXPIRED
+            - CONSENT_AUTHORIZATION_ABOUT_TO_EXPIRE
+          example: CONSENT_AUTHORIZATION_EXPIRED
+        message:
+          type: string
+          example:
+           - Autorização iniciada não for concluída dentro do prazo regulatório falta de resposta da Iniciadora
+           - Autorização expirou por falta de confirmação do usuário
+           - Consentimento prestes a expirar
+        status:
+          type: string
+          example: REJECTED
+        updateStatusTimestamp:
+          type: string
+          format: date-time
+          example: "2025-09-17T12:41:11.001667-03:00"
+        consentId:
+          type: string
+          example: urn:amazingbank:4136f4ae-ab4c-40e3-8d8d-608e10dad36b
+        brandId:
+          type: string
+          example: cbanco
+      required:
+        - consentVersion
+        - eventType
+        - message
+        - status
+        - updateStatusTimestamp
+        - consentId
+        - brandId
 ```
 
 ## additionalVars
