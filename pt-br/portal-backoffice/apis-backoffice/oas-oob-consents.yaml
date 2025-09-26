@@ -936,6 +936,74 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /open-banking/oob-consents/v1/webhook/status/{consentId}:
+    get:
+      description: Obter status de envio do webhook para o consentimento
+      tags:
+      - Consents Opus Open Banking
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseToggleWebhook'
+        'default':
+          description: Resposta de erro padrão
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /open-banking/oob-consents/v1/webhook/toggle/{consentId}:
+    patch:
+      description: Ativar/Desativar envio opcional de webhook
+      tags:
+      - Consents Opus Open Banking
+      parameters:
+      - name: consentId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestToggleWebhook'
+            x-zia-agent-param-type: dynamic
+      responses:
+        '204':
+          description: 'No Content'
+        'default':
+          description: Resposta de erro padrão
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
     AccountPaymentTypeEnum:
@@ -3544,6 +3612,18 @@ components:
         - REJECTED
         - CANCELLED
         - PAYMENT_ISSUE
+    RequestToggleWebhook:
+      type: object
+      properties:
+        active:
+          type: boolean
+      required:
+      - active
+    ResponseToggleWebhook:
+      type: object
+      properties:
+        active:
+          type: boolean
   securitySchemes:
     jwt:
       type: http
