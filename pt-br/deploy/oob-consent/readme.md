@@ -324,7 +324,7 @@ Usado para definir o agendamento da publicação do evento dropreason.
 
 **Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 
-**Valor padrão:** `disable`
+**Valor padrão:** `disabled`
 
 **Exemplo:** Para agendar o job para rodar a cada 5 minutos:
 
@@ -342,7 +342,7 @@ Usado para definir o agendamento da verificação de consentimentos prestes a ex
 
 **Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 
-**Valor padrão:** `disable`
+**Valor padrão:** `disabled`
 
 **Exemplo:** Para agendar o job para rodar a todo dia 10am (recomendado):
 

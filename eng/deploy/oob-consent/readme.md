@@ -277,7 +277,7 @@ Used to define the schedule for publishing the dropreason event.
 
 **Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 
-**Default value:** `disable`
+**Default value:** `disabled`
 
 **Example:** To schedule the job to run every 5 minutes:
 
@@ -295,7 +295,7 @@ Used to define the schedule for checking consents that are about to expire.
 
 **Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 
-**Default value:** `disable`
+**Default value:** `disabled`
 
 **Example:** To schedule the job to run every day at 10am (recommended):
 
