@@ -262,13 +262,13 @@ Used to define the schedule for the active consents fetching os authorization se
 
 **Default value**: `disabled`
 
-**Example:** To schedule the job to run every 30 minutes.
+**Example:** To schedule the job to run every 5 minutes (recommended).
 
 ```yaml
 env:
   dapr:
     job:
-      activeConsents: "@every 30m"
+      activeConsents: "@every 5m"
 ```
 
 ## dapr/job/dropreason/schedule
@@ -277,7 +277,7 @@ Used to define the schedule for publishing the dropreason event.
 
 **Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 
-**Default value:** `disable`
+**Default value:** `disabled`
 
 **Example:** To schedule the job to run every 5 minutes:
 
@@ -287,6 +287,24 @@ env:
     job:
       dropreason:
         schedule: "@every 5m"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Used to define the schedule for checking consents that are about to expire.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every day at 10am (recommended):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## opentelemetry
@@ -757,20 +775,20 @@ additionalVarsDaemon:
     value: "23"
 ```
 
-### APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+### DAPR_JOB_CONSENTTOEXPIRE_DAYS
 
-Configuration to enable webhook sending to the backoffice, which will actually be sent by the [oof-event-service](../oof-event-service/readme.md) (additional configurations are also required).
+Configuration to set how many days before expiration the webhook must be sent to backoffice.
 
-**Format:** boolean
+**Format:** Integer
 
-Default value: `false`
+Default value: `1`
 
 **Ex:**
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
-    value: "true"
+  - name: DAPR_JOB_CONSENTTOEXPIRE_DAYS
+    value: "1"
 ```
 
 ## FEATURE FLAGS

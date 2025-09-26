@@ -309,13 +309,13 @@ Utilizado para definir o agendamento da busca de consentimentos ativos no author
 
 **Valor default:** `disabled` (desativado)
 
-**Exemplo:** Para agendar a execução do job a cada 30 minutos:
+**Exemplo:** Para agendar a execução do job a cada 5 minutos (recomendado):
 
 ```yaml
 env:
   dapr:
     job:
-      activeConsents: "@every 30m"
+      activeConsents: "@every 5m"
 ```
 
 ## dapr/job/dropreason/schedule
@@ -324,7 +324,7 @@ Usado para definir o agendamento da publicação do evento dropreason.
 
 **Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 
-**Valor padrão:** `disable`
+**Valor padrão:** `disabled`
 
 **Exemplo:** Para agendar o job para rodar a cada 5 minutos:
 
@@ -334,6 +334,24 @@ env:
     job:
       dropreason:
         schedule: "@every 5m"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Usado para definir o agendamento da verificação de consentimentos prestes a expirar.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a todo dia 10am (recomendado):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## opentelemetry
@@ -850,22 +868,19 @@ additionalVarsDaemon:
     value: "23"
 ```
 
-### APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
+### DAPR_JOB_CONSENTTOEXPIRE_DAYS
+Configuração para definir com quantos dias de antecedência ao vencimento o webhook deve ser enviado para o backoffice.
 
-Configuração para habilitar envio de webhook para a retaguarda,
-que será efetivamente enviado pelo [oof-event-service](../oof-event-service/readme.md)
-(também possui configurações).
+**Formato:** Número inteiro
 
-**Formato:** boolean
-
-Valor default: `false`
+Valor padrão: `1`
 
 **Ex:**
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_WEBHOOK_NOTIFICATION_ENABLED
-    value: "true"
+  - name: DAPR_JOB_CONSENTTOEXPIRE_DAYS
+    value: "1"
 ```
 
 ## FEATURE FLAGS
