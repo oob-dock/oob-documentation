@@ -233,13 +233,24 @@ info:
 paths:
   /:
     post:
-      summary: Receives webhook payload
+      parameters:
+        - name: x-webhook-interaction-id
+          in: header
+          description: Identificador único da interação do webhook.
+          required: true
+          schema:
+            type: string
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/BackofficeWebhookPayload'
+              type: object
+              properties:
+                data:
+                  $ref: '#/components/schemas/BackofficeWebhookPayload'
+              required:
+                - data
       responses:
         '200':
           description: Webhook received
