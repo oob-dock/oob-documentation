@@ -200,6 +200,10 @@ List of *software statements* composed of: BRCAC certificate, private key, and c
 * `privateKeySecretName`: Name of the secret that contains the private key(s).
 * `privateKeySecretKey`: Name of the secret property that contains the private key.
 * `clientId`: Identifier(s) of the client(s) in the participant directory.
+* `proxyUrl`: Optional URL for proxy usage with mTLS endpoints (token endpoint).
+The parameter **%s** will be replaced by the URL that would be originally called and therefore must be present in the configuration.
+* `proxyOrg`: Optional configuration associated with proxy usage when the certificate does not contain the organization.
+orgId.
 
 **Example:**
 
@@ -215,6 +219,8 @@ List of *software statements* composed of: BRCAC certificate, private key, and c
       privateKeySecretName: "pcm-organization-tls"
       privateKeySecretKey: "tls2.key"
       clientId: "1dfbae86-ce9b-41d9-bf29-832317f26b31"
+      proxyUrl: "https://proxyorg?originalUrl=%s"
+      proxyOrg: "e6d4b80f-edd2-4800-a94a-ff7a91bf2f4c"
 ```
 
 ### pcm
