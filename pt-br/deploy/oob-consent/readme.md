@@ -309,13 +309,13 @@ Utilizado para definir o agendamento da busca de consentimentos ativos no author
 
 **Valor default:** `disabled` (desativado)
 
-**Exemplo:** Para agendar a execução do job a cada 30 minutos:
+**Exemplo:** Para agendar a execução do job a cada 5 minutos (recomendado):
 
 ```yaml
 env:
   dapr:
     job:
-      activeConsents: "@every 30m"
+      activeConsents: "@every 5m"
 ```
 
 ## dapr/job/dropreason/schedule
@@ -324,7 +324,7 @@ Usado para definir o agendamento da publicação do evento dropreason.
 
 **Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 
-**Valor padrão:** `disable`
+**Valor padrão:** `disabled`
 
 **Exemplo:** Para agendar o job para rodar a cada 5 minutos:
 
@@ -334,6 +334,24 @@ env:
     job:
       dropreason:
         schedule: "@every 5m"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Usado para definir o agendamento da verificação de consentimentos prestes a expirar.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a todo dia 10am (recomendado):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## opentelemetry
@@ -729,6 +747,22 @@ additionalVars:
     value: "5"
 ```
 
+### APPLICATION_JWS_ISS
+
+Utilizado para assinar os payloads JWT das requisições.
+
+**IMPORTANTE**: Se não for definido, o ID da organização será usado como valor padrão.
+
+**Formato:** String
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_JWS_ISS
+    value: "https://obb.qa.oob.opus-software.com.br"
+```
+
 ### Conectores
 
 Existem additionalVars para utilização do conector de aprovação de consentimento
@@ -832,6 +866,21 @@ Valor default: `23`
 additionalVarsDaemon:
   - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
     value: "23"
+```
+
+### DAPR_JOB_CONSENTTOEXPIRE_DAYS
+Configuração para definir com quantos dias de antecedência ao vencimento o webhook deve ser enviado para o backoffice.
+
+**Formato:** Número inteiro
+
+Valor padrão: `1`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: DAPR_JOB_CONSENTTOEXPIRE_DAYS
+    value: "1"
 ```
 
 ## FEATURE FLAGS

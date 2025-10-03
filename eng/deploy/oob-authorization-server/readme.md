@@ -857,6 +857,30 @@ The default value is '2024-05-22' as per specification. To perform security test
 
 **Default:** `2024-05-22`
 
+### SOFTWARE_STATEMENT_IDS_SYNC_CONSENT_CHECK
+
+Defines a list of software statement IDs for which information about consents
+will be obtained synchronously as part of the token issuance process by the
+Authorization Server.
+
+By default, this information is received asynchronously via events consumed by
+the Authorization Server.
+
+**Format:** A comma-separated list of software statement IDs: `<ssid1>,<ssid2>`.
+
+**Valid Examples:**
+
+* `60733381-b341-4a36-9219-e39c863b673e`
+* `7fd34c3e-6b6f-4941-a3ee-9f7ac23b1e25,38833feb-694a-4ca1-84b3-e7c0fb66844b,60733381-b341-4a36-9219-e39c863b673e`
+
+**Configuration Example:**
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_IDS_SYNC_CONSENT_CHECK
+    value: "7fd34c3e-6b6f-4941-a3ee-9f7ac23b1e25,38833feb-694a-4ca1-84b3-e7c0fb66844b,60733381-b341-4a36-9219-e39c863b673e"
+```
+
 ## Exposure
 
 As access to the Authorization Server is not done through Kong, an ingress needs to be created. [More details here](../readme.md)

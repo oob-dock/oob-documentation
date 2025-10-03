@@ -200,6 +200,10 @@ List of *software statements* composed of: BRCAC certificate, private key, and c
 * `privateKeySecretName`: Name of the secret that contains the private key(s).
 * `privateKeySecretKey`: Name of the secret property that contains the private key.
 * `clientId`: Identifier(s) of the client(s) in the participant directory.
+* `proxyUrl`: Optional URL for proxy usage with mTLS endpoints (token endpoint).
+The parameter **%s** will be replaced by the URL that would be originally called and therefore must be present in the configuration.
+* `proxyOrg`: Optional configuration associated with proxy usage when the certificate does not contain the organization.
+orgId.
 
 **Example:**
 
@@ -215,6 +219,8 @@ List of *software statements* composed of: BRCAC certificate, private key, and c
       privateKeySecretName: "pcm-organization-tls"
       privateKeySecretKey: "tls2.key"
       clientId: "1dfbae86-ce9b-41d9-bf29-832317f26b31"
+      proxyUrl: "https://proxyorg?originalUrl=%s"
+      proxyOrg: "e6d4b80f-edd2-4800-a94a-ff7a91bf2f4c"
 ```
 
 ### pcm
@@ -328,4 +334,31 @@ Defines the suffix that will be used in the types of actors used by this module 
 additionalVars:
   - name: DAPR_ACTOR_TYPE
     value: "Qa"
+```
+
+### SOFTWARE_STATEMENT_N_PROXY_URL
+
+**N** should correspond to the position of the software statement in the Helm configuration, with the first position being 0.
+
+Configures the URL used for communication with a proxy for mTLS endpoints (currently only for the token endpoint).
+It is optional; the presence of this variable will enable the use of the proxy.
+
+It should be set with the query string that will be used by the proxy, leaving the value as **%s**. This will be replaced by the original URL, for example:
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_0_PROXY_URL
+    value: "https://proxy.exemplo.com?itproxy_url=%s"
+```
+
+### SOFTWARE_STATEMENT_N_PROXY_ORG
+ 
+**N** should correspond to the position of the software statement in the Helm configuration, with the first position being 0.
+
+Configures the organization of the software statement for use in the proxy if the certificate used does not contain the organization's identification.
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_0_PROXY_ORG
+    value: "afab9837-1128-4b96-81e8-87f1c6f11597"
 ```
