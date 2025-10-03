@@ -327,21 +327,21 @@ additionalVars:
     value: "true"
 ```
 
-### FEATURE_ALL_PAYMENTS_ASYNC_ENABLED
+### FEATURE_POST_PAYMENTS_SYNC_ENABLED
 
-Se ativa, faz com que todos os pagamentos sejam processados de
-forma assíncrona a requisição da ITP.
+Se desativada, faz com que todos os pagamentos sejam processados de
+forma assíncrona à requisição do ITP.
 
-**Importante**: Essa funcionalidade deve ser habilitada ***APENAS*** quando o sistema
+**Importante**: Essa funcionalidade deve ser desativada ***APENAS*** quando o sistema
 da detentora for capaz de tratar o campo ***internalIdempotencyKey***
 durante a criação dos pagamentos.
 
 **Formato:** `true` ou `false`
 
-**Valor default**: `false`
+**Valor default**: `true`
 
 ```yaml
 additionalVars:
-  - name: FEATURE_ALL_PAYMENTS_ASYNC_ENABLED
-    value: "true"
+  - name: FEATURE_POST_PAYMENTS_SYNC_ENABLED
+    value: "false"
 ```

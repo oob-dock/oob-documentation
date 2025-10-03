@@ -302,21 +302,21 @@ additionalVars:
     value: "true"
 ```
 
-### FEATURE_POST_PAYMENTS_ASYNC_ENABLED
+### FEATURE_POST_PAYMENTS_SYNC_ENABLED
 
-If enabled, it causes all payments to be processed
+If disabled, it causes all payments to be processed
 asynchronously upon the ITP request.
 
-**Important**: This functionality should be enabled ***ONLY*** when the holder's
+**Important**: This functionality should be disabled ***ONLY*** when the holder's
 system is capable of handling the ***internalIdempotencyKey***
 field during the creation of payments.
 
 **Format:** `true` ou `false`
 
-**Default**: `false`
+**Default**: `true`
 
 ```yaml
 additionalVars:
-  - name: FEATURE_POST_PAYMENTS_ASYNC_ENABLED
-    value: "true"
+  - name: FEATURE_POST_PAYMENTS_SYNC_ENABLED
+    value: "false"
 ```
