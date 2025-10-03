@@ -284,7 +284,7 @@ additionalVars:
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
 ```
 
-### feature/requires-sync-status/enabled
+### FEATURE_REQUIRES_SYNC_STATUS_ENABLED
 
 Enables or disables synchronous requests to legacy endpoint to
 get payment status.
@@ -302,12 +302,12 @@ additionalVars:
     value: "true"
 ```
 
-### feature/all-payments-async/enabled
+### FEATURE_POST_PAYMENTS_ASYNC_ENABLED
 
 If enabled, it causes all payments to be processed
 asynchronously upon the ITP request.
 
-This functionality should be enabled ONLY when the holder's
+**Important**: This functionality should be enabled ***ONLY*** when the holder's
 system is capable of handling the ***internalIdempotencyKey***
 field during the creation of payments.
 
@@ -317,6 +317,6 @@ field during the creation of payments.
 
 ```yaml
 additionalVars:
-  - name: FEATURE_ALL_PAYMENTS_ASYNC_ENABLED
+  - name: FEATURE_POST_PAYMENTS_ASYNC_ENABLED
     value: "true"
 ```

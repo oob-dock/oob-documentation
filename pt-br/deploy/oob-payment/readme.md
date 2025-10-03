@@ -309,7 +309,7 @@ additionalVars:
     value: -----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDFjalN4Lvam2AX(...)\n-----END PRIVATE KEY-----
 ```
 
-### feature/requires-sync-status/enabled
+### FEATURE_REQUIRES_SYNC_STATUS_ENABLED
 
 Habilita ou desabilita as requisições síncronas ao endpoint legado para
 obter o status do pagamento.
@@ -327,12 +327,12 @@ additionalVars:
     value: "true"
 ```
 
-### feature/all-payments-async/enabled
+### FEATURE_ALL_PAYMENTS_ASYNC_ENABLED
 
 Se ativa, faz com que todos os pagamentos sejam processados de
 forma assíncrona a requisição da ITP.
 
-Essa funcionalidade deve ser habilitada APENAS quando o sistema
+**Importante**: Essa funcionalidade deve ser habilitada ***APENAS*** quando o sistema
 da detentora for capaz de tratar o campo ***internalIdempotencyKey***
 durante a criação dos pagamentos.
 
