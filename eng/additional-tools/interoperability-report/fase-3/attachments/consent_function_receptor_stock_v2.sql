@@ -1,4 +1,4 @@
-CREATE OR REPLACE FUNCTION consent_receptor_stock_v2(dt_end date)
+CREATE OR REPLACE FUNCTION consent_receptor_stock_v2(dt_end date, brand_id varchar DEFAULT null)
     RETURNS TABLE (
         org_name VARCHAR,
         qtd_Estoque_Consentimentos_Ativos BIGINT,
@@ -10,7 +10,7 @@ DECLARE dt_end_interval date;
 DECLARE dt_end_utc timestamptz;
 BEGIN
     SELECT dt_end + INTERVAL '1 day' INTO dt_end_interval;
-    SELECT dt_end_interval::date::timestamp AT TIME ZONE 'America/Sao_Paulo' INTO dt_end_utc;
+    SELECT dt_end_interval::date::timestamp INTO dt_end_utc;
 
     RETURN QUERY
         select  subquery.org_name                                                                                 AS org_name,
@@ -26,6 +26,7 @@ BEGIN
             and c.status = 1
             and c.dt_creation < dt_end_utc 
             and (c.dt_expiration is null or c.dt_expiration > dt_end_utc)
+            and (brand_id is null or c.id_brand = brand_id)
             group by get_conglomerate_name(tpp.org_name), tpp.org_id
         ) subquery
         group by subquery.org_name;
