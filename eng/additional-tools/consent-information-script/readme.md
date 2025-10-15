@@ -152,10 +152,11 @@ First, the *consent_receptor_stock_v2* function must be created by executing the
 To obtain the data, you must call the function using the following command:
 
 ```sql
-SELECT * FROM consent_receptor_stock_v2('<final_date>');
+SELECT * FROM consent_receptor_stock_v2('<final_date>', '<optional_id_brand>');
 ```
 
 The *final_date* parameter must be filled in the yyyy-MM-dd format.
+The *optional_id_brand* parameter can be optionally filled with the brand of the client.
 
 The obtained data should be filled in the "Estoque_Consentimentos" tab, Transmitting View, columns K and L ("Estoque de consentimentos ativos" e "OrganisationId Receptor").
 
