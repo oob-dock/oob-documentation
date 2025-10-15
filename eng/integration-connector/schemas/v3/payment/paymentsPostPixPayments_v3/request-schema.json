@@ -19,6 +19,13 @@
         }
       ]
     },
+    "internalIdempotencyKey": {
+      "type": "string",
+      "description": "Internal request identifier that, if present, should be used to handle retries of creating the same payment. It will always be sent for scheduled payments with multiple installments as a way to identify each one of them. If the environment variable `feature.all-payments-async.enabled` is enabled, this field will be sent for all types of payments.",
+      "maxLength": 40,
+      "pattern": "^(?!\\s)(.*)(\\S)$",
+      "example": "TXpRMU9UQTROMWhZV2xSU1FUazJSMDl"
+    },
     "idempotencyKey": {
       "type": "string",
       "description": "Identificador de solicitação exclusivo para suportar a idempotência.",
