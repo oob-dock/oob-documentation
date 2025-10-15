@@ -172,10 +172,11 @@ seguinte [script](attachments/consent_function_receptor_stock_v2.sql).
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM consent_receptor_stock_v2('<data_fim>');
+SELECT * FROM consent_receptor_stock_v2('<data_fim>', '<optional_id_brand>');
 ```
 
-Sendo que o parâmetro *data_fim* ser preenchido no formato yyyy-MM-dd.
+Sendo que o parâmetro *data_fim* deve ser preenchido no formato yyyy-MM-dd.
+Sendo que o parâmetro *optional_id_brand* pode ser preenchido com a marca do cliente.
 
 Os dados obtidos devem ser preenchidos na aba "Estoque_Consentimentos", Visão Transmissora, colunas K e L ("Estoque de consentimentos ativos" e "OrganisationId Receptor")
 
