@@ -27,7 +27,7 @@
             "name": {
               "type": "string",
               "description": "Nome do proprietário da conta a ser usada na STR para pagamento de portabilidade de crédito exclusiva para o OFB.\n\n[RESTRIÇÃO] campo de preenchimento obrigatório quando campo `hasFinancialAgent` for igual a true\n",
-              "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+              "pattern": "^[^\\s](?:.*[^\\s])?$",
               "maxLength": 80,
               "minLength": 1,
               "example": "Instituicao Credora"
