@@ -10,6 +10,7 @@
       "description": "Conjunto de informações de contratos de empréstimos/financiamentos mantidos pelo cliente na instituição credora e para os quais ele tenha fornecido consentimento",
       "required": [
         "portabilityId",
+        "originalLoanContractInfo",
         "creationDateTime"
       ],
       "properties": {
@@ -20,6 +21,68 @@
           "minLength": 36,
           "example": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6",
           "description": "Código identificador do pedido de portabilidade realizado."
+        },
+        "originalLoanContractInfo": {
+          "type": "object",
+          "description": "Informações do contrato de empréstimo original",
+          "required": [
+            "contractId",
+            "companyCnpj",
+            "contractOutstandingBalance"
+          ],
+          "properties": {
+            "contractId": {
+              "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "description": "Nome do campo do identificador no sistema de origem",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "Valor do campo do identificador no sistema de origem",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key"
+                ],
+                "additionalItems": false
+              },
+              "examples": [
+                [
+                  {
+                    "key": "pk_CampoUm",
+                    "value": "ABC"
+                  },
+                  {
+                    "key": "pk_CampoDois",
+                    "value": "123"
+                  }
+                ]
+              ]
+            },
+            "companyCnpj": {
+              "type": "string",
+              "pattern": "^[0-9A-Z]{12}[0-9]{2}$",
+              "maxLength": 14,
+              "example": "21128159000166",
+              "description": "Representação alfanumérica completa do CNPJ da instituição responsável pelo contrato de empréstimo afim de identificar a instituição credora nos casos de portabilidade de crédito - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas a representação alfanumérica do CNPJ, sem máscara."
+            },
+            "contractOutstandingBalance": {
+              "type": "string",
+              "format": "double",
+              "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+              "maxLength": 20,
+              "minLength": 4,
+              "example": "1000.0400",
+              "description": "Valor necessário para o cliente liquidar a dívida, ou seja, este campo deve ser preenchido com o saldo devedor atualizado descrito no DDC (Documento Descritivo de Crédito). \nO valor a liquidar atualizado do dia deve ser ajustado para compartilhamento pela Transmissora até às 10:00 do mesmo dia, especialmente para Crédito Pessoal Clean, escopo de Portabilidade de Crédito, pois este valor é utilizado pela Receptora em papel de Proponente para pagamento à Transmissora em papel de Credora.\n",
+              "minimum": -1.7976931348623157e+308,
+              "maximum": 1.7976931348623157e+308
+            }
+          }
         },
         "status": {
           "type": "string",
