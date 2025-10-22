@@ -39,7 +39,7 @@
             "typeAdditionalInfo": {
               "type": "string",
               "maxLength": 144,
-              "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+              "pattern": "^[^\\s](?:.*[^\\s])?$",
               "example": "Informações Adicionais",
               "description": "Informação adicional sobre rejeição de portabilidade de crédito. \nAo utilizar essa opção, é fortemente recomendável enviar um ticket para o GT de Portabilidade de Crédito como sugestão para estrutura Open Finance para discussão e mapeamento em futuras versões.\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando campo `type` for igual a `OUTROS`.\n"
             }

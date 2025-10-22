@@ -18,8 +18,8 @@
         "portabilityId": {
           "type": "string",
           "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
-          "maxLength": 100,
-          "minLength": 1,
+          "maxLength": 36,
+          "minLength": 36,
           "example": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6",
           "description": "Código identificador do pedido de portabilidade realizado."
         },
@@ -62,7 +62,7 @@
         },
         "transactionId": {
           "type": "string",
-          "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+          "pattern": "^[^\\s](?:.*[^\\s])?$",
           "maxLength": 20,
           "minLength": 1,
           "example": "STR20181108000000013",
