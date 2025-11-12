@@ -325,7 +325,7 @@ additionalVars:
     value: "https://obb.qa.oob.opus-software.com.br"
 ```
 
-### feature/requires-sync-status/enabled
+### FEATURE_REQUIRES_SYNC_STATUS_ENABLED
 
 Habilita ou desabilita as requisições síncronas ao endpoint legado para
 obter o status do pagamento.
@@ -341,4 +341,23 @@ de homologação.
 additionalVars:
   - name: FEATURE_REQUIRES_SYNC_STATUS_ENABLED
     value: "true"
+```
+
+### FEATURE_POST_PAYMENTS_SYNC_ENABLED
+
+Se desativada, faz com que todos os pagamentos sejam processados de
+forma assíncrona à requisição do ITP.
+
+**Importante**: Essa funcionalidade deve ser desativada ***APENAS*** quando o sistema
+da detentora for capaz de tratar o campo ***internalIdempotencyKey***
+durante a criação dos pagamentos.
+
+**Formato:** `true` ou `false`
+
+**Valor default**: `true`
+
+```yaml
+additionalVars:
+  - name: FEATURE_POST_PAYMENTS_SYNC_ENABLED
+    value: "false"
 ```

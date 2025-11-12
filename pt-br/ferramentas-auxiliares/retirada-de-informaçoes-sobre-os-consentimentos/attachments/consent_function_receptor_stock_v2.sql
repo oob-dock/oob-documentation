@@ -1,0 +1,33 @@
+CREATE OR REPLACE FUNCTION consent_receptor_stock_v2(dt_end date, brand_id varchar DEFAULT null)
+    RETURNS TABLE (
+        org_name VARCHAR,
+        qtd_Estoque_Consentimentos_Ativos BIGINT,
+        org_id VARCHAR
+)
+LANGUAGE plpgsql
+AS $function$
+DECLARE dt_end_interval date;
+DECLARE dt_end_utc timestamptz;
+BEGIN
+    SELECT dt_end + INTERVAL '1 day' INTO dt_end_interval;
+    SELECT dt_end_interval::date::timestamp INTO dt_end_utc;
+
+    RETURN QUERY
+        select  subquery.org_name                                                                                 AS org_name,
+                sum(subquery.qtd_Estoque_Consentimentos_Ativos)::BIGINT                                           AS qtd_Estoque_Consentimentos_Ativos,
+                (array_agg(subquery.org_id order by subquery.qtd_Estoque_Consentimentos_Ativos desc))[1]::varchar AS org_id
+        from (
+            select  get_conglomerate_name(tpp.org_name)::varchar                   AS org_name,
+                    count(distinct(c.id))                                          AS qtd_Estoque_Consentimentos_Ativos,
+                    tpp.org_id::varchar                                            AS org_id
+            from consent c
+                inner join tpp on tpp.id = c.id_tpp
+            where c.tp_consent = 1 
+            and c.status = 1
+            and c.dt_creation < dt_end_utc 
+            and (c.dt_expiration is null or c.dt_expiration > dt_end_utc)
+            and (brand_id is null or c.id_brand = brand_id)
+            group by get_conglomerate_name(tpp.org_name), tpp.org_id
+        ) subquery
+        group by subquery.org_name;
+end;$function$;

@@ -166,21 +166,17 @@ Os dados obtidos devem ser preenchidos na aba "Estoque_Consentimentos", Visão T
 Os scripts SQL fornecidos nessa seção devem ser operados no
 **banco de dados do OOB-Consent**
 
-Primeiramente é necessário criar a function consent_receptor_stock executando o
-seguinte [script](attachments/consent_function_receptor_stock.sql).
+Primeiramente é necessário criar a function consent_receptor_stock_v2 executando o
+seguinte [script](attachments/consent_function_receptor_stock_v2.sql).
 
 Para obter os dados, deve-se chamar a função usando o seguinte comando:
 
 ```sql
-SELECT * FROM consent_receptor_stock('<data_fim>', '<resultado_as_function>');
+SELECT * FROM consent_receptor_stock_v2('<data_fim>', '<optional_id_brand>');
 ```
 
-Sendo que o parâmetro *data_fim* ser preenchido no formato yyyy-MM-dd e o *resultado_as_function*
-com o resultado da execução da function as_function_access_token_generated. Por exemplo:
-
-```sql
-SELECT * FROM consent_receptor_stock('2022-10-08',  array ['f769dfb4-e537-4458-9408-42b24ef1edc8','c33da603-f7a6-42af-9eba-d10ca59c463b']);
-```
+Sendo que o parâmetro *data_fim* deve ser preenchido no formato yyyy-MM-dd.
+Sendo que o parâmetro *optional_id_brand* pode ser preenchido com a marca do cliente.
 
 Os dados obtidos devem ser preenchidos na aba "Estoque_Consentimentos", Visão Transmissora, colunas K e L ("Estoque de consentimentos ativos" e "OrganisationId Receptor")
 

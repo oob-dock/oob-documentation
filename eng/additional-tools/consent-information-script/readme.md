@@ -147,19 +147,16 @@ The obtained data should be filled in the "Estoque_Consentimentos" tab, Transmit
 
 The SQL scripts provided in this section should be operated in the **OOB-Consent database**.
 
-First, the *consent_receptor_stock* function must be created by executing the following [script](attachments/consent_function_receptor_stock.sql).
+First, the *consent_receptor_stock_v2* function must be created by executing the following [script](attachments/consent_function_receptor_stock_v2.sql).
 
 To obtain the data, you must call the function using the following command:
 
 ```sql
-SELECT * FROM consent_receptor_stock('<final_date>', '<as_function_result>');
+SELECT * FROM consent_receptor_stock_v2('<final_date>', '<optional_id_brand>');
 ```
 
-The *final_date* parameter must be filled in the yyyy-MM-dd format, and the *as_function_result* with the result of the *as_function_access_token_generated* function execution. For example:
-
-```sql
-SELECT * FROM consent_receptor_stock('2022-10-08',  array ['f769dfb4-e537-4458-9408-42b24ef1edc8','c33da603-f7a6-42af-9eba-d10ca59c463b']);
-```
+The *final_date* parameter must be filled in the yyyy-MM-dd format.
+The *optional_id_brand* parameter can be optionally filled with the brand of the client.
 
 The obtained data should be filled in the "Estoque_Consentimentos" tab, Transmitting View, columns K and L ("Estoque de consentimentos ativos" e "OrganisationId Receptor").
 

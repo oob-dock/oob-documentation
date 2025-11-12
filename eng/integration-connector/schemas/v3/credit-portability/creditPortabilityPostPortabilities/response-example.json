@@ -1,6 +1,20 @@
 {
   "data": {
     "status": "ACCEPTED_SETTLEMENT_IN_PROCESS",
-    "portabilityId": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6"
+    "portabilityId": "54d5348c-1a3f-4ff4-a8a8-d0724fb806c6",
+    "originalLoanContractInfo": {
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "companyCnpj": "21128159000166",
+      "contractOutstandingBalance": "1000.0400"
+    }
   }
 }
