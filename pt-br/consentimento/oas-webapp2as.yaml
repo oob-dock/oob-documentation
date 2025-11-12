@@ -730,7 +730,7 @@ components:
             - CREDIT_CARD_ACCOUNT
       additionalProperties: false
     ConsentCustomerPayment:
-      description: Detalhes do consentimentob de pagamento
+      description: Detalhes do consentimento de pagamento
       type: object
       required:
         - type
@@ -1013,6 +1013,13 @@ components:
           maxItems: 1000
           example:
             - PAYMENT
+        linkedConsents:
+          type: array
+          description: Lista de consentimentos vinculados ao consentimento de pagamento recorrente para jornada otimizada.
+          items:
+            type: object
+            $ref: '#/components/schemas/ConsentCustomerDataSharing'
+          maxItems: 100
       additionalProperties: false
     ConsentCustomerAcceptance:
       description: Detalhes do consentimento
