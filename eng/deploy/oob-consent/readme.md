@@ -262,13 +262,13 @@ Used to define the schedule for the active consents fetching os authorization se
 
 **Default value**: `disabled`
 
-**Example:** To schedule the job to run every 30 minutes.
+**Example:** To schedule the job to run every 5 minutes (recommended).
 
 ```yaml
 env:
   dapr:
     job:
-      activeConsents: "@every 30m"
+      activeConsents: "@every 5m"
 ```
 
 ## dapr/job/dropreason/schedule
@@ -277,7 +277,7 @@ Used to define the schedule for publishing the dropreason event.
 
 **Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
-**Default value:** `disable`
+**Default value:** `disabled`
 
 **Example:** To schedule the job to run every 5 minutes:
 
@@ -305,6 +305,24 @@ env:
     job:
       consentExpiration:
         schedule: "@every 60s"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Used to define the schedule for checking consents that are about to expire.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every day at 10am (recommended):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## dapr/job/instantPaymentWebhook/schedule
@@ -785,6 +803,22 @@ additionalVars:
 
 There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
 
+### DAPR_JOB_CONSENTTOEXPIRE_DAYS
+
+Configuration to set how many days before expiration the webhook must be sent to backoffice.
+
+**Format:** Integer
+
+Default value: `1`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: DAPR_JOB_CONSENTTOEXPIRE_DAYS
+    value: "1"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled
@@ -860,3 +894,20 @@ for all non-selectable resources.
 **Format:** `0` ou `1`
 
 **Default value**: `0`
+
+### ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
+
+Defines the date when the necessary modifications for No Redirect Journey
+v2.2 should be activated.
+It must be configured once the official date is announced by BACEN.
+
+**Format:** "YYYY-MM-DD"
+
+**Example:** To activate the modifications on 15/10/2025, configure
+as follows:
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
+  - value: "2025-10-15"
+```

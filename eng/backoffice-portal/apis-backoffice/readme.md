@@ -184,6 +184,18 @@ This API is responsible for revoking an enrollment, returning its details and th
 Responsible for notifying the OOF about the change of non-selectable resources by category.  
 Example: Loan, financing, etc.
 
+## Enable/Disable Webhook Delivery
+
+        PATCH /open-banking/oob-consents/v1/webhook/toggle/{consentId}
+
+Endpoint used to enable or disable optional webhook delivery to the backoffice, linked to the consent.
+
+## Get Webhook Delivery Status
+
+        GET /open-banking/oob-consents/v1/webhook/status/{consentId}
+
+Endpoint used to retrieve the status of optional webhook delivery to the backoffice, linked to the consent.
+
 ## Authentication
 
 To access the endpoints listed here, a token generated from the *Client Credentials* flow in the non-regulatory base path of the Authorization Server must be used.

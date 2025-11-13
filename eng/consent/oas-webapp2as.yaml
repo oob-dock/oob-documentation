@@ -1032,6 +1032,13 @@ components:
           maxItems: 1000
           example:
             - PAYMENT
+        linkedConsents:
+          type: array
+          description: List of consents linked to recurring payment consent for optimized journey.
+          items:
+            type: object
+            $ref: '#/components/schemas/ConsentCustomerDataSharing'
+          maxItems: 100
       additionalProperties: false
     ConsentCustomerAcceptance:
       description: Consent details

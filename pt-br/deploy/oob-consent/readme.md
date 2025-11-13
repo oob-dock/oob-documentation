@@ -309,13 +309,13 @@ Utilizado para definir o agendamento da busca de consentimentos ativos no author
 
 **Valor default:** `disabled` (desativado)
 
-**Exemplo:** Para agendar a execução do job a cada 30 minutos:
+**Exemplo:** Para agendar a execução do job a cada 5 minutos (recomendado):
 
 ```yaml
 env:
   dapr:
     job:
-      activeConsents: "@every 30m"
+      activeConsents: "@every 5m"
 ```
 
 ## dapr/job/dropreason/schedule
@@ -324,7 +324,7 @@ Usado para definir o agendamento da publicação do evento dropreason.
 
 **Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
-**Valor padrão:** `disable`
+**Valor padrão:** `disabled`
 
 **Exemplo:** Para agendar o job para rodar a cada 5 minutos:
 
@@ -352,6 +352,24 @@ env:
     job:
       consentExpiration:
         schedule: "@every 60s"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Usado para definir o agendamento da verificação de consentimentos prestes a expirar.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a todo dia 10am (recomendado):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## dapr/job/instantPaymentWebhook/schedule
@@ -859,6 +877,21 @@ desenvolvido pela Opus, que estão listadas em
 [consent](../../integração-plugin/consent/readme.md) na seção
 `Arquivo de rota implementado pela OPUS`
 
+### DAPR_JOB_CONSENTTOEXPIRE_DAYS
+Configuração para definir com quantos dias de antecedência ao vencimento o webhook deve ser enviado para o backoffice.
+
+**Formato:** Número inteiro
+
+Valor padrão: `1`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: DAPR_JOB_CONSENTTOEXPIRE_DAYS
+    value: "1"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled
@@ -930,6 +963,12 @@ para ***TODOS*** os tipos de pagamento.
 
 **Valor default**: `false`
 
+```yaml
+additionalVars:
+  - name: FEATURE_ASYNC_PAYMENT_STATUS_ENABLED
+    value: "true"
+```
+
 ### feature/resources/async/enabled
 
 Habilita ou desabilita as requisições assíncronas ao discovery
@@ -942,3 +981,20 @@ para todos os recursos não-selecionáveis.
 **Formato:** `0` ou `1`
 
 **Valor default**: `0`
+
+### ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
+
+Define a data em que as modificações necessárias para JSR v2.2
+devem ser ativadas. Deve ser configurada uma vez que a data oficial
+seja definida pelo BACEN.
+
+**Formato:**: "YYYY-MM-DD"
+
+**Ex:** Para que as modificações sejam ativadas dia 15/10/2025, basta
+configurar conforme a seguir:
+
+```yaml
+additionalVars:
+  - name: ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
+  - value: "2025-10-15"
+```

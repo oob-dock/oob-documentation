@@ -226,6 +226,10 @@ BRCAC.
 * `privateKeySecretKey`: Nome da propriedade do secret que contém a chave
 privada.
 * `clientId`: Identificador(es) do(s) cliente(s) no diretório de participantes.
+* `proxyUrl`: Url opcional para o caso de uso de proxy para endpoints mtls (token endpoint).
+O parametro **%s** será substituido pela url que seria chamada originalmente e portanto deve estar presente na configuração.
+* `proxyOrg`: Configuração opcional associado ao uso de proxy em caso do certificado não possuir
+orgId.
 
 **Exemplo:**
 
@@ -241,6 +245,8 @@ privada.
       privateKeySecretName: "pcm-organization-tls"
       privateKeySecretKey: "tls2.key"
       clientId: "1dfbae86-ce9b-41d9-bf29-832317f26b31"
+      proxyUrl: "https://proxyorg?originalUrl=%s"
+      proxyOrg: "e6d4b80f-edd2-4800-a94a-ff7a91bf2f4c"
 ```
 
 ### pcm
@@ -368,4 +374,35 @@ ambiente.
 additionalVars:
   - name: DAPR_ACTOR_TYPE
     value: "Qa"
+```
+
+### SOFTWARE_STATEMENT_N_PROXY_URL
+
+O **N** deve corresponder a posição do software statement feita na configuração do helm,
+sendo a primeira posição de valor 0.
+
+Configura a url usada pra comunicação com um proxy para endpoints mtls (no momento apenas o de token).
+É opcional, a presença dessa variável habilitará o uso do proxy.
+
+Deve ser configurada já com a query string que será usada pelo proxy, deixando o valor como **%s**,
+este será substituído pela url orginal, exemplo:
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_0_PROXY_URL
+    value: "https://proxy.exemplo.com?itproxy_url=%s"
+```
+
+### SOFTWARE_STATEMENT_N_PROXY_ORG
+ 
+O **N** deve corresponder a posição do software statement feita na configuração do helm,
+sendo a primeira posição de valor 0.
+
+Configura a org do software statement para uso no proxy caso o certificado usado
+não contenha a identificação da organização.
+
+```yaml
+additionalVars:
+  - name: SOFTWARE_STATEMENT_0_PROXY_ORG
+    value: "afab9837-1128-4b96-81e8-87f1c6f11597"
 ```

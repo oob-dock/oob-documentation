@@ -300,7 +300,7 @@ additionalVars:
     value: "https://obb.qa.oob.opus-software.com.br"
 ```
 
-### feature/requires-sync-status/enabled
+### FEATURE_REQUIRES_SYNC_STATUS_ENABLED
 
 Enables or disables synchronous requests to legacy endpoint to
 get payment status.
@@ -316,4 +316,23 @@ environments.
 additionalVars:
   - name: FEATURE_REQUIRES_SYNC_STATUS_ENABLED
     value: "true"
+```
+
+### FEATURE_POST_PAYMENTS_SYNC_ENABLED
+
+If disabled, it causes all payments to be processed
+asynchronously upon the ITP request.
+
+**Important**: This functionality should be disabled ***ONLY*** when the holder's
+system is capable of handling the ***internalIdempotencyKey***
+field during the creation of payments.
+
+**Format:** `true` ou `false`
+
+**Default**: `true`
+
+```yaml
+additionalVars:
+  - name: FEATURE_POST_PAYMENTS_SYNC_ENABLED
+    value: "false"
 ```

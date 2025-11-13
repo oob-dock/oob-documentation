@@ -104,10 +104,10 @@
               },
               "companyName": {
                 "type": "string",
-                "pattern": "^(?!\\s)[\\w\\W\\s]*[^\\s]$",
+                "pattern": "^[^\\s](?:.*[^\\s])?$",
                 "maxLength": 80,
                 "example": "Empresa da Organização A",
-                "description": "Nome da Instituição Proponente responsável pelo pedido de portabilidade de credito anterior a atual consulta p.ex.Empresa A.\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `status` for igual a `EM_ANDAMENTO`         \n"
+                "description": "Nome da Instituição Proponente responsável pelo pedido de portabilidade de credito anterior a atual consulta p.ex.Empresa A.\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando o campo `status` for igual a `EM_ANDAMENTO`"
               },
               "companyCnpj": {
                 "type": "string",
