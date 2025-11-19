@@ -96,7 +96,7 @@ Enables Dapr in the application to send events.
 
 **Format:**: `true` or `false`.
 
-Default value: `true`
+**Default value**: `true`
 
 ### dapr/appId
 
@@ -104,20 +104,22 @@ Identifier of the service to be used if there is more than one instance
 for different brands within the same environment.
 If not filled, the default name "oob-status" will be used.
 
-Example: `oob-status-cbanco`
+**Example:** `oob-status-cbanco`
 
 ### dapr/address
 
 Dapr sidecar address to be used by the service.
 
-Example: `localhost:3501`
+**Default value**: `localhost:3501`
+
+**Example:** `dapr.address:3502`
 
 ### dapr/health/timeoutMs
 
 Time, in milliseconds, that the service will wait until the
 dapr sidecar is available.
 
-Example: `10000`
+**Example:** `10000`
 
 ## dapr/schedulerHostAddress
 
@@ -135,7 +137,7 @@ env:
 
 ## dapr/job/dailyMetric/schedule
 
-Define the scheduling of daily metric processing for display in the OF metrics API.
+Define the scheduling of daily metric processing for display in the Open Finance's metrics API.
 
 **Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
 

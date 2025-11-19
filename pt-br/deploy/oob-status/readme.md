@@ -102,7 +102,7 @@ Habilita o Dapr na aplicação para realizar o envio de eventos.
 
 **Formato:** : `true` ou `false`.
 
-Valor default: `true`
+**Valor default**: `true`
 
 ### dapr/appId
 
@@ -116,14 +116,16 @@ Ex: `oob-status-cbanco`
 
 Endereço do sidecar do dapr a ser utilizado pelo serviço.
 
-Ex: `localhost:3501`
+**Valor default:** `localhost:3501`.
+
+**Exemplo:** `dapr.address:3502`
 
 ### dapr/health/timeoutMs
 
 Tempo, em milissegundos, que o serviço irá esperar até que o sidecar do dapr
 esteja disponível.
 
-Ex: `10000`
+**Exemplo:** `10000`
 
 ## dapr/schedulerHostAddress
 
@@ -142,7 +144,7 @@ env:
 ## dapr/job/dailyMetric/schedule
 
 Define o agendamento do processamento das métricas diárias para exibição
-na API de métricas do OF.
+na API de métricas do Open Finance.
 
 **Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
 
