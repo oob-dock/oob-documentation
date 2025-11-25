@@ -116,7 +116,7 @@ Ex: `oob-status-cbanco`
 
 Endereço do sidecar do dapr a ser utilizado pelo serviço.
 
-**Valor default:** `localhost:3501`.
+**Valor default:** `127.0.0.1:3500`.
 
 **Exemplo:** `dapr.address:3502`
 

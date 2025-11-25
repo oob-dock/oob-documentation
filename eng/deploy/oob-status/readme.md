@@ -110,7 +110,7 @@ If not filled, the default name "oob-status" will be used.
 
 Dapr sidecar address to be used by the service.
 
-**Default value**: `localhost:3501`
+**Default value**: `127.0.0.1:3500`.
 
 **Example:** `dapr.address:3502`
 
