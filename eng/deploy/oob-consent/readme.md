@@ -240,7 +240,7 @@ env:
 
 Used to define the schedule for the PCM consent stock report job.
 
-**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
 **Default value**: `disabled`
 
@@ -258,7 +258,7 @@ env:
 
 Used to define the schedule for the active consents fetching os authorization server.
 
-**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
 **Default value**: `disabled`
 
@@ -275,7 +275,7 @@ env:
 
 Used to define the schedule for publishing the dropreason event.
 
-**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
 
 **Default value:** `disabled`
 
@@ -287,6 +287,81 @@ env:
     job:
       dropreason:
         schedule: "@every 5m"
+```
+
+## dapr/job/consentExpiration/schedule
+
+Used to define the schedule for check for consent expiration.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Default value:** `@every 60s`
+
+**Example:** To schedule the job to run every 60 seconds:
+
+```yaml
+env:
+  dapr:
+    job:
+      consentExpiration:
+        schedule: "@every 60s"
+```
+
+## dapr/job/instantPaymentWebhook/schedule
+
+Used to set the job execution interval for status checks to send instant payment webhooks.
+To activate the job, it is also necessary to activate the webhook feature in the instance.
+
+**IMPORTANT**: Activating the job is part of the temporary webhook solution and should only be
+enabled while the holder does not implement the
+[Payment Status Change Notification API](../../backoffice-portal/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento).
+
+**Format:**  Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every 5 seconds:
+instantPaymentWebhook:
+        schedule: "@every 5s"
+```
+
+## dapr/job/scheduledPaymentWebhook/schedule
+
+Used to set the job execution interval for status checks to send scheduled payment (SCHD) webhooks.
+As with the previous one, activating this job depends on the activation of the webhook feature in the instance.
+The job is disabled by default.
+
+**Format:**  Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every 60 seconds:
+
+```yaml
+env:
+  dapr:
+    job:
+      scheduledPaymentWebhook:
+        schedule: "@every 60s"
+```
+
+## dapr/job/scheduledEnrollment/schedule
+
+Used to enable the validation of the daily payment limit for JSR consents.
+It is recommended that this job remain disabled.
+
+**Format:**  Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every 24 hours:
+
+```yaml
+env:
+  dapr:
+    job:
+      scheduledEnrollment:
+        schedule: "@every 24h"
 ```
 
 ## dapr/job/consentToExpire/schedule
@@ -613,27 +688,6 @@ additionalVars:
     value: "X-SSL-Client-Cert"
 ```
 
-### ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
-
-It can be activated (value `true`) if the holder wishes
-the limits of scheduled payments to be validated at the
-time of their initiation. It should not be activated
-for certification execution.
-
-If false the daemon that evaluates the limits for scheduled payments will run.
-
-**Format:** `true` ou `false`
-
-Valor default: `false`
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: ENROLLMENT_VALIDATE_SCHEDULED_LIMIT
-    value: "true"
-```
-
 ### CONSENT_DATA_SHARING_V31_DATE
 
 Defines the date when the necessary modifications for Phase 2 v3.1 should be activated.
@@ -699,53 +753,10 @@ additionalVars:
     value: "https://obb.qa.oob.opus-software.com.br"
 ```
 
-### Connectors
+### APPLICATION_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
 
-There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
-
-## additionalVarsDaemon
-
-Used to define optional configurations for daemon instances.
-
-### DAEMON_WEBHOOK_PAYMENT_INSTANT_INTERVAL
-
-Used to set the daemon execution interval for status checks to send instant payment webhooks. This configuration value should be an integer followed by a time unit expressed in `m` for minutes or `s` for seconds. To activate the daemon, it is also necessary to activate the webhook feature in the instance.
-
-**Example:**
-
-The following example shows a configuration for running the daemon at 5-second intervals:
-
-```yaml
-additionalVarsDaemon:
-  - name: DAEMON_WEBHOOK_PAYMENT_INSTANT_INTERVAL
-    value: "5s"
-  - name: APPLICATION_WEBHOOK_PAYMENT_ENABLED
-    value: "true"
-```
-
-**IMPORTANT**: Activating the daemon is part of the temporary webhook solution and should only be enabled while the holder does not implement the [Payment Status Change Notification API](../../backoffice-portal/apis-backoffice/readme.md#notificação-de-mudança-de-status-de-pagamento). The daemon is disabled by default, but if the holder chooses to use it, the recommended interval value is `1s`, to meet the regulatory expected time.
-
-Default value: `disabled`
-
-### DAEMON_WEBHOOK_PAYMENT_SCHEDULED_INTERVAL
-
-Used to set the daemon execution interval for status checks to send scheduled payment (SCHD) webhooks. The daemon configuration follows the same pattern as the previous one and is also considered a temporary solution to be used while the holder does not implement the payment status notification via API. As with the previous one, activating this daemon depends on the activation of the webhook feature in the instance. The daemon is disabled by default, but if the holder chooses to use it, the recommended interval value is `1s`, to meet the regulatory expected time.
-
-**Example:**
-
-```yaml
-additionalVarsDaemon:
-  - name: DAEMON_WEBHOOK_PAYMENT_SCHEDULED_INTERVAL
-    value: "5s"
-  - name: APPLICATION_WEBHOOK_PAYMENT_ENABLED
-    value: "true"
-```
-
-Default value: `disabled`
-
-### DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
-
-To improve the performance of the status check daemons for webhook sending, the holder can enable execution parallelism, allowing multiple status checks to its banking core at once.
+To improve the performance of the status check jobs for webhook sending, the holder can
+enable execution parallelism, allowing multiple status checks to its banking core at once.
 
 **Format:** `true` or `false`
 
@@ -754,26 +765,14 @@ Default value: `false`
 **Example:**
 
 ```yaml
-additionalVarsDaemon:
-  - name: DAEMON_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
+additionalVars:
+  - name: APPLICATION_WEBHOOK_PAYMENT_PARALLELISM_ENABLED
     value: "true"
 ```
 
-### DAEMON_ENROLLMENT_EXECUTION_HOUR
+### Connectors
 
-Configuration of the hour at which the daemon will be executed.
-
-**Format:** Number from 0-23
-
-Default value: `23`
-
-**Ex:**
-
-```yaml
-additionalVarsDaemon:
-  - name: DAEMON_ENROLLMENT_EXECUTION_HOUR
-    value: "23"
-```
+There are additionalVars for using the consent approval connector developed by Opus, which are listed in [consent](../../integration-connector/consent/readme.md) in the `File route implemented by OPUS` section.
 
 ### DAPR_JOB_CONSENTTOEXPIRE_DAYS
 
