@@ -401,14 +401,32 @@ A daily execution is recommended.
 
 **Default value:** `disabled`
 
-**Example:** To schedule the job to run every 24 hours:
+**Example:** To schedule the job to run every 12 hours:
 
 ```yaml
 env:
   dapr:
     job:
       resourceUpdate:
-        schedule: "@every 24h"
+        schedule: "@every 12h"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Used to define the schedule for checking consents that are about to expire.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every day at 10am (recommended):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## opentelemetry

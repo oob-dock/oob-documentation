@@ -1,5 +1,39 @@
 # Instalação do OOB Status
 
+## Pré-requisitos
+
+### Virtual Actors
+
+Este módulo utiliza os [virtual actors](https://docs.dapr.io/developing-applications/building-blocks/actors/actors-overview/)
+do [Dapr](/deploy/shared-definitions.md#dapr).
+A utilização dessa funcionalidade depende da inclusão de uma [state store](https://docs.dapr.io/reference/components-reference/supported-state-stores/)
+para manter seus estados de funcionamento. Assim, será necessário incluir esta
+configuração. **Importante:** Necessário definir na state store uma propriedade
+chamada `actorStateStore` com valor `true`.
+
+Segue um exemplo de definição de um componente de state store que utiliza o Redis.
+
+```yaml
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: statestore
+spec:
+  type: state.redis
+  version: v1
+  metadata:
+  - name: redisHost
+    value: <host>:<port>
+  - name: redisPassword
+    value: ""
+  - name: actorStateStore
+    value: "true"
+
+```
+
+**Atenção:** Este é apenas um **exemplo**. Necessário ajustar a tecnologia desejada
+e revisar todas as propriedades configuradas.
+
 ## Instalação
 
 A instalação do módulo é feita via Helm Chart
@@ -62,6 +96,89 @@ Configuração dos endereços base dos serviços acessíveis externamente mtls o
 
 **Ex:** `mtls-obb.qa.oob.opus-software.com.br`
 
+### dapr/enabled
+
+Habilita o Dapr na aplicação para realizar o envio de eventos.
+
+**Formato:** : `true` ou `false`.
+
+**Valor default**: `true`
+
+### dapr/appId
+
+Identificador do serviço a ser utilizado caso exista mais de uma instância
+para marcas diferentes dentro do mesmo ambiente.
+Caso não seja preenchido, utilizará o nome padrão "oob-status".
+
+Ex: `oob-status-cbanco`
+
+### dapr/address
+
+Endereço do sidecar do dapr a ser utilizado pelo serviço.
+
+**Valor default:** `127.0.0.1:3500`.
+
+**Exemplo:** `dapr.address:3502`
+
+### dapr/health/timeoutMs
+
+Tempo, em milissegundos, que o serviço irá esperar até que o sidecar do dapr
+esteja disponível.
+
+**Exemplo:** `10000`
+
+## dapr/schedulerHostAddress
+
+Essa configuração deve apontar para o serviço de agendamento do Dapr
+para habilitar a funcionalidade da API de Jobs do Dapr.  
+Para mais detalhes, consulte a [documentação do Dapr](https://docs.dapr.io/reference/arguments-annotations-overview/).
+
+**Exemplo:**
+
+```yaml
+env:
+  dapr:
+    schedulerHostAddress: dapr-scheduler-server.oob.svc.cluster.local:50006
+```
+
+## dapr/job/dailyMetric/schedule
+
+Define o agendamento do processamento das métricas diárias para exibição
+na API de métricas do Open Finance.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `@every 300s` (a cada 300 segundos).
+
+**Exemplo:** Para agendar a execução da coleta de métricas diária a cada 300 segundos:
+
+```yaml
+env:
+  dapr:
+    job:
+      dailyMetric:
+        schedule: "@every 300s"
+```
+
+## dapr/job/incident/schedule
+
+Define o agendamento do processamento do status dos serviços e
+dados sobre as requisições recebidas nos endpoints regulatórios.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento.Baseado na [API de jobs do Dapr](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor default:** `@every 30s` (a cada 30 segundos).
+
+**Exemplo:** Para agendar a execução da coleta dos dados de APIs regulatórias a 30 segundos:
+
+```yaml
+env:
+  dapr:
+    job:
+      incident:
+        schedule: "@every 30s"
+```
+
 ### features
 
 Vide a [definição](../shared-definitions.md#suporte-a-features-do-opus-open-finance)
@@ -122,20 +239,4 @@ Valor default: `WARN`
 additionalVars:
   - name: LOGGING_LEVEL_INITIALIZATION
     value: "WARN"
-```
-
-### DAEMON_INCIDENT_ENABLED
-
-Indica se o daemon de incidentes está habilitado. Em produção deve estar ativado.
-
-**Formato:** `true` ou `false`
-
-**Default:** `true`
-
-**Ex:**
-
-```yaml
-additionalVars:
-  - name: DAEMON_INCIDENT_ENABLED
-    value: "true"
 ```

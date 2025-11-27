@@ -452,14 +452,32 @@ Recomenda-se execução diária.
 
 **Valor padrão:** `disabled`
 
-**Exemplo:** Para agendar o job para rodar a cada 24 horas:
+**Exemplo:** Para agendar o job para rodar a cada 12 horas:
 
 ```yaml
 env:
   dapr:
     job:
       resourceUpdate:
-        schedule: "@every 24h"
+        schedule: "@every 12h"
+```
+
+## dapr/job/consentToExpire/schedule
+
+Usado para definir o agendamento da verificação de consentimentos prestes a expirar.
+
+**Formato:** String no formato cron (ignorando segundos, apenas 5 campos) ou expressão para agendamento baseada na [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Valor padrão:** `disabled`
+
+**Exemplo:** Para agendar o job para rodar a todo dia 10am (recomendado):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
 ```
 
 ## opentelemetry
