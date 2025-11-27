@@ -177,15 +177,22 @@ This API is responsible for deleting the metadata information related to a conse
 
 This API is responsible for revoking an enrollment, returning its details and the history of status changes made. The revocation is done through the internal identifier of the enrollment in UUID format.
 
+## Resource change notification
+
+        POST /open-banking/oob-consents/v1/resources-notification
+
+Responsible for notifying the OOF about the change of non-selectable resources by category.  
+Example: Loan, financing, etc.
+
 ## Enable/Disable Webhook Delivery
 
-PATCH /open-banking/oob-consents/v1/webhook/toggle/{consentId}
+        PATCH /open-banking/oob-consents/v1/webhook/toggle/{consentId}
 
 Endpoint used to enable or disable optional webhook delivery to the backoffice, linked to the consent.
 
 ## Get Webhook Delivery Status
 
-GET /open-banking/oob-consents/v1/webhook/status/{consentId}
+        GET /open-banking/oob-consents/v1/webhook/status/{consentId}
 
 Endpoint used to retrieve the status of optional webhook delivery to the backoffice, linked to the consent.
 

@@ -307,6 +307,24 @@ env:
         schedule: "@every 60s"
 ```
 
+## dapr/job/consentToExpire/schedule
+
+Used to define the schedule for checking consents that are about to expire.
+
+**Format:** Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the [Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every day at 10am (recommended):
+
+```yaml
+env:
+  dapr:
+    job:
+      consentToExpire:
+        schedule: "0 10 * * *"
+```
+
 ## dapr/job/instantPaymentWebhook/schedule
 
 Used to set the job execution interval for status checks to send instant payment webhooks.
@@ -321,7 +339,12 @@ enabled while the holder does not implement the
 **Default value:** `disabled`
 
 **Example:** To schedule the job to run every 5 seconds:
-instantPaymentWebhook:
+
+```yaml
+env:
+  dapr:
+    job:
+      instantPaymentWebhook:
         schedule: "@every 5s"
 ```
 
@@ -362,6 +385,30 @@ env:
     job:
       scheduledEnrollment:
         schedule: "@every 24h"
+```
+
+## dapr/job/resourceUpdate/schedule
+
+Used to activate the resource query job for data-sharing consents that have not yet successfully
+completed the discovery of all products.
+It should only be activated if [asynchronous resource discovery](./readme.md#featureresourcesasyncenabled)
+is enabled.
+
+A daily execution is recommended.
+
+**Format:**  Cron-like string (ignoring seconds, just 5 fields) or expression for scheduling based on the
+[Dapr Jobs API](https://docs.dapr.io/reference/api/jobs_api/#schedule).
+
+**Default value:** `disabled`
+
+**Example:** To schedule the job to run every 12 hours:
+
+```yaml
+env:
+  dapr:
+    job:
+      resourceUpdate:
+        schedule: "@every 12h"
 ```
 
 ## dapr/job/consentToExpire/schedule
@@ -853,6 +900,18 @@ additionalVars:
   - name: FEATURE_ASYNC_PAYMENT_STATUS_ENABLED
     value: "true"
 ```
+
+### feature/resources/async/enabled
+
+Enables or disables asynchronous requests to the backend system’s discovery service to check for resource changes.  
+
+This feature should be enabled **ONLY** if the institution has implemented the 
+[resource change notification](../../backoffice-portal/apis-backoffice/readme.md#resource-change-notification)
+for all non-selectable resources.
+
+**Format:** `0` ou `1`
+
+**Default value**: `0`
 
 ### ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
 

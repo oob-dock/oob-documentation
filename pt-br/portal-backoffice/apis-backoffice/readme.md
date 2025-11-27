@@ -199,16 +199,23 @@ a um consentimento.
 
 Esta API é responsável por revogar um vínculo, retornando os detalhes do mesmo e o histórico de mudanças de status realizadas. A revogação é feita através do identificador interno do vínculo formato UUID.
 
+## Notificação de alteração de recursos
+
+        POST /open-banking/oob-consents/v1/resources-notification
+
+Responsável por notificar ao OOF a alteração de recursos
+não-selecionáveis por categoria. Ex: Empréstimo, financiamento, etc.
+
 ## Ativar/Desativar envio de webhook
 
-PATCH /open-banking/oob-consents/v1/webhook/toggle/{consentId}
+        PATCH /open-banking/oob-consents/v1/webhook/toggle/{consentId}
 
 Endpoint usado para ativar ou desativar o envio de webhooks opcionais para a retaguarda,
 atrelado ao consentimento.
 
 ## Get status do envio de webhook
 
-GET /open-banking/oob-consents/v1/webhook/status/{consentId}
+        GET /open-banking/oob-consents/v1/webhook/status/{consentId}
 
 Endpoint usado para buscar o status do envio de webhooks opcionais para a retaguarda,
 atrelado ao consentimento.
