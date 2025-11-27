@@ -152,6 +152,14 @@ Deve ser preenchido com o salt a ser utilizado para gerar a chave de de criptogr
 em conjunto com a chave informada no item anterior; recomenda-se que possua 64 bits,
 e que o formato dos valores seja hexadecimal.
 
+### application/authorizationServerId
+
+Deve ser preenchido com o authorizationServerId da instituição cadastrada
+no diretório de participantes. Utilizar o ID de sandbox em ambientes não produtivos
+e o ID de produção em ambientes produtivos. Tipo: UUID.
+
+Exemplo: `2e4c1b0c-1234-4f9d-9abc-55aa66bb7788`
+
 > **Atenção**
 >
 > `É necessário que a mesma seja armazenada de forma segura, pois caso
