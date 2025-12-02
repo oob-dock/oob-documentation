@@ -2,11 +2,10 @@
   "data": {
     "dueInstalments": 57,
     "pastDueInstalments": 73,
-    "typeContractRemaining": "DIA",
+    "typeContractRemaining": "ANO",
     "typeNumberOfInstalments": "MES",
     "paidInstalments": 73,
     "totalNumberOfInstalments": 130632,
-    "contractRemainingNumber": 80,
     "balloonPayments": [
       {
         "dueDate": "2020-01-10",
@@ -28,10 +27,26 @@
           "amount": "100000.0400",
           "currency": "BRL"
         }
+      },
+      {
+        "dueDate": "2020-01-10",
+        "amount": {
+          "amount": "100000.0400",
+          "currency": "BRL"
+        }
+      },
+      {
+        "dueDate": "2020-01-10",
+        "amount": {
+          "amount": "100000.0400",
+          "currency": "BRL"
+        }
       }
-    ]
+    ],
+    "contractRemainingNumber": 80
   },
   "meta": {
-    "requestDateTime": -22829732.587402016
+    "totalRecords": 1,
+    "totalPages": 1
   }
 }

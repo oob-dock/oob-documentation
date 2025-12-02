@@ -3,6 +3,7 @@
   "required": [
     "data"
   ],
+  "additionalProperties": false,
   "properties": {
     "data": {
       "type": "object",
@@ -15,39 +16,44 @@
         "productSubType",
         "contractDate",
         "contractAmount",
+        "settlementDate",
+        "currency",
+        "dueDate",
         "instalmentPeriodicity",
+        "instalmentPeriodicityAdditionalInfo",
+        "firstInstalmentDueDate",
+        "CET",
         "amortizationScheduled",
+        "amortizationScheduledAdditionalInfo",
         "interestRates",
         "contractedFees",
         "contractedFinanceCharges"
       ],
+      "additionalProperties": false,
       "properties": {
         "contractNumber": {
           "type": "string",
           "maxLength": 100,
-          "minLength": 1,
-          "pattern": "^[\\w\\W]{1,100}$",
           "example": "1324926521496",
           "description": "Número do contrato dado pela instituição contratante."
         },
         "ipocCode": {
           "type": "string",
           "maxLength": 67,
-          "minLength": 22,
-          "pattern": "^[\\w\\W]{22,67}$",
           "example": "92792126019929279212650822221989319252576",
-          "description": "Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\n"
+          "description": "\"Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\"\n"
         },
         "productName": {
           "type": "string",
           "maxLength": 140,
-          "pattern": "^[^\\s](.*[^\\s])?$",
+          "pattern": "[\\w\\W\\s]*",
           "example": "AD",
-          "description": "Denominação/Identificação do nome da Modalidade da Operação de Crédito divulgado ao cliente\n"
+          "description": "\"Denominação/Identificação do nome da Modalidade da Operação de Crédito divulgado ao cliente\"\n"
         },
         "productType": {
           "type": "string",
           "description": "\"Tipo da modalidade de crédito contratada, conforme circular 4.015 e descrição do DOC3040 do SCR). (Vide Enum)\nAdiantamento a depositantes, Direitos creditórios descontados Empréstimos,  Financiamentos, Financiamentos rurais  e Financiamentos imobiliários\"\n",
+          "maxLength": 27,
           "enum": [
             "ADIANTAMENTO_A_DEPOSITANTES"
           ],
@@ -62,57 +68,58 @@
           "example": "ADIANTAMENTO_A_DEPOSITANTES"
         },
         "contractDate": {
-          "description": "Data de contratação da operação de crédito. Especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339). \nPara operações em que o adiantamento a depositantes é disponibilizado ao cliente desde a abertura da conta, utilizar a data de abertura da conta como data de contratação.\n",
+          "description": "Data de contratação da operação de crédito. Especificação RFC-3339",
           "type": "string",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2018-01-05"
         },
-        "disbursementDates": {
-          "type": "array",
-          "minItems": 1,
-          "description": "Lista que traz as Datas de Desembolso do valor contratado.\n",
-          "items": {
-            "type": "string",
-            "maxLength": 10,
-            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
-            "example": "2018-01-15",
-            "description": "Data do Desembolso do valor contratado. Especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339).\nNo caso de uma liberação de recursos feita em D0 mas com referência retroativa feita em D -1, contabilmente a data correta seria D -1.\n"
-          }
-        },
-        "settlementDate": {
+        "disbursementDate": {
           "type": "string",
           "maxLength": 10,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2018-01-15",
-          "description": "Data de liquidação da operação.\n"
+          "description": "Data do Desembolso do valor contratado. Especificação RFC-3339"
+        },
+        "settlementDate": {
+          "type": "string",
+          "maxLength": 10,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$|^NA$",
+          "example": "2018-01-15",
+          "description": "Data de liquidação da operação.\n[Restrição] Deve aceitar NA caso não seja retornado pela instituição.\n"
         },
         "contractAmount": {
-          "description": "Valor contratado da operação. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais. Nos casos em que não houver este valor explícito no contrato do produto, enviar como 0.00.",
-          "type": "string",
-          "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+          "description": "Valor contratado da operação. Expresso em valor monetário com até 4 casas decimais",
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double",
+          "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
           "maxLength": 20,
-          "minLength": 4,
-          "example": "100000.0400"
+          "minLength": 0,
+          "example": 100000.04,
+          "minimum": -1.7976931348623157e+308,
+          "maximum": 1.7976931348623157e+308
         },
         "currency": {
           "type": "string",
           "pattern": "^(\\w{3}){1}$",
           "maxLength": 3,
-          "description": "Moeda referente ao valor da garantia, segundo modelo ISO-4217. p.ex. 'BRL'\nTodos os valores monetários informados estão representados com a moeda vigente do Brasil\n",
+          "description": "\"Moeda referente ao valor da garantia, segundo modelo ISO-4217. p.ex. 'BRL'\nTodos os valores monetários informados estão representados com a moeda vigente do Brasil\"\n",
           "example": "BRL"
         },
         "dueDate": {
           "type": "string",
           "maxLength": 10,
-          "minLength": 2,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2028-01-15",
-          "description": "Data de vencimento Final da operação. Especificação [RFC-3339](https://datatracker.ietf.org/doc/html/rfc3339). \nNão aplicável para contratos ativos / Informar data do cancelamento para contratos cancelados.\n"
+          "description": "Data de vencimento Final da operação. Especificação RFC-3339"
         },
         "instalmentPeriodicity": {
           "type": "string",
           "description": "\"Informação relativa à periodicidade regular das parcelas. (Vide Enum)\nsem periodicidade regular, semanal, quinzenal, mensal, bimestral, trimestral, semestral, anual\"\n",
+          "maxLength": 25,
           "enum": [
             "SEM_PERIODICIDADE_REGULAR",
             "SEMANAL",
@@ -131,30 +138,28 @@
           "pattern": "[\\w\\W\\s]*",
           "maxLength": 50,
           "example": "Informações adicionais sobre periodicidade",
-          "description": "Campo para complementar a informação relativa à periodicidade de pagamento regular.\n\n[Restrição] Obrigatório quando o campo `instalmentPeriodicity` for igual a `OUTROS`.\n"
+          "description": "Campo obrigatório para complementar a informação relativa à periodicidade de pagamento regular quando tiver a opção OUTROS.\n[Restrição] Obrigatório para complementar a informação relativa da periodicidade de pagamento regular, quando selecionada o tipo ou subtipo OUTRO.\n"
         },
         "firstInstalmentDueDate": {
           "type": "string",
           "maxLength": 10,
-          "minLength": 2,
           "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
           "example": "2018-02-15",
-          "description": "Data de vencimento primeira parcela do principal\n"
+          "description": "Data de vencimento primeira parcela do principal"
         },
         "CET": {
-          "type": "string",
-          "pattern": "^\\d{1,6}\\.\\d{6}$",
-          "format": "double",
-          "description": "CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas). \n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.150000. sEste valor representa 15%. O valor 1 representa 100%).\n",
-          "maxLength": 13,
-          "minLength": 8,
-          "example": "0.290000",
-          "minimum": -1.7976931348623157e+308,
-          "maximum": 1.7976931348623157e+308
+          "type": [
+            "number",
+            "null"
+          ],
+          "description": "\"CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e   incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas).\nO preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros\n(representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)\"\n",
+          "maxLength": 19,
+          "example": 0.29
         },
         "amortizationScheduled": {
           "type": "string",
           "description": "Sistema de amortização (Vide Enum):\n- SAC (Sistema de Amortização Constante) - É aquele em que o valor da amortização permanece igual até o final. Os juros cobrados sobre o parcelamento não entram nesta conta.\n- PRICE (Sistema Francês de Amortização) - As parcelas são fixas do início ao fim do contrato. Ou seja, todas as parcelas terão o mesmo valor, desde a primeira até a última. Nos primeiros pagamentos, a maior parte do valor da prestação corresponde aos juros. Ao longo do tempo, a taxa de juros vai decrescendo. Como o valor da prestação é fixo, com o passar das parcelas, o valor de amortização vai aumentando.\n- SAM (Sistema de Amortização Misto) - Cada prestação (pagamento) é a média aritmética das prestações respectivas no Sistemas Price e no Sistema de Amortização Constante (SAC).\n- SEM SISTEMA DE AMORTIZAÇÃO\n",
+          "maxLength": 23,
           "enum": [
             "SAC",
             "PRICE",
@@ -167,14 +172,12 @@
         "amortizationScheduledAdditionalInfo": {
           "type": "string",
           "pattern": "[\\w\\W\\s]*",
-          "maxLength": 200,
-          "example": "Informações complementares relativa à amortização do tipo 'OUTROS'",
-          "description": "Campo para complementar a informação relativa à amortização.\n\n[Restrição] Obrigatório quando o campo `amortizationScheduled` for igual a `OUTROS`.\n"
+          "maxLength": 50,
+          "example": "NA",
+          "description": "Campo obrigatório para complementar a informação relativa à amortização quando selecionada a opção OUTROS.\n[Restrição] Obrigatório para complementar a informação relativa à amortização quando selecionada a opção OUTROS, para os demais casos informar \"NA\".\n"
         },
         "interestRates": {
           "type": "array",
-          "minItems": 0,
-          "description": "Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito.  \nCaso o contrato não possua taxas de juros, deve ser compartilhada uma lista vazia. Caso o contrato possua uma taxa de juros com valor 0, deve ser compartilhado um objeto com o valor 0 de forma explícita.\n",
           "items": {
             "type": "object",
             "description": "Objeto que traz o conjunto de informações necessárias para demonstrar a composição das taxas de juros remuneratórios da Modalidade de crédito",
@@ -183,12 +186,17 @@
               "interestRateType",
               "taxPeriodicity",
               "calculation",
-              "referentialRateIndexerType"
+              "referentialRateIndexerType",
+              "preFixedRate",
+              "postFixedRate",
+              "additionalInfo"
             ],
+            "additionalProperties": false,
             "properties": {
               "taxType": {
                 "type": "string",
                 "description": "\"Tipo de Taxa (vide  Enum)\n- NOMINAL (taxa nominal é uma taxa de juros em que a unidade referencial não coincide com a unidade de tempo da capitalização. Ela é sempre fornecida em termos anuais, e seus períodos de capitalização podem ser diários, mensais, trimestrais ou semestrais. p.ex. Uma taxa de 12% ao ano com capitalização mensal)\n- EFETIVA (É a taxa de juros em que a unidade referencial coincide com a unidade de tempo da capitalização. Como as unidades de medida de tempo da taxa de juros e dos períodos de capitalização são iguais, usa-se exemplos simples como 1% ao mês, 60% ao ano)\"\n",
+                "maxLength": 7,
                 "enum": [
                   "NOMINAL",
                   "EFETIVA"
@@ -198,6 +206,7 @@
               "interestRateType": {
                 "type": "string",
                 "description": "\"Tipo de Juros  (vide  Enum)\n- SIMPLES (aplicada/cobrada sempre sobre o capital inicial, que é o valor emprestado/investido. Não há cobrança de juros sobre juros acumulados no(s) período(s) anterior(es). Exemplo: em um empréstimo de R$1.000, com taxa de juros simples de 8% a.a., com duração de 2 anos, o total de juros será R$80 no primeiro ano e R$ 80 no segundo ano. Ao final do contrato, o tomador irá devolver o principal e os juros simples de cada ano: R$1.000+R$80+R$80=R$1.160)\n- COMPOSTO (para cada período do contrato (diário, mensal, anual etc.), há um “novo capital” para a cobrança da taxa de juros contratada. Esse “novo capital” é a soma do capital e do juro cobrado no período anterior. Exemplo: em um empréstimo de R$1.000, com taxa de juros composta de 8% a.a., com duração de 2 anos, o total de juros será R$80 no primeiro ano. No segundo ano, os juros vão ser somados ao capital (R$1.000 + R$ 80 = R$ 1.080), resultando em juros de R$ 86 (8%de R$ 1.080))\"\n",
+                "maxLength": 8,
                 "enum": [
                   "SIMPLES",
                   "COMPOSTO"
@@ -206,7 +215,8 @@
               },
               "taxPeriodicity": {
                 "type": "string",
-                "description": "\"Periodicidade da taxa. (Vide  Enum)\na.m - ao mês\na.a. - ao ano\"\n",
+                "description": "\"Periodicidade da taxa . (Vide  Enum)\na.m - ao mês\na.a. - ao ano\"\n",
+                "maxLength": 2,
                 "enum": [
                   "AM",
                   "AA"
@@ -216,6 +226,7 @@
               "calculation": {
                 "type": "string",
                 "description": "Base de cálculo",
+                "maxLength": 6,
                 "enum": [
                   "21/252",
                   "30/360",
@@ -226,6 +237,7 @@
               "referentialRateIndexerType": {
                 "type": "string",
                 "description": "\"Tipos de taxas referenciais ou indexadores, conforme Anexo 5: Taxa referencial ou Indexador (Indx), do Documento 3040\"\n",
+                "maxLength": 18,
                 "enum": [
                   "SEM_TIPO_INDEXADOR",
                   "PRE_FIXADO",
@@ -240,6 +252,7 @@
               "referentialRateIndexerSubType": {
                 "type": "string",
                 "description": "\"Sub tipos de taxas referenciais ou indexadores, conforme Anexo 5: Taxa referencial ou Indexador (Indx), do Documento 3040\"\n",
+                "maxLength": 24,
                 "enum": [
                   "SEM_SUB_TIPO_INDEXADOR",
                   "PRE_FIXADO",
@@ -266,38 +279,31 @@
               "referentialRateIndexerAdditionalInfo": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "^[^\\s](.*[^\\s])?$",
+                "pattern": "[\\w\\W\\s]*",
                 "example": "Informações adicionais",
                 "description": "Campo livre para complementar a informação relativa ao Tipo de taxa referencial ou indexador.\n[Restrição] Obrigatório para complementar a informação relativa ao Tipo de taxa referencial ou indexador, quando selecionada o tipo ou subtipo OUTRO.\n"
               },
               "preFixedRate": {
-                "type": "string",
-                "format": "double",
-                "pattern": "^\\d{1,2}\\.\\d{6}$",
-                "maxLength": 9,
-                "minLength": 8,
-                "description": "Taxa pré-fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.014500. O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\n\n[Restrição] Este campo é de envio obrigatório caso não seja enviado o campo `postFixedRate`.  \n",
-                "example": "0.600000",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "type": [
+                  "number",
+                  "null"
+                ],
+                "description": "\"Taxa pré fixada aplicada sob o contrato da modalidade crédito.\np.ex. 0.0045. O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros\n(representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)\"\n",
+                "maxLength": 19,
+                "example": 0.6
               },
               "postFixedRate": {
-                "type": "string",
-                "format": "double",
-                "pattern": "^\\d{1,2}\\.\\d{6}$",
-                "maxLength": 9,
-                "minLength": 8,
-                "description": "Taxa pós-fixada aplicada sob o contrato da modalidade crédito. p.ex. 0.0045. O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%).\n\n[Restrição] Este campo é de envio obrigatório caso não seja enviado o campo `preFixedRate`.\n",
-                "example": "0.550000",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "type": "number",
+                "description": "\"Taxa pós fixada aplicada sob o contrato da modalidade crédito.\np.ex. 0.0045 .O preenchimento deve respeitar as 4 casas decimais, mesmo que venham preenchidas com zeros\n(representação de porcentagem p.ex: 0.1500. Este valor representa 15%. O valor 1 representa 100%)\"\n",
+                "maxLength": 19,
+                "example": 0.55
               },
               "additionalInfo": {
                 "type": "string",
                 "maxLength": 1200,
-                "pattern": "^[^\\s](.*[^\\s])?$",
+                "pattern": "[\\w\\W\\s]*",
                 "example": "Informações adicionais",
-                "description": "Texto com informações adicionais sobre a composição das taxas de juros pactuadas. \n\n[Restrição] Caso a instituição possua a informação para compartilhamento, esta deverá ser informada.\n"
+                "description": "Texto com informações adicionais sobre a composição das taxas de juros pactuadas"
               }
             }
           }
@@ -305,33 +311,37 @@
         "contractedFees": {
           "type": "array",
           "minItems": 0,
-          "description": "Lista que traz as informações das tarifas pactuadas no contrato.",
+          "description": "Lista que traz a relação de tarifas pactuadas no contrato",
           "items": {
             "type": "object",
             "required": [
               "feeName",
               "feeCode",
               "feeChargeType",
-              "feeCharge"
+              "feeCharge",
+              "feeAmount",
+              "feeRate"
             ],
+            "additionalProperties": false,
             "properties": {
               "feeName": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "^[^\\s](.*[^\\s])?$",
+                "pattern": "[\\w\\W\\s]*",
                 "description": "Denominação da Tarifa pactuada",
                 "example": "Excesso em Conta"
               },
               "feeCode": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "^[^\\s](.*[^\\s])?$",
+                "pattern": "[\\w\\W\\s]*",
                 "description": "Sigla identificadora da tarifa pactuada",
                 "example": "EXCESSO_CONTA"
               },
               "feeChargeType": {
                 "type": "string",
                 "description": "Tipo de cobrança para a tarifa pactuada no contrato.",
+                "maxLength": 11,
                 "enum": [
                   "UNICA",
                   "POR_PARCELA"
@@ -341,6 +351,7 @@
               "feeCharge": {
                 "type": "string",
                 "description": "\"Forma de cobrança relativa a tarifa pactuada no contrato. (Vide Enum)\n- Mínimo\n- Máximo\n- Fixo\n- Percentual\"\n",
+                "maxLength": 10,
                 "enum": [
                   "MINIMO",
                   "MAXIMO",
@@ -350,24 +361,27 @@
                 "example": "MINIMO"
               },
               "feeAmount": {
-                "type": "string",
+                "type": [
+                  "number",
+                  "null"
+                ],
                 "format": "double",
-                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
                 "maxLength": 20,
-                "minLength": 4,
-                "example": "1000.0400",
-                "description": "Valor monetário da tarifa pactuada no contrato. \n\n[Restrição] Preenchimento obrigatório quando a forma de cobrança for diferente de Percentual.\n",
+                "description": "Valor monetário da tarifa pactuada no contrato. Preenchimento obrigatório quando a forma de cobrança for: Mínimo, Máximo ou Fixo.\n",
+                "example": 100000.04,
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
               },
               "feeRate": {
-                "type": "string",
-                "pattern": "^\\d{1}\\.\\d{6}$",
+                "type": [
+                  "number",
+                  "null"
+                ],
                 "format": "double",
-                "maxLength": 8,
-                "minLength": 8,
-                "description": "É o valor da tarifa em percentual pactuada no contrato.\n\n[Restrição] Preenchimento obrigatório quando a forma de cobrança for Percentual.\n",
-                "example": "0.062000",
+                "description": "É o valor da tarifa em percentual pactuada no contrato. Deve-se informar 4 casas decimais, mesmo que preenchidas com zeros. Exemplo: 0.2000\n[Restrição] Preenchimento obrigatório quando a forma de cobrança for Percentual. Exemplo: 0.0150 = 1,5%.\n",
+                "maxLength": 19,
+                "example": 50,
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
               }
@@ -376,17 +390,20 @@
         },
         "contractedFinanceCharges": {
           "type": "array",
-          "minItems": 0,
           "description": "Lista que traz os encargos pactuados no contrato",
+          "minItems": 0,
           "items": {
             "type": "object",
             "required": [
-              "chargeType"
+              "chargeType",
+              "chargeAdditionalInfo"
             ],
+            "additionalProperties": false,
             "properties": {
               "chargeType": {
                 "type": "string",
                 "description": "Tipo de encargo pactuado no contrato.",
+                "maxLength": 31,
                 "enum": [
                   "JUROS_REMUNERATORIOS_POR_ATRASO",
                   "MULTA_ATRASO_PAGAMENTO",
@@ -400,27 +417,18 @@
               },
               "chargeAdditionalInfo": {
                 "type": "string",
-                "pattern": "^[^\\s](.*[^\\s])?$",
+                "pattern": "[\\w\\W\\s]*",
                 "example": "Informações adicionais sobre encargos.",
-                "description": "Campo para informações adicionais.\n\n[Restrição] Obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.\n"
+                "description": "Campo para informações adicionais.\n[Restrição] Obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.\n"
               },
               "chargeRate": {
-                "type": "string",
-                "format": "double",
-                "pattern": "^\\d{1}\\.\\d{6}$",
-                "maxLength": 8,
-                "minLength": 8,
-                "description": "Representa o valor do encargo em percentual pactuado no contrato.\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\n",
-                "example": "0.071200",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "type": "number",
+                "description": "Representa o valor do encargo em percentual pactuado no contrato. Exemplo: 0.0210 (=2.1%).\n",
+                "maxLength": 19,
+                "example": 0.07
               }
             }
           }
-        },
-        "hasInsuranceContracted": {
-          "type": "boolean",
-          "description": "Campo que identifica se existe seguro contratado para o Adiantamento a Depositante, onde seguro contratado é true e não contratado é false. O não envio do campo significa que a instituição não oferece este produto."
         }
       }
     },
@@ -428,19 +436,37 @@
       "type": "object",
       "description": "Meta informações referente à API requisitada.",
       "required": [
+        "totalRecords",
+        "totalPages",
         "requestDateTime"
       ],
+      "additionalProperties": false,
       "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "requestDateTime": {
-          "type": "string",
           "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
           "maxLength": 20,
           "format": "date-time",
           "example": "2021-05-21T08:30:00Z"
         }
-
       }
     }
   },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "$schema": "http://json-schema.org/draft-04/schema#"
 }
