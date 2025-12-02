@@ -3,45 +3,53 @@
   "required": [
     "data"
   ],
+  "additionalProperties": false,
   "properties": {
     "data": {
       "type": "object",
       "description": "Conjunto de informações dos pagamentos referentes às operações de direitos creditórios descontados  contratadas",
       "required": [
+        "paidInstalments",
         "contractOutstandingBalance",
         "releases"
       ],
+      "additionalProperties": false,
       "properties": {
         "paidInstalments": {
-          "type": "number",
-          "maximum": 999,
+          "type": [
+            "number",
+            "null"
+          ],
+          "maxLength": 3,
           "example": 73,
           "description": "Quantidade total de parcelas pagas do contrato referente à Modalidade de Crédito informada."
         },
         "contractOutstandingBalance": {
-          "type": "string",
+          "type": "number",
           "format": "double",
-          "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+          "minLength": 0,
           "maxLength": 20,
-          "minLength": 4,
-          "example": "1000.0400",
-          "description": "Valor necessário para o cliente liquidar a dívida, ou seja, este campo deve ser preenchido com o saldo devedor atualizado descrito no DDC (Documento Descritivo de Crédito).",
+          "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+          "example": 100000.04,
+          "description": "Valor necessario para o cliente liquidar a dívida.",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
         },
         "releases": {
           "type": "array",
-          "minItems": 0,
           "description": "Lista dos pagamentos realizados no período.",
           "items": {
             "type": "object",
             "description": "Lista dos pagamentos realizados no período",
             "required": [
               "isOverParcelPayment",
+              "instalmentId",
               "paidDate",
               "currency",
-              "paidAmount"
+              "paidAmount",
+              "overParcel"
             ],
+            "additionalProperties": false,
             "properties": {
               "paymentId": {
                 "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
@@ -51,30 +59,35 @@
                   "properties": {
                     "key": {
                       "description": "Nome do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "pk_brown",
+                        "pk_green",
+                        "pk_yellow"
+                      ]
                     },
                     "value": {
                       "description": "Valor do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "value1",
+                        "value2",
+                        "value3",
+                        "20220511"
+                      ]
                     }
                   },
                   "required": [
                     "key"
                   ],
                   "additionalItems": false
-                },
-                "examples": [
-                  [
-                    {
-                      "key": "pk_CampoUm",
-                      "value": "ABC"
-                    },
-                    {
-                      "key": "pk_CampoDois",
-                      "value": "123"
-                    }
-                  ]
-                ]
+                }
               },
               "isOverParcelPayment": {
                 "type": "boolean",
@@ -89,30 +102,35 @@
                   "properties": {
                     "key": {
                       "description": "Nome do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "pk_brown",
+                        "pk_green",
+                        "pk_yellow"
+                      ]
                     },
                     "value": {
                       "description": "Valor do campo do identificador no sistema de origem",
-                      "type": "string"
+                      "type": "string",
+                      "examples": [
+                        "1",
+                        "2",
+                        "3",
+                        "4",
+                        "5",
+                        "6",
+                        "value1",
+                        "value2",
+                        "value3",
+                        "20220511"
+                      ]
                     }
                   },
                   "required": [
                     "key"
                   ],
                   "additionalItems": false
-                },
-                "examples": [
-                  [
-                    {
-                      "key": "pk_CampoUm",
-                      "value": "ABC"
-                    },
-                    {
-                      "key": "pk_CampoDois",
-                      "value": "123"
-                    }
-                  ]
-                ]
+                }
               },
               "paidDate": {
                 "type": "string",
@@ -129,27 +147,27 @@
                 "description": "Moeda referente ao valor monetário informado, segundo modelo ISO-4217. p.ex. ''BRL'''.\nTodos os valores monetários informados estão representados com a moeda vigente do Brasil.\n"
               },
               "paidAmount": {
-                "type": "string",
+                "type": "number",
                 "format": "double",
+                "maxLength": 20,
+                "minLength": 0,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                "maxLength": 21,
-                "minLength": 4,
-                "example": "1000.0400",
-                "description": "Valor do pagamento referente ao  contrato da modalidade de crédito consultada.\nExpresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.\n",
+                "example": 100000.04,
+                "description": "Valor do pagamento referente ao  contrato da modalidade de crédito consultada.\nExpresso em valor monetário com até 4 casas decimais.\n",
                 "minimum": -1.7976931348623157e+308,
                 "maximum": 1.7976931348623157e+308
               },
               "overParcel": {
                 "type": "object",
-                "description": "Objeto das tarifas e encargos que foram pagos fora da parcela.\n\n[Restrição] Informação deve ser enviada caso ela exista.\n",
+                "description": "Objeto das tarifas e encargos que foram pagos fora da parcela.",
                 "required": [
                   "fees",
                   "charges"
                 ],
+                "additionalProperties": false,
                 "properties": {
                   "fees": {
                     "type": "array",
-                    "minItems": 0,
                     "description": "Lista das tarifas que foram pagas fora da parcela, só para pagamento avulso.",
                     "items": {
                       "type": "object",
@@ -158,31 +176,33 @@
                         "feeCode",
                         "feeAmount"
                       ],
+                      "additionalProperties": false,
                       "properties": {
                         "feeName": {
                           "type": "string",
                           "maxLength": 140,
-                          "minLength": 2,
-                          "pattern": "[\\w\\W\\s]+",
-                          "description": "Denominação da Tarifa pactuada.\n",
+                          "pattern": "[\\w\\W\\s]*",
+                          "description": "Denominação da Tarifa pactuada",
                           "example": "Excesso em Conta"
                         },
                         "feeCode": {
                           "type": "string",
                           "maxLength": 140,
-                          "minLength": 2,
-                          "pattern": "[\\w\\W\\s]+",
-                          "description": "Sigla identificadora da tarifa pactuada.\n",
+                          "pattern": "[\\w\\W\\s]*",
+                          "description": "Sigla identificadora da tarifa pactuada",
                           "example": "EXCESSO_CONTA"
                         },
                         "feeAmount": {
-                          "type": "string",
+                          "description": "Valor monetário da tarifa pactuada no contrato. Preenchimento obrigatório quando a forma de cobrança for: Mínimo, Máximo ou Fixo\n",
+                          "type": [
+                            "number",
+                            "null"
+                          ],
                           "format": "double",
                           "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                          "maxLength": 21,
-                          "minLength": 4,
-                          "example": "1000.0400",
-                          "description": "Valor monetário da tarifa pactuada no contrato.\n\nExpresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.\n",
+                          "maxLength": 20,
+                          "minLength": 0,
+                          "example": 100000.04,
                           "minimum": -1.7976931348623157e+308,
                           "maximum": 1.7976931348623157e+308
                         }
@@ -191,18 +211,20 @@
                   },
                   "charges": {
                     "type": "array",
-                    "minItems": 0,
                     "description": "Lista dos encargos que foram pagos fora da parcela.",
                     "items": {
                       "type": "object",
                       "required": [
                         "chargeType",
+                        "chargeAdditionalInfo",
                         "chargeAmount"
                       ],
+                      "additionalProperties": false,
                       "properties": {
                         "chargeType": {
                           "type": "string",
-                          "description": "Tipo de encargo pactuado no contrato.",
+                          "description": "Tipo de encargo pago fora da parcela",
+                          "maxLength": 31,
                           "enum": [
                             "JUROS_REMUNERATORIOS_POR_ATRASO",
                             "MULTA_ATRASO_PAGAMENTO",
@@ -216,19 +238,22 @@
                         },
                         "chargeAdditionalInfo": {
                           "type": "string",
-                          "description": "Campo livre para preenchimento das informações adicionais referente ao encargo.\n\n[Restrição] Obrigatório quando chargeType for igual 'OUTROS'.\n",
-                          "pattern": "^[^\\s](.*[^\\s])?$",
+                          "description": "Campo de preenchimento obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pago fora da parcela",
+                          "pattern": "[\\w\\W\\s]*",
                           "example": "Informações adicionais",
                           "maxLength": 140
                         },
                         "chargeAmount": {
-                          "type": "string",
+                          "description": "Valor do pagamento do encargo pago fora da parcela. Expresso em valor monetário com até 4 casas decimais.",
+                          "type": [
+                            "number",
+                            "null"
+                          ],
                           "format": "double",
                           "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                          "maxLength": 21,
-                          "minLength": 4,
-                          "example": "1000.0400",
-                          "description": "Valor do pagamento do encargo pago fora da parcela. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+                          "maxLength": 20,
+                          "minLength": 0,
+                          "example": 100000.04,
                           "minimum": -1.7976931348623157e+308,
                           "maximum": 1.7976931348623157e+308
                         }
@@ -246,12 +271,31 @@
       "type": "object",
       "description": "Meta informações referente à API requisitada.",
       "required": [
+        "totalRecords",
+        "totalPages",
         "requestDateTime"
       ],
+      "additionalProperties": false,
       "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
         "requestDateTime": {
-          "type": "string",
           "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
           "maxLength": 20,
           "format": "date-time",
           "example": "2021-05-21T08:30:00Z"
@@ -259,5 +303,5 @@
       }
     }
   },
-  "$schema": "http://json-schema.org/draft-07/schema#"
+  "$schema": "http://json-schema.org/draft-04/schema#"
 }

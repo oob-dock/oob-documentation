@@ -3,18 +3,23 @@
   "type": "object",
   "required": [
     "requestMeta",
-    "contractId",
     "consent"
   ],
   "properties": {
     "requestMeta": {
       "$ref": "../../../common/common-schema.json#/$defs/RequestMeta"
     },
-    "contractId": {
-      "$ref": "../../../common/common-schema.json#/$defs/LegacyId"
-    },
     "consent": {
       "$ref": "../../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
+    },
+    "page": {
+      "$ref": "../../../common/common-schema.json#/$defs/page"
+    },
+    "pageSize": {
+      "$ref": "../../../common/common-schema.json#/$defs/pageSize"
+    },
+    "pagination-key": {
+      "$ref": "../../../common/common-schema.json#/$defs/pagination-key"
     }
   },
   "additionalProperties": false
