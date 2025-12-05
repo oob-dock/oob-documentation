@@ -629,6 +629,20 @@ additionalVars:
     value: "BRL"
 ```
 
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+
+Utilizado para definir o valor máximo para limites de vínculos (diário, transação).
+
+Valor default: `500`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+    value: "500"
+```
+
 ### APPLICATION_TEDTEF_ENABLED
 
 Utilizado para habilitar ou desabilitar consentimentos dos tipos TED/TEF.
