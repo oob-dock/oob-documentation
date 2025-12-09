@@ -580,6 +580,20 @@ additionalVars:
     value: "BRL"
 ```
 
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+
+Used to set the maximum value for enrollments limits (daily, transaction)
+
+Default value: `500`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+    value: "500"
+```
+
 ### APPLICATION_TEDTEF_ENABLED
 
 Used to enable or disable TED/TEF type consents.
