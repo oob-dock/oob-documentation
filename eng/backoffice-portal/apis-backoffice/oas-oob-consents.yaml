@@ -3255,6 +3255,10 @@ components:
           description: Transaction limit for the consent
           type: string
           example: "1000.00"
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
   securitySchemes:
     jwt:
       type: http
