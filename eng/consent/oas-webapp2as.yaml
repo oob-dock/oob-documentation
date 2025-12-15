@@ -746,6 +746,13 @@ components:
           example:
             - ACCOUNT
             - CREDIT_CARD_ACCOUNT
+        linkedConsents:
+          type: array
+          description: List of consents linked to consent for optimized journey.
+          items:
+            type: object
+            $ref: '#/components/schemas/LinkedConsentCustomerPayment'
+          maxItems: 100
       additionalProperties: false
     ConsentCustomerPayment:
       description: Consent payment details
@@ -1037,8 +1044,536 @@ components:
           description: List of consents linked to recurring payment consent for optimized journey.
           items:
             type: object
-            $ref: '#/components/schemas/ConsentCustomerDataSharing'
+            $ref: '#/components/schemas/LinkedConsentCustomerDataSharing'
           maxItems: 100
+      additionalProperties: false
+    LinkedConsentCustomerDataSharing:
+      description: Consent data sharing details
+      type: object
+      required:
+        - type
+        - brandId
+        - creationDateTime
+        - tpp
+        - externalId
+        - loggedUser
+      properties:
+        type:
+          description: Consent type
+          type: string
+          enum:
+            - DATA_SHARING
+        brandId:
+          type: string
+          description: Identifier of the brand reported by the Open Banking participant
+          example: cbanco
+          minLength: 1
+          maxLength: 50
+        creationDateTime:
+          description: Date and time when the consent was created. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          format: date-time
+          example: "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        startDateTime:
+          description: Date and time when the consent should become valid. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+
+            [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
+          type: string
+          format: date-time
+          example: "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        tpp:
+          type: object
+          description: Details of the TPP that requested the consent
+          additionalProperties: false
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Name of the TPP that requested the consent
+              example: GuiaBolsa
+              maxLength: 100
+        externalId:
+          type: string
+          description: Consent identifier used outside the OOB platform
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          maxLength: 100
+        loggedUser:
+          type: object
+          description: User (natural person) logged into the Payment Initiating institution.
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: User's official identification document.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: User's official identification document number.
+                  example: "11111111111"
+                  pattern: ^\d{11}$
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Type of user's official identification document.
+                  example: CPF
+                  pattern: ^[A-Z]{3}$
+        businessDocumentType:
+          type: object
+          description: User (legal entity) logged into the Payment Initiating institution. [Restriction] Mandatory if the logged user at the Payment Initiating institution is a CNPJ (legal entity).
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official identification document of the legal entity holder.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 14
+                  description: Official identification document number of the legal entity holder.
+                  example: "11111111111111"
+                  pattern: ^\d{14}$
+                rel:
+                  type: string
+                  maxLength: 4
+                  description: Type of official identification document of the legal entity holder.
+                  example: CNPJ
+                  pattern: ^[A-Z]{4}$
+        resources:
+          description: List of resources that can be selected by the customer to be used in the consent. Object used in consent acceptance interfaces
+          type: array
+          items:
+            type: object
+            description: Resource selectable by the customer
+            properties:
+              id:
+                type: string
+                description: field in GUID format
+                example: 49fe29f1-95a9-4521-8f48-a9700e392b48
+                pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
+                maxLength: 36
+              type:
+                description: Resource type
+                type: string
+                enum:
+                  - ACCOUNT
+                  - CREDIT_CARD_ACCOUNT
+                example: ACCOUNT
+              name:
+                type: array
+                description: "Array of key-value pairs with the resource name, this data will be presented in the frontends in the format: 'Key1: Value1 Key2: Value2 ...'"
+                items:
+                  type: object
+                  required:
+                    - key
+                  properties:
+                    key:
+                      type: string
+                      example: Credit card
+                    value:
+                      type: string
+                      example: 2134 XXXX XXXX 3123
+                minItems: 1
+                maxItems: 10
+              balanceCurrency:
+                description: Resource balance currency.
+                type: string
+                example: BRL
+              balanceAmount:
+                description: Resource balance amount.
+                type: number
+                example: 3192.32
+              hasMultipleAuthorisers:
+                deprecated: true
+                type: boolean
+                example: "false"
+              rejectionReason:
+                description: Object indicating the reason for resource rejection
+                type: object
+                required:
+                  - code
+                properties:
+                  code:
+                    description: Code determining the reason for the resource being denied
+                    type: string
+                    enum:
+                      - VALOR_INVALIDO
+                      - NAO_INFORMADO
+                      - FALHA_INFRAESTRUTURA
+                      - CONTAS_ORIGEM_DESTINO_IGUAIS
+                      - CONTA_NAO_PERMITE_PAGAMENTO
+                      - SALDO_INSUFICIENTE
+                      - VALOR_ACIMA_LIMITE
+                      - CONTA_DIVERGENTE_DA_SOLICITADA
+                      - QRCODE_INVALIDO
+                  detail:
+                    type: string
+                    description: Description of the resource rejection reason. It will be filled only if a rejection reason is sent by the connector.
+            additionalProperties: false
+          maxItems: 1000
+        expirationDateTime:
+          description: Permission expiration date and time. Mandatory field, reflects the consent's expiration date. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          maxLength: 20
+          format: date-time
+          example: "2021-05-21T08:30:00Z"
+        permissions:
+          type: array
+          items:
+            description: Only for data sharing consents. Specifies the types of access permissions to the APIs within the scope of Open Banking Brazil - Phase 2, according to the consent blocks provided by the user and necessary for accessing each API endpoint.
+            type: string
+            enum:
+              - ACCOUNTS_READ
+              - ACCOUNTS_BALANCES_READ
+              - ACCOUNTS_TRANSACTIONS_READ
+              - ACCOUNTS_OVERDRAFT_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_READ
+              - CREDIT_CARDS_ACCOUNTS_BILLS_TRANSACTIONS_READ
+              - CREDIT_CARDS_ACCOUNTS_LIMITS_READ
+              - CREDIT_CARDS_ACCOUNTS_TRANSACTIONS_READ
+              - CUSTOMERS_PERSONAL_IDENTIFICATIONS_READ
+              - CUSTOMERS_PERSONAL_ADITTIONALINFO_READ
+              - CUSTOMERS_BUSINESS_IDENTIFICATIONS_READ
+              - CUSTOMERS_BUSINESS_ADITTIONALINFO_READ
+              - FINANCINGS_READ
+              - FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - FINANCINGS_PAYMENTS_READ
+              - FINANCINGS_WARRANTIES_READ
+              - INVOICE_FINANCINGS_READ
+              - INVOICE_FINANCINGS_SCHEDULED_INSTALMENTS_READ
+              - INVOICE_FINANCINGS_PAYMENTS_READ
+              - INVOICE_FINANCINGS_WARRANTIES_READ
+              - LOANS_READ
+              - LOANS_SCHEDULED_INSTALMENTS_READ
+              - LOANS_PAYMENTS_READ
+              - LOANS_WARRANTIES_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_SCHEDULED_INSTALMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_PAYMENTS_READ
+              - UNARRANGED_ACCOUNTS_OVERDRAFT_WARRANTIES_READ
+              - RESOURCES_READ
+          minItems: 1
+          maxItems: 30
+          example:
+            - ACCOUNTS_READ
+            - ACCOUNTS_OVERDRAFT_LIMITS_READ
+            - RESOURCES_READ
+        failingResources:
+          type: array
+          items:
+            description: Optional list of resources that failed in discovery
+            type: string
+            enum:
+              - CREDIT_CARD_ACCOUNT
+              - ACCOUNT
+          maxItems: 1000
+          example:
+            - ACCOUNT
+            - CREDIT_CARD_ACCOUNT
+      additionalProperties: false
+    LinkedConsentCustomerPayment:
+      description: Consent payment details
+      type: object
+      required:
+        - type
+        - brandId
+        - creationDateTime
+        - tpp
+        - externalId
+        - loggedUser
+      properties:
+        type:
+          description: Consent type
+          type: string
+          enum:
+            - PAYMENT
+            - ENROLLMENT
+        brandId:
+          type: string
+          description: Identifier of the brand reported by the Open Banking participant
+          example: cbanco
+          minLength: 1
+          maxLength: 50
+        creationDateTime:
+          description: Date and time when the consent was created. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          format: date-time
+          example: "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        startDateTime:
+          description: Date and time when the consent should become valid. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+
+            [ Restriction ] Mandatory when payment consent becomes valid on a future date (day and time).
+          type: string
+          format: date-time
+          example: "2021-05-21T08:30:00Z"
+          pattern: ^(\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\d|2[0123]):(?:[012345]\d):(?:[012345]\d)Z$
+          maxLength: 20
+        tpp:
+          type: object
+          description: Details of the TPP that requested the consent
+          additionalProperties: false
+          required:
+            - name
+          properties:
+            name:
+              type: string
+              description: Name of the TPP that requested the consent
+              example: GuiaBolsa
+              maxLength: 100
+        externalId:
+          type: string
+          description: Consent identifier used outside the OOB platform
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+          maxLength: 100
+        loggedUser:
+          type: object
+          description: User (natural person) logged into the Payment Initiating institution.
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: User's official identification document.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 11
+                  description: User's official identification document number.
+                  example: "11111111111"
+                  pattern: ^\d{11}$
+                rel:
+                  type: string
+                  maxLength: 3
+                  description: Type of user's official identification document.
+                  example: CPF
+                  pattern: ^[A-Z]{3}$
+        businessDocumentType:
+          type: object
+          description: User (legal entity) logged into the Payment Initiating institution. [Restriction] Mandatory if the logged user at the Payment Initiating institution is a CNPJ (legal entity).
+          additionalProperties: false
+          required:
+            - document
+          properties:
+            document:
+              type: object
+              description: Official identification document of the legal entity holder.
+              additionalProperties: false
+              required:
+                - identification
+                - rel
+              properties:
+                identification:
+                  type: string
+                  maxLength: 14
+                  description: Official identification document number of the legal entity holder.
+                  example: "11111111111111"
+                  pattern: ^\d{14}$
+                rel:
+                  type: string
+                  maxLength: 4
+                  description: Type of official identification document of the legal entity holder.
+                  example: CNPJ
+                  pattern: ^[A-Z]{4}$
+        resources:
+          description: List of resources that can be selected by the customer to be used in the consent. Object used in consent acceptance interfaces
+          type: array
+          items:
+            type: object
+            description: Resource selectable by the customer
+            properties:
+              id:
+                type: string
+                description: field in GUID format
+                example: 49fe29f1-95a9-4521-8f48-a9700e392b48
+                pattern: ^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$
+                maxLength: 36
+              type:
+                description: Resource type
+                type: string
+                enum:
+                  - PAYMENT
+                example: PAYMENT
+              name:
+                type: array
+                description: "Array of key-value pairs with the resource name, this data will be presented in the frontends in the format: 'Key1: Value1 Key2: Value2 ...'"
+                items:
+                  type: object
+                  required:
+                    - key
+                  properties:
+                    key:
+                      type: string
+                      example: Credit card
+                    value:
+                      type: string
+                      example: 2134 XXXX XXXX 3123
+                minItems: 1
+                maxItems: 10
+              balanceCurrency:
+                description: Resource balance currency.
+                type: string
+                example: BRL
+              balanceAmount:
+                description: Resource balance amount.
+                type: number
+                example: 3192.32
+              hasMultipleAuthorisers:
+                deprecated: true
+                type: boolean
+                example: "false"
+              rejectionReason:
+                description: Object indicating the reason for resource rejection
+                type: object
+                required:
+                  - code
+                properties:
+                  code:
+                    description: Code determining the reason for the resource being denied
+                    type: string
+                    enum:
+                      - VALOR_INVALIDO
+                      - NAO_INFORMADO
+                      - FALHA_INFRAESTRUTURA
+                      - CONTAS_ORIGEM_DESTINO_IGUAIS
+                      - CONTA_NAO_PERMITE_PAGAMENTO
+                      - SALDO_INSUFICIENTE
+                      - VALOR_ACIMA_LIMITE
+                      - CONTA_DIVERGENTE_DA_SOLICITADA
+                      - QRCODE_INVALIDO
+                  detail:
+                    type: string
+                    description: Description of the resource rejection reason. It will be filled only if a rejection reason is sent by the connector.
+            additionalProperties: false
+          maxItems: 1000
+        expirationDateTime:
+          description: Permission expiration date and time. Mandatory field, reflects the consent's expiration date. A date-time string according to RFC-3339 specification, always using UTC timezone (UTC time format).
+          type: string
+          maxLength: 20
+          format: date-time
+          example: "2021-05-21T08:30:00Z"
+        additionalInformation:
+          description: Additional information entered by the paying user in Automatic Payment consents
+          type: string
+          example: 'My recurrence'
+          pattern: '[\w\W\s]*'
+          maxLength: 140
+        creditors:
+          type: array
+          description: List of possible payment recipients
+          items:
+            allOf:
+              - $ref: '#/components/schemas/Creditor'
+        creditor:
+          deprecated: true
+          description: Will be replaced in the future by the creditors object with the list of possible payment recipients.
+          allOf:
+            - $ref: '#/components/schemas/Creditor'
+        payment:
+          $ref: '#/components/schemas/PixPaymentConsent'
+        recurringConfiguration:
+          $ref: '#/components/schemas/AutomaticPayment'
+        debtorAccount:
+          type: object
+          description: |
+            Only for payment consents and enrollment consents. Object containing the identification of the payer's source account.
+            The payer's source account information can be brought in the consent to the holder if the initiator has collected this information from the customer. Otherwise, it will be collected by the holder and brought to the initiator in response to the payment creation.
+          required:
+            - ispb
+            - number
+            - accountType
+          properties:
+            ispb:
+              type: string
+              minLength: 8
+              maxLength: 8
+              pattern: ^[0-9]{8}$
+              example: "12345678"
+              description: |
+                Must be filled with the ISPB (Brazilian Payment System Identifier) of the SPI (Instant Payment System) participant using only numbers.
+            issuer:
+              type: string
+              maxLength: 4
+              pattern: ^\d{4}$
+              example: "1774"
+              description: |
+                Agency code issuing the account without digit.
+                (The agency is the branch intended for serving customers, the general public, and credit union members,
+                in the institution's activities, and cannot be mobile or transitory).
+                [Restriction] Mandatory for the following account types: CACC (CURRENT_ACCOUNT), SVGS (SAVINGS_ACCOUNT), and SLRY (SALARY_ACCOUNT).
+            number:
+              type: string
+              minLength: 3
+              maxLength: 20
+              pattern: ^\d{3,20}$
+              example: "1234567890"
+              description: |
+                Must be filled with the payer's transactional account number, with a check digit (if it exists),
+                if there is an alphanumeric value, it should be converted to 0.
+            accountType:
+              type: string
+              maxLength: 4
+              enum:
+                - CACC
+                - SLRY
+                - SVGS
+                - TRAN
+              example: CACC
+              description: |
+                Types of accounts used for payment.
+                Traditional modalities provided by Resolution 4.753, not including linked accounts,
+                accounts of residents abroad, foreign currency accounts, and corresponding electronic money accounts.
+                Here is a description of each ENUM value.
+                CACC - Current - Current Account.
+                SLRY - Salary - Salary Account.
+                SVGS - Savings - Savings Account.
+                TRAN - TransactingAccount - Prepaid Payment Account.
+          additionalProperties: false
+        permissions:
+          type: array
+          items:
+            description: Only for enrollment consents. Specifies the types of access permissions to the APIs within the scope of Open Banking Brazil - Phase 3, according to the consent blocks provided by the user and necessary for accessing each API endpoint.
+            type: string
+            enum:
+              - PAYMENTS_INITIATE
+          minItems: 1
+          maxItems: 30
+          example:
+             PAYMENTS_INITIATE
+        failingResources:
+          type: array
+          items:
+            description: Optional list of resources that failed in discovery
+            type: string
+            enum:
+              - PAYMENT
+          maxItems: 1000
+          example:
+            - PAYMENT
       additionalProperties: false
     ConsentCustomerAcceptance:
       description: Consent details
