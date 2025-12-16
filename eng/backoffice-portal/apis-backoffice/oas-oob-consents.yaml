@@ -313,6 +313,45 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/ResponseConsentDetailSchema"
+  /open-banking/oob-consents/enrollments/v1/enrollments/{enrollmentId}/edit:
+    patch:
+      tags:
+      - Consents Opus Open Banking
+      description: Edit enrollment consent
+      parameters:
+      - name: enrollmentId
+        in: path
+        required: true
+        schema:
+          $ref: '#/components/schemas/UUID'
+      - name: X-Brand-ID
+        in: header
+        required: true
+        schema:
+          type: string
+          nullable: false
+      - name: X-Correlation-ID
+        in: header
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RequestEditOobEnrollmentConsent'
+      responses:
+        default:
+          description: Default error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseConsentDetailSchema'
   /open-banking/oob-consents/payments/v1/consents/{consentId}:
     patch:
       tags:
@@ -3201,6 +3240,25 @@ components:
       properties:
         active:
           type: boolean
+    RequestEditOobEnrollmentConsent:
+      type: object
+      properties:
+        expirationDateTime:
+          format: date-time
+          type: string
+          example: 2023-05-07T11:50:02Z
+        dailyLimit:
+          description: Daily limit for the consent
+          type: string
+          example: "1000.00"
+        transactionLimit:
+          description: Transaction limit for the consent
+          type: string
+          example: "1000.00"
+    UUID:
+      format: uuid
+      pattern: "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}"
+      type: string
   securitySchemes:
     jwt:
       type: http
