@@ -1190,6 +1190,10 @@ components:
           example: "Guia Seguros"
         enrollmentData:
           $ref: "#/components/schemas/EnrollmentData"
+        linkedConsents:
+          type: array
+          items:
+            $ref: "#/components/schemas/LinkedConsents"
     ConsentHistoryStatus:
       type: object
       properties:
@@ -1249,6 +1253,17 @@ components:
         tppLogo:
           type: string
           example: "http://www.exemplo.com/logo.png"
+        journey:
+          type: object
+          properties:
+            isLinked:
+              type: boolean
+              example: true
+            linkId:
+              type: string
+              example: "urn:amazingbank:9e470cb4-7d3f-4c49-9e20-018e042ae455"
+            status:
+              $ref: "#/components/schemas/ConsentAuthorizationStatusEnum"
     ConsentExtends:
       type: object
       properties:
@@ -3275,6 +3290,41 @@ components:
           format: double
           type: number
           example: 100.00
+    LinkedConsents:
+      type: object
+      properties:
+        externalId:
+          type: string
+          example: urn:oob-bank:2f710909-4ccd-4998-8679-3d8de00e5ccf
+        creationDateTime:
+          format: date-time
+          type: string
+          example: 2023-08-15T10:30:00Z
+        status:
+          $ref: "#/components/schemas/StatusEnum"
+        statusUpdateDateTime:
+          format: date-time
+          type: string
+          example: 2023-08-15T10:30:00Z
+        permissions:
+          type: array
+          items:
+            $ref: "#/components/schemas/Permission"
+        expirationDateTime:
+          format: date-time
+          type: string
+          example: 2024-08-15T10:30:00Z
+        rejection:
+          $ref: "#/components/schemas/Rejection"
+        journey:
+          type: object
+          properties:
+            isLinked: 
+              type: boolean
+              example: true
+            linkId:
+              type: string
+              example: urn:amazingbank:9e470cb4-7d3f-4c49-9e20-018e042ae455
     PaymentManualRiskSignal:
       type: object
       properties:
