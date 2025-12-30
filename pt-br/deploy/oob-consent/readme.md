@@ -789,6 +789,21 @@ additionalVars:
     value: "true"
 ```
 
+### APPLICATION_FEATURE_NOTIFYCPFTOWEBHOOK
+
+Utilizado para definir se envia ou não o campo **cpf** para os webhooks
+de notificação para a retaguarda.
+
+**Formato:** `true` ou `false`
+
+Valor default: `false`
+
+```yaml
+additionalVars:
+  - name: APPLICATION_FEATURE_NOTIFYCPFTOWEBHOOK
+    value: "true"
+```
+
 ### APPLICATION_ENCRYPTION_CHARSET
 
 Utilizado para definir o charset usado na criptografia dos campos na base de dados.

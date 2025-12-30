@@ -720,6 +720,19 @@ additionalVars:
     value: "true"
 ```
 
+### APPLICATION_FEATURE_NOTIFYCPFTOWEBHOOK
+Used to define whether or not to send the **cpf** field to notification webhooks for backoffice.
+
+**Format:** `true` or `false`
+
+Default value: `false`
+
+```yaml
+additionalVars:
+  - name: APPLICATION_FEATURE_NOTIFYCPFTOWEBHOOK
+    value: "true"
+```
+
 ### APPLICATION_ENCRYPTION_CHARSET
 
 Used to define the charset used in encrypting fields in the database.
