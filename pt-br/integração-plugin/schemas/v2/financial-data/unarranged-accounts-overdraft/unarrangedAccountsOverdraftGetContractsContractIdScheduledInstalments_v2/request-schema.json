@@ -13,17 +13,8 @@
     "contractId": {
       "$ref": "../../../common/common-schema.json#/$defs/LegacyId"
     },
-    "page": {
-      "$ref": "../../../common/common-schema.json#/$defs/page"
-    },
-    "pageSize": {
-      "$ref": "../../../common/common-schema.json#/$defs/pageSize"
-    },
     "consent": {
       "$ref": "../../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
-    },
-    "pagination-key": {
-      "$ref": "../../../common/common-schema.json#/$defs/pagination-key"
     }
   },
   "additionalProperties": false
