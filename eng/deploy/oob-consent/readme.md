@@ -128,6 +128,14 @@ Fill with the salt used to generate the encryption key together with the key fro
 
 Example: `6598C77E29BB822B`
 
+### application/authorizationServerId
+
+Must be filled with the authorization server ID of the institution registered
+in the participant directory. Use the sandbox ID in non-production environments
+and the production ID in production. Type: UUID.
+
+Example: `2e4c1b0c-1234-4f9d-9abc-55aa66bb7788`
+
 ### consent/external/id
 
 Used to define the id related to consentId. The consentId is the unique identifier for the consent and should be a URN - Uniform Resource Name.
@@ -572,6 +580,20 @@ additionalVars:
     value: "BRL"
 ```
 
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+
+Used to set the maximum value for enrollments limits (daily, transaction)
+
+Default value: `500`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+    value: "500"
+```
+
 ### APPLICATION_TEDTEF_ENABLED
 
 Used to enable or disable TED/TEF type consents.
@@ -695,6 +717,19 @@ Default value: `true`
 ```yaml
 additionalVars:
   - name: APPLICATION_FEATURE_CONSENT_ACCEPTANCE_CREDITOR
+    value: "true"
+```
+
+### APPLICATION_FEATURE_NOTIFYCPFTOWEBHOOK
+Used to define whether or not to send the **cpf** field to notification webhooks for backoffice.
+
+**Format:** `true` or `false`
+
+Default value: `false`
+
+```yaml
+additionalVars:
+  - name: APPLICATION_FEATURE_NOTIFYCPFTOWEBHOOK
     value: "true"
 ```
 
