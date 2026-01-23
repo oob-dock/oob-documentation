@@ -1,0 +1,21 @@
+{
+  "data": {
+    "payrollData": {
+      "contractId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
+      "registeringEntity": "SERPRO"
+    }
+  },
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": -30926552.527413204
+  }
+}
