@@ -637,9 +637,9 @@ additionalVars:
     value: "BRL"
 ```
 
-### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTDAILY
 
-Utilizado para definir o valor máximo para limites de vínculos (diário, transação).
+Utilizado para definir o valor máximo para limites de vínculos diário.
 
 Valor default: `500`
 
@@ -647,7 +647,21 @@ Valor default: `500`
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTDAILY
+    value: "500"
+```
+
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTRANSACTION
+
+Utilizado para definir o valor máximo para limites de vínculos transação.
+
+Valor default: `500`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTRANSACTION
     value: "500"
 ```
 

@@ -580,9 +580,9 @@ additionalVars:
     value: "BRL"
 ```
 
-### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITDAILY
 
-Used to set the maximum value for enrollments limits (daily, transaction)
+Used to set the maximum value for enrollments limits daily.
 
 Default value: `500`
 
@@ -590,7 +590,21 @@ Default value: `500`
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTDAILY
+    value: "500"
+```
+
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTRANSACTION
+
+Used to set the maximum value for enrollments limits transaction.
+
+Default value: `500`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTRANSACTION
     value: "500"
 ```
 
