@@ -259,7 +259,7 @@ env:
   dapr:
     job:
       pcm:
-        schedule: "0 4 * * *"
+        schedule: "0 0 1 * * *"
 ```
 
 ## dapr/job/activeConsents/schedule
@@ -330,7 +330,7 @@ env:
   dapr:
     job:
       consentToExpire:
-        schedule: "0 10 * * *"
+        schedule: "0 0 10 * * *"
 ```
 
 ## dapr/job/instantPaymentWebhook/schedule
@@ -434,7 +434,7 @@ env:
   dapr:
     job:
       consentToExpire:
-        schedule: "0 10 * * *"
+        schedule: "0 0 10 * * *"
 ```
 
 ## opentelemetry
