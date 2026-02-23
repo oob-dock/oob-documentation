@@ -37,6 +37,7 @@
       - [ssl\_certificate\_header\_name](#ssl_certificate_header_name)
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
+      - [dapr\_large\_event\_store](#dapr_large_event_store)
       - [route\_block\_enabled](#route_block_enabled)
       - [mqd\_event\_enabled](#mqd_event_enabled)
       - [opentelemetry\_tracer\_exporter\_url\_http](#opentelemetry_tracer_exporter_url_http)
@@ -278,6 +279,30 @@ Identificador da organização no diretório de participantes.
 Identificador do componente de publish/subscribe do [Dapr](../shared-definitions.md#dapr).
 
 **Ex:** `event-publisher`
+
+#### dapr_large_event_store
+
+Define o nome da state store do Dapr utilizada para armazenar eventos que
+possuem o payload muito grande e portanto não podem ser publicados diretamente
+nas filas. Neste caso o evento é persistido nesta state store e o ID da entrada
+persistida é enviado via evento para os sistemas de destino. **Utilizado no
+cenário de MQD, sua configuração é obrigatória. O nome definido aqui deverá
+ser o mesmo definido no módulo `oof-mqd-dispatcher` na variável
+`env.dapr.largeEventStateStore.name`**.
+
+**Importante:**
+
+- É necessário que este componente de state store do Dapr seja
+configurado com um campo `keyPrefix` com valor `name`, para que todas as
+entradas persistidas tenham o mesmo prefixo que é compartilhado pelo
+`oob-kong` e pelo `oof-mqd-dispatcher`. Esse prefixo será justamente o nome
+definido nesta variável de configuração.
+- Necessário criar este componente em todo namespace que o utiliza. Se o Kong
+estiver no mesmo namespace do `oof-mqd-dispatcher` basta apenas definí-lo
+uma única vez. Caso contrário, necessário definí-lo no namespace do Kong e no
+namespace do módulo `oof-mqd-dispatcher`.
+- Um template de exemplo deste componente pode ser conferido no helm do
+`oof-mqd-dispatcher`, em `helm/oof-mqd-dispatcher/templates/large-event-state-store.yaml`.
 
 #### route_block_enabled
 

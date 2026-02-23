@@ -26,12 +26,48 @@ Dapr-related configurations.
 
 * `dapr.retryPubsubId`: Identifier of the pub/sub component that implements retry policies. All events consumed by this module support reprocessing in case of failures, so the pub/sub component to be used by the module as a whole should be the one that supports retries.
 
+* `dapr.largeEventStateStore`:
+  * State store used to retrieve events that have a very large payload and
+  therefore could not be published directly to queues. In this case, the event
+  is persisted in this state store and the ID of the persisted entry is received
+  in this module, which then retrieves the event payload. **Its configuration is
+  mandatory.**
+    * `name`: Name of the Dapr component to be initialized. **Important:** Kong
+    also uses this same component to fetch published events, and the connection
+    between modules occurs through the component name. Therefore, the name
+    defined here must be the same as defined in `terraform` in the `dapr_large_event_store` variable.
+      * `type`: Type of the Dapr component to be used as state store.
+        * A list of components can be found [here](https://docs.dapr.io/reference/components-reference/supported-state-stores/)
+    * `version`: Component version.
+    * `connectionMetadata`: Connection settings for the component to be used as state store.
+
+  * **Important:**
+    * This Dapr state store component must be configured with a `keyPrefix` field
+    with the value `name`, so that all persisted entries have the same prefix that
+    is shared by `oob-kong` and `oof-mqd-dispatcher`. This prefix will be exactly
+    the name defined in the `dapr.largeEventStateStore.name` variable.
+    * This component must be created in every namespace that uses it. If Kong
+    is in the same namespace as `oof-mqd-dispatcher`, it only needs to be
+    defined once. Otherwise, it must be defined in both the Kong namespace and
+    this module's namespace.
+    * An example template of this component can be found in this module's helm
+    chart, at `helm/oof-mqd-dispatcher/templates/large-event-state-store.yaml`.
+
 **Example:**
 
 ```yaml
   dapr:
     enabled: "true"
     retryPubsubId: "pub-sub-retry"
+    largeEventStateStore:
+      name: "large-event-state-store"
+      type: "state.postgresql"
+      version: "v1"
+      connectionMetadata:
+        - name: "connectionString"
+          value: "host=db-opus-open-banking.namespace.us-east-1.rds.amazonaws.com user=user password=passwd database=dapr_state"
+        - name: timeout
+          value: 10
 ```
 
 ### organisation.ids
