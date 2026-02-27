@@ -1,7 +1,16 @@
 {
   "data": [
     {
-      "transactionId": "ABCD2126019929279212650822221989319253344",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ],
       "type": "ENTRADA",
       "transactionType": "AMORTIZACAO",
       "transactionTypeAdditionalInfo": "*=[jlth",
