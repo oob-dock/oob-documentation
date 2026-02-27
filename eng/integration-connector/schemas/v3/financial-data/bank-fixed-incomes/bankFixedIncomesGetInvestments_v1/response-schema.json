@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -22,15 +23,15 @@
           "brandName": {
             "type": "string",
             "description": "Nome da Marca reportada pelo participante no Open Finance. Recomenda-se utilizar, sempre que possível, o mesmo nome de marca atribuído no campo do diretório Customer Friendly Server Name (Authorisation Server).",
-            "pattern": "[\\w\\W\\s]*",
+            "pattern": "^[^\\s](.*[^\\s])?$",
             "example": "Organização A",
             "maxLength": 80
           },
           "companyCnpj": {
             "type": "string",
-            "description": "Número completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara",
+            "description": "Registro completo do CNPJ da instituição responsável pelo Cadastro - o CNPJ corresponde a representação alfanumérica da inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os caracteres do CNPJ, sem máscara.",
             "maxLength": 14,
-            "pattern": "^\\d{14}$",
+            "pattern": "^[0-9A-Z]{12}[0-9]{2}$",
             "example": "21281590001660"
           },
           "investmentType": {
@@ -43,17 +44,6 @@
               "LCA"
             ],
             "example": "CDB"
-          },
-          "status": {
-              "description": "Indica o status atual do recurso",
-              "type": "string",
-              "default": "AVAILABLE",
-              "enum": [
-                  "AVAILABLE",
-                  "PENDING_AUTHORISATION",
-                  "UNAVAILABLE",
-                  "TEMPORARILY_UNAVAILABLE"
-              ]
           },
           "investmentId": {
             "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
@@ -96,7 +86,8 @@
       "description": "Meta informações referente a API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages"
+        "totalPages",
+        "requestDateTime"
       ],
       "additionalProperties": false,
       "properties": {
@@ -104,20 +95,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
         },
         "totalPages": {
           "type": "integer",
           "format": "int32",
           "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }
