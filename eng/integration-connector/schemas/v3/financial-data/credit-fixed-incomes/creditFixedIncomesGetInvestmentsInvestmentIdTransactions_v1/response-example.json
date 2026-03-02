@@ -28,7 +28,16 @@
       },
       "remunerationTransactionRate": "0.300000",
       "indexerPercentage": "1.100000",
-      "transactionId": "ABCD2126019929279212650822221989319253344"
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
     }
   ],
   "meta": {
