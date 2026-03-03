@@ -1,13 +1,13 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
     "data": {
       "type": "object",
-      "description": "Lista de títulos de renda fixa bancária mantidos pelo cliente na instituição transmissora e para as quais ele tenha fornecido consentimento",
       "required": [
         "referenceDateTime",
         "quantity",
@@ -22,7 +22,8 @@
       "properties": {
         "referenceDateTime": {
           "type": "string",
-          "description": "data e hora da última posição consolidada disponível a que se referem os dados transacionais do cliente disponíveis nos canais eletrônicos; Na representação data deve se considerar os minutos e segundos como zero (00:00:00Z).",
+          "format": "date-time",
+          "description": "Data e hora da última posição consolidada a que se referem os dados transacionais do cliente disponíveis nos canais eletrônicos.\nDeve respeitar o prazo máximo de tempestividade da API, conforme a página \"Orientações\".\nNa representação data deve se considerar os minutos e segundos como zero (00:00:00Z).\n\nNo preenchimento do campo é esperado que a instituição informe a última vez que capturou a posição para compartilhamento no Open Finance. Dessa forma, é possível que:\n- Caso a instituição capture dados de forma síncrona, essa informação seja de até uma hora atrás;\n- Caso a instituição capture dados de forma assíncrona, essa informação seja de horas ou dias atrás;\n- Quando a posição for zerada: mesmo conteúdo do campo requestDateTime",
           "pattern": "(^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$)",
           "example": "2022-07-21T17:32:00Z",
           "maxLength": 20
@@ -33,9 +34,7 @@
           "description": "Quantidade de títulos detidos na data da posição do cliente",
           "maxLength": 24,
           "pattern": "^\\d{1,15}\\.\\d{2,8}$",
-          "example": "1000.0004",
-          "minimum": -1.7976931348623157e+308,
-          "maximum": 1.7976931348623157e+308
+          "example": "1000.0004"
         },
         "updatedUnitPrice": {
           "type": "object",
@@ -51,15 +50,13 @@
               "format": "double",
               "maxLength": 24,
               "pattern": "^\\d{1,15}\\.\\d{2,8}$",
-              "example": "1000.000004",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.000004"
             },
             "currency": {
-              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "type": "string",
-              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
               "example": "BRL"
             }
           }
@@ -78,15 +75,13 @@
               "format": "double",
               "maxLength": 20,
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-              "example": "1000.0004",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.0004"
             },
             "currency": {
-              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "type": "string",
-              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
               "example": "BRL"
             }
           }
@@ -105,15 +100,13 @@
               "format": "double",
               "maxLength": 20,
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-              "example": "1000.0004",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.0004"
             },
             "currency": {
-              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "type": "string",
-              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
               "example": "BRL"
             }
           }
@@ -132,15 +125,13 @@
               "format": "double",
               "maxLength": 20,
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-              "example": "1000.0004",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.0004"
             },
             "currency": {
-              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "type": "string",
-              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
               "example": "BRL"
             }
           }
@@ -159,15 +150,13 @@
               "format": "double",
               "maxLength": 20,
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-              "example": "1000.0004",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.0004"
             },
             "currency": {
-              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "type": "string",
-              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
               "example": "BRL"
             }
           }
@@ -186,15 +175,13 @@
               "format": "double",
               "maxLength": 20,
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-              "example": "1000.0004",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.0004"
             },
             "currency": {
-              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "type": "string",
-              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
               "example": "BRL"
             }
           }
@@ -213,15 +200,13 @@
               "format": "double",
               "maxLength": 24,
               "pattern": "^\\d{1,15}\\.\\d{2,8}$",
-              "example": "1000.000004",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.000004"
             },
             "currency": {
-              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "type": "string",
-              "maxLength": 3,
+              "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
               "pattern": "^[A-Z]{3}$",
+              "maxLength": 3,
               "example": "BRL"
             }
           }
@@ -229,24 +214,20 @@
         "preFixedRate": {
           "type": "string",
           "format": "double",
-          "description": "Taxa de remuneração acordada com o cliente na contratação. \nEm casos de produtos progressivos, considerar taxa vigente. p.ex. 0.014500. \nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. \nEste valor representa 15%. O valor 1 representa 100%). É esperado que o preenchimento deste campo pelas participantes seja enviado de acordo com o campo preFixedRate do endpoint /investment/{investmentId}.\n",
-          "pattern": "^\\d{1}\\.\\d{6}$",
-          "maxLength": 8,
+          "description": "Taxa de remuneração acordada com o cliente na contratação. Em casos de produtos progressivos, considerar a taxa máxima contratada.\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\nÉ esperado que o preenchimento deste campo pelas participantes seja enviado conforme foi acordado no momento da contratação.",
+          "pattern": "^-?\\d{1}\\.\\d{6}$",
+          "maxLength": 9,
           "minLength": 8,
-          "example": "0.300000",
-          "minimum": -1.7976931348623157e+308,
-          "maximum": 1.7976931348623157e+308
+          "example": "0.300000"
         },
         "postFixedIndexerPercentage": {
           "type": "string",
           "format": "double",
-          "description": "Percentual do indexador acordado com o cliente na contratação. \nEm casos de produtos progressivos, considerar taxa vigente. p.ex. 0.014500. \nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. \nEste valor representa 15%. O valor 1 representa 100%). É esperado que o preenchimento deste campo pelas participantes seja enviado de acordo com o campo postFixedIndexerPercentage do endpoint /investment/{investmentId}.\n",
-          "pattern": "^\\d{1}\\.\\d{6}$",
-          "maxLength": 8,
+          "description": "Percentual do indexador acordado com o cliente na contratação. Em casos de produtos progressivos, considerar a taxa máxima contratada.\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\nÉ esperado que o preenchimento deste campo pelas participantes seja enviado conforme foi acordado no momento da contratação.",
+          "pattern": "^-?\\d{1}\\.\\d{6}$",
+          "maxLength": 9,
           "minLength": 8,
-          "example": "1.000000",
-          "minimum": -1.7976931348623157e+308,
-          "maximum": 1.7976931348623157e+308
+          "example": "1.000000"
         }
       }
     },
@@ -255,7 +236,8 @@
       "description": "Meta informações referente a API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages"
+        "totalPages",
+        "requestDateTime"
       ],
       "additionalProperties": false,
       "properties": {
@@ -263,20 +245,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
         },
         "totalPages": {
           "type": "integer",
           "format": "int32",
           "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }

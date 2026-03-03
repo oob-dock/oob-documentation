@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -24,12 +25,12 @@
           "type": "string",
           "description": "CNPJ do fundo de investimento.",
           "maxLength": 14,
-          "pattern": "^\\d{14}$",
+          "pattern": "^[0-9A-Z]{12}[0-9]{2}$",
           "example": "11225860000140"
         },
         "isinCode": {
           "type": "string",
-          "description": "Código universal que identifica cada valor mobiliário ou instrumento financeiro, conforme Norma ISO 6166.\n\nDEFINIÇÃO: O ISIN (International Securities Identification Number) é um código que identifica um valor mobiliário, conforme a norma ISO 6166.\n\nESTRUTURA: O ISIN é um código alfanumérico que possui 12 caracteres com a seguinte estrutura:  \n- Um prefixo, composto de 2 caracteres alfa, que identifica o código do país (Norma ISO 3166);\n- O número básico, composto de 9 caracteres alfabéticos ou numéricos em sua extensão;\n- Um dígito numérico de controle.\n",
+          "description": "Código universal que identifica cada valor mobiliário ou instrumento financeiro, conforme Norma ISO 6166.\n\nDEFINIÇÃO: O ISIN (International Securities Identification Number) é um código que identifica um valor mobiliário, conforme a norma ISO 6166.\n\nESTRUTURA: O ISIN é um código alfanumérico que possui 12 caracteres com a seguinte estrutura:  \n- Um prefixo, composto de 2 caracteres alfa, que identifica o código do país (Norma ISO 3166);\n- O número básico, composto de 9 caracteres alfabéticos ou numéricos em sua extensão;\n- Um dígito numérico de controle.",
           "maxLength": 12,
           "minLength": 12,
           "pattern": "^[A-Z]{2}([A-Z0-9]){9}\\d{1}$",
@@ -37,7 +38,7 @@
         },
         "anbimaCategory": {
           "type": "string",
-          "description": "Conforme classificação ANBIMA, que segue a deliberação 77 da ANBIMA.\n\n– Renda Fixa\n\n– Ações\n\n– Multimercado\n\n– Cambial\n\nhttps://www.anbima.com.br/data/files/5A/44/2C/B7/8411B510CD3B4DA568A80AC2/DeliberacaoN77-Diretriz-de-Classificacao-de-Fundos.pdf\n",
+          "description": "Conforme classificação ANBIMA, que segue a deliberação 77 da ANBIMA.\n\n– Renda Fixa\n\n– Ações\n\n– Multimercado\n\n– Cambial\n\nhttps://www.anbima.com.br/data/files/5A/44/2C/B7/8411B510CD3B4DA568A80AC2/DeliberacaoN77-Diretriz-de-Classificacao-de-Fundos.pdf",
           "enum": [
             "RENDA_FIXA",
             "ACOES",
@@ -65,7 +66,8 @@
       "description": "Meta informações referente a API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages"
+        "totalPages",
+        "requestDateTime"
       ],
       "additionalProperties": false,
       "properties": {
@@ -73,20 +75,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
         },
         "totalPages": {
           "type": "integer",
           "format": "int32",
           "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }

@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -17,7 +18,7 @@
           "type": "string",
           "description": "CNPJ da instituição emissora. Caso a transmissora possua a informação o envio deste campo é obrigatório.",
           "maxLength": 14,
-          "pattern": "^\\d{14}$",
+          "pattern": "^[0-9A-Z]{12}[0-9]{2}$",
           "example": "11225860000140"
         },
         "isinCode": {
@@ -41,7 +42,8 @@
       "description": "Meta informações referente a API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages"
+        "totalPages",
+        "requestDateTime"
       ],
       "additionalProperties": false,
       "properties": {
@@ -49,20 +51,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
         },
         "totalPages": {
           "type": "integer",
           "format": "int32",
           "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }

@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -28,6 +29,9 @@
             "type": "array",
             "items": {
               "type": "object",
+              "required": [
+                "key"
+              ],
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
@@ -37,11 +41,7 @@
                   "description": "Valor do campo do identificador no sistema de origem",
                   "type": "string"
                 }
-              },
-              "required": [
-                "key"
-              ],
-              "additionalItems": false
+              }
             },
             "examples": [
               [
@@ -86,6 +86,7 @@
           },
           "transactionConversionDate": {
             "type": "string",
+            "format": "date",
             "description": "Data da conversão da transação de movimentação do fundo de investimento.",
             "maxLength": 10,
             "minLength": 10,
@@ -105,9 +106,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 25,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,8}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -119,13 +118,11 @@
             }
           },
           "transactionQuotaQuantity": {
-            "type": "string",            
+            "type": "string",
             "description": "Número de cotas convertidas na data da movimentação.\n",
             "maxLength": 24,
             "pattern": "^\\d{1,15}\\.\\d{2,8}$",
-            "example": "42.25",
-            "minimum": -1.7976931348623157e+308,
-            "maximum": 1.7976931348623157e+308
+            "example": "42.25"
           },
           "transactionValue": {
             "type": "object",
@@ -140,9 +137,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 21,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -166,9 +161,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 21,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -192,9 +185,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 21,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -218,9 +209,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 21,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -244,9 +233,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 20,
                 "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -270,9 +257,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 21,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -288,19 +273,19 @@
     },
     "meta": {
       "type": "object",
-      "description": "Meta informações referente à API requisitada.",
+      "description": "Meta informação referente a API requisitada.",
       "required": [
-        "hasMoreRecords",
         "requestDateTime"
       ],
       "properties": {
-        "hasMoreRecords": {
-          "type": "boolean",
-          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
-          "example": true
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }

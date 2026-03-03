@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -43,9 +44,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "5000.0024",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "5000.0024"
             },
             "currency": {
               "type": "string",
@@ -70,9 +69,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -97,9 +94,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -124,9 +119,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -151,9 +144,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -178,9 +169,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -205,9 +194,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -232,9 +219,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -259,9 +244,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "13.8751",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "13.8751"
             },
             "currency": {
               "type": "string",
@@ -286,9 +269,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "4889.0012",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "4889.0012"
             },
             "currency": {
               "type": "string",
@@ -306,7 +287,8 @@
       "description": "Meta informações referente a API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages"
+        "totalPages",
+        "requestDateTime"
       ],
       "additionalProperties": false,
       "properties": {
@@ -314,20 +296,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
         },
         "totalPages": {
           "type": "integer",
           "format": "int32",
           "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }
