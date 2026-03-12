@@ -1,0 +1,18 @@
+{
+    "data": {
+        "transactionId": "STR20181108000000013",
+        "payrollData": {
+            "contractId": [
+                {
+                    "key": "pk_CampoUm",
+                    "value": "ABC"
+                },
+                {
+                    "key": "pk_CampoDois",
+                    "value": "123"
+                }
+            ],
+            "registeringEntity": "SERPRO"
+        }
+    }
+}
