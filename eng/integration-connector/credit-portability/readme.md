@@ -2,8 +2,7 @@
 
 This document presents the **Camel Routes** and **Supported Configurations** for the
 Credit Portability service, which corresponds to
-the [Credit Portability APIs](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC) and
-[Federal Payroll Loan Portability APIs](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/1217495041/PC+API+-+Cr+dito+Consignado+Federal+-+CF) of Open Banking Brazil.
+the [Credit Portability APIs](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC) of Open Banking Brazil.
 
 &nbsp;
 
@@ -39,7 +38,7 @@ the plugin can create its own environment variables to be injected.
 
 &nbsp;
 
-## Camel Routes to Credit Portability APIs
+## Camel Routes
 
 The following subsections contain all the `endpoints` that need
 to have routes defined in Camel and for which the creation of one or
@@ -93,69 +92,3 @@ defined in the plugin as:
 | Method   | Version | Endpoint                                 | Camel Route                                                         |
 | -------- | ------- | ---------------------------------------- | ------------------------------------------------------------------- |
 | POST     | v1      | /portabilities/\{portabilityId\}/payment | ```direct:creditPortabilityPostPortabilitiesPortabilityIdPayment``` |
-
-## Camel Routes to Federal Payroll Loan Portability APIs
-
-The following subsections contain all the `endpoints` that need
-to have routes defined in Camel and for which the creation of one or
-more plugins is necessary.
-
-For the `/account-data` endpoint, for example, the route must be
-
-defined in the plugin as:
-
-```xml
-<from uri="direct:payrollCreditPortabilityGetAccountData"/>
-```
-
-&nbsp;
-
-### Account Data
-
-&nbsp;
-
-| Method | Version | Endpoint                                                  | Camel Route                                         |
-| ------ | ------- | --------------------------------------------------------- | --------------------------------------------------- |
-| GET    | v1      | /account-data                                             | ```direct:payrollCreditPortabilityGetAccountData``` |
-
-&nbsp;
-
-### Concurrency Management
-
-&nbsp;
-
-| Method | Version | Endpoint                                                  | Camel Route                                                                              |
-| ------ | ------- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| GET    | v1      | /credit-operations/\{contractId\}/portability-elegibility | ```direct:payrollCreditPortabilityGetCreditOperationsContractIdPortabilityEligibility``` |
-
-&nbsp;
-
-### Credit Portability
-
-&nbsp;
-
-| Method   | Version | Endpoint                                | Camel Route                                                                |
-| -------- | ------- | --------------------------------------- | -------------------------------------------------------------------------- |
-| POST     | v1      | /portabilities                          | ```direct:payrollCreditPortabilityPostPortabilities```                     |
-| PATCH    | v1      | /portabilities/\{portabilityId\}/cancel | ```direct:payrollCreditPortabilityPatchPortabilitiesPortabilityIdCancel``` |
-
-&nbsp;
-
-### Payments
-
-&nbsp;
-
-| Method   | Version | Endpoint                                           | Camel Route                                                                         |
-| -------- | ------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| POST     | v1      | /portabilities/\{portabilityId\}/payment           | ```direct:payrollCreditPortabilityPostPortabilitiesPortabilityIdPayment```          |
-| POST     | v1      | /portabilities/\{portabilityId\}/request-discharge | ```direct:payrollCreditPortabilityPostPortabilitiesPortabilityIdRequestDischarge``` |
-
-&nbsp;
-
-### Registering Entity
-
-&nbsp;
-
-| Method   | Version | Endpoint                                             | Camel Route                                                                         |
-| -------- | ------- | ---------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| GET      | v1      | /credit-operations/\{contractId\}/registering-entity | ```direct:payrollCreditPortabilityGetCreditOperationsContractIdRegisteringEntity``` |
