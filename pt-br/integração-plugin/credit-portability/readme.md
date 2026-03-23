@@ -1,7 +1,7 @@
 # API Credit Portabilty
 
 Esse documento apresenta as **Rotas do Camel** e **Configurações Suportadas** para
-os serviço de Portabilidade de crédito, o qual equivale às [APIs de Portabilidade de Crédito Pessoal Clean](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC) e [APIS de Portabilidade de Crédito Consignado Federal](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/1217495041/PC+API+-+Cr+dito+Consignado+Federal+-+CF) do
+o serviço de Portabilidade de crédito, o qual equivale às [APIs de Portabilidade de Crédito Pessoal Clean](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC) do
 Open Banking Brasil.
 
 &nbsp;
@@ -38,7 +38,7 @@ disso, o plugin pode criar suas próprias variáveis de ambiente a serem injetad
 
 &nbsp;
 
-## Rotas do Camel para APIs de Portabilidade de Crédito Pessoal Clean
+## Rotas do Camel
 
 As subseções seguintes contêm todos os `endpoints` que precisam ter rotas definidas
 no camel e para os quais é necessário a criação de um ou mais plugins.
@@ -91,68 +91,3 @@ definida no plugin como:
 | Método   | Versão | Endpoint                                 | Rota do Camel                                                       |
 | -------- | ------ | ---------------------------------------- | ------------------------------------------------------------------- |
 | POST     | v1     | /portabilities/\{portabilityId\}/payment | ```direct:creditPortabilityPostPortabilitiesPortabilityIdPayment``` |
-
-## Rotas do Camel para APIs de Portabilidade de Crédito Consignado Federal
-
-As subseções seguintes contêm todos os `endpoints` que precisam ter rotas definidas
-no camel e para os quais é necessário a criação de um ou mais plugins.
-
-Para o endpoint `/account-data`, por exemplo, a rota deve estar
-
-definida no plugin como:
-
-```xml
-<from uri="direct:payrollCreditPortabilityGetAccountData"/>
-```
-
-&nbsp;
-
-### Account Data
-
-&nbsp;
-
-| Método | Versão | Endpoint                                                  | Rota do Camel                                       |
-| ------ | ------ | --------------------------------------------------------- | --------------------------------------------------- |
-| GET    | v1     | /account-data                                             | ```direct:payrollCreditPortabilityGetAccountData``` |
-
-&nbsp;
-
-### Concurrency Management
-
-&nbsp;
-
-| Método | Versão | Endpoint                                                  | Rota do Camel                                                                            |
-| ------ | ------ | --------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| GET    | v1     | /credit-operations/\{contractId\}/portability-elegibility | ```direct:payrollCreditPortabilityGetCreditOperationsContractIdPortabilityEligibility``` |
-
-&nbsp;
-
-### Credit Portability
-
-&nbsp;
-
-| Método   | Versão | Endpoint                                | Rota do Camel                                                              |
-| -------- | ------ | --------------------------------------- | -------------------------------------------------------------------------- |
-| POST     | v1     | /portabilities                          | ```direct:payrollCreditPortabilityPostPortabilities```                     |
-| PATCH    | v1     | /portabilities/\{portabilityId\}/cancel | ```direct:payrollCreditPortabilityPatchPortabilitiesPortabilityIdCancel``` |
-
-&nbsp;
-
-### Payments
-
-&nbsp;
-
-| Método   | Versão | Endpoint                                 | Rota do Camel                                                                                 |
-| -------- | ------ | ---------------------------------------- | --------------------------------------------------------------------------------------------- |
-| POST     | v1     | /portabilities/\{portabilityId\}/payment           | ```direct:payrollCreditPortabilityPostPortabilitiesPortabilityIdPayment```          |
-| POST     | v1     | /portabilities/\{portabilityId\}/request-discharge | ```direct:payrollCreditPortabilityPostPortabilitiesPortabilityIdRequestDischarge``` |
-
-&nbsp;
-
-### Registering Entity
-
-&nbsp;
-
-| Método   | Versão | Endpoint                                             | Rota do Camel                                                                       |
-| -------- | ------ | ---------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| GET      | v1     | /credit-operations/\{contractId\}/registering-entity | ```direct:payrollCreditPortabilityGetCreditOperationsContractIdRegisteringEntity``` |

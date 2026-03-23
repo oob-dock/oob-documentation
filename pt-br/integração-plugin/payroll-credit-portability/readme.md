@@ -1,7 +1,7 @@
 # API Credit Portabilty
 
 Esse documento apresenta as **Rotas do Camel** e **Configurações Suportadas** para
-o serviço de Portabilidade de crédito, o qual equivale às [APIs de Portabilidade de Crédito Consignado](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/1217497188/Swagger+-+v1.0.0-beta.1+-+PC+Portabilidade+de+Cr+dito+-+CF) do
+o serviço de Portabilidade de crédito, o qual equivale às [APIs de Portabilidade de Crédito Consignado](https://openfinancebrasil.atlassian.net/wiki/spaces/OF/pages/1217495041/PC+API+-+Cr+dito+Consignado+Federal+-+CF) do
 Open Banking Brasil.
 
 &nbsp;
@@ -48,8 +48,18 @@ Para o endpoint `/account-data`, por exemplo, a rota deve estar
 definida no plugin como:
 
 ```xml
-<from uri="direct:payrollCreditPortabilityGetCreditOperationsContractIdPortabilityEligibility"/>
+<from uri="direct:payrollCreditPortabilityGetAccountData"/>
 ```
+
+&nbsp;
+
+### Account Data
+
+&nbsp;
+
+| Método | Versão | Endpoint                                                  | Rota do Camel                                       |
+| ------ | ------ | --------------------------------------------------------- | --------------------------------------------------- |
+| GET    | v1     | /account-data                                             | ```direct:payrollCreditPortabilityGetAccountData``` |
 
 &nbsp;
 
@@ -57,8 +67,38 @@ definida no plugin como:
 
 &nbsp;
 
-| Método | Versão | Endpoint                                                          | Rota do Camel |
-| ------ | ------ |-------------------------------------------------------------------| ------ |
-| GET    | v1     | /payroll-credit-operations/\{contractId\}/portability-elegibility | ```payrollCreditPortabilityGetCreditOperationsContractIdPortabilityEligibility``` |
+| Método | Versão | Endpoint                                                  | Rota do Camel                                                                            |
+| ------ | ------ | --------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| GET    | v1     | /credit-operations/\{contractId\}/portability-elegibility | ```direct:payrollCreditPortabilityGetCreditOperationsContractIdPortabilityEligibility``` |
 
 &nbsp;
+
+### Credit Portability
+
+&nbsp;
+
+| Método   | Versão | Endpoint                                | Rota do Camel                                                              |
+| -------- | ------ | --------------------------------------- | -------------------------------------------------------------------------- |
+| POST     | v1     | /portabilities                          | ```direct:payrollCreditPortabilityPostPortabilities```                     |
+| PATCH    | v1     | /portabilities/\{portabilityId\}/cancel | ```direct:payrollCreditPortabilityPatchPortabilitiesPortabilityIdCancel``` |
+
+&nbsp;
+
+### Payments
+
+&nbsp;
+
+| Método   | Versão | Endpoint                                 | Rota do Camel                                                                                 |
+| -------- | ------ | ---------------------------------------- | --------------------------------------------------------------------------------------------- |
+| POST     | v1     | /portabilities/\{portabilityId\}/payment           | ```direct:payrollCreditPortabilityPostPortabilitiesPortabilityIdPayment```          |
+| POST     | v1     | /portabilities/\{portabilityId\}/request-discharge | ```direct:payrollCreditPortabilityPostPortabilitiesPortabilityIdRequestDischarge``` |
+
+&nbsp;
+
+### Registering Entity
+
+&nbsp;
+
+| Método   | Versão | Endpoint                                             | Rota do Camel                                                                       |
+| -------- | ------ | ---------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| GET      | v1     | /credit-operations/\{contractId\}/registering-entity | ```direct:payrollCreditPortabilityGetCreditOperationsContractIdRegisteringEntity``` |
