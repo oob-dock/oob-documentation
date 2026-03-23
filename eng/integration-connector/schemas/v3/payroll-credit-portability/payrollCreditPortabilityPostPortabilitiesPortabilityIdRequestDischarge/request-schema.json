@@ -3,11 +3,15 @@
   "type": "object",
   "required": [
     "requestMeta",
-    "consent"
+    "consent",
+    "requestBody"
   ],
   "properties": {
     "requestMeta": {
       "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+    },
+    "consent": {
+      "$ref": "../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
     },
     "portabilityId": {
       "type": "string"
@@ -19,6 +23,10 @@
       ],
       "properties": {
         "data": {
+          "required": [
+            "transactionId",
+            "payrollData"
+          ],
           "type": "object",
           "properties": {
             "transactionId": {
@@ -28,6 +36,10 @@
             },
             "payrollData": {
               "type": "object",
+              "required": [
+                "contractId",
+                "registeringEntity"
+              ],
               "properties": {
                 "contractId": {
                   "$ref": "../../common/common-schema.json#/$defs/LegacyId"
