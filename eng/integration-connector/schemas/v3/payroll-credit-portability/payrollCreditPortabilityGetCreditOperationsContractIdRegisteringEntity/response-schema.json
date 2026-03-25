@@ -20,37 +20,12 @@
           ],
           "properties": {
             "contractId": {
-              "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "key": {
-                    "description": "Nome do campo do identificador no sistema de origem",
-                    "type": "string"
-                  },
-                  "value": {
-                    "description": "Valor do campo do identificador no sistema de origem",
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "key"
-                ],
-                "additionalItems": false
-              },
-              "examples": [
-                [
-                  {
-                    "key": "pk_CampoUm",
-                    "value": "ABC"
-                  },
-                  {
-                    "key": "pk_CampoDois",
-                    "value": "123"
-                  }
-                ]
-              ]
+              "type": "string",
+              "description": "Número do contrato dado pela instituição contratante no sistema da averbadora.",
+              "example": "12346579841058798Asq",
+              "maxLength": 20,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,19}$"
             },
             "registeringEntity": {
               "type": "string",
