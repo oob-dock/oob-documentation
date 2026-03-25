@@ -1050,20 +1050,3 @@ para todos os recursos não-selecionáveis.
 **Formato:** `0` ou `1`
 
 **Valor default**: `0`
-
-### ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
-
-Define a data em que as modificações necessárias para JSR v2.2
-devem ser ativadas. Deve ser configurada uma vez que a data oficial
-seja definida pelo BACEN.
-
-**Formato:**: "YYYY-MM-DD"
-
-**Ex:** Para que as modificações sejam ativadas dia 15/10/2025, basta
-configurar conforme a seguir:
-
-```yaml
-additionalVars:
-  - name: ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
-  - value: "2025-10-15"
-```
