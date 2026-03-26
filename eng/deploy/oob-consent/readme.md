@@ -961,20 +961,3 @@ for all non-selectable resources.
 **Format:** `0` ou `1`
 
 **Default value**: `0`
-
-### ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
-
-Defines the date when the necessary modifications for No Redirect Journey
-v2.2 should be activated.
-It must be configured once the official date is announced by BACEN.
-
-**Format:** "YYYY-MM-DD"
-
-**Example:** To activate the modifications on 15/10/2025, configure
-as follows:
-
-```yaml
-additionalVars:
-  - name: ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
-  - value: "2025-10-15"
-```
