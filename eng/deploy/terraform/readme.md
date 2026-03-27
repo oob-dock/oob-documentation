@@ -37,6 +37,7 @@
       - [ssl\_certificate\_header\_name](#ssl_certificate_header_name)
       - [server\_org\_id](#server_org_id)
       - [pubsub\_id](#pubsub_id)
+      - [dapr\_large\_event\_store](#dapr_large_event_store)
       - [route\_block\_enabled](#route_block_enabled)
       - [mqd\_event\_enabled](#mqd_event_enabled)
       - [opentelemetry\_tracer\_exporter\_url\_http](#opentelemetry_tracer_exporter_url_http)
@@ -262,6 +263,29 @@ Organization identifier in the participant directory.
 Identifier of the publish/subscribe component in [Dapr](../shared-definitions.md#dapr).
 
 **Example:** `event-publisher`
+
+#### dapr_large_event_store
+
+Defines the name of the Dapr state store used to store events that have a very
+large payload and therefore cannot be published directly to queues. In this
+case, the event is persisted in this state store and the ID of the persisted
+entry is sent via event to the target systems. **Used in the MQD scenario, its
+configuration is mandatory. The name defined here must be the same as defined
+in the `oof-mqd-dispatcher` module in the `env.dapr.largeEventStateStore.name`
+variable**.
+
+**Important:**
+
+- This Dapr state store component must be configured with a `keyPrefix` field
+with the value `name`, so that all persisted entries have the same prefix that
+is shared by `oob-kong` and `oof-mqd-dispatcher`. This prefix will be exactly
+the name defined in this configuration variable.
+- This component must be created in every namespace that uses it. If Kong is in
+the same namespace as `oof-mqd-dispatcher`, it only needs to be defined once.
+Otherwise, it must be defined in the Kong namespace and in the
+`oof-mqd-dispatcher` module namespace.
+- An example template of this component can be found in the `oof-mqd-dispatcher`
+helm chart, at `helm/oof-mqd-dispatcher/templates/large-event-state-store.yaml`.
 
 #### route_block_enabled
 

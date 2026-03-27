@@ -43,12 +43,50 @@ possuem suporte à reprocessamento em caso de falhas, sendo assim o componente
 pub/sub a ser utilizado pelo módulo como um todo deve ser o componente que
 oferece suporte à retentativas.
 
+* `dapr.largeEventStateStore`:
+  * State store utilizada para recuperar eventos que possuem o payload muito
+  grande e portanto não puderam ser publicados diretamente nas filas. Neste
+  caso o evento é persistido nesta state store e o ID da entrada persistido é
+  recebido neste módulo, que recupera então o payload do evento. **Sua
+  configuração é obrigatória.**
+    * `name`: Nome do componente Dapr a ser inicializado. **Importante:** o
+    Kong também utiliza este mesmo componente para buscar os eventos
+    publicados, e a ligação entre os módulos ocorre através do nome do
+    componente. Sendo assim, o nome definido aqui deverá ser o mesmo definido
+    no `terraform` na variável `dapr_large_event_store`.
+      * `type`: Tipo do componente Dapr a ser usado como state store.
+        * Uma lista de componentes pode ser encontrada [aqui](https://docs.dapr.io/reference/components-reference/supported-state-stores/)
+    * `version`: Versão do componente.
+    * `connectionMetadata`: Configurações de conexão do componente a ser usado como state store.
+
+  * **Importante:**
+    * É necessário que este componente de state store do Dapr seja configurado
+    com um campo `keyPrefix` com valor `name`, para que todas as entradas
+    persistidas tenham o mesmo prefixo que é compartilhado pelo `oob-kong` e
+    pelo `oof-mqd-dispatcher`. Esse prefixo será justamente o nome definido
+    na variável `dapr.largeEventStateStore.name`.
+    * Necessário criar este componente em todo namespace que o utiliza. Se o Kong
+  estiver no mesmo namespace do `oof-mqd-dispatcher` basta apenas definí-lo
+  uma única vez. Caso contrário, necessário definí-lo no namespace do Kong e no
+  namespace deste módulo.
+    * Um template de exemplo deste componente pode ser conferido no helm deste
+  módulo, em `helm/oof-mqd-dispatcher/templates/large-event-state-store.yaml`.
+
 **Exemplo:**
 
 ```yaml
   dapr:
     enabled: "true"
     retryPubsubId: "pub-sub-retry"
+    largeEventStateStore:
+      name: "large-event-state-store"
+      type: "state.postgresql"
+      version: "v1"
+      connectionMetadata:
+        - name: "connectionString"
+          value: "host=db-opus-open-banking.namespace.us-east-1.rds.amazonaws.com user=user password=passwd database=dapr_state"
+        - name: timeout
+          value: 10
 ```
 
 ### organisation.ids
