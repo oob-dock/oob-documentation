@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -87,8 +86,8 @@
         },
         "paymentMethod": {
           "type": "array",
-          "description": "Listagem dos cartões (ex.: virtual/adicional/titular) associados a conta cartão consentida, conforme disponíveis ao usuário nos canais proprietários.\n",
-          "minItems": 1,
+          "description": "Listagem dos cartões (ex.: virtual/adicional/titular) associados a conta cartão consentida, conforme disponíveis ao usuário nos canais proprietários.\n\nO envio da listagem paymentMethod vazia só deve ocorrer nos seguintes cenários:\n- Conta com pagamento ativo, mas com todos os métodos de pagamentos cancelados;\n- Conta nova sem emissão de métodos de pagamentos;\n- Conta com cartão no-name: entrega de cartão emergencial ao cliente sem dados do cliente no plástico;\n- Conta bloqueada por furto, roubo ou perda: cartão está inativo e aguardando embossing de novo cartão;\n- Conta suspensa: conta suspensa por falta de pagamento, suspensão judicial, entre outros, no entanto cartão se mantém em posse do cliente;\n- Conta inativa: sem utilização de cartão por mais de X dias, no entanto cartão ainda está atrelado ao cliente;\n- Conta aguardando / revisão da análise do cliente: cliente já solicitou cartão, embossing em processo, mas ainda há análises adicionais (ex.: fraude), para serem concluídas.\n",
+          "minItems": 0,
           "items": {
             "type": "object",
             "description": "Conjunto de informações relativas aos Meios de Pagamento da Conta de pagamento pós-paga",
@@ -99,7 +98,7 @@
             "properties": {
               "identificationNumber": {
                 "type": "string",
-                "description": "Número de identificação do cartão: corresponde aos 4 últimos dígitos do cartão para pessoa natural, ou então, preencher com um identificador para pessoa jurídica, com as características definidas para os IDs no Open Banking.\n",
+                "description": "Número de identificação do cartão: corresponde aos 4 últimos dígitos do cartão para pessoa natural, ou então, preencher com um identificador para pessoa jurídica, com as características definidas para os IDs no Open Finance.\n",
                 "maxLength": 100,
                 "minLength": 1,
                 "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$",
@@ -141,6 +140,5 @@
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }
