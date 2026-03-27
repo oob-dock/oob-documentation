@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -23,7 +24,8 @@
           "maxLength": 20,
           "pattern": "(^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$)",
           "example": "2022-07-21T17:32:00Z",
-          "type": "string"
+          "type": "string",
+          "format": "date-time"
         },
         "updatedUnitPrice": {
           "description": "Valor bruto unitário atualizado (a mercado) na data de referência.",
@@ -39,9 +41,7 @@
               "pattern": "^\\d{1,15}\\.\\d{2,8}$",
               "example": "1000.000004",
               "type": "string",
-              "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "format": "double"
             },
             "currency": {
               "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
@@ -66,9 +66,7 @@
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "example": "1000.04",
               "type": "string",
-              "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "format": "double"
             },
             "currency": {
               "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
@@ -93,9 +91,7 @@
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "example": "1000.04",
               "type": "string",
-              "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "format": "double"
             },
             "currency": {
               "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
@@ -120,9 +116,7 @@
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "example": "1000.04",
               "type": "string",
-              "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "format": "double"
             },
             "currency": {
               "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
@@ -147,9 +141,7 @@
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "example": "1000.04",
               "type": "string",
-              "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "format": "double"
             },
             "currency": {
               "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
@@ -174,9 +166,7 @@
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "example": "1000.04",
               "type": "string",
-              "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "format": "double"
             },
             "currency": {
               "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
@@ -201,9 +191,7 @@
               "pattern": "^\\d{1,15}\\.\\d{2,8}$",
               "example": "1000.000004",
               "type": "string",
-              "format": "double",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "format": "double"
             },
             "currency": {
               "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
@@ -220,9 +208,7 @@
           "pattern": "^\\d{1,15}\\.\\d{2,8}$",
           "format": "double",
           "type": "string",
-          "example": "1000.015",
-          "minimum": -1.7976931348623157e+308,
-          "maximum": 1.7976931348623157e+308
+          "example": "1000.015"
         }
       }
     },
@@ -231,7 +217,8 @@
       "description": "Meta informações referente a API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages"
+        "totalPages",
+        "requestDateTime"
       ],
       "additionalProperties": false,
       "properties": {
@@ -239,20 +226,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
         },
         "totalPages": {
           "type": "integer",
           "format": "int32",
           "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
+        },
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }

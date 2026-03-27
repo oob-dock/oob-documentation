@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -39,9 +40,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "1000.04",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.04"
             },
             "currency": {
               "type": "string",
@@ -65,9 +64,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "1000.04",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.04"
             },
             "currency": {
               "type": "string",
@@ -91,9 +88,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 20,
-              "example": "50.02",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "50.02"
             },
             "currency": {
               "type": "string",
@@ -117,9 +112,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 20,
-              "example": "50.02",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "50.02"
             },
             "currency": {
               "type": "string",
@@ -143,9 +136,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
               "maxLength": 21,
-              "example": "1000.04",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.04"
             },
             "currency": {
               "type": "string",
@@ -161,9 +152,7 @@
           "description": "Quantidade de cotas detidas em posição do cliente .",
           "pattern": "^\\d{1,15}\\.\\d{2,8}$",
           "maxLength": 24,
-          "example": "42.25",
-          "minimum": -1.7976931348623157e+308,
-          "maximum": 1.7976931348623157e+308
+          "example": "42.25"
         },
         "quotaGrossPriceValue": {
           "type": "object",
@@ -178,9 +167,7 @@
               "description": "Valor relacionado ao objeto.",
               "pattern": "^-?\\d{1,15}\\.\\d{2,8}$",
               "maxLength": 25,
-              "example": "1000.04",
-              "minimum": -1.7976931348623157e+308,
-              "maximum": 1.7976931348623157e+308
+              "example": "1000.04"
             },
             "currency": {
               "type": "string",
@@ -198,7 +185,8 @@
       "description": "Meta informações referente a API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages"
+        "totalPages",
+        "requestDateTime"
       ],
       "additionalProperties": false,
       "properties": {
@@ -206,20 +194,22 @@
           "type": "integer",
           "format": "int32",
           "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
         },
         "totalPages": {
           "type": "integer",
           "format": "int32",
           "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+          "example": 1
+        },
+        "requestDateTime": {
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }

@@ -1,0 +1,187 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "array",
+      "description": "Lista de caixinhas/reservas",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "reservedIndentification",
+          "availableAmount"
+        ],
+        "properties": {
+          "reservedName": {
+            "type": "string",
+            "description": "Nome dado pelo usuário para a reserva",
+            "pattern": "^[^\\s][\\w\\W\\s]*[^\\s]$",
+            "maxLength": 248,
+            "minLength": 5,
+            "example": "Caixinha Paras Férias"
+          },
+          "reservedIndentification": {
+            "type": "string",
+            "description": "Identificador único da reserva",
+            "format": "uuid",
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$",
+            "maxLength": 36,
+            "minLength": 1,
+            "example": "d78fc4e5-37ca-4da3-adf2-9b082bf92280"
+          },
+          "availableAmount": {
+            "type": "array",
+            "description": "Saldo que se encontra disponível na reserva",
+            "minLength": 1,
+            "items": {
+              "type": "object",
+              "required": [
+                "amount",
+                "currency"
+              ],
+              "properties": {
+                "amount": {
+                  "type": "string",
+                  "description": "Valor relacionado ao objeto.",
+                  "format": "double",
+                  "pattern": "^\\d{1,15}\\.\\d{2,4}$",
+                  "maxLength": 20,
+                  "minLength": 4,
+                  "example": "1000.0400",
+                  "minimum": -1.7976931348623157e+308,
+                  "maximum": 1.7976931348623157e+308
+                },
+                "currency": {
+                  "type": "string",
+                  "description": "Moeda referente ao valor monetário, seguindo o modelo ISO-4217.",
+                  "pattern": "^[A-Z]{3}$",
+                  "maxLength": 3,
+                  "example": "BRL"
+                },
+                "remuneration": {
+                  "type": "object",
+                  "description": "Remuneração aplicada a reserva",
+                  "required": [
+                    "rateType",
+                    "indexer",
+                    "calculation",
+                    "ratePeriodicity"
+                  ],
+                  "properties": {
+                    "preFixedRate": {
+                      "type": "string",
+                      "description": "Taxa de remuneração pré fixada para a reserva de saldo. p.ex. 0.014500. O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). \n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando campo `postFixedIndexerPercentage` não for preenchido\n",
+                      "format": "double",
+                      "pattern": "^\\d{1}\\.\\d{6}$",
+                      "minLength": 8,
+                      "maxLength": 8,
+                      "example": "0.300000",
+                      "minimum": -1.7976931348623157e+308,
+                      "maximum": 1.7976931348623157e+308
+                    },
+                    "postFixedIndexerPercentage": {
+                      "type": "string",
+                      "description": "Percentual do indexador pós fixado para a reserva de saldo. p.ex. 0.014500. O preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). \n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando campo `preFixedRate` não for preenchido\n",
+                      "format": "double",
+                      "pattern": "^\\d{1}\\.\\d{6}$",
+                      "minLength": 8,
+                      "maxLength": 8,
+                      "example": "0.300000",
+                      "minimum": -1.7976931348623157e+308,
+                      "maximum": 1.7976931348623157e+308
+                    },
+                    "rateType": {
+                      "type": "string",
+                      "description": "Tipo da taxa de remuneração (linear ou exponencial)",
+                      "enum": [
+                        "LINEAR",
+                        "EXPONENCIAL"
+                      ],
+                      "example": "LINEAR"
+                    },
+                    "indexer": {
+                      "type": "string",
+                      "description": "Índice utilizado como referência para remuneração da reserva",
+                      "enum": [
+                        "CDI",
+                        "DI",
+                        "TR",
+                        "IPCA",
+                        "IGP_M",
+                        "IGP_DI",
+                        "INPC",
+                        "BCP",
+                        "TLC",
+                        "SELIC",
+                        "PRE_FIXADO",
+                        "OUTROS"
+                      ],
+                      "example": "CDI"
+                    },
+                    "calculation": {
+                      "type": "string",
+                      "description": "Base de cálculo (dias úteis ou dias corridos)",
+                      "enum": [
+                        "DIAS_UTEIS",
+                        "DIAS_CORRIDOS"
+                      ],
+                      "example": "DIAS_UTEIS"
+                    },
+                    "ratePeriodicity": {
+                      "type": "string",
+                      "description": "Periodicidade da taxa de remuneração (mensal, anual, diário, semestral)",
+                      "enum": [
+                        "MENSAL",
+                        "ANUAL",
+                        "DIARIO",
+                        "SEMESTRAL"
+                      ],
+                      "example": "MENSAL"
+                    },
+                    "indexerAdditionalInfo": {
+                      "type": "string",
+                      "description": "Informações adicionais do indexador\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando houver `Outros` no campo `indexer`\n",
+                      "pattern": "[\\w\\W\\s]*",
+                      "maxLength": 50,
+                      "example": "Dólar"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "totalRecords",
+        "totalPages"
+      ],
+      "properties": {
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        },
+        "totalPages": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

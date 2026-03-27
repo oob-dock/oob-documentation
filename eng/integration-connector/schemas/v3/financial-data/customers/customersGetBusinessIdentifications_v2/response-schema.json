@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -158,8 +157,8 @@
           },
           "parties": {
             "type": "array",
-            "minItems": 1,
-            "description": "Lista relativa às informações das partes envolvidas, como: sócio e /ou administrador\n",
+            "minItems": 0,
+            "description": "Lista relativa às informações das partes envolvidas, como: sócio e/ou administrador. Objeto de envio obrigatório para todos os CNPJs que possuam sócios e/ou administradores no cadastro do QSA (Quadro de Sócios e Administradores)\n",
             "items": {
               "type": "object",
               "description": "Lista relativa às informações das partes envolvidas, como: sócio e /ou administrador\n",
@@ -511,9 +510,9 @@
                     },
                     "email": {
                       "type": "string",
+                      "format": "email",
                       "description": "Endereço de email",
                       "maxLength": 320,
-                      "pattern": "^[a-z0-9.!#$&'*+\\/=?^_`{|}~-]+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)*$",
                       "example": "karinafernandes-81@br.inter.net"
                     }
                   }
