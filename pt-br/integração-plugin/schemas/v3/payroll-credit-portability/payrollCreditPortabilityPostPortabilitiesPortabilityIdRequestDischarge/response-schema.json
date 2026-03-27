@@ -1,0 +1,78 @@
+{
+    "type": "object",
+    "required": [
+        "data"
+    ],
+    "properties": {
+        "data": {
+            "type": "object",
+            "description": "Conjunto de informações de contratos de empréstimos/financiamentos mantidos pelo cliente na instituição credora e para os quais ele tenha fornecido consentimento",
+            "required": [
+                "transactionId",
+                "payrollData"
+            ],
+            "properties": {
+                "transactionId": {
+                    "type": "string",
+                    "pattern": "^[^\\s](?:.*[^\\s])?$",
+                    "maxLength": 20,
+                    "minLength": 1,
+                    "example": "STR20181108000000013",
+                    "description": "Identificador da transação utilizada para Proponente liquidar portabilidade de crédito com a Credora.\n\nNo contexto de STR0047, utilizar o valor do campo de retorno NumCtrlSTR (Numero de Controle da STR)\".\n"
+                },
+                "payrollData": {
+                    "type": "object",
+                    "description": "Dados do contrato de empréstimo consignado.",
+                    "required": [
+                        "contractId",
+                        "registeringEntity"
+                    ],
+                    "properties": {
+                        "contractId": {
+                            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+                            "type": "array",
+                            "items": {
+                                "type": "object",
+                                "properties": {
+                                    "key": {
+                                        "description": "Nome do campo do identificador no sistema de origem",
+                                        "type": "string"
+                                    },
+                                    "value": {
+                                        "description": "Valor do campo do identificador no sistema de origem",
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "key"
+                                ],
+                                "additionalItems": false
+                            },
+                            "examples": [
+                                [
+                                    {
+                                        "key": "pk_CampoUm",
+                                        "value": "ABC"
+                                    },
+                                    {
+                                        "key": "pk_CampoDois",
+                                        "value": "123"
+                                    }
+                                ]
+                            ]
+                        },
+                        "registeringEntity": {
+                            "type": "string",
+                            "enum": [
+                                "SERPRO"
+                            ],
+                            "description": "Nome da averbadora do empréstimo consignado.",
+                            "example": "SERPRO"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}

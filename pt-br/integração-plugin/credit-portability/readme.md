@@ -1,7 +1,7 @@
 # API Credit Portabilty
 
 Esse documento apresenta as **Rotas do Camel** e **Configurações Suportadas** para
-o serviço de Portabilidade de crédito, o qual equivale às [APIs de Portabilidade de Crédito](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC) do
+o serviço de Portabilidade de crédito, o qual equivale às [APIs de Portabilidade de Crédito Pessoal Clean](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC) do
 Open Banking Brasil.
 
 &nbsp;
@@ -40,7 +40,7 @@ disso, o plugin pode criar suas próprias variáveis de ambiente a serem injetad
 
 ## Rotas do Camel
 
-As subseções seguintes contêm todos os `endpoints` que precisam ter rotas defnidas
+As subseções seguintes contêm todos os `endpoints` que precisam ter rotas definidas
 no camel e para os quais é necessário a criação de um ou mais plugins.
 
 Para o endpoint `/account-data`, por exemplo, a rota deve estar
