@@ -1,0 +1,59 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Dados para identificação do contrato a ser portado junto a averbadora",
+      "required": [
+        "payrollData"
+      ],
+      "properties": {
+        "payrollData": {
+          "description": "Dados do contrato de empréstimo consignado.",
+          "type": "object",
+          "required": [
+            "contractId",
+            "registeringEntity"
+          ],
+          "properties": {
+            "contractId": {
+              "type": "string",
+              "description": "Número do contrato dado pela instituição contratante no sistema da averbadora.",
+              "example": "12346579841058798Asq",
+              "maxLength": 20,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,19}$"
+            },
+            "registeringEntity": {
+              "type": "string",
+              "enum": [
+                "SERPRO"
+              ],
+              "description": "Nome da averbadora do empréstimo consignado.\n",
+              "example": "SERPRO"
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "hasMoreRecords",
+        "requestDateTime"
+      ],
+      "properties": {
+        "hasMoreRecords": {
+          "type": "boolean",
+          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
+          "example": true
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

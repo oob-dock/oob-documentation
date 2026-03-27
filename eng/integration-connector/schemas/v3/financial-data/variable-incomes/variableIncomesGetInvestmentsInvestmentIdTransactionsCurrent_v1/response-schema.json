@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "additionalProperties": false,
   "properties": {
@@ -51,6 +52,7 @@
           },
           "transactionDate": {
             "type": "string",
+            "format": "date",
             "description": "Data da movimentação.\n\n[Restrição] Data do pregão: compartilhar movimentos até a data da posição.\n",
             "maxLength": 10,
             "minLength": 10,
@@ -63,9 +65,7 @@
             "description": "Fator que indica o número de ações utilizadas para a formação do preço. Valor informado deve ser maior que zero.\n",
             "pattern": "^\\d{1,15}\\.\\d{2,8}$",
             "maxLength": 24,
-            "example": "100.0005",
-            "minimum": -1.7976931348623157e+308,
-            "maximum": 1.7976931348623157e+308
+            "example": "100.0005"
           },
           "transactionUnitPrice": {
             "type": "object",
@@ -81,9 +81,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 21,
                 "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.0004",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.0004"
               },
               "currency": {
                 "type": "string",
@@ -100,9 +98,7 @@
             "description": "Quantidade de ativos movimentados.\n\n[Restrição] Campo de preenchimento obrigatório pelas participantes quando o campo 'transactionType' for preenchido com os valores 'COMPRA', 'VENDA' ou 'ALUGUEIS'.\n",
             "maxLength": 24,
             "pattern": "^\\d{1,15}\\.\\d{2,8}$",
-            "example": "42.00000025",
-            "minimum": -1.7976931348623157e+308,
-            "maximum": 1.7976931348623157e+308
+            "example": "42.00000025"
           },
           "transactionValue": {
             "type": "object",
@@ -118,9 +114,7 @@
                 "description": "Valor relacionado ao objeto.",
                 "maxLength": 20,
                 "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-                "example": "1000.04",
-                "minimum": -1.7976931348623157e+308,
-                "maximum": 1.7976931348623157e+308
+                "example": "1000.04"
               },
               "currency": {
                 "type": "string",
@@ -132,10 +126,13 @@
             }
           },
           "transactionId": {
-            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
             "type": "array",
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
             "items": {
               "type": "object",
+              "required": [
+                "key"
+              ],
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
@@ -145,30 +142,17 @@
                   "description": "Valor do campo do identificador no sistema de origem",
                   "type": "string"
                 }
-              },
-              "required": [
-                "key"
-              ],
-              "additionalItems": false
-            },
-            "examples": [
-              [
-                {
-                  "key": "pk_CampoUm",
-                  "value": "ABC"
-                },
-                {
-                  "key": "pk_CampoDois",
-                  "value": "123"
-                }
-              ]
-            ]
+              }
+            }
           },
           "brokerNoteId": {
-            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
             "type": "array",
+            "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
             "items": {
               "type": "object",
+              "required": [
+                "key"
+              ],
               "properties": {
                 "key": {
                   "description": "Nome do campo do identificador no sistema de origem",
@@ -178,43 +162,27 @@
                   "description": "Valor do campo do identificador no sistema de origem",
                   "type": "string"
                 }
-              },
-              "required": [
-                "key"
-              ],
-              "additionalItems": false
-            },
-            "examples": [
-              [
-                {
-                  "key": "pk_CampoUm",
-                  "value": "ABC"
-                },
-                {
-                  "key": "pk_CampoDois",
-                  "value": "123"
-                }
-              ]
-            ]
+              }
+            }
           }
         }
       }
     },
     "meta": {
       "type": "object",
-      "description": "Meta informações referente à API requisitada.",
+      "description": "Meta informação referente a API requisitada.",
       "required": [
-        "hasMoreRecords",
         "requestDateTime"
       ],
       "properties": {
-        "hasMoreRecords": {
-          "type": "boolean",
-          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
-          "example": true
+        "requestDateTime": {
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "type": "string",
+          "format": "date-time",
+          "maxLength": 20,
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
-  },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  }
 }

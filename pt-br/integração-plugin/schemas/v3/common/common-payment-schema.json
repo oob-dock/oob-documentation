@@ -56,7 +56,9 @@
                 "QRDN",
                 "QRES",
                 "INIC",
-                "AUTO"
+                "AUTO",
+                "APES",
+                "APDN"
             ],
             "examples": [
                 "DICT"

@@ -3,7 +3,7 @@
     "description": "Objeto com detalhes do erro ocorrido. Deve ser um objeto do tipo ResponseErrorCreatePixConsent caso o consentimento não possa ser criado por uma restrição de negócio. Deve ser um responseError padrão se for um erro de sistema",
     "oneOf": [
         {
-            "$ref": "#/$defs/ResponseErrorValidatePaymentData"
+            "$ref": "#/$defs/ResponseErrorValidateRiskSignals"
         },
         {
             "$ref": "../../common/response-error-schema.json"

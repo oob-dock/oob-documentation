@@ -1,0 +1,13 @@
+{
+  "data": {
+    "rejectedBy": "PROPONENTE",
+    "reason": {
+      "type": "POLITICA_DE_CREDITO",
+      "typeAdditionalInfo": "Informações Adicionais"
+    }
+  },
+  "meta": {
+    "hasMoreRecords": true,
+    "requestDateTime": false
+  }
+}

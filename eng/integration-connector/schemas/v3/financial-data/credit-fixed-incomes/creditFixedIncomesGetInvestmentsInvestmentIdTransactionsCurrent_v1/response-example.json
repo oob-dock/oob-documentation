@@ -3,123 +3,44 @@
     {
       "type": "ENTRADA",
       "transactionType": "COMPRA",
+      "transactionTypeAdditionalInfo": "36'd!a\\zl\\?9cq5F=?i>[LOR2X]J?BKN=t&P7mLuhor(84I?2%PAft)L-E3;Y\"s_OX2W$`AB!R(bvdb",
       "transactionDate": "2018-02-15",
-      "transactionGrossValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionNetValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "transactionUnitPrice": {
-        "amount": "1000.000004",
-        "currency": "BRL"
-      },
-      "indexerPercentage": "1.100000",
-      "financialTransactionTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionTypeAdditionalInfo": "'j*3lqDk2",
-      "incomeTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "remunerationTransactionRate": "0.300000",
-      "transactionQuantity": "42.25"
-    },
-    {
-      "type": "ENTRADA",
-      "transactionType": "COMPRA",
-      "transactionDate": "2018-02-15",
-      "transactionGrossValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionNetValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "transactionUnitPrice": {
-        "amount": "1000.000004",
-        "currency": "BRL"
-      },
-      "financialTransactionTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "remunerationTransactionRate": "0.300000",
-      "incomeTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionQuantity": "42.25",
-      "transactionTypeAdditionalInfo": "$288Zv{*O",
-      "indexerPercentage": "1.100000"
-    },
-    {
-      "type": "ENTRADA",
-      "transactionType": "COMPRA",
-      "transactionDate": "2018-02-15",
-      "transactionGrossValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionNetValue": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "financialTransactionTax": {
-        "amount": "1000.04",
-        "currency": "BRL"
-      },
-      "transactionTypeAdditionalInfo": "i+9",
-      "remunerationTransactionRate": "0.300000",
-      "indexerPercentage": "1.100000",
       "transactionUnitPrice": {
         "amount": "1000.000004",
         "currency": "BRL"
       },
       "transactionQuantity": "42.25",
+      "transactionGrossValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
       "incomeTax": {
         "amount": "1000.04",
         "currency": "BRL"
-      }
+      },
+      "financialTransactionTax": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "transactionNetValue": {
+        "amount": "1000.04",
+        "currency": "BRL"
+      },
+      "remunerationTransactionRate": "0.300000",
+      "indexerPercentage": "1.100000",
+      "transactionId": [
+        {
+          "key": "pk_CampoUm",
+          "value": "ABC"
+        },
+        {
+          "key": "pk_CampoDois",
+          "value": "123"
+        }
+      ]
     }
   ],
   "meta": {
-    "hasMoreRecords": true,
-    "requestDateTime": "voluptate consequat minim reprehenderit commodo"
+    "requestDateTime": "2021-05-21T08:30:00Z"
   }
 }

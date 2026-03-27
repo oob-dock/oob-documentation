@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -15,7 +14,9 @@
         "productType",
         "productSubType",
         "contractDate",
+        "contractAmount",
         "instalmentPeriodicity",
+        "CET",
         "amortizationScheduled",
         "interestRates",
         "contractedFees",
@@ -25,7 +26,7 @@
         "contractNumber": {
           "type": "string",
           "maxLength": 100,
-          "pattern": "^\\d{1,100}$",
+          "pattern": "^[\\w\\W]{1,100}$",
           "example": "1324926521496",
           "description": "Número do contrato dado pela instituição contratante."
         },
@@ -33,14 +34,14 @@
           "type": "string",
           "maxLength": 67,
           "minLength": 22,
-          "pattern": "^\\d{22,67}$",
+          "pattern": "^[\\w\\W]{22,67}$",
           "description": "\"Número padronizado do contrato - IPOC (Identificação Padronizada da Operação de Crédito). Segundo DOC 3040, composta por:\n- **CNPJ da instituição:** 8 (oito) posições iniciais;\n- **Modalidade da operação:** 4 (quatro) posições;\n- **Tipo do cliente:** 1 (uma) posição( 1 = pessoa natural - CPF, 2= pessoa jurídica – CNPJ, 3 = pessoa física no exterior, 4 = pessoa jurídica no exterior, 5 = pessoa natural sem CPF e 6 = pessoa jurídica sem CNPJ);\n- **Código do cliente:** O número de posições varia conforme o tipo do cliente:\n  1. Para clientes pessoa física com CPF (tipo de cliente = 1), informar as 11 (onze) posições do CPF;\n  2. Para clientes pessoa jurídica com CNPJ (tipo de cliente = 2), informar as 8 (oito) posições iniciais do CNPJ;\n  3. Para os demais clientes (tipos de cliente 3, 4, 5 e 6), informar 14 (catorze) posições com complemento de zeros à esquerda se a identificação tiver tamanho inferior;\n- **Código do contrato:** 1 (uma) até 40 (quarenta) posições, sem complemento de caracteres.\"\n",
           "example": "92792126019929279212650822221989319252576"
         },
         "productName": {
           "type": "string",
           "maxLength": 140,
-          "pattern": "[\\w\\W\\s]*",
+          "pattern": "^[^\\s](.*[^\\s])?$",
           "example": "Crédito Pessoal Consignado",
           "description": "Denominação/Identificação do nome da Modalidade da Operação de Crédito divulgado ao cliente\n"
         },
@@ -98,12 +99,11 @@
         },
         "contractAmount": {
           "type": "string",
-          "format": "double",
           "pattern": "^\\d{1,15}\\.\\d{2,4}$",
           "maxLength": 20,
           "minLength": 4,
           "example": "1000.0400",
-          "description": "Valor contratado da operação. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
+          "description": "Valor contratado da operação. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais. Nos casos em que não houver este valor explícito no contrato do produto, enviar como 0.00.",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
         },
@@ -139,7 +139,7 @@
         },
         "instalmentPeriodicityAdditionalInfo": {
           "type": "string",
-          "pattern": "[\\w\\W\\s]*",
+          "pattern": "^[^\\s](.*[^\\s])?$",
           "maxLength": 50,
           "example": "Informações adicionais sobre periodicidade",
           "description": "Campo para complementar a informação relativa à periodicidade de pagamento regular. \n\n[Restrição] Obrigatório quando o campo instalmentPeriodicity for igual a OUTROS.\n"
@@ -153,12 +153,11 @@
         },
         "CET": {
           "type": "string",
-          "format": "double",
-          "maxLength": 9,
+          "maxLength": 13,
           "minLength": 8,
-          "pattern": "^\\d{1,2}\\.\\d{6}$",
+          "pattern": "^\\d{1,6}\\.\\d{6}$",
           "example": "0.290000",
-          "description": "CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas).   \nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%).\n",
+          "description": "CET – Custo Efetivo Total deve ser expresso na forma de taxa percentual anual e incorpora todos os encargos e despesas incidentes nas operações de crédito (taxa de juro, mas também tarifas, tributos, seguros e outras despesas cobradas).\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros (representação de porcentagem p.ex: 0.150000.\nEste valor representa 15%. O valor 1 representa 100%).  \n\nPara o público PF (pessoa física) o campo é de envio obrigatório para contratos firmados a partir de 2008, conforme Resolução CMN 3.517. Para o público PJ (pessoa jurídica) o campo é de envio obrigatório para contratos firmados a partir de 2011, conforme Resolução CMN 3.909. Excepcionalmente nos casos de operações de crédito rural, o envio do campo CET será obrigatório a partir de 2019, conforme Resolução CMN 4.699. O campo poderá ser preenchido com 0.00 em cenários nos quais a casa não tenha a informação de CET (Custo efetivo total) apenas para as exceções listadas abaixo:\n- Em contratos anteriores a 2008 (para o público PF);\n- Em contratos anteriores a 2011 (para o público PJ);\n- Em contratos anteriores a 2019 para os casos de operações de crédito rural (ambos os públicos PF e PJ);\n- Público PJ de médio ou grande porte.\n\nQuando o CET for indexado dinamicamente a um indicador ainda não divulgado, informar o valor recalculado com o último índice oficial disponível na data da consulta. Assim que o novo índice for publicado, o CET deve ser atualizado na próxima exposição.\n",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
         },
@@ -176,7 +175,7 @@
         },
         "amortizationScheduledAdditionalInfo": {
           "type": "string",
-          "pattern": "[\\w\\W\\s]*",
+          "pattern": "^[^\\s](.*[^\\s])?$",
           "maxLength": 200,
           "example": "Informações complementares relativa à amortização do tipo 'OUTROS'",
           "description": "Campo para complementar a informação relativa à amortização.\n\n[Restrição] Obrigatório quando o campo amortizationScheduled for igual a OUTROS.\n"
@@ -276,13 +275,12 @@
               "referentialRateIndexerAdditionalInfo": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "[\\w\\W\\s]*",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "example": "Informações adicionais",
                 "description": "Campo livre para complementar a informação relativa ao Tipo de taxa referencial ou indexador.\n\n[Restrição] Obrigatório para complementar a informação relativa ao Tipo de taxa referencial ou indexador, quando selecionada o tipo ou subtipo OUTRO.\n"
               },
               "preFixedRate": {
                 "type": "string",
-                "format": "double",
                 "maxLength": 9,
                 "minLength": 8,
                 "pattern": "^\\d{1,2}\\.\\d{6}$",
@@ -293,7 +291,6 @@
               },
               "postFixedRate": {
                 "type": "string",
-                "format": "double",
                 "maxLength": 9,
                 "minLength": 8,
                 "pattern": "^\\d{1,2}\\.\\d{6}$",
@@ -305,7 +302,7 @@
               "additionalInfo": {
                 "type": "string",
                 "maxLength": 1200,
-                "pattern": "[\\w\\W\\s]*",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "example": "Informações adicionais",
                 "description": "Texto com informações adicionais sobre a composição das taxas de juros pactuadas. \n\n[Restrição] Caso a instituição possua a informação para compartilhamento, esta deverá ser informada.\n"
               }
@@ -329,14 +326,14 @@
               "feeName": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "[\\w\\W\\s]*",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "description": "Denominação da Tarifa pactuada",
                 "example": "Excesso em Conta"
               },
               "feeCode": {
                 "type": "string",
                 "maxLength": 140,
-                "pattern": "[\\w\\W\\s]*",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "description": "Sigla identificadora da tarifa pactuada",
                 "example": "EXCESSO_CONTA"
               },
@@ -362,7 +359,6 @@
               },
               "feeAmount": {
                 "type": "string",
-                "format": "double",
                 "pattern": "^\\d{1,15}\\.\\d{2,4}$",
                 "maxLength": 20,
                 "minLength": 4,
@@ -373,10 +369,9 @@
               },
               "feeRate": {
                 "type": "string",
-                "format": "double",
                 "maxLength": 8,
                 "minLength": 8,
-                "pattern": "^[01]\\.\\d{6}$",
+                "pattern": "^\\d{1}\\.\\d{6}$",
                 "description": "É o valor da tarifa em percentual pactuada no contrato.\n\n[Restrição] Preenchimento obrigatório quando a forma de cobrança for Percentual.\n",
                 "example": "0.200000",
                 "minimum": -1.7976931348623157e+308,
@@ -414,13 +409,12 @@
                 "type": "string",
                 "maxLength": 50,
                 "description": "Campo para informações adicionais.\n\n[Restrição] Obrigatório se selecionada a opção 'OUTROS' em Tipo de encargo pactuado no contrato.\n",
-                "pattern": "[\\w\\W\\s]*",
+                "pattern": "^[^\\s](.*[^\\s])?$",
                 "example": "Informações adicionais sobre encargos."
               },
               "chargeRate": {
                 "type": "string",
-                "format": "double",
-                "pattern": "^[01]\\.\\d{6}$",
+                "pattern": "^\\d{1}\\.\\d{6}$",
                 "maxLength": 8,
                 "minLength": 8,
                 "description": "Representa o valor do encargo em percentual pactuado no contrato.   \nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. \nEste valor representa 15%. O valor 1 representa 100%).\n",
@@ -430,6 +424,10 @@
               }
             }
           }
+        },
+        "hasInsuranceContracted": {
+          "type": "boolean",
+          "description": "Campo que identifica se existe seguro contratado para o Financiamento, onde seguro contratado é true e não contratado é false. O não envio do campo significa que a instituição não oferece este produto."
         }
       }
     },
@@ -437,28 +435,18 @@
       "type": "object",
       "description": "Meta informações referente à API requisitada.",
       "required": [
-        "totalRecords",
-        "totalPages"
+        "requestDateTime"
       ],
       "properties": {
-        "totalRecords": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
-        },
-        "totalPages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+        "requestDateTime": {
+          "type": "string",
+          "maxLength": 30,
+          "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])[Tt](2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])(\\.\\d+)?([Zz]|([+-](2[0-3]|[01][0-9]):[0-5][0-9]))$",
+          "example": "2023-10-05T14:48:00.000Z",
+          "description": "Data e hora da requisição conforme especificação RFC-3339.",
         }
       }
     }
   },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  "$schema": "http://json-schema.org/draft-07/schema#"
 }

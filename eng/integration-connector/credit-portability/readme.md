@@ -2,8 +2,7 @@
 
 This document presents the **Camel Routes** and **Supported Configurations** for the
 Credit Portability service, which corresponds to
-the [Credit Portability APIs](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC)
-of Open Banking Brazil.
+the [Credit Portability APIs](https://openfinancebrasil.atlassian.net/wiki/spaces/DraftOF/pages/764510211/Portabilidade+de+Cr+dito+-+PC) of Open Banking Brazil.
 
 &nbsp;
 

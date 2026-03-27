@@ -306,7 +306,7 @@ env:
   dapr:
     job:
       pcm:
-        schedule: "0 4 * * *"
+        schedule: "0 0 1 * * *"
 ```
 
 ## dapr/job/activeConsents/schedule
@@ -377,7 +377,7 @@ env:
   dapr:
     job:
       consentToExpire:
-        schedule: "0 10 * * *"
+        schedule: "0 0 10 * * *"
 ```
 
 ## dapr/job/instantPaymentWebhook/schedule
@@ -485,7 +485,7 @@ env:
   dapr:
     job:
       consentToExpire:
-        schedule: "0 10 * * *"
+        schedule: "0 0 10 * * *"
 ```
 
 ## opentelemetry
@@ -637,9 +637,9 @@ additionalVars:
     value: "BRL"
 ```
 
-### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTDAILY
 
-Utilizado para definir o valor máximo para limites de vínculos (diário, transação).
+Utilizado para definir o valor máximo para limites de vínculos diário.
 
 Valor default: `500`
 
@@ -647,7 +647,21 @@ Valor default: `500`
 
 ```yaml
 additionalVars:
-  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMIT
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTDAILY
+    value: "500"
+```
+
+### APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTRANSACTION
+
+Utilizado para definir o valor máximo para limites de vínculos transação.
+
+Valor default: `500`
+
+**Example:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_ENROLLMENT_MAXLIMITTRANSACTION
     value: "500"
 ```
 
@@ -1036,20 +1050,3 @@ para todos os recursos não-selecionáveis.
 **Formato:** `0` ou `1`
 
 **Valor default**: `0`
-
-### ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
-
-Define a data em que as modificações necessárias para JSR v2.2
-devem ser ativadas. Deve ser configurada uma vez que a data oficial
-seja definida pelo BACEN.
-
-**Formato:**: "YYYY-MM-DD"
-
-**Ex:** Para que as modificações sejam ativadas dia 15/10/2025, basta
-configurar conforme a seguir:
-
-```yaml
-additionalVars:
-  - name: ENROLLMENT_BLOCK_RECURRING_PERMISSION_BEFORE
-  - value: "2025-10-15"
-```
