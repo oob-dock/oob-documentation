@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "properties": {
     "data": {
@@ -10,6 +11,7 @@
       "required": [
         "compeCode",
         "number",
+        "checkDigit",
         "type",
         "subtype",
         "currency"
@@ -19,7 +21,7 @@
           "type": "string",
           "maxLength": 3,
           "pattern": "^\\d{3}$",
-          "description": "Código identificador atribuído pelo Banco Central do Brasil às instituições participantes do STR (Sistema de Transferência de reservas). O número-código substituiu o antigo código COMPE. Todos os participantes do STR, exceto as Infraestruturas do Mercado Financeiro (IMF) e a Secretaria do Tesouro Nacional, possuem um número-código independentemente de participarem da Centralizadora da Compensação de Cheques (Compe).",
+          "description": "Código identificador atribuído pelo Banco Central do Brasil às instituições participantes do STR (Sistema de Transferência de reservas). O número-código substituiu o antigo código COMPE. Todos os participantes do STR, exceto as Infraestruturas do Mercado Financeiro (IMF) e a Secretaria do Tesouro Nacional, possuem um número-código independentemente de participarem da Centralizadora da Compensação de Cheques (Compe). O campo tem a anotação “n/a” (“não se aplica”) para os participantes do STR aos quais não é atribuído um número-código",
           "example": "001"
         },
         "branchCode": {
@@ -40,7 +42,7 @@
           "type": "string",
           "maxLength": 1,
           "pattern": "[\\w\\W\\s]*",
-          "description": "Dígito da conta. \n\n[Restrição] Obrigatoriamente deve ser preenchido quando o campo \"type\" for diferente de conta pré-paga. Nos casos em que a conta pré-paga possua dígito, o envio é obrigatório\n",
+          "description": "Dígito da conta\n",
           "example": "4"
         },
         "type": {
