@@ -1,0 +1,84 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Dados para identificação do contrato a ser portado junto a averbadora",
+      "required": [
+        "payrollData"
+      ],
+      "properties": {
+        "payrollData": {
+          "description": "Dados do contrato de empréstimo consignado.",
+          "type": "object",
+          "required": [
+            "contractId",
+            "registeringEntity"
+          ],
+          "properties": {
+            "contractId": {
+              "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "key": {
+                    "description": "Nome do campo do identificador no sistema de origem",
+                    "type": "string"
+                  },
+                  "value": {
+                    "description": "Valor do campo do identificador no sistema de origem",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "key"
+                ],
+                "additionalItems": false
+              },
+              "examples": [
+                [
+                  {
+                    "key": "pk_CampoUm",
+                    "value": "ABC"
+                  },
+                  {
+                    "key": "pk_CampoDois",
+                    "value": "123"
+                  }
+                ]
+              ]
+            },
+            "registeringEntity": {
+              "type": "string",
+              "enum": [
+                "SERPRO"
+              ],
+              "description": "Nome da averbadora do empréstimo consignado.\n",
+              "example": "SERPRO"
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "hasMoreRecords",
+        "requestDateTime"
+      ],
+      "properties": {
+        "hasMoreRecords": {
+          "type": "boolean",
+          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
+          "example": true
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

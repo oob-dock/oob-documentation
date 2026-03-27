@@ -1,0 +1,69 @@
+{
+  "type": "object",
+  "required": [
+    "data"
+  ],
+  "properties": {
+    "data": {
+      "type": "object",
+      "description": "Objeto para notificar a respeito da liquidação efetuada pela proponente a Credora.",
+      "required": [
+        "rejectedBy",
+        "reason"
+      ],
+      "properties": {
+        "rejectedBy": {
+          "type": "string",
+          "description": "Informar usuário responsável pela rejeição da proposta, onde:\n\n`PROPONENTE ` - Indica que o pedido de portabilidade de crédito foi rejeitado pela proponente, seja porque a proponente rejeitou a liquidação que excedeu em 15% o valor do contrato original, entre outras possibilidades.\n\n`USUARIO` - Indica que o cliente cancelou o pedido de portabilidade de crédito.\n",
+          "enum": [
+            "PROPONENTE",
+            "USUARIO"
+          ]
+        },
+        "reason": {
+          "type": "object",
+          "description": "Motivo de recusa do pedido de portabilidade",
+          "required": [
+            "type"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Motivo de recusa do pedido de portabilidade, onde:\n\n`CANCELADO_PELO_CLIENTE` - Cliente desiste do pedido da portabilidade\n\n`SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE` - Saldo devedor atualizado divergente (superior a 15%) do informado inicialmente\n\n`POLITICA_DE_CREDITO` - Proponente desiste da oferta ao cliente por políticas internas\n\n`RESERVA_DA_MARGEM` - Problemas relacionado a liberação/reserva da margem solicitada pela proponente\n\n`OUTROS` - Motivo da rejeição não se encaixa nas opções disponíveis\n",
+              "enum": [
+                "CANCELADO_PELO_CLIENTE",
+                "SALDO_DEVEDOR_ATUALIZADO_SUBSTANCIALMENTE_DIVERGENTE",
+                "POLITICA_DE_CREDITO",
+                "RESERVA_DA_MARGEM",
+                "OUTROS"
+              ]
+            },
+            "typeAdditionalInfo": {
+              "type": "string",
+              "maxLength": 144,
+              "pattern": "^[^\\s](?:.*[^\\s])?$",
+              "example": "Informações Adicionais",
+              "description": "Informação adicional sobre rejeição de portabilidade de crédito. \nAo utilizar essa opção, é fortemente recomendável enviar um ticket para o GT de Portabilidade de Crédito como sugestão para estrutura Open Finance para discussão e mapeamento em futuras versões.\n\n[RESTRIÇÃO] Campo de preenchimento obrigatório quando campo `type` for igual a `OUTROS` ou quando o campo `type` for igual a `RESERVA_DE_MARGEM`.\n"
+            }
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Meta informações referente à API requisitada.",
+      "required": [
+        "hasMoreRecords",
+        "requestDateTime"
+      ],
+      "properties": {
+        "hasMoreRecords": {
+          "type": "boolean",
+          "description": "Indica se tem mais registros a serem retornados (true) ou não (false).",
+          "example": true
+        }
+      }
+    }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
+}

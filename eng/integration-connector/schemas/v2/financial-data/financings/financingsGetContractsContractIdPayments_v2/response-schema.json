@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -26,7 +25,7 @@
           "maxLength": 20,
           "minLength": 4,
           "example": "1000.0400",
-          "description": "Valor necessario para o cliente liquidar a dívida.",
+          "description": "Valor necessário para o cliente liquidar a dívida, ou seja, este campo deve ser preenchido com o saldo devedor atualizado descrito no DDC (Documento Descritivo de Crédito).",
           "minimum": -1.7976931348623157e+308,
           "maximum": 1.7976931348623157e+308
         },
@@ -38,6 +37,7 @@
             "type": "object",
             "description": "Lista dos pagamentos realizados no período",
             "required": [
+              "paymentId",
               "isOverParcelPayment",
               "paidDate",
               "currency",
@@ -132,8 +132,8 @@
               "paidAmount": {
                 "type": "string",
                 "format": "double",
-                "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-                "maxLength": 20,
+                "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                "maxLength": 21,
                 "minLength": 4,
                 "example": "1000.0400",
                 "description": "Valor do pagamento referente ao  contrato da modalidade de crédito consultada.\nExpresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.\n",
@@ -163,22 +163,22 @@
                         "feeName": {
                           "type": "string",
                           "maxLength": 140,
-                          "pattern": "[\\w\\W\\s]*",
+                          "pattern": "^[^\\s](.*[^\\s])?$",
                           "example": "Reavaliação periódica do bem",
                           "description": "Denominação da Tarifa pactuada.\n"
                         },
                         "feeCode": {
                           "type": "string",
                           "maxLength": 140,
-                          "pattern": "[\\w\\W\\s]*",
+                          "pattern": "^[^\\s](.*[^\\s])?$",
                           "example": "aval_bem",
                           "description": "Sigla identificadora da tarifa pactuada.  \n"
                         },
                         "feeAmount": {
                           "type": "string",
                           "format": "double",
-                          "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-                          "maxLength": 20,
+                          "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                          "maxLength": 21,
                           "minLength": 4,
                           "example": "1000.0400",
                           "description": "Valor monetário da tarifa pactuada no contrato.\n\nExpresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.\n",
@@ -216,8 +216,8 @@
                         "chargeAmount": {
                           "type": "string",
                           "format": "double",
-                          "pattern": "^\\d{1,15}\\.\\d{2,4}$",
-                          "maxLength": 20,
+                          "pattern": "^-?\\d{1,15}\\.\\d{2,4}$",
+                          "maxLength": 21,
                           "minLength": 4,
                           "example": "1000.0400",
                           "description": "Valor do pagamento do encargo pago fora da parcela. Expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais.",
@@ -226,7 +226,7 @@
                         },
                         "chargeAdditionalInfo": {
                           "type": "string",
-                          "pattern": "[\\w\\W\\s]*",
+                          "pattern": "^[^\\s](.*[^\\s])?$",
                           "maxLength": 140,
                           "example": "Informações adicionais",
                           "description": "Campo livre para preenchimento das informações adicionais referente ao encargo.\n\n[Restrição] Obrigatório quando chargeType for igual 'OUTROS'.\n"
@@ -245,28 +245,18 @@
       "type": "object",
       "description": "Meta informações referente à API requisitada.",
       "required": [
-        "totalRecords",
-        "totalPages"
+        "requestDateTime"
       ],
       "properties": {
-        "totalRecords": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Número total de registros no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
-        },
-        "totalPages": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Número total de páginas no resultado",
-          "example": 1,
-          "minimum": -2147483648,
-          "maximum": 2147483647
+        "requestDateTime": {
+          "type": "string",
+          "description": "Data e hora da consulta, conforme especificação RFC-3339, formato UTC.",
+          "maxLength": 20,
+          "format": "date-time",
+          "example": "2021-05-21T08:30:00Z"
         }
       }
     }
   },
-  "$schema": "http://json-schema.org/draft-04/schema#"
+  "$schema": "http://json-schema.org/draft-07/schema#"
 }

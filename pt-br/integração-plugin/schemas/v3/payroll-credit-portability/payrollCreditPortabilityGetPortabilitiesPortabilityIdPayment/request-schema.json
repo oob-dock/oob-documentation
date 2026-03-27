@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "type": "object",
+  "required": [
+    "requestMeta",
+    "consent"
+  ],
+  "properties": {
+    "requestMeta": {
+      "$ref": "../../common/common-schema.json#/$defs/RequestMeta"
+    },
+    "portabilityId": {
+      "type": "string"
+    },
+    "consent": {
+      "$ref": "../../common/consent/consent-data-sharing-schema.json#/$defs/ConsentDataSharing"
+    },
+    "requestBody": {
+      "type": "object",
+      "required": [
+        "data"
+      ],
+      "properties": {
+        "data": {
+          "properties": {
+            "paymentDateTime": {
+              "type": "string",
+              "maxLength": 20,
+              "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)Z$"
+            },
+            "paymentAmount": {
+              "properties": {
+                "amount": {
+                  "type": "string",
+                  "maxLength": 20,
+                  "pattern": "^\\d{1,15}\\.\\d{2,4}$"
+                },
+                "currency": {
+                  "type": "string",
+                  "maxLength": 3,
+                  "pattern": "^(\\w{3}){1}$",
+                  "description": "Moeda referenciada ao campo amount, segundo modelo ISO-4217."
+                }
+              }
+            },
+            "transactionId": {
+              "type": "string",
+              "maxLength": 20,
+              "minLength": 1,
+              "pattern": "^[^\\s](?:.*[^\\s])?$"
+            }
+          }
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}
