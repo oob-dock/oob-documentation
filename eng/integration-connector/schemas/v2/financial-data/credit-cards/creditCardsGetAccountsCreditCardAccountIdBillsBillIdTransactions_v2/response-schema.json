@@ -1,7 +1,8 @@
 {
   "type": "object",
   "required": [
-    "data"
+    "data",
+    "meta"
   ],
   "properties": {
     "data": {
@@ -11,16 +12,15 @@
         "type": "object",
         "description": "Lista que traz os valores relativos aos saldos do Limite de crédito total da conta de pagamento pós-paga",
         "required": [
-          "transactionId",
           "identificationNumber",
           "transactionName",
           "creditDebitType",
           "transactionType",
+          "chargeIdentificator",
           "brazilianAmount",
           "amount",
-          "transactionDateTime",
-          "billPostDate",
-          "billForecastDate"
+          "transactionDate",
+          "billPostDate"
         ],
         "properties": {
           "transactionId": {
@@ -62,14 +62,14 @@
             "minLength": 1,
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-]{0,99}$",
             "example": "4453",
-            "description": "Número de identificação do cartão: corresponde aos 4 últimos dígitos do cartão para PF, ou então, preencher com um identificador para PJ, com as caracteristicas definidas para os IDs no Open Finance.\n"
+            "description": "Número de identificação do cartão: corresponde aos 4 últimos dígitos do cartão para PF, ou então, preencher com um identificador para PJ, com as caracteristicas definidas para os IDs no Open Banking.\n"
           },
           "transactionName": {
             "type": "string",
-            "maxLength": 200,
+            "maxLength": 100,
             "pattern": "[\\w\\W\\s]*",
             "example": "PGTO",
-            "description": "Literal usada na instituição financeira para identificar a transação. A informação apresentada precisa ser a mesma utilizada nos canais eletrônicos da instituição (extrato e fatura)."
+            "description": "Campo de livre preenchimento. Literal usada na instituição financeira para identificar a transação"
           },
           "billId": {
             "description": "Array de chave e valor com a chave de identificação do recurso no sistema de origem (legado), permitindo chaves compostas",
@@ -115,10 +115,9 @@
           },
           "transactionType": {
             "type": "string",
-            "description": "Traz os tipos de transações. O tipo `PAGAMENTO_FATURA` deve ser utilizado para pagamentos parciais (liberação de limite ou pagamento mínimo, por exemplo) ou total de fatura.",
+            "description": "Traz os tipos de Transação",
             "enum": [
               "PAGAMENTO",
-              "PAGAMENTO_FATURA",
               "TARIFA",
               "OPERACOES_CREDITO_CONTRATADAS_CARTAO",
               "ESTORNO",
@@ -181,12 +180,11 @@
             "description": "Campo livre para preenchimento de dados adicionais de outros tipos de crédito contratados no cartão.\n\n[Restrição] Preenchimento obrigatório quando selecionado no campo outros tipos de crédito \"OUTROS\".\n"
           },
           "chargeIdentificator": {
-            "type": "number",
-            "format": "integer",
-            "description": "Número da parcela que está sendo informada.\n\n[Restrição] Preenchimento obrigatório se Tipo de Pagamento (paymentType) selecionada for 'A_PRAZO'.\n",
-            "minimum": 1,
-            "maximum": 999,
-            "example": 12
+            "type": "string",
+            "maxLength": 50,
+            "pattern": "[\\w\\W\\s]*",
+            "example": "PARCELA_1",
+            "description": "Identificador da parcela que está sendo informada. Campo de livre preenchimento"
           },
           "chargeNumber": {
             "type": "number",
@@ -197,7 +195,7 @@
           },
           "brazilianAmount": {
             "type": "object",
-            "description": "Valor da transação expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais, em moeda corrente do Brasil. \nDeve ser o valor de amount convertido para BRL (em caso de compra internacional) ou o mesmo valor de amount (em caso de compra nacional). \nPara compras parceladas o valor do campo deve corresponder ao valor da parcela.\n",
+            "description": "Valor da transação expresso em valor monetário com no mínimo 2 casas e no máximo 4 casas decimais, em moeda corrente do Brasil. Deve ser o valor de amount convertido para BRL (em caso de compra internacional) ou o mesmo valor de amount (em caso de compra nacional).\n",
             "required": [
               "amount",
               "currency"
@@ -225,7 +223,7 @@
           },
           "amount": {
             "type": "object",
-            "description": "Valor original da transação. Expresso em valor monetário com no mínimo 2 casas decimais e no máximo 4 casas decimais. \nDeve ser sempre preenchido com o valor original da transação independente da nacionalidade, sem convertê-lo. \nPara compras parceladas o valor do campo deve corresponder ao valor da parcela.   \n",
+            "description": "Valor original da transação. Expresso em valor monetário com no mínimo 2 casas decimais e no máximo 4 casas decimais. Deve ser sempre preenchido com o valor original da transação independente da nacionalidade, sem convertê-lo.\n",
             "required": [
               "amount",
               "currency"
@@ -251,32 +249,26 @@
               }
             }
           },
-          "transactionDateTime": {
+          "transactionDate": {
             "type": "string",
-            "maxLength": 24,
-            "pattern": "(^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])T(?:[01]\\d|2[0123]):(?:[012345]\\d):(?:[012345]\\d)\\.(?:[0-9]){3}Z$)",
-            "example": "2016-01-29T12:29:03.374Z",
-            "description": "Data e hora da transação.   \n\nNas compras parceladas, o `transactionDateTime` deve ser idêntico em todas as parcelas. O campo deve obrigatoriamente refletir a informação exibida ao cliente nos canais digitais da instituição, com precisão de data, hora e minuto — mesmo que a instituição não exiba esse nível de granularidade em seus canais. Nesses casos, os segundos e milissegundos podem ser preenchidos com zero (0). Exemplo: 2024-01-29T11:15:00.000Z.\n"
+            "maxLength": 20,
+            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
+            "example": "2021-05-21",
+            "description": "Data original da transação"
           },
           "billPostDate": {
             "type": "string",
             "maxLength": 20,
             "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])-(3[01]|[12][0-9]|0?[1-9])$",
             "example": "2021-05-21",
-            "description": "Data em que a transação foi inserida na fatura. \nPreencher o campo com a data dummy: 0001-01-01, apenas para os casos nos quais ainda não houver a data de inserção na fatura.\n"
-          },
-          "billForecastDate": {
-            "type": "string",
-            "pattern": "^(\\d{4})-(1[0-2]|0?[1-9])$",
-            "example": "2021-05",
-            "description": "Mês e ano em que a transação/parcela será faturada, podendo ser uma fatura aberta, futura ou fechada.\n\n- Caso seja uma transação futura, essa data poderá ser ajustada conforme o cliente altere os ciclos de sua fatura. Independentemente disso, o mês e o ano devem corresponder exatamente à previsão de cobrança dessa parcela.\n\n- Todas as transações devem ser refletidas de forma idêntica aos canais digitais, e, caso não estejam nos canais, devem ser apresentadas conforme a previsão de cobrança da casa.\n"
+            "description": "Data em que a transação foi inserida na fatura"
           },
           "payeeMCC": {
             "type": "number",
             "format": "integer",
             "maximum": 2147483647,
             "example": 5137,
-            "description": "O MCC ou o código da categoria do estabelecimento comercial. Os MCCs são agrupados segundo suas similaridades. O MCC é usado para classificar o negócio pelo tipo fornecido de bens ou serviços. Os MCCs são atribuídos por tipo de comerciante (por exemplo, um para hotéis, um para lojas de materiais de escritório, etc.) ou por nome de comerciante (por exemplo, 3000 para a United Airlines).\n\n[Restrição] Informação de envio obrigatório quando o valor do campo transactionType for igual a PAGAMENTO.\n"
+            "description": "O MCC ou o código da categoria do estabelecimento comercial. Os MCCs são agrupados segundo suas similaridades. O MCC é usado para classificar o negócio pelo tipo fornecido de bens ou serviços. Os MCCs são atribuídos por tipo de comerciante (por exemplo, um para hotéis, um para lojas de materiais de escritório, etc.) ou por nome de comerciante (por exemplo, 3000 para a United Airlines).\n"
           }
         }
       }
@@ -286,22 +278,27 @@
       "description": "Meta informações referente à API requisitada.",
       "required": [
         "totalRecords",
-        "totalPages",
-        "requestDateTime"
+        "totalPages"
       ],
       "properties": {
-        "requestDateTime": {
-          "type": "string"
+        "totalRecords": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de registros no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
         },
         "totalPages": {
-          "type": "number",
-          "format": "integer"
-        },
-        "totalRecordds": {
-          "type": "number",
-          "format": "integer"
+          "type": "integer",
+          "format": "int32",
+          "description": "Número total de páginas no resultado",
+          "example": 1,
+          "minimum": -2147483648,
+          "maximum": 2147483647
         }
       }
     }
-  }
+  },
+  "$schema": "http://json-schema.org/draft-04/schema#"
 }
