@@ -6,7 +6,6 @@
       "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "number": "94088392",
-      "checkDigit": "4",
       "accountId": [
         {
           "key": "pk_CampoUm",
@@ -17,6 +16,7 @@
           "value": "123"
         }
       ],
+      "checkDigit": "4",
       "branchCode": "6272"
     },
     {
@@ -25,7 +25,6 @@
       "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "number": "94088392",
-      "checkDigit": "4",
       "accountId": [
         {
           "key": "pk_CampoUm",
@@ -36,6 +35,7 @@
           "value": "123"
         }
       ],
+      "checkDigit": "4",
       "branchCode": "6272"
     },
     {
@@ -44,7 +44,6 @@
       "type": "CONTA_DEPOSITO_A_VISTA",
       "compeCode": "001",
       "number": "94088392",
-      "checkDigit": "4",
       "accountId": [
         {
           "key": "pk_CampoUm",
@@ -55,45 +54,8 @@
           "value": "123"
         }
       ],
-      "branchCode": "6272"
-    },
-    {
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "type": "CONTA_DEPOSITO_A_VISTA",
-      "compeCode": "001",
-      "number": "94088392",
-      "checkDigit": "4",
-      "accountId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "branchCode": "6272"
-    },
-    {
-      "brandName": "Organização A",
-      "companyCnpj": "21128159000166",
-      "type": "CONTA_DEPOSITO_A_VISTA",
-      "compeCode": "001",
-      "number": "94088392",
-      "checkDigit": "4",
-      "accountId": [
-        {
-          "key": "pk_CampoUm",
-          "value": "ABC"
-        },
-        {
-          "key": "pk_CampoDois",
-          "value": "123"
-        }
-      ],
-      "branchCode": "6272"
+      "branchCode": "6272",
+      "checkDigit": "4"
     }
   ],
   "meta": {

@@ -1,8 +1,7 @@
 {
   "type": "object",
   "required": [
-    "data",
-    "meta"
+    "data"
   ],
   "properties": {
     "data": {
@@ -11,7 +10,6 @@
       "required": [
         "compeCode",
         "number",
-        "checkDigit",
         "type",
         "subtype",
         "currency"
@@ -42,7 +40,7 @@
           "type": "string",
           "maxLength": 1,
           "pattern": "[\\w\\W\\s]*",
-          "description": "Dígito da conta\n",
+          "description": "Dígito da conta. \n\n[Restrição] Obrigatoriamente deve ser preenchido quando o campo \"type\" for diferente de conta pré-paga. Nos casos em que a conta pré-paga possua dígito, o envio é obrigatório\n",
           "example": "4"
         },
         "type": {
