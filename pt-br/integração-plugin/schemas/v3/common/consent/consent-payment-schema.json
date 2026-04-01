@@ -63,6 +63,9 @@
                 },
                 "consentOwner": {
                     "$ref": "./common-consent-schema.json#/$defs/ConsentOwner"
+                },
+                "enrollmentId": {
+                    "$ref": "./common-consent-schema.json#/$defs/ExternalId"
                 }
             },
             "additionalProperties": false
