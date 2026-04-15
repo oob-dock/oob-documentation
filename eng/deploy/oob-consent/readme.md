@@ -886,6 +886,22 @@ additionalVars:
     value: "1"
 ```
 
+### APPLICATION_VALIDATION_PAYMENT_CONSENT_START_DATE_OFFSET_MINUTES
+
+This setting defines the grace period, in minutes, for the `startDateTime` field of automatic payment consents. The specified value allows the system to accept consents with a retroactive start time within the defined range.
+
+**Format:** Integer
+
+Default value: `5`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_PAYMENT_CONSENT_START_DATE_OFFSET_MINUTES
+    value: "5"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled
@@ -940,7 +956,7 @@ This feature should not be enabled if the institution has
 implemented the [status change notification](../../backoffice-portal/apis-backoffice/readme.md#payment-status-change-notification)
 for ***ALL*** types of payments.
 
-**Format:** `true` ou `false`
+**Format:** `true` or `false`
 
 **Default value**: `false`
 
@@ -958,6 +974,16 @@ This feature should be enabled **ONLY** if the institution has implemented the
 [resource change notification](../../backoffice-portal/apis-backoffice/readme.md#resource-change-notification)
 for all non-selectable resources.
 
-**Format:** `0` ou `1`
+**Format:** `0` or `1`
 
 **Default value**: `0`
+
+### feature/mobile/validate-required-android-fields/disabled
+
+Enables or disables the validation of required fields for risk signals in the Journey without Redirection flow.
+
+This feature must be enabled when using mobile devices with the device's own browsers.
+
+**Format:** `true` or `false`
+
+**default value**: `false`
