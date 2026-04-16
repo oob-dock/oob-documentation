@@ -961,6 +961,22 @@ additionalVars:
     value: "1"
 ```
 
+### APPLICATION_VALIDATION_PAYMENT_CONSENT_START_DATE_OFFSET_MINUTES
+
+Esta configuração define o período de tolerância, em minutos, para o campo `startDateTime` dos consentimentos de pagamentos automáticos. O valor especificado permite que o sistema aceite consentimentos com um horário de início retroativo dentro do intervalo definido.
+
+**Formato:** Número inteiro
+
+Valor default: `5`
+
+**Ex:**
+
+```yaml
+additionalVars:
+  - name: APPLICATION_VALIDATION_PAYMENT_CONSENT_START_DATE_OFFSET_MINUTES
+    value: "5"
+```
+
 ## FEATURE FLAGS
 
 ### feature/consentusagepersistence/enabled
@@ -1050,3 +1066,13 @@ para todos os recursos não-selecionáveis.
 **Formato:** `0` ou `1`
 
 **Valor default**: `0`
+
+### feature/mobile/validate-required-android-fields/disabled
+
+Habilita ou desabilita a validação de campos obrigatórios para sínais de risco no fluxo de Jornada sem Redirecionamento.
+
+Essa funcionalidade deve ser ativada ao utilizar dispositivos móveis com navegadores do próprio dispositivo.
+
+**Formato:** `true` ou `false`
+
+**Valor default**: `false`
