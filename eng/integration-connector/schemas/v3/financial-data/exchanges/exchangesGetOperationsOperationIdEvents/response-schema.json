@@ -136,7 +136,7 @@
           },
           "operationOutstandingBalance": {
             "type": "object",
-            "description": "Valor do saldo da operação, após evento, a liquidar em moeda estrangeira. Objeto de envio obrigatório nos casos de operações de câmbio com liquidação futura.",
+            "description": "Valor do saldo da operação a liquidar em moeda estrangeira. Objeto de envio obrigatório para eventos criados (eventDate) a partir de 15/04/2024 nos casos de operações de câmbio com liquidação futura.",
             "required": [
               "amount",
               "currency"
@@ -190,7 +190,7 @@
           },
           "localCurrencyAdvancePercentage": {
             "type": "string",
-            "description": "Percentual do valor de moeda nacional concedido ao cliente antecipadamente. p.ex. 0.014500.\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). Campos de envio obrigatório no caso de operações de câmbio com liquidação futura.\n",
+            "description": "Percentual do valor de moeda estrangeira concedido ao cliente antecipadamente. p.ex. 0.014500.\n\nO preenchimento deve respeitar as 6 casas decimais, mesmo que venham preenchidas com zeros(representação de porcentagem p.ex: 0.150000. Este valor representa 15%. O valor 1 representa 100%). Campos de envio obrigatório no caso de operações de câmbio com liquidação futura.\n",
             "pattern": "^\\d{1}\\.\\d{1,6}$",
             "maxLength": 8,
             "minLength": 3,
@@ -198,7 +198,7 @@
           },
           "deliveryForeignCurrency": {
             "type": "string",
-            "description": "Forma de entrega da moeda estrangeira.",
+            "description": "Forma de entrega da moeda estrangeira.\n\n```\n|--------|-------------------------------------------------------------|\n| Código | ENUM                                                        |\n|--------|-------------------------------------------------------------|\n|   10   | CARTA_CREDITO_A_VISTA                                       |\n|   15   | CARTA_CREDITO_A_PRAZO                                       |\n|   20   | CONTA_DEPOSITO                                              |\n|   21   | CONTA_DEPOSITO_MOEDA_ESTRANGEIRA_PAIS                       |\n|   22   | CONTA_DEPOSITO_EXPORTADOR_MANTIDA_NO_EXTERIOR               |\n|   23   | CONTA_DEPOSITO_OU_PAGAMENTO_EXPORTADOR_INSTITUICAO_EXTERIOR |\n|   25   | CONVENIO_PAGAMENTOS_E_CREDITOS_RECIPROCOS                   |\n|   30   | CHEQUE                                                      |\n|   50   | ESPECIE_CHEQUES_VIAGEM                                      |\n|   55   | CARTAO_PREPAGO                                              |\n|   65   | TELETRANSMISSAO                                             |\n|   75   | TITULOS_VALORES                                             |\n|   90   | SIMBOLICA                                                   |\n|   91   | SEM_MOVIMENTACAO_VALORES                                    |\n|   99   | DEMAIS                                                      |\n|   N/A  | OUTRO_NAO_MAPEADO_OFB                                       |\n|--------|-------------------------------------------------------------|\n```\n",
             "enum": [
               "CONTA_DEPOSITO_MOEDA_ESTRANGEIRA_PAIS",
               "CONTA_DEPOSITO_OU_PAGAMENTO_EXPORTADOR_INSTITUICAO_EXTERIOR",
@@ -212,7 +212,10 @@
               "CONTA_DEPOSITO",
               "CHEQUE",
               "TITULOS_VALORES",
-              "SIMBOLICA"
+              "SIMBOLICA",
+              "CONTA_DEPOSITO_EXPORTADOR_MANTIDA_NO_EXTERIOR",
+              "CONVENIO_PAGAMENTOS_E_CREDITOS_RECIPROCOS",
+              "OUTRO_NAO_MAPEADO_OFB"
             ],
             "example": "CARTA_CREDITO_A_PRAZO"
           },
@@ -242,7 +245,7 @@
               "foreignPartieName": {
                 "type": "string",
                 "description": "Nome do pagador ou recebedor no exterior.\n",
-                "maxLength": 80,
+                "maxLength": 120,
                 "pattern": "[\\w\\W\\s]*",
                 "example": "José da Silva"
               },

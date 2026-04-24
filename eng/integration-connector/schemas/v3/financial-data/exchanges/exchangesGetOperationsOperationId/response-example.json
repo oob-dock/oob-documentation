@@ -19,18 +19,18 @@
     },
     "deliveryForeignCurrency": "CARTA_CREDITO_A_PRAZO",
     "operationCategoryCode": "90302",
+    "operationNumber": "393874649456",
     "vetAmount": {
       "amount": "1000.000004",
       "currency": "BRL"
     },
     "intermediaryInstitutionName": "AGENCIA CORRETORA",
-    "operationNumber": "393874649456",
     "intermediaryInstitutionCnpjNumber": "11225860000140",
+    "localCurrencyAdvancePercentage": "0.12",
     "operationOutstandingBalance": {
       "amount": "1000.04",
       "currency": "BRL"
-    },
-    "localCurrencyAdvancePercentage": "0.12"
+    }
   },
   "meta": {
     "hasMoreRecords": true,
