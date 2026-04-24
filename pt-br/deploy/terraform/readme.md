@@ -313,6 +313,15 @@ como `false` nos ambientes de homologação para execução da certificação.
 **Default:** `true`
 **Valores possíveis:** `true` ou `false`
 
+#### route_version_enabled
+
+Define se as rotas do Kong devem ou não ser alterar a versão da api de acordo com as datas regulatórias.
+Essa variável deve ser mantida como `true` nos ambientes produtivos, mas configurada
+como `false` nos ambientes de homologação para execução da certificação.
+
+**Default:** `true`
+**Valores possíveis:** `true` ou `false`
+
 #### mqd_event_enabled
 
 Define se a instalação deverá ou não enviar eventos de chamadas dos endpoints

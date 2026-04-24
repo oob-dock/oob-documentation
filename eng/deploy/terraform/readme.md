@@ -294,6 +294,13 @@ Defines whether Kong routes should be blocked according to regulatory dates. Thi
 **Default:** `true`
 **Possible values:** `true` or `false`
 
+#### route_version_enabled
+
+Defines whether Kong routes should be change the ap version according to regulatory dates. This variable should be kept as `true` in production environments but set to `false` in homologation environments for certification execution.
+
+**Default:** `true`
+**Possible values:** `true` or `false`
+
 #### mqd_event_enabled
 
 Defines whether the installation should send event calls from endpoints linked to the Data Quality Engine (MQD). If the variable is set to `true`, each route's configuration will be considered to decide whether the event will be sent or not. If the variable is set to `false`, each route's configuration will be ignored, and no event will be generated.
