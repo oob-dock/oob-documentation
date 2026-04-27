@@ -27,7 +27,8 @@
                             "CREDIT_FIXED_INCOME",
                             "VARIABLE_INCOME",
                             "TREASURE_TITLE",
-                            "FUND"
+                            "FUND",
+                            "EXCHANGE"
                         ],
                         "examples": [
                             "PAYMENT"
