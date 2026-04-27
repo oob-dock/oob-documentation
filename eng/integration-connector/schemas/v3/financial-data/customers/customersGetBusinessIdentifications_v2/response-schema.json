@@ -71,7 +71,7 @@
           },
           "companyName": {
             "type": "string",
-            "maxLength": 70,
+            "maxLength": 144,
             "pattern": "[\\w\\W\\s]*",
             "example": "Luiza e Benjamin Assessoria Jurídica Ltda",
             "description": "Razão social da empresa consultada é o termo registrado sob o qual uma pessoa jurídica (PJ) se individualiza e exerce suas atividades. Também pode ser chamada por denominação social ou firma empresarial"
@@ -93,7 +93,7 @@
           "cnpjNumber": {
             "type": "string",
             "maxLength": 14,
-            "pattern": "^\\d{14}$",
+            "pattern": "^[0-9A-Z]{12}[0-9]{2}$",
             "example": "50685362006773",
             "description": "Número completo do CNPJ da Empresa consultada  - o CNPJ corresponde ao número de inscrição no Cadastro de Pessoa Jurídica. Deve-se ter apenas os números do CNPJ, sem máscara"
           },
@@ -108,7 +108,7 @@
             "items": {
               "type": "string",
               "maxLength": 14,
-              "pattern": "^\\d{14}$",
+              "pattern": "^[0-9A-Z]{12}[0-9]{2}$",
               "example": "50685362000135"
             }
           },
@@ -201,7 +201,7 @@
                 },
                 "companyName": {
                   "type": "string",
-                  "maxLength": 70,
+                  "maxLength": 144,
                   "pattern": "[\\w\\W\\s]*",
                   "example": "Luiza e Benjamin Assessoria Jurídica Ltda",
                   "description": "Razão social da empresa consultada é o termo registrado sob o qual uma pessoa jurídica (PJ) se individualiza e exerce suas atividades. Também pode ser chamada por denominação social ou firma empresarial\n\n[Restrição] o campo companyName deve ser obrigatoriamente preenchido quando personType for PESSOA_JURIDICA.\n"
@@ -222,10 +222,9 @@
                 },
                 "shareholding": {
                   "type": "string",
-                  "format": "double",
                   "maxLength": 8,
                   "minLength": 8,
-                  "pattern": "^[01]\\.\\d{6}$",
+                  "pattern": "(^1\\.0{1,9}$|^0\\.\\d{1,9}$)",
                   "example": "0.510000",
                   "description": "Percentual de participação societária (informar com 6 casas decimais). O Sócio só deve ser informado se sua participação societária for igual ou superior a 25%. p.ex: 0.250000 (Este valor  representa 25%. O valor '1 'representa 100%).\n\n[Restrição]: Campo obrigatório caso o type for igual a SOCIO e este tiver participação societária maior que 25%.\n",
                   "minimum": -1.7976931348623157e+308,
