@@ -48,6 +48,11 @@ Onde:
 
 ## Changelog
 
+### 2026-05-08 - v4.5.0
+
+- Consent
+  - validatePaymentData: Novo código de erro PERMISSAO_INSUFICIENTE: A solicitação de Saque ou Troco foi realizada por um usuário sem plenos poderes de aprovação
+
 ### 2024-12-03 - v4.4.0
 
 - Inclusão do campo originalRecurringPaymentId para POST paymentV3

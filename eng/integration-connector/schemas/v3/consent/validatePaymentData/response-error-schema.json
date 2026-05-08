@@ -87,7 +87,8 @@
                 "CONTA_NAO_PERMITE_PAGAMENTO",
                 "SALDO_INSUFICIENTE",
                 "VALOR_ACIMA_LIMITE",
-                "QRCODE_INVALIDO"
+                "QRCODE_INVALIDO",
+                "PERMISSAO_INSUFICIENTE"
             ],
             "example": "VALOR_INVALIDO",
             "description": "Códigos de erros previstos na validação de pagamento durante post de consentimento"
