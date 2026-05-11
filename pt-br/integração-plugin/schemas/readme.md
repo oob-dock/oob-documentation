@@ -52,6 +52,7 @@ Onde:
 
 - Consent
   - validatePaymentData: Novo código de erro PERMISSAO_INSUFICIENTE: A solicitação de Saque ou Troco foi realizada por um usuário sem plenos poderes de aprovação
+  - Envio da versão do consentimento para conector validatePaymentData
 
 ### 2024-12-03 - v4.4.0
 
