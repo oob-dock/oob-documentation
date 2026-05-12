@@ -28,6 +28,11 @@ Where:
 
 ## Changelog
 
+### 2026-05-08 - v4.5.0
+
+- Consent
+  - validatePaymentData: New error code PERMISSAO_INSUFICIENTE: The withdrawal or change request was made by a user without full approval powers.
+
 ### 2024-12-03 - v4.4.0
 
 - Inclusion of the originalRecurringPaymentId field for POST paymentV3
