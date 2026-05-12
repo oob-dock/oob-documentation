@@ -32,6 +32,7 @@ Where:
 
 - Consent
   - validatePaymentData: New error code PERMISSAO_INSUFICIENTE: The withdrawal or change request was made by a user without full approval powers.
+  - Sending consent version to validatePaymentData connector
 
 ### 2024-12-03 - v4.4.0
 

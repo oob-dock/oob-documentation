@@ -28,6 +28,9 @@
                 },
                 "paymentType": {
                     "$ref": "#/$defs/PaymentType"
+                },
+                "version": {
+                    "$ref": "../../common/consent/common-consent-schema.json#/$defs/Version"
                 }
             }
         }
